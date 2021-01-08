@@ -36,7 +36,7 @@ class Car(models.Model):
         return str(self.car_number) + ' ' + str(self.brand)
 
     class Meta:
-        verbose_name = 'Машина'
+        verbose_name = 'Машину'
         verbose_name_plural = 'Машины'
 
 class Customer(models.Model):
@@ -52,7 +52,7 @@ class Customer(models.Model):
         return str(self.name)
 
     class Meta:
-        verbose_name = 'Клиент'
+        verbose_name = 'Клиента'
         verbose_name_plural = 'Клиенты'
 
 
@@ -127,7 +127,7 @@ class Service(models.Model):
         return str(self.name)
 
     class Meta:
-        verbose_name = 'Услуга'
+        verbose_name = 'Услугу'
         verbose_name_plural = 'Услуги'
 
 
