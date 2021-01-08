@@ -1,0 +1,71 @@
+{% extends 'makereport/base_report.html' %}
+
+{% block title %}
+    Reports list
+{% endblock %}
+
+{% block content %}
+<button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
+
+  <main id="main">
+
+  	<div class="top_block_phone col-12">
+  		<div class=" row">
+
+
+            <div class="col-lg-3">
+                <div class="input_phone">
+                    <input type="email" placeholder="Введите номер отчёта" required />
+                    <span><a href="#"><ion-icon name="search-outline"></ion-icon></a></span>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <span class="dropdown-el">
+                    <input type="radio" name="sortType1" value="Relevance1" checked="checked" id="sort-relevance"><label for="sort-relevance">Запчасти</label>
+                    <input type="radio" name="sortType1" value="Popularity" id="sort-best"><label for="sort-best">Запчасть 1</label>
+                    <input type="radio" name="sortType1" value="PriceIncreasing" id="sort-low"><label for="sort-low">Запчасть 2</label>
+                    <input type="radio" name="sortType1" value="PriceDecreasing" id="sort-high"><label for="sort-high">Запчасть 3</label>
+                    <input type="radio" name="sortType1" value="ProductBrand" id="sort-brand"><label for="sort-brand">Запчасть 4</label>
+                    <input type="radio" name="sortType1" value="ProductName" id="sort-name"><label for="sort-name">Запчасть 5</label>
+                </span>
+            </div>
+  	    </div>
+  	</div>
+
+    <div class="table1">
+      <table class="table" data-tablesaw-mode="stack">
+
+        <thead>
+          <tr>
+            <th style="width: 34px;">№</th>
+            <th style="width: 136px;">Дата</th>
+            <th style="width: 136px;">Марка машины</th>
+            <th style="width: 136px;">Номер</th>
+            <th style="width: 136px;">Исполнитель</th>
+            <th style="width: 136px;">Договор</th>
+            <th style="width: 136px;">Отчёт</th>
+            <th style="width: 159px;">Функции</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for report in reports %}
+          <tr class="blacked">
+            <td style="border-bottom: 1px solid #fff;" data-title="№">{{ report.report_id }}</td>
+            <td style="border-bottom: 1px solid #fff;" data-title="Дата">{{ report.created_at}}</td>
+            <td style="border-bottom: 1px solid #fff;" data-title="Марка машины">{{ report.car.brand }}</td>
+            <td style="border-bottom: 1px solid #fff;" data-title="Номер">{{ report.car.car_number }}</td>
+            <td style="border-bottom: 1px solid #fff;" data-title="Исполнитель">{{ report.created_by }}</td>
+            <td style="border-bottom: 1px solid #fff;" data-title="Договор">{{ report.contract }}</td>
+            <td style="border-bottom: 1px solid #fff;" data-title="Отчёт" data-type="currency"><a href="{% url 'get_response' report.report_id %}">Открыть</a></td>
+            <td style="border-bottom: 1px solid #fff;" data-title="Функции" data-type="currency"><a href="{% url 'edit_report' report.report_id %}">Изменить</a></td>
+          </tr>
+         {% endfor %}
+        </tbody>
+
+      </table>
+    </div>
+
+
+
+
+{% endblock %}

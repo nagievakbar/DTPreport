@@ -1,0 +1,883 @@
+/* ======================================================================= */
+/* Template Name: 
+/* Author:  
+/* Author URI: 
+/* Version: 
+/* Description: 
+/* ======================================================================= */
+
+/* ============================== Basic CSS ============================== */
+
+* {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+html,
+body {
+  height: 100%;
+  background-color: #f4f4f2 !important;
+}
+
+a {
+  text-decoration: none;
+}
+a:hover,
+a:focus {
+  text-decoration: none;
+  outline: none;
+}
+
+/* ============================= whole block ============================= */
+.whole-block {
+  position: absolute;
+  width: 1132px;
+  height: 792px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.25);
+  z-index: 1;
+  margin: 8% 0;
+}
+@media screen and (max-width: 1331px) {
+  .whole-block {
+    display: none;
+  }
+}
+
+
+/* ===================================== */
+/* left
+/* ===================================== */
+.left_block {
+  position: absolute;
+  left: 0;
+  width: 595px;
+  height: 792px;
+}
+.left_block .enter {
+  max-width: 490px;
+  height: 264px;
+  text-align: center;
+  margin-left: 30px;
+  margin-top: 157px;
+}
+.left_block .enter h2 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  color: #3f3f3f;
+  line-height: 22px;
+}
+.left_block .enter p {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  color: #4f4f4f;
+  padding-bottom: 0px;
+}
+/* inputs */
+.Form-fields {
+  background: transparent;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-direction: column;
+  width: 490px;
+}
+
+.Form-fields .Control-requirements--email,
+.Form-fields .ControlInput--email {
+  -webkit-box-ordinal-group: 0;
+          order: -1;
+}
+.Form-fields .Control-label--email {
+  -webkit-box-ordinal-group: -1;
+          order: -2;
+}
+.Form-fields .ControlInput--password {
+  -webkit-box-ordinal-group: 1;
+          order: 0;
+  padding-right: 50px;
+}
+.Form-fields .Control-label--password {
+  -webkit-box-ordinal-group: 0;
+          order: -1;
+  margin-bottom: -30px;
+}
+/*.Control-label {
+  -webkit-transition: color 6s ease;
+  transition: color 6s ease;
+}*/
+/*.ControlInput:invalid:not(:focus):not(:placeholder-shown) + .Control-label {
+  color: red;
+}*/
+/*.ControlInput:valid:not(:focus):not(:placeholder-shown) + .Control-label {
+  color: #5fa550;
+}*/
+.Form-fields .ControlInput {
+  background: #f2f2f2;
+  border-radius: 5px;
+  width: 490px;
+  height: 40px;
+  padding-left: 10px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 15px;
+  font-size: 12px;
+  color: #9f9f9f;
+  margin-bottom: 15px;
+  border: 0;
+}
+.Form-fields .ControlInput:focus {
+  border: 0;
+  outline: 0;
+}
+.Form-fields .ControlInput:invalid:not(:focus):not(:placeholder-shown) {
+  border-radius: 0px;
+}
+.Form-fields .ControlInput:valid:not(:focus):not(:placeholder-shown) {
+  border: 0;
+}
+
+.Form-fields .Control-requirements {
+  border-top: none;
+  width: 490px;
+  margin-top: -15px;
+  margin-bottom: 15px;
+  max-height: 0;
+  overflow: hidden;
+  background: #5c6e91;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 15px;
+  font-size: 12px;
+  color: #fff;
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+}
+.Form-fields .ControlInput:invalid:not(:focus):not(:placeholder-shown) + .Control-label + .Control-requirements {
+  max-height: 100px;
+  padding: 5px 0px;
+}
+
+.Form-fields .Control-label--showPassword {
+  width: 22px;
+  position: relative;
+  top: 45px;
+  left: 455px;
+}
+.Form-fields .show-password {
+  display: none;
+}
+.Form-fields .show-password:checked ~ .ControlInput--password {
+  text-security: disc;
+  -webkit-text-security: disc;
+  -moz-text-security: disc;
+}
+.Form-fields .show-password:checked ~ .Control-label--showPassword .svg-toggle-password .closed-eye {
+  opacity: 1;
+  -webkit-transition: opacity 300ms ease, height 400ms ease;
+  transition: opacity 300ms ease, height 400ms ease;
+  width: 4px;
+  height: 44px;
+}
+.Form-fields .svg-toggle-password {
+  fill: #5c6e91;
+}
+.Form-fields .svg-toggle-password .closed-eye {
+  opacity: 0;
+  height: 0;
+}
+
+/**/
+.left_block .enter_user {
+  width: 278px;
+  height: 40px;
+  margin: 0 auto;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+.left_block .enter_user .enter_button {
+  width: 278px;
+  height: 40px;
+  box-shadow: none;
+  border-radius: 10px;
+  background: #5c6e91;
+  
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 400;
+  text-align: center;
+  color: #fff;
+}
+
+.left_block .enter .forget_btn {
+  text-align: center;
+}
+.left_block .enter .forget_btn .forget_text {
+  border-bottom: 1px solid #5c6e91;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  color: #5c6e91;
+}
+
+
+/* ===================================== */
+/* right
+/* ===================================== */
+.right_block {
+  position: absolute;
+  right: 0;
+  height: 792px;
+  width: 537px;
+  border-radius: 20px;
+  background-color: #5c6e91;
+  box-shadow: -5px 0px 4px rgba(0, 0, 0, 0.19);
+}
+
+.right_block .search-part {
+  max-width: 486px;
+  height: 264px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 33px;
+}
+
+.input-search {
+  position: relative;
+  width: 100%;
+  height: 40px;
+}
+.input-search span {
+  position: absolute;
+  display: block;
+  right: 15px;
+  top: 7px;
+}
+.input-search span i {
+  color: #5c6e91;
+  opacity: 0.5;
+  font-size: 16px;
+}
+.input-search input {
+  width: 100%;
+  height: 40px;
+  background: #fff;
+  border: 0;
+  display: block;
+  border-radius: 14px;
+  padding: 0px 5px 0px 25px;
+  transition: 0.2s ease-out;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  color: #5c6e91;
+  line-height: 15px;
+}
+.right_block .search-part .input-search input::placeholder {
+  color: #5c6e91;
+  opacity: 0.5;
+}
+.input-search input:focus {
+  padding: 0px 5px 0px 10px;
+  outline: 0;
+  color: #fff;
+}
+
+
+.floating-label-group {
+  position: absolute;
+  width: 320px;
+  height: 33px;
+  right: 109px;
+  top: 113px;
+}
+.floating-label-group input {
+  background: none;
+  width: 320px;
+  height: 33px;
+  border: 1px solid #fff;
+  box-sizing: border-box;
+  border-radius: 5px;
+  outline: 0;
+  box-shadow: none;
+  font-size: 12px;
+  font-style: normal;
+  color: #ccc;
+}
+.floating-label-group input:focus {
+  background: transparent;;
+  outline: 0;
+  box-shadow: none;
+  border: 1px solid #fff;
+  color: #ccc;
+}
+.floating-label-group .floating-label {
+  background: none;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  color: #ccc;
+  position: absolute;
+  pointer-events: none;
+  top: 7px;
+  left: 12px;
+  -webkit-transition: all 0.1s ease;
+  transition: all 0.1s ease;
+}
+.floating-label-group input:focus ~ .floating-label,
+.floating-label-group input:not(:focus):valid ~ .floating-label {
+  top: -20px;
+  bottom: 0px;
+  left: 0px;
+  font-size: 12px;
+  opacity: 0.5;
+  color: #fff;
+}
+
+
+.right_block .go_over {
+  width: 208px;
+  height: 30px;
+  position: absolute;
+  right: 164px;
+  top: 166px;
+}
+.right_block .go_over .go_over_button {
+  width: 208px;
+  height: 30px;
+  background: #fff;
+  box-sizing: border-box;
+  box-shadow: none;
+  border-radius: 1px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 400;
+  text-align: center;
+  color: #5c6e91;
+}
+
+
+/* ===================================== */
+/* background
+/* ===================================== */
+.liquid_shape_first {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.liquid_shape_second {
+  position: absolute;
+  left: 0;
+  top: 45px;
+}
+@media only screen and (max-width: 576px) {
+  .liquid_shape_second {
+    display: none;
+  }
+}
+
+.liquid_shape_third {
+  position: absolute;
+  right: 151px;
+  bottom: -255px;
+}
+.liquid_shape_fourth {
+  position: absolute;
+  right: 191px;
+  bottom: -225px;
+}
+@media only screen and (max-width: 1200px) {
+  .liquid_shape_third,
+  .liquid_shape_fourth {
+    display: none;
+  }
+}
+
+
+
+
+/* ============================= whole block phone ============================= */
+.whole-block-phone {
+  z-index: 1;
+  background-color: transparent;
+  float: none;
+  margin: auto;
+  margin: 8% 0;
+}
+@media screen and (min-width: 1300px) {
+  .whole-block-phone {
+    display: none;
+  }
+}
+
+
+/* ===================================== */
+/* left
+/* ===================================== */
+.left_block_phone {
+  display: flex;
+  border-radius: 20px 0 0 20px;
+  background-color: #5c6e91;
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.25);
+}
+@media only screen and (max-width: 576px) {
+  .left_block_phone {
+    border-radius: 5% 5% 0 0;
+    height: 400px;
+  }
+}
+@media only screen and (min-width: 576px) and (max-width: 992px) { 
+  .left_block_phone {
+    border-radius: 5% 5% 0 0;
+    height: 400px;
+  }
+}
+
+.left_block_phone .search_phone {
+  max-width: 486px;
+  height: 264px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 33px;
+}
+@media only screen and (max-width: 576px) {
+  .left_block_phone .search_phone {
+    margin-top: 33px;
+  }
+}
+
+.left_block_phone .input_search_phone {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 46px;
+}
+.left_block_phone .input_search_phone span {
+  position: absolute;
+  display: block;
+  right: 15px;
+  top: 7px;
+}
+.left_block_phone .input_search_phone span i {
+  color: #5c6e91;
+  opacity: 0.5;
+  font-size: 16px;
+}
+.left_block_phone .input_search_phone input {
+  width: 100%;
+  height: 40px;
+  background: #fff;
+  border: 0;
+  display: block;
+  border-radius: 14px;
+  padding: 0px 5px 0px 25px;
+  transition: 0.2s ease-out;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  color: #5c6e91;
+  line-height: 15px;
+}
+@media only screen and (max-width: 320px) {
+  .left_block_phone .input_search_phone input {
+    width: 230px;
+    height: 40px;
+  }
+}
+@media only screen and (min-width: 330px) and (max-width: 576px) {
+  .left_block_phone .input_search_phone input {
+    width: 300px;
+    height: 40px;
+  }
+}
+@media only screen and (min-width: 576px) and (max-width: 1024px) {
+  .left_block_phone .input_search_phone input {
+    width: 350px;
+    height: 40px;
+  }
+}
+.left_block_phone .search_phone .input_search_phone input::placeholder {
+  color: #5c6e91;
+  opacity: 0.5;
+}
+.left_block_phone .input_search_phone input:focus {
+  padding: 0px 5px 0px 10px;
+  outline: 0;
+  color: #5c6e91;
+}
+
+
+.left_block_phone .floating-label-phone {
+  position: relative;
+  width: 320px;
+  height: 33px;
+  margin: 0 auto;
+  padding: 0;
+}
+.left_block_phone .floating-label-phone input {
+  background: none;
+  width: 320px;
+  height: 33px;
+  border: 1px solid #fff;
+  box-sizing: border-box;
+  border-radius: 5px;
+  outline: 0;
+  box-shadow: none;
+  font-size: 12px;
+  font-style: normal;
+  color: #ccc;
+}
+.left_block_phone .floating-label-phone input:focus {
+  background: transparent;;
+  outline: 0;
+  box-shadow: none;
+  border: 1px solid #fff;
+  color: #ccc;
+}
+@media only screen and (max-width: 320px) {
+  .left_block_phone .floating-label-phone {
+    max-width: 206px;
+  }
+  .left_block_phone .floating-label-phone input {
+    max-width: 206px;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 576px) {
+  .left_block_phone .floating-label-phone {
+    width: 256px;
+  }
+  .left_block_phone .floating-label-phone input {
+    width: 256px;
+  }
+}
+
+.left_block_phone .floating-label-phone .label-phone {
+  background: none;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  color: #ccc;
+  position: absolute;
+  pointer-events: none;
+  top: 7px;
+  left: 12px;
+  -webkit-transition: all 0.1s ease;
+  transition: all 0.1s ease;
+}
+.left_block_phone .floating-label-phone input:focus ~ .label-phone,
+.left_block_phone .floating-label-phone input:not(:focus):valid ~ .label-phone {
+  top: -20px;
+  bottom: 0px;
+  left: 0px;
+  font-size: 12px;
+  opacity: 0.5;
+  color: #fff;
+}
+
+
+.left_block_phone .go_over {
+  width: 208px;
+  height: 30px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+.left_block_phone .go_over .go_over_button {
+  width: 208px;
+  height: 30px;
+  box-sizing: border-box;
+  box-shadow: none;
+  border-radius: 1px;
+  background: #fff;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 400;
+  text-align: center;
+  color: #5c6e91;
+}
+@media only screen and (max-width: 576px) {
+  .left_block_phone .go_over {
+    width: 186px;
+  }
+  .left_block_phone .go_over .go_over_button {
+    width: 186px;
+  }
+}
+
+/* ===================================== */
+/* right
+/* ===================================== */
+.right_block_phone {
+  height: 792px;
+  border-radius: 0 20px 20px 0;
+  background: #fff;
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.25);
+}
+@media only screen and (max-width: 576px) {
+  .right_block_phone {
+    height: 450px;
+    border-radius: 0 0 5% 5%;
+  }
+}
+@media only screen and (min-width: 576px) and (max-width: 992px) {
+  .right_block_phone {
+    height: 500px;
+    border-radius: 0 0 5% 5%;
+  }
+}
+
+.right_block_phone .enter_hone {
+  max-width: 490px;
+  height: 264px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 157px;
+}
+@media only screen and (max-width: 576px) {
+  .right_block_phone .enter_hone {
+    margin-top: 57px;
+  }
+}
+@media only screen and (min-width: 576px) and (max-width: 992px) {
+  .right_block_phone .enter_hone {
+    margin-top: 90px;
+  }
+}
+.right_block_phone .enter_hone h2 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  color: #3f3f3f;
+  line-height: 22px;
+}
+.right_block_phone .enter_hone p {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  color: #4f4f4f;
+  padding-bottom: 10px;
+}
+/* inputs */
+.Form_phone {
+  background: transparent;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-direction: column;
+  position: relative;
+  max-width: 490px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.Form_phone .Control-requirements--email,
+.Form_phone .ControlInput--email {
+  -webkit-box-ordinal-group: 0;
+          order: -1;
+}
+.Form_phone .Control-label--email {
+  -webkit-box-ordinal-group: -1;
+          order: -2;
+}
+.Form_phone .ControlInput--password {
+  -webkit-box-ordinal-group: 1;
+          order: 0;
+  padding-right: 50px;
+}
+.Form_phone .Control-label--password {
+  -webkit-box-ordinal-group: 0;
+          order: -1;
+  margin-bottom: -30px;
+}
+/*.Control-label {
+  -webkit-transition: color 6s ease;
+  transition: color 6s ease;
+}*/
+/*.ControlInput:invalid:not(:focus):not(:placeholder-shown) + .Control-label {
+  color: red;
+}*/
+/*.ControlInput:valid:not(:focus):not(:placeholder-shown) + .Control-label {
+  color: #5fa550;
+}*/
+.Form_phone .ControlInput {
+  background: #f2f2f2;
+  border-radius: 5px;
+  max-width: 490px;
+  height: 40px;
+  padding-left: 10px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 15px;
+  font-size: 12px;
+  color: #9f9f9f;
+  margin-bottom: 15px;
+  border: 0;
+}
+.Form_phone .ControlInput:focus {
+  border: 0;
+  outline: 0;
+}
+.Form_phone .ControlInput:invalid:not(:focus):not(:placeholder-shown) {
+  border-radius: 0px;
+}
+.Form_phone .ControlInput:valid:not(:focus):not(:placeholder-shown) {
+  border: 0;
+}
+
+.Form_phone .Control-requirements {
+  border-top: none;
+  max-width: 490px;
+  margin-top: -15px;
+  margin-bottom: 50px;
+  max-height: 0;
+  overflow: hidden;
+  background: #5c6e91;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 15px;
+  font-size: 12px;
+  color: #fff;
+  -webkit-transition: all 200ms ease;
+  transition: all 200ms ease;
+}
+.Form_phone .ControlInput:invalid:not(:focus):not(:placeholder-shown) + .Control-label + .Control-requirements {
+  max-height: 100px;
+  padding: 5px 0px;
+}
+
+.Form_phone .Control-label--showPassword {
+  width: 22px;
+  position: absolute;
+  top: 77px;
+  right: 5px;
+}
+.Form_phone .show-password {
+  display: none;
+}
+.Form_phone .show-password:checked ~ .ControlInput--password {
+  text-security: disc;
+  -webkit-text-security: disc;
+  -moz-text-security: disc;
+}
+.Form_phone .show-password:checked ~ .Control-label--showPassword .svg-toggle-password .closed-eye {
+  opacity: 1;
+  -webkit-transition: opacity 300ms ease, height 400ms ease;
+  transition: opacity 300ms ease, height 400ms ease;
+  width: 4px;
+  height: 44px;
+}
+.Form_phone .svg-toggle-password {
+  fill: #5c6e91;
+}
+.Form_phone .svg-toggle-password .closed-eye {
+  opacity: 0;
+  height: 0;
+}
+
+/* label */
+.placeholder {
+  position: absolute;
+  top: 14px;
+  left: 50px;
+
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 15px;
+  font-size: 12px;
+  color: #9f9f9f;
+
+  transition: transform 200ms, color 200ms;  
+}
+.placeholder i {
+  color: #6f6f6f;
+  font-size: 16px;
+  position: absolute; 
+  top: 0px;
+  left: -30px;
+}
+.placeholder .fa-lock {
+  color: #6f6f6f;
+  font-size: 16px;
+  position: absolute; 
+  top: 0px;
+  left: -29.5px;
+}
+
+.input:focus ~ .placeholder, .input:not(:placeholder-shown) ~ .placeholder {
+  display: none;
+}
+
+.right_block_phone .enter_user_phone {
+  max-width: 278px;
+  height: 40px;
+  margin: 0 auto;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+.right_block_phone .enter_user_phone .enter_button {
+  max-width: 278px;
+  height: 40px;
+  box-shadow: none;
+  border-radius: 10px;
+  background: #5c6e91;
+  
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 400;
+  text-align: center;
+  color: #fff;
+}
+@media only screen and (min-width: 330px) and (max-width: 576px) {
+  .right_block_phone .panel_user {
+    width: 206px;
+  }
+  .right_block_phone .enter_user_phone .enter_button {
+    width: 206px;
+  }
+}
+
+.right_block_phone .enter_hone .forget_btn_phone {
+  text-align: center;
+}
+.right_block_phone .enter_hone .forget_btn_phone .forget_text {
+  border-bottom: 1px solid #5c6e91;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  color: #5c6e91;
+}

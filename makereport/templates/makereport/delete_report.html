@@ -1,0 +1,16 @@
+{% extends 'makereport/base_report.html' %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+    <h1>Delete report {{ report.report_id }} </h1>
+    <form action="{% url 'delete_report' report.report_id %}" method="POST">
+      {% csrf_token %}
+      <div class="container">
+        <div class="row">
+            <a href="{% url 'reports_list' %}">Cancel</a>
+          <input type="submit" value="Confirm" />
+        </div>
+      </div>
+    </form>
+{% endblock content %}
