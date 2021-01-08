@@ -26,7 +26,9 @@ SECRET_KEY = 'qij#o3(%qzx#1i3@zk98s_6nx3^7i303ap^ob@*yq!lp$oe9d@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['makereport.elite-house.uz']
+ALLOWED_HOSTS = ['makereport.elite-house.uz',
+                 '127.0.0.1'
+                 ]
 
 
 # Application definition

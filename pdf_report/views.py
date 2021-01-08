@@ -10,7 +10,7 @@ import locale
 
 class GeneratePDF(View):
     def get(self, request, id=id):
-        locale.setlocale(locale.LC_ALL, "ru")
+        locale.setlocale(locale.LC_ALL, "ru-RU")
 
         new_report_pdf = Report.objects.get(report_id=id)
         pdf = PyPDFML('example.xml')
