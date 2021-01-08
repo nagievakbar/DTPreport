@@ -5,11 +5,15 @@ from django.contrib.auth.models import User
 class Contract(models.Model):
 
     contract_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
-    customer = models.ForeignKey('Customer', on_delete=models.CASCADE, related_name='Customer')
+    customer = models.ForeignKey('Customer', on_delete=models.CASCADE, related_name='Customer',verbose_name='Клиент')
     pdf_contract = models.FileField(blank=True, null=True, verbose_name='Контракт в пдф')
 
     def __str__(self):
         return str(self.contract_id)
+
+    class Meta:
+        verbose_name = 'Контракт'
+        verbose_name_plural = 'Контракты'
 
 
 class Car(models.Model):
@@ -31,18 +35,25 @@ class Car(models.Model):
     def __str__(self):
         return str(self.car_number) + ' ' + str(self.brand)
 
+    class Meta:
+        verbose_name = 'Машина'
+        verbose_name_plural = 'Машины'
 
 class Customer(models.Model):
     customer_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, verbose_name='ФИО')
     address = models.CharField(max_length=100)
-    passport_number = models.CharField(max_length=9)
+    passport_number = models.CharField(max_length=9,verbose_name='Паспорт')
     when_passport_issued = models.DateField()
     whom_passport_issued = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=20)
 
     def __str__(self):
         return str(self.name)
+
+    class Meta:
+        verbose_name = 'Клиент'
+        verbose_name_plural = 'Клиенты'
 
 
 class Product(models.Model):
@@ -70,6 +81,9 @@ class Product(models.Model):
     def __str__(self):
         return str(self.name)
 
+    class Meta:
+        verbose_name = 'Деталь'
+        verbose_name_plural = 'Детали'
 
 class Service(models.Model):
 
@@ -112,6 +126,10 @@ class Service(models.Model):
     def __str__(self):
         return str(self.name)
 
+    class Meta:
+        verbose_name = 'Услуга'
+        verbose_name_plural = 'Услуги'
+
 
 class Consumable(models.Model):
     consumable_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
@@ -122,6 +140,10 @@ class Consumable(models.Model):
 
     def __str__(self):
         return str(self.name)
+
+    class Meta:
+        verbose_name = 'Расходник'
+        verbose_name_plural = 'Расходники'
 
 
 class Report(models.Model):
@@ -144,6 +166,10 @@ class Report(models.Model):
 
     def __str__(self):
         return str(self.report_id)
+
+    class Meta:
+        verbose_name = 'Отчёт'
+        verbose_name_plural = 'Отчёты'
 
     def get_report_price(self):
         pass

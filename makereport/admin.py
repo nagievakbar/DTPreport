@@ -28,7 +28,7 @@ class CarAdmin(admin.ModelAdmin):
 
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ('сustomer_id',
+    list_display = ('customer_id',
                     'name',
                     'phone_number',
                     'passport_number',
