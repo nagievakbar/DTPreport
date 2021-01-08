@@ -43,10 +43,10 @@ class Customer(models.Model):
     customer_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     name = models.CharField(max_length=100, verbose_name='ФИО')
     address = models.CharField(max_length=100)
-    passport_number = models.CharField(max_length=9,verbose_name='Паспорт')
+    passport_number = models.CharField(max_length=9, verbose_name='Паспорт')
     when_passport_issued = models.DateField()
     whom_passport_issued = models.CharField(max_length=50)
-    phone_number = models.CharField(max_length=20)
+    phone_number = models.CharField(max_length=20, verbose_name='Тел. номер')
 
     def __str__(self):
         return str(self.name)
