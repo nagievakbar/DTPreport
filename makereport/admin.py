@@ -5,9 +5,6 @@ from .models import *
 
 
 # Register your models here.
-admin.site.register(Customer)
-admin.site.register(Contract)
-
 
 @admin.register(Report)
 class ReportAdmin(admin.ModelAdmin):
@@ -29,4 +26,19 @@ class CarAdmin(admin.ModelAdmin):
     )
     search_fields = ['car_id']
 
+@admin.register(Customer)
+class CustomerAdmin(admin.ModelAdmin):
+    list_display = ('сustomer_id',
+                    'name',
+                    'phone_number',
+                    'passport_number',
+    )
+    search_fields = ['passport_number']
+
+@admin.register(Contract)
+class ContractAdmin(admin.ModelAdmin):
+    list_display = ('contract_id',
+                    'customer',
+    )
+    search_fields = ['customer']
 
