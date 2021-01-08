@@ -21,10 +21,12 @@ class ReportAdmin(admin.ModelAdmin):
 @admin.register(Car)
 class CarAdmin(admin.ModelAdmin):
     list_display = ('car_id',
+                    'brand',
                     'car_number',
-
+                    'car_owner'
     )
-    search_fields = ['car_id']
+    search_fields = ['car_number',
+                     'brand']
 
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
