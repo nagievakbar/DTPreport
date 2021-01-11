@@ -158,18 +158,33 @@ class Report(models.Model):
     product = models.ManyToManyField(Product, related_name='Детали', verbose_name='Детали')
     consumable = models.ManyToManyField(Consumable, related_name='Расходники', verbose_name='Расходники')
 
+    service_cost = 0
+    product_cost = 0
+    product_acc_cost = 0
+    consumable_cost = 0
+
     pdf_report = models.FileField(blank=True, null=True, verbose_name='Отчёт в пдф')
 
     passport_photo = models.FileField(blank=True, null=True, verbose_name='Фото пасспорта')
     registration_photo = models.FileField(blank=True, null=True, verbose_name='Фото тех.пасспорта')
     media_photo = models.FileField(blank=True, null=True, verbose_name='Разные Фото')
 
+    WEAR_DATA = {}
+    SERVICE_DATA = []
+    PRODUCT_DATA = []
+    CONSUMABLE_DATA = []
+
     def __str__(self):
         return str(self.report_id)
+
+    def get_product_acc_cost(self):
+        print('get_product_acc_cost')
+        return self.product_cost * (1 - self.WEAR_DATA.__getitem__('accept_wear')/100)
+
+    def get_total_report_price(self):
+        print('get_total_report_price')
+        return ' '.join('{:,}'.format(int(self.service_cost + self.get_product_acc_cost() + self.consumable_cost)).split(','))
 
     class Meta:
         verbose_name = 'Отчёт'
         verbose_name_plural = 'Отчёты'
-
-    def get_report_price(self):
-        pass

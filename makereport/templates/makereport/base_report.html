@@ -19,11 +19,12 @@
 	<link href="{% static '/makereport/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
 
 	<!-- Template Main CSS File -->
+    <link href="{% static '/makereport/css/desktop3.css' %}" rel="stylesheet">
 	<link href="{% static '/makereport/css/desktop7.css' %}" rel="stylesheet">
     <link href="{% static '/makereport/css/desktop6.css' %}" rel="stylesheet">
     <link href="{% static '/makereport/css/desktop8.css' %}" rel="stylesheet">
     <link href="{% static '/makereport/css/desktop11.css' %}" rel="stylesheet">
-    <link href="{% static '/makereport/css/desktop13.css' %}" rel="stylesheet">
+
 
     <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule="" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.js"></script>
@@ -32,9 +33,9 @@
     <script src="{% static '/makereport/vendor/jquery/jquery.min.js' %}"></script>
     <!-- Template Main JS File -->
     <script src="{% static '/makereport/js/jquery-1.12.4.js' %}"></script>
-    <script src="{% static '/makereport/js/auth/main.js' %}"></script>
+    <script src="{% static '/makereport/js/main.js' %}"></script>
     <script src="{% static '/makereport/js/script.min.js' %}"> </script>
-    <script src="{% static '/makereport/js/desktop8.js' %}"></script>
+    <script src="{% static '/makereport/js/../../static/report/img/desktop6.js' %}"></script>
 
 </head>
 
@@ -130,6 +131,9 @@
             {% endblock %}
 
 
+</section>
+
+
 <div class="background_left">
   <svg class="first_shape" width="410" height="406" viewBox="0 0 410 406" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path opacity="0.1" d="M235.187 22.7177C291.397 31.2456 359.361 20.0989 393.579 65.4872C427.827 110.913 399.132 173.299 391.175 229.623C383.188 286.165 393.236 353.865 347.929 388.641C302.456 423.543 239.474 396.073 182.488 389.801C122.125 383.157 45.5846 401.819 11.4545 351.606C-22.579 301.534 29.0803 238.808 39.3021 179.14C48.9902 122.587 24.0647 52.0394 68.9082 16.23C113.962 -19.7473 178.177 14.0684 235.187 22.7177Z" fill="#5C6E91"/>
@@ -146,201 +150,6 @@
 <path opacity="0.1" d="M270.752 -203.869C335.462 -194.06 413.703 -206.881 453.096 -154.674C492.522 -102.422 459.489 -30.6632 450.329 34.1232C441.133 99.1607 452.701 177.032 400.542 217.033C348.193 257.179 275.687 225.581 210.084 218.367C140.593 210.724 52.4779 232.191 13.1867 174.433C-25.9933 116.838 33.4778 44.6878 45.2454 -23.9452C56.3985 -88.9946 27.7037 -170.142 79.3285 -211.332C131.195 -252.714 205.12 -213.818 270.752 -203.869Z" fill="#5C6E91"/>
 </svg>
   </div>
-
-
-{% block javascript %}
-        <script>
-            $(document).on('keypress', ".input-service_id", function (e) {
-                console.log('CLICK')
-                var key = e.which;
-                if (key === 13) {
-                    console.log(this)
-                    var service_id = $(this).val(),
-                        last_input_name = $(this).parents('tr').find('.input-name'),
-                        last_input_nph = $(this).parents('tr').find('.input-nph'),
-                        last_input_price = $(this).parents('tr').find('.input-price')
-
-                    brand = $('#id_brand').val()
-
-
-                    $.ajax({
-                        url: '{% url "get_service_ajax" %}',
-                        data: {
-                            'service_id': service_id,
-                            'brand': brand,
-                        },
-                        dataType: 'json',
-                        success: function (data) {
-                            console.log('success')
-                            last_input_name.val(data.name)
-                            last_input_nph.val(data.norm_per_hour)
-                            last_input_price.val(data.price)
-                        },
-                    })
-                }
-            });
-
-            $(document).on('keypress', ".input-premium", function (e) {
-                console.log('CLICK premium')
-                var key = e.which;
-                if (key === 13) {
-                    var premium = $(this).val(),
-                        price = $(this).parents('tr').find('.input-price').val()
-                    nph = $(this).parents('tr').find('.input-nph').val(),
-                        cost = $(this).parents('tr').find('.input-cost')
-                    console.log(cost)
-                    console.log(cost.val())
-                    last = $(this).parents('tbody').find('tr').last()
-
-                    $.ajax({
-                        url: '{% url "get_service_cost" %}',
-                        data: {
-                            'premium': premium,
-                            'price': price,
-                            'nph': nph,
-                        },
-                        dataType: 'json',
-                        success: function (data) {
-                            console.log('success calculate cost')
-                            cost.val(data.total_cost)
-                            last.clone().insertAfter(last);
-                        },
-                    })
-                }
-            });
-
-            $(document).on('keypress', ".input-product_id", function (e) {
-                console.log('CLICK')
-                var key = e.which;
-                if (key === 13) {
-                    console.log(this)
-                    var product_id = $(this).val(),
-                        last_input_name = $(this).parents('tr').find('.input-name'),
-                        last_input_unit = $(this).parents('tr').find('.input-unit'),
-                        last_input_price = $(this).parents('tr').find('.input-price')
-
-                    brand = $('#id_brand').val()
-
-
-                    $.ajax({
-                        url: '{% url "get_product_ajax" %}',
-                        data: {
-                            'product_id': product_id,
-                            'brand': brand,
-                        },
-                        dataType: 'json',
-                        success: function (data) {
-                            console.log('success')
-                            last_input_name.val(data.name)
-                            last_input_unit.val(data.unit)
-                            last_input_price.val(data.price)
-                        },
-                    })
-                }
-            });
-
-            $(document).on('keypress', ".input-quantity-cons", function (e) {
-                var key = e.which;
-                if (key === 13) {
-                    var quantity = $(this).val(),
-                        price = $(this).parents('tr').find('.input-price').val(),
-                        cost = $(this).parents('tr').find('.input-cost')
-                    last = $(this).parents('tbody').find('tr').last()
-
-                    $.ajax({
-                        url: '{% url "get_product_cost" %}',
-                        data: {
-                            'quantity': quantity,
-                            'price': price,
-                        },
-                        dataType: 'json',
-                        success: function (data) {
-                            console.log('success calculate cost')
-                            cost.val(data.total_cost)
-                            last.clone().insertAfter(last);
-                        },
-                    })
-                }
-            });
-
-            $(document).on('keypress', ".input-consumable_id", function (e) {
-                var key = e.which;
-                if (key === 13) {
-                    var consumable_id = $(this).val(),
-                        last_input_name = $(this).parents('tr').find('.input-name'),
-                        last_input_unit = $(this).parents('tr').find('.input-unit'),
-                        last_input_price = $(this).parents('tr').find('.input-price')
-
-                    $.ajax({
-                        url: '{% url "get_consumable_ajax" %}',
-                        data: {
-                            'consumable_id': consumable_id,
-                        },
-                        dataType: 'json',
-                        success: function (data) {
-                            console.log('success')
-                            last_input_name.val(data.name)
-                            last_input_unit.val(data.unit)
-                            last_input_price.val(data.price)
-                        },
-                    })
-                }
-            });
-
-            $(document).on('keypress', ".input-quantity", function (e) {
-                var key = e.which;
-                if (key === 13) {
-                    var quantity = $(this).val(),
-                        price = $(this).parents('tr').find('.input-price').val(),
-                        cost = $(this).parents('tr').find('.input-cost')
-
-                    last = $(this).parents('tbody').find('tr').last()
-
-
-                    $.ajax({
-                        url: '{% url "get_consumable_cost" %}',
-                        data: {
-                            'quantity': quantity,
-                            'price': price,
-                        },
-                        dataType: 'json',
-                        success: function (data) {
-                            console.log('success calculate cost')
-                            cost.val(data.total_cost)
-                            last.clone().insertAfter(last);
-                        },
-                    })
-                }
-            });
-
-            $(document).on('keypress', ".weight-input", function (e) {
-                var key = e.which;
-                if (key === 13) {
-                    var weight = $(this).val(),
-                        point = $(this).parents('.details').find('.point-input').val(),
-                        wear = $(this).parents('.details').find('.wear-input')
-
-                    $.ajax({
-                        url: '{% url "get_wear_ajax" %}',
-                        data: {
-                            'weight': weight,
-                            'point': point,
-                        },
-                        dataType: 'json',
-                        success: function (data) {
-                            console.log('success')
-                            wear.val(data.wear)
-
-                        },
-                    })
-                }
-            });
-
-            $(document).on('keypress', "form", function (event) {
-                return event.key !== "Enter";
-            });
-        </script>
-    {% endblock %}
 
 
 

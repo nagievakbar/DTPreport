@@ -73,28 +73,38 @@ class CustomerForm(forms.ModelForm):
 
 class ServiceForm(forms.Form):
 
-    service_id = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'ID', 'class': 'input input-service_id'}))
-    name = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Название', 'class': 'input input-name', 'readonly': ''}))
-    norm_per_hour= forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'нор\час', 'class': 'input input-nph', 'readonly': ''}))
-    premium = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'надбавка', 'class': 'input input-premium','value': '0'}))
-    price = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'цена', 'class': 'input input-price', 'readonly': ''}))
-    cost = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'сумма', 'class': 'input input-cost', 'readonly': ''}))
+    service_id = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder': 'ID', 'class': 'input input-service_id'}))
+    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Название', 'class': 'input input-name', }))
+    norm_per_hour= forms.FloatField(widget=forms.NumberInput(attrs={'placeholder': 'нор\час', 'class': 'input input-nph', }))
+    premium = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'надбавка', 'class': 'input input-premium','value': '0'}))
+    price = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder': 'цена', 'class': 'input input-price', }))
+    service_cost = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder': 'сумма', 'class': 'input input-cost', }))
+    # 'readonly': ''
 
 
 class ProductForm(forms.Form):
 
     product_id = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'ID', 'class': 'input input-product_id'}))
-    name = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Название', 'class': 'input input-name', 'readonly': ''}))
-    unit = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Ед.изм', 'class': 'input input-unit', 'readonly': ''}))
+    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Название', 'class': 'input input-name', 'readonly': ''}))
+    unit = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Ед.изм', 'class': 'input input-unit', 'readonly': ''}))
     quantity = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'надбавка', 'class': 'input input-quantity','value': '0'}))
     price = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'цена', 'class': 'input input-price', 'readonly': ''}))
-    cost = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'сумма', 'class': 'input input-cost', 'readonly': ''}))
+    product_cost = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'сумма', 'class': 'input input-cost', 'readonly': ''}))
+
 
 class ConsumableForm(forms.Form):
 
     consumable_id = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'ID', 'class': 'input input-consumable_id'}))
-    name = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Название', 'class': 'input input-name', 'readonly': ''}))
-    unit = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Ед.изм', 'class': 'input input-unit', 'readonly': ''}))
+    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Название', 'class': 'input input-name', 'readonly': ''}))
+    unit = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Ед.изм', 'class': 'input input-unit', 'readonly': ''}))
     quantity = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'надбавка', 'class': 'input input-quantity-cons','value': '0'}))
     price = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'цена', 'class': 'input input-price', 'readonly': ''}))
-    cost = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'сумма', 'class': 'input input-cost', 'readonly': ''}))
+    consumable_cost = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'сумма', 'class': 'input input-cost', 'readonly': ''}))
+
+
+class WearForm(forms.Form):
+
+    point = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Баллы', 'class': 'input work-price-input point-input'}))
+    weight = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Т', 'class': 'input work-price-input weight-input'}))
+    wear = forms.IntegerField(widget=forms.TextInput(attrs={'class':'input work-price-input wear-input'}))
+    accept_wear = forms.IntegerField(widget=forms.TextInput(attrs={'class':'input work-price-input prehnite-input'}))

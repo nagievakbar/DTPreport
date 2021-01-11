@@ -1,6 +1,7 @@
 from django.urls import path
 
 from .views import *
+from .utils import *
 
 urlpatterns = [
     path('list', reports_list, name='reports_list'),
@@ -15,5 +16,6 @@ urlpatterns = [
     path(r'ajax/get_consumable_cost/', get_consumable_cost, name='get_consumable_cost'),
     path(r'ajax/get_consumable_ajax/', get_consumable_ajax, name='get_consumable_ajax'),
     path(r'ajax/get_wear_ajax/', get_wear_ajax, name='get_wear_ajax'),
+    # path(r'ajax/get_report_cost/', get_report_cost, name='get_report_cost'),
 
 ]

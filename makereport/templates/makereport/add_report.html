@@ -2,275 +2,560 @@
 {% load static %}
 
 {% block content %}
-<main id="main">
+    <main id="main">
 
-<section class="padding_phone">
+        <section class="padding_phone">
 
 
-
-    <div class="accordion one">
-        <form method="POST" style="display: block;">{% csrf_token %}
-                <div class="accordion-item" >
-                    <div class="accordion-header active-accordion">
-                        <span class="accordion-title">Отчёт номер №{{ report_number }}  </span>
-                        <img src="{% static '/makereport/img/Polygon.png' %}" alt="polygon" class="polygon">
-                    </div>
-                    <div class="form accordion-content" style="display: block;">
-                        <div class="accordion-content-wrapper">
-                            <div class="inputs">
-                                <div class="left-inputs">
-                                    {{ car_form.car_number }}
-                                    {{ car_form.brand }}
-                                    {{ car_form.registration }}
-                                    {{ car_form.engine_number }}
-                                    {{ car_form.body_number }}
-                                    {{ car_form.chassis }}
-                                    {{ car_form.car_color }}
-                                    {{ car_form.mileage }}
-                                    {{ car_form.release_date }}
-                                    {{ car_form.car_type }}
-                                    {{ car_form.car_owner }}
-                                    {{ car_form.owner_address }}
-                                </div>
-                                <div class="divider"></div>
-                                <div class="right-inputs">
-                                    {{ report_form.created_at }}
-                                    {{ customer_form.name }}
-                                    {{ customer_form.address }}
-                                    {{ customer_form.passport_number }}
-                                    {{ customer_form.when_passport_issued }}
-                                    {{ customer_form.whom_passport_issued }}
-                                    {{ customer_form.phone_number }}
-                                </div>
-                            </div>
+            <div class="accordion one">
+                <form method="POST" class="accordion-title">{% csrf_token %}
+                    <div class="accordion-item">
+                        <div class="accordion-header active-accordion">
+                            <span class="accordion-title">Отчёт номер №{{ report_number }}  </span>
+                            <img src="{% static '/makereport/img/Polygon.png' %}" alt="polygon" class="polygon">
                         </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header active-accordion">
-                        <span class="accordion-title">Стоимость работы</span>
-                        <img src="{% static '/makereport/img/Polygon.png' %}" alt="polygon" class="polygon">
-                    </div>
                         <div class="form accordion-content" style="display: block;">
-                        <div class="accordion-content-wrapper">
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td class="table-headers" style="width: 50px">ID</td>
-                                        <th class="table-headers">Наименование</th>
-                                        <th class="table-headers">Нор/час</th>
-                                        <th class="table-headers">Надбавка</th>
-                                        <th class="table-headers">Цена</th>
-                                        <th class="table-headers">Сумма</th>
-                                    </tr>
-                                         {% for form in service_formset %}
-                                             <tr>
-                                                 <td>{{ form.service_id }}</td>
-                                                 <td>{{ form.name }}</td>
-                                                 <td>{{ form.norm_per_hour }}</td>
-                                                 <td>{{ form.premium }}</td>
-                                                 <td>{{ form.price }}</td>
-                                                 <td>{{ form.cost }}</td>
-                                             </tr>
-                                         {% endfor %}
-
-                                </tbody>
-                            </table>
-                        </div>
-                        </div>
-
-                </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span class="accordion-title">Запчасти</span>
-                        <img src="{% static '/makereport/img/Polygon.png' %}" alt="polygon" class="polygon">
-                    </div>
-                    <div class="form accordion-content" style="display: block;">
-                        <div class="accordion-content-wrapper">
-                            <table>
-                                <tbody><tr>
-                                    <th class="table-spare-part-headers" style="width: 50px">ID</th>
-                                    <th class="table-spare-part-headers">Наименование</th>
-                                    <th class="table-spare-part-headers">Ед.измерения</th>
-                                    <th class="table-spare-part-headers">Кол-во</th>
-                                    <th class="table-spare-part-headers">Цена</th>
-                                    <th class="table-spare-part-headers">Сумма</th>
-                                </tr>
-                                {% for form in consumable_formset %}
-                                    <tr>
-                                        <td>{{ form.consumable_id }}</td>
-                                        <td>{{ form.name }}</td>
-                                        <td>{{ form.unit }}</td>
-                                        <td>{{ form.quantity }}</td>
-                                        <td>{{ form.price }}</td>
-                                        <td>{{ form.cost }}</td>
-                                    </tr>
-                                {% endfor %}
-
-                            </tbody></table>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span class="accordion-title">Материалы</span>
-                        <img src="{% static '/makereport/img/Polygon.png' %}" alt="polygon" class="polygon">
-                    </div>
-                    <div class="form accordion-content" style="display: block;">
-                        <div class="accordion-content-wrapper">
-                            <table>
-                                <tbody><tr>
-                                    <th class="table-spare-part-headers" style="width: 50px">ID</th>
-                                    <th class="table-spare-part-headers">Наименование</th>
-                                    <th class="table-spare-part-headers">Ед.измерения</th>
-                                    <th class="table-spare-part-headers">Кол-во</th>
-                                    <th class="table-spare-part-headers">Цена</th>
-                                    <th class="table-spare-part-headers">Сумма</th>
-                                </tr>
-                                {% for form in product_formset %}
-                                    <tr>
-                                        <td>{{ form.product_id }}</td>
-                                        <td>{{ form.name }}</td>
-                                        <td>{{ form.unit }}</td>
-                                        <td>{{ form.quantity }}</td>
-                                        <td>{{ form.price }}</td>
-                                        <td>{{ form.cost }}</td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody></table>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span class="accordion-title">Износ</span>
-                        <img src="{% static '/makereport/img/Polygon.png' %}" alt="polygon" class="polygon">
-                    </div>
-                    <div class="form accordion-content characteristic-table" style="display: block;">
-                        <div class="accordion-content-wrapper">
-                            <div class="details">
-                                <div class="point">
-                                    <span class="point-text">Балл</span>
-                                    <input type="text" class="input work-price-input point-input">
-                                </div>
-                                <div class="weight">
-                                    <span class="weight-text">Т</span>
-                                    <input type="text" class="input work-price-input weight-input">
-                                </div>
-                                <div class="wear">
-                                    <span class="wear-text">Износ, % </span>
-                                    <input type="text" class="input work-price-input wear-input">
-                                </div>
-                                <div class="prehnite">
-                                    <span class="prehnite-text">Принит </span>
-                                    <input type="text" class="input work-price-input prehnite-input">
+                            <div class="accordion-content-wrapper">
+                                <div class="inputs">
+                                    <div class="left-inputs">
+                                        {{ car_form.car_number }}
+                                        {{ car_form.brand }}
+                                        {{ car_form.registration }}
+                                        {{ car_form.engine_number }}
+                                        {{ car_form.body_number }}
+                                        {{ car_form.chassis }}
+                                        {{ car_form.car_color }}
+                                        {{ car_form.mileage }}
+                                        {{ car_form.release_date }}
+                                        {{ car_form.car_type }}
+                                        {{ car_form.car_owner }}
+                                        {{ car_form.owner_address }}
+                                    </div>
+                                    <div class="divider"></div>
+                                    <div class="right-inputs">
+                                        {{ report_form.created_at }}
+                                        {{ customer_form.name }}
+                                        {{ customer_form.address }}
+                                        {{ customer_form.passport_number }}
+                                        {{ customer_form.when_passport_issued }}
+                                        {{ customer_form.whom_passport_issued }}
+                                        {{ customer_form.phone_number }}
+                                    </div>
                                 </div>
                             </div>
-                            <table class="table">
-                                <tbody><tr>
-                                    <th class="characterstic-header">Оценка состояния</th>
-                                    <th class="characterstic-header">Характеристика физического состояния </th>
-                                    <th class="characterstic-header">Средний балл Б</th>
-                                </tr>
-                                <tr class="tr-2">
-                                    <td class="state">очень хорошее</td>
-                                    <td class="physic-state">Оборудование , мало эксплуатировавшееся либо прошедшее качественный капитальный ремонт , в очень хорошем состоянии</td>
-                                    <td class="average-score">50</td>
-                                </tr>
-                                <tr>
-                                    <td class="state">хорошее</td>
-                                    <td class="physic-state">Слабо поношенное , отремонтированное или обновленное оборудование в хорошем состоянии</td>
-                                    <td class="average-score">40</td>
-                                </tr>
-                                <tr>
-                                    <td class="state">среднее</td>
-                                    <td class="physic-state">Оборудование в удовлетворительном состоянии, частично поношенное , требующее небольшого ремонта или замена отдельных мелких частей , таких , как подшибники , вкладыщи и д.р</td>
-                                    <td class="average-score">30</td>
-                                </tr>
-                                <tr>
-                                    <td class="state">посредственное</td>
-                                    <td class="physic-state">Оборудование в работоспособном состоянии , но требующее ремонта или замены главных частей , таких , как двигатель и других отвественных узлов</td>
-                                    <td class="average-score">20</td>
-                                </tr>
-                                <tr>
-                                    <td class="state" style="border-bottom: 0;">плохое</td>
-                                    <td class="physic-state" style="border-bottom: 0;">Оборудование в плохом состоянии , требующее такого капитального ремонта , как замена рабочих органов основных агрегатов</td>
-                                    <td class="average-score" style="border-bottom: 0;">10</td>
-                                </tr>
-                            </tbody></table>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header active-accordion">
+                            <span class="accordion-title">Стоимость работы</span>
+                            <img src="{% static '/makereport/img/Polygon.png' %}" alt="polygon" class="polygon">
+                        </div>
+                        <div class="form accordion-content" style="display: block;">
+                            <div class="accordion-content-wrapper">
+                                <div class="div" id="service_formset">
+                                    <table>
+                                        <tr>
+                                            <td class="table-headers" style="width: 50px">ID</td>
+                                            <th class="table-headers">Наименование</th>
+                                            <th class="table-headers">Нор/час</th>
+                                            <th class="table-headers">Надбавка</th>
+                                            <th class="table-headers">Цена</th>
+                                            <th class="table-headers">Сумма</th>
+                                        </tr>
+                                    </table>
+                                    {% for form in service_formset.forms %}
+{#                                        {{ form.non_field_errors }}#}
+{#                                        {{ form.errors }}#}
+                                        <table class="no_error">
+                                            <tr>
+                                                <td style="width: 50px">{{ form.service_id }}</td>
+                                                <td>{{ form.name }}</td>
+                                                <td>{{ form.norm_per_hour }}</td>
+                                                <td>{{ form.premium }}</td>
+                                                <td>{{ form.price }}</td>
+                                                <td>{{ form.service_cost }}</td>
+                                            </tr>
+                                        </table>
+                                    {% endfor %}
+                                    {{ service_formset.management_form }}
+                                    {#                                            <input type="button" value="Add More" id="add_more">#}
 
-                            <table class="table">
-                                <tbody><tr>
-                                    <th class="characterstic-header">Физическая характеристика состояния транспортного средства</th>
-                                    <th class="characterstic-header">Оценка сос-я</th>
-                                    <th class="characterstic-header">Износ Итр,%</th>
-                                </tr>
-                                <tr class="tr-2">
-                                    <td class="physic-state">Новое, в отличном состоянии, после выполнения предпродажной подготовки.</td>
-                                    <td class="state">Новое</td>
-                                    <td class="average-score">0 -10</td>
-                                </tr>
-                                <tr>
-                                    <td class="physic-state">Практически новое, периоде эксплуатации, с выполненными объемами технического обслуживания и не требующего ремонта или замены каких-либо частей.</td>
-                                    <td class="state">Очень хорошее</td>
-                                    <td class="average-score">10 - 20</td>
-                                </tr>
-                                <tr>
-                                    <td class="physic-state">На послегарантийном периоде эксплуатации , с выполненными объемами технического обслуживания , не требующее текущего ремонта или замены каких-либо частей. После капитального ремонта.</td>
-                                    <td class="state">Хорошее</td>
-                                    <td class="average-score">20 - 40</td>
-                                </tr>
-                                <tr>
-                                    <td class="physic-state">Бывшее в эксплуатации , с выполненными объемами технического обслуживания , требующее текущего ремонта или замены некоторых деталей , имеющее незначительное повреждение лакокрасочного покрытия</td>
-                                    <td class="state">Удовлетворительное</td>
-                                    <td class="average-score">40 - 60</td>
-                                </tr>
-                                <tr>
-                                    <td class="physic-state">Бывшее в эксплуатации , в состоянии , пригодном для дальнейшей эксплуатации после выполнения работ текущего ремонта ( замены ) агрегатов , ремонта ( наружной окраски ) кузова ( кабины ).</td>
-                                    <td class="state">Условно пригодное</td>
-                                    <td class="average-score">60 - 75</td>
-                                </tr>
-                                <tr>
-                                    <td class="physic-state">Бывшее в эксплуатации , требующее капитального ремонта или замены номерных агрегатов ( двигателя , кузова , рамы ) , полной окраски</td>
-                                    <td class="state">Неудовлетворительно-пригодно</td>
-                                    <td class="average-score">до 80</td>
-                                </tr>
-                                <tr>
-                                    <td class="physic-state" style="border-bottom: 0;">Бывшее в эксплуатации , требующее ремонта в объеме , превышающем экономическую целесообразность его выполнения; отстутвие технической возможности осуществления такового; непригодное к эксплуатации и ремонту</td>
-                                    <td class="state" style="border-bottom: 0;">Предварительное</td>
-                                    <td class="average-score" style="border-bottom: 0;">80 и более</td>
-                                </tr>
-                            </tbody></table>
 
+                                </div>
+                                <div id="empty_service_form" style="display:none">
+                                    <table class='no_error'>
+                                        <tr>
+                                            <td style="width: 50px">{{ service_formset.empty_form.service_id }}</td>
+                                            <td>{{ service_formset.empty_form.name }}</td>
+                                            <td>{{ service_formset.empty_form.norm_per_hour }}</td>
+                                            <td>{{ service_formset.empty_form.premium }}</td>
+                                            <td>{{ service_formset.empty_form.price }}</td>
+                                            <td>{{ service_formset.empty_form.service_cost }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span class="accordion-title">Запчасти</span>
+                            <img src="{% static '/makereport/img/Polygon.png' %}" alt="polygon" class="polygon">
+                        </div>
+                        <div class="form accordion-content" style="display: block;">
+                            <div class="accordion-content-wrapper">
+                                <div class="div" id="product_formset">
+                                    <table>
+                                        <tr>
+                                            <th class="table-spare-part-headers" style="width: 50px">ID</th>
+                                            <th class="table-spare-part-headers">Наименование</th>
+                                            <th class="table-spare-part-headers">Ед.измерения</th>
+                                            <th class="table-spare-part-headers">Кол-во</th>
+                                            <th class="table-spare-part-headers">Цена</th>
+                                            <th class="table-spare-part-headers">Сумма</th>
+                                        </tr>
+                                    </table>
+                                    {% for form in product_formset.forms %}
+{#                                        {{ form.non_field_errors }}#}
+{#                                        {{ form.errors }}#}
+                                        <table class='no_error'>
+                                            <tr>
+                                                <td style="width: 50px">{{ form.product_id }}</td>
+                                                <td>{{ form.name }}</td>
+                                                <td>{{ form.unit }}</td>
+                                                <td>{{ form.quantity }}</td>
+                                                <td>{{ form.price }}</td>
+                                                <td>{{ form.product_cost }}</td>
+                                            </tr>
+                                        </table>
+                                    {% endfor %}
+                                    {{ product_formset.management_form }}
+                                </div>
+                                <div id="empty_product_form" style="display:none">
+                                    <table class='no_error'>
+                                        <tr>
+                                            <td style="width: 50px">{{ product_formset.empty_form.product_id }}</td>
+                                            <td>{{ product_formset.empty_form.name }}</td>
+                                            <td>{{ product_formset.empty_form.unit }}</td>
+                                            <td>{{ product_formset.empty_form.quantity }}</td>
+                                            <td>{{ product_formset.empty_form.price }}</td>
+                                            <td>{{ product_formset.empty_form.product_cost }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span class="accordion-title">Материалы</span>
+                            <img src="{% static '/makereport/img/Polygon.png' %}" alt="polygon" class="polygon">
+                        </div>
+                        <div class="form accordion-content" style="display: block;">
+                            <div class="accordion-content-wrapper">
+                                <div class="div" id="consumable_formset">
+                                    <table>
+                                        <tr>
+                                            <th class="table-spare-part-headers" style="width: 50px">ID</th>
+                                            <th class="table-spare-part-headers">Наименование</th>
+                                            <th class="table-spare-part-headers">Ед.измерения</th>
+                                            <th class="table-spare-part-headers">Кол-во</th>
+                                            <th class="table-spare-part-headers">Цена</th>
+                                            <th class="table-spare-part-headers">Сумма</th>
+                                        </tr>
+                                    </table>
+                                    {% for form in consumable_formset.forms %}
+{#                                        {{ form.non_field_errors }}#}
+{#                                        {{ form.errors }}#}
+                                        <table class='no_error'>
+                                            <tr>
+                                                <td style="width: 50px">{{ form.consumable_id }}</td>
+                                                <td>{{ form.name }}</td>
+                                                <td>{{ form.unit }}</td>
+                                                <td>{{ form.quantity }}</td>
+                                                <td>{{ form.price }}</td>
+                                                <td>{{ form.consumable_cost }}</td>
+                                            </tr>
+                                        </table>
+                                    {% endfor %}
+                                    {{ consumable_formset.management_form }}
+                                </div>
+                                <div id="empty_consum_form" style="display:none">
+                                    <table class='no_error'>
+                                        <tr>
+                                            <td style="width: 50px">{{ consumable_formset.empty_form.consumable_id }}</td>
+                                            <td>{{ consumable_formset.empty_form.name }}</td>
+                                            <td>{{ consumable_formset.empty_form.unit }}</td>
+                                            <td>{{ consumable_formset.empty_form.quantity }}</td>
+                                            <td>{{ consumable_formset.empty_form.price }}</td>
+                                            <td>{{ consumable_formset.empty_form.consumable_cost }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span class="accordion-title">Износ</span>
+                            <img src="{% static '/makereport/img/Polygon.png' %}" alt="polygon" class="polygon">
+                        </div>
+                        <div class="form accordion-content characteristic-table" style="display: block;">
+                            <div class="accordion-content-wrapper">
+                                <div class="details">
+                                    <div class="point">
+                                        <span class="point-text">Балл</span>
+                                        {{ wear_form.point }}
+                                    </div>
+                                    <div class="weight">
+                                        <span class="weight-text">Т</span>
+                                        {#                                        <input type="text" class="input work-price-input weight-input">#}
+                                        {{ wear_form.weight }}
+                                    </div>
+                                    <div class="wear">
+                                        <span class="wear-text">Износ, % </span>
+                                        {#                                        <input type="text" class="input work-price-input wear-input">#}
+                                        {{ wear_form.wear }}
+                                    </div>
+                                    <div class="prehnite">
+                                        <span class="prehnite-text">Принит </span>
+                                        {#                                        <input type="text" class="input work-price-input prehnite-input">#}
+                                        {{ wear_form.accept_wear }}
+                                    </div>
+                                </div>
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <th class="characterstic-header">Оценка состояния</th>
+                                        <th class="characterstic-header">Характеристика физического состояния</th>
+                                        <th class="characterstic-header">Средний балл Б</th>
+                                    </tr>
+                                    <tr class="tr-2">
+                                        <td class="state">очень хорошее</td>
+                                        <td class="physic-state">Оборудование , мало эксплуатировавшееся либо прошедшее
+                                            качественный капитальный ремонт , в очень хорошем состоянии
+                                        </td>
+                                        <td class="average-score">50</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="state">хорошее</td>
+                                        <td class="physic-state">Слабо поношенное , отремонтированное или обновленное
+                                            оборудование в хорошем состоянии
+                                        </td>
+                                        <td class="average-score">40</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="state">среднее</td>
+                                        <td class="physic-state">Оборудование в удовлетворительном состоянии, частично
+                                            поношенное , требующее небольшого ремонта или замена отдельных мелких частей
+                                            , таких , как подшибники , вкладыщи и д.р
+                                        </td>
+                                        <td class="average-score">30</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="state">посредственное</td>
+                                        <td class="physic-state">Оборудование в работоспособном состоянии , но требующее
+                                            ремонта или замены главных частей , таких , как двигатель и других
+                                            отвественных узлов
+                                        </td>
+                                        <td class="average-score">20</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="state" style="border-bottom: 0;">плохое</td>
+                                        <td class="physic-state" style="border-bottom: 0;">Оборудование в плохом
+                                            состоянии , требующее такого капитального ремонта , как замена рабочих
+                                            органов основных агрегатов
+                                        </td>
+                                        <td class="average-score" style="border-bottom: 0;">10</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <th class="characterstic-header">Физическая характеристика состояния
+                                            транспортного средства
+                                        </th>
+                                        <th class="characterstic-header">Оценка сос-я</th>
+                                        <th class="characterstic-header">Износ Итр,%</th>
+                                    </tr>
+                                    <tr class="tr-2">
+                                        <td class="physic-state">Новое, в отличном состоянии, после выполнения
+                                            предпродажной подготовки.
+                                        </td>
+                                        <td class="state">Новое</td>
+                                        <td class="average-score">0 -10</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="physic-state">Практически новое, периоде эксплуатации, с выполненными
+                                            объемами технического обслуживания и не требующего ремонта или замены
+                                            каких-либо частей.
+                                        </td>
+                                        <td class="state">Очень хорошее</td>
+                                        <td class="average-score">10 - 20</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="physic-state">На послегарантийном периоде эксплуатации , с
+                                            выполненными объемами технического обслуживания , не требующее текущего
+                                            ремонта или замены каких-либо частей. После капитального ремонта.
+                                        </td>
+                                        <td class="state">Хорошее</td>
+                                        <td class="average-score">20 - 40</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="physic-state">Бывшее в эксплуатации , с выполненными объемами
+                                            технического обслуживания , требующее текущего ремонта или замены некоторых
+                                            деталей , имеющее незначительное повреждение лакокрасочного покрытия
+                                        </td>
+                                        <td class="state">Удовлетворительное</td>
+                                        <td class="average-score">40 - 60</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="physic-state">Бывшее в эксплуатации , в состоянии , пригодном для
+                                            дальнейшей эксплуатации после выполнения работ текущего ремонта ( замены )
+                                            агрегатов , ремонта ( наружной окраски ) кузова ( кабины ).
+                                        </td>
+                                        <td class="state">Условно пригодное</td>
+                                        <td class="average-score">60 - 75</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="physic-state">Бывшее в эксплуатации , требующее капитального ремонта
+                                            или замены номерных агрегатов ( двигателя , кузова , рамы ) , полной окраски
+                                        </td>
+                                        <td class="state">Неудовлетворительно-пригодно</td>
+                                        <td class="average-score">до 80</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="physic-state" style="border-bottom: 0;">Бывшее в эксплуатации ,
+                                            требующее ремонта в объеме , превышающем экономическую целесообразность его
+                                            выполнения; отстутвие технической возможности осуществления такового;
+                                            непригодное к эксплуатации и ремонту
+                                        </td>
+                                        <td class="state" style="border-bottom: 0;">Предварительное</td>
+                                        <td class="average-score" style="border-bottom: 0;">80 и более</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="file-upload">
+                        <div class="file-select">
+                            <div class="file-select-button" id="fileName"><span>Выбрать</span></div>
+                            <div class="file-select-name" id="noFile">Добавить фото</div>
+                            <input type="file" name="chooseFile" id="chooseFile">
                         </div>
                     </div>
 
-                </div>
-                <button class="save-btn" type="submit">Сохранить</button>
-        </form>
-    </div>
+                    <div class="file-upload">
+                        <div class="file-select">
+                            <div class="file-select-button" id="fileName"><span>Выбрать</span></div>
+                            <div class="file-select-name" id="noFile">Фото паспорта</div>
+                            <input type="file" name="chooseFile" id="chooseFile">
+                        </div>
+                    </div>
 
-</section>
-</main>
+                    <div class="file-upload">
+                        <div class="file-select">
+                            <div class="file-select-button" id="fileName"><span>Выбрать</span></div>
+                            <div class="file-select-name" id="noFile">Фото тех.паспорта</div>
+                            <input type="file" name="chooseFile" id="chooseFile">
+                        </div>
+                    </div>
+
+                    <div class="file-upload">
+                        <div class="file-select">
+                            <div class="file-select-button" id="fileName"><span>Выбрать</span></div>
+                            <div class="file-select-name" id="noFile">Добавить чек</div>
+                            <input type="file" name="chooseFile" id="chooseFile">
+                        </div>
+                    </div>
+
+
+
+                <div class="almost_latest_block row">
+
+                    <div class="col-lg-6">
+                        <div class="welcome-part">
+
+                            <div class="welcome_user">
+                                <h2>Цена</h2>
+                            </div>
+
+                            <div class="panel_price">
+{#                                <a href="#">#}
+                                  <button type="button" class="btn panel_price_button" id="cost_button">{{ total_report_price }}</button>
+{#                                    <input class="btn panel_price_button" id="cost_button">#}
+{#                                </a>#}
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6 dont_know_why">
+                        <div class="row">
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-8">
+
+                                <dl class="row">
+                                    <dd class="col-sm-5 single_word">
+                                        Опр ст.ущерба
+                                    </dd>
+                                    <dd class="col-sm-7 work_work">
+                                        <span class="i_dont_hnow_why_nth_child_doesnt_work">200 000</span>
+                                    </dd>
+                                </dl>
+
+                                <dl class="row">
+                                    <dd class="col-sm-5 single_word">
+                                        Опр ст.УТС
+                                    </dd>
+                                    <dd class="col-sm-7 work_work">
+                                        <span>0</span>
+                                    </dd>
+                                </dl>
+
+                                <dl class="row">
+                                    <dd class="col-sm-5 single_word">
+                                        Выезд
+                                    </dd>
+                                    <dd class="col-sm-7 work_work">
+                                        <span>0</span>
+                                    </dd>
+                                </dl>
+
+                                <dl class="row">
+                                    <dd class="col-sm-12">
+                                        <div class="panel_save">
+{#                                            <a href="#">#}
+                                                <button type="submit" class="btn panel_save_button">Сохранить</button>
+{#                                            </a>#}
+                                        </div>
+                                    </dd>
+                                </dl>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="last_bottom_block">
+
+                    <div class="white_block">
+
+                    </div>
+                    <div class="little_white_block">
+                        <span>№23</span>
+                    </div>
+
+                    <div class="word" id="word">
+                        <p>Заключение</p>
+                    </div>
+                    <div class="panel_user">
+                        <a href="#">
+                            <button type="button" class="btn panel_button">Скачать</button>
+                        </a>
+                    </div>
+
+                    <div class="word_2" id="word">
+                        <p>Договор</p>
+                    </div>
+                    <div class="panel_user_2">
+                        <a href="#">
+                            <button type="button" class="btn panel_button">Скачать</button>
+                        </a>
+                    </div>
+
+                    <div class="word_3" id="word">
+                        <p>Отчёт</p>
+                    </div>
+                    <div class="panel_user_3">
+                        <a href="#">
+                            <button type="button" class="btn panel_button">Скачать</button>
+                        </a>
+                    </div>
+
+                </div>
+{#                <button class="save-btn" type="submit">Сохранить</button>#}
+                </form>
+            </div>
+
+        </section>
+    </main>
 
     {% block javascript %}
         <script>
-            $(document).on('keypress', ".input-service_id", function (e) {
-                console.log('CLICK')
+
+            $(document).on('keypress', "form", function (event) {
+                return event.key !== "Enter";
+            });
+
+            {#$(document).on('keypress', "#id_accept_wear", function (e) {#}
+            {#    console.log('CLICK id_accept_wear')#}
+            {#    var key = e.which;#}
+            {#    if (key === 13) {#}
+            {#        var id_accept_wear = $(this).val(),#}
+            {#            cost_button = $('#cost_button')#}
+            {##}
+            {#        $.ajax({#}
+            {#            url: '{% url "get_report_cost" %}',#}
+            {#            data: {#}
+            {#                'id_accept_wear': id_accept_wear,#}
+            {#            },#}
+            {#            dataType: 'json',#}
+            {#            success: function (data) {#}
+            {#                console.log('success')#}
+            {#                cost_button.val(data.total_report_cost)#}
+            {#            },#}
+            {#        })#}
+            {#    }#}
+            {#});#}
+
+            $(document).on('keypress', ".input-premium", function (e) {
                 var key = e.which;
                 if (key === 13) {
-                    console.log(this)
+                    console.log('CLICK-Service')
+                    var form_idx = $('#id_service-TOTAL_FORMS').val();
+                    $('#service_formset').append($('#empty_service_form').html().replace(/__prefix__/g, form_idx));
+                    $('#id_service-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+                }
+            });
+            $(document).on('keypress', ".input-quantity", function (e) {
+                var key = e.which;
+                if (key === 13) {
+                    console.log('CLICK-Product')
+                    var form_idx = $('#id_product-TOTAL_FORMS').val();
+                    $('#product_formset').append($('#empty_product_form').html().replace(/__prefix__/g, form_idx));
+                    $('#id_product-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+                }
+            });
+            $(document).on('keypress', ".input-quantity-cons", function (e) {
+                var key = e.which;
+                if (key === 13) {
+                    console.log('CLICK-Consumable')
+                    var form_idx = $('#id_consumable-TOTAL_FORMS').val();
+                    $('#consumable_formset').append($('#empty_consum_form').html().replace(/__prefix__/g, form_idx));
+                    $('#id_consumable-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+                }
+            });
+
+            $(document).on('keypress', ".input-service_id", function (e) {
+                console.log('CLICK service_id')
+                var key = e.which;
+                if (key === 13) {
                     var service_id = $(this).val(),
                         last_input_name = $(this).parents('tr').find('.input-name'),
                         last_input_nph = $(this).parents('tr').find('.input-nph'),
                         last_input_price = $(this).parents('tr').find('.input-price')
 
                     brand = $('#id_brand').val()
-
 
                     $.ajax({
                         url: '{% url "get_service_ajax" %}',
@@ -292,13 +577,14 @@
             $(document).on('keypress', ".input-premium", function (e) {
                 console.log('CLICK premium')
                 var key = e.which;
+                var service_cost;
+                var nph;
                 if (key === 13) {
                     var premium = $(this).val(),
                         price = $(this).parents('tr').find('.input-price').val()
                     nph = $(this).parents('tr').find('.input-nph').val(),
-                        cost = $(this).parents('tr').find('.input-cost')
-                    console.log(cost)
-                    console.log(cost.val())
+                        service_cost = $(this).parents('tr').find('.input-cost')
+
                     last = $(this).parents('tbody').find('tr').last()
 
                     $.ajax({
@@ -311,25 +597,23 @@
                         dataType: 'json',
                         success: function (data) {
                             console.log('success calculate cost')
-                            cost.val(data.total_cost)
-                            last.clone().insertAfter(last);
+                            {#last.clone().insertAfter(last);#}
+                            service_cost.val(data.service_cost)
                         },
                     })
                 }
             });
 
             $(document).on('keypress', ".input-product_id", function (e) {
-                console.log('CLICK')
+                console.log('CLICK product_id')
                 var key = e.which;
                 if (key === 13) {
-                    console.log(this)
                     var product_id = $(this).val(),
                         last_input_name = $(this).parents('tr').find('.input-name'),
                         last_input_unit = $(this).parents('tr').find('.input-unit'),
                         last_input_price = $(this).parents('tr').find('.input-price')
 
                     brand = $('#id_brand').val()
-
 
                     $.ajax({
                         url: '{% url "get_product_ajax" %}',
@@ -349,13 +633,14 @@
             });
 
             $(document).on('keypress', ".input-quantity-cons", function (e) {
+                console.log('CLICK quantity-cons')
                 var key = e.which;
                 if (key === 13) {
                     var quantity = $(this).val(),
                         price = $(this).parents('tr').find('.input-price').val(),
                         cost = $(this).parents('tr').find('.input-cost')
                     last = $(this).parents('tbody').find('tr').last()
-
+                    {#last.clone().insertAfter(last);#}
                     $.ajax({
                         url: '{% url "get_product_cost" %}',
                         data: {
@@ -366,13 +651,13 @@
                         success: function (data) {
                             console.log('success calculate cost')
                             cost.val(data.total_cost)
-                            last.clone().insertAfter(last);
                         },
                     })
                 }
             });
 
             $(document).on('keypress', ".input-consumable_id", function (e) {
+                console.log('CLICK consumable_id')
                 var key = e.which;
                 if (key === 13) {
                     var consumable_id = $(this).val(),
@@ -397,6 +682,7 @@
             });
 
             $(document).on('keypress', ".input-quantity", function (e) {
+                console.log('CLICK quantity')
                 var key = e.which;
                 if (key === 13) {
                     var quantity = $(this).val(),
@@ -405,7 +691,7 @@
 
                     last = $(this).parents('tbody').find('tr').last()
 
-
+                    {#last.clone().insertAfter(last);#}
                     $.ajax({
                         url: '{% url "get_consumable_cost" %}',
                         data: {
@@ -416,38 +702,34 @@
                         success: function (data) {
                             console.log('success calculate cost')
                             cost.val(data.total_cost)
-                            last.clone().insertAfter(last);
                         },
                     })
                 }
             });
-
             $(document).on('keypress', ".weight-input", function (e) {
+                console.log('CLICK point-input')
                 var key = e.which;
                 if (key === 13) {
-                    var weight = $(this).val(),
-                        point = $(this).parents('.details').find('.point-input').val(),
+                    var point = $(this).val(),
+                        weight = $(this).parents('.details').find('.weight-input').val(),
                         wear = $(this).parents('.details').find('.wear-input')
 
                     $.ajax({
                         url: '{% url "get_wear_ajax" %}',
                         data: {
-                            'weight': weight,
                             'point': point,
+                            'weight': weight,
                         },
                         dataType: 'json',
                         success: function (data) {
-                            console.log('success')
+                            console.log('success calculate cost')
                             wear.val(data.wear)
-
                         },
                     })
                 }
             });
 
-            $(document).on('keypress', "form", function (event) {
-                return event.key !== "Enter";
-            });
+
         </script>
     {% endblock %}
 

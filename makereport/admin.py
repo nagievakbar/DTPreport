@@ -13,7 +13,11 @@ class ReportAdmin(admin.ModelAdmin):
                     'created_at',
                     'created_by',
                     'contract',
-                    'pdf_report'
+                    'pdf_report',
+                    'WEAR_DATA',
+                    'PRODUCT_DATA',
+                    'SERVICE_DATA',
+                    'CONSUMABLE_DATA'
     )
     search_fields = ['report_id']
 

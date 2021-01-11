@@ -453,8 +453,6 @@ table {
   border-radius: 5px;
 }
 
-
-
 .wear-text {
   display: inline-block;
   width: 128px;
@@ -467,7 +465,7 @@ table {
   color: #3f3f3f;
 }
 
-.prehnite-text {
+.accept_wear-text {
   display: inline-block;
   width: 128px;
   padding: 10px 0;
@@ -479,7 +477,7 @@ table {
   color: #3f3f3f;
 }
 
-.prehnite-input {
+.accept-wear-input {
   height: 35px;
   max-width: 45px;
   border: 1px solid #5c6e91;
