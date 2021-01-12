@@ -16,7 +16,9 @@ class ReportView(View):
 
     @method_decorator(decorators)
     def get(self, request, id=None):
+        report = None
         if id:
+            print('get method with report id=%.d' % id)
             report = Report.objects.get(report_id=id)
             contract = Contract.objects.get(contract_id=report.contract_id)
             report_form = ReportForm(instance=report)
@@ -41,7 +43,7 @@ class ReportView(View):
             else:
                 report_number = 1
         else:
-            report = None
+            print('get method without id')
             report_form = ReportForm(instance=Report())
             car_form = CarForm(instance=Car())
             customer_form = CustomerForm(instance=Customer())
@@ -69,7 +71,7 @@ class ReportView(View):
             'product_formset': product_formset,
             'consumable_formset': consumable_formset,
             'wear_form': wear_form,
-            'report': report,
+            'report': report or None,
             'total_price_report': total_price_report
         }
         return render(request, template, context)
@@ -83,12 +85,9 @@ class ReportView(View):
         report_form = ReportForm(request.POST, instance=Report())
         car_form = CarForm(request.POST, instance=Car())
         customer_form = CustomerForm(request.POST, instance=Customer())
-        service_form = formset_factory(ServiceForm, extra=2)
-        service_formset = service_form(request.POST, prefix='service')
-        product_form = formset_factory(ProductForm, extra=2)
-        product_formset = product_form(request.POST, prefix='product')
-        consumable_form = formset_factory(ConsumableForm, extra=2)
-        consumable_formset = consumable_form(request.POST, prefix='consumable')
+        service_formset = self.init_service_formset(request)
+        product_formset = self.init_product_formset(request)
+        consumable_formset = self.init_consumable_formset(request)
         wear_form = WearForm(request.POST)
         all_reports = Report.objects.all()
         if all_reports:
@@ -135,10 +134,10 @@ class ReportView(View):
                 print('wear form is validated')
                 wd = get_data_from_wear_form(wear_form)
                 new_report.WEAR_DATA.update(wd)
-                total_report_price = new_report.get_total_report_price()
+                new_report.get_total_report_price()
             new_report.save()
+            return HttpResponseRedirect('/report/list')
 
-            # return HttpResponseRedirect('/report/list')
         context = {
             'report_form': report_form,
             'car_form': car_form,
@@ -148,8 +147,8 @@ class ReportView(View):
             'product_formset': product_formset,
             'consumable_formset': consumable_formset,
             'wear_form': wear_form,
-            'new_report': new_report or None,
-            'total_report_price': total_report_price or None
+            # 'new_report': new_report or None,
+            # 'total_report_price': total_report_price or None
         }
         return render(request, 'makereport/add_report.html', context)
 
@@ -163,6 +162,17 @@ class ReportView(View):
         car_form = CarForm(request.POST, instance=car)
         customer = Customer.objects.get(customer_id=contract.customer_id)
         customer_form = CustomerForm(request.POST, instance=customer)
+        service_formset = self.init_service_formset(request)
+        product_formset = self.init_product_formset(request)
+        consumable_formset = self.init_consumable_formset(request)
+        wear_form = WearForm(request.POST)
+        # service_form = formset_factory(ServiceForm, extra=1)
+        # service_formset = service_form(initial=report.SERVICE_DATA)
+        # product_form = formset_factory(ProductForm, extra=1)
+        # product_formset = product_form(initial=report.PRODUCT_DATA)
+        # consumable_form = formset_factory(ConsumableForm, extra=1)
+        # consumable_formset = consumable_form(initial=report.CONSUMABLE_DATA)
+        # wear_form = WearForm(initial=report.WEAR_DATA)
         all_reports = Report.objects.all()
         if all_reports:
             report_number = Report.objects.get(report_id=id)
@@ -178,6 +188,34 @@ class ReportView(View):
             new_car = car_form.save()
             new_car.save()
             new_report.car = new_car
+            new_report.save()
+            for form in service_formset.forms:
+                if form.is_valid():
+                    print('service form is validated')
+                    sd = get_data_from_service_form(form)
+                    add_service_to_report(new_report, sd.__getitem__('service_id'), sd.__getitem__('service_cost'))
+                    new_report.SERVICE_DATA.append(sd)
+                print(new_report.service_cost)
+            for form in product_formset.forms:
+                if form.is_valid():
+                    print('product form is validated')
+                    pd = get_data_from_product_form(form)
+                    add_product_to_report(new_report, pd.__getitem__('product_id'), pd.__getitem__('product_cost'))
+                    new_report.PRODUCT_DATA.append(pd)
+                print(new_report.product_cost)
+            for form in consumable_formset.forms:
+                if form.is_valid():
+                    print('consum form is validated')
+                    cd = get_data_from_consum_form(form)
+                    add_consumable_to_report(new_report, cd.__getitem__('consumable_id'),
+                                             cd.__getitem__('consumable_cost'))
+                    new_report.CONSUMABLE_DATA.append(cd)
+                print(new_report.consumable_cost)
+            if wear_form.is_valid():
+                print('wear form is validated')
+                wd = get_data_from_wear_form(wear_form)
+                new_report.WEAR_DATA.update(wd)
+                new_report.get_total_report_price()
             new_report.save()
             return HttpResponseRedirect('/report/list')
         context = {
@@ -195,7 +233,22 @@ class ReportView(View):
             report.delete()
             return redirect('reports_list')
         context = {'report': report}
-        return render(request, 'makereport/delete_report.html', context=report)
+        return render(request, 'makereport/delete_report.html', context=context)
+
+    def init_service_formset(self, request):
+        service_form = formset_factory(ServiceForm, extra=2)
+        service_formset = service_form(request.POST, prefix='service')
+        return service_formset
+
+    def init_product_formset(self, request):
+        product_form = formset_factory(ProductForm, extra=2)
+        product_formset = product_form(request.POST, prefix='product')
+        return product_formset
+
+    def init_consumable_formset(self, request):
+        consumable_form = formset_factory(ConsumableForm, extra=2)
+        consumable_formset = consumable_form(request.POST, prefix='consumable')
+        return consumable_formset
 
 
 @login_required
