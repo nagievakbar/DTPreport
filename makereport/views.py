@@ -10,6 +10,7 @@ from django.views.generic import View
 from .forms import *
 from .utils import *
 
+
 class ReportView(View):
     decorators = [login_required]
 
@@ -220,9 +221,9 @@ def user_login(request):
             return HttpResponseRedirect(reverse('reports_list'))
         else:
             context["error"] = "Invalid data"
-            return render(request, "makereport/auth/login.html", context)
+            return render(request, "makereport/auth/enter.html", context)
     else:
-        return render(request, "makereport/auth/login.html", context)
+        return render(request, "makereport/auth/enter.html", context)
 
 
 @login_required
