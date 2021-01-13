@@ -158,18 +158,18 @@ class Report(models.Model):
     product = models.ManyToManyField(Product, related_name='Детали', verbose_name='Детали')
     consumable = models.ManyToManyField(Consumable, related_name='Расходники', verbose_name='Расходники')
 
-    # service_cost = models.IntegerField(default=0)
-    # product_cost = models.IntegerField(default=0)
-    # product_acc_cost = models.IntegerField(default=0)
-    # # consumable_cost = models.IntegerField(default=0)
+    service_cost = models.IntegerField(default=0)
+    product_cost = models.IntegerField(default=0)
+    product_acc_cost = models.IntegerField(default=0)
+    consumable_cost = models.IntegerField(default=0)
 
-    service_cost = 0
-    product_cost = 0
-    product_acc_cost = 0
-    consumable_cost = 0
+    # service_cost = 0
+    # product_cost = 0
+    # product_acc_cost = 0
+    # consumable_cost = 0
 
-    # total_report_cost = models.IntegerField(default=0)
-    total_report_cost = 0
+    total_report_cost = models.CharField(max_length=15)
+    # total_report_cost = 0
 
     pdf_report = models.FileField(blank=True, null=True, verbose_name='Отчёт в пдф')
 
@@ -178,18 +178,16 @@ class Report(models.Model):
     media_photo = models.FileField(blank=True, null=True, verbose_name='Разные Фото')
 
     wear_data = models.JSONField(blank=True, null=True)
-
-    WEAR_DATA = {}
-    SERVICE_DATA = []
-    PRODUCT_DATA = []
-    CONSUMABLE_DATA = []
+    service_data = models.JSONField(blank=True, null=True)
+    product_data = models.JSONField(blank=True, null=True)
+    consumable_data = models.JSONField(blank=True, null=True)
 
     def __str__(self):
         return str(self.report_id)
 
     def get_product_acc_cost(self):
         print('get_product_acc_cost')
-        self.product_acc_cost = self.product_cost * (1 - self.WEAR_DATA.__getitem__('accept_wear')/100)
+        self.product_acc_cost = self.product_cost * (1 - self.wear_data.__getitem__('accept_wear')/100)
         return self.product_acc_cost
 
     def get_total_report_price(self):

@@ -103,7 +103,7 @@ _________ Сагдуллаев Б.К.
         </text>
         <text  align="center" >Автомобиль марки {{ report.car.brand }} государственный номер: {{ report.car.car_number }}
         </text>
-        <text fontsize="20" align="center" lineheight="1.5" >{ Цена }
+        <text fontsize="20" align="center" lineheight="1.5" >{{ report.total_report_cost }}
         </text>
         <text>
             Оценка произведена в соответствии с требованиями Закона «Об оценочной деятельности» № 811-I от

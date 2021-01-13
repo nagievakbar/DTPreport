@@ -64,7 +64,6 @@ class CustomerForm(forms.ModelForm):
     whom_passport_issued = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Кем выдан', 'class': 'input'}))
     phone_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Телефон', 'class': 'input'}))
 
-
     class Meta:
         model = Customer
         fields = ['name', 'address', 'passport_number', 'when_passport_issued',
@@ -74,11 +73,11 @@ class CustomerForm(forms.ModelForm):
 class ServiceForm(forms.Form):
 
     service_id = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder': 'ID', 'class': 'input input-service_id'}))
-    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Название', 'class': 'input input-name', }))
-    norm_per_hour= forms.FloatField(widget=forms.NumberInput(attrs={'placeholder': 'нор\час', 'class': 'input input-nph', }))
-    premium = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'надбавка', 'class': 'input input-premium','value': '0'}))
-    price = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder': 'цена', 'class': 'input input-price', }))
-    service_cost = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder': 'сумма', 'class': 'input input-cost', }))
+    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Название', 'class': 'input input-name', 'readonly': ''}))
+    norm_per_hour= forms.FloatField(widget=forms.NumberInput(attrs={'placeholder': 'нор\час', 'class': 'input input-nph', 'readonly': ''}))
+    premium = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'надбавка', 'class': 'input input-premium', 'value': '0'}))
+    price = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder': 'цена', 'class': 'input input-price', 'readonly': ''}))
+    service_cost = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder': 'сумма', 'class': 'input input-cost', 'readonly': ''}))
     # 'readonly': ''
 
 
@@ -107,4 +106,4 @@ class WearForm(forms.Form):
     point = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Баллы', 'class': 'input work-price-input point-input'}))
     weight = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Т', 'class': 'input work-price-input weight-input'}))
     wear = forms.IntegerField(widget=forms.TextInput(attrs={'class':'input work-price-input wear-input'}))
-    accept_wear = forms.IntegerField(widget=forms.TextInput(attrs={'class':'input work-price-input prehnite-input'}))
+    accept_wear = forms.IntegerField(widget=forms.TextInput(attrs={'class':'input work-price-input accept-wear-input'}))

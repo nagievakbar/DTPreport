@@ -14,10 +14,10 @@ class ReportAdmin(admin.ModelAdmin):
                     'created_by',
                     'contract',
                     'pdf_report',
-                    'WEAR_DATA',
-                    'PRODUCT_DATA',
-                    'SERVICE_DATA',
-                    'CONSUMABLE_DATA'
+                    'wear_data',
+                    'product_data',
+                    'service_data',
+                    'consumable_data'
     )
     search_fields = ['report_id']
 
@@ -32,6 +32,7 @@ class CarAdmin(admin.ModelAdmin):
     search_fields = ['car_number',
                      'brand']
 
+
 @admin.register(Customer)
 class CustomerAdmin(admin.ModelAdmin):
     list_display = ('customer_id',
@@ -40,6 +41,7 @@ class CustomerAdmin(admin.ModelAdmin):
                     'passport_number',
     )
     search_fields = ['passport_number']
+
 
 @admin.register(Contract)
 class ContractAdmin(admin.ModelAdmin):

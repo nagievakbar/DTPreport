@@ -1,7 +1,7 @@
 {% extends 'makereport/base_report.html' %}
 {% load static %}
-{% block title %}
-    Новый Документ
+{% block title%}
+    Отчёт номер № {{ report_number }}
 {% endblock %}
 {% block content %}
     <main id="main">
@@ -52,7 +52,7 @@
                             <span class="accordion-title">Стоимость работы</span>
                             <img src="{% static '/makereport/img/Polygon.png' %}" alt="polygon" class="polygon">
                         </div>
-                        <div class="form accordion-content" style="display: none;">
+                        <div class="form accordion-content" style="display: block;">
                             <div class="accordion-content-wrapper">
                                 <div class="div" id="service_formset">
                                     <table>
@@ -105,7 +105,7 @@
                             <span class="accordion-title">Запчасти</span>
                             <img src="{% static '/makereport/img/Polygon.png' %}" alt="polygon" class="polygon">
                         </div>
-                        <div class="form accordion-content" style="display: none;">
+                        <div class="form accordion-content" style="display: block;">
                             <div class="accordion-content-wrapper">
                                 <div class="div" id="product_formset">
                                     <table>
@@ -154,7 +154,7 @@
                             <span class="accordion-title">Материалы</span>
                             <img src="{% static '/makereport/img/Polygon.png' %}" alt="polygon" class="polygon">
                         </div>
-                        <div class="form accordion-content" style="display: none;">
+                        <div class="form accordion-content" style="display: block;">
                             <div class="accordion-content-wrapper">
                                 <div class="div" id="consumable_formset">
                                     <table>
@@ -204,7 +204,7 @@
                             <span class="accordion-title">Износ</span>
                             <img src="{% static '/makereport/img/Polygon.png' %}" alt="polygon" class="polygon">
                         </div>
-                        <div class="form accordion-content characteristic-table" style="display: none;">
+                        <div class="form accordion-content characteristic-table" style="display: block;">
                             <div class="accordion-content-wrapper">
                                 <div class="details">
                                     <div class="point">
@@ -221,8 +221,8 @@
                                         {#                                        <input type="text" class="input work-price-input wear-input">#}
                                         {{ wear_form.wear }}
                                     </div>
-                                    <div class="prehnite">
-                                        <span class="prehnite-text">Принит </span>
+                                    <div class="accept-wear">
+                                        <span class="accept_wear-text">Принит </span>
                                         {#                                        <input type="text" class="input work-price-input prehnite-input">#}
                                         {{ wear_form.accept_wear }}
                                     </div>
@@ -393,7 +393,7 @@
 
                             <div class="panel_price">
 {#                                <a href="#">#}
-                                  <button type="button" class="btn panel_price_button" id="cost_button">{{ total_report_price }}</button>
+                                  <button type="button" class="btn panel_price_button" id="cost_button">{{ total_price_report }}</button>
 {#                                    <input class="btn panel_price_button" id="cost_button">#}
 {#                                </a>#}
                             </div>
