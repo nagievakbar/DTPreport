@@ -7,10 +7,12 @@ class ReportForm(forms.ModelForm):
     """docstring for ReportForm."""
 
     created_at = forms.DateField(input_formats=['%d.%m.%Y'], widget=forms.DateInput(attrs={'value': datetime.date.today().strftime("%d.%m.%Y") , 'class': 'input'}))
+    media_photo = forms.FileField(widget=forms.FileInput(attrs={'class': 'file-input', 'id': 'chooseFile'}))
 
     class Meta:
         model = Report
-        fields = ['created_at']
+        fields = ['created_at',
+                  'media_photo']
         # 'created_at',
 
 

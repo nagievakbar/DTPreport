@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'makereport',
     'pdf_report',
     'import',
-    'import_export'
+    'import_export',
 ]
 
 MIDDLEWARE = [

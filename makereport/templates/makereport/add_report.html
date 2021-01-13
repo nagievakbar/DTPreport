@@ -65,6 +65,7 @@
                                             <th class="table-headers">Сумма</th>
                                         </tr>
                                     </table>
+                                    {{ service_formset.management_form }}
                                     {% for form in service_formset.forms %}
 {#                                        {{ form.non_field_errors }}#}
 {#                                        {{ form.errors }}#}
@@ -79,7 +80,7 @@
                                             </tr>
                                         </table>
                                     {% endfor %}
-                                    {{ service_formset.management_form }}
+
                                     {#                                            <input type="button" value="Add More" id="add_more">#}
 
 
@@ -118,6 +119,7 @@
                                             <th class="table-spare-part-headers">Сумма</th>
                                         </tr>
                                     </table>
+                                    {{ product_formset.management_form }}
                                     {% for form in product_formset.forms %}
 {#                                        {{ form.non_field_errors }}#}
 {#                                        {{ form.errors }}#}
@@ -132,7 +134,6 @@
                                             </tr>
                                         </table>
                                     {% endfor %}
-                                    {{ product_formset.management_form }}
                                 </div>
                                 <div id="empty_product_form" style="display:none">
                                     <table class='no_error'>
@@ -167,6 +168,7 @@
                                             <th class="table-spare-part-headers">Сумма</th>
                                         </tr>
                                     </table>
+                                    {{ consumable_formset.management_form }}
                                     {% for form in consumable_formset.forms %}
 {#                                        {{ form.non_field_errors }}#}
 {#                                        {{ form.errors }}#}
@@ -518,7 +520,7 @@
             {#            },#}
             {#        })#}
             {#    }#}
-            {#});#}
+            {#);#}
 
             $(document).on('keypress', ".input-premium", function (e) {
                 var key = e.which;
@@ -555,7 +557,8 @@
                     var service_id = $(this).val(),
                         last_input_name = $(this).parents('tr').find('.input-name'),
                         last_input_nph = $(this).parents('tr').find('.input-nph'),
-                        last_input_price = $(this).parents('tr').find('.input-price')
+                        last_input_price = $(this).parents('tr').find('.input-price'),
+                        last_input_premium = $(this).parents('tr').find('.input-premium')
 
                     brand = $('#id_brand').val()
 
@@ -568,6 +571,7 @@
                         dataType: 'json',
                         success: function (data) {
                             console.log('success')
+                            last_input_premium.select()
                             last_input_name.val(data.name)
                             last_input_nph.val(data.norm_per_hour)
                             last_input_price.val(data.price)
@@ -583,9 +587,11 @@
                 var nph;
                 if (key === 13) {
                     var premium = $(this).val(),
-                        price = $(this).parents('tr').find('.input-price').val()
-                    nph = $(this).parents('tr').find('.input-nph').val(),
-                        service_cost = $(this).parents('tr').find('.input-cost')
+                        price = $(this).parents('tr').find('.input-price').val(),
+                        nph = $(this).parents('tr').find('.input-nph').val(),
+                        service_cost = $(this).parents('tr').find('.input-cost'),
+                        present_table = $(this).parents('.no_error').next().find('.input-service_id')
+                        {#next_service_id = $(this).parents('.div').find('.no_error').next()#}
 
                     last = $(this).parents('tbody').find('tr').last()
 
@@ -599,6 +605,8 @@
                         dataType: 'json',
                         success: function (data) {
                             console.log('success calculate cost')
+                            present_table.select()
+                            {#next_service_id.select()#}
                             {#last.clone().insertAfter(last);#}
                             service_cost.val(data.service_cost)
                         },
@@ -613,7 +621,8 @@
                     var product_id = $(this).val(),
                         last_input_name = $(this).parents('tr').find('.input-name'),
                         last_input_unit = $(this).parents('tr').find('.input-unit'),
-                        last_input_price = $(this).parents('tr').find('.input-price')
+                        last_input_price = $(this).parents('tr').find('.input-price'),
+                        present_table = $(this).parents('.no_error').next().find('.input-service_id')
 
                     brand = $('#id_brand').val()
 
