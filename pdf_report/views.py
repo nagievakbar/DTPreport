@@ -30,7 +30,8 @@ class GeneratePDF(View):
 
 def get_response(request, id):
     report_pdf = Report.objects.get(report_id=id)
-    filename = "%s.pdf" % report_pdf.car.car_number
+    # filename = "%s.pdf" % report_pdf.car.car_number
+    filename = str(report_pdf.pdf_report)
     response = FileResponse(open(os.path.join(s.MEDIA_ROOT, filename), 'rb'), content_type='application/pdf')
     content = "inline; filename=%s" % filename
     download = request.GET.get("download")
@@ -40,3 +41,9 @@ def get_response(request, id):
     return response
 
 
+# def get_iter_y(report):
+#     report = Report.objects.get(report_id=id)
+#     services_length = report.service.all().__len__()
+#     for i in report.service.all():
+#
+#     return

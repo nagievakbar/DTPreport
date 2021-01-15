@@ -662,3 +662,5 @@ class PyPDFML(object):
     def barcode_cdata(self, cdata):
         b = self.barcode_stack.pop()
         b.draw(self.canvas, cdata)
+
+
