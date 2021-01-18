@@ -288,3 +288,7 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('user_login'))
+
+
+def get_sign(request):
+    return render(request,'makereport/imzo.html')
