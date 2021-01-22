@@ -39,6 +39,7 @@ class Car(models.Model):
         verbose_name = 'Машину'
         verbose_name_plural = 'Машины'
 
+
 class Customer(models.Model):
     customer_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     name = models.CharField(max_length=100, verbose_name='ФИО')

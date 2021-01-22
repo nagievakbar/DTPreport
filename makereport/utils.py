@@ -2,6 +2,16 @@ from .models import *
 from django.http import JsonResponse
 
 
+def get_car_from_search(request):
+    car_number = request.GET.get('car_number', None)
+    car = Car.objects.get(car_number=car_number)
+
+    data = {
+
+    }
+    return JsonResponse(data)
+
+
 def get_last_report_id(request):
     last_report = Report.objects.last()
     last_report_id = last_report.report_id
