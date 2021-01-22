@@ -66,6 +66,7 @@ class CustomerForm(forms.ModelForm):
     whom_passport_issued = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Кем выдан', 'class': 'input'}))
     phone_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Телефон', 'class': 'input'}))
 
+
     class Meta:
         model = Customer
         fields = ['name', 'address', 'passport_number', 'when_passport_issued',

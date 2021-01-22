@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['makereport.elite-house.uz',
                  '127.0.0.1',
+                 'e-otsenka.uz',
                  'localhost'
                  ]
 
@@ -44,7 +45,7 @@ INSTALLED_APPS = [
     'makereport',
     'pdf_report',
     'import',
-    'import_export',
+    'import_export'
 ]
 
 MIDDLEWARE = [

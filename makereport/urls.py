@@ -17,6 +17,6 @@ urlpatterns = [
     path(r'ajax/get_consumable_cost/', get_consumable_cost, name='get_consumable_cost'),
     path(r'ajax/get_consumable_ajax/', get_consumable_ajax, name='get_consumable_ajax'),
     path(r'ajax/get_wear_ajax/', get_wear_ajax, name='get_wear_ajax'),
-    # path(r'ajax/get_report_cost/', get_report_cost, name='get_report_cost'),
+    path(r'ajax/get_car_from_search/', get_car_from_search, name='get_car_from_search'),
 
 ]
