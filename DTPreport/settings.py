@@ -108,9 +108,9 @@ WSGI_APPLICATION = 'DTPreport.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'report',
-        'USER': 'report',
-        'PASSWORD': 'reportpass',
+        'NAME': 'eotsenka',
+        'USER': 'admin',
+        'PASSWORD': 'admin',
         'HOST': 'localhost',
         'PORT': '5432'
     }
