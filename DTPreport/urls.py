@@ -22,7 +22,8 @@ from makereport.views import user_login, user_logout, users_list
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('makereport.urls')),
+    path('report/', include('makereport.urls')),
+    path('',user_login, name='user_login'),
     path('login/', user_login, name='user_login'),
     path('logout/', user_logout, name='user_logout'),
     path('users/', users_list, name='users_list'),
