@@ -284,6 +284,7 @@ def user_login(request):
             return render(request, "makereport/auth/enter.html", context)
     else:
         if request.user:
+            print(request.user)
             return redirect('reports_list')
         return render(request, "makereport/auth/enter.html", context)
 
