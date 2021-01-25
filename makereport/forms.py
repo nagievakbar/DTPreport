@@ -7,12 +7,13 @@ class ReportForm(forms.ModelForm):
     """docstring for ReportForm."""
 
     created_at = forms.DateField(input_formats=['%d.%m.%Y'], widget=forms.DateInput(attrs={'value': datetime.date.today().strftime("%d.%m.%Y") , 'class': 'input'}))
-    media_photo = forms.FileField(widget=forms.FileInput(attrs={'class': 'file-input', 'id': 'chooseFile'}))
+    # media_photo = forms.FileField(widget=forms.FileInput(attrs={'class': 'file-input', 'id': 'chooseFile'}))
 
     class Meta:
         model = Report
-        fields = ['created_at',
-                  'media_photo']
+        fields = ['created_at']
+
+        # 'media_photo']
         # 'created_at',
 
 
@@ -110,3 +111,13 @@ class WearForm(forms.Form):
     weight = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Т', 'class': 'input work-price-input weight-input'}))
     wear = forms.IntegerField(widget=forms.TextInput(attrs={'class':'input work-price-input wear-input'}))
     accept_wear = forms.IntegerField(widget=forms.TextInput(attrs={'class':'input work-price-input accept-wear-input'}))
+
+
+class ReportRateSettingForm(forms.ModelForm):
+
+    report_rate_price = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'input-rate-price'}))
+
+    class Meta:
+        model = MyUser
+        fields = ['report_rate_price']
+

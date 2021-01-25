@@ -1,0 +1,53 @@
+{% extends 'makereport/base_report.html' %}
+{% load static %}
+{% block title%}
+    Настройки Пользователя
+{% endblock %}
+{% block content %}
+<head>
+
+    <link href="{% static '/makereport/css/desktop17.css' %}" rel="stylesheet">
+    <link href="{% static '/makereport/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+	<link href="{% static '/makereport/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+
+</head>
+<main id="main">
+    <div class="top_three_blocks row">
+
+      <div class="col-lg-4">
+        <div class="director_block">
+
+          <div class="input-search">
+            <input type="email" placeholder="{{ user.firstname}}" />
+            <span><a href="#"></a></span>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="report_rate_block">
+        <form method="POST">{% csrf_token %}
+          <div class="input-search-div">
+              <div class="input-rate">{{ report_rate_form.report_rate_price }}</div>
+              <div class="input-search-btn"><button type="submit" class="btn save_button">Сохранить</button></div>
+          </div>
+        </form>
+
+
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="license_block">
+          <div class="save_user">
+            <a href="#">
+              <button type="button" class="btn save_button">Сохранить</button>
+            </a>
+          </div>
+        </div>
+      </div>
+
+</div>
+</main>
+{% endblock %}

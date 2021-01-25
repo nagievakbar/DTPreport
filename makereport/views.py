@@ -74,7 +74,8 @@ class ReportView(View):
             'consumable_formset': consumable_formset,
             'wear_form': wear_form,
             'report': report or None,
-            'total_price_report': total_price_report
+            'total_price_report': total_price_report,
+            'report_rate_price': request.user.myuser.report_rate_price,
         }
         return render(request, template, context)
 
@@ -96,6 +97,7 @@ class ReportView(View):
             report_number = str(Report.objects.latest('created_at').report_id + 1)
         else:
             report_number = 1
+        print('forms validation next')
         if report_form.is_valid() and car_form.is_valid() and customer_form.is_valid():
             new_contract = Contract()
             new_customer = customer_form.save(commit=False)
@@ -109,6 +111,7 @@ class ReportView(View):
             new_report.car = new_car
             new_report.created_by = request.user
             new_report.save()
+            print('new_report is ')
             print(new_report)
             new_report.service_data = []
             new_report.product_data = []
@@ -270,6 +273,33 @@ def users_list(request):
     return render(request, 'makereport/users_list.html', context={'users': users})
 
 
+class UserSettingsView(View):
+    decorators = [login_required]
+
+    @method_decorator(decorators)
+    def get(self, request):
+        user = request.user.myuser
+        report_rate_form = ReportRateSettingForm(instance=user)
+        context = {
+            'user': user,
+            'report_rate_form': report_rate_form,
+        }
+        return render(request, 'makereport/user_settings.html', context)
+
+    def post(self, request):
+        user = request.user.myuser
+        report_rate_form = ReportRateSettingForm(request.POST, instance=user)
+        if report_rate_form.is_valid():
+            print('user settings forms is valid')
+            user = report_rate_form.save()
+
+        context = {
+            'user': user,
+            'report_rate_form': report_rate_form,
+        }
+        return render(request, 'makereport/user_settings.html', context)
+
+
 def user_login(request):
     context = {}
     if request.method == "POST":
@@ -283,7 +313,10 @@ def user_login(request):
             context["error"] = "Invalid data"
             return render(request, "makereport/auth/enter.html", context)
     else:
-        return render(request, "makereport/auth/enter.html", context)
+        if request.user.is_anonymous:
+            return render(request, "makereport/auth/enter.html", context)
+        else:
+            return redirect('reports_list')
 
 
 @login_required
