@@ -283,6 +283,8 @@ def user_login(request):
             context["error"] = "Invalid data"
             return render(request, "makereport/auth/enter.html", context)
     else:
+        if request.user:
+            return redirect('reports_list')
         return render(request, "makereport/auth/enter.html", context)
 
 
