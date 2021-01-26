@@ -64,7 +64,7 @@
             <td style="border-bottom: 1px solid #fff;" data-title="Дата">{{ report.created_at}}</td>
             <td style="border-bottom: 1px solid #fff;" data-title="Марка машины">{{ report.car.brand }}</td>
             <td style="border-bottom: 1px solid #fff;" data-title="Номер">{{ report.car.car_number }}</td>
-            <td style="border-bottom: 1px solid #fff;" data-title="Исполнитель">{{ report.created_by }}</td>
+            <td style="border-bottom: 1px solid #fff;" data-title="Исполнитель">{{ report.created_by.user }}</td>
             <td style="border-bottom: 1px solid #fff;" data-title="Договор">{{ report.contract }}</td>
             <td style="border-bottom: 1px solid #fff;" data-title="Отчёт" data-type="currency"><a href="{% url 'get_response' report.report_id %}">Открыть</a></td>
             <td style="border-bottom: 1px solid #fff;" data-title="Функции" data-type="currency"><a href="{% url 'edit_report' report.report_id %}">Изменить</a></td>

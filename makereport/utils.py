@@ -5,11 +5,22 @@ from django.http import JsonResponse
 def get_car_from_search(request):
     car_number = request.GET.get('car_number', None)
     car = Car.objects.get(car_number=car_number)
-
+    brand = car.brand
+    key = get_key_from_car(car)
+    pdf_report = car.Car.select_related().get().pdf_report.url
+    url = """<button class="btn download_report"><a href='%s' download>Download</a></button>""" % (pdf_report,)
+    card = """<div class='card'><div class='card-header'> %s %s </div><div class='card-body'> <h5 class='card-title'>Special title treatment</h5> <p class='card-text'>With supporting text below as a natural lead-in to additional content.</p> <a href='#' class='btn btn-primary'>Go somewhere</a> </div> </div>""" % (brand, car.car_number,)
     data = {
-
+        'url': url,
+        'key': key,
+        'card': card,
     }
     return JsonResponse(data)
+
+
+def get_key_from_car(car):
+    key = car.Car.select_related().get().key
+    return key
 
 
 def get_last_report_id(request):

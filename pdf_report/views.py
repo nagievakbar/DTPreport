@@ -39,11 +39,3 @@ def get_response(request, id):
         content = "attachment; filename='%s'" % filename
     response['Content-Disposition'] = content
     return response
-
-
-# def get_iter_y(report):
-#     report = Report.objects.get(report_id=id)
-#     services_length = report.service.all().__len__()
-#     for i in report.service.all():
-#
-#     return

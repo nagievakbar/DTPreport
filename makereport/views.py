@@ -109,7 +109,7 @@ class ReportView(View):
             new_car = car_form.save()
             new_car.save()
             new_report.car = new_car
-            new_report.created_by = request.user
+            new_report.created_by = request.user.myuser
             new_report.save()
             print('new_report is ')
             print(new_report)

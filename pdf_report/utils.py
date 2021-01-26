@@ -362,7 +362,7 @@ class PyPDFML(object):
         self.image_dir = image_dir
         self.font_dir = font_dir
 
-        self.parser = xml.parsers.expat.ParserCreate(encoding='UTF-8')
+        self.parser = xml.parsers.expat.ParserCreate(encoding='utf-8')
         self.parser.StartElementHandler = self.get_start_handler()
         self.parser.EndElementHandler = self.get_end_handler()
         self.parser.CharacterDataHandler = self.get_cdata_handler()

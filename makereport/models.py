@@ -168,6 +168,7 @@ class Report(models.Model):
     product_cost = models.IntegerField(default=0)
     product_acc_cost = models.IntegerField(default=0)
     consumable_cost = models.IntegerField(default=0)
+    key = models.CharField(max_length=8,blank=True)
 
     # service_cost = 0
     # product_cost = 0
@@ -200,6 +201,10 @@ class Report(models.Model):
         print('get_total_report_price')
         self.total_report_cost = ' '.join('{:,}'.format(int(self.service_cost + self.get_product_acc_cost() + self.consumable_cost)).split(','))
         print(self.total_report_cost)
+
+    def set_private_key(self):
+        self.key = str(self.report_id)[0] + self.car.car_number[2] + self.car.car_number[7] + self.car.car_number[5] + str(self.contract_id)[0] + str(self.car.release_date)[2] + str(self.car.release_date)[3] + self.car.brand[0]
+
 
     class Meta:
         verbose_name = 'Отчёт'
