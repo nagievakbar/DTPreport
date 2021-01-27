@@ -189,6 +189,10 @@ class Report(models.Model):
     product_data = models.JSONField(blank=True, null=True)
     consumable_data = models.JSONField(blank=True, null=True)
 
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.set_private_key()
+
     def __str__(self):
         return str(self.report_id)
 
@@ -204,7 +208,6 @@ class Report(models.Model):
 
     def set_private_key(self):
         self.key = str(self.report_id)[0] + self.car.car_number[2] + self.car.car_number[7] + self.car.car_number[5] + str(self.contract_id)[0] + str(self.car.release_date)[2] + str(self.car.release_date)[3] + self.car.brand[0]
-
 
     class Meta:
         verbose_name = 'Отчёт'

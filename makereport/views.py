@@ -145,6 +145,7 @@ class ReportView(View):
                 wd = get_data_from_wear_form(wear_form)
                 new_report.wear_data.update(wd)
                 new_report.get_total_report_price()
+            new_report.set_private_key()
             new_report.save()
             return HttpResponseRedirect('/report/list')
 

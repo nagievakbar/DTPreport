@@ -57,14 +57,15 @@
                                 <div class="div" id="service_formset">
                                     <table>
                                         <tr>
-                                            <td class="table-headers" style="width: 50px">ID</td>
-                                            <th class="table-headers">Наименование</th>
-                                            <th class="table-headers">Нор/час</th>
-                                            <th class="table-headers">Надбавка</th>
-                                            <th class="table-headers">Цена</th>
-                                            <th class="table-headers">Сумма</th>
+                                            <th class="table-spare-part-headers" style="width: 50px">ID</th>
+                                            <th class="table-spare-part-headers" style="width: 150px">Наименование</th>
+                                            <th class="table-spare-part-headers" style="width: 140px">Нор/час</th>
+                                            <th class="table-spare-part-headers" style="width: 150px">Надбавка</th>
+                                            <th class="table-spare-part-headers" style="width: 140px">Цена</th>
+                                            <th class="table-spare-part-headers" style="width: 100px">Сумма</th>
                                         </tr>
                                     </table>
+                                    {{ service_formset.management_form }}
                                     {% for form in service_formset.forms %}
 {#                                        {{ form.non_field_errors }}#}
 {#                                        {{ form.errors }}#}
@@ -79,7 +80,7 @@
                                             </tr>
                                         </table>
                                     {% endfor %}
-                                    {{ service_formset.management_form }}
+
                                     {#                                            <input type="button" value="Add More" id="add_more">#}
 
 
@@ -111,13 +112,14 @@
                                     <table>
                                         <tr>
                                             <th class="table-spare-part-headers" style="width: 50px">ID</th>
-                                            <th class="table-spare-part-headers">Наименование</th>
-                                            <th class="table-spare-part-headers">Ед.измерения</th>
-                                            <th class="table-spare-part-headers">Кол-во</th>
-                                            <th class="table-spare-part-headers">Цена</th>
-                                            <th class="table-spare-part-headers">Сумма</th>
+                                            <th class="table-spare-part-headers" style="width: 150px">Наименование</th>
+                                            <th class="table-spare-part-headers" style="width: 140px">Ед.измерения</th>
+                                            <th class="table-spare-part-headers" style="width: 150px">Кол-во</th>
+                                            <th class="table-spare-part-headers" style="width: 140px">Цена</th>
+                                            <th class="table-spare-part-headers" style="width: 100px">Сумма</th>
                                         </tr>
                                     </table>
+                                    {{ product_formset.management_form }}
                                     {% for form in product_formset.forms %}
 {#                                        {{ form.non_field_errors }}#}
 {#                                        {{ form.errors }}#}
@@ -132,7 +134,6 @@
                                             </tr>
                                         </table>
                                     {% endfor %}
-                                    {{ product_formset.management_form }}
                                 </div>
                                 <div id="empty_product_form" style="display:none">
                                     <table class='no_error'>
@@ -160,13 +161,14 @@
                                     <table>
                                         <tr>
                                             <th class="table-spare-part-headers" style="width: 50px">ID</th>
-                                            <th class="table-spare-part-headers">Наименование</th>
-                                            <th class="table-spare-part-headers">Ед.измерения</th>
-                                            <th class="table-spare-part-headers">Кол-во</th>
-                                            <th class="table-spare-part-headers">Цена</th>
-                                            <th class="table-spare-part-headers">Сумма</th>
+                                            <th class="table-spare-part-headers" style="width: 150px">Наименование</th>
+                                            <th class="table-spare-part-headers" style="width: 140px">Ед.измерения</th>
+                                            <th class="table-spare-part-headers" style="width: 150px">Кол-во</th>
+                                            <th class="table-spare-part-headers" style="width: 140px">Цена</th>
+                                            <th class="table-spare-part-headers" style="width: 100px">Сумма</th>
                                         </tr>
                                     </table>
+                                    {{ consumable_formset.management_form }}
                                     {% for form in consumable_formset.forms %}
 {#                                        {{ form.non_field_errors }}#}
 {#                                        {{ form.errors }}#}
@@ -227,7 +229,7 @@
                                         {{ wear_form.accept_wear }}
                                     </div>
                                 </div>
-                                <table class="table">
+                                <table class="table" id="report">
                                     <tbody>
                                     <tr>
                                         <th class="characterstic-header">Оценка состояния</th>
@@ -275,7 +277,7 @@
                                     </tbody>
                                 </table>
 
-                                <table class="table">
+                                <table class="table" id="report2">
                                     <tbody>
                                     <tr>
                                         <th class="characterstic-header">Физическая характеристика состояния
@@ -354,7 +356,6 @@
                             <div class="file-select-name" id="noFile">Добавить фото</div>
                             <input type="file" name="chooseFile" id="chooseFile">
                         </div>
-                        {{ report_form.media_photo }}
                     </div>
 
                     <div class="file-upload">
@@ -411,7 +412,7 @@
                                         Опр ст.ущерба
                                     </dd>
                                     <dd class="col-sm-7 work_work">
-                                        <span class="i_dont_hnow_why_nth_child_doesnt_work">200 000</span>
+                                        <span class="i_dont_hnow_why_nth_child_doesnt_work">{{ report_rate_price }}</span>
                                     </dd>
                                 </dl>
 
@@ -437,7 +438,7 @@
                                     <dd class="col-sm-12">
                                         <div class="panel_save">
 {#                                            <a href="#">#}
-                                                <button type="submit" class="btn panel_save_button">Сохранить</button>
+                                                <button type="submit" class="btn panel_save_button" id="report_save">Сохранить</button>
 {#                                            </a>#}
                                         </div>
                                     </dd>
@@ -455,17 +456,17 @@
 
                     </div>
                     <div class="little_white_block">
-                        <span>№{{ report_form.report_id }}</span>
+                        <span>№23</span>
                     </div>
 
-{#                    <div class="word" id="word">#}
-{#                        <p>Заключение</p>#}
-{#                    </div>#}
-{#                    <div class="panel_user">#}
-{#                        <a href="#">#}
-{#                            <button type="button" class="btn panel_button">Скачать</button>#}
-{#                        </a>#}
-{#                    </div>#}
+                    <div class="word" id="word">
+                        <p>Заключение</p>
+                    </div>
+                    <div class="panel_user">
+                        <a href="#">
+                            <button type="button" class="btn panel_button">Скачать</button>
+                        </a>
+                    </div>
 
                     <div class="word_2" id="word">
                         <p>Договор</p>
@@ -480,7 +481,7 @@
                         <p>Отчёт</p>
                     </div>
                     <div class="panel_user_3">
-                        <a href="{% url 'get_response' report.report_id %}">
+                        <a href="#">
                             <button type="button" class="btn panel_button">Скачать</button>
                         </a>
                     </div>
@@ -499,27 +500,6 @@
             $(document).on('keypress', "form", function (event) {
                 return event.key !== "Enter";
             });
-
-            {#$(document).on('keypress', "#id_accept_wear", function (e) {#}
-            {#    console.log('CLICK id_accept_wear')#}
-            {#    var key = e.which;#}
-            {#    if (key === 13) {#}
-            {#        var id_accept_wear = $(this).val(),#}
-            {#            cost_button = $('#cost_button')#}
-            {##}
-            {#        $.ajax({#}
-            {#            url: '{% url "get_report_cost" %}',#}
-            {#            data: {#}
-            {#                'id_accept_wear': id_accept_wear,#}
-            {#            },#}
-            {#            dataType: 'json',#}
-            {#            success: function (data) {#}
-            {#                console.log('success')#}
-            {#                cost_button.val(data.total_report_cost)#}
-            {#            },#}
-            {#        })#}
-            {#    }#}
-            {#);#}
 
             $(document).on('keypress', ".input-premium", function (e) {
                 var key = e.which;
@@ -556,7 +536,8 @@
                     var service_id = $(this).val(),
                         last_input_name = $(this).parents('tr').find('.input-name'),
                         last_input_nph = $(this).parents('tr').find('.input-nph'),
-                        last_input_price = $(this).parents('tr').find('.input-price')
+                        last_input_price = $(this).parents('tr').find('.input-price'),
+                        last_input_premium = $(this).parents('tr').find('.input-premium')
 
                     brand = $('#id_brand').val()
 
@@ -569,6 +550,7 @@
                         dataType: 'json',
                         success: function (data) {
                             console.log('success')
+                            last_input_premium.select()
                             last_input_name.val(data.name)
                             last_input_nph.val(data.norm_per_hour)
                             last_input_price.val(data.price)
@@ -584,9 +566,11 @@
                 var nph;
                 if (key === 13) {
                     var premium = $(this).val(),
-                        price = $(this).parents('tr').find('.input-price').val()
-                    nph = $(this).parents('tr').find('.input-nph').val(),
-                        service_cost = $(this).parents('tr').find('.input-cost')
+                        price = $(this).parents('tr').find('.input-price').val(),
+                        nph = $(this).parents('tr').find('.input-nph').val(),
+                        service_cost = $(this).parents('tr').find('.input-cost'),
+                        present_table = $(this).parents('.no_error').next().find('.input-service_id')
+                        {#next_service_id = $(this).parents('.div').find('.no_error').next()#}
 
                     last = $(this).parents('tbody').find('tr').last()
 
@@ -600,6 +584,9 @@
                         dataType: 'json',
                         success: function (data) {
                             console.log('success calculate cost')
+                            console.log(present_table)
+                            present_table.select()
+                            {#next_service_id.select()#}
                             {#last.clone().insertAfter(last);#}
                             service_cost.val(data.service_cost)
                         },
@@ -614,7 +601,8 @@
                     var product_id = $(this).val(),
                         last_input_name = $(this).parents('tr').find('.input-name'),
                         last_input_unit = $(this).parents('tr').find('.input-unit'),
-                        last_input_price = $(this).parents('tr').find('.input-price')
+                        last_input_price = $(this).parents('tr').find('.input-price'),
+                        last_input_quantity = $(this).parents('tr').find('.input-quantity')
 
                     brand = $('#id_brand').val()
 
@@ -627,6 +615,7 @@
                         dataType: 'json',
                         success: function (data) {
                             console.log('success')
+                            last_input_quantity.select()
                             last_input_name.val(data.name)
                             last_input_unit.val(data.unit)
                             last_input_price.val(data.price)
@@ -641,11 +630,12 @@
                 if (key === 13) {
                     var quantity = $(this).val(),
                         price = $(this).parents('tr').find('.input-price').val(),
-                        cost = $(this).parents('tr').find('.input-cost')
-                    last = $(this).parents('tbody').find('tr').last()
+                        cost = $(this).parents('tr').find('.input-cost'),
+                        last = $(this).parents('tbody').find('tr').last(),
+                        present_table = $(this).parents('.no_error').next().find('.input-consumable_id')
                     {#last.clone().insertAfter(last);#}
                     $.ajax({
-                        url: '{% url "get_product_cost" %}',
+                        url: '{% url "get_consumable_cost" %}',
                         data: {
                             'quantity': quantity,
                             'price': price,
@@ -653,6 +643,7 @@
                         dataType: 'json',
                         success: function (data) {
                             console.log('success calculate cost')
+                            present_table.select()
                             cost.val(data.total_cost)
                         },
                     })
@@ -666,7 +657,8 @@
                     var consumable_id = $(this).val(),
                         last_input_name = $(this).parents('tr').find('.input-name'),
                         last_input_unit = $(this).parents('tr').find('.input-unit'),
-                        last_input_price = $(this).parents('tr').find('.input-price')
+                        last_input_price = $(this).parents('tr').find('.input-price'),
+                        last_input_price_cons = $(this).parents('tr').find('.input-quantity-cons')
 
                     $.ajax({
                         url: '{% url "get_consumable_ajax" %}',
@@ -676,6 +668,7 @@
                         dataType: 'json',
                         success: function (data) {
                             console.log('success')
+                            last_input_price_cons.select()
                             last_input_name.val(data.name)
                             last_input_unit.val(data.unit)
                             last_input_price.val(data.price)
@@ -690,9 +683,9 @@
                 if (key === 13) {
                     var quantity = $(this).val(),
                         price = $(this).parents('tr').find('.input-price').val(),
-                        cost = $(this).parents('tr').find('.input-cost')
-
-                    last = $(this).parents('tbody').find('tr').last()
+                        cost = $(this).parents('tr').find('.input-cost'),
+                        last = $(this).parents('tbody').find('tr').last(),
+                        present_table = $(this).parents('.no_error').next().find('.input-product_id')
 
                     {#last.clone().insertAfter(last);#}
                     $.ajax({
@@ -704,6 +697,7 @@
                         dataType: 'json',
                         success: function (data) {
                             console.log('success calculate cost')
+                            present_table.select()
                             cost.val(data.total_cost)
                         },
                     })
@@ -726,9 +720,40 @@
                         dataType: 'json',
                         success: function (data) {
                             console.log('success calculate cost')
+                            wear.select()
                             wear.val(data.wear)
                         },
                     })
+                }
+            });
+
+            $(document).on('keypress', ".point-input", function (e) {
+                console.log('CLICK point-input')
+                var key = e.which;
+                if (key === 13) {
+                    var point = $(this).val(),
+                        weight = $(this).parents('.details').find('.weight-input')
+                        weight.select()
+                }
+            });
+
+             $(document).on('keypress', ".wear-input", function (e) {
+                console.log('CLICK point-input')
+                var key = e.which;
+                if (key === 13) {
+                    var point = $(this).val(),
+                        accept_weight = $(this).parents('.details').find('.accept-wear-input')
+                        accept_weight.select()
+                }
+            });
+
+             $(document).on('keypress', ".accept-wear-input", function (e) {
+                console.log('CLICK accept_weight')
+                var key = e.which;
+                if (key === 13) {
+                    var point = $(this).val(),
+                        btn = $(document).find('#report_save')
+                        btn.focus()
                 }
             });
 

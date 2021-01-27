@@ -401,6 +401,9 @@ a:hover {
   display: inline-block;
   position: relative;
   margin-top: 20px;
+  color: #FFFFFF;
+  border: 2px solid #FFFFFF;
+  border-radius: 5px;
 }
 
 @media (max-width: 768px) {
@@ -434,7 +437,7 @@ a:hover {
 }
 
 .input-rate input{
-  width: 60%;
+  width: 80%;
   height: 40px;
   background: #fff;
   border: 0;

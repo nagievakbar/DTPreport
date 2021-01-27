@@ -255,15 +255,40 @@
                     {#this.insertAdjacentHTML('afterend', "<button> Скачать </button>" );#}
 
                     $.ajax({
-                        url: '{% url "get_car_from_search" %}',
+                        url: '{% url "get_car_card" %}',
                         data: {
                             'car_number': car_number,
                         },
                         dataType: 'json',
                         success: function (data) {
                             console.log('success search')
-                            search_input.append(data.card )
-                            {#search_input.insertAdjacentHTML('afterend', s.innerHTML)#}
+                            {#search_input.append(data.card)#}
+                            search_input.insertAdjacentHTML('afterend', data.card)
+                            {#search_input.insertAdjacentHTML('afterend', data.url);#}
+                        },
+                    })
+                }
+            });
+
+           $(document).on('keypress', "#key-input", function (e) {
+                var key = e.which;
+                if (key === 13) {
+                    var key = $(this).val()
+                    var key_input = this
+                    var car_number = $('#search-car').val()
+
+
+                    $.ajax({
+                        url: '{% url "get_btn_to_download" %}',
+                        data: {
+                            'key': key,
+                            'car_number': car_number,
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            console.log('success auth key')
+                            {#search_input.append(data.card)#}
+                            key_input.insertAdjacentHTML('afterend', data.btn)
                             {#search_input.insertAdjacentHTML('afterend', data.url);#}
                         },
                     })

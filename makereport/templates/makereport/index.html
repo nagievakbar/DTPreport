@@ -7,42 +7,41 @@
 {% block content %}
 <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
 
-  <main id="main">
+<main id="main">
 
   <div class="up_block">
-
   		<div class="search_block">
-  			<div class="input">
+  			<div class="search">
                 <input type="email" placeholder="Поиск" required />
-                <span><a href="#"><ion-icon name="search-outline"></ion-icon></a></span>
+{#                <span><a href="#"><ion-icon name="search-outline"></ion-icon></a></span>#}
             </div>
   		</div>
   </div>
 
-  	<div class="top_block_phone col-12">
-  		<div class=" row">
+{#  <div class="top_block_phone col-12">#}
+{#  		<div class=" row">#}
+{##}
+{##}
+{#            <div class="col-lg-3">#}
+{#                <div class="input_phone">#}
+{#                    <input type="email" placeholder="Введите номер отчёта" required />#}
+{#                    <span><a href="#"><ion-icon name="search-outline"></ion-icon></a></span>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="col-lg-3">#}
+{#                <span class="dropdown-el">#}
+{#                    <input type="radio" name="sortType1" value="Relevance1" checked="checked" id="sort-relevance"><label for="sort-relevance">Запчасти</label>#}
+{#                    <input type="radio" name="sortType1" value="Popularity" id="sort-best"><label for="sort-best">Запчасть 1</label>#}
+{#                    <input type="radio" name="sortType1" value="PriceIncreasing" id="sort-low"><label for="sort-low">Запчасть 2</label>#}
+{#                    <input type="radio" name="sortType1" value="PriceDecreasing" id="sort-high"><label for="sort-high">Запчасть 3</label>#}
+{#                    <input type="radio" name="sortType1" value="ProductBrand" id="sort-brand"><label for="sort-brand">Запчасть 4</label>#}
+{#                    <input type="radio" name="sortType1" value="ProductName" id="sort-name"><label for="sort-name">Запчасть 5</label>#}
+{#                </span>#}
+{#            </div>#}
+{#  	    </div>#}
+{#  	</div>#}
 
-
-            <div class="col-lg-3">
-                <div class="input_phone">
-                    <input type="email" placeholder="Введите номер отчёта" required />
-                    <span><a href="#"><ion-icon name="search-outline"></ion-icon></a></span>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <span class="dropdown-el">
-                    <input type="radio" name="sortType1" value="Relevance1" checked="checked" id="sort-relevance"><label for="sort-relevance">Запчасти</label>
-                    <input type="radio" name="sortType1" value="Popularity" id="sort-best"><label for="sort-best">Запчасть 1</label>
-                    <input type="radio" name="sortType1" value="PriceIncreasing" id="sort-low"><label for="sort-low">Запчасть 2</label>
-                    <input type="radio" name="sortType1" value="PriceDecreasing" id="sort-high"><label for="sort-high">Запчасть 3</label>
-                    <input type="radio" name="sortType1" value="ProductBrand" id="sort-brand"><label for="sort-brand">Запчасть 4</label>
-                    <input type="radio" name="sortType1" value="ProductName" id="sort-name"><label for="sort-name">Запчасть 5</label>
-                </span>
-            </div>
-  	    </div>
-  	</div>
-
-    <div class="table1">
+  <div class="table1">
       <table class="table" data-tablesaw-mode="stack">
 
         <thead>
@@ -53,6 +52,7 @@
             <th style="width: 136px;">Номер</th>
             <th style="width: 136px;">Исполнитель</th>
             <th style="width: 136px;">Договор</th>
+            <th style="width: 136px;">Ключ</th>
             <th style="width: 136px;">Отчёт</th>
             <th style="width: 159px;">Функции</th>
           </tr>
@@ -66,6 +66,7 @@
             <td style="border-bottom: 1px solid #fff;" data-title="Номер">{{ report.car.car_number }}</td>
             <td style="border-bottom: 1px solid #fff;" data-title="Исполнитель">{{ report.created_by.user }}</td>
             <td style="border-bottom: 1px solid #fff;" data-title="Договор">{{ report.contract }}</td>
+            <td style="border-bottom: 1px solid #fff;" data-title="Ключ">{{ report.key }}</td>
             <td style="border-bottom: 1px solid #fff;" data-title="Отчёт" data-type="currency"><a href="{% url 'get_response' report.report_id %}">Открыть</a></td>
             <td style="border-bottom: 1px solid #fff;" data-title="Функции" data-type="currency"><a href="{% url 'edit_report' report.report_id %}">Изменить</a></td>
           </tr>
@@ -74,6 +75,32 @@
 
       </table>
     </div>
-</main>
+    <div class="modal" id="modal">
 
+        <button class="class-button" id="close-button">Закрыть</button>
+        <div class="modal-guts">
+            <!--- скролиться -->
+        </div>
+        <div class="modal-overlay" id="modal-overlay"></div>
+    </div>
+<button id="open-button" class="open-button">Открыть окно</button>
+</main>
+{% block javascript %}
+    <script>
+        var modal = document.querySelector("#modal"),
+            modalOverlay = document.querySelector("#modal-overlay"),
+            closeButton = document.querySelector("#close-button"),
+            openButton = document.querySelector("#open-button");
+
+        closeButton.addEventListner("click", function(){
+            modal.classList.toggle("closed");
+            modalOverlay.classList.toggle("closed");
+        });
+
+        openButton.addEventListner("click", function(){
+            modal.classList.toggle("closed");
+            modalOverlay.classList.toggle("closed");
+        });
+    </script>
+{% endblock %}
 {% endblock %}

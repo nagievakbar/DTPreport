@@ -5,17 +5,30 @@ from django.http import JsonResponse
 def get_car_from_search(request):
     car_number = request.GET.get('car_number', None)
     car = Car.objects.get(car_number=car_number)
-    brand = car.brand
-    key = get_key_from_car(car)
-    pdf_report = car.Car.select_related().get().pdf_report.url
-    url = """<button class="btn download_report"><a href='%s' download>Download</a></button>""" % (pdf_report,)
-    card = """<div class='card'><div class='card-header'> %s %s </div><div class='card-body'> <h5 class='card-title'>Special title treatment</h5> <p class='card-text'>With supporting text below as a natural lead-in to additional content.</p> <a href='#' class='btn btn-primary'>Go somewhere</a> </div> </div>""" % (brand, car.car_number,)
+    return car
+
+
+def get_car_card(request):
+    car = get_car_from_search(request)
+    card = """<div class='card'><div class='card-header'> %s %s </div><div class='card-body'> <h5 class='card-title'>Введите ключ для скачивания</h5> <input id='key-input' class='ControlInput ControlInput--email'/> </div> </div>""" % (car.brand, car.car_number,)
     data = {
-        'url': url,
-        'key': key,
         'card': card,
     }
     return JsonResponse(data)
+
+
+def get_btn_to_download(request):
+    key = request.GET.get('key', None)
+    car = get_car_from_search(request)
+    pdf_report = car.Car.select_related().get().pdf_report.url
+    btn = "<a href='%s'><button class='btn enter_button'>Скачать</button></a>" % (pdf_report,)
+    if key == get_key_from_car(car):
+        data = {
+            'btn': btn,
+        }
+        return JsonResponse(data)
+    else:
+        return JsonResponse(data=None)
 
 
 def get_key_from_car(car):

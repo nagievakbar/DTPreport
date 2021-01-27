@@ -18,6 +18,7 @@ urlpatterns = [
     path(r'ajax/get_consumable_cost/', get_consumable_cost, name='get_consumable_cost'),
     path(r'ajax/get_consumable_ajax/', get_consumable_ajax, name='get_consumable_ajax'),
     path(r'ajax/get_wear_ajax/', get_wear_ajax, name='get_wear_ajax'),
-    path(r'ajax/get_car_from_search/', get_car_from_search, name='get_car_from_search'),
+    path(r'ajax/get_car_card/', get_car_card, name='get_car_card'),
+    path(r'ajax/get_btn_to_download/', get_btn_to_download, name='get_btn_to_download'),
 
 ]
