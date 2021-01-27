@@ -84,7 +84,7 @@ class ServiceForm(forms.Form):
     service_cost = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder': 'сумма', 'class': 'input input-cost', 'readonly': ''}))
     # 'readonly': ''
 
-
+# user = User.objects.get(id=u.__getitem__(0).myuser.user_id)
 class ProductForm(forms.Form):
 
     product_id = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'ID', 'class': 'input input-product_id'}))
