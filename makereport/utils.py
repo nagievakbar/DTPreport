@@ -10,7 +10,7 @@ def get_car_from_search(request):
 
 def get_car_card(request):
     car = get_car_from_search(request)
-    card = """<div class='card'><div class='card-header'> %s %s </div><div class='card-body'> <h5 class='card-title'>Введите ключ для скачивания</h5> <input id='key-input' class='ControlInput ControlInput--email'/> </div> </div>""" % (car.brand, car.car_number,)
+    card = """<div class='card'><div class='card-header'> %s %s </div><div class='card-body'> <h5 class='card-title'>Введите ключ для скачивания</h5> <input type="text" id="key-input" class="form-control" required=""> </div> </div>""" % (car.brand, car.car_number,)
     data = {
         'card': card,
     }

@@ -312,10 +312,10 @@ def user_login(request):
             return HttpResponseRedirect(reverse('reports_list'))
         else:
             context["error"] = "Invalid data"
-            return render(request, "makereport/auth/enter.html", context)
+            return render(request, "makereport/auth/login_search.html", context)
     else:
         if request.user.is_anonymous:
-            return render(request, "makereport/auth/enter.html", context)
+            return render(request, "makereport/auth/login_search.html", context)
         else:
             return redirect('reports_list')
 
