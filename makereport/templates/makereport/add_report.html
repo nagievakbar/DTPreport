@@ -1,13 +1,16 @@
 {% extends 'makereport/base_report.html' %}
 {% load static %}
+
 {% block title%}
     Отчёт номер № {{ report_number }}
 {% endblock %}
 {% block content %}
+    <head>
+    <link href="{% static '/makereport/css/desktop7.css' %}" rel="stylesheet">
+    </head>
     <main id="main">
 
         <section class="padding_phone">
-
 
             <div class="accordion one">
                 <form method="POST" class="accordion-title">{% csrf_token %}

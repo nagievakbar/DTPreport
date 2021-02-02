@@ -16,6 +16,7 @@ class GeneratePDF(View):
         pdf = PyPDFML('example.xml')
         context = {
             'report': new_report_pdf,
+            'services': new_report_pdf.service.all().__len__(),
             'datetime': str(new_report_pdf.created_at.strftime((" «%d»  %b  %Yг. ")))
         }
         pdf.generate(context)

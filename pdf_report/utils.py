@@ -290,6 +290,11 @@ class MagicCursor(object):
             self.x1 = self.x
             self.x2 = self.x + self.width
 
+        # Move before draw
+        elif name == 'rect':
+            self.y = self.y
+            self.x = self.x
+
         elif name == 'circle':
             self.x_cen = self.x + attrs['r']
             self.y_cen = self.y - attrs['r']

@@ -330,6 +330,8 @@ def get_sign(request):
     return render(request, 'makereport/imzo.html')
 
 
+def test_input(request):
+    return render(request, 'input_test.html')
 # def get_service_ajax(request):
 #     service = get_service_from_request(request)
 #
