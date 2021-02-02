@@ -1,12 +1,12 @@
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.core.files.storage import FileSystemStorage
+from django.forms import formset_factory
 from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils.decorators import method_decorator
-
-from django.contrib.auth import authenticate, login, logout
-from django.forms import formset_factory
-from .forms import *
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.generic import View
 
 from .forms import *
@@ -111,8 +111,6 @@ class ReportView(View):
             new_report.car = new_car
             new_report.created_by = request.user.myuser
             new_report.save()
-            print('new_report is ')
-            print(new_report)
             new_report.service_data = []
             new_report.product_data = []
             new_report.consumable_data = []
@@ -177,13 +175,6 @@ class ReportView(View):
         product_formset = self.init_product_formset(request)
         consumable_formset = self.init_consumable_formset(request)
         wear_form = WearForm(request.POST)
-        # service_form = formset_factory(ServiceForm, extra=1)
-        # service_formset = service_form(initial=report.SERVICE_DATA)
-        # product_form = formset_factory(ProductForm, extra=1)
-        # product_formset = product_form(initial=report.PRODUCT_DATA)
-        # consumable_form = formset_factory(ConsumableForm, extra=1)
-        # consumable_formset = consumable_form(initial=report.CONSUMABLE_DATA)
-        # wear_form = WearForm(initial=report.WEAR_DATA)
         all_reports = Report.objects.all()
         if all_reports:
             report_number = Report.objects.get(report_id=id)
@@ -330,114 +321,15 @@ def get_sign(request):
     return render(request, 'makereport/imzo.html')
 
 
+@ensure_csrf_cookie
 def test_input(request):
+    if request.method == "POST":
+        print(request.FILES['input'])
+        myfiles = request.FILES['input']
+        fs = FileSystemStorage()
+        filename = fs.save(myfiles.name, myfiles)
+        uploaded_file_url = fs.url(filename)
+        return render(request, 'input_test.html', {
+            'uploaded_file_url': uploaded_file_url
+        })
     return render(request, 'input_test.html')
-# def get_service_ajax(request):
-#     service = get_service_from_request(request)
-#
-#     data = {
-#         'name': service.name,
-#         'norm_per_hour': get_brand_nph(request),
-#         'price': service.price
-#     }
-#     return JsonResponse(data)
-#
-#
-# def get_product_ajax(request):
-#     product = get_product_from_request(request)
-#
-#     data = {
-#         'name': product.name,
-#         'unit': product.unit,
-#         'price': product.price
-#
-#     }
-#     return JsonResponse(data)
-#
-#
-# def get_consumable_ajax(request):
-#     consumable = get_consumable_from_request(request)
-#
-#     data = {
-#         'name': consumable.name,
-#         'unit': consumable.unit,
-#         'price': consumable.price
-#
-#     }
-#     return JsonResponse(data)
-#
-#
-# def get_wear_ajax(request):
-#     point = request.GET.get('point', None)
-#     weight = request.GET.get('weight', None)
-#     print(point)
-#     print(weight)
-#     wear = ((0.208 - 0.003 * float(point)) * float(weight) ** 0.7) * 100
-#
-#     data = {
-#         'wear': int(wear)
-#     }
-#     return JsonResponse(data)
-#
-#
-# def get_service_from_request(request):
-#     service_id = request.GET.get('service_id', None)
-#     finded_service = Service.objects.get(service_id=service_id)
-#     return finded_service
-#
-#
-# def get_product_from_request(request):
-#     product_id = request.GET.get('product_id', None)
-#     finded_product = Product.objects.get(product_id=product_id)
-#     return finded_product
-#
-# def get_consumable_from_request(request):
-#     consumable_id = request.GET.get('consumable_id', None)
-#     finded_consumable = Consumable.objects.get(consumable_id=consumable_id)
-#     return finded_consumable
-#
-#
-# def get_brand_nph(request):
-#     service = get_service_from_request(request)
-#     brand = request.GET.get('brand', None)
-#     norm_per_hour = service.BRANDS.get(brand).value_from_object(service)
-#     return norm_per_hour
-#
-#
-# def get_service_cost(request):
-#     premium = request.GET.get('premium', None)
-#     norm_per_hour = request.GET.get('nph', None)
-#     price = request.GET.get('price', None)
-#
-#     total_cost = (float(norm_per_hour) + float(premium) ) * float(price)
-#
-#     data = {
-#         'total_cost': round(total_cost),
-#     }
-#     return JsonResponse(data)
-#
-#
-# def get_product_cost(request):
-#     quantity = request.GET.get('quantity', None)
-#     price = request.GET.get('price', None)
-#
-#     total_cost = float(quantity) * float(price)
-#
-#     data = {
-#         'total_cost': total_cost,
-#     }
-#     return JsonResponse(data)
-#
-#
-# def get_consumable_cost(request):
-#     quantity = request.GET.get('quantity', None)
-#     price = request.GET.get('price', None)
-#
-#     total_cost = float(quantity) * float(price)
-#
-#     data = {
-#         'total_cost': total_cost,
-#     }
-#     return JsonResponse(data)
-#
-#

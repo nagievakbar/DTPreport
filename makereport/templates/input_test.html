@@ -1,573 +1,144 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
+{% load static %}
+    <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link href="/path/to/bootstrap.min.css" rel="stylesheet">
-    <script src="/path/to/jquery-1.12.4.js"></script>
-    <link href="/path/to/css/fileinput.css" rel="stylesheet">
+{#    <link href="/path/to/bootstrap.min.css" rel="stylesheet">#}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">
+{#    <script src="/path/to/jquery-1.12.4.js"></script>#}
+    <link href="{% static '/path/to/css/fileinput.css' %}" media="all" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
+    <link href="{% static '/path/to/themes/explorer-fas/theme.css' %}" media="all" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <!-- <link href="/path/to/css/fileinput-rtl.css" rel="stylesheet"> -->
-    <script src="/path/to/js/fileinput.min.js"></script>
-    <script src="/path/to/js/plugins/piexif.min.js"></script>
-    <script src="/path/to/js/plugins/sortable.min.js"></script>
+    <script src="{% static '/path/to/js/plugins/piexif.js' %}" type="text/javascript"></script>
+    <script src="{% static '/path/to/js/plugins/sortable.js' %}" type="text/javascript"></script>
+{#    <script src="/path/to/js/fileinput.min.js" type="text/javascript"></script>#}
+    <script src="{% static '/path/to/js/fileinput.js' %}" type="text/javascript"></script>
+    <script src="{% static '/path/to/themes/explorer-fas/theme.js' %}" type="text/javascript"></script>
+{#    <link rel="stylesheet" href="https://jqueryscript.ru/css/jqueryscript.css">#}
 </head>
-<body>
-    <div class="form-group">
-        <input id="file-demo" type="file" class="file" multiple=true data-preview-file-type="any">
+    <body>
+    <div class="container my-4" >
+        <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+            <div class="file-loading">
+                <input id="kv-explorer" name="input" type="file" multiple>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="reset" class="btn btn-outline-secondary">Reset</button>
+        </form>
     </div>
+
+
 </body>
-<script>
-        $("#file-demo").fileinput({
-              // local
-        language: 'en',
-
-        // displays the file caption
-        showCaption: true,
-
-        // displays the file browse button
-        showBrowse: true,
-
-        // displays the file preview
-        showPreview: true,
-
-        // displayes the file remove button
-        showRemove: true,
-
-        // displays the upload button
-        showUpload: true,
-
-        // displays the upload state
-        showUploadStats: true,
-
-        // displays the cancel button
-        showCancel: null,
-
-        // displays the pause button
-        showPause: null,
-
-        // displays the close button
-        showClose: true,
-
-        // persists display of the uploaded file thumbnails in the preview window (for ajax uploads)
-        showUploadedThumbs: true,
-
-        // browses local files by clicking the upload zone
-        browseOnZoneClick: false,
-
-        // automatically replaces the files in the preview after the maxFileCount limit is reached and a new set of file(s) is/are selected
-        autoReplace: false,
-
-        // applicable for JPEG images only and non ios safari
-        autoOrientImage: function () {
-          var ua = window.navigator.userAgent, webkit = !!ua.match(/WebKit/i),
-              iOS = !!ua.match(/iP(od|ad|hone)/i), iOSSafari = iOS && webkit && !ua.match(/CriOS/i);
-          return !iOSSafari;
-        },
-
-        // detects whether to automatically orient JPEG images pre-loaded within the initialPreview
-        // boolean or function
-        autoOrientImageInitial: true,
-
-        // is required field?
-        required: false,
-
-        // RTL mode
-        rtl: false,
-
-        // hides thumbnail content
-        hide Thumbnail Content: false,
-
-        // encodes URLs
-        encodeUrl: true,
-
-        // a callback to generate the unique file identifier for each file selected from the client
-        // parameter: file
-        generateFileId: null,
-
-        // CSS class for the file preview
-        previewClass: '',
-
-        // CSS class for the file caption
-        captionClass: '',
-
-        // CSS class for the thumbnail frame
-        frameClass: 'krajee-default',
-
-        // CSS class for the plugin
-        mainClass: 'file-caption-main',
-
-        mainTemplate: null,
-
-        // purifies HTML content displayed for HTML content type in previe
-        purifyHtml: true,
-
-        // a callback to generate the human friendly filesize based on the bytes parameter
-        fileSizeGetter: null,
-
-        // initial values
-        initialCaption: '',
-        initialPreview: [],
-        initialPreviewDelimiter: '*$$*',
-        initialPreviewAsData: false,
-        initialPreviewFileType: 'image',
-        initialPreviewConfig: [],
-        initialPreviewThumbTags: [],
-
-        // a list of tags used in thumbnail templates
-        previewThumbTags: {},
-
-        // whether the delete button will be displayed for each thumbnail that has been created with initialPreview
-        initialPreviewShowDelete: true,
-
-        // the URL to download the files in the initialPreview.
-        initialPreviewDownloadUrl: '',
-
-        // removes the file thumbnail on error
-        removeFromPreviewOnError: false,
-
-        // the URL for deleting the image/content in the initial preview via AJAX post response
-        // you can also set deleteUrl as a function callback which will return a string.
-        deleteUrl: '',
-
-        // the extra data that will be passed as data to the initial preview delete url/AJAX server call via POST
-        // this can be setup either as an object (associative array of keys and values) or as a function callback
-        deleteExtraData: {},
-
-        // overwrites the initial preview content and caption setup
-        overwriteInitial: true,
-
-        // a function that will sanitize the zoom cache content and return the sanitized html
-        sanitize Zoom Cache: function (content) {
-          var $container = $(document.createElement('div')).append(content);
-          $container.find('input,select,.file-thumbnail-footer').remove();
-          return $container.html();
-        },
-
-        // custom button icons
-        previewZoomButtonIcons: {
-          prev: '<i class="glyphicon glyphicon-triangle-left"></i>',
-          next: '<i class="glyphicon glyphicon-triangle-right"></i>',
-          toggleheader: '<i class="glyphicon glyphicon-resize-vertical"></i>',
-          fullscreen: '<i class="glyphicon glyphicon-fullscreen"></i>',
-          borderless: '<i class="glyphicon glyphicon-resize-full"></i>',
-          close: '<i class="glyphicon glyphicon-remove"></i>'
-        },
-
-        // default CSS classes
-        previewZoomButtonClasses: {
-          prev: 'btn btn-navigate',
-          next: 'btn btn-navigate',
-          toggleheader: 'btn btn-sm btn-kv btn-default btn-outline-secondary',
-          fullscreen: 'btn btn-sm btn-kv btn-default btn-outline-secondary',
-          borderless: 'btn btn-sm btn-kv btn-default btn-outline-secondary',
-          close: 'btn btn-sm btn-kv btn-default btn-outline-secondary'
-        },
-
+    <script>
+    $('#file-fr').fileinput({
+        theme: 'fas',
+        language: 'fr',
+        uploadUrl: '#',
+        allowedFileExtensions: ['jpg', 'png', 'gif']
+    });
+    $('#file-es').fileinput({
+        theme: 'fas',
+        language: 'es',
+        uploadUrl: '#',
+        allowedFileExtensions: ['jpg', 'png', 'gif']
+    });
+    $("#file-0").fileinput({
+        theme: 'fas',
+        uploadUrl: '#'
+    }).on('filepreupload', function(event, data, previewId, index) {
+        alert('The description entered is:\n\n' + ($('#description').val() || ' NULL'));
+    });
+    $("#file-1").fileinput({
+        theme: 'fas',
+        uploadUrl: '#', // you must set a valid URL here else you will get an error
+        allowedFileExtensions: ['jpg', 'png', 'gif'],
+        overwriteInitial: false,
+        maxFileSize: 1000,
+        maxFilesNum: 10,
+        //allowedFileTypes: ['image', 'video', 'flash'],
+        slugCallback: function (filename) {
+            return filename.replace('(', '_').replace(']', '_');
+        }
+    });
+    /*
+     $(".file").on('fileselect', function(event, n, l) {
+     alert('File Selected. Name: ' + l + ', Num: ' + n);
+     });
+     */
+    $("#file-3").fileinput({
+        theme: 'fas',
+        showUpload: false,
+        showCaption: false,
+        browseClass: "btn btn-primary btn-lg",
+        fileType: "any",
+        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+        overwriteInitial: false,
+        initialPreviewAsData: true,
+        initialPreview: [
+            "http://lorempixel.com/1920/1080/transport/1",
+            "http://lorempixel.com/1920/1080/transport/2",
+            "http://lorempixel.com/1920/1080/transport/3"
+        ],
+        initialPreviewConfig: [
+            {caption: "transport-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1},
+            {caption: "transport-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2},
+            {caption: "transport-3.jpg", size: 632762, width: "120px", url: "{$url}", key: 3}
+        ]
+    });
+    $("#file-4").fileinput({
+        theme: 'fas',
+        uploadExtraData: {kvId: '10'}
+    });
+    $(".btn-warning").on('click', function () {
+        var $el = $("#file-4");
+        if ($el.attr('disabled')) {
+            $el.fileinput('enable');
+        } else {
+            $el.fileinput('disable');
+        }
+    });
+    $(".btn-info").on('click', function () {
+        $("#file-4").fileinput('refresh', {previewClass: 'bg-info'});
+    });
+    /*
+     $('#file-4').on('fileselectnone', function() {
+     alert('Huh! You selected no files.');
+     });
+     $('#file-4').on('filebrowse', function() {
+     alert('File browse clicked for #file-4');
+     });
+     */
+    $(document).ready(function () {
+        $("#test-upload").fileinput({
+            'theme': 'fas',
+            'showPreview': false,
+            'allowedFileExtensions': ['jpg', 'png', 'gif'],
+            'elErrorContainer': '#errorBlock'
+        });
+        $("#kv-explorer").fileinput({
+            'theme': 'explorer-fas',
+            'uploadUrl': '#',
+            overwriteInitial: false,
+            {#initialPreviewAsData: true,#}
+            {#initialPreview: [#}
+            {#    "http://lorempixel.com/1920/1080/nature/1",#}
+            {#    "http://lorempixel.com/1920/1080/nature/2",#}
+            {#    "http://lorempixel.com/1920/1080/nature/3"#}
+            {#],#}
+            {#initialPreviewConfig: [#}
+            {#    {caption: "nature-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1},#}
+            {#    {caption: "nature-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2},#}
+            {#    {caption: "nature-3.jpg", size: 632762, width: "120px", url: "{$url}", key: 3}#}
+            {#]#}
+        });
         /*
-          image: the preview template for image files.
-
-          text: the preview template for text files.
-
-          html: the preview template for html files.
-
-          video: the preview template for video files (supported by HTML 5 video tag).
-
-          audio: the preview template for audio files (supported by HTML 5 audio tag).
-
-          flash: the preview template for flash files (supported currently on webkit browsers).
-
-          object: the preview template for all other files - by default treated as object. To disable this behavior, configure the allowedPreviewTypes property.
-
-          generic: this template is used ONLY for rendering the initialPreview markup content passed directly as a raw format.
-
-          The following tags will be parsed and replaced in each of the templates:
-
-          {rtl}: will be set to kv-rtl css class when rtl is set to true, else will be a empty string.
-
-          {fileindex}: will be replaced with the sequential index of the file within the selected file stack
-
-          {previewId}: will be replaced with the generated HTML identifier for the file preview thumbnail frame
-
-          {template}: the template key name
-
-          {frameClass}: will be replaced by the frameClass setting
-
-          {caption}: will be replaced by the file caption / file name
-
-          {style}: will be replaced by the CSS style markup based on the settings in previewSettings or previewSettingsSmall
-
-          {data}: will be replaced by the raw file data when files are selected on client, or data source set via initialPreview for initial preview content
-
-          {footer}: will be replaced with the thumbnail footer that displays the actions .
-
-          {content}: this is applicable only for the generic template. It will be replaced with the raw HTML markup as set in initialPreview. None of the above tags will be parsed for the generic template.
-
-          As noted, if you are coming from an earlier release (before v2.4.0), all preview templates have now been combined into one property, instead of separate templates for image, text etc.
-
-          NOTE: when setting your own preview templates, the following CSS classes are mandatory to identify elements within each file preview template:
-
-          file-preview-frame: CSS class to identify each preview thumbnail frame container
-
-          kv-file-content: CSS class to identify the display container for the file content
-
-          kv-preview-data: CSS class to identify the element containing the data source (and the {data} tag) for each file type
-        */
-        previewTemplates: {},
-
-        // custom preview templates
-        previewContentTemplates: {},
-
-        // forces iconic preview of file thumbnails in the preview zone
-        preferIconicPreview: false,
-
-        // forces iconic preview of file thumbnails in the detailed zoom preview zone
-        preferIconicZoomPreview: false,
-
-        // an array of allowed file types
-        // e.g. 'image', 'html', 'text', 'video', 'audio', 'flash', 'object'
-        allowedFileTypes: null,
-
-        // an array of allowed file extensions
-        allowedFileExtensions: null,
-
-        // an array of allowed preview types
-        allowedPreviewTypes: undefined,
-
-        // an array of allowed mime types for preview
-        allowedPreviewMimeTypes: null,
-
-        // an array of allowed preview file extensions
-        allowedPreviewExtensions: null,
-
-        // an array of disabled preview types
-        disabledPreviewTypes: undefined,
-        disabledPreviewExtensions: ['msi', 'exe', 'com', 'zip', 'rar', 'app', 'vb', 'scr'],
-        disabledPreviewMimeTypes: null,
-
-        // the default content / markup to show by default in the preview window whenever the files are cleared or the input is cleared
-        defaultPreviewContent: null,
-
-        // an object of additional custom tags
-        customLayoutTags: {},
-
-        // an object of additional preview tags
-        customPreviewTags: {},
-
-        // preview icon
-        previewFileIcon: '<i class="glyphicon glyphicon-file"></i>',
-
-        // CSS class for the preview icon
-        previewFileIconClass: 'file-other-icon',
-
-        /* e.g.
-          previewFileIconSettings: {
-            'doc': '<i class="fa fa-file-word-o text-primary"></i>',
-            'xls': '<i class="fa fa-file-excel-o text-success"></i>',
-            'ppt': '<i class="fa fa-file-powerpoint-o text-danger"></i>',
-            'jpg': '<i class="fa fa-file-photo-o text-warning"></i>',
-            'pdf': '<i class="fa fa-file-pdf-o text-danger"></i>',
-            'zip': '<i class="fa fa-file-archive-o text-muted"></i>',
-          }
-        */
-        previewFileIconSettings: {},
-
-        /* e.g.
-          previewFileExtSettings: {
-            'doc': function(ext) {
-              return ext.match(/(doc|docx)$/i);
-            },
-            'xls': function(ext) {
-              return ext.match(/(xls|xlsx)$/i);
-            },
-            'ppt': function(ext) {
-              return ext.match(/(ppt|pptx)$/i);
-            }
-          }
-        */
-        previewFileExtSettings: {},
-
-        // CSS class for the button label
-        buttonLabelClass: 'hidden-xs',
-
-        // default icons
-        browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>&nbsp;',
-        browseClass: 'btn btn-primary',
-        removeIcon: '<i class="glyphicon glyphicon-trash"></i>',
-        removeClass: 'btn btn-default btn-secondary',
-        cancelIcon: '<i class="glyphicon glyphicon-ban-circle"></i>',
-        cancelClass: 'btn btn-default btn-secondary',
-        pauseIcon: '<i class="glyphicon glyphicon-pause"></i>',
-        pauseClass: 'btn btn-default btn-secondary',
-        uploadIcon: '<i class="glyphicon glyphicon-upload"></i>',
-
-        // CSS class for the upload button
-        uploadClass: 'btn btn-default btn-secondary',
-
-        // the URL for the upload processing action
-        // You can also set uploadUrl as a function callback which will return a string.
-        uploadUrl: null,
-
-        // the URL for the ajax upload processing action applicable when each individual file thumbnail is separately uploaded
-        // You can also set uploadThumbUrl as a function callback which will return a string.
-        uploadUrlThumb: null,
-
-        // enables asynchronous upload
-        uploadAsync: true,
-
-        // default parameter names
-        uploadParamNames: {
-          chunkCount: 'chunkCount',
-          chunkIndex: 'chunkIndex',
-          chunkSize: 'chunkSize',
-          chunkSizeStart: 'chunkSizeStart',
-          chunksUploaded: 'chunksUploaded',
-          fileBlob: 'fileBlob',
-          fileId: 'fileId',
-          fileName: 'fileName',
-          fileRelativePath: 'fileRelativePath',
-          fileSize: 'fileSize',
-          retryCount: 'retryCount'
-        },
-
-        // max ajax threads
-        maxAjaxThreads: 5,
-
-        // process delay in ms
-        processDelay: 100,
-
-        // must be lesser than process delay
-        queueDelay: 10,
-
-        // must be lesser than process delay
-        progressDelay: 0,
-
-        // enables resumable / chunk uploads
-        enableResumableUpload: false,
-
-        // resumable upload options
-        resumableUploadOptions: {
-          fallback: null,
-          testUrl: null, // used for checking status of chunks/ files previously / partially uploaded
-          chunkSize: 2 * 1024, // in KB
-          maxThreads: 4,
-          maxRetries: 3,
-          showErrorLog: true
-        },
-
-        // the extra data that will be passed as data to the url/AJAX server call via POST.
-        uploadExtraData: {},
-
-        // the height of the zoom modal
-        zoom Modal Height: 480,
-
-        // min/max image size
-        minImageWidth: null,
-        minImageHeight: null,
-        maxImageWidth: null,
-        maxImageHeight: null,
-
-        // allows the user to resize the uploaded images
-        resizeImage: false,
-
-        // preference to resize the image based on width or height
-        resizePreference: 'width',
-
-        // resize quality
-        resizeQuality: 0.92,
-
-        // default image type
-        resizeDefaultImageType: 'image/jpeg',
-
-        // in KB
-        resizeIfSizeMoreThan: 0,
-
-        // min/max file size
-        minFileSize: 0,
-        maxFileSize: 0,
-
-        // 25 MB
-        maxFilePreviewSize: 25600,
-
-        // min/max/ file count
-        minFileCount: 0,
-        maxFileCount: 0,
-
-        // includes initial preview file count
-        vali date InitialCount: false,
-
-        // error class for the validation
-        msg Validation ErrorClass: 'text-danger',
-
-        // icon for the validation
-        msgValidationErrorIcon: '<i class="glyphicon glyphicon-exclamation-sign"></i> ',
-
-        // CSS class for the error message
-        msgErrorClass: 'file-error-message',
-
-        // default CSS classes for the upload progress bar
-        progressThumbClass: 'progress-bar progress-bar-striped active',
-        progressClass: 'progress-bar bg-success progress-bar-success progress-bar-striped active',
-        progressInfoClass: 'progress-bar bg-info progress-bar-info progress-bar-striped active',
-        progressCompleteClass: 'progress-bar bg-success progress-bar-success',
-        progressPauseClass: 'progress-bar bg-primary progress-bar-primary progress-bar-striped active',
-        progressErrorClass: 'progress-bar bg-danger progress-bar-danger',
-
-        // the percentage progress threshold until which the file upload progress indicator will display the percentag
-        progressUploadThreshold: 99,
-
-        // the type of files that are to be displayed in the preview window
-        // or 'text', 'any'
-        previewFileType: 'image',
-
-        // the identifier for the caption container
-        elCaptionContainer: null,
-
-        // the identifier for the caption text
-        elCaptionText: null,
-
-        // the identifier for the preview container
-        elPreviewContainer: null,
-
-        // the identifier for the image preview
-        elPreviewImage: null,
-
-        // the identifier for the preview status
-        elPreviewStatus: null,
-
-        // the identifier for the error container
-        elErrorContainer: null,
-
-        errorCloseButton: $h.closeButton('kv-error-close'),
-
-        // a callback to convert the filename as a slug string eliminating special characters
-        slugCallback: null,
-
-        // enables drop zone
-        dropZoneEnabled: true,
-
-        // CSS class for the title of the drop zone
-        dropZoneTitleClass: 'file-drop-zone-title',
-
-        /*
-          showDownload: boolean | function, whether to show the download button in the thumbnail. This can also be setup as a callback function as described in the showUpload button above. NOTE: The download button will be displayed only for uploaded files on server and when you have set a valid initialPreview and a valid initialPreviewDownloadUrl or set a valid downloadUrl for each file configuration within initialPreviewConfig.
-
-          showRemove: boolean | function, whether to show the remove button in the thumbnail. This can also be setup as a callback function as described in the showUpload button above. NOTE: Even if this property is set to true, the remove button in thumbnails will never be shown in the following cases:
-
-          Client Selected Files (Non-Ajax): The remove button will be hidden always for file thumbnails that are selected from client for non-ajax / form based submissions (when uploadUrl is not set).
-
-          Server Uploaded Files (Without delete URL): The remove button will not be effective for server uploaded file thumbnails set via initialPreview, unless you set a valid initialPreview and a valid deleteUrl or a valid url for each file configuration within initialPreviewConfig .
-
-          showZoom: boolean | function, whether to show the zoom button in the thumbnail. This can also be setup as a callback function as described in the showUpload button above.
-
-          showDrag: boolean | function, whether to show the drag button in the thumbnail (applicable only for initial preview content). This can also be setup as a callback function as described in the showUpload button above. NOTE: The drag indicator button will be displayed only for uploaded files on server and when you have set a valid initialPreview.
-
-          uploadIcon: string, icon for upload button to be displayed in each file thumbnail.
-
-          uploadClass: string, CSS class for the upload button in each file thumbnail.
-
-          uploadTitle: string, title for upload button in each file thumbnail.
-
-          uploadRetryIcon: string, icon to be displayed for upload button after an upload error is encountered from the server to allow retry of the upload. This will be rendered in such a case for the errored file thumbnail when retryErrorUploads is set to true.
-
-          uploadRetryIcon: string, title to be displayed for upload button after an upload error is encountered from the server to allow retry of the upload. This will be rendered in such a case for the errored file thumbnail when retryErrorUploads is set to true.
-
-          downloadIcon: string, icon for download button to be displayed in each file thumbnail.
-
-          downloadClass: string, CSS class for the download button in each file thumbnail.
-
-          downloadTitle: string, title for download button in each file thumbnail.
-
-          removeIcon: string, icon for remove button to be displayed in each file thumbnail.
-
-          removeClass: string, CSS class for the remove button in each file thumbnail.
-
-          removeTitle: string, title for remove button in each file thumbnail.
-
-          zoomIcon: string, icon for zoom button to be displayed in each file thumbnail (to zoom thumbnail content to a detailed modal preview).
-
-          zoomClass: string, CSS class for the zoom button in each file thumbnail (to zoom thumbnail content to a detailed modal preview).
-
-          zoomTitle: string, title for zoom button in each file thumbnail (to zoom thumbnail content to a detailed modal preview).
-
-          dragIcon: string, icon for drag button to be displayed in each file thumbnail (to sort / rearrange items in initial preview).
-
-          dragClass: string, CSS class for the drag button in each file thumbnail (to sort / rearrange items in initial preview).
-
-          dragTitle: string, title for drag button in each file thumbnail (to sort / rearrange items in initial preview).
-
-          dragSettings: object, the configuration for the Sortable plugin that will allow you to control the drag settings.
-
-          indicatorNew: string, an indicator (HTML markup) for new pending upload displayed in each file thumbnail.
-
-          indicatorSuccess: string, an indicator (HTML markup) for successful upload displayed in each file thumbnail.
-
-          indicatorError: string, an indicator (HTML markup) for error in upload displayed in each file thumbnail.
-
-          indicatorLoading: string, an indicator (HTML markup) for ongoing upload displayed in each file thumbnail.
-
-          indicatorPaused: string, an indicator (HTML markup) for paused upload displayed in each file thumbnail (applicable for resumable uploads when enableResumableUpload property to true).
-
-          indicatorNewTitle: string, title to display on hover of indicator for new pending upload in each file thumbnail.
-
-          indicatorSuccessTitle: string, title to display on hover of indicator for successful in each file thumbnail.
-
-          indicatorErrorTitle: string, title to display on hover of indicator for error in upload in each file thumbnail.
-
-          indicatorLoadingTitle: string, title to display on hover of indicator for ongoing upload in each file thumbnail.
-
-          indicatorPausedTitle: string, title to display on hover of indicator for paused upload in each file thumbnail (applicable for resumable uploads when enableResumableUpload property to true).
-        */
-        fileActionSettings: {},
-
-        /*
-          {key}: Will be replaced with the key property set for each preview thumbnail setting within initialPreviewConfig.
-
-          {dataKey}: Will be replaced with data-key="{keyval}", where {keyval} is the key property set for each preview thumbnail setting within initialPreviewConfig.
-
-          {dataUrl}: Will be replaced with data-url="{urlval}", where {urlval} is the delete url property set for each preview thumbnail setting within initialPreviewConfig.
-
-          {downloadUrl}: the url to be used to trigger the download of the selected thumbnail. This will be derived from the downloadUrl property for the thumbnail frame within initialPreviewConfig or if this is not set, will be auto derived from the initialPreviewDownloadUrl setting. If neither are set, or the url is set to false, then the download action button will not be displayed.
-
-          {caption}: the name of the file that will be downloaded. Will be derived from the filename property for the thumbnail frame within initialPreviewConfig or if that is not available, will use the caption property for the thumbnail frame within initialPreviewConfig.
-        */
-        otherActionButtons: '',
-
-        // encoding
-        textEncoding: 'UTF-8',
-
-        // jQuery ajax settings
-        ajaxSettings: {},
-        ajaxDeleteSettings: {},
-
-        // shows details of the error stack from the server log
-        showAjaxErrorDetails: true,
-
-        // merge the ajax callback functions set in ajaxSettings with the default plugin callbacks for beforeSend, success, error, complete
-        mergeAjaxCallbacks: false,
-        mergeAjaxDeleteCallbacks: false,
-
-        // retry upload on error
-        retryErrorUploads: true,
-
-        // reverses preview order
-        reversePreviewOrder: false,
-
-        // uses a PDF Rendering library like PDF JS to render the PDF files
-        usePdfRenderer: function () {
-          //noinspection JSUnresolvedVariable
-          var isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
-          return !!navigator.userAgent.match(/(iPod|iPhone|iPad| Android)/i) || isIE11;
-        },
-
-        // the PDF rendering library URL
-        pdfRendererUrl: '',
-
-        /*
-          {renderer} will be replaced by the pdfRendererUrl. The parent div thumbnail container to this rendered PDF iframe will have an additional CSS class kv-pdf-rendered appended to it (for overriding your styles for PDF Container). The default width for kv-pdf-rendered is set to 400px.
-
-          {style} will be replaced by the CSS style markup based on the settings in previewSettings or previewSettingsSmall
-        */
-        pdfRendererTemplate: '<iframe class="kv-preview-data file-preview-pdf" src="{renderer}?file={data}" {style}></iframe>'
-                });
-        </script>
-        </html>
+         $("#test-upload").on('fileloaded', function(event, file, previewId, index) {
+         alert('i = ' + index + ', id = ' + previewId + ', file = ' + file.name);
+         });
+         */
+    });
+</script>
+</html>
