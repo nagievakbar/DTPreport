@@ -12,6 +12,7 @@ from django.views.generic import View
 from .forms import *
 from .utils import *
 
+from DTPreport import settings as s
 
 class ReportView(View):
     decorators = [login_required]
@@ -323,6 +324,11 @@ def get_sign(request):
 
 @ensure_csrf_cookie
 def test_input(request):
+    report = Report.objects.get(report_id=1)
+    url = s.ALLOWED_HOSTS.__getitem__(1).translate({39: None})
+    u = str("http://") + str(url) + str(report.media_photo.url)
+    print(u)
+    print(report.media_photo.url)
     if request.method == "POST":
         print(request.FILES['input'])
         myfiles = request.FILES['input']
@@ -330,6 +336,11 @@ def test_input(request):
         filename = fs.save(myfiles.name, myfiles)
         uploaded_file_url = fs.url(filename)
         return render(request, 'input_test.html', {
-            'uploaded_file_url': uploaded_file_url
+            'uploaded_file_url': uploaded_file_url,
+            'report': report,
+            'u': u,
         })
-    return render(request, 'input_test.html')
+    return render(request, 'input_test.html', {
+            'report': report,
+            'u': u,
+        })

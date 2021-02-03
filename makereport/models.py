@@ -182,7 +182,7 @@ class Report(models.Model):
 
     passport_photo = models.FileField(blank=True, null=True, verbose_name='Фото пасспорта')
     registration_photo = models.FileField(blank=True, null=True, verbose_name='Фото тех.пасспорта')
-    media_photo = models.FileField(blank=True, null=True, verbose_name='Разные Фото')
+    media_photo = models.ImageField(blank=True, null=True, verbose_name='Разные Фото')
 
     wear_data = models.JSONField(blank=True, null=True)
     service_data = models.JSONField(blank=True, null=True)
