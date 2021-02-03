@@ -1,16 +1,13 @@
 {% extends 'makereport/base_report.html' %}
 {% load static %}
-
 {% block title%}
     Отчёт номер № {{ report_number }}
 {% endblock %}
 {% block content %}
-    <head>
-    <link href="{% static '/makereport/css/desktop7.css' %}" rel="stylesheet">
-    </head>
     <main id="main">
 
         <section class="padding_phone">
+
 
             <div class="accordion one">
                 <form method="POST" class="accordion-title">{% csrf_token %}
@@ -451,6 +448,46 @@
                         </div>
                     </div>
                 </div>
+
+
+                <div class="last_bottom_block">
+
+                    <div class="white_block">
+
+                    </div>
+                    <div class="little_white_block">
+                        <span>№23</span>
+                    </div>
+
+                    <div class="word" id="word">
+                        <p>Заключение</p>
+                    </div>
+                    <div class="panel_user">
+                        <a href="#">
+                            <button type="button" class="btn panel_button">Скачать</button>
+                        </a>
+                    </div>
+
+                    <div class="word_2" id="word">
+                        <p>Договор</p>
+                    </div>
+                    <div class="panel_user_2">
+                        <a href="#">
+                            <button type="button" class="btn panel_button">Скачать</button>
+                        </a>
+                    </div>
+
+                    <div class="word_3" id="word">
+                        <p>Отчёт</p>
+                    </div>
+                    <div class="panel_user_3">
+                        <a href="#">
+                            <button type="button" class="btn panel_button">Скачать</button>
+                        </a>
+                    </div>
+
+                </div>
+{#                <button class="save-btn" type="submit">Сохранить</button>#}
                 </form>
             </div>
 
@@ -463,27 +500,6 @@
             $(document).on('keypress', "form", function (event) {
                 return event.key !== "Enter";
             });
-
-            {#$(document).on('keypress', "#id_accept_wear", function (e) {#}
-            {#    console.log('CLICK id_accept_wear')#}
-            {#    var key = e.which;#}
-            {#    if (key === 13) {#}
-            {#        var id_accept_wear = $(this).val(),#}
-            {#            cost_button = $('#cost_button')#}
-            {##}
-            {#        $.ajax({#}
-            {#            url: '{% url "get_report_cost" %}',#}
-            {#            data: {#}
-            {#                'id_accept_wear': id_accept_wear,#}
-            {#            },#}
-            {#            dataType: 'json',#}
-            {#            success: function (data) {#}
-            {#                console.log('success')#}
-            {#                cost_button.val(data.total_report_cost)#}
-            {#            },#}
-            {#        })#}
-            {#    }#}
-            {#);#}
 
             $(document).on('keypress', ".input-premium", function (e) {
                 var key = e.which;

@@ -21,7 +21,7 @@ from DTPreport import settings
 from makereport.views import user_login, user_logout, users_list
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='admin'),
     path('report/', include('makereport.urls')),
     path('',user_login, name='user_login'),
     path('login/', user_login, name='user_login'),

@@ -9,7 +9,7 @@
 # General
 --------------------------------------------------------------*/
 body {
-    font-family: Montserrat;
+    /*font-family: Montserrat;*/
     background: #e5e5e5;
 }
 
@@ -575,11 +575,13 @@ Dropdown
 }
 
 
-/*table {
+table {
   margin-top: 15px;
   border-spacing: 10px;
   color: #3f3f3f;
 }
+
+
 
 .table-headers:nth-child(3) {
   text-align: left;
@@ -729,7 +731,7 @@ Dropdown
 
 .wear-text {
   display: inline-block;
-  width: 175px;
+  width: 128px;
   padding: 10px 0;
   background: #f4f4f2;
   border-radius: 5px;
@@ -813,7 +815,7 @@ Dropdown
 .average-score,
 .state {
   text-align: center;
-}*/
+}
 
 
 /****** CODE ******/
@@ -1502,3 +1504,148 @@ Dropdown
     position: absolute;
     right: 0;
 }
+
+
+
+.details {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.point,
+.wear,
+.weight {
+  margin-bottom: 5px;
+}
+
+.point-text {
+  display: inline-block;
+  width: 128px;
+  padding: 10px 0;
+  background: #f4f4f2;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 15px;
+  color: #3f3f3f;
+}
+
+.point-input {
+  height: 35px;
+  max-width: 45px;
+  border: 1px solid #5c6e91;
+  border-radius: 5px;
+}
+
+.weight-text {
+  display: inline-block;
+  width: 128px;
+  padding: 10px 0;
+  background: #f4f4f2;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 15px;
+  color: #3f3f3f;
+}
+
+.weight-input {
+  height: 35px;
+  max-width: 45px;
+  border: 1px solid #5c6e91;
+  border-radius: 5px;
+}
+
+.wear-text {
+  display: inline-block;
+  width: 128px;
+  padding: 10px 0;
+  background: #f4f4f2;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 15px;
+  color: #3f3f3f;
+}
+
+.prehnite-text {
+  display: inline-block;
+  width: 128px;
+  padding: 10px 0;
+  background: #f4f4f2;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 15px;
+  color: #3f3f3f;
+}
+
+.prehnite-input {
+  height: 35px;
+  max-width: 45px;
+  border: 1px solid #5c6e91;
+  border-radius: 5px;
+}
+
+.characteristic-table {
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+
+.characterstic-header {
+  background: #f4f4f2;
+  padding: 10px 0;
+  text-align: center;
+  border-radius: 16px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  color: #3f3f3f;
+  border-left: 6px solid #fff;
+  border-right: 6px solid #fff;
+}
+
+.state {
+  line-height: 30px;
+}
+.physic-state {
+  max-width: 444px;
+  padding: 0 20px;
+}
+.average-score {
+  line-height: 30px;
+}
+
+.table {
+  border-collapse: collapse;
+  border: 2px solid #fff;
+}
+
+.average-score,
+.physic-state,
+.table>tbody>tr>.state {
+  border-bottom: 2px solid #f4f4f2;
+}
+
+.physic-state,
+.table>tbody>tr>.state {
+  border-top: 0;
+  border-right: 2px solid #f4f4f2;
+}
+.table>tbody>tr>.physic-state {
+  border-top: 0;
+}
+.table>tbody>tr>.average-score {
+  border-top: 0;
+}
+
+.tr-2 {
+  padding-top: 14px;
+}
+
+.average-score,
+.state {
+  text-align: center;
+}
+

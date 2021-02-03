@@ -13,6 +13,8 @@ from .forms import *
 from .utils import *
 
 from DTPreport import settings as s
+from DTPreport import urls
+
 
 class ReportView(View):
     decorators = [login_required]
@@ -344,3 +346,4 @@ def test_input(request):
             'report': report,
             'u': u,
         })
+

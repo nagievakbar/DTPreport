@@ -1,11 +1,11 @@
 from django.urls import path
-
+# from DTPreport.urls import admin
+from django.contrib import admin
 from .views import *
 from .utils import *
 
 urlpatterns = [
     path('list', reports_list, name='reports_list'),
-    # path('new/', add_report, name='report_new')
     path('create/', ReportView.as_view(), name='new_report'),
     path('<int:id>/edit/', ReportView.as_view(), name='edit_report'),
     path('<int:id>/delete/', ReportView.as_view(), name='delete_report'),

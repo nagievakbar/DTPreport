@@ -576,7 +576,7 @@ left: 27px;
 .top_block_phone {
   max-width: 100%;
   position: relative;
-  height: 100%; 
+  /*height: 100%; */
   margin-top: 30px;
 }
 }

@@ -109,8 +109,8 @@ class WearForm(forms.Form):
 
     point = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Баллы', 'class': 'input work-price-input point-input'}))
     weight = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Т', 'class': 'input work-price-input weight-input'}))
-    wear = forms.IntegerField(widget=forms.TextInput(attrs={'class':'input work-price-input wear-input'}))
-    accept_wear = forms.IntegerField(widget=forms.TextInput(attrs={'class':'input work-price-input accept-wear-input'}))
+    wear = forms.IntegerField(widget=forms.TextInput(attrs={'class':'input work-price-input prehnite-input'}))
+    accept_wear = forms.IntegerField(widget=forms.TextInput(attrs={'class':'input work-price-input prehnite-input'}))
 
 
 class ReportRateSettingForm(forms.ModelForm):
