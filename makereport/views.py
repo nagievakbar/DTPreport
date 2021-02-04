@@ -24,6 +24,7 @@ class ReportView(View):
         report = None
         if id:
             print('get method with report id=%.d' % id)
+            image_form = ImageForm(instance=Images())
             report = Report.objects.get(report_id=id)
             contract = Contract.objects.get(contract_id=report.contract_id)
             report_form = ReportForm(instance=report)
@@ -49,6 +50,7 @@ class ReportView(View):
                 report_number = 1
         else:
             print('get method without id')
+            image_form = ImageForm(instance=Images())
             report_form = ReportForm(instance=Report())
             car_form = CarForm(instance=Car())
             customer_form = CustomerForm(instance=Customer())
@@ -79,6 +81,7 @@ class ReportView(View):
             'report': report or None,
             'total_price_report': total_price_report,
             'report_rate_price': request.user.myuser.report_rate_price,
+            'image_form': image_form or None
         }
         return render(request, template, context)
 
@@ -89,6 +92,7 @@ class ReportView(View):
             print('getting id')
             return self.put(request, id)
         report_form = ReportForm(request.POST, instance=Report())
+        image_form = ImageForm(request.POST, instance=Images())
         car_form = CarForm(request.POST, instance=Car())
         customer_form = CustomerForm(request.POST, instance=Customer())
         service_formset = self.init_service_formset(request)
@@ -101,7 +105,15 @@ class ReportView(View):
         else:
             report_number = 1
         print('forms validation next')
-        if report_form.is_valid() and car_form.is_valid() and customer_form.is_valid():
+        print(image_form.is_valid())
+        print(image_form.errors)
+        print(image_form)
+        print(request.FILES)
+        # myfiles = request.FILES
+        # fs = FileSystemStorage()
+        # filename = fs.save(myfiles.name, myfiles)
+        uploaded_file_url = fs.url(filename)
+        if report_form.is_valid() and car_form.is_valid() and customer_form.is_valid() :
             new_contract = Contract()
             new_customer = customer_form.save(commit=False)
             new_customer.save()
@@ -113,6 +125,11 @@ class ReportView(View):
             new_car.save()
             new_report.car = new_car
             new_report.created_by = request.user.myuser
+            if image_form.is_valid():
+                print('image form is valid')
+                new_report.media_photo = image_form.save(commit=False)
+            else:
+                print('image form isnt valid')
             new_report.save()
             new_report.service_data = []
             new_report.product_data = []
@@ -161,6 +178,7 @@ class ReportView(View):
             'wear_form': wear_form,
             # 'new_report': new_report or None,
             # 'total_report_price': total_report_price or None
+            # 'uploaded_file_url': uploaded_file_url,
         }
         return render(request, 'makereport/add_report.html', context)
 
@@ -324,13 +342,30 @@ def get_sign(request):
     return render(request, 'makereport/imzo.html')
 
 
+
+class ImageInputViem(View):
+    def get(self, request, id):
+        report = Report.objects.get(report_id=id)
+        context = {
+            'report': report,
+        }
+        return render(request, 'input_test.html', context)
+
+    def post(self, request, id):
+        myfiles = request.FILES['input']
+        fs = FileSystemStorage()
+        filename = fs.save(myfiles.name, myfiles)
+        uploaded_file_url = fs.url(filename)
+        return
+
+
 @ensure_csrf_cookie
 def test_input(request):
     report = Report.objects.get(report_id=1)
     url = s.ALLOWED_HOSTS.__getitem__(1).translate({39: None})
-    u = str("http://") + str(url) + str(report.media_photo.url)
-    print(u)
-    print(report.media_photo.url)
+    # u = str("http://") + str(url) + str(report.media_photo.image.url)
+    # print(u)
+    # print(report.media_photo.url)
     if request.method == "POST":
         print(request.FILES['input'])
         myfiles = request.FILES['input']
@@ -340,10 +375,10 @@ def test_input(request):
         return render(request, 'input_test.html', {
             'uploaded_file_url': uploaded_file_url,
             'report': report,
-            'u': u,
+            # 'u': u,
         })
     return render(request, 'input_test.html', {
             'report': report,
-            'u': u,
+            # 'u': u,
         })
 

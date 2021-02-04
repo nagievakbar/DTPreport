@@ -105,6 +105,14 @@ class ConsumableForm(forms.Form):
     consumable_cost = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'сумма', 'class': 'input input-cost', 'readonly': ''}))
 
 
+class ImageForm(forms.ModelForm):
+    image = forms.CharField(widget=forms.FileInput(attrs={'id': 'kv-explorer', 'name': 'input', 'multiple': ''}))
+
+    class Meta:
+        model = Images
+        fields = ['image']
+
+
 class WearForm(forms.Form):
 
     point = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Баллы', 'class': 'input work-price-input point-input'}))

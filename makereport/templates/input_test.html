@@ -21,13 +21,11 @@
 </head>
     <body>
     <div class="container my-4" >
-        <form method="POST" enctype="multipart/form-data">{% csrf_token %}
             <div class="file-loading">
                 <input id="kv-explorer" name="input" type="file" multiple>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
             <button type="reset" class="btn btn-outline-secondary">Reset</button>
-        </form>
     </div>
 
 

@@ -61,7 +61,7 @@
             close: '<i class="fas fa-fw fa-times"></i>'
         },
         previewFileIcon: '<i class="fas fa-file"></i>',
-        browseIcon: '<i class="fas fa-folder-open"></i>',
+        // browseIcon: '<i class="fas fa-folder-open"></i>',
         removeIcon: '<i class="fas fa-trash-alt"></i>',
         cancelIcon: '<i class="fas fa-ban"></i>',
         pauseIcon: '<i class="fas fa-pause"></i>',
