@@ -18,12 +18,14 @@ from DTPreport import urls
 
 class ReportView(View):
     decorators = [login_required]
+    extend = False
 
     @method_decorator(decorators)
-    def get(self, request, id=None):
+    def get(self, request, id=None, extend=0):
         report = None
         if id:
             print('get method with report id=%.d' % id)
+            print(extend)
             image_form = ImageForm(instance=Images())
             report = Report.objects.get(report_id=id)
             contract = Contract.objects.get(contract_id=report.contract_id)
@@ -33,15 +35,24 @@ class ReportView(View):
             car_form = CarForm(instance=car)
             customer = Customer.objects.get(customer_id=contract.customer_id)
             customer_form = CustomerForm(instance=customer)
-            service_form = formset_factory(ServiceForm, extra=1)
-            service_formset = service_form(initial=report.service_data)
-            product_form = formset_factory(ProductForm, extra=1)
-            product_formset = product_form(initial=report.product_data)
-            consumable_form = formset_factory(ConsumableForm, extra=1)
-            consumable_formset = consumable_form(initial=report.consumable_data)
-            wear_form = WearForm(initial=report.wear_data)
-            total_price_report = report.total_report_cost
-            print(total_price_report)
+            if extend:
+                service_form = formset_factory(ServiceForm, extra=1)
+                service_formset = service_form(initial=report.service_data)
+                product_form = formset_factory(ProductForm, extra=1)
+                product_formset = product_form(initial=report.product_data)
+                consumable_form = formset_factory(ConsumableForm, extra=1)
+                consumable_formset = consumable_form(initial=report.consumable_data)
+                wear_form = WearForm(initial=report.wear_data)
+                total_price_report = report.total_report_cost
+            else:
+                service_form = formset_factory(ServiceForm, extra=2)
+                service_formset = service_form(prefix='service')
+                product_form = formset_factory(ProductForm, extra=2)
+                product_formset = product_form(prefix='product')
+                consumable_form = formset_factory(ConsumableForm, extra=2)
+                consumable_formset = consumable_form(prefix='consumable')
+                wear_form = WearForm()
+                total_price_report = 0
             template = 'makereport/edit_report.html'
             all_reports = Report.objects.all()
             if all_reports:
@@ -86,13 +97,13 @@ class ReportView(View):
         return render(request, template, context)
 
     @method_decorator(decorators)
-    def post(self, request, id=None):
+    def post(self, request, id=None, extend=0):
         total_report_price = 0
         if id:
             print('getting id')
             return self.put(request, id)
         report_form = ReportForm(request.POST, instance=Report())
-        image_form = ImageForm(request.POST, instance=Images())
+        # image_form = ImageForm(request.POST, instance=Images())
         car_form = CarForm(request.POST, instance=Car())
         customer_form = CustomerForm(request.POST, instance=Customer())
         service_formset = self.init_service_formset(request)
@@ -105,15 +116,7 @@ class ReportView(View):
         else:
             report_number = 1
         print('forms validation next')
-        print(image_form.is_valid())
-        print(image_form.errors)
-        print(image_form)
-        print(request.FILES)
-        # myfiles = request.FILES
-        # fs = FileSystemStorage()
-        # filename = fs.save(myfiles.name, myfiles)
-        uploaded_file_url = fs.url(filename)
-        if report_form.is_valid() and car_form.is_valid() and customer_form.is_valid() :
+        if report_form.is_valid() and car_form.is_valid() and customer_form.is_valid():
             new_contract = Contract()
             new_customer = customer_form.save(commit=False)
             new_customer.save()
@@ -125,11 +128,6 @@ class ReportView(View):
             new_car.save()
             new_report.car = new_car
             new_report.created_by = request.user.myuser
-            if image_form.is_valid():
-                print('image form is valid')
-                new_report.media_photo = image_form.save(commit=False)
-            else:
-                print('image form isnt valid')
             new_report.save()
             new_report.service_data = []
             new_report.product_data = []

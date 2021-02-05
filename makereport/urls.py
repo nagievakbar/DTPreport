@@ -4,9 +4,11 @@ from django.contrib import admin
 from .views import *
 from .utils import *
 
+
 urlpatterns = [
     path('list', reports_list, name='reports_list'),
     path('create/', ReportView.as_view(), name='new_report'),
+    path('<str:extend>/<int:id>', ReportView.as_view(), name='extend_report'),
     path('<int:id>/edit/', ReportView.as_view(), name='edit_report'),
     path('<int:id>/delete/', ReportView.as_view(), name='delete_report'),
     path('user_settings/', UserSettingsView.as_view(), name='user_settings'),
