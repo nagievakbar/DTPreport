@@ -10,7 +10,7 @@
 
 
             <div class="accordion one">
-                <form method="POST" class="accordion-title">{% csrf_token %}
+                <form method="POST" class="accordion-title" enctype="multipart/form-data">{% csrf_token %}
                     <div class="accordion-item">
                         <div class="accordion-header active-accordion">
                             <span class="accordion-title">Отчёт номер №{{ report_number }}  </span>
@@ -845,7 +845,7 @@ $('#file-fr').fileinput({
         });
         $("#kv-explorer").fileinput({
             'theme': 'explorer-fas',
-            'uploadUrl': '#',
+            {#'uploadUrl': '/media/',#}
             overwriteInitial: false,
             initialPreviewAsData: true,
             initialPreview: [

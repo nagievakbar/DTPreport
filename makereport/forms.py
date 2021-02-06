@@ -106,7 +106,7 @@ class ConsumableForm(forms.Form):
 
 
 class ImageForm(forms.ModelForm):
-    image = forms.CharField(widget=forms.FileInput(attrs={'id': 'kv-explorer', 'name': 'input', 'multiple': ''}))
+    image = forms.CharField(widget=forms.FileInput(attrs={'id': 'kv-explorer', 'name': 'input', 'multiple': True}))
 
     class Meta:
         model = Images
@@ -117,8 +117,8 @@ class WearForm(forms.Form):
 
     point = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Баллы', 'class': 'input work-price-input point-input'}))
     weight = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Т', 'class': 'input work-price-input weight-input'}))
-    wear = forms.IntegerField(widget=forms.TextInput(attrs={'class':'input work-price-input prehnite-input'}))
-    accept_wear = forms.IntegerField(widget=forms.TextInput(attrs={'class':'input work-price-input prehnite-input'}))
+    wear = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'input work-price-input prehnite-input'}))
+    accept_wear = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'input work-price-input prehnite-input'}))
 
 
 class ReportRateSettingForm(forms.ModelForm):

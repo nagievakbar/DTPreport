@@ -155,6 +155,7 @@ class MyUser(models.Model):
 class Images(models.Model):
     image_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     image = models.ImageField(blank=True, null=True, verbose_name='Фото')
+    report = models.ForeignKey('Report', on_delete=models.CASCADE, blank=True, null=True, related_name='report', verbose_name='Фото')
 
 
 class Report(models.Model):
@@ -187,7 +188,7 @@ class Report(models.Model):
 
     passport_photo = models.FileField(blank=True, null=True, verbose_name='Фото пасспорта')
     registration_photo = models.FileField(blank=True, null=True, verbose_name='Фото тех.пасспорта')
-    media_photo = models.ForeignKey('Images', on_delete=models.CASCADE, blank=True, null=True, related_name='created_by', verbose_name='Фото')
+    # Images = models.ForeignKey('Images', on_delete=models.CASCADE, blank=True, null=True, related_name='created_by', verbose_name='Фото')
 
     wear_data = models.JSONField(blank=True, null=True)
     service_data = models.JSONField(blank=True, null=True)

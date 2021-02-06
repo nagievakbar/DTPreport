@@ -65,3 +65,5 @@ class ContractAdmin(admin.ModelAdmin):
     )
     search_fields = ['customer']
 
+
+admin.site.register(Images)

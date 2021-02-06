@@ -103,7 +103,7 @@ class ReportView(View):
             print('getting id')
             return self.put(request, id)
         report_form = ReportForm(request.POST, instance=Report())
-        # image_form = ImageForm(request.POST, instance=Images())
+        image_form = ImageForm(request.POST, request.FILES)
         car_form = CarForm(request.POST, instance=Car())
         customer_form = CustomerForm(request.POST, instance=Customer())
         service_formset = self.init_service_formset(request)
@@ -116,7 +116,11 @@ class ReportView(View):
         else:
             report_number = 1
         print('forms validation next')
-        if report_form.is_valid() and car_form.is_valid() and customer_form.is_valid():
+        print(image_form.is_valid())
+        print(image_form.errors)
+        print(request.FILES.getlist('image'))
+        save_path = str(s.MEDIA_ROOT + "/")
+        if report_form.is_valid() and car_form.is_valid() and customer_form.is_valid() and image_form.is_valid():
             new_contract = Contract()
             new_customer = customer_form.save(commit=False)
             new_customer.save()
@@ -128,7 +132,15 @@ class ReportView(View):
             new_car.save()
             new_report.car = new_car
             new_report.created_by = request.user.myuser
+            # new_report.media_photo.image = image_form.save(commit=False)
             new_report.save()
+            for each in request.FILES.getlist('image'):
+                print(each.name)
+                new_image = image_form.save()
+                print(new_image)
+                with open(save_path + each.name, 'wb+') as destination:
+                    for chunk in request.FILES['image'].chunks():
+                        destination.write(chunk)
             new_report.service_data = []
             new_report.product_data = []
             new_report.consumable_data = []
