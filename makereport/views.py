@@ -23,9 +23,11 @@ class ReportView(View):
     @method_decorator(decorators)
     def get(self, request, id=None, extend=0):
         report = None
+        images = None
         if id:
             print('get method with report id=%.d' % id)
             print(extend)
+            images = Images.objects.filter(report_id=id)
             image_form = ImageForm(instance=Images())
             report = Report.objects.get(report_id=id)
             contract = Contract.objects.get(contract_id=report.contract_id)
@@ -92,7 +94,8 @@ class ReportView(View):
             'report': report or None,
             'total_price_report': total_price_report,
             'report_rate_price': request.user.myuser.report_rate_price,
-            'image_form': image_form or None
+            'image_form': image_form or None,
+            'images': images or None
         }
         return render(request, template, context)
 
@@ -118,6 +121,9 @@ class ReportView(View):
         print('forms validation next')
         print(image_form.is_valid())
         print(image_form.errors)
+        print(report_form.errors)
+        print(car_form.errors)
+        print(customer_form.errors)
         print(request.FILES.getlist('image'))
         save_path = str(s.MEDIA_ROOT + "/")
         if report_form.is_valid() and car_form.is_valid() and customer_form.is_valid() and image_form.is_valid():
@@ -134,9 +140,12 @@ class ReportView(View):
             new_report.created_by = request.user.myuser
             # new_report.media_photo.image = image_form.save(commit=False)
             new_report.save()
+            # + str(new_report.report_id) + "/"
+            save_path = str(s.MEDIA_ROOT + "/")
             for each in request.FILES.getlist('image'):
-                print(each.name)
-                new_image = image_form.save()
+                print(each)
+                new_image = image_form.save(commit=False)
+                new_image.save()
                 print(new_image)
                 with open(save_path + each.name, 'wb+') as destination:
                     for chunk in request.FILES['image'].chunks():
