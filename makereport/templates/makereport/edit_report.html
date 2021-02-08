@@ -81,9 +81,6 @@
                                         </table>
                                     {% endfor %}
 
-                                    {#                                            <input type="button" value="Add More" id="add_more">#}
-
-
                                 </div>
                                 <div id="empty_service_form" style="display:none">
                                     <table class='no_error'>
@@ -183,7 +180,6 @@
                                             </tr>
                                         </table>
                                     {% endfor %}
-                                    {{ consumable_formset.management_form }}
                                 </div>
                                 <div id="empty_consum_form" style="display:none">
                                     <table class='no_error'>
@@ -358,31 +354,6 @@
 {#                        <button type="submit" class="btn btn-primary">Submit</button>#}
 {#                        <button type="reset" class="btn btn-outline-secondary">Reset</button>#}
                     </div>
-
-                    <div class="file-upload">
-                        <div class="file-select">
-                            <div class="file-select-button" id="fileName"><span>Выбрать</span></div>
-                            <div class="file-select-name" id="noFile">Фото паспорта</div>
-                            <input type="file" name="chooseFile" id="chooseFile">
-                        </div>
-                    </div>
-
-                    <div class="file-upload">
-                        <div class="file-select">
-                            <div class="file-select-button" id="fileName"><span>Выбрать</span></div>
-                            <div class="file-select-name" id="noFile">Фото тех.паспорта</div>
-                            <input type="file" name="chooseFile" id="chooseFile">
-                        </div>
-                    </div>
-
-                    <div class="file-upload">
-                        <div class="file-select">
-                            <div class="file-select-button" id="fileName"><span>Выбрать</span></div>
-                            <div class="file-select-name" id="noFile">Добавить чек</div>
-                            <input type="file" name="chooseFile" id="chooseFile">
-                        </div>
-                    </div>
-
 
 
                 <div class="almost_latest_block row">
@@ -710,7 +681,7 @@
                 if (key === 13) {
                     var point = $(this).val(),
                         weight = $(this).parents('.details').find('.weight-input').val(),
-                        wear = $(this).parents('.details').find('.wear-input')
+                        wear = $(this).parents('.details').find('.prehnite-input')
 
                     $.ajax({
                         url: '{% url "get_wear_ajax" %}',
@@ -738,7 +709,7 @@
                 }
             });
 
-             $(document).on('keypress', ".wear-input", function (e) {
+             $(document).on('keypress', ".prehnite-input", function (e) {
                 console.log('CLICK point-input')
                 var key = e.which;
                 if (key === 13) {
@@ -846,24 +817,24 @@
                     $("#kv-explorer").fileinput({
                         'theme': 'explorer-fas',
                         {#'uploadUrl': '#',#}
-                        overwriteInitial: false,
-                        initialCaption:'1231231',
+                        overwriteInitial: true,
                         initialPreviewAsData: true,
                         initialPreview: [
                             {% for each in images %}
                                 "http://127.0.0.1:8000{{ each.image.url }}",
                             {% endfor %}
                         ],
-                        initialPreviewShowDelete: true,
-                        removeFromPreviewOnError: false,
+                        initialPreviewDownloadUrl: '/media/',
+                        {#initialPreviewShowDelete: true,#}
+                        {#removeFromPreviewOnError: false,#}
                         showUpload: false,
                         required: false,
-                        deleteExtraData: {},
-                        overwriteInitial: false,
+                        {#deleteUrl: "{% url 'delete_image' %}",#}
+                        deleteUrl: "http://127.0.0.1:8000/report/delete_image/",
+                        {#deleteExtraData: {},#}
                         initialPreviewConfig: [
                             {% for each in images %}
-
-                                {caption: "{{ each.image }}", width: "120px", url: "{% url 'delete_image' %}", key: 1},
+                                {caption: "{{ each.image }}", url: "{% url 'delete_image' %}",key: {{ forloop.counter }} },
                             {% endfor %}
                             {#{caption: "nature-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1},#}
                             {#{caption: "nature-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2},#}

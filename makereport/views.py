@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.csrf import csrf_protect
 from django.views.generic import View
 
 from .forms import *
@@ -26,7 +27,6 @@ class ReportView(View):
         images = None
         if id:
             print('get method with report id=%.d' % id)
-            print(extend)
             images = Images.objects.filter(report_id=id)
             image_form = ImageForm(instance=Images())
             report = Report.objects.get(report_id=id)
@@ -38,15 +38,6 @@ class ReportView(View):
             customer = Customer.objects.get(customer_id=contract.customer_id)
             customer_form = CustomerForm(instance=customer)
             if extend:
-                service_form = formset_factory(ServiceForm, extra=1)
-                service_formset = service_form(initial=report.service_data)
-                product_form = formset_factory(ProductForm, extra=1)
-                product_formset = product_form(initial=report.product_data)
-                consumable_form = formset_factory(ConsumableForm, extra=1)
-                consumable_formset = consumable_form(initial=report.consumable_data)
-                wear_form = WearForm(initial=report.wear_data)
-                total_price_report = report.total_report_cost
-            else:
                 service_form = formset_factory(ServiceForm, extra=2)
                 service_formset = service_form(prefix='service')
                 product_form = formset_factory(ProductForm, extra=2)
@@ -55,6 +46,16 @@ class ReportView(View):
                 consumable_formset = consumable_form(prefix='consumable')
                 wear_form = WearForm()
                 total_price_report = 0
+            else:
+                service_form = formset_factory(ServiceForm, extra=1)
+                service_formset = service_form(initial=report.service_data, prefix='service')
+                product_form = formset_factory(ProductForm, extra=1)
+                product_formset = product_form(initial=report.product_data, prefix='product')
+                consumable_form = formset_factory(ConsumableForm, extra=1)
+                consumable_formset = consumable_form(initial=report.consumable_data, prefix='consumable')
+                wear_form = WearForm(initial=report.wear_data)
+                total_price_report = report.total_report_cost
+
             template = 'makereport/edit_report.html'
             all_reports = Report.objects.all()
             if all_reports:
@@ -124,10 +125,7 @@ class ReportView(View):
         print(report_form.errors)
         print(car_form.errors)
         print(customer_form.errors)
-        print(request.FILES.getlist('image'))
-        save_path = str(s.MEDIA_ROOT + "/")
         if report_form.is_valid() and car_form.is_valid() and customer_form.is_valid() and image_form.is_valid():
-
             new_contract = Contract()
             new_customer = customer_form.save(commit=False)
             new_customer.save()
@@ -201,6 +199,7 @@ class ReportView(View):
     def put(self, request, id=None):
         report = Report.objects.get(report_id=id)
         contract = Contract.objects.get(contract_id=report.contract_id)
+        image_form = ImageForm(request.POST, request.FILES)
         report_form = ReportForm(request.POST, instance=report)
         # report_form.created_at = report_form.created_at.strptime('%d. %m. %Y')
         car = Car.objects.get(car_id=report.car_id)
@@ -217,29 +216,38 @@ class ReportView(View):
         else:
             report_number = 1
         if report_form.is_valid() and car_form.is_valid() and customer_form.is_valid():
+            new_contract = Contract()
             new_customer = customer_form.save(commit=False)
             new_customer.save()
-            contract.customer = new_customer
-            contract.save()
+            new_contract.customer = new_customer
+            new_contract.save()
             new_report = report_form.save(commit=False)
-            new_report.contract = contract
+            new_report.contract = new_contract
             new_car = car_form.save()
             new_car.save()
             new_report.car = new_car
+            new_report.created_by = request.user.myuser
             new_report.save()
+            save_path = str(s.MEDIA_ROOT + "/")
+            for each in request.FILES.getlist('image'):
+                Images.objects.create(image=each, report=new_report)
+                with open(save_path + each.name, 'wb+') as destination:
+                    for chunk in request.FILES['image'].chunks():
+                        destination.write(chunk)
             for form in service_formset.forms:
+                print(form.is_valid())
                 if form.is_valid():
                     print('service form is validated')
                     sd = get_data_from_service_form(form)
                     add_service_to_report(new_report, sd.__getitem__('service_id'), sd.__getitem__('service_cost'))
-                    new_report.service_data.update(sd)
+                    new_report.service_data.append(sd)
                 print(new_report.service_cost)
             for form in product_formset.forms:
                 if form.is_valid():
                     print('product form is validated')
                     pd = get_data_from_product_form(form)
                     add_product_to_report(new_report, pd.__getitem__('product_id'), pd.__getitem__('product_cost'))
-                    new_report.product_data.update(pd)
+                    new_report.product_data.append(pd)
                 print(new_report.product_cost)
             for form in consumable_formset.forms:
                 if form.is_valid():
@@ -247,7 +255,7 @@ class ReportView(View):
                     cd = get_data_from_consum_form(form)
                     add_consumable_to_report(new_report, cd.__getitem__('consumable_id'),
                                              cd.__getitem__('consumable_cost'))
-                    new_report.consumable_data.update(cd)
+                    new_report.consumable_data.append(cd)
                 print(new_report.consumable_cost)
             if wear_form.is_valid():
                 print('wear form is validated')
@@ -261,6 +269,11 @@ class ReportView(View):
             'car_form': car_form,
             'customer_form': customer_form,
             'report_number': report_number,
+            'image_form': image_form,
+            'service_formset': service_formset,
+            'product_formset': product_formset,
+            'consumable_formset': consumable_formset,
+            'wear_form': wear_form,
         }
         return render(request, 'makereport/edit_report.html', context)
 
@@ -276,16 +289,17 @@ class ReportView(View):
     def init_service_formset(self, request):
         service_form = formset_factory(ServiceForm, extra=2)
         service_formset = service_form(request.POST, prefix='service')
+        # request.POST,
         return service_formset
 
     def init_product_formset(self, request):
         product_form = formset_factory(ProductForm, extra=2)
-        product_formset = product_form(request.POST, prefix='product')
+        product_formset = product_form(prefix='product')
         return product_formset
 
     def init_consumable_formset(self, request):
         consumable_form = formset_factory(ConsumableForm, extra=2)
-        consumable_formset = consumable_form(request.POST, prefix='consumable')
+        consumable_formset = consumable_form(prefix='consumable')
         return consumable_formset
 
 
@@ -357,7 +371,6 @@ def get_sign(request):
     return render(request, 'makereport/imzo.html')
 
 
-
 class ImageInputViem(View):
     def get(self, request, id):
         report = Report.objects.get(report_id=id)
@@ -393,10 +406,13 @@ def test_input(request):
             # 'u': u,
         })
     return render(request, 'input_test.html', {
-            'report': report,
-            # 'u': u,
-        })
+        'report': report,
+        # 'u': u,
+    })
 
 
+@ensure_csrf_cookie
 def delete_image(request):
+    print('sadasdasdasdasd')
     print(request)
+    return render(request,'input_test.html',context={'delete': True})

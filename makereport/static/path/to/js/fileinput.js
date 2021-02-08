@@ -953,7 +953,7 @@
             $cont = self.$container;
             self.$dropZone = $cont.find('.file-drop-zone');
             self.$progress = $cont.find('.kv-upload-progress');
-            // self.$btnUpload = $cont.find('.fileinput-upload');
+            self.$btnUpload = $cont.find('.fileinput-upload');
             self.$captionContainer = $h.getElement(options, 'elCaptionContainer', $cont.find('.file-caption'));
             self.$caption = $h.getElement(options, 'elCaptionText', $cont.find('.file-caption-name'));
             if (!$h.isEmpty(self.msgPlaceholder)) {
@@ -1721,8 +1721,8 @@
             //noinspection HtmlUnknownAttribute
             tActionDelete = '<button type="button" class="kv-file-remove {removeClass}" ' +
                 'title="{removeTitle}" {dataUrl}{dataKey}>{removeIcon}</button>\n';
-            // tActionUpload = '<button type="button" class="kv-file-upload {uploadClass}" title="{uploadTitle}">' +
-            //     '{uploadIcon}</button>';
+            tActionUpload = '<button type="button" class="kv-file-upload {uploadClass}" title="{uploadTitle}">' +
+                '{uploadIcon}</button>';
             tActionDownload = '<a class="kv-file-download {downloadClass}" title="{downloadTitle}" ' +
                 'href="{downloadUrl}" download="{caption}" target="_blank">{downloadIcon}</a>';
             tActionZoom = '<button type="button" class="kv-file-zoom {zoomClass}" ' +
@@ -4423,19 +4423,19 @@
             }
             self._refreshUploadButton($thumb);
         },
-        // _refreshUploadButton: function ($thumb) {
-        //     var self = this, $btn = $thumb.find('.kv-file-upload'), cfg = self.fileActionSettings,
-        //         icon = cfg.uploadIcon, title = cfg.uploadTitle;
-        //     if (!$btn.length) {
-        //         return;
-        //     }
-        //     if (self.retryErrorUploads) {
-        //         icon = cfg.uploadRetryIcon;
-        //         title = cfg.uploadRetryTitle;
-        //     }
-        //     $btn.attr('title', title);
-        //     $h.setHtml($btn, icon);
-        // },
+        _refreshUploadButton: function ($thumb) {
+            var self = this, $btn = $thumb.find('.kv-file-upload'), cfg = self.fileActionSettings,
+                icon = cfg.uploadIcon, title = cfg.uploadTitle;
+            if (!$btn.length) {
+                return;
+            }
+            if (self.retryErrorUploads) {
+                icon = cfg.uploadRetryIcon;
+                title = cfg.uploadRetryTitle;
+            }
+            $btn.attr('title', title);
+            $h.setHtml($btn, icon);
+        },
         _checkDimensions: function (i, chk, $img, $thumb, fname, type, params) {
             var self = this, msg, dim, tag = chk === 'Small' ? 'min' : 'max', limit = self[tag + 'Image' + type],
                 $imgEl, isValid;
@@ -4925,13 +4925,13 @@
                     'key': key
                 });
             }
-            // if (showUpl) {
-            //     btnUpload = self._getLayoutTemplate('actionUpload').setTokens({
-            //         'uploadClass': config.uploadClass,
-            //         'uploadIcon': config.uploadIcon,
-            //         'uploadTitle': config.uploadTitle
-            //     });
-            // }
+            if (showUpl) {
+                btnUpload = self._getLayoutTemplate('actionUpload').setTokens({
+                    'uploadClass': config.uploadClass,
+                    'uploadIcon': config.uploadIcon,
+                    'uploadTitle': config.uploadTitle
+                });
+            }
             if (showDwn) {
                 btnDownload = self._getLayoutTemplate('actionDownload').setTokens({
                     'downloadClass': config.downloadClass,
@@ -5847,7 +5847,7 @@
         previewThumbTags: {},
         initialPreviewShowDelete: true,
         initialPreviewDownloadUrl: '',
-        removeFromPreviewOnError: true,
+        removeFromPreviewOnError: false,
         deleteUrl: '',
         deleteExtraData: {},
         overwriteInitial: true,
@@ -6003,12 +6003,12 @@
         pauseLabel: 'Пауза',
         pauseTitle: 'Pause ongoing upload',
         uploadLabel: 'Загрузить',
-        uploadTitle: 'Upload selected files',
+        uploadTitle: 'Загрузить выбранные файлы ',
         msgNo: 'No',
-        msgNoFilesSelected: 'Файлы не выбраны',
+        msgNoFilesSelected: 'Не выбраны файлы',
         msgCancelled: 'Cancelled',
         msgPaused: 'Paused',
-        msgPlaceholder: 'Выберите файлы ...',
+        msgPlaceholder: 'Выбраны {files} ...',
         msgZoomModalHeading: 'Детальный просмотр',
         msgFileRequired: 'You must select a file to upload.',
         msgSizeTooSmall: 'File "{name}" (<b>{size} KB</b>) is too small and must be larger than <b>{minSize} KB</b>.',
@@ -6016,7 +6016,7 @@
         msgFilesTooLess: 'You must select at least <b>{n}</b> {files} to upload.',
         msgFilesTooMany: 'Number of files selected for upload <b>({n})</b> exceeds maximum allowed limit of <b>{m}</b>.',
         msgTotalFilesTooMany: 'You can upload a maximum of <b>{m}</b> files (<b>{n}</b> files detected).',
-        msgFileNotFound: 'Файл "{name}" не найден!',
+        msgFileNotFound: 'File "{name}" not found!',
         msgFileSecured: 'Security restrictions prevent reading the file "{name}".',
         msgFileNotReadable: 'File "{name}" is not readable.',
         msgFilePreviewAborted: 'File preview aborted for "{name}".',
@@ -6066,7 +6066,7 @@
             uploadBatch: 'batch file upload',
             uploadExtra: 'form data upload'
         },
-        dropZoneTitle: 'Перетащите файлы сюда &hellip;',
+        dropZoneTitle: 'Перетащите файлы сюда',
         dropZoneClickTitle: '<br>(or click to select {files})',
         previewZoomButtonTitles: {
             prev: 'View previous file',
