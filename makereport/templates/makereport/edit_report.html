@@ -847,17 +847,28 @@
                         'theme': 'explorer-fas',
                         {#'uploadUrl': '#',#}
                         overwriteInitial: false,
+                        initialCaption:'1231231',
                         initialPreviewAsData: true,
                         initialPreview: [
                             {% for each in images %}
                                 "http://127.0.0.1:8000{{ each.image.url }}",
                             {% endfor %}
                         ],
-                        {#initialPreviewConfig: [#}
-                        {#    {caption: "nature-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1},#}
-                        {#    {caption: "nature-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2},#}
-                        {#    {caption: "nature-3.jpg", size: 632762, width: "120px", url: "{$url}", key: 3}#}
-                        {#]#}
+                        initialPreviewShowDelete: true,
+                        removeFromPreviewOnError: false,
+                        showUpload: false,
+                        required: false,
+                        deleteExtraData: {},
+                        overwriteInitial: false,
+                        initialPreviewConfig: [
+                            {% for each in images %}
+
+                                {caption: "{{ each.image }}", width: "120px", url: "{% url 'delete_image' %}", key: 1},
+                            {% endfor %}
+                            {#{caption: "nature-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1},#}
+                            {#{caption: "nature-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2},#}
+                            {#{caption: "nature-3.jpg", size: 632762, width: "120px", url: "{$url}", key: 3}#}
+                        ]
                     });
                     /*
                      $("#test-upload").on('fileloaded', function(event, file, previewId, index) {

@@ -127,6 +127,7 @@ class ReportView(View):
         print(request.FILES.getlist('image'))
         save_path = str(s.MEDIA_ROOT + "/")
         if report_form.is_valid() and car_form.is_valid() and customer_form.is_valid() and image_form.is_valid():
+
             new_contract = Contract()
             new_customer = customer_form.save(commit=False)
             new_customer.save()
@@ -138,15 +139,10 @@ class ReportView(View):
             new_car.save()
             new_report.car = new_car
             new_report.created_by = request.user.myuser
-            # new_report.media_photo.image = image_form.save(commit=False)
             new_report.save()
-            # + str(new_report.report_id) + "/"
             save_path = str(s.MEDIA_ROOT + "/")
             for each in request.FILES.getlist('image'):
-                print(each)
-                new_image = image_form.save(commit=False)
-                new_image.save()
-                print(new_image)
+                Images.objects.create(image=each, report=new_report)
                 with open(save_path + each.name, 'wb+') as destination:
                     for chunk in request.FILES['image'].chunks():
                         destination.write(chunk)
@@ -401,3 +397,6 @@ def test_input(request):
             # 'u': u,
         })
 
+
+def delete_image(request):
+    print(request)

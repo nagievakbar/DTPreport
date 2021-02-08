@@ -14,6 +14,7 @@ urlpatterns = [
     path('user_settings/', UserSettingsView.as_view(), name='user_settings'),
     path('sign/', get_sign, name='get_sight'),
     path('input/', test_input, name='test_input'),
+    path('delete_image/', delete_image, name='delete_image'),
     path(r'ajax/get_service_ajax/', get_service_ajax, name='get_service_ajax'),
     path(r'ajax/get_service_cost/', get_service_cost, name='get_service_cost'),
     path(r'ajax/get_product_ajax/', get_product_ajax, name='get_product_ajax'),

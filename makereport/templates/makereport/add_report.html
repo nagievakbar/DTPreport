@@ -359,32 +359,6 @@
 {#                        <button type="reset" class="btn btn-outline-secondary">Reset</button>#}
                     </div>
 
-                    <div class="file-upload">
-                        <div class="file-select">
-                            <div class="file-select-button" id="fileName"><span>Выбрать</span></div>
-                            <div class="file-select-name" id="noFile">Фото паспорта</div>
-                            <input type="file" name="chooseFile" id="chooseFile">
-                        </div>
-                    </div>
-
-                    <div class="file-upload">
-                        <div class="file-select">
-                            <div class="file-select-button" id="fileName"><span>Выбрать</span></div>
-                            <div class="file-select-name" id="noFile">Фото тех.паспорта</div>
-                            <input type="file" name="chooseFile" id="chooseFile">
-                        </div>
-                    </div>
-
-                    <div class="file-upload">
-                        <div class="file-select">
-                            <div class="file-select-button" id="fileName"><span>Выбрать</span></div>
-                            <div class="file-select-name" id="noFile">Добавить чек</div>
-                            <input type="file" name="chooseFile" id="chooseFile">
-                        </div>
-                    </div>
-
-
-
                 <div class="almost_latest_block row">
 
                     <div class="col-lg-6">
@@ -850,6 +824,8 @@ $('#file-fr').fileinput({
             initialPreviewAsData: true,
             initialPreview: [
             ],
+            showUpload: false,
+            required: false,
             {#initialPreviewConfig: [#}
             {#    {caption: "nature-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1},#}
             {#    {caption: "nature-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2},#}

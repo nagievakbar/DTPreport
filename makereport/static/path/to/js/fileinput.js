@@ -953,7 +953,7 @@
             $cont = self.$container;
             self.$dropZone = $cont.find('.file-drop-zone');
             self.$progress = $cont.find('.kv-upload-progress');
-            self.$btnUpload = $cont.find('.fileinput-upload');
+            // self.$btnUpload = $cont.find('.fileinput-upload');
             self.$captionContainer = $h.getElement(options, 'elCaptionContainer', $cont.find('.file-caption'));
             self.$caption = $h.getElement(options, 'elCaptionText', $cont.find('.file-caption-name'));
             if (!$h.isEmpty(self.msgPlaceholder)) {
@@ -1721,8 +1721,8 @@
             //noinspection HtmlUnknownAttribute
             tActionDelete = '<button type="button" class="kv-file-remove {removeClass}" ' +
                 'title="{removeTitle}" {dataUrl}{dataKey}>{removeIcon}</button>\n';
-            tActionUpload = '<button type="button" class="kv-file-upload {uploadClass}" title="{uploadTitle}">' +
-                '{uploadIcon}</button>';
+            // tActionUpload = '<button type="button" class="kv-file-upload {uploadClass}" title="{uploadTitle}">' +
+            //     '{uploadIcon}</button>';
             tActionDownload = '<a class="kv-file-download {downloadClass}" title="{downloadTitle}" ' +
                 'href="{downloadUrl}" download="{caption}" target="_blank">{downloadIcon}</a>';
             tActionZoom = '<button type="button" class="kv-file-zoom {zoomClass}" ' +
@@ -4423,19 +4423,19 @@
             }
             self._refreshUploadButton($thumb);
         },
-        _refreshUploadButton: function ($thumb) {
-            var self = this, $btn = $thumb.find('.kv-file-upload'), cfg = self.fileActionSettings,
-                icon = cfg.uploadIcon, title = cfg.uploadTitle;
-            if (!$btn.length) {
-                return;
-            }
-            if (self.retryErrorUploads) {
-                icon = cfg.uploadRetryIcon;
-                title = cfg.uploadRetryTitle;
-            }
-            $btn.attr('title', title);
-            $h.setHtml($btn, icon);
-        },
+        // _refreshUploadButton: function ($thumb) {
+        //     var self = this, $btn = $thumb.find('.kv-file-upload'), cfg = self.fileActionSettings,
+        //         icon = cfg.uploadIcon, title = cfg.uploadTitle;
+        //     if (!$btn.length) {
+        //         return;
+        //     }
+        //     if (self.retryErrorUploads) {
+        //         icon = cfg.uploadRetryIcon;
+        //         title = cfg.uploadRetryTitle;
+        //     }
+        //     $btn.attr('title', title);
+        //     $h.setHtml($btn, icon);
+        // },
         _checkDimensions: function (i, chk, $img, $thumb, fname, type, params) {
             var self = this, msg, dim, tag = chk === 'Small' ? 'min' : 'max', limit = self[tag + 'Image' + type],
                 $imgEl, isValid;
@@ -4925,13 +4925,13 @@
                     'key': key
                 });
             }
-            if (showUpl) {
-                btnUpload = self._getLayoutTemplate('actionUpload').setTokens({
-                    'uploadClass': config.uploadClass,
-                    'uploadIcon': config.uploadIcon,
-                    'uploadTitle': config.uploadTitle
-                });
-            }
+            // if (showUpl) {
+            //     btnUpload = self._getLayoutTemplate('actionUpload').setTokens({
+            //         'uploadClass': config.uploadClass,
+            //         'uploadIcon': config.uploadIcon,
+            //         'uploadTitle': config.uploadTitle
+            //     });
+            // }
             if (showDwn) {
                 btnDownload = self._getLayoutTemplate('actionDownload').setTokens({
                     'downloadClass': config.downloadClass,
@@ -5847,7 +5847,7 @@
         previewThumbTags: {},
         initialPreviewShowDelete: true,
         initialPreviewDownloadUrl: '',
-        removeFromPreviewOnError: false,
+        removeFromPreviewOnError: true,
         deleteUrl: '',
         deleteExtraData: {},
         overwriteInitial: true,

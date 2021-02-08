@@ -157,6 +157,10 @@ class Images(models.Model):
     image = models.ImageField(blank=True, null=True, verbose_name='Фото')
     report = models.ForeignKey('Report', on_delete=models.CASCADE, blank=True, null=True, related_name='report', verbose_name='Фото')
 
+    # def save(self, *args, **kwargs):
+    #     self.objects.create(something=kwargs['something'])
+    #     super(Images, self).save(*args, **kwargs)
+
 
 class Report(models.Model):
     report_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')

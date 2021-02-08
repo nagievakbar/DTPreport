@@ -825,3 +825,7 @@ height: 25px;
   position: absolute;
   right: 0;
 }
+
+.btn-primary{
+  background-color: black !important ;
+}
