@@ -294,12 +294,12 @@ class ReportView(View):
 
     def init_product_formset(self, request):
         product_form = formset_factory(ProductForm, extra=2)
-        product_formset = product_form(prefix='product')
+        product_formset = product_form(request.POST, prefix='product')
         return product_formset
 
     def init_consumable_formset(self, request):
         consumable_form = formset_factory(ConsumableForm, extra=2)
-        consumable_formset = consumable_form(prefix='consumable')
+        consumable_formset = consumable_form(request.POST, prefix='consumable')
         return consumable_formset
 
 
