@@ -6,7 +6,9 @@ import datetime
 class ReportForm(forms.ModelForm):
     """docstring for ReportForm."""
 
-    created_at = forms.DateField(input_formats=['%d.%m.%Y'], widget=forms.DateInput(attrs={'value': datetime.date.today().strftime("%d.%m.%Y") , 'class': 'input'}))
+    created_at = forms.DateField(input_formats=['%d.%m.%Y'], widget=forms.DateInput(
+        attrs={'value': datetime.date.today().strftime("%d.%m.%Y"), 'class': 'input_in'}))
+
     # media_photo = forms.FileField(widget=forms.FileInput(attrs={'class': 'file-input', 'id': 'chooseFile'}))
 
     class Meta:
@@ -20,18 +22,20 @@ class ReportForm(forms.ModelForm):
 class CarForm(forms.ModelForm):
     """docstring for CarForm."""
 
-    brand = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Марка', 'class': 'input'}))
-    car_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Номер машины', 'class': 'input'}))
-    registration = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Тех. паспорт', 'class': 'input'}))
-    engine_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Двигатель', 'class': 'input'}))
-    body_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Кузов', 'class': 'input'}))
-    chassis = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Шасси', 'class': 'input'}))
-    car_color = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Цвет окраски', 'class': 'input'}))
-    mileage = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Пробег', 'class': 'input'}))
-    release_date = forms.DateField(input_formats=['%Y'], widget=forms.DateInput(attrs={'placeholder': 'Год и месяц выпуска', 'class': 'input'}))
-    car_type = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Тип', 'class': 'input'}))
-    car_owner = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Владелец', 'class': 'input'}))
-    owner_address = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Адрес владельца', 'class': 'input'}))
+    brand = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Марка', 'class': 'input_in'}))
+    car_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Номер машины', 'class': 'input_in'}))
+    registration = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Тех. паспорт', 'class': 'input_in'}))
+    engine_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Двигатель', 'class': 'input_in'}))
+    body_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Кузов', 'class': 'input_in'}))
+    chassis = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Шасси', 'class': 'input_in'}))
+    car_color = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Цвет окраски', 'class': 'input_in'}))
+    mileage = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Пробег', 'class': 'input_in'}))
+    release_date = forms.DateField(input_formats=['%Y'], widget=forms.DateInput(
+        attrs={'placeholder': 'Год и месяц выпуска', 'class': 'input_in'}))
+    car_type = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Тип', 'class': 'input_in'}))
+    car_owner = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Владелец', 'class': 'input_in'}))
+    owner_address = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'Адрес владельца', 'class': 'input_in'}))
 
     class Meta:
         model = Car
@@ -60,13 +64,14 @@ class ContractForm(forms.ModelForm):
 class CustomerForm(forms.ModelForm):
     """docstring for CustomerForm."""
 
-    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Заказчик', 'class': 'input'}))
-    address = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Адрес заказчика', 'class': 'input'}))
-    passport_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Паспорт', 'class': 'input'}))
-    when_passport_issued = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Когда выдан', 'class': 'input'}))
-    whom_passport_issued = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Кем выдан', 'class': 'input'}))
-    phone_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Телефон', 'class': 'input'}))
-
+    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Заказчик', 'class': 'input_in'}))
+    address = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Адрес заказчика', 'class': 'input_in'}))
+    passport_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Паспорт', 'class': 'input_in'}))
+    when_passport_issued = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'Когда выдан', 'class': 'input_in'}))
+    whom_passport_issued = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'Кем выдан', 'class': 'input_in'}))
+    phone_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Телефон', 'class': 'input_in'}))
 
     class Meta:
         model = Customer
@@ -75,38 +80,55 @@ class CustomerForm(forms.ModelForm):
 
 
 class ServiceForm(forms.Form):
-
-    service_id = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder': 'ID', 'class': 'input input-service_id'}))
-    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Название', 'class': 'input input-name', 'readonly': ''}))
-    norm_per_hour= forms.FloatField(widget=forms.NumberInput(attrs={'placeholder': 'нор\час', 'class': 'input input-nph', 'readonly': ''}))
-    premium = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'надбавка', 'class': 'input input-premium', 'value': '0'}))
-    price = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder': 'цена', 'class': 'input input-price', 'readonly': ''}))
-    service_cost = forms.IntegerField(widget=forms.NumberInput(attrs={'placeholder': 'сумма', 'class': 'input input-cost', 'readonly': ''}))
+    service_id = forms.IntegerField(
+        widget=forms.NumberInput(attrs={'class': 'input2 work-price-input2 first2'}))
+    name = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'input2 work-price-input2 name2', 'readonly': ''}))
+    norm_per_hour = forms.FloatField(
+        widget=forms.NumberInput(attrs={'class': 'input2 work-price-input2 time2', 'readonly': ''}))
+    premium = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'input2 work-price-input2 allowance2', })) #'value': '0'
+    price = forms.IntegerField(
+        widget=forms.NumberInput(attrs={'class': 'input2 work-price-input2 price2', 'readonly': ''}))
+    service_cost = forms.IntegerField(
+        widget=forms.NumberInput(attrs={'class': 'input2 work-price-input2 sum2', 'readonly': ''}))
     # 'readonly': ''
+
 
 # user = User.objects.get(id=u.__getitem__(0).myuser.user_id)
 class ProductForm(forms.Form):
-
-    product_id = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'ID', 'class': 'input input-product_id'}))
-    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Название', 'class': 'input input-name', 'readonly': ''}))
-    unit = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Ед.изм', 'class': 'input input-unit', 'readonly': ''}))
-    quantity = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'надбавка', 'class': 'input input-quantity','value': '0'}))
-    price = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'цена', 'class': 'input input-price', 'readonly': ''}))
-    product_cost = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'сумма', 'class': 'input input-cost', 'readonly': ''}))
+    product_id = forms.IntegerField(
+        widget=forms.TextInput(attrs={ 'class': 'input3 work-price-input3 count'}))
+    name = forms.CharField(
+        widget=forms.TextInput(attrs={ 'class': 'input3 work-price-input3 name3', 'readonly': ''}))
+    unit = forms.CharField(
+        widget=forms.TextInput(attrs={ 'class': 'input3 work-price-input3 name3', 'readonly': ''}))
+    quantity = forms.IntegerField(
+        widget=forms.TextInput(attrs={ 'class': 'input3 work-price-input3 time3', })) #'value': '0'
+    price = forms.IntegerField(
+        widget=forms.TextInput(attrs={ 'class': 'input3 work-price-input3 price3', 'readonly': ''}))
+    product_cost = forms.IntegerField(
+        widget=forms.TextInput(attrs={ 'class': 'input3 work-price-input3 sum3', 'readonly': ''}))
 
 
 class ConsumableForm(forms.Form):
-
-    consumable_id = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'ID', 'class': 'input input-consumable_id'}))
-    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Название', 'class': 'input input-name', 'readonly': ''}))
-    unit = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Ед.изм', 'class': 'input input-unit', 'readonly': ''}))
-    quantity = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'надбавка', 'class': 'input input-quantity-cons','value': '0'}))
-    price = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'цена', 'class': 'input input-price', 'readonly': ''}))
-    consumable_cost = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'сумма', 'class': 'input input-cost', 'readonly': ''}))
+    consumable_id = forms.IntegerField(
+        widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 first4'}))
+    name = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 name4', 'readonly': ''}))
+    unit = forms.CharField(
+        widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 time4', 'readonly': ''}))
+    quantity = forms.IntegerField(
+        widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 allowance4', })) #'value': '0'
+    price = forms.IntegerField(
+        widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 price4', 'readonly': ''}))
+    consumable_cost = forms.IntegerField(
+        widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 sum4', 'readonly': ''}))
 
 
 class ImageForm(forms.ModelForm):
-    image = forms.CharField(widget=forms.FileInput(attrs={'id': 'kv-explorer', 'name': 'input', 'required': False, 'multiple': True}))
+    image = forms.CharField(
+        widget=forms.FileInput(attrs={'id': 'kv-explorer', 'name': 'input', 'required': False, 'multiple': True}))
 
     class Meta:
         model = Images
@@ -114,18 +136,18 @@ class ImageForm(forms.ModelForm):
 
 
 class WearForm(forms.Form):
-
-    point = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Баллы', 'class': 'input work-price-input point-input'}))
-    weight = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Т', 'class': 'input work-price-input weight-input'}))
+    point = forms.IntegerField(
+        widget=forms.TextInput(attrs={'class': 'input work-price-input point-input'}))
+    weight = forms.IntegerField(
+        widget=forms.TextInput(attrs={'class': 'input work-price-input weight-input'}))
     wear = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'input work-price-input prehnite-input'}))
-    accept_wear = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'input work-price-input accept-wear-input'}))
+    accept_wear = forms.IntegerField(
+        widget=forms.TextInput(attrs={'class': 'input work-price-input prehnite-input'}))
 
 
 class ReportRateSettingForm(forms.ModelForm):
-
     report_rate_price = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'input-rate-price'}))
 
     class Meta:
         model = MyUser
         fields = ['report_rate_price']
-

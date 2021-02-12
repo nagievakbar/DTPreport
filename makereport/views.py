@@ -56,7 +56,7 @@ class ReportView(View):
                 wear_form = WearForm(initial=report.wear_data)
                 total_price_report = report.total_report_cost
 
-            template = 'makereport/edit_report.html'
+            template = 'makereport/edit_repor.html'
             all_reports = Report.objects.all()
             if all_reports:
                 report_number = Report.objects.filter(report_id=id).last()
@@ -76,7 +76,7 @@ class ReportView(View):
             consumable_formset = consumable_form(prefix='consumable')
             wear_form = WearForm()
             total_price_report = 0
-            template = 'makereport/add_report.html'
+            template = 'makereport/add_repor.html'
             all_reports = Report.objects.all()
             if all_reports:
                 report_number = str(Report.objects.latest('created_at').report_id + 1)
@@ -193,7 +193,7 @@ class ReportView(View):
             # 'total_report_price': total_report_price or None
             # 'uploaded_file_url': uploaded_file_url,
         }
-        return render(request, 'makereport/add_report.html', context)
+        return render(request, 'makereport/add_repor.html', context)
 
     @method_decorator(decorators)
     def put(self, request, id=None):
@@ -275,7 +275,7 @@ class ReportView(View):
             'consumable_formset': consumable_formset,
             'wear_form': wear_form,
         }
-        return render(request, 'makereport/edit_report.html', context)
+        return render(request, 'makereport/edit_repor.html', context)
 
     @method_decorator(decorators)
     def delete(self, request, id=None):
@@ -353,10 +353,10 @@ def user_login(request):
             return HttpResponseRedirect(reverse('reports_list'))
         else:
             context["error"] = "Invalid data"
-            return render(request, "makereport/auth/login_search.html", context)
+            return render(request, "makereport/auth/login_sea.html", context)
     else:
         if request.user.is_anonymous:
-            return render(request, "makereport/auth/login_search.html", context)
+            return render(request, "makereport/auth/login_sea.html", context)
         else:
             return redirect('reports_list')
 
