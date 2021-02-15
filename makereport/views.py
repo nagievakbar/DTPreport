@@ -25,10 +25,16 @@ class ReportView(View):
     def get(self, request, id=None, extend=0):
         report = None
         images = None
+        pphotos = None
+        ophotos = None
         if id:
             print('get method with report id=%.d' % id)
             images = Images.objects.filter(report_id=id)
+            pphotos = PassportPhotos.objects.filter(report_id=id)
+            ophotos = OtherPhotos.objects.filter(report_id=id)
             image_form = ImageForm(instance=Images())
+            passphoto_form = PPhotoForm(instance=PassportPhotos())
+            otherphoto_form = OPhotoForm(instance=OtherPhotos())
             report = Report.objects.get(report_id=id)
             contract = Contract.objects.get(contract_id=report.contract_id)
             report_form = ReportForm(instance=report)
@@ -65,6 +71,8 @@ class ReportView(View):
         else:
             print('get method without id')
             image_form = ImageForm(instance=Images())
+            passphoto_form = PPhotoForm(instance=PassportPhotos())
+            otherphoto_form = OPhotoForm(instance=OtherPhotos())
             report_form = ReportForm(instance=Report())
             car_form = CarForm(instance=Car())
             customer_form = CustomerForm(instance=Customer())
@@ -96,7 +104,11 @@ class ReportView(View):
             'total_price_report': total_price_report,
             'report_rate_price': request.user.myuser.report_rate_price,
             'image_form': image_form or None,
-            'images': images or None
+            'passphoto_form': passphoto_form or None,
+            'otherphoto_form': otherphoto_form or None,
+            'images': images or None,
+            'pphotos': pphotos or None,
+            'ophotos': ophotos or None,
         }
         return render(request, template, context)
 
@@ -108,6 +120,8 @@ class ReportView(View):
             return self.put(request, id)
         report_form = ReportForm(request.POST, instance=Report())
         image_form = ImageForm(request.POST, request.FILES)
+        passphoto_form = PPhotoForm(request.POST, request.FILES)
+        otherphoto_form = OPhotoForm(request.POST, request.FILES)
         car_form = CarForm(request.POST, instance=Car())
         customer_form = CustomerForm(request.POST, instance=Customer())
         service_formset = self.init_service_formset(request)
@@ -143,6 +157,16 @@ class ReportView(View):
                 Images.objects.create(image=each, report=new_report)
                 with open(save_path + each.name, 'wb+') as destination:
                     for chunk in request.FILES['image'].chunks():
+                        destination.write(chunk)
+            for each in request.FILES.getlist('photo'):
+                PassportPhotos.objects.create(photo=each, report=new_report)
+                with open(save_path + each.name, 'wb+') as destination:
+                    for chunk in request.FILES['photo'].chunks():
+                        destination.write(chunk)
+            for each in request.FILES.getlist('photos'):
+                OtherPhotos.objects.create(photos=each, report=new_report)
+                with open(save_path + each.name, 'wb+') as destination:
+                    for chunk in request.FILES['photos'].chunks():
                         destination.write(chunk)
             new_report.service_data = []
             new_report.product_data = []
@@ -200,6 +224,8 @@ class ReportView(View):
         report = Report.objects.get(report_id=id)
         contract = Contract.objects.get(contract_id=report.contract_id)
         image_form = ImageForm(request.POST, request.FILES)
+        passphoto_form = PPhotoForm(request.POST, request.FILES)
+        otherphoto_form = OPhotoForm(request.POST, request.FILES)
         report_form = ReportForm(request.POST, instance=report)
         # report_form.created_at = report_form.created_at.strptime('%d. %m. %Y')
         car = Car.objects.get(car_id=report.car_id)
@@ -229,6 +255,7 @@ class ReportView(View):
             new_report.created_by = request.user.myuser
             new_report.save()
             save_path = str(s.MEDIA_ROOT + "/")
+            print(request.FILES)
             for each in request.FILES.getlist('image'):
                 Images.objects.create(image=each, report=new_report)
                 with open(save_path + each.name, 'wb+') as destination:
@@ -270,6 +297,8 @@ class ReportView(View):
             'customer_form': customer_form,
             'report_number': report_number,
             'image_form': image_form,
+            'passphoto_form':passphoto_form,
+            'otherphoto_form':otherphoto_form,
             'service_formset': service_formset,
             'product_formset': product_formset,
             'consumable_formset': consumable_formset,

@@ -155,11 +155,26 @@ class MyUser(models.Model):
 class Images(models.Model):
     image_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     image = models.ImageField(blank=True, null=True, verbose_name='Фото')
-    report = models.ForeignKey('Report', on_delete=models.CASCADE, blank=True, null=True, related_name='report', verbose_name='Фото')
+    report = models.ForeignKey('Report', on_delete=models.CASCADE, blank=True, null=True, related_name='reportImages',
+                               verbose_name='Отчёт')
 
     # def save(self, *args, **kwargs):
     #     self.objects.create(something=kwargs['something'])
     #     super(Images, self).save(*args, **kwargs)
+
+
+class PassportPhotos(models.Model):
+    p_photo_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
+    photo = models.ImageField(blank=True, null=True, verbose_name='Фото пасспорта')
+    report = models.ForeignKey('Report', on_delete=models.CASCADE, blank=True, null=True, related_name='reportPPhotos',
+                               verbose_name='Отчёт')
+
+
+class OtherPhotos(models.Model):
+    o_photo_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
+    photos = models.ImageField(blank=True, null=True, verbose_name='Фото чеков')
+    report = models.ForeignKey('Report', on_delete=models.CASCADE, blank=True, null=True, related_name='reportOPhotos',
+                               verbose_name='Отчёт')
 
 
 class Report(models.Model):

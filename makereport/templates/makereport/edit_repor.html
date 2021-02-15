@@ -24,6 +24,28 @@
 	<link href="{% static 'makereport/css/main.css' %}" rel="stylesheet">
 	<link href="{% static 'makereport/css/desktop7.css' %}" rel="stylesheet">
 
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">
+    <link href="{% static '/path/to/css/fileinput.css' %}" media="all" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
+    <link href="{% static '/path/to/themes/explorer-fas/theme.css' %}" media="all" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script src="{% static '/path/to/jquery-3.3.1.min.js' %}" ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="{% static '/path/to/js/plugins/piexif.js' %}" type="text/javascript"></script>
+    <script src="{% static '/path/to/js/plugins/sortable.js' %}" type="text/javascript"></script>
+    <script src="{% static '/path/to/js/fileinput.js' %}" type="text/javascript"></script>
+    <script src="{% static '/path/to/themes/explorer-fas/theme.js' %}" type="text/javascript"></script>
+
+	<script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
+	<!-- Vendor JS Files -->
+{#	<script src="{% static '/makereport/vendor/jquery/jquery.min.js' %}"></script>#}
+{#	<!-- Template Main JS File -->#}
+{#	<script src="{% static '/makereport/js/jquery-1.12.4.js' %}"></script>#}
+	<script src="{% static '/makereport/js/script.min.js' %}"> </script>
+	<script src="{% static '/makereport/js/main.js' %}"></script>
+
 </head>
 
 <!-- =======================================================
@@ -140,476 +162,433 @@
 
 		<section class="padding_phone" style="z-index: 9999 !important;">
 
+                <form method="POST" class="material-form-2" enctype="multipart/form-data">{% csrf_token %}
 
-			<div class="accordion one">
+                    <div class="accordion one">
+                    <!-- 1 -->
+                        <div class="accordion-item">
+                            <div class="accordion-header active-accordion">
+                                <span class="accordion-title">Данные</span>
+                                <img src="{% static '/makereport/img/Polygon.png' %}" alt="polygon" class="polygon">
+                            </div>
+                            <div class="inside-content accordion-content" style="display: block;">
+                                <div class="accordion-content-wrapper">
+                                    <div class="inputs_big">
+                                        <div class="left-inputs">
+{#                                            <input type="text" placeholder="Отчёт" class="input_in">#}
+                                            {{ report_form.created_at }}
+                                            {{ car_form.car_number }}
+                                            {{ car_form.brand }}
+                                            {{ car_form.registration }}
+                                            {{ car_form.engine_number }}
+                                            {{ car_form.body_number }}
+                                            {{ car_form.chassis }}
+                                            {{ car_form.car_color }}
+                                            {{ car_form.mileage }}
+                                            {{ car_form.release_date }}
+                                            {{ car_form.car_type }}
+                                            {{ car_form.car_owner }}
+                                            {{ car_form.owner_address }}
+                                        </div>
+                                        <div class="divider"></div>
+                                        <div class="right-inputs">
+                                            {{ customer_form.name }}
+                                            {{ customer_form.address }}
+                                            {{ customer_form.passport_number }}
+                                            {{ customer_form.when_passport_issued }}
+                                            {{ customer_form.whom_passport_issued }}
+                                            {{ customer_form.phone_number }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 1 -->
 
-
-                <!-- 1 -->
-				<div class="accordion-item">
-					<div class="accordion-header active-accordion">
-						<span class="accordion-title">Данные</span>
-						<img src="{% static '/makereport/img/Polygon.png' %}" alt="polygon" class="polygon">
-					</div>
-					<form method="POST" class="form accordion-content" style="display: block;">
-						<div class="accordion-content-wrapper">
-							<div class="inputs_big">
-								<div class="left-inputs">
-									<input type="text" placeholder="Отчёт" class="input_in">
-									{{ report_form.created_at }}
-                                    {{ car_form.car_number }}
-                                    {{ car_form.brand }}
-                                    {{ car_form.registration }}
-                                    {{ car_form.engine_number }}
-                                    {{ car_form.body_number }}
-                                    {{ car_form.chassis }}
-                                    {{ car_form.car_color }}
-                                    {{ car_form.mileage }}
-                                    {{ car_form.release_date }}
-                                    {{ car_form.car_type }}
-                                    {{ car_form.car_owner }}
-                                    {{ car_form.owner_address }}
-								</div>
-								<div class="divider"></div>
-								<div class="right-inputs">
-                                    {{ customer_form.name }}
-                                    {{ customer_form.address }}
-                                    {{ customer_form.passport_number }}
-                                    {{ customer_form.when_passport_issued }}
-                                    {{ customer_form.whom_passport_issued }}
-                                    {{ customer_form.phone_number }}
-								</div>
-							</div>
-							<button class="save-btn" type="submit">Сохранить</button>
-						</div>
-					</form>
-				</div>
-				<!-- 1 -->
-
-                <!-- 2 -->
-				<div class="accordion-item">
-					<div class="accordion-header">
-						<span class="accordion-title">Стоимость работы</span>
-						<img src="{% static '/makereport/img/Polygon.png' %}" alt="polygon" class="polygon">
-					</div>
-					<form method="POST" class="form accordion-content" style="display: none;">
-						<div class="accordion-content-wrapper">
-							<table style="width: 100%;">
-								<tbody>
-									<tr>
-										<th class="table-headers"></th>
-										<th class="table-headers"></th>
-										<th class="table-headers">Наименование</th>
-										<th class="table-headers">Нор/час</th>
-										<th class="table-headers">Надбавка</th>
-										<th class="table-headers">Цена</th>
-										<th class="table-headers">Сумма</th>
-									</tr>
-                                    {{ service_formset.management_form }}
-                                    {% for form in service_formset.forms %}
-{#                                        {{ form.non_field_errors }}#}
-{#                                        {{ form.errors }}#}
-                                    <tr>
-                                        <td><input type="checkbox" id="checkbox-2-1"
-												class="regular-checkbox big-checkbox" checked /><label
-												for="checkbox-2-1"></label></td>
-                                        <td>{{ form.service_id }}</td>
-                                        <td>{{ form.name }}</td>
-                                        <td>{{ form.norm_per_hour }}</td>
-                                        <td>{{ form.premium }}</td>
-                                        <td>{{ form.price }}</td>
-                                        <td>{{ form.service_cost }}</td>
-                                    </tr>
-                                    {% endfor %}
-                                        <table class='no_error' style="display: none">
+                        <!-- 2 -->
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span class="accordion-title">Стоимость работы</span>
+                                <img src="{% static '/makereport/img/Polygon.png' %}" alt="polygon" class="polygon">
+                            </div>
+                            <div class="inside-content accordion-content" style="display: none;">
+                                <div class="accordion-content-wrapper">
+                                    <table style="width: 100%;">
+                                        <tbody>
                                             <tr>
-                                                <td>{{ service_formset.empty_form.service_id }}</td>
-                                                <td>{{ service_formset.empty_form.name }}</td>
-                                                <td>{{ service_formset.empty_form.norm_per_hour }}</td>
-                                                <td>{{ service_formset.empty_form.premium }}</td>
-                                                <td>{{ service_formset.empty_form.price }}</td>
-                                                <td>{{ service_formset.empty_form.service_cost }}</td>
+                                                <th class="table-headers"></th>
+                                                <th class="table-headers"></th>
+                                                <th class="table-headers">Наименование</th>
+                                                <th class="table-headers">Нор/час</th>
+                                                <th class="table-headers">Надбавка</th>
+                                                <th class="table-headers">Цена</th>
+                                                <th class="table-headers">Сумма</th>
                                             </tr>
-                                        </table>
-								</tbody>
-							</table>
-							<button class="save-btn" type="submit">Сохранить</button>
-						</div>
-					</form>
-				</div>
-				<!-- 2 -->
-
-                <!-- 3 -->
-				<div class="accordion-item">
-					<div class="accordion-header">
-						<span class="accordion-title">Запчасти</span>
-						<img src="{% static '/makereport/img/Polygon.png' %}" alt="polygon" class="polygon">
-					</div>
-					<form method="POST" class="form accordion-content" style="display: none;">
-						<div class="accordion-content-wrapper">
-							<table>
-								<tbody>
-									<tr>
-										<th class="table-spare-part-headers"></th>
-										<th class="table-spare-part-headers">Наименование</th>
-										<th class="table-spare-part-headers">Кол-во</th>
-										<th class="table-spare-part-headers">Цена</th>
-										<th class="table-spare-part-headers">Сумма</th>
-									</tr>
-                                    {{ product_formset.management_form }}
-                                    {% for form in product_formset.forms %}
-{#                                        {{ form.non_field_errors }}#}
-{#                                        {{ form.errors }}#}
+                                            {{ service_formset.management_form }}
+                                            {% for form in service_formset.forms %}
+        {#                                        {{ form.non_field_errors }}#}
+        {#                                        {{ form.errors }}#}
                                             <tr>
-                                                <td>{{ form.product_id }}</td>
+                                                <td><input type="checkbox" id="checkbox-2-1"
+                                                        class="regular-checkbox big-checkbox" checked /><label
+                                                        for="checkbox-2-1"></label></td>
+                                                <td>{{ form.service_id }}</td>
                                                 <td>{{ form.name }}</td>
-{#                                                <td>{{ form.unit }}</td>#}
-                                                <td>{{ form.quantity }}</td>
+                                                <td>{{ form.norm_per_hour }}</td>
+                                                <td>{{ form.premium }}</td>
                                                 <td>{{ form.price }}</td>
-                                                <td>{{ form.product_cost }}</td>
+                                                <td>{{ form.service_cost }}</td>
                                             </tr>
-                                    {% endfor %}
-                                        <table class='no_error' style="display: none">
+                                            {% endfor %}
+                                                <table class='no_error' style="display: none">
+                                                    <tr>
+                                                        <td>{{ service_formset.empty_form.service_id }}</td>
+                                                        <td>{{ service_formset.empty_form.name }}</td>
+                                                        <td>{{ service_formset.empty_form.norm_per_hour }}</td>
+                                                        <td>{{ service_formset.empty_form.premium }}</td>
+                                                        <td>{{ service_formset.empty_form.price }}</td>
+                                                        <td>{{ service_formset.empty_form.service_cost }}</td>
+                                                    </tr>
+                                                </table>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 2 -->
+
+                        <!-- 3 -->
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span class="accordion-title">Запчасти</span>
+                                <img src="{% static '/makereport/img/Polygon.png' %}" alt="polygon" class="polygon">
+                            </div>
+                            <div class="inside-content accordion-content" style="display: none;">
+                                <div class="accordion-content-wrapper">
+                                    <table>
+                                        <tbody>
                                             <tr>
-                                                <td><div class="count">{{ product_formset.empty_form.product_id }}</div></td>
-                                                <td>{{ product_formset.empty_form.name }}</td>
-                                                <td>{{ product_formset.empty_form.unit }}</td>
-                                                <td>{{ product_formset.empty_form.quantity }}</td>
-                                                <td>{{ product_formset.empty_form.price }}</td>
-                                                <td>{{ product_formset.empty_form.product_cost }}</td>
+                                                <th class="table-spare-part-headers"></th>
+                                                <th class="table-spare-part-headers">Наименование</th>
+                                                <th class="table-spare-part-headers">Кол-во</th>
+                                                <th class="table-spare-part-headers">Цена</th>
+                                                <th class="table-spare-part-headers">Сумма</th>
                                             </tr>
-                                        </table>
-								</tbody>
-							</table>
-							<button class="save-btn" type="submit">Сохранить</button>
-
-
-							<ul class="responsive-table">
-
-								<li class="table-row">
-									<div class="col col-1" data-label=""></div>
-									<div class="col col-2" data-label="">3809000</div>
-								</li>
-								<li class="table-row">
-									<div class="col col-1" data-label="">Эксплуатационный<span>износ<span></div>
-									<div class="col col-2" data-label="Эксплуатационныйизнос">571350</div>
-								</li>
-								<li class="table-row">
-									<div class="col col-1" data-label="">С<span>минусом</span>износа</div>
-									<div class="col col-2" data-label="Сминусомизноса">3237650</div>
-								</li>
-
-							</ul>
-
-
-						</div>
-					</form>
-				</div>
-				<!-- 3 -->
-
-                <!-- 4 -->
-				<div class="accordion-item">
-					<div class="accordion-header">
-						<span class="accordion-title">Материалы</span>
-						<img src="{% static '/makereport/img/Polygon.png' %}" alt="polygon" class="polygon">
-					</div>
-					<form method="POST" class="form accordion-content" style="display: none;">
-						<div class="accordion-content-wrapper">
-							<table>
-								<tbody>
-									<tr>
-										<th class="table-spare-part-headers4"></th>
-										<th class="table-spare-part-headers4">Наименование</th>
-										<th class="table-spare-part-headers4">Ед.измерения</th>
-										<th class="table-spare-part-headers4">Надбавка</th>
-										<th class="table-spare-part-headers4">Ед.расхода</th>
-										<th class="table-spare-part-headers4">Сумма</th>
-									</tr>
-										{ consumable_formset.management_form }}
-                                        {% for form in consumable_formset.forms %}
-{#                                        {{ form.non_field_errors }}#}
-{#                                        {{ form.errors }}#}
-                                            <tr>
-                                                <td>{{ form.consumable_id }}</td>
-                                                <td>{{ form.name }}</td>
-                                                <td>{{ form.unit }}</td>
-                                                <td>{{ form.quantity }}</td>
-                                                <td>{{ form.price }}</td>
-                                                <td>{{ form.consumable_cost }}</td>
-                                            </tr>
-                                        {% endfor %}
-                                    <table class='no_error' style="display: none;">
-                                        <tr>
-                                            <td>{{ consumable_formset.empty_form.consumable_id }}</td>
-                                            <td>{{ consumable_formset.empty_form.name }}</td>
-                                            <td>{{ consumable_formset.empty_form.unit }}</td>
-                                            <td>{{ consumable_formset.empty_form.quantity }}</td>
-                                            <td>{{ consumable_formset.empty_form.price }}</td>
-                                            <td>{{ consumable_formset.empty_form.consumable_cost }}</td>
-                                        </tr>
+                                            {{ product_formset.management_form }}
+                                            {% for form in product_formset.forms %}
+        {#                                        {{ form.non_field_errors }}#}
+        {#                                        {{ form.errors }}#}
+                                                    <tr>
+                                                        <td>{{ form.product_id }}</td>
+                                                        <td>{{ form.name }}</td>
+        {#                                                <td>{{ form.unit }}</td>#}
+                                                        <td>{{ form.quantity }}</td>
+                                                        <td>{{ form.price }}</td>
+                                                        <td>{{ form.product_cost }}</td>
+                                                    </tr>
+                                            {% endfor %}
+                                                <table class='no_error' style="display: none">
+                                                    <tr>
+                                                        <td><div class="count">{{ product_formset.empty_form.product_id }}</div></td>
+                                                        <td>{{ product_formset.empty_form.name }}</td>
+                                                        <td>{{ product_formset.empty_form.unit }}</td>
+                                                        <td>{{ product_formset.empty_form.quantity }}</td>
+                                                        <td>{{ product_formset.empty_form.price }}</td>
+                                                        <td>{{ product_formset.empty_form.product_cost }}</td>
+                                                    </tr>
+                                                </table>
+                                        </tbody>
                                     </table>
 
-								</tbody>
-							</table>
-							<button class="save-btn" type="submit">Сохранить</button>
-						</div>
-					</form>
-				</div>
-				<!-- 4 -->
 
-				<!-- 5 -->
-				<div class="accordion-item">
-					<div class="accordion-header">
-						<span class="accordion-title">Износ</span>
-						<img src="{% static '/makereport/img/Polygon.png' %}" alt="polygon" class="polygon">
-					</div>
-					<div class="form accordion-content characteristic-table">
-						<div class="accordion-content-wrapper">
+                                    <ul class="responsive-table">
 
-							<div class="details">
-								<div class="point">
-									<span class="point-text">Балл</span>
-									{{ wear_form.point }}
-								</div>
-								<div class="weight">
-									<span class="weight-text">Т</span>
-									{{ wear_form.weight }}
-								</div>
-								<div class="wear">
-									<span class="wear-text">Износ = </span>
-								</div>
-								<div class="prehnite">
-									<span class="prehnite-text">Принит = </span>
-									{{ wear_form.accept_wear }}
-								</div>
-							</div>
-							<table class="table">
-								<tbody>
-									<tr>
-										<th class="characterstic-header">Оценка состояния</th>
-										<th class="characterstic-header">Характеристика физического состояния </th>
-										<th class="characterstic-header">Средний балл Б</th>
-									</tr>
-									<tr id="condition" class="tr-2">
-										<td class="state">очень хорошее</td>
-										<td class="physic-state">Оборудование , мало эксплуатировавшееся либо прошедшее
-											качественный капитальный ремонт , в очень хорошем состоянии</td>
-										<td class="average-score">50</td>
-									</tr>
-									<tr id="condition">
-										<td class="state">хорошее</td>
-										<td class="physic-state">Слабо поношенное , отремонтированное или обновленное
-											оборудование в хорошем состоянии</td>
-										<td class="average-score">40</td>
-									</tr>
-									<tr id="condition">
-										<td class="state">среднее</td>
-										<td class="physic-state">Оборудование в удовлетворительном состоянии, частично
-											поношенное , требующее небольшого ремонта или замена отдельных мелких частей
-											, таких , как подшибники , вкладыщи и д.р</td>
-										<td class="average-score">30</td>
-									</tr>
-									<tr id="condition">
-										<td class="state">посредственное</td>
-										<td class="physic-state">Оборудование в работоспособном состоянии , но требующее
-											ремонта или замены главных частей , таких , как двигатель и других
-											отвественных узлов</td>
-										<td class="average-score">20</td>
-									</tr>
-									<tr id="condition">
-										<td class="state" style="border-bottom: 0;">плохое</td>
-										<td class="physic-state" style="border-bottom: 0;">Оборудование в плохом
-											состоянии , требующее такого капитального ремонта , как замена рабочих
-											органов основных агрегатов</td>
-										<td class="average-score" style="border-bottom: 0;">10</td>
-									</tr>
-								</tbody>
-							</table>
+                                        <li class="table-row">
+                                            <div class="col col-1" data-label=""></div>
+                                            <div class="col col-2" data-label="">3809000</div>
+                                        </li>
+                                        <li class="table-row">
+                                            <div class="col col-1" data-label="">Эксплуатационный<span>износ</span></div>
+                                            <div class="col col-2" data-label="Эксплуатационныйизнос">571350</div>
+                                        </li>
+                                        <li class="table-row">
+                                            <div class="col col-1" data-label="">С<span>минусом</span>износа</div>
+                                            <div class="col col-2" data-label="Сминусомизноса">3237650</div>
+                                        </li>
 
-							<table class="table">
-								<tbody>
-									<tr>
-										<th class="characterstic-header">Физическая характеристика состояния
-											транспортного средства</th>
-										<th class="characterstic-header">Оценка сос-я</th>
-										<th class="characterstic-header">Износ Итр,%</th>
-									</tr>
-									<tr id="condition" class="tr-2">
-										<td class="physic-state">Новое, в отличном состоянии, после выполнения
-											предпродажной подготовки.</td>
-										<td class="state">Новое</td>
-										<td class="average-score">0 -10</td>
-									</tr>
-									<tr id="condition">
-										<td class="physic-state">Практически новое, периоде эксплуатации, с выполненными
-											объемами технического обслуживания и не требующего ремонта или замены
-											каких-либо частей.</td>
-										<td class="state">Очень хорошее</td>
-										<td class="average-score">10 - 20</td>
-									</tr>
-									<tr id="condition">
-										<td class="physic-state">На послегарантийном периоде эксплуатации , с
-											выполненными объемами технического обслуживания , не требующее текущего
-											ремонта или замены каких-либо частей. После капитального ремонта.</td>
-										<td class="state">Хорошее</td>
-										<td class="average-score">20 - 40</td>
-									</tr>
-									<tr id="condition">
-										<td class="physic-state">Бывшее в эксплуатации , с выполненными объемами
-											технического обслуживания , требующее текущего ремонта или замены некоторых
-											деталей , имеющее незначительное повреждение лакокрасочного покрытия</td>
-										<td class="state">Удовлетворительное</td>
-										<td class="average-score">40 - 60</td>
-									</tr>
-									<tr id="condition">
-										<td class="physic-state">Бывшее в эксплуатации , в состоянии , пригодном для
-											дальнейшей эксплуатации после выполнения работ текущего ремонта ( замены )
-											агрегатов , ремонта ( наружной окраски ) кузова ( кабины ).</td>
-										<td class="state">Условно пригодное</td>
-										<td class="average-score">60 - 75</td>
-									</tr>
-									<tr id="condition">
-										<td class="physic-state">Бывшее в эксплуатации , требующее капитального ремонта
-											или замены номерных агрегатов ( двигателя , кузова , рамы ) , полной окраски
-										</td>
-										<td class="state">Неудовлетворительно-пригодно</td>
-										<td class="average-score">до 80</td>
-									</tr>
-									<tr id="condition">
-										<td class="physic-state" style="border-bottom: 0;">Бывшее в эксплуатации ,
-											требующее ремонта в объеме , превышающем экономическую целесообразность его
-											выполнения; отстутвие технической возможности осуществления такового;
-											непригодное к эксплуатации и ремонту</td>
-										<td class="state" style="border-bottom: 0;">Предварительное</td>
-										<td class="average-score" style="border-bottom: 0;">80 и более</td>
-									</tr>
-								</tbody>
-							</table>
-
-						</div>
-					</div>
-				</div>
-				<!-- 5 -->
+                                    </ul>
 
 
-			</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 3 -->
+
+                        <!-- 4 -->
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span class="accordion-title">Материалы</span>
+                                <img src="{% static '/makereport/img/Polygon.png' %}" alt="polygon" class="polygon">
+                            </div>
+                            <div class="inside-content accordion-content" style="display: none;">
+                                <div class="accordion-content-wrapper">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <th class="table-spare-part-headers4"></th>
+                                                <th class="table-spare-part-headers4">Наименование</th>
+                                                <th class="table-spare-part-headers4">Ед.измерения</th>
+                                                <th class="table-spare-part-headers4">Надбавка</th>
+                                                <th class="table-spare-part-headers4">Ед.расхода</th>
+                                                <th class="table-spare-part-headers4">Сумма</th>
+                                            </tr>
+                                            {{ consumable_formset.management_form }}
+                                            {% for form in consumable_formset.forms %}
+    {#                                        {{ form.non_field_errors }}#}
+    {#                                        {{ form.errors }}#}
+                                                <tr>
+                                                    <td>{{ form.consumable_id }}</td>
+                                                    <td>{{ form.name }}</td>
+                                                    <td>{{ form.unit }}</td>
+                                                    <td>{{ form.quantity }}</td>
+                                                    <td>{{ form.price }}</td>
+                                                    <td>{{ form.consumable_cost }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            <table class='no_error' style="display: none;">
+                                                <tr>
+                                                    <td>{{ consumable_formset.empty_form.consumable_id }}</td>
+                                                    <td>{{ consumable_formset.empty_form.name }}</td>
+                                                    <td>{{ consumable_formset.empty_form.unit }}</td>
+                                                    <td>{{ consumable_formset.empty_form.quantity }}</td>
+                                                    <td>{{ consumable_formset.empty_form.price }}</td>
+                                                    <td>{{ consumable_formset.empty_form.consumable_cost }}</td>
+                                                </tr>
+                                            </table>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 4 -->
+
+                        <!-- 5 -->
+                        <div class="accordion-item">
+                            <div class="accordion-header">
+                                <span class="accordion-title">Износ</span>
+                                <img src="{% static '/makereport/img/Polygon.png' %}" alt="polygon" class="polygon">
+                            </div>
+
+                            <div class="inside-content accordion-content characteristic-table">
+                                <div class="accordion-content-wrapper">
+
+                                    <div class="details">
+                                        <div class="point">
+                                            <span class="point-text">Балл</span>
+                                            {{ wear_form.point }}
+                                        </div>
+                                        <div class="weight">
+                                            <span class="weight-text">Т</span>
+                                            {{ wear_form.weight }}
+                                        </div>
+                                        <div class="wear">
+                                            <span class="wear-text">Износ = </span>
+                                        </div>
+                                        <div class="prehnite">
+                                            <span class="prehnite-text">Принит = </span>
+                                            {{ wear_form.accept_wear }}
+                                        </div>
+                                    </div>
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th class="characterstic-header">Оценка состояния</th>
+                                                <th class="characterstic-header">Характеристика физического состояния </th>
+                                                <th class="characterstic-header">Средний балл Б</th>
+                                            </tr>
+                                            <tr id="condition" class="tr-2">
+                                                <td class="state">очень хорошее</td>
+                                                <td class="physic-state">Оборудование , мало эксплуатировавшееся либо прошедшее
+                                                    качественный капитальный ремонт , в очень хорошем состоянии</td>
+                                                <td class="average-score">50</td>
+                                            </tr>
+                                            <tr id="condition">
+                                                <td class="state">хорошее</td>
+                                                <td class="physic-state">Слабо поношенное , отремонтированное или обновленное
+                                                    оборудование в хорошем состоянии</td>
+                                                <td class="average-score">40</td>
+                                            </tr>
+                                            <tr id="condition">
+                                                <td class="state">среднее</td>
+                                                <td class="physic-state">Оборудование в удовлетворительном состоянии, частично
+                                                    поношенное , требующее небольшого ремонта или замена отдельных мелких частей
+                                                    , таких , как подшибники , вкладыщи и д.р</td>
+                                                <td class="average-score">30</td>
+                                            </tr>
+                                            <tr id="condition">
+                                                <td class="state">посредственное</td>
+                                                <td class="physic-state">Оборудование в работоспособном состоянии , но требующее
+                                                    ремонта или замены главных частей , таких , как двигатель и других
+                                                    отвественных узлов</td>
+                                                <td class="average-score">20</td>
+                                            </tr>
+                                            <tr id="condition">
+                                                <td class="state" style="border-bottom: 0;">плохое</td>
+                                                <td class="physic-state" style="border-bottom: 0;">Оборудование в плохом
+                                                    состоянии , требующее такого капитального ремонта , как замена рабочих
+                                                    органов основных агрегатов</td>
+                                                <td class="average-score" style="border-bottom: 0;">10</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th class="characterstic-header">Физическая характеристика состояния
+                                                    транспортного средства</th>
+                                                <th class="characterstic-header">Оценка сос-я</th>
+                                                <th class="characterstic-header">Износ Итр,%</th>
+                                            </tr>
+                                            <tr id="condition" class="tr-2">
+                                                <td class="physic-state">Новое, в отличном состоянии, после выполнения
+                                                    предпродажной подготовки.</td>
+                                                <td class="state">Новое</td>
+                                                <td class="average-score">0 -10</td>
+                                            </tr>
+                                            <tr id="condition">
+                                                <td class="physic-state">Практически новое, периоде эксплуатации, с выполненными
+                                                    объемами технического обслуживания и не требующего ремонта или замены
+                                                    каких-либо частей.</td>
+                                                <td class="state">Очень хорошее</td>
+                                                <td class="average-score">10 - 20</td>
+                                            </tr>
+                                            <tr id="condition">
+                                                <td class="physic-state">На послегарантийном периоде эксплуатации , с
+                                                    выполненными объемами технического обслуживания , не требующее текущего
+                                                    ремонта или замены каких-либо частей. После капитального ремонта.</td>
+                                                <td class="state">Хорошее</td>
+                                                <td class="average-score">20 - 40</td>
+                                            </tr>
+                                            <tr id="condition">
+                                                <td class="physic-state">Бывшее в эксплуатации , с выполненными объемами
+                                                    технического обслуживания , требующее текущего ремонта или замены некоторых
+                                                    деталей , имеющее незначительное повреждение лакокрасочного покрытия</td>
+                                                <td class="state">Удовлетворительное</td>
+                                                <td class="average-score">40 - 60</td>
+                                            </tr>
+                                            <tr id="condition">
+                                                <td class="physic-state">Бывшее в эксплуатации , в состоянии , пригодном для
+                                                    дальнейшей эксплуатации после выполнения работ текущего ремонта ( замены )
+                                                    агрегатов , ремонта ( наружной окраски ) кузова ( кабины ).</td>
+                                                <td class="state">Условно пригодное</td>
+                                                <td class="average-score">60 - 75</td>
+                                            </tr>
+                                            <tr id="condition">
+                                                <td class="physic-state">Бывшее в эксплуатации , требующее капитального ремонта
+                                                    или замены номерных агрегатов ( двигателя , кузова , рамы ) , полной окраски
+                                                </td>
+                                                <td class="state">Неудовлетворительно-пригодно</td>
+                                                <td class="average-score">до 80</td>
+                                            </tr>
+                                            <tr id="condition">
+                                                <td class="physic-state" style="border-bottom: 0;">Бывшее в эксплуатации ,
+                                                    требующее ремонта в объеме , превышающем экономическую целесообразность его
+                                                    выполнения; отстутвие технической возможности осуществления такового;
+                                                    непригодное к эксплуатации и ремонту</td>
+                                                <td class="state" style="border-bottom: 0;">Предварительное</td>
+                                                <td class="average-score" style="border-bottom: 0;">80 и более</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
 
 
+                                </div>
+                            </div>
+                        </div>
+				    <!-- 5 -->
+                    </div>
+                    <div class="container my-4">
+                         <div class="file-loading">
+                             {{ image_form.image }}
+                        </div>
+                    </div>
+                    <div class="container my-4">
+                         <div class="file-loading">
+                             {{ passphoto_form.photo }}
+                        </div>
+                    </div>
+                <div class="container my-4">
+                         <div class="file-loading">
+                             {{ otherphoto_form.photos }}
+                        </div>
+                    </div>
 
+{#                    <div class="file-upload2">#}
+{#                         <div class="file-loading2">#}
+{#                            <input id="kv-explorer" name="input" type="file" multiple>#}
+{#                              {{ passphoto_form.image }}#}
+{#                        </div>#}
+{#                    </div>#}
+{##}
+{#                    <div class="file-upload3">#}
+{#                         <div class="file-loading3">#}
+{#                            <input id="kv-explorer" name="input" type="file" multiple>#}
+{#                              {{ otherphoto_form.image }}#}
+{#                        </div>#}
+{#                    </div>#}
 
-			<form class="material-form-2">
+                    <div class="save-btn-block">
+                        <button class="save-btn" type="submit">Сохранить</button>
+                    </div>
+                </form>
+                <div class="material-form-2">
+                    <div class="last_bottom_block col-12">
+                        <div class="row">
 
-				<div class="file-upload">
-					<div class="file-select">
-						<div class="file-select-button" id="fileName"><span>Выбрать<span></div>
-						<div class="file-select-name" id="noFile">Добавить фото</div>
-						<input type="file" name="chooseFile" id="chooseFile">
-					</div>
-				</div>
+                            <div class="col-lg-4 white_blocks">
+                                <div class="white_block">
 
-				<div class="file-upload">
-					<div class="file-select">
-						<div class="file-select-button" id="fileName"><span>Выбрать<span></div>
-						<div class="file-select-name" id="noFile">Фото паспорта</div>
-						<input type="file" name="chooseFile" id="chooseFile">
-					</div>
-				</div>
+                                </div>
+                                <div class="little_white_block">
+                                    <span>№23</span>
+                                </div>
+                            </div>
 
-				<div class="file-upload">
-					<div class="file-select">
-						<div class="file-select-button" id="fileName"><span>Выбрать<span></div>
-						<div class="file-select-name" id="noFile">Фото тех.паспорта</div>
-						<input type="file" name="chooseFile" id="chooseFile">
-					</div>
-				</div>
+                            <div class="col-lg-8">
+                                <div class="row">
 
-			</form>
+                                    <div class="col-lg-4 download_button">
+                                        <div class="panel_user" id="download_button1">
+                                            <a href="#">
+                                                <button type="button" class="btn panel_button">Скачать</button>
+                                            </a>
+                                        </div>
+                                    </div>
 
+                                    <div class="col-lg-4 download_button">
+                                        <div class="panel_user" id="download_button2">
+                                            <a href="#">
+                                                <button type="button" class="btn panel_button">Скачать</button>
+                                            </a>
+                                        </div>
+                                    </div>
 
+                                    <div class="col-lg-4 download_button">
+                                        <div class="panel_user" id="download_button3">
+                                            <a href="#">
+                                                <button type="button" class="btn panel_button">Скачать</button>
+                                            </a>
+                                        </div>
+                                    </div>
 
+                                </div>
+                            </div>
 
-
-
-			<div class="last_bottom_block">
-
-				<div class="white_block">
-
-				</div>
-				<div class="little_white_block">
-					<span>№23</span>
-				</div>
-
-				<div class="word" id="word">
-					<p>Заключение</p>
-				</div>
-				<div class="panel_user">
-					<a href="#">
-						<button type="button" class="btn panel_button">Скачать</button>
-					</a>
-				</div>
-
-				<div class="word_2" id="word">
-					<p>Договор</p>
-				</div>
-				<div class="panel_user_2">
-					<a href="#">
-						<button type="button" class="btn panel_button">Скачать</button>
-					</a>
-				</div>
-
-				<div class="word_3" id="word">
-					<p>Отчёт</p>
-				</div>
-				<div class="panel_user_3">
-					<a href="#">
-						<button type="button" class="btn panel_button">Скачать</button>
-					</a>
-				</div>
-
-			</div>
-
-
-			<!-- <div class="last_bottom_block_phone col-12">
-
-				<div class="col-lg-4">
-                <div class="white_block">
-
-                </div>
-                <div class="little_white_block">
-                    <span>№23</span>
-                </div>
-			</div>
-
-			<div class="col-lg-4">
-                <div class="word" id="word">
-                    <p>Заключение</p>
-                </div>
-                <div class="panel_user">
-                    <a href="#">
-                        <button type="button" class="btn panel_button">Скачать</button>
-                    </a>
-                </div>
-
-                <div class="word_2" id="word">
-                    <p>Договор</p>
-                </div>
-                <div class="panel_user_2">
-                    <a href="#">
-                        <button type="button" class="btn panel_button">Скачать</button>
-                    </a>
-                </div>
-
-                <div class="word_3" id="word">
-                    <p>Отчёт</p>
-                </div>
-                <div class="panel_user_3">
-                    <a href="#">
-                        <button type="button" class="btn panel_button">Скачать</button>
-                    </a>
-                </div>
-			</div>
-
-            </div> -->
-
+                        </div>
+                    </div>
+			    </div>
 
 		</section>
 
@@ -639,14 +618,415 @@
 	</main><!-- End #main -->
 
 
+    {% block javascript %}
+        <script>
 
-	<script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
-	<!-- Vendor JS Files -->
-	<script src="{% static '/makereport/vendor/jquery/jquery.min.js' %}"></script>
-	<!-- Template Main JS File -->
-	<script src="{% static '/makereport/js/jquery-1.12.4.js' %}"></script>
-	<script src="{% static '/makereport/js/script.min.js' %}"> </script>
-	<script src="{% static '/makereport/js/main.js' %}"></script>
+            $(document).on('keypress', "form", function (event) {
+                return event.key !== "Enter";
+            });
+
+            $(document).on('keypress', ".input-premium", function (e) {
+                var key = e.which;
+                if (key === 13) {
+                    console.log('CLICK-Service')
+                    var form_idx = $('#id_service-TOTAL_FORMS').val();
+                    $('#service_formset').append($('#empty_service_form').html().replace(/__prefix__/g, form_idx));
+                    $('#id_service-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+                }
+            });
+            $(document).on('keypress', ".input-quantity", function (e) {
+                var key = e.which;
+                if (key === 13) {
+                    console.log('CLICK-Product')
+                    var form_idx = $('#id_product-TOTAL_FORMS').val();
+                    $('#product_formset').append($('#empty_product_form').html().replace(/__prefix__/g, form_idx));
+                    $('#id_product-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+                }
+            });
+            $(document).on('keypress', ".input-quantity-cons", function (e) {
+                var key = e.which;
+                if (key === 13) {
+                    console.log('CLICK-Consumable')
+                    var form_idx = $('#id_consumable-TOTAL_FORMS').val();
+                    $('#consumable_formset').append($('#empty_consum_form').html().replace(/__prefix__/g, form_idx));
+                    $('#id_consumable-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+                }
+            });
+
+            $(document).on('keypress', ".input-service_id", function (e) {
+                console.log('CLICK service_id')
+                var key = e.which;
+                if (key === 13) {
+                    var service_id = $(this).val(),
+                        last_input_name = $(this).parents('tr').find('.input-name'),
+                        last_input_nph = $(this).parents('tr').find('.input-nph'),
+                        last_input_price = $(this).parents('tr').find('.input-price'),
+                        last_input_premium = $(this).parents('tr').find('.input-premium')
+
+                    brand = $('#id_brand').val()
+
+                    $.ajax({
+                        url: '{% url "get_service_ajax" %}',
+                        data: {
+                            'service_id': service_id,
+                            'brand': brand,
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            console.log('success')
+                            last_input_premium.select()
+                            last_input_name.val(data.name)
+                            last_input_nph.val(data.norm_per_hour)
+                            last_input_price.val(data.price)
+                        },
+                    })
+                }
+            });
+
+            $(document).on('keypress', ".input-premium", function (e) {
+                console.log('CLICK premium')
+                var key = e.which;
+                var service_cost;
+                var nph;
+                if (key === 13) {
+                    var premium = $(this).val(),
+                        price = $(this).parents('tr').find('.input-price').val(),
+                        nph = $(this).parents('tr').find('.input-nph').val(),
+                        service_cost = $(this).parents('tr').find('.input-cost'),
+                        present_table = $(this).parents('.no_error').next().find('.input-service_id')
+                        {#next_service_id = $(this).parents('.div').find('.no_error').next()#}
+
+                    last = $(this).parents('tbody').find('tr').last()
+
+                    $.ajax({
+                        url: '{% url "get_service_cost" %}',
+                        data: {
+                            'premium': premium,
+                            'price': price,
+                            'nph': nph,
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            console.log('success calculate cost')
+                            console.log(present_table)
+                            present_table.select()
+                            {#next_service_id.select()#}
+                            {#last.clone().insertAfter(last);#}
+                            service_cost.val(data.service_cost)
+                        },
+                    })
+                }
+            });
+
+            $(document).on('keypress', ".input-product_id", function (e) {
+                console.log('CLICK product_id')
+                var key = e.which;
+                if (key === 13) {
+                    var product_id = $(this).val(),
+                        last_input_name = $(this).parents('tr').find('.input-name'),
+                        last_input_unit = $(this).parents('tr').find('.input-unit'),
+                        last_input_price = $(this).parents('tr').find('.input-price'),
+                        last_input_quantity = $(this).parents('tr').find('.input-quantity')
+
+                    brand = $('#id_brand').val()
+
+                    $.ajax({
+                        url: '{% url "get_product_ajax" %}',
+                        data: {
+                            'product_id': product_id,
+                            'brand': brand,
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            console.log('success')
+                            last_input_quantity.select()
+                            last_input_name.val(data.name)
+                            last_input_unit.val(data.unit)
+                            last_input_price.val(data.price)
+                        },
+                    })
+                }
+            });
+
+            $(document).on('keypress', ".input-quantity-cons", function (e) {
+                console.log('CLICK quantity-cons')
+                var key = e.which;
+                if (key === 13) {
+                    var quantity = $(this).val(),
+                        price = $(this).parents('tr').find('.input-price').val(),
+                        cost = $(this).parents('tr').find('.input-cost'),
+                        last = $(this).parents('tbody').find('tr').last(),
+                        present_table = $(this).parents('.no_error').next().find('.input-consumable_id')
+                    {#last.clone().insertAfter(last);#}
+                    $.ajax({
+                        url: '{% url "get_consumable_cost" %}',
+                        data: {
+                            'quantity': quantity,
+                            'price': price,
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            console.log('success calculate cost')
+                            present_table.select()
+                            cost.val(data.total_cost)
+                        },
+                    })
+                }
+            });
+
+            $(document).on('keypress', ".input-consumable_id", function (e) {
+                console.log('CLICK consumable_id')
+                var key = e.which;
+                if (key === 13) {
+                    var consumable_id = $(this).val(),
+                        last_input_name = $(this).parents('tr').find('.input-name'),
+                        last_input_unit = $(this).parents('tr').find('.input-unit'),
+                        last_input_price = $(this).parents('tr').find('.input-price'),
+                        last_input_price_cons = $(this).parents('tr').find('.input-quantity-cons')
+
+                    $.ajax({
+                        url: '{% url "get_consumable_ajax" %}',
+                        data: {
+                            'consumable_id': consumable_id,
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            console.log('success')
+                            last_input_price_cons.select()
+                            last_input_name.val(data.name)
+                            last_input_unit.val(data.unit)
+                            last_input_price.val(data.price)
+                        },
+                    })
+                }
+            });
+
+            $(document).on('keypress', ".input-quantity", function (e) {
+                console.log('CLICK quantity')
+                var key = e.which;
+                if (key === 13) {
+                    var quantity = $(this).val(),
+                        price = $(this).parents('tr').find('.input-price').val(),
+                        cost = $(this).parents('tr').find('.input-cost'),
+                        last = $(this).parents('tbody').find('tr').last(),
+                        present_table = $(this).parents('.no_error').next().find('.input-product_id')
+
+                    {#last.clone().insertAfter(last);#}
+                    $.ajax({
+                        url: '{% url "get_consumable_cost" %}',
+                        data: {
+                            'quantity': quantity,
+                            'price': price,
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            console.log('success calculate cost')
+                            present_table.select()
+                            cost.val(data.total_cost)
+                        },
+                    })
+                }
+            });
+            $(document).on('keypress', ".weight-input", function (e) {
+                console.log('CLICK point-input')
+                var key = e.which;
+                if (key === 13) {
+                    var point = $(this).val(),
+                        weight = $(this).parents('.details').find('.weight-input').val(),
+                        wear = $(this).parents('.details').find('.prehnite-input')
+
+                    $.ajax({
+                        url: '{% url "get_wear_ajax" %}',
+                        data: {
+                            'point': point,
+                            'weight': weight,
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            console.log('success calculate cost')
+                            wear.select()
+                            wear.val(data.wear)
+                        },
+                    })
+                }
+            });
+
+            $(document).on('keypress', ".point-input", function (e) {
+                console.log('CLICK point-input')
+                var key = e.which;
+                if (key === 13) {
+                    var point = $(this).val(),
+                        weight = $(this).parents('.details').find('.weight-input')
+                        weight.select()
+                }
+            });
+
+             $(document).on('keypress', ".prehnite-input", function (e) {
+                console.log('CLICK point-input')
+                var key = e.which;
+                if (key === 13) {
+                    var point = $(this).val(),
+                        accept_weight = $(this).parents('.details').find('.accept-wear-input')
+                        accept_weight.select()
+                }
+            });
+
+             $(document).on('keypress', ".accept-wear-input", function (e) {
+                console.log('CLICK accept_weight')
+                var key = e.which;
+                if (key === 13) {
+                    var point = $(this).val(),
+                        btn = $(document).find('#report_save')
+                        btn.focus()
+                }
+                });
+
+                $('#file-fr').fileinput({
+                    theme: 'fas',
+                    language: 'fr',
+                    uploadUrl: '#',
+                    allowedFileExtensions: ['jpg', 'png', 'gif']
+                });
+                $('#file-es').fileinput({
+                    theme: 'fas',
+                    language: 'es',
+                    uploadUrl: '#',
+                    allowedFileExtensions: ['jpg', 'png', 'gif']
+                });
+                $("#file-0").fileinput({
+                    theme: 'fas',
+                    uploadUrl: '#'
+                }).on('filepreupload', function(event, data, previewId, index) {
+                    alert('The description entered is:\n\n' + ($('#description').val() || ' NULL'));
+                });
+                $("#file-1").fileinput({
+                    theme: 'fas',
+                    uploadUrl: '#', // you must set a valid URL here else you will get an error
+                    allowedFileExtensions: ['jpg', 'png', 'gif'],
+                    overwriteInitial: false,
+                    maxFileSize: 1000,
+                    maxFilesNum: 10,
+                    //allowedFileTypes: ['image', 'video', 'flash'],
+                    slugCallback: function (filename) {
+                        return filename.replace('(', '_').replace(']', '_');
+                    }
+                });
+                /*
+                 $(".file").on('fileselect', function(event, n, l) {
+                 alert('File Selected. Name: ' + l + ', Num: ' + n);
+                 });
+                 */
+                $("#file-3").fileinput({
+                    theme: 'fas',
+                    showUpload: false,
+                    showCaption: false,
+                    browseClass: "btn btn-primary btn-lg",
+                    fileType: "any",
+                    previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+                    overwriteInitial: false,
+                    initialPreviewAsData: true,
+                    initialPreview: [
+                        "http://lorempixel.com/1920/1080/transport/1",
+                        "http://lorempixel.com/1920/1080/transport/2",
+                        "http://lorempixel.com/1920/1080/transport/3"
+                    ],
+                    initialPreviewConfig: [
+                        {caption: "transport-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1},
+                        {caption: "transport-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2},
+                        {caption: "transport-3.jpg", size: 632762, width: "120px", url: "{$url}", key: 3}
+                    ]
+                });
+                $("#file-4").fileinput({
+                    theme: 'fas',
+                    uploadExtraData: {kvId: '10'}
+                });
+                $(".btn-warning").on('click', function () {
+                    var $el = $("#file-4");
+                    if ($el.attr('disabled')) {
+                        $el.fileinput('enable');
+                    } else {
+                        $el.fileinput('disable');
+                    }
+                });
+                $(".btn-info").on('click', function () {
+                    $("#file-4").fileinput('refresh', {previewClass: 'bg-info'});
+                });
+                /*
+                 $('#file-4').on('fileselectnone', function() {
+                 alert('Huh! You selected no files.');
+                 });
+                 $('#file-4').on('filebrowse', function() {
+                 alert('File browse clicked for #file-4');
+                 });
+                 */
+                $(document).ready(function () {
+                    $("#test-upload").fileinput({
+                        'theme': 'fas',
+                        'showPreview': false,
+                        'allowedFileExtensions': ['jpg', 'png', 'gif'],
+                        'elErrorContainer': '#errorBlock'
+                    });
+                    $("#imageinput").fileinput({
+                        'theme': 'explorer-fas',
+                        {#'uploadUrl': '#',#}
+                        overwriteInitial: false,
+                        initialPreviewAsData: true,
+                        initialPreview: [
+                            {% for each in images %}
+                                "http://127.0.0.1:8000{{ each.image.url }}",
+                            {% endfor %}
+                        ],
+                        {#initialCaption: "Фото Машины",#}
+                        showUpload: false,
+                        required: false,
+                        {#initialPreviewConfig: [#}
+                        {#    {caption: "nature-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1},#}
+                        {#    {caption: "nature-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2},#}
+                        {#    {caption: "nature-3.jpg", size: 632762, width: "120px", url: "{$url}", key: 3}#}
+                        {#]#}
+                    });
+                     $("#pphotoinput").fileinput({
+                        'theme': 'explorer-fas',
+                        {#'uploadUrl': '#',#}
+                        overwriteInitial: false,
+                        initialPreviewAsData: true,
+                        initialPreview: [
+                            {% for each in pphotos %}
+                                "http://127.0.0.1:8000{{ each.photo.url }}",
+                            {% endfor %}
+                        ],
+                        {#initialCaption: "Фото чеков",#}
+                        showUpload: false,
+                        required: false,
+                        {#initialPreviewConfig: [#}
+                        {#    {caption: "nature-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1},#}
+                        {#    {caption: "nature-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2},#}
+                        {#    {caption: "nature-3.jpg", size: 632762, width: "120px", url: "{$url}", key: 3}#}
+                        {#]#}
+                    });
+                     $("#ophotoinput").fileinput({
+                        'theme': 'explorer-fas',
+                        {#'uploadUrl': '#',#}
+                        overwriteInitial: false,
+                        initialPreviewAsData: true,
+                        initialPreview: [
+                            {% for each in ophotos %}
+                                "http://127.0.0.1:8000{{ each.photos.url }}",
+                            {% endfor %}
+                        ],
+                        {#initialCaption: "Фото чеков",#}
+                        showUpload: false,
+                        required: false,
+                        {#initialPreviewConfig: [#}
+                        {#    {caption: "nature-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1},#}
+                        {#    {caption: "nature-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2},#}
+                        {#    {caption: "nature-3.jpg", size: 632762, width: "120px", url: "{$url}", key: 3}#}
+                        {#]#}
+                    });
+                });
+        </script>
+    {% endblock %}
+
 
 </body>
 

@@ -87,7 +87,7 @@ class ServiceForm(forms.Form):
     norm_per_hour = forms.FloatField(
         widget=forms.NumberInput(attrs={'class': 'input2 work-price-input2 time2', 'readonly': ''}))
     premium = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'input2 work-price-input2 allowance2', })) #'value': '0'
+        widget=forms.TextInput(attrs={'class': 'input2 work-price-input2 allowance2', }))  # 'value': '0'
     price = forms.IntegerField(
         widget=forms.NumberInput(attrs={'class': 'input2 work-price-input2 price2', 'readonly': ''}))
     service_cost = forms.IntegerField(
@@ -98,17 +98,17 @@ class ServiceForm(forms.Form):
 # user = User.objects.get(id=u.__getitem__(0).myuser.user_id)
 class ProductForm(forms.Form):
     product_id = forms.IntegerField(
-        widget=forms.TextInput(attrs={ 'class': 'input3 work-price-input3 count'}))
+        widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 count'}))
     name = forms.CharField(
-        widget=forms.TextInput(attrs={ 'class': 'input3 work-price-input3 name3', 'readonly': ''}))
+        widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 name3', 'readonly': ''}))
     unit = forms.CharField(
-        widget=forms.TextInput(attrs={ 'class': 'input3 work-price-input3 name3', 'readonly': ''}))
+        widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 name3', 'readonly': ''}))
     quantity = forms.IntegerField(
-        widget=forms.TextInput(attrs={ 'class': 'input3 work-price-input3 time3', })) #'value': '0'
+        widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 time3', }))  # 'value': '0'
     price = forms.IntegerField(
-        widget=forms.TextInput(attrs={ 'class': 'input3 work-price-input3 price3', 'readonly': ''}))
+        widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 price3', 'readonly': ''}))
     product_cost = forms.IntegerField(
-        widget=forms.TextInput(attrs={ 'class': 'input3 work-price-input3 sum3', 'readonly': ''}))
+        widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 sum3', 'readonly': ''}))
 
 
 class ConsumableForm(forms.Form):
@@ -119,7 +119,7 @@ class ConsumableForm(forms.Form):
     unit = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 time4', 'readonly': ''}))
     quantity = forms.IntegerField(
-        widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 allowance4', })) #'value': '0'
+        widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 allowance4', }))  # 'value': '0'
     price = forms.IntegerField(
         widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 price4', 'readonly': ''}))
     consumable_cost = forms.IntegerField(
@@ -128,11 +128,34 @@ class ConsumableForm(forms.Form):
 
 class ImageForm(forms.ModelForm):
     image = forms.CharField(
-        widget=forms.FileInput(attrs={'id': 'kv-explorer', 'name': 'input', 'required': False, 'multiple': True}))
+        widget=forms.FileInput(
+            attrs={'id': 'imageinput', 'type': 'file', 'name': 'input', 'required': False, 'multiple': True}))
 
     class Meta:
         model = Images
         fields = ['image']
+
+
+class PPhotoForm(forms.ModelForm):
+    photo = forms.CharField(
+        widget=forms.FileInput(
+            attrs={'id': 'pphotoinput', 'type': 'file', 'name': 'input', 'required': False,
+                   'multiple': True}))
+
+    class Meta:
+        model = PassportPhotos
+        fields = ['photo']
+
+
+class OPhotoForm(forms.ModelForm):
+    photos = forms.CharField(
+        widget=forms.FileInput(
+            attrs={'id': 'ophotoinput', 'type': 'file', 'name': 'input', 'required': False,
+                   'multiple': True}))
+
+    class Meta:
+        model = OtherPhotos
+        fields = ['photos']
 
 
 class WearForm(forms.Form):
