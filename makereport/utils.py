@@ -151,6 +151,9 @@ def get_consumable_cost(request):
 
 def add_service_to_report(report, service_id, cost):
     report.service.add(Service.objects.get(service_id=service_id))
+    print('service_id={} add to report'.format(service_id))
+    print(report.service.all())
+    # print('something wrong with add service to report')
     calculate_service_cost(report, cost)
 
 
@@ -177,22 +180,24 @@ def calculate_consumable_cost(report, cost):
 
 
 def get_data_from_service_form(form):
-    service_data = {
-        'service_id': form.cleaned_data['service_id'],
-        'name': form.cleaned_data['name'],
-        'norm_per_hour': form.cleaned_data['norm_per_hour'],
-        'premium': form.cleaned_data['premium'],
-        'price': form.cleaned_data['price'],
-        'service_cost': form.cleaned_data['service_cost'],
-    }
-    return service_data
+    if form.cleaned_data:
+        print(form.cleaned_data)
+        service_data = {
+            'service_id': form.cleaned_data['service_id'],
+            'name': form.cleaned_data['name'],
+            'norm_per_hour': form.cleaned_data['norm_per_hour'],
+            'premium': form.cleaned_data['premium'],
+            'price': form.cleaned_data['price'],
+            'service_cost': form.cleaned_data['service_cost'],
+        }
+        return service_data
 
 
 def get_data_from_product_form(form):
     product_data = {
         'product_id': form.cleaned_data['product_id'],
         'name': form.cleaned_data['name'],
-        'unit': form.cleaned_data['unit'],
+        # 'unit': form.cleaned_data['unit'],
         'quantity': form.cleaned_data['quantity'],
         'price': form.cleaned_data['price'],
         'product_cost': form.cleaned_data['product_cost'],

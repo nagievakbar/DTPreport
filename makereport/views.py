@@ -173,28 +173,28 @@ class ReportView(View):
             new_report.consumable_data = []
             new_report.wear_data = {}
             for form in service_formset.forms:
-                if form.is_valid():
+                if form.is_valid() and form.cleaned_data:
                     print('service form is validated')
-                    new_report.service_data = []
+                    # new_report.service_data = []
                     sd = get_data_from_service_form(form)
                     add_service_to_report(new_report, sd.__getitem__('service_id'), sd.__getitem__('service_cost'))
                     new_report.service_data.append(sd)
-                print(new_report.service_cost)
+                print(new_report.service_data)
             for form in product_formset.forms:
-                if form.is_valid():
+                if form.is_valid() and form.cleaned_data:
                     print('product form is validated')
                     pd = get_data_from_product_form(form)
                     add_product_to_report(new_report, pd.__getitem__('product_id'), pd.__getitem__('product_cost'))
                     new_report.product_data.append(pd)
-                print(new_report.product_cost)
+                print(new_report.product_data)
             for form in consumable_formset.forms:
-                if form.is_valid():
+                if form.is_valid() and form.cleaned_data:
                     print('consum form is validated')
                     cd = get_data_from_consum_form(form)
                     add_consumable_to_report(new_report, cd.__getitem__('consumable_id'),
                                              cd.__getitem__('consumable_cost'))
                     new_report.consumable_data.append(cd)
-                print(new_report.consumable_cost)
+                print(new_report.consumable_data)
             if wear_form.is_valid():
                 print('wear form is validated')
                 wd = get_data_from_wear_form(wear_form)

@@ -1,7 +1,7 @@
 <pdf filename="title_page.pdf" pagesize="A4" unit="cm" margin="2,2" >
 	<font name="TNR" ttf="Times New Roman 400.ttf"/>
 	<font name="TNRB" ttf="Times New Roman 400 Bold.ttf"/>
-{#                                     PAGE 1#}
+                                     PAGE 1
 {#	<page>#}
 {#		<image src="AAB.png" height="5" width="9" x="1" y="24" />#}
 {#		<text/>#}
@@ -507,15 +507,6 @@
 {##}
 {#        Идентификация и техническое освидетельствование объекта были произведены лично Оценщиком. В ходе идентификации установлено следующее:#}
 {#        </text>#}
-{#        <text align="justify">#}
-{#            Марка      {{ report.car.brand }}#}
-{#            Гос.номер      {{ report.car.car_number }}          Дата и год выпуска {{ report.car.release_date }}#}
-{#            Серия,номер      {{ report.car.registration }}      Цвет {{ report.car.car_color }}#}
-{#            техпаспорта#}
-{#            Двигатель №      {{ report.car.engine_number }}     Тип {{ report.car.car_type }}#}
-{#            Кузов №      {{ report.car.body_number }}   Шасси № {{ report.car.chassis }}#}
-{#            Пробег      {{ report.car.mileage }}    VIN {{ report.car.body_number }}#}
-{#        </text>#}
 {#        <text x="2" y="14">Марка,модель                              {{ report.car.brand }}</text>#}
 {#        <text x="2" y="13.5">Гос.номер                                   {{ report.car.car_number }}</text>#}
 {#        <text x="11" y="13.5">Дата и год выпуска                    {{ report.car.release_date }}</text>#}
@@ -883,24 +874,71 @@
         <text>
             1. Стоимость работ
         </text>
-        <rect x="1" y="26" width="1.5" height="0.7"/>
-        <rect x="2.5" y="26" width="10" height="0.7"/>
-        <rect x="12.5" y="26" width="1.5" height="0.7"/>
-        <rect x="14" y="26" width="1.5" height="0.7"/>
-        <rect x="15.5" y="26" width="2" height="0.7"/>
-        <rect x="17.5" y="26" width="2.5" height="0.7"/>
+{#        <rect x="1" y="26" width="1.5" height="0.7"/>#}
+{#        <rect x="2.5" y="26" width="10" height="0.7"/>#}
+{#        <rect x="12.5" y="26" width="1.5" height="0.7"/>#}
+{#        <rect x="14" y="26" width="1.5" height="0.7"/>#}
+{#        <rect x="15.5" y="26" width="2" height="0.7"/>#}
+{#        <rect x="17.5" y="26" width="2.5" height="0.7"/>#}
 
-        {% for service in report.serice_data %}
-            <rect x="2" y="-{{ 4 + loop.index/2+0.1}} " width="1.5" height="1"/>
-            <rect x="3.5" y="-{{ 4 + loop.index/2+0.1}} " width="7.5" height="1"/>
-            <rect x="11" y="-{{ 4 + loop.index/2+0.1}} " width="1.5" height="1"/>
-            <rect x="12.5" y="-{{ 4 + loop.index/2+0.1}} " width="1.5" height="1"/>
-            <rect x="14" y="-{{ 4 + loop.index/2+0.1}} " width="2" height="1"/>
-            <rect x="16" y="-{{ 4 + loop.index/2+0.1}} " width="3" height="1"/>
-            <text x="2.6" y="-{{ 4 + loop.index/2}}" >{{ service }}</text>
-            <text x="3.5" y="-{{ 4 + loop.index/2 }}" lineheight="1.5"> {{ service }} </text>
-            <text x="3.5" y="-{{ 4 + loop.index/2 }}" lineheight="1.5"> {{ report.service_data.__getitem__() }} </text>
-            <text x="3.5" y="-{{ 4 + loop.index/2 }}" lineheight="1.5"> {{ service }} </text>
+         {% for service in report.service_data %}
+            {% if loop.first %}
+                <rect x="2" y="-{{ 5 + loop.index/2+0.1}} " width="1.5" height="1"/>
+                <rect x="3.5" y="-{{ 5 + loop.index/2+0.1}} " width="7.5" height="1"/>
+                <rect x="11" y="-{{ 5 + loop.index/2+0.1}} " width="1.5" height="0.5"/>
+                <rect x="11" y="-{{ 4.5 + loop.index/2+0.1}} " width="1.5" height="0.5"/>
+                <rect x="12.5" y="-{{ 5 + loop.index/2+0.1}} " width="1.5" height="1"/>
+                <rect x="14" y="-{{ 5 + loop.index/2+0.1}} " width="2" height="1"/>
+                <rect x="16" y="-{{ 5 + loop.index/2+0.1}} " width="3" height="1"/>
+
+                <rect x="2" y="-{{ 5.5 + loop.index/2+0.1}} " width="1.5" height="0.5"/>
+                <rect x="3.5" y="-{{ 5.5 + loop.index/2+0.1}} " width="7.5" height="0.5"/>
+                <rect x="11" y="-{{ 5.5 + loop.index/2+0.1}} " width="1.5" height="0.5"/>
+                <rect x="12.5" y="-{{ 5.5 + loop.index/2+0.1}} " width="1.5" height="0.5"/>
+                <rect x="14" y="-{{ 5.5 + loop.index/2+0.1}} " width="2" height="0.5"/>
+                <rect x="16" y="-{{ 5.5 + loop.index/2+0.1}} " width="3" height="0.5"/>
+
+                <text x="2.5" y="-{{ 5 + loop.index/2 -0.3}}" >№</text>
+                <text x="6" y="-{{ 5 + loop.index/2 -0.3 }}" lineheight="1.5"> Наименование </text>
+                <text x="11.1" y="-{{ 5 + loop.index/2 -0.5}} " lineheight="1.5"> коэфф </text>
+                <text x="11.3" y="-{{ 5 + loop.index/2 }}" lineheight="1.5"> н/ч </text>
+                <text x="12.6" y="-{{ 5 + loop.index/2 -0.3}}" lineheight="1.5"> н-вка </text>
+                <text x="14.5" y="-{{ 5 + loop.index/2 -0.3}}" lineheight="1.5"> цена </text>
+                <text x="16.9" y="-{{ 5 + loop.index/2 -0.3}}" lineheight="1.5"> сумма </text>
+
+                <text x="2.6" y="-{{ 5.5 + loop.index/2 }}" >1</text>
+                <text x="7" y="-{{ 5.5 + loop.index/2 }}" lineheight="1.5"> 2 </text>
+                <text x="11.5" y="-{{ 5.5 + loop.index/2 }} " lineheight="1.5"> 3 </text>
+                <text x="13" y="-{{ 5.5 + loop.index/2 }}" lineheight="1.5"> 4 </text>
+                <text x="14.8" y="-{{ 5.5 + loop.index/2 }}" lineheight="1.5"> 5 </text>
+                <text x="17.3" y="-{{ 5.5 + loop.index/2 }}" lineheight="1.5"> 6 </text>
+
+{#                <text x="2.6" y="-{{ 5 + loop.index/2}}" >№ парагр</text>#}
+{#                <text x="7" y="-{{ 5 + loop.index/2 }}" lineheight="1.5"> Наименование </text>#}
+{#                <text x="12.5" y="-{{ 5 + loop.index/2 }}" lineheight="1.5"> коэфф </text>#}
+{#                <text x="14" y="-{{ 5 + loop.index/2 }}" lineheight="1.5"> н/ч </text>#}
+{#                <text x="12.5" y="-{{ 5 + loop.index/2 }}" lineheight="1.5"> н-вка </text>#}
+{#                <text x="14" y="-{{ 5 + loop.index/2 }}" lineheight="1.5"> цена </text>#}
+{#                <text x="12.5" y="-{{ 5 + loop.index/2 }}" lineheight="1.5"> сумма </text>      #}
+            {% endif %}
+            <rect x="2" y="-{{ 6 + loop.index/2+0.1}} " width="1.5" height="0.5"/>
+            <rect x="3.5" y="-{{ 6 + loop.index/2+0.1}} " width="7.5" height="0.5"/>
+            <rect x="11" y="-{{ 6 + loop.index/2+0.1}} " width="1.5" height="0.5"/>
+            <rect x="12.5" y="-{{ 6 + loop.index/2+0.1}} " width="1.5" height="0.5"/>
+            <rect x="14" y="-{{ 6 + loop.index/2+0.1}} " width="2" height="0.5"/>
+            <rect x="16" y="-{{ 6 + loop.index/2+0.1}} " width="3" height="0.5"/>
+            <text x="2.6" y="-{{ 6 + loop.index/2}}" >{{ service.service_id }}</text>
+            <text x="3.5" y="-{{ 6 + loop.index/2 }}" lineheight="1.5"> {{ service.name }} </text>
+            <text x="11.5" y="-{{ 6 + loop.index/2 }}" lineheight="1.5"> {{ service.norm_per_hour }} </text>
+            <text x="8.5" y="-{{ 6 + loop.index/2 }}" lineheight="1.5"> {{ service.premium }} </text>
+            <text x="15" y="-{{ 6 + loop.index/2 }}" lineheight="1.5"> {{ service.price }} </text>
+            <text x="17" y="-{{ 6 + loop.index/2 }}" lineheight="1.5"> {{ service.service_cost }} </text>
+            {% if loop.last %}
+                <rect x="2" y="-{{ 6.5 + loop.index/2+0.1}}" width="14" height="0.5"/>
+                <rect x="16" y="-{{ 6.5 + loop.index/2+0.1}}" width="3" height="0.5"/>
+                <text x="2.5" y="-{{ 6.5 + loop.index/2 }}" lineheight="1.5"> Общая стоимость работ</text>
+                <text x="17" y="-{{ 6.5 + loop.index/2 }}" lineheight="1.5" font="TNRB">{{ report.service_cost}}</text>
+            {% endif %}
         {% endfor %}
 
     </page>

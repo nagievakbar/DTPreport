@@ -45,6 +45,7 @@
 {#	<script src="{% static '/makereport/js/jquery-1.12.4.js' %}"></script>#}
 	<script src="{% static '/makereport/js/script.min.js' %}"> </script>
 	<script src="{% static '/makereport/js/main.js' %}"></script>
+	<script src="{% static '/makereport/js/desktop3.js' %}"></script>
 
 </head>
 
@@ -204,7 +205,55 @@
                             </div>
                         </div>
                         <!-- 1 -->
+                        <div class="row">
 
+                            <div class="col-lg-4">
+                                <div class="select-block">
+                                    <label>Марка машины</label>
+                                    <div class="custom-select">
+                                        <div class="active-list">0</div>
+                                        <input type="text" class="list-field" value="0" />
+                                        <ul class="drop-down-list">
+                                            <li>1</li>
+                                            <li>2</li>
+                                            <li>3</li>
+                                            <li>4</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="select-block">
+                                    <label>TEST</label>
+                                    <div class="custom-select">
+                                        <div class="active-list">0</div>
+                                        <input type="text" class="list-field" value="0" />
+                                        <ul class="drop-down-list">
+                                            <li>1</li>
+                                            <li>2</li>
+                                            <li>3</li>
+                                            <li>4</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="select-block">
+                                    <label>TEST</label>
+                                    <div class="custom-select">
+                                        <div class="active-list">0</div>
+                                        <input type="text" class="list-field" value="0" />
+                                        <ul class="drop-down-list">
+                                            <li>1</li>
+                                            <li>2</li>
+                                            <li>3</li>
+                                            <li>4</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                         <!-- 2 -->
                         <div class="accordion-item">
                             <div class="accordion-header">
@@ -213,6 +262,7 @@
                             </div>
                             <div class="inside-content accordion-content" style="display: none;">
                                 <div class="accordion-content-wrapper">
+                                    <div class="div" id="service_formset">
                                     <table style="width: 100%;">
                                         <tbody>
                                             <tr>
@@ -226,22 +276,26 @@
                                             </tr>
                                             {{ service_formset.management_form }}
                                             {% for form in service_formset.forms %}
-        {#                                        {{ form.non_field_errors }}#}
-        {#                                        {{ form.errors }}#}
-                                            <tr>
-                                                <td><input type="checkbox" id="checkbox-2-1"
-                                                        class="regular-checkbox big-checkbox" checked /><label
-                                                        for="checkbox-2-1"></label></td>
-                                                <td>{{ form.service_id }}</td>
-                                                <td>{{ form.name }}</td>
-                                                <td>{{ form.norm_per_hour }}</td>
-                                                <td>{{ form.premium }}</td>
-                                                <td>{{ form.price }}</td>
-                                                <td>{{ form.service_cost }}</td>
-                                            </tr>
-                                            {% endfor %}
-                                                <table class='no_error' style="display: none">
+                                                <table class="no_error">
                                                     <tr>
+{#                                                        <td><input type="checkbox" id="checkbox-2-1"#}
+{#                                                                class="regular-checkbox big-checkbox" /><label#}
+{#                                                                for="checkbox-2-1"></label></td>#}
+                                                        <td>{{ form.service_id }}</td>
+                                                        <td>{{ form.name }}</td>
+                                                        <td>{{ form.norm_per_hour }}</td>
+                                                        <td>{{ form.premium }}</td>
+                                                        <td>{{ form.price }}</td>
+                                                        <td>{{ form.service_cost }}</td>
+                                                    </tr>
+                                                </table>
+                                            {% endfor %}
+                                            <div id="empty_service_form" style="display:none">
+                                                <table class='no_error'>
+                                                    <tr>
+{#                                                        <td><input type="checkbox" id="checkbox-2-1"#}
+{#                                                        class="regular-checkbox big-checkbox" checked /><label#}
+{#                                                        for="checkbox-2-1"></label></td>#}
                                                         <td>{{ service_formset.empty_form.service_id }}</td>
                                                         <td>{{ service_formset.empty_form.name }}</td>
                                                         <td>{{ service_formset.empty_form.norm_per_hour }}</td>
@@ -250,8 +304,10 @@
                                                         <td>{{ service_formset.empty_form.service_cost }}</td>
                                                     </tr>
                                                 </table>
+                                             </div>
                                         </tbody>
                                     </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -265,10 +321,11 @@
                             </div>
                             <div class="inside-content accordion-content" style="display: none;">
                                 <div class="accordion-content-wrapper">
-                                    <table>
+                                <div class="div" id="product_formset">
+                                    <table >
                                         <tbody>
                                             <tr>
-                                                <th class="table-spare-part-headers"></th>
+                                                <th class="table-spare-part-headers">    </th>
                                                 <th class="table-spare-part-headers">Наименование</th>
                                                 <th class="table-spare-part-headers">Кол-во</th>
                                                 <th class="table-spare-part-headers">Цена</th>
@@ -278,25 +335,29 @@
                                             {% for form in product_formset.forms %}
         {#                                        {{ form.non_field_errors }}#}
         {#                                        {{ form.errors }}#}
-                                                    <tr>
-                                                        <td>{{ form.product_id }}</td>
-                                                        <td>{{ form.name }}</td>
-        {#                                                <td>{{ form.unit }}</td>#}
-                                                        <td>{{ form.quantity }}</td>
-                                                        <td>{{ form.price }}</td>
-                                                        <td>{{ form.product_cost }}</td>
-                                                    </tr>
+                                                    <table class='no_error'>
+                                                        <tr>
+                                                            <td>{{ form.product_id }}</td>
+                                                            <td>{{ form.name }}</td>
+            {#                                                <td>{{ form.unit }}</td>#}
+                                                            <td>{{ form.quantity }}</td>
+                                                            <td>{{ form.price }}</td>
+                                                            <td>{{ form.product_cost }}</td>
+                                                        </tr>
+                                                    </table>
                                             {% endfor %}
-                                                <table class='no_error' style="display: none">
+                                             <div id="empty_product_form" style="display:none">
+                                                <table class='no_error'>
                                                     <tr>
-                                                        <td><div class="count">{{ product_formset.empty_form.product_id }}</div></td>
+                                                        <td>{{ product_formset.empty_form.product_id }}</td>
                                                         <td>{{ product_formset.empty_form.name }}</td>
-                                                        <td>{{ product_formset.empty_form.unit }}</td>
+{#                                                        <td>{{ product_formset.empty_form.unit }}</td>#}
                                                         <td>{{ product_formset.empty_form.quantity }}</td>
                                                         <td>{{ product_formset.empty_form.price }}</td>
                                                         <td>{{ product_formset.empty_form.product_cost }}</td>
                                                     </tr>
                                                 </table>
+                                             </div>
                                         </tbody>
                                     </table>
 
@@ -318,7 +379,7 @@
 
                                     </ul>
 
-
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -332,6 +393,7 @@
                             </div>
                             <div class="inside-content accordion-content" style="display: none;">
                                 <div class="accordion-content-wrapper">
+                                <div class="div" id="consumable_formset">
                                     <table>
                                         <tbody>
                                             <tr>
@@ -346,28 +408,33 @@
                                             {% for form in consumable_formset.forms %}
     {#                                        {{ form.non_field_errors }}#}
     {#                                        {{ form.errors }}#}
-                                                <tr>
-                                                    <td>{{ form.consumable_id }}</td>
-                                                    <td>{{ form.name }}</td>
-                                                    <td>{{ form.unit }}</td>
-                                                    <td>{{ form.quantity }}</td>
-                                                    <td>{{ form.price }}</td>
-                                                    <td>{{ form.consumable_cost }}</td>
-                                                </tr>
+                                                <table class='no_error'>
+                                                    <tr>
+                                                        <td>{{ form.consumable_id }}</td>
+                                                        <td>{{ form.name }}</td>
+                                                        <td>{{ form.unit }}</td>
+                                                        <td>{{ form.quantity }}</td>
+                                                        <td>{{ form.price }}</td>
+                                                        <td>{{ form.consumable_cost }}</td>
+                                                    </tr>
+                                                </table>
                                             {% endfor %}
-                                            <table class='no_error' style="display: none;">
-                                                <tr>
-                                                    <td>{{ consumable_formset.empty_form.consumable_id }}</td>
-                                                    <td>{{ consumable_formset.empty_form.name }}</td>
-                                                    <td>{{ consumable_formset.empty_form.unit }}</td>
-                                                    <td>{{ consumable_formset.empty_form.quantity }}</td>
-                                                    <td>{{ consumable_formset.empty_form.price }}</td>
-                                                    <td>{{ consumable_formset.empty_form.consumable_cost }}</td>
-                                                </tr>
-                                            </table>
+                                            <div id="empty_consum_form" style="display:none">
+                                                <table class='no_error' >
+                                                    <tr>
+                                                        <td>{{ consumable_formset.empty_form.consumable_id }}</td>
+                                                        <td>{{ consumable_formset.empty_form.name }}</td>
+                                                        <td>{{ consumable_formset.empty_form.unit }}</td>
+                                                        <td>{{ consumable_formset.empty_form.quantity }}</td>
+                                                        <td>{{ consumable_formset.empty_form.price }}</td>
+                                                        <td>{{ consumable_formset.empty_form.consumable_cost }}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
 
                                         </tbody>
                                     </table>
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -393,7 +460,9 @@
                                             {{ wear_form.weight }}
                                         </div>
                                         <div class="wear">
-                                            <span class="wear-text">Износ = </span>
+                                            <span class="wear-text">Износ, % </span>
+                                        {#                                        <input type="text" class="input work-price-input wear-input">#}
+                                            {{ wear_form.wear }}
                                         </div>
                                         <div class="prehnite">
                                             <span class="prehnite-text">Принит = </span>
@@ -539,10 +608,74 @@
 {#                        </div>#}
 {#                    </div>#}
 
-                    <div class="save-btn-block">
-                        <button class="save-btn" type="submit">Сохранить</button>
+
+
+                    <div class="almost_latest_block">
+                            <div class="row">
+
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-5">
+                                <div class="welcome-part">
+
+                                    <div class="welcome_user">
+                                        <h2>Цена</h2>
+                                    </div>
+
+                                    <div class="panel_price">
+                                        <a href="#">
+                                            <button type="button" class="btn panel_price_button">3 486 489 UZS</button>
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 dont_know_why">
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-8">
+
+                                        <div class="row last_details_price">
+                                            <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5 single_word">
+                                                Опр ст.ущерба
+                                            </div>
+                                            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 work_work">
+                                                <span>200 000</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row last_details_price">
+                                            <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5 single_word">
+                                                Опр ст.УТС
+                                            </div>
+                                            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 work_work">
+                                                <span>0</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row last_details_price">
+                                            <div class="col-sm-5 col-md-5 col-lg-5 col-xl-5 single_word">
+                                                Выезд
+                                            </div>
+                                            <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 work_work">
+                                                <span>0</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row last_details_price">
+                                            <div class="col-sm-12">
+                                                <div class="save-btn-block">
+                                                    <button class="save-btn" type="submit">Сохранить</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                </form>
                 <div class="material-form-2">
                     <div class="last_bottom_block col-12">
                         <div class="row">
@@ -589,7 +722,7 @@
                         </div>
                     </div>
 			    </div>
-
+                </form>
 		</section>
 
 
@@ -625,7 +758,7 @@
                 return event.key !== "Enter";
             });
 
-            $(document).on('keypress', ".input-premium", function (e) {
+            $(document).on('keypress', ".allowance2", function (e) {
                 var key = e.which;
                 if (key === 13) {
                     console.log('CLICK-Service')
@@ -634,7 +767,7 @@
                     $('#id_service-TOTAL_FORMS').val(parseInt(form_idx) + 1);
                 }
             });
-            $(document).on('keypress', ".input-quantity", function (e) {
+            $(document).on('keypress', ".time3", function (e) {
                 var key = e.which;
                 if (key === 13) {
                     console.log('CLICK-Product')
@@ -643,7 +776,7 @@
                     $('#id_product-TOTAL_FORMS').val(parseInt(form_idx) + 1);
                 }
             });
-            $(document).on('keypress', ".input-quantity-cons", function (e) {
+            $(document).on('keypress', ".allowance4", function (e) {
                 var key = e.which;
                 if (key === 13) {
                     console.log('CLICK-Consumable')
@@ -653,15 +786,15 @@
                 }
             });
 
-            $(document).on('keypress', ".input-service_id", function (e) {
+            $(document).on('keypress', ".first2", function (e) {
                 console.log('CLICK service_id')
                 var key = e.which;
                 if (key === 13) {
                     var service_id = $(this).val(),
-                        last_input_name = $(this).parents('tr').find('.input-name'),
-                        last_input_nph = $(this).parents('tr').find('.input-nph'),
-                        last_input_price = $(this).parents('tr').find('.input-price'),
-                        last_input_premium = $(this).parents('tr').find('.input-premium')
+                        last_input_name = $(this).parents('tr').find('.name2'),
+                        last_input_nph = $(this).parents('tr').find('.time2'),
+                        last_input_price = $(this).parents('tr').find('.price2'),
+                        last_input_premium = $(this).parents('tr').find('.allowance2')
 
                     brand = $('#id_brand').val()
 
@@ -683,17 +816,17 @@
                 }
             });
 
-            $(document).on('keypress', ".input-premium", function (e) {
+            $(document).on('keypress', ".allowance2", function (e) {
                 console.log('CLICK premium')
                 var key = e.which;
                 var service_cost;
                 var nph;
                 if (key === 13) {
                     var premium = $(this).val(),
-                        price = $(this).parents('tr').find('.input-price').val(),
-                        nph = $(this).parents('tr').find('.input-nph').val(),
-                        service_cost = $(this).parents('tr').find('.input-cost'),
-                        present_table = $(this).parents('.no_error').next().find('.input-service_id')
+                        price = $(this).parents('tr').find('.price2').val(),
+                        nph = $(this).parents('tr').find('.time2').val(),
+                        service_cost = $(this).parents('tr').find('.sum2'),
+                        present_table = $(this).parents().next().find('.first2')
                         {#next_service_id = $(this).parents('.div').find('.no_error').next()#}
 
                     last = $(this).parents('tbody').find('tr').last()
@@ -718,15 +851,15 @@
                 }
             });
 
-            $(document).on('keypress', ".input-product_id", function (e) {
+            $(document).on('keypress', ".count", function (e) {
                 console.log('CLICK product_id')
                 var key = e.which;
                 if (key === 13) {
                     var product_id = $(this).val(),
-                        last_input_name = $(this).parents('tr').find('.input-name'),
-                        last_input_unit = $(this).parents('tr').find('.input-unit'),
-                        last_input_price = $(this).parents('tr').find('.input-price'),
-                        last_input_quantity = $(this).parents('tr').find('.input-quantity')
+                        last_input_name = $(this).parents('tr').find('.name3'),
+                        {#last_input_unit = $(this).parents('tr').find('.input-unit'),#}
+                        last_input_price = $(this).parents('tr').find('.price3'),
+                        last_input_quantity = $(this).parents('tr').find('.time3')
 
                     brand = $('#id_brand').val()
 
@@ -741,22 +874,22 @@
                             console.log('success')
                             last_input_quantity.select()
                             last_input_name.val(data.name)
-                            last_input_unit.val(data.unit)
+                            {#last_input_unit.val(data.unit)#}
                             last_input_price.val(data.price)
                         },
                     })
                 }
             });
 
-            $(document).on('keypress', ".input-quantity-cons", function (e) {
+            $(document).on('keypress', ".allowance4", function (e) {
                 console.log('CLICK quantity-cons')
                 var key = e.which;
                 if (key === 13) {
                     var quantity = $(this).val(),
-                        price = $(this).parents('tr').find('.input-price').val(),
-                        cost = $(this).parents('tr').find('.input-cost'),
+                        price = $(this).parents('tr').find('.price4').val(),
+                        cost = $(this).parents('tr').find('.sum4'),
                         last = $(this).parents('tbody').find('tr').last(),
-                        present_table = $(this).parents('.no_error').next().find('.input-consumable_id')
+                        present_table = $(this).parents('.no_error').next().find('.first4')
                     {#last.clone().insertAfter(last);#}
                     $.ajax({
                         url: '{% url "get_consumable_cost" %}',
@@ -774,15 +907,15 @@
                 }
             });
 
-            $(document).on('keypress', ".input-consumable_id", function (e) {
+            $(document).on('keypress', ".first4", function (e) {
                 console.log('CLICK consumable_id')
                 var key = e.which;
                 if (key === 13) {
                     var consumable_id = $(this).val(),
-                        last_input_name = $(this).parents('tr').find('.input-name'),
-                        last_input_unit = $(this).parents('tr').find('.input-unit'),
-                        last_input_price = $(this).parents('tr').find('.input-price'),
-                        last_input_price_cons = $(this).parents('tr').find('.input-quantity-cons')
+                        last_input_name = $(this).parents('tr').find('.name4'),
+                        last_input_unit = $(this).parents('tr').find('.time4'),
+                        last_input_price = $(this).parents('tr').find('.price4'),
+                        last_input_price_cons = $(this).parents('tr').find('.allowance4')
 
                     $.ajax({
                         url: '{% url "get_consumable_ajax" %}',
@@ -801,19 +934,19 @@
                 }
             });
 
-            $(document).on('keypress', ".input-quantity", function (e) {
+            $(document).on('keypress', ".time3", function (e) {
                 console.log('CLICK quantity')
                 var key = e.which;
                 if (key === 13) {
                     var quantity = $(this).val(),
-                        price = $(this).parents('tr').find('.input-price').val(),
-                        cost = $(this).parents('tr').find('.input-cost'),
+                        price = $(this).parents('tr').find('.price3').val(),
+                        cost = $(this).parents('tr').find('.sum3'),
                         last = $(this).parents('tbody').find('tr').last(),
-                        present_table = $(this).parents('.no_error').next().find('.input-product_id')
+                        present_table = $(this).parents('.no_error').next().find('.count')
 
                     {#last.clone().insertAfter(last);#}
                     $.ajax({
-                        url: '{% url "get_consumable_cost" %}',
+                        url: '{% url "get_product_cost" %}',
                         data: {
                             'quantity': quantity,
                             'price': price,
@@ -861,85 +994,26 @@
                 }
             });
 
-             $(document).on('keypress', ".prehnite-input", function (e) {
-                console.log('CLICK point-input')
-                var key = e.which;
-                if (key === 13) {
-                    var point = $(this).val(),
-                        accept_weight = $(this).parents('.details').find('.accept-wear-input')
-                        accept_weight.select()
-                }
-            });
+            {# $(document).on('keypress', ".prehnite-input", function (e) {#}
+            {#    console.log('CLICK point-input')#}
+            {#    var key = e.which;#}
+            {#    if (key === 13) {#}
+            {#        var point = $(this).val(),#}
+            {#            accept_weight = $(this).parents('.details').find('.accept-wear-input')#}
+            {#            accept_weight.select()#}
+            {#    }#}
+            {#});#}
 
-             $(document).on('keypress', ".accept-wear-input", function (e) {
+             $(document).on('keypress', ".prehnite-input", function (e) {
                 console.log('CLICK accept_weight')
                 var key = e.which;
                 if (key === 13) {
                     var point = $(this).val(),
-                        btn = $(document).find('#report_save')
+                        btn = $(document).find('#imageinput')
                         btn.focus()
                 }
                 });
 
-                $('#file-fr').fileinput({
-                    theme: 'fas',
-                    language: 'fr',
-                    uploadUrl: '#',
-                    allowedFileExtensions: ['jpg', 'png', 'gif']
-                });
-                $('#file-es').fileinput({
-                    theme: 'fas',
-                    language: 'es',
-                    uploadUrl: '#',
-                    allowedFileExtensions: ['jpg', 'png', 'gif']
-                });
-                $("#file-0").fileinput({
-                    theme: 'fas',
-                    uploadUrl: '#'
-                }).on('filepreupload', function(event, data, previewId, index) {
-                    alert('The description entered is:\n\n' + ($('#description').val() || ' NULL'));
-                });
-                $("#file-1").fileinput({
-                    theme: 'fas',
-                    uploadUrl: '#', // you must set a valid URL here else you will get an error
-                    allowedFileExtensions: ['jpg', 'png', 'gif'],
-                    overwriteInitial: false,
-                    maxFileSize: 1000,
-                    maxFilesNum: 10,
-                    //allowedFileTypes: ['image', 'video', 'flash'],
-                    slugCallback: function (filename) {
-                        return filename.replace('(', '_').replace(']', '_');
-                    }
-                });
-                /*
-                 $(".file").on('fileselect', function(event, n, l) {
-                 alert('File Selected. Name: ' + l + ', Num: ' + n);
-                 });
-                 */
-                $("#file-3").fileinput({
-                    theme: 'fas',
-                    showUpload: false,
-                    showCaption: false,
-                    browseClass: "btn btn-primary btn-lg",
-                    fileType: "any",
-                    previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-                    overwriteInitial: false,
-                    initialPreviewAsData: true,
-                    initialPreview: [
-                        "http://lorempixel.com/1920/1080/transport/1",
-                        "http://lorempixel.com/1920/1080/transport/2",
-                        "http://lorempixel.com/1920/1080/transport/3"
-                    ],
-                    initialPreviewConfig: [
-                        {caption: "transport-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1},
-                        {caption: "transport-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2},
-                        {caption: "transport-3.jpg", size: 632762, width: "120px", url: "{$url}", key: 3}
-                    ]
-                });
-                $("#file-4").fileinput({
-                    theme: 'fas',
-                    uploadExtraData: {kvId: '10'}
-                });
                 $(".btn-warning").on('click', function () {
                     var $el = $("#file-4");
                     if ($el.attr('disabled')) {
@@ -959,7 +1033,7 @@
                  alert('File browse clicked for #file-4');
                  });
                  */
-                $(document).ready(function () {
+                    $(document).ready(function () {
                     $("#test-upload").fileinput({
                         'theme': 'fas',
                         'showPreview': false,
@@ -1026,8 +1100,6 @@
                 });
         </script>
     {% endblock %}
-
-
 </body>
 
 </html>

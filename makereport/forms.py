@@ -101,8 +101,8 @@ class ProductForm(forms.Form):
         widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 count'}))
     name = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 name3', 'readonly': ''}))
-    unit = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 name3', 'readonly': ''}))
+    # unit = forms.CharField(
+        # widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 name3', 'readonly': ''}))
     quantity = forms.IntegerField(
         widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 time3', }))  # 'value': '0'
     price = forms.IntegerField(

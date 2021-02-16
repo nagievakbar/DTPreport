@@ -640,7 +640,7 @@ table {
 }
 .wear-text {
   display: inline-block;
-  width: 175px;
+  width: 128px;
   padding: 10px 0;
   background: #f4f4f2;
   border-radius: 5px;
@@ -665,6 +665,11 @@ table {
   max-width: 45px;
   border: 1px solid #5c6e91;
   border-radius: 5px;
+}
+
+.btn-file {
+  background-color: #5c6e91 !important;
+  border-color:  #5c6e91 !important;
 }
 
 /* table 5 */
