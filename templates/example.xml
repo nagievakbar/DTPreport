@@ -874,13 +874,6 @@ _________ Сагдуллаев Б.К.
         <text>
             1. Стоимость работ
         </text>
-        <rect x="1" y="26" width="1.5" height="0.7"/>
-        <rect x="2.5" y="26" width="10" height="0.7"/>
-        <rect x="12.5" y="26" width="1.5" height="0.7"/>
-        <rect x="14" y="26" width="1.5" height="0.7"/>
-        <rect x="15.5" y="26" width="2" height="0.7"/>
-        <rect x="17.5" y="26" width="2.5" height="0.7"/>
-
          {% for service in report.service_data %}
             {% if loop.first %}
                 <rect x="2" y="-{{ 5 + loop.index/2+0.1}} " width="1.5" height="1"/>
@@ -922,17 +915,17 @@ _________ Сагдуллаев Б.К.
             <rect x="16" y="-{{ 6 + loop.index/2+0.1}} " width="3" height="0.5"/>
             <text x="2.6" y="-{{ 6 + loop.index/2}}" >{{ service.service_id }}</text>
             <text x="3.5" y="-{{ 6 + loop.index/2 }}" lineheight="1.5"> {{ service.name }} </text>
-            <text x="11.5" y="-{{ 6 + loop.index/2 }}" lineheight="1.5"> {{ service.norm_per_hour }} </text>
-            <text x="8.5" y="-{{ 6 + loop.index/2 }}" lineheight="1.5"> {{ service.premium }} </text>
-            <text x="15" y="-{{ 6 + loop.index/2 }}" lineheight="1.5"> {{ service.price }} </text>
+            <text x="11.3" y="-{{ 6 + loop.index/2 }}" lineheight="1.5"> {{ service.norm_per_hour }} </text>
+            <text x="12.5" y="-{{ 6 + loop.index/2 }}" lineheight="1.5"> {{ service.premium }} </text>
+            <text x="14.5" y="-{{ 6 + loop.index/2 }}" lineheight="1.5"> {{ service.price }} </text>
             <text x="17" y="-{{ 6 + loop.index/2 }}" lineheight="1.5"> {{ service.service_cost }} </text>
             {% if loop.last %}
                 <rect x="2" y="-{{ 6.5 + loop.index/2+0.1}}" width="14" height="0.5"/>
                 <rect x="16" y="-{{ 6.5 + loop.index/2+0.1}}" width="3" height="0.5"/>
                 <text x="2.5" y="-{{ 6.5 + loop.index/2 }}" lineheight="1.5"> Общая стоимость работ</text>
                 <text x="17" y="-{{ 6.5 + loop.index/2 }}" lineheight="1.5" font="TNRB">{{ report.service_cost}}</text>
-                <text x="2" y="-{{ 7.5 + loop.index/2 }}" font="TNRB" > Примечание: при ремонте автомобилей или агрегатов, срок эксплуатации которых 5 лет, к нормам
-времени принимаются надбавки в следуюших размерах свыше 5 до 8 лет-10%, свыше 8 лет-20%</text>
+                <text x="2" y="-{{ 7.5 + loop.index/2 }}" font="TNRB" >Примечание: при ремонте автомобилей или агрегатов, срок эксплуатации которых 5 лет, к нормам
+времени  принимаются  надбавки  в  следуюших  размерах  свыше 5 до 8 лет - 10%, свыше  8  лет - 20%</text>
             {% endif %}
         {% endfor %}
 
