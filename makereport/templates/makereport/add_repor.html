@@ -826,10 +826,10 @@
                         price = $(this).parents('tr').find('.price2').val(),
                         nph = $(this).parents('tr').find('.time2').val(),
                         service_cost = $(this).parents('tr').find('.sum2'),
-                        present_table = $(this).parents().next().find('.first2')
+                        present_table = $(this).parents().next().find('.first2'),
+                        psss = $(this).parents('div').find('.no_error').next()
                         {#next_service_id = $(this).parents('.div').find('.no_error').next()#}
-
-                    last = $(this).parents('tbody').find('tr').last()
+                        last = $(this).parents('tbody').find('tr').last()
 
                     $.ajax({
                         url: '{% url "get_service_cost" %}',
@@ -842,9 +842,8 @@
                         success: function (data) {
                             console.log('success calculate cost')
                             console.log(present_table)
+                            console.log(psss)
                             present_table.select()
-                            {#next_service_id.select()#}
-                            {#last.clone().insertAfter(last);#}
                             service_cost.val(data.service_cost)
                         },
                     })
