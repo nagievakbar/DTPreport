@@ -184,7 +184,6 @@ class GeneratePDF(View):
         }
         pdf.generate(context)
         data = pdf.contents()
-
         filename = "%s.pdf" % new_report_pdf.car.car_number
 
         new_report_pdf.pdf_report.save(filename, ContentFile(data))

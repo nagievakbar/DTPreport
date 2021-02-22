@@ -1,11 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
+from .converters import num2text
 
 
 class Contract(models.Model):
-
     contract_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
-    customer = models.ForeignKey('Customer', on_delete=models.CASCADE, related_name='Customer',verbose_name='Клиент')
+    customer = models.ForeignKey('Customer', on_delete=models.CASCADE, related_name='Customer', verbose_name='Клиент')
     pdf_contract = models.FileField(blank=True, null=True, verbose_name='Контракт в пдф')
 
     def __str__(self):
@@ -17,7 +17,6 @@ class Contract(models.Model):
 
 
 class Car(models.Model):
-
     car_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     brand = models.CharField(max_length=30)
     car_number = models.CharField(max_length=8)
@@ -87,7 +86,6 @@ class Product(models.Model):
 
 
 class Service(models.Model):
-
     service_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     name = models.CharField(max_length=1000, blank=True, null=True)
     nexia3 = models.FloatField(blank=True, null=True, verbose_name='Нексия 3')
@@ -105,7 +103,7 @@ class Service(models.Model):
     takuma = models.FloatField(blank=True, null=True, verbose_name='Такума')
     epica = models.FloatField(blank=True, null=True, verbose_name='Эпика')
 
-    price = models.IntegerField(blank=True, null=True,verbose_name='Цена')
+    price = models.IntegerField(blank=True, null=True, verbose_name='Цена')
 
     BRANDS = {
         'Кобальт': cobalt,
@@ -193,7 +191,7 @@ class Report(models.Model):
     product_cost = models.IntegerField(default=0)
     product_acc_cost = models.IntegerField(default=0)
     consumable_cost = models.IntegerField(default=0)
-    key = models.CharField(max_length=8,blank=True)
+    key = models.CharField(max_length=8, blank=True)
 
     # service_cost = 0
     # product_cost = 0
@@ -201,6 +199,7 @@ class Report(models.Model):
     # consumable_cost = 0
 
     total_report_cost = models.CharField(max_length=15)
+    total_report_cost_txt = models.CharField(max_length=200)
     # total_report_cost = 0
 
     pdf_report = models.FileField(blank=True, null=True, verbose_name='Отчёт в пдф')
@@ -223,16 +222,23 @@ class Report(models.Model):
 
     def get_product_acc_cost(self):
         print('get_product_acc_cost')
-        self.product_acc_cost = self.product_cost * (1 - self.wear_data.__getitem__('accept_wear')/100)
+        self.product_acc_cost = (self.product_cost * (1 - self.wear_data.__getitem__('accept_wear') / 100))
         return self.product_acc_cost
 
     def get_total_report_price(self):
         print('get_total_report_price')
-        self.total_report_cost = ' '.join('{:,}'.format(int(self.service_cost + self.get_product_acc_cost() + self.consumable_cost)).split(','))
-        print(self.total_report_cost)
+        self.total_report_cost = ' '.join(
+            '{:,}'.format(int(self.service_cost + self.get_product_acc_cost() + self.consumable_cost)).split(','))
+
+    def get_total_report_cost_txt(self):
+        self.total_report_cost_txt = num2text(int(self.service_cost + self.get_product_acc_cost() + self.consumable_cost), main_units=((u'сум', u'сумы', u'суммов'), 'f'))
+        return self.total_report_cost_txt
 
     def set_private_key(self):
-        self.key = str(self.report_id)[0] + self.car.car_number[2] + self.car.car_number[7] + self.car.car_number[5] + str(self.contract_id)[0] + str(self.car.release_date)[2] + str(self.car.release_date)[3] + self.car.brand[0]
+        self.key = str(self.report_id)[0] + self.car.car_number[2] + self.car.car_number[7] + self.car.car_number[5] + \
+                   str(self.contract_id)[0] + str(self.car.release_date)[2] + str(self.car.release_date)[3] + \
+                   self.car.brand[0]
+
 
     class Meta:
         verbose_name = 'Отчёт'

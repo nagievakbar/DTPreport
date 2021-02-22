@@ -12,6 +12,7 @@ from django.views.generic import View
 
 from .forms import *
 from .utils import *
+from .converters import num2text
 
 from DTPreport import settings as s
 from DTPreport import urls
@@ -445,3 +446,8 @@ def delete_image(request):
     print('sadasdasdasdasd')
     print(request)
     return render(request,'input_test.html',context={'delete': True})
+
+
+def num_to_text(number):
+    text = num2text(int(number),main_units=((u'сум', u'сумы', u'суммов'), 'f'))
+    return text

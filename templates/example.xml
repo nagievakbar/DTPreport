@@ -1,4 +1,4 @@
-<pdf filename="title_page.pdf" pagesize="A4" unit="cm" margin="2,2" >
+<pdf filename="title_page.pdf" pagesize="A4" unit="cm" margin="2,2">
 	<font name="TNR" ttf="Times New Roman 400.ttf"/>
 	<font name="TNRB" ttf="Times New Roman 400 Bold.ttf"/>
                                      PAGE 1
@@ -930,6 +930,322 @@ _________ Сагдуллаев Б.К.
         {% endfor %}
 
     </page>
+    <page>
+        <text>
+            2. Стоимость запасных частей
+        </text>
+         {% for product in report.product_data %}
+            {% if loop.first %}
+                <rect x="2" y="-{{ 5 + loop.index/2+0.1}} " width="1.5" height="1"/>
+                <rect x="3.5" y="-{{ 5 + loop.index/2+0.1}} " width="7.5" height="1"/>
+                <rect x="11" y="-{{ 5 + loop.index/2+0.1}} " width="1.5" height="1"/>
+{#                <rect x="11" y="-{{ 4.5 + loop.index/2+0.1}} " width="1.5" height="0.5"/>#}
+                <rect x="12.5" y="-{{ 5 + loop.index/2+0.1}} " width="1.5" height="1"/>
+                <rect x="14" y="-{{ 5 + loop.index/2+0.1}} " width="2" height="1"/>
+                <rect x="16" y="-{{ 5 + loop.index/2+0.1}} " width="3" height="1"/>
+
+                <rect x="2" y="-{{ 5.5 + loop.index/2+0.1}} " width="1.5" height="0.5"/>
+                <rect x="3.5" y="-{{ 5.5 + loop.index/2+0.1}} " width="7.5" height="0.5"/>
+                <rect x="11" y="-{{ 5.5 + loop.index/2+0.1}} " width="1.5" height="0.5"/>
+                <rect x="12.5" y="-{{ 5.5 + loop.index/2+0.1}} " width="1.5" height="0.5"/>
+                <rect x="14" y="-{{ 5.5 + loop.index/2+0.1}} " width="2" height="0.5"/>
+                <rect x="16" y="-{{ 5.5 + loop.index/2+0.1}} " width="3" height="0.5"/>
+
+                <text x="2.5" y="-{{ 5 + loop.index/2 -0.3}}" >№</text>
+                <text x="6" y="-{{ 5 + loop.index/2 -0.3 }}" lineheight="1.5"> Наименование </text>
+                <text x="11.1" y="-{{ 5 + loop.index/2 -0.3}} " lineheight="1.5"> Ед.изм </text>
+                <text x="12.6" y="-{{ 5 + loop.index/2 -0.3}}" lineheight="1.5"> К-во </text>
+                <text x="14.5" y="-{{ 5 + loop.index/2 -0.3}}" lineheight="1.5"> цена </text>
+                <text x="16.9" y="-{{ 5 + loop.index/2 -0.3}}" lineheight="1.5"> сумма </text>
+
+                <text x="2.6" y="-{{ 5.5 + loop.index/2 }}" >1</text>
+                <text x="7" y="-{{ 5.5 + loop.index/2 }}" lineheight="1.5"> 2 </text>
+                <text x="11.5" y="-{{ 5.5 + loop.index/2 }} " lineheight="1.5"> 3 </text>
+                <text x="13" y="-{{ 5.5 + loop.index/2 }}" lineheight="1.5"> 4 </text>
+                <text x="14.8" y="-{{ 5.5 + loop.index/2 }}" lineheight="1.5"> 5 </text>
+                <text x="17.3" y="-{{ 5.5 + loop.index/2 }}" lineheight="1.5"> 6 </text>
+
+            {% endif %}
+            <rect x="2" y="-{{ 6 + loop.index/2+0.1}} " width="1.5" height="0.5"/>
+            <rect x="3.5" y="-{{ 6 + loop.index/2+0.1}} " width="7.5" height="0.5"/>
+            <rect x="11" y="-{{ 6 + loop.index/2+0.1}} " width="1.5" height="0.5"/>
+            <rect x="12.5" y="-{{ 6 + loop.index/2+0.1}} " width="1.5" height="0.5"/>
+            <rect x="14" y="-{{ 6 + loop.index/2+0.1}} " width="2" height="0.5"/>
+            <rect x="16" y="-{{ 6 + loop.index/2+0.1}} " width="3" height="0.5"/>
+            <text x="2.6" y="-{{ 6 + loop.index/2}}" >{{ product.product_id }}</text>
+            <text x="3.5" y="-{{ 6 + loop.index/2 }}" lineheight="1.5"> {{ product.name }} </text>
+            <text x="11.3" y="-{{ 6 + loop.index/2 }}" lineheight="1.5"> {{ product.unit }} </text>
+            <text x="13" y="-{{ 6 + loop.index/2 }}" lineheight="1.5"> {{ product.quantity }} </text>
+            <text x="14.5" y="-{{ 6 + loop.index/2 }}" lineheight="1.5"> {{ product.price }} </text>
+            <text x="17" y="-{{ 6 + loop.index/2 }}" lineheight="1.5"> {{ product.product_cost }} </text>
+            {% if loop.last %}
+                <rect x="2" y="-{{ 6.5 + loop.index/2+0.1}}" width="14" height="0.5"/>
+                <rect x="16" y="-{{ 6.5 + loop.index/2+0.1}}" width="3" height="0.5"/>
+                <rect x="2" y="-{{ 7 + loop.index/2+0.1}}" width="14" height="0.5"/>
+                <rect x="14" y="-{{ 7 + loop.index/2+0.1}} " width="2" height="0.5"/>
+                <rect x="16" y="-{{ 7 + loop.index/2+0.1}}" width="3" height="0.5"/>
+                <rect x="2" y="-{{ 7.5 + loop.index/2+0.1}}" width="14" height="0.5"/>
+                <rect x="16" y="-{{ 7.5 + loop.index/2+0.1}}" width="3" height="0.5"/>
+                <text x="2.5" y="-{{ 6.5 + loop.index/2 }}" lineheight="1.5"> Общая стоимость запасных частей</text>
+                <text x="2.5" y="-{{ 7 + loop.index/2 }}" lineheight="1.5"> Износ Ки</text>
+                <text x="2.5" y="-{{ 7.5 + loop.index/2 }}" lineheight="1.5"> Cтоимость запасных частей с учетом износа</text>
+                <text x="14.5" y="-{{ 7 + loop.index/2 }}" lineheight="1.5">  {{ report.wear_data.accept_wear }} %</text>
+                <text x="17" y="-{{ 6.5 + loop.index/2 }}" lineheight="1.5" font="TNRB">{{ report.product_cost }}</text>
+                <text x="17" y="-{{ 7 + loop.index/2 }}" lineheight="1.5" font="TNRB">{{ report.product_cost - report.product_acc_cost }}</text>
+                <text x="17" y="-{{ 7.5 + loop.index/2 }}" lineheight="1.5" font="TNRB">{{ report.product_acc_cost }}</text>
+                <text x="2" y="-{{ 8 + loop.index/2 }}" font="TNRB" >Примечание:  Цены на запасные части указаны среднорыночные по г. Ташкенту</text>
+            {% endif %}
+        {% endfor %}
+    </page>
+    <page>
+        <text font="TNRB">             6.4.6 Калькуляция (смета)</text>
+        <text>
+            3. Стоимость материалов:
+        </text>
+            {% for consumable in report.consumable_data %}
+                {% if loop.first %}
+                    <rect x="2" y="-{{ 5 + loop.index/2+0.1}} " width="1.5" height="1"/>
+                    <rect x="3.5" y="-{{ 5 + loop.index/2+0.1}} " width="7.5" height="1"/>
+                    <rect x="11" y="-{{ 5 + loop.index/2+0.1}} " width="1.5" height="1"/>
+    {#                <rect x="11" y="-{{ 4.5 + loop.index/2+0.1}} " width="1.5" height="0.5"/>#}
+                    <rect x="12.5" y="-{{ 5 + loop.index/2+0.1}} " width="1.5" height="1"/>
+                    <rect x="14" y="-{{ 5 + loop.index/2+0.1}} " width="2" height="1"/>
+                    <rect x="16" y="-{{ 5 + loop.index/2+0.1}} " width="3" height="1"/>
+
+                    <rect x="2" y="-{{ 5.5 + loop.index/2+0.1}} " width="1.5" height="0.5"/>
+                    <rect x="3.5" y="-{{ 5.5 + loop.index/2+0.1}} " width="7.5" height="0.5"/>
+                    <rect x="11" y="-{{ 5.5 + loop.index/2+0.1}} " width="1.5" height="0.5"/>
+                    <rect x="12.5" y="-{{ 5.5 + loop.index/2+0.1}} " width="1.5" height="0.5"/>
+                    <rect x="14" y="-{{ 5.5 + loop.index/2+0.1}} " width="2" height="0.5"/>
+                    <rect x="16" y="-{{ 5.5 + loop.index/2+0.1}} " width="3" height="0.5"/>
+
+                    <text x="2.5" y="-{{ 5 + loop.index/2 -0.3}}" >№</text>
+                    <text x="6" y="-{{ 5 + loop.index/2 -0.3 }}" lineheight="1.5"> Наименование </text>
+                    <text x="11.1" y="-{{ 5 + loop.index/2 -0.3}} " lineheight="1.5"> Ед.изм </text>
+                    <text x="12.6" y="-{{ 5 + loop.index/2 -0.3}}" lineheight="1.5"> К-во </text>
+                    <text x="14.5" y="-{{ 5 + loop.index/2 -0.3}}" lineheight="1.5"> цена </text>
+                    <text x="16.9" y="-{{ 5 + loop.index/2 -0.3}}" lineheight="1.5"> сумма </text>
+
+                    <text x="2.6" y="-{{ 5.5 + loop.index/2 }}" >1</text>
+                    <text x="7" y="-{{ 5.5 + loop.index/2 }}" lineheight="1.5"> 2 </text>
+                    <text x="11.5" y="-{{ 5.5 + loop.index/2 }} " lineheight="1.5"> 3 </text>
+                    <text x="13" y="-{{ 5.5 + loop.index/2 }}" lineheight="1.5"> 4 </text>
+                    <text x="14.8" y="-{{ 5.5 + loop.index/2 }}" lineheight="1.5"> 5 </text>
+                    <text x="17.3" y="-{{ 5.5 + loop.index/2 }}" lineheight="1.5"> 6 </text>
+
+                {% endif %}
+                    <rect x="2" y="-{{ 6 + loop.index/2+0.1}} " width="1.5" height="0.5"/>
+                    <rect x="3.5" y="-{{ 6 + loop.index/2+0.1}} " width="7.5" height="0.5"/>
+                    <rect x="11" y="-{{ 6 + loop.index/2+0.1}} " width="1.5" height="0.5"/>
+                    <rect x="12.5" y="-{{ 6 + loop.index/2+0.1}} " width="1.5" height="0.5"/>
+                    <rect x="14" y="-{{ 6 + loop.index/2+0.1}} " width="2" height="0.5"/>
+                    <rect x="16" y="-{{ 6 + loop.index/2+0.1}} " width="3" height="0.5"/>
+                    <text x="2.6" y="-{{ 6 + loop.index/2}}" >{{ consumable.consumable_id }}</text>
+                    <text x="3.5" y="-{{ 6 + loop.index/2 }}" lineheight="1.5"> {{ consumable.name }} </text>
+                    <text x="11.3" y="-{{ 6 + loop.index/2 }}" lineheight="1.5"> {{ consumable.unit }} </text>
+                    <text x="13" y="-{{ 6 + loop.index/2 }}" lineheight="1.5"> {{ consumable.quantity }} </text>
+                    <text x="14.5" y="-{{ 6 + loop.index/2 }}" lineheight="1.5"> {{ consumable.price }} </text>
+                    <text x="17" y="-{{ 6 + loop.index/2 }}" lineheight="1.5"> {{ consumable.consumable_cost }} </text>
+                {% if loop.last %}
+                    <rect x="2" y="-{{ 6.5 + loop.index/2+0.1}}" width="14" height="0.5"/>
+                    <rect x="16" y="-{{ 6.5 + loop.index/2+0.1}}" width="3" height="0.5"/>
+                    <text x="2.5" y="-{{ 6.5 + loop.index/2 }}" lineheight="1.5"> Общая стоимость материалов </text>
+                    <text x="17" y="-{{ 6.5 + loop.index/2 }}" lineheight="1.5" font="TNRB">{{ report.consumable_cost }}</text>
+                {% endif %}
+        {% endfor %}
+
+    </page>
+    <page>
+        <text>Таким образом, Итог стоимости ущерба транспортного средства составляет:
+        </text>
+        <rect x="2" y="25" height="1" width="8"/>
+        <rect x="10" y="25" height="1" width="6"/>
+        <rect x="16" y="25" height="1" width="3"/>
+        <rect x="2" y="24" height="1" width="8"/>
+        <rect x="10" y="24" height="1" width="6"/>
+        <rect x="16" y="24" height="1" width="3"/>
+        <rect x="2" y="23" height="1" width="8"/>
+        <rect x="10" y="23" height="1" width="6"/>
+        <rect x="16" y="23" height="1" width="3"/>
+        <rect x="2" y="22" height="1" width="8"/>
+        <rect x="10" y="22" height="1" width="6"/>
+        <rect x="16" y="22" height="1" width="3"/>
+        <text x="3" y="25.4">Cтоимость работ</text>
+        <text x="3" y="24.4">Cтоимость запасных частей</text>
+        <text x="3" y="23.4">Cтоимость материалов</text>
+        <text x="3" y="22.4">Срем=Сраб+См+Сзч</text>
+        <text x="11" y="25.4">{{ report.service_cost }}</text>
+        <text x="11" y="24.4">{{ report.product_acc_cost}}</text>
+        <text x="11" y="23.4">{{ report.consumable_cost}}</text>
+        <text x="11" y="22.4">{{ report.total_report_cost}}</text>
+        <text x="17" y="25.4">сум</text>
+        <text x="17" y="24.4">сум</text>
+        <text x="17" y="23.4">сум</text>
+        <text x="17" y="22.4">сум</text>
+        <text x="3" y="21">велечина затрат на ремонт:
+        </text>
+        <rect x="3" y="19" height="1" width="15"/>
+        <rect x="3" y="18" height="1" width="15"/>
+        <text x="9" y="19.35" font="TNRB" fontsize="15"> {{ report.total_report_cost }}</text>
+        <text x="3" y="17" font="TNRB">6.5 Определение стоимости сравнительным подходом</text>
+        <text x="2" y="16" lineheight="1.5">    Сравнительный подход основан на сравнении объекта оценки с аналогичными и применяется  тогда,
+когда затратную часть определить невозможно в силу авторских изменений, внесенных в конструкцию
+АМТС. Подход  не  применялся  ,поскольку  характер  повреждений  автомобиля  и  его  последующий
+восстановительный  ремонт, строго  индивидуальны,  аналоги  по  ихколичественным  и качественным
+характеристикам на рынке выявить  невозможно  или  попросту отсутствуют. Поэтому  сравнительный
+подход не мог быть использован.
+        </text>
+        <text x="3" y="12" font="TNRB">6.6 Определение стоимости доходным подходом</text>
+        <text x="2" y="11" lineheight="1.5">        Доходный    подход    в    основном   исползуется   для   оценки   предприятий,   производственных
+комплексов и других объектов бизнеса. Очевидно, что для АМТС степень эффективности (доходности)
+их использования не отрежается на стоимости.
+        При  оценке   стоимости   ремонта   АМТС  используются  затратный   и   сравнительный  подходы.
+Доходный   подход   не   используется  ,  т.к.   при  ремонте   не   подразумевается   получение  доходов
+ни одной из заинтересованных сторон.Поэтому доходный подход не мог быть использован.
+        </text>
+        <text x="2.5" y="7" font="TNRB" fontsize="13" >7.Согласование итоговой велечины и вывод рыночной стоимости ущерба объекта </text>
+        <text x="3" y="6" font="TNRB" >7.1. Согласование результатов оценки.</text>
+        <text x="2" y="5" lineheight="1.5">     В зависимости от объема, достоверности и  сопоставимости  информации, использованной в каждом
+из подходов, результаты этих подходов в той или иной степени могут отличаться друг от друга.В связи
+с  этим ,  выбор   итоговой  величины  стоимости  объекта  оценки  происходит  на   основе  нескольких
+промежуточных результатов.
+     Процесс согласования учитывал слабые и сильные  стороны  каждого  из  примененных  подходов,на
+основе  которых . Оценщиком  сделано  заключение , какие  из  этих результатов вносят больший вклад,
+а какие меньший в общую итоговую величину стоимости.
+</text>
+
+    </page>
+    <page>
+        <text lineheight="1.5" align="justify">     Помимо качества и количества информации, Оценщик учитывал само назначение оценки.
+        Для определения величины рыночной стоимости объекта в данном отчете были применены один классических подхода к оценке: затратный
+   Для окончательного ответа при выводе итоговой величины стоимости  ущерба Оценщик руководствовался, прежде всего, целью оценки, а также количеством и качеством исходной информации, примененной в каждом методе.Согласование результатов оценки – определение итоговой стоимости ущерба объекта оценки путем взвешивания и сравнения результатов, полученных с применением различных подходов оценки, осуществляется одним из следующих методов: логического согласования, заключающемся в выборе удельных весов на основе анализа, проводимого оценщиком, с учетом всех значимых параметров. Оценщиком определяется приоритетный подход, а результаты остальных подходов используются для проверки и корректировки результата, полученного с помощью приоритетного подхода; математического взвешивания, в котором для определения удельных весов результатов, полученных различными подходами к оценке, используются несколько критериев, которыми описываются преимущества или недостатки примененного метода расчета с учетом особенностей оценки конкретного  объекта.
+        </text>
+        <text font="TNRB" lineheight="1.5">В данной работе Оценщиком использовался метод логического согласования.</text>
+        <text font="TNRB" lineheight="1.5">Итоговая величина рыночной стоимости определяется по формуле:</text>
+        <image src="Cit.png" height="0.7" width="7" x="5" y="16.2" />
+        <text/>
+        <text/>
+        <text fontsize="11">,где:</text>
+        <text lineheight="1.5">Cит - итоговая стоимость объекта оценки;</text>
+        <text lineheight="1.5">Сзп, Сдп, Ссп –  стоимости ,  определенные  соответственно  затратным ,доходным и сравнительным подходами;</text>
+        <text lineheight="1.5">К1, К2, К3 – соответствующие удельные веса, выбранные для каждого подхода к оценке.</text>
+        <text >При этом должно выполняться условие:</text>
+        <image src="К.png" height="0.7" width="4.2" x="8" y="12.2" />
+        <text/>
+        <text/>
+        {# -------------------- #}
+        <rect x="2" y="11" width="8" height="0.8"/>
+        <rect x="10" y="11" width="3" height="0.8"/>
+        <rect x="13" y="11" width="3" height="0.8"/>
+        <rect x="16" y="11" width="3" height="0.8"/>
+        <text x="5" y="11.3">Показатели</text>
+        <text x="10.5" y="11.45">Затратный</text>
+        <text x="10.5" y="11.1">  подход</text>
+        <text x="13.3" y="11.45">Сравнительный</text>
+        <text x="13.5" y="11.1">   подход</text>
+        <text x="16.5" y="11.45">Доходный</text>
+        <text x="16.5" y="11.1">  подход</text>
+        {# -------------------- #}
+        <rect x="2" y="10" width="8" height="1"/>
+        <rect x="10" y="10" width="3" height="1"/>
+        <text x="2.4" y="10.6">Достоверность и достаточность</text>
+        <text x="2.4" y="10.2">информации</text>100,0
+        <text x="11" y="10.4" font="TNRB">100,0</text>
+        {# -------------------- #}
+        <rect x="2" y="8.7" width="8" height="1.3"/>
+        <rect x="10" y="8.7" width="3" height="1.3"/>
+        <text x="2.4" y="9.6">Соответствие использованных расчетных</text>
+        <text x="2.4" y="9.2">методов объему доступной</text>
+        <text x="2.4" y="8.8">рыночной информации</text>
+        <text x="11" y="9.2" font="TNRB">100,0</text>
+        {# -------------------- #}
+        <rect x="2" y="6.7" width="8" height="2"/>
+        <rect x="10" y="6.7" width="3" height="2"/>
+        <text x="2.4" y="8.2">Соответствие подхода оценки</text>
+        <text x="2.4" y="7.8">рассчитываемому виду стоимости, цели</text>
+        <text x="2.4" y="7.4">оценки и предполагаемому использованию</text>
+        <text x="2.4" y="7">результатов оценки</text>
+        <text x="11" y="7.6" font="TNRB">100,0</text>
+        {# -------------------- #}
+        <rect x="2" y="4.7" width="8" height="2"/>
+        <rect x="10" y="4.7" width="3" height="2"/>
+        <text x="2.4" y="6.3">Способность подхода оценки отразить</text>
+        <text x="2.4" y="5.9">мотивацию типичных покупателей и</text>
+        <text x="2.4" y="5.5">продавцов объектов, аналогичных объекту</text>
+        <text x="2.4" y="5.1">оценки</text>
+        <text x="11" y="5.7" font="TNRB">100,0</text>
+		{# -------------------- #}
+        <rect x="2" y="3.7" width="8" height="1"/>
+        <rect x="10" y="3.7" width="3" height="1"/>
+        <text x="2.4" y="4.3">Соответствие типу объекта оценки и</text>
+        <text x="2.4" y="3.9">характеру его использования</text>
+        <text x="11" y="4.1" font="TNRB">100,0</text>
+        {# -------------------- #}
+        <rect x="2" y="2.7" width="8" height="1"/>
+        <rect x="10" y="2.7" width="3" height="1"/>
+        <text x="2.4" y="3.3">Способность объекта оценки учитывать</text>
+        <text x="2.4" y="2.9">конъюнктуру рынка</text>
+        <text x="11" y="3.1" font="TNRB">100,0</text>
+        {# -------------------- #}
+        <rect x="2" y="1.7" width="8" height="1"/>
+        <rect x="10" y="1.7" width="3" height="1"/>
+        <text x="2.4" y="2.3">Весовые показатели достоверности</text>
+        <text x="2.4" y="1.9">информации</text>
+        <text x="11" y="2.1" font="TNRB">100,0</text>
+        {# -------------------- #}
+        <rect x="13" y="1.7" width="3" height="9.3"/>
+        <rect x="16" y="1.7" width="3" height="9.3"/>
+        {# -------------------- #}
+        <text x="14.2" y="7" font="TNRB">Не</text>
+        <text x="13.2" y="6.5" font="TNRB">использовался</text>
+        <text x="17.2" y="7" font="TNRB">Не</text>
+        <text x="16.2" y="6.5" font="TNRB">использовался</text>
+    </page>
+   <page><text font="TNRB" lineheight="1.5">7.2 Вывод об итоговой стоимости ущерба</text>
+       <text align="justify" lineheight="1.5">     Проведенные исследования и анализ имеющейся в нашей распоряжении информации, с учетом сделанных допущений и принятых ограничений, позволяют сделать вывод, что рыночная стоимость ущерба оцениваемого автомобиля  на дату оценки составляет:</text>
+       {# -------------------- #}
+       <rect x="3" y="23" width="5" height="1"/>
+       <rect x="8" y="23" width="5" height="1"/>
+       <rect x="13" y="23" width="6" height="1"/>
+       {# -------------------- #}
+       <rect x="3" y="22" width="5" height="1"/>
+       <rect x="8" y="22" width="5" height="1"/>
+       <rect x="13" y="22" width="6" height="1"/>
+       {# -------------------- #}
+       <text x="4.4" y="23.4">Марка,модель</text>
+       <text x="8.5" y="23.4">государственный номер</text>
+       <text x="13.5" y="23.4">Рыночная стоимость ущерба</text>
+       {# -------------------- #}
+       <text x="4.8" y="22.4">{{ report.car.brand }}</text>
+       <text x="9.4" y="22.4">{{ report.car.car_number}}</text>
+       <text x="15.2" y="22.4">{{ report.total_report_cost}}</text>
+       {# -------------------- #}
+       {# -------------------- #}
+       <rect x="3" y="20" height="1" width="16"/>
+       <text x="10.5" y="20.35" font="TNRB" fontsize="13">{{ report.total_report_cost}}</text>
+       <text x="0" y="19" font="TNRB" fontsize="12" align="center">{{ report.get_total_report_cost_txt()}}</text>
+       <text x="2" y="18" font="TNRB">ВЫВОДЫ</text>
+       <text x="2" y="17" >   Таким образом, мы пришли к выводу, что АМТС может быть отремонтировано в условиях СТО</text>
+       <text x="2" y="16" lineheight="1.5">   При   ремонте  в  условиях  СТО , возможно выявление скрытых  дефектов ,  что повлечет  за собой
+увеличение стоимости ремонта
+   Калькуляция   является   основанием   для    проведения   торговых   операций   и  документов    для
+определения возмещения ущерба.</text>
+       <text x="2" y="13.5" font="TNRB">7.2.1 Заявление о качестве.</text>
+       <text x="2" y="12.7" lineheight="1.5">  Мы, оценщики, выполнившие данную работу, подтверждаем, что в соответствии с имеющимся у нас
+данными:
+• все факты, изложенные в настоящем отчете об оценке, верны и соответствуют действительности;
+• сделанный анализ, высказанные мнения  и  полученные  выводы  принадлежат  нам и действительны
+исключительно в пределах оговоренных в настоящем отчете об оценке допущений и ограничивающих
+условий;
+• мы, не  имеем  ни  настоящей,  ни ожидаемой заинтересованности в  объекте  оценки , и действовали
+непредвзято и без предубеждения по отношению к заинтересованным в сделке сторонам;
+• наше вознаграждение не  зависит от  итоговой  величины  стоимости  объекта  оценки ,  а  также  тех
+событий,которые могут наступить в  результате  использования  заказчиком  или  третьими сторонами
+настоящего отчета об оценке;
+Согласно статьи 18, Закона Республики Узбекистан №811-I от 19.08.1999 года «Об оценочной деятельности»
+Отчёт, составленный в порядке, предусмотренном настоящим Законом.
+</text>
+   </page>
 </pdf>
 
 

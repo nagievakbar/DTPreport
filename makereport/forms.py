@@ -83,13 +83,13 @@ class ServiceForm(forms.Form):
     service_id = forms.IntegerField(
         widget=forms.NumberInput(attrs={'class': 'input2 work-price-input2 first2'}))
     name = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'input2 work-price-input2 name2', 'readonly': ''}))
+        widget=forms.TextInput(attrs={'class': 'input2 work-price-input2 name2'}))
     norm_per_hour = forms.FloatField(
-        widget=forms.NumberInput(attrs={'class': 'input2 work-price-input2 time2', 'readonly': ''}))
+        widget=forms.NumberInput(attrs={'class': 'input2 work-price-input2 time2'}))
     premium = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'input2 work-price-input2 allowance2', }))  # 'value': '0'
+        widget=forms.TextInput(attrs={'class': 'input2 work-price-input2 allowance2' }))  # 'value': '0'
     price = forms.IntegerField(
-        widget=forms.NumberInput(attrs={'class': 'input2 work-price-input2 price2', 'readonly': ''}))
+        widget=forms.NumberInput(attrs={'class': 'input2 work-price-input2 price2'}))
     service_cost = forms.IntegerField(
         widget=forms.NumberInput(attrs={'class': 'input2 work-price-input2 sum2', 'readonly': ''}))
     # 'readonly': ''
@@ -100,13 +100,13 @@ class ProductForm(forms.Form):
     product_id = forms.IntegerField(
         widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 count'}))
     name = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 name3', 'readonly': ''}))
+        widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 name3', }))
     # unit = forms.CharField(
         # widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 name3', 'readonly': ''}))
     quantity = forms.IntegerField(
         widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 time3', }))  # 'value': '0'
     price = forms.IntegerField(
-        widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 price3', 'readonly': ''}))
+        widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 price3', }))
     product_cost = forms.IntegerField(
         widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 sum3', 'readonly': ''}))
 
@@ -115,13 +115,13 @@ class ConsumableForm(forms.Form):
     consumable_id = forms.IntegerField(
         widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 first4'}))
     name = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 name4', 'readonly': ''}))
+        widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 name4', }))
     unit = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 time4', 'readonly': ''}))
+        widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 time4', }))
     quantity = forms.IntegerField(
         widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 allowance4', }))  # 'value': '0'
     price = forms.IntegerField(
-        widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 price4', 'readonly': ''}))
+        widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 price4', }))
     consumable_cost = forms.IntegerField(
         widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 sum4', 'readonly': ''}))
 
