@@ -148,6 +148,11 @@ class Consumable(models.Model):
 class MyUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     report_rate_price = models.IntegerField(default=0)
+    report_rate_price_txt = models.CharField(max_length=200)
+
+    def get_total_report_cost_txt(self):
+        self.report_rate_price_txt = num2text(int(self.report_rate_price), main_units=((u'сум', u'сумы', u'сум'), 'f'))
+        return self.report_rate_price_txt
 
 
 class Images(models.Model):
