@@ -130,12 +130,17 @@
 
       <div class="up_block">
 
-        <div class="search_block">
+       <div class="search_block">
           <div class="input">
-            <input type="email" placeholder="Поиск" required />
-            <span><a href="#">
-                <ion-icon name="search-outline"></ion-icon>
-              </a></span>
+              <form method = 'GET'>
+                <input type='text' name ="search" placeholder="Поиск" required />
+                <span>
+                <button type = 'submit' style="border: none;background-color: #e5e5e5">
+                    <ion-icon name="search-outline" class = "search_submit">
+                    </ion-icon>
+                    </button>
+                  </span>
+              </form>
           </div>
         </div>
 

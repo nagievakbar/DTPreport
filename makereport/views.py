@@ -335,7 +335,10 @@ class ReportView(View):
 
 @login_required
 def reports_list(request):
-    reports = Report.objects.all()
+    if 'search' in request.GET:
+        reports = Report.objects.filter(car__car_number__contains = request.GET['search'])
+    else:
+        reports = Report.objects.all()
     return render(request, 'makereport/index.html', context={'reports': reports})
 
 
@@ -399,53 +402,6 @@ def user_logout(request):
 
 def get_sign(request):
     return render(request, 'makereport/imzo.html')
-
-
-class ImageInputViem(View):
-    def get(self, request, id):
-        report = Report.objects.get(report_id=id)
-        context = {
-            'report': report,
-        }
-        return render(request, 'input_test.html', context)
-
-    def post(self, request, id):
-        myfiles = request.FILES['input']
-        fs = FileSystemStorage()
-        filename = fs.save(myfiles.name, myfiles)
-        uploaded_file_url = fs.url(filename)
-        return
-
-
-@ensure_csrf_cookie
-def test_input(request):
-    report = Report.objects.get(report_id=1)
-    url = s.ALLOWED_HOSTS.__getitem__(1).translate({39: None})
-    # u = str("http://") + str(url) + str(report.media_photo.image.url)
-    # print(u)
-    # print(report.media_photo.url)
-    if request.method == "POST":
-        print(request.FILES['input'])
-        myfiles = request.FILES['input']
-        fs = FileSystemStorage()
-        filename = fs.save(myfiles.name, myfiles)
-        uploaded_file_url = fs.url(filename)
-        return render(request, 'input_test.html', {
-            'uploaded_file_url': uploaded_file_url,
-            'report': report,
-            # 'u': u,
-        })
-    return render(request, 'input_test.html', {
-        'report': report,
-        # 'u': u,
-    })
-
-
-@ensure_csrf_cookie
-def delete_image(request):
-    print('sadasdasdasdasd')
-    print(request)
-    return render(request,'input_test.html',context={'delete': True})
 
 
 def search(request):
