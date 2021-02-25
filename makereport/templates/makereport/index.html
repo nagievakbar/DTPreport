@@ -36,7 +36,7 @@
     <div class="d-flex flex-column">
 
       <div class="profile">
-        <h2><a href="index.html">LOGO</a></h2>
+        <h2><a href="{% url 'search' %}">LOGO</a></h2>
       </div>
 
       <nav class="nav-menu">
@@ -48,7 +48,7 @@
                   fill="white"></path>
               </svg><br>Новый документ</a>
           </li>
-          <li><a href="generic.html"><svg width="20" height="18" viewBox="0 0 20 18" fill="none"
+          <li><a href="#"><svg width="20" height="18" viewBox="0 0 20 18" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M5.86123 9.69051H14.1292C14.1325 9.69051 14.1356 9.69051 14.1389 9.69051C14.5632 9.69051 14.9063 9.34643 14.9063 8.92298C14.9063 8.83429 14.8916 8.74804 14.8635 8.66882L13.8612 2.99338C13.7966 2.62659 13.4785 2.35934 13.1059 2.35934H6.88387C6.51118 2.35934 6.19301 2.62627 6.1281 2.99338L5.10514 8.79023C5.06587 9.01343 5.12706 9.24263 5.27305 9.4164C5.41825 9.5899 5.6342 9.69051 5.86123 9.69051Z"
@@ -190,8 +190,8 @@
               <th style="width: 136px;">Марка машины</th>
               <th style="width: 136px;">Номер</th>
               <th style="width: 136px;">Исполнитель</th>
-              <th style="width: 136px;">Договор</th>
-{#              <th style="width: 136px;">Ключ</th>#}
+{#              <th style="width: 136px;">Договор</th>#}
+              <th style="width: 136px;">Ключ</th>
               <th style="width: 136px;">Отчёт</th>
               <th style="width: 159px;">Функции</th>
             </tr>
@@ -200,13 +200,13 @@
             {% for report in reports %}
                 <tr >
                     <td style="border-bottom: 1px solid #fff;" data-title="№">{{ report.report_id }}</td>
-                    <td style="border-bottom: 1px solid #fff;" data-title="Дата">{{ report.created_at }}</td>
+                    <td style="border-bottom: 1px solid #fff;" data-title="Дата">{{ report.created_at|date:"d.m.Y" }}</td>
                     <td style="border-bottom: 1px solid #fff;" data-title="Марка машины">{{ report.car.brand }}</td>
                     <td style="border-bottom: 1px solid #fff;" data-title="Номер">{{ report.car.car_number }}</td>
                     <td style="border-bottom: 1px solid #fff;"
                         data-title="Исполнитель">{{ report.created_by.user }}</td>
-                    <td style="border-bottom: 1px solid #fff;" data-title="Договор">{{ report.contract }}</td>
-{#                    <td style="border-bottom: 1px solid #fff;" data-title="Ключ">{{ report.key }}</td>#}
+{#                    <td style="border-bottom: 1px solid #fff;" data-title="Договор">{{ report.contract }}</td>#}
+                    <td style="border-bottom: 1px solid #fff;" data-title="Ключ">{{ report.key }}</td>
                     <td style="border-bottom: 1px solid #fff;" data-title="Отчёт" data-type="currency"><a
                             href="{% url 'get_response' report.report_id %}">Открыть</a></td>
                     <td style="border-bottom: 1px solid #fff;" data-title="Функции" data-type="currency"><a

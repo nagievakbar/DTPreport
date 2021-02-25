@@ -1490,6 +1490,21 @@ _________ Сагдуллаев Б.К.
 Согласно статьи 18, Закона Республики Узбекистан №811-I от 19.08.1999 года «Об оценочной деятельности»
 Отчёт, составленный в порядке, предусмотренном настоящим Законом.</text>
    </page>
+   <page>
+       {% for image in images %}
+           {% if loop.index/3 <= 1 %}
+{#                <image  src="{{ image.image }}" x="{{ loop.index + 5 }}" y="15" height="3" width="4" />#}
+                <text x="{{ loop.index + 5 }}" y="15">1st {{ loop.length }}</text>
+           {% elif 1 < loop.index/3 <= 2 %}
+{#                <image  src="{{ image.image }}" x="{{ loop.index + 2 }}" y="10" height="3" width="4" />#}
+                <text x="{{ loop.index + 2 }}" y="10">2nd</text>
+           {% elif 2 < loop.index/3 <= 3 %}
+{#                <image  src="{{ image.image }}" x="{{ loop.index - 1 }}" y="10" height="3" width="4" />#}
+                <text x="{{ loop.index - 1 }}" y="5">3th</text>
+           {% endif %}
+
+       {% endfor %}
+   </page>
 </pdf>
 
 

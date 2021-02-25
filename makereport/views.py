@@ -448,6 +448,5 @@ def delete_image(request):
     return render(request,'input_test.html',context={'delete': True})
 
 
-def num_to_text(number):
-    text = num2text(int(number),main_units=((u'сум', u'сумы', u'суммов'), 'f'))
-    return text
+def search(request):
+    return render(request, "makereport/auth/search.html")

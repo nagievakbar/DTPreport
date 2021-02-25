@@ -183,7 +183,7 @@ class OtherPhotos(models.Model):
 class Report(models.Model):
     report_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     created_by = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name='created_by', verbose_name='Создан')
-    created_at = models.DateTimeField(verbose_name='Время создания')
+    created_at = models.DateField( verbose_name='Время создания')
 
     car = models.ForeignKey('Car', on_delete=models.CASCADE, related_name='Car', verbose_name='Машина')
     contract = models.ForeignKey('Contract', on_delete=models.CASCADE, related_name='Contract', verbose_name='Контракт')

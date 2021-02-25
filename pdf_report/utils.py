@@ -34,7 +34,7 @@ ALIGN = 'left'
 
 ## Paths
 TEMPLATES = 'templates'
-IMAGES = 'makereport/static/makereport/img'
+IMAGES = 'media'
 FONTS = 'makereport/static/makereport/fonts'
 
 ## Expand tab char

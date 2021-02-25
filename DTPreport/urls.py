@@ -18,12 +18,12 @@ from django.contrib import admin
 from django.urls import path, include
 
 from DTPreport import settings
-from makereport.views import user_login, user_logout, users_list
+from makereport.views import user_login, user_logout, users_list, search
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('report/', include('makereport.urls')),
-    path('',user_login, name='user_login'),
+    path('', search, name='search'),
     path('login/', user_login, name='user_login'),
     path('logout/', user_logout, name='user_logout'),
     path('users/', users_list, name='users_list'),
