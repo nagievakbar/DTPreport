@@ -129,7 +129,7 @@ class ConsumableForm(forms.Form):
 class ImageForm(forms.ModelForm):
     image = forms.CharField(
         widget=forms.FileInput(
-            attrs={'id': 'imageinput', 'type': 'file', 'name': 'input', 'required': False, 'multiple': True}))
+            attrs={'id': 'imageinput', 'type': 'file', 'name': 'input', 'multiple': True, 'required': False}))
 
     class Meta:
         model = Images
@@ -139,8 +139,7 @@ class ImageForm(forms.ModelForm):
 class PPhotoForm(forms.ModelForm):
     photo = forms.CharField(
         widget=forms.FileInput(
-            attrs={'id': 'pphotoinput', 'type': 'file', 'name': 'input', 'required': False,
-                   'multiple': True}))
+            attrs={'id': 'pphotoinput', 'type': 'file', 'name': 'input', 'multiple': True}))
 
     class Meta:
         model = PassportPhotos
@@ -150,8 +149,7 @@ class PPhotoForm(forms.ModelForm):
 class OPhotoForm(forms.ModelForm):
     photos = forms.CharField(
         widget=forms.FileInput(
-            attrs={'id': 'ophotoinput', 'type': 'file', 'name': 'input', 'required': False,
-                   'multiple': True}))
+            attrs={'id': 'ophotoinput', 'type': 'file', 'name': 'input', 'multiple': True}))
 
     class Meta:
         model = OtherPhotos
