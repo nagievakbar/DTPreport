@@ -15,10 +15,11 @@ def get_verifyPkcs7(report_id):
         body = """<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
             <Body>
                 <verifyPkcs7 xmlns="http://v1.pkcs7.plugin.server.dsv.eimzo.yt.uz/">
-                    <pkcs7B64 xmlns=""> {} < / pkcs7B64 > < / verifyPkcs7 >
-        < / Body >
-    
-        < / Envelope > """.format(each)
+                    <pkcs7B64 xmlns=""> {} 
+                    </pkcs7B64 >
+                </verifyPkcs7 >
+            </Body>
+        </Envelope> """.format("each")
 
         response = requests.post(url, data=body, headers=headers)
 
