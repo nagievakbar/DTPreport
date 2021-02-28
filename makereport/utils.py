@@ -4,7 +4,7 @@ import requests
 import json
 
 
-def get_verifyPkcs7(request, report_id):
+def get_verifyPkcs7(report_id):
     data = {}
     report = Report.objects.get(report_id=report_id)
     pkcs7 = report.pdf_report_pkcs
