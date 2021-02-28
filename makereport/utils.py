@@ -7,7 +7,7 @@ import json
 def get_verifyPkcs7(report_id):
     data = {}
     report = Report.objects.get(report_id=report_id)
-    pkcs7 = report.pdf_report_pkcs
+    pkcs7 = report.pdf_report_pkcs7
     for each in pkcs7:
         print(each)
     url = "http://127.0.0.1:9090/dsvs/pkcs7/v1?WSDL"
