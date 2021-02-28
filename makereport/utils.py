@@ -9,24 +9,21 @@ def get_verifyPkcs7(report_id):
     report = Report.objects.get(report_id=report_id)
     pkcs7 = report.pdf_report_pkcs7
     for each in pkcs7:
-        print(each)
-    url = "http://127.0.0.1:9090/dsvs/pkcs7/v1?WSDL"
-    # headers = {'content-type': 'application/soap+xml'}
-    headers = {'content-type': 'text/xml'}
-    body = """<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
-        <Body>
-            <verifyPkcs7 xmlns="http://v1.pkcs7.plugin.server.dsv.eimzo.yt.uz/">
-                <pkcs7B64 xmlns="">< / pkcs7B64 > < / verifyPkcs7 >
-    < / Body >
+        url = "http://127.0.0.1:9090/dsvs/pkcs7/v1?WSDL"
+        # headers = {'content-type': 'application/soap+xml'}
+        headers = {'content-type': 'text/xml'}
+        body = """<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+            <Body>
+                <verifyPkcs7 xmlns="http://v1.pkcs7.plugin.server.dsv.eimzo.yt.uz/">
+                    <pkcs7B64 xmlns=""> {} < / pkcs7B64 > < / verifyPkcs7 >
+        < / Body >
+    
+        < / Envelope > """.format(each)
 
-    < / Envelope > """
+        response = requests.post(url, data=body, headers=headers)
 
-    response = requests.post(url, data=body, headers=headers)
-
-    # with open('data.json', 'w') as f:
-    #     json.dump(response, f)
-
-    print(response.content)
+        with open('data.json', 'w') as f:
+            json.dump(response, f)
 
 
 def verifyPkcs7(request):
