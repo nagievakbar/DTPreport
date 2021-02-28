@@ -25,14 +25,12 @@ admin.site.register(User, UserAdmin)
 class ReportAdmin(admin.ModelAdmin):
     list_display = ('report_id',
                     'car',
-                    'created_at',
-                    'created_by',
-                    'contract',
-                    'pdf_report',
+                    'pdf_report_pcks7',
                     'wear_data',
                     'product_data',
                     'service_data',
-                    'consumable_data'
+                    'consumable_data',
+
     )
     search_fields = ['report_id']
 
