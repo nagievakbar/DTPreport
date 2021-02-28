@@ -289,7 +289,7 @@ var EIMZOClient = {
         }
     },
     createPkcs7: function(id, data, timestamper, success, fail){
-        CAPIWS.callFunction({plugin: "pkcs7", name: "create_pkcs7", arguments: [Base64.encode(data), id, 'no']}, function (event, data) {
+        CAPIWS.callFunction({plugin: "pkcs7", name: "create_pkcs7", arguments: [Base64.encode(data), id, 'yes']}, function (event, data) {
             if (data.success) {
                 var pkcs7 = data.pkcs7_64;
                 if(timestamper){

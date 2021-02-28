@@ -626,24 +626,31 @@ a:focus {
 /*--------------------------------------------------------------
 # up 4 blocks
 --------------------------------------------------------------*/
-.up_block {
-    max-width: 100%;
-    position: relative;
-    height: 40px; 
-    margin-top: 30px;
+.grid-container {
+  display: grid;
+  grid-template-columns: 2fr repeat(3, 1fr);
+  grid-template-rows: 40px;
+  grid-column-gap: 30px;
+  grid-row-gap: 10px;
+  margin: 30px;
+}
+@media (max-width: 576px) {
+  .grid-container {
+    grid-column: 4;
+    grid-template-columns: 100%;
   }
-  @media (max-width: 1400px) {
-    .up_block{
-      display: none;
-    }
+}
+
+@media (max-width: 992px) {
+  .grid-container {
+    margin: 20px;
   }
+}
 
 
   .search_block {
-    width: 432px;
-  height: 40px;
-  position: absolute;
-  left: 27px;
+    width: 100%;
+    height: 40px;
   }
   .search_block .input span a  {
     color: #5f5f55;
@@ -688,13 +695,11 @@ a:focus {
 
 
   .data_user {
-    width: 235px;
+    width: 100%;
     height: 40px;
-    right: 272px;
-    position: absolute;
   }
    .data_user .data_button {
-    width: 215px;
+    width: 100%;
     height: 40px;
     border-radius: 5px;
     box-shadow: none;
@@ -709,16 +714,13 @@ a:focus {
   }
 
   .name_user {
-    width: 235px;
+    width: 100%;
     height: 40px;
-    left: 489px;
-    position: absolute;
   }
+
    .signed_user {
-    width: 235px;
+    width: 100%;
     height: 40px;
-    right: 27px;
-    position: absolute;
   }
   
 

@@ -177,7 +177,10 @@
                                     <div class="inputs_big">
                                         <div class="left-inputs">
 {#                                            <input type="text" placeholder="Отчёт" class="input_in">#}
-                                            {{ report_form.created_at }}
+                                            {{ report_form.report_number }}
+                                            {{ report_form.report_date }}
+                                            {{ contract_form.contract_number }}
+                                            {{ contract_form.contract_date }}
                                             {{ car_form.car_number }}
                                             {{ car_form.brand }}
                                             {{ car_form.registration }}
@@ -187,11 +190,11 @@
                                             {{ car_form.car_color }}
                                             {{ car_form.mileage }}
                                             {{ car_form.release_date }}
+                                            {{ car_form.car_type }}
 
                                         </div>
                                         <div class="divider"></div>
                                         <div class="right-inputs">
-                                            {{ car_form.car_type }}
                                             {{ car_form.car_owner }}
                                             {{ car_form.owner_address }}
                                             {{ customer_form.name }}
@@ -200,6 +203,10 @@
                                             {{ customer_form.when_passport_issued }}
                                             {{ customer_form.whom_passport_issued }}
                                             {{ customer_form.phone_number }}
+                                            {{ customer_form.gnu_or_gje }}
+                                            {{ customer_form.uvajaemaya }}
+                                            {{ customer_form.vid }}
+                                            {{ customer_form.mesto_osmotra }}
                                         </div>
                                     </div>
                                 </div>
@@ -588,9 +595,14 @@
                              {{ passphoto_form.photo }}
                         </div>
                     </div>
-                <div class="container my-4">
+                    <div class="container my-4">
                          <div class="file-loading">
                              {{ otherphoto_form.photos }}
+                        </div>
+                    </div>
+                    <div class="container my-4">
+                         <div class="file-loading">
+                             {{ checks_form.checks }}
                         </div>
                     </div>
 
@@ -1013,7 +1025,7 @@
             {#            accept_weight = $(this).parents('.details').find('.accept-wear-input')#}
             {#            accept_weight.select()#}
             {#    }#}
-            {#});#}
+            {# });#}
 
              $(document).on('keypress', ".prehnite-input", function (e) {
                 console.log('CLICK accept_weight')
@@ -1086,6 +1098,23 @@
                         {#]#}
                     });
                      $("#ophotoinput").fileinput({
+                        'theme': 'fas',
+                        {#'uploadUrl': '#',#}
+                        overwriteInitial: false,
+                        initialPreviewAsData: true,
+                        initialPreview: [
+                        ],
+                        initialCaption: 'Выберите фото тех паспорта',
+                        {#initialCaption: "Фото чеков",#}
+                        showUpload: false,
+                        required: false,
+                        {#initialPreviewConfig: [#}
+                        {#    {caption: "nature-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1},#}
+                        {#    {caption: "nature-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2},#}
+                        {#    {caption: "nature-3.jpg", size: 632762, width: "120px", url: "{$url}", key: 3}#}
+                        {#]#}
+                    });
+                     $("#checksinput").fileinput({
                         'theme': 'fas',
                         {#'uploadUrl': '#',#}
                         overwriteInitial: false,

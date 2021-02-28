@@ -1,5 +1,45 @@
 from .models import *
 from django.http import JsonResponse
+import requests
+import json
+
+
+def get_verifyPkcs7(request):
+    data = {}
+    url = "http://127.0.0.1:9090/dsvs/pkcs7/v1?WSDL"
+    # headers = {'content-type': 'application/soap+xml'}
+    headers = {'content-type': 'text/xml'}
+    body = """<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+        <Body>
+            <verifyPkcs7 xmlns="http://v1.pkcs7.plugin.server.dsv.eimzo.yt.uz/">
+                <pkcs7B64 xmlns="">
+    < / pkcs7B64 > < / verifyPkcs7 >
+    < / Body >
+
+    < / Envelope > """
+
+    response = requests.post(url,data=body,headers=headers)
+
+    with open('data.json', 'w') as f:
+        json.dump(response, f)
+
+def verifyPkcs7(request):
+    if request.method == "POST":
+        pkcs7 = request.POST.get('pkcs7', None)
+        report_id = request.POST.get('report_id', None)
+        report = Report.objects.get(report_id=report_id)
+        if not report.pdf_report_pkcs7:
+            report.pdf_report_pkcs7 = []
+        report.pdf_report_pkcs7.append(pkcs7)
+        report.save()
+        data = {
+            'success': 'True',
+        }
+        return JsonResponse(data)
+    data = {
+        'success': 'False',
+    }
+    return JsonResponse(data)
 
 
 def get_car_from_search(request):

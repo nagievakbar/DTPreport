@@ -7,6 +7,7 @@ from pdf_report.utils import PyPDFML
 from fpdf import FPDF
 from django.core.files.base import ContentFile
 import locale
+import base64
 from django.shortcuts import render
 
 
@@ -21,14 +22,18 @@ class GeneratePDF(View):
             'report': new_report_pdf,
             'services': new_report_pdf.service.all().__len__(),
             'images': images,
-            'datetime': str(new_report_pdf.created_at.strftime((" %d.%m.%Y. ")))
+            'datetime': new_report_pdf.report_date
         }
         pdf.generate(context)
         data = pdf.contents()
         filename = "%s.pdf" % new_report_pdf.car.car_number
 
         new_report_pdf.pdf_report.save(filename, ContentFile(data))
-
+        with open(new_report_pdf.pdf_report.path, "rb") as file:
+            encoded_string = base64.b64encode(file.read())
+        new_report_pdf.pdf_report_base64 = encoded_string
+        # print(new_report_pdf.pdf_report_base64)
+        new_report_pdf.save()
         return get_response(request, new_report_pdf.report_id)
 
 

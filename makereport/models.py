@@ -7,6 +7,8 @@ class Contract(models.Model):
     contract_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     customer = models.ForeignKey('Customer', on_delete=models.CASCADE, related_name='Customer', verbose_name='Клиент')
     pdf_contract = models.FileField(blank=True, null=True, verbose_name='Контракт в пдф')
+    contract_date = models.CharField(max_length=10, null=True, blank=True)
+    contract_number = models.CharField(max_length=10, null=True, blank=True)
 
     def __str__(self):
         return str(self.contract_id)
@@ -47,6 +49,10 @@ class Customer(models.Model):
     when_passport_issued = models.DateField()
     whom_passport_issued = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=20, verbose_name='Тел. номер')
+    gnu_or_gje = models.CharField(max_length=40)
+    uvajaemaya = models.CharField(max_length=40)
+    vid = models.CharField(max_length=100)
+    mesto_osmotra = models.CharField(max_length=200)
 
     def __str__(self):
         return str(self.name)
@@ -147,8 +153,8 @@ class Consumable(models.Model):
 
 class MyUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    report_rate_price = models.IntegerField(default=0)
-    report_rate_price_txt = models.CharField(max_length=200)
+    report_rate_price = models.IntegerField(default=0, blank=True, null=True)
+    report_rate_price_txt = models.CharField(max_length=200, blank=True, null=True)
 
     def get_total_report_cost_txt(self):
         self.report_rate_price_txt = num2text(int(self.report_rate_price), main_units=((u'сум', u'сумы', u'сум'), 'f'))
@@ -180,10 +186,19 @@ class OtherPhotos(models.Model):
                                verbose_name='Отчёт')
 
 
+class Checks(models.Model):
+    checks_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
+    checks = models.ImageField(blank=True, null=True, verbose_name='Фото чеков')
+    report = models.ForeignKey('Report', on_delete=models.CASCADE, blank=True, null=True, related_name='reportChecks',
+                               verbose_name='Отчёт')
+
+
 class Report(models.Model):
     report_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
+    report_number = models.CharField(max_length=10)
+    report_date = models.CharField(max_length=10)
     created_by = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name='created_by', verbose_name='Создан')
-    created_at = models.DateField( verbose_name='Время создания')
+    created_at = models.DateField(blank=True, null=True, verbose_name='Время создания')
 
     car = models.ForeignKey('Car', on_delete=models.CASCADE, related_name='Car', verbose_name='Машина')
     contract = models.ForeignKey('Contract', on_delete=models.CASCADE, related_name='Contract', verbose_name='Контракт')
@@ -198,29 +213,21 @@ class Report(models.Model):
     consumable_cost = models.IntegerField(default=0)
     key = models.CharField(max_length=8, blank=True)
 
-    # service_cost = 0
-    # product_cost = 0
-    # product_acc_cost = 0
-    # consumable_cost = 0
-
     total_report_cost = models.CharField(max_length=15)
     total_report_cost_txt = models.CharField(max_length=200)
-    # total_report_cost = 0
 
     pdf_report = models.FileField(blank=True, null=True, verbose_name='Отчёт в пдф')
+    pdf_report_base64 = models.CharField(max_length=1000000, blank=True, null=True)
+    pdf_report_pkcs7 = models.JSONField(blank=True, null=True)
 
     passport_photo = models.FileField(blank=True, null=True, verbose_name='Фото пасспорта')
     registration_photo = models.FileField(blank=True, null=True, verbose_name='Фото тех.пасспорта')
-    # Images = models.ForeignKey('Images', on_delete=models.CASCADE, blank=True, null=True, related_name='created_by', verbose_name='Фото')
 
     wear_data = models.JSONField(blank=True, null=True)
     service_data = models.JSONField(blank=True, null=True)
     product_data = models.JSONField(blank=True, null=True)
     consumable_data = models.JSONField(blank=True, null=True)
 
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.set_private_key()
 
     def __str__(self):
         return str(self.report_id)
@@ -243,7 +250,6 @@ class Report(models.Model):
         self.key = str(self.report_id)[0] + self.car.car_number[2] + self.car.car_number[7] + self.car.car_number[5] + \
                    str(self.contract_id)[0] + str(self.car.release_date)[2] + str(self.car.release_date)[3] + \
                    self.car.brand[0]
-
 
     class Meta:
         verbose_name = 'Отчёт'

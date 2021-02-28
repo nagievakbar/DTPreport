@@ -69,7 +69,7 @@ accordion
 
 .inside-content {
   width: 100%;
-  padding: 0 20px;
+  padding: 0 60px;
   background: #fff;
 }
 @media (max-width: 768px) {
@@ -87,7 +87,7 @@ accordion
   display: flex;
   -webkit-box-align: center;
   -ms-flex-align: center;
-  align-items: normal;
+  align-items: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
@@ -135,7 +135,7 @@ table {
 
 .divider {
   width: 20px;
-  height: 500px;
+  height: 600px;
   background-color: #fff;
   -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.25);
   box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.25);
@@ -222,7 +222,7 @@ table {
   color: #3f3f3f;
   line-height: 15px;
   opacity: 0.6;
-  text-align: left;
+  text-align: center;
 }
 .table-headers:nth-child(3) {
   padding-left: 15px;
@@ -267,7 +267,7 @@ table {
   max-width: 50px;
 }
 .name2 {
-  width: 340px;
+  width: 240px;
 }
 @media (max-width: 576px) {
   .name2 {
@@ -336,6 +336,7 @@ table {
   height: 30px;
   border: none;
   border-bottom: 1px solid #5c6e91;
+  margin-top: 10px;
   margin-bottom: 10px;
   margin-left: 10px;
 }
@@ -343,6 +344,7 @@ table {
   .input3 {
     width: 95%;
     margin-bottom: 5px;
+    margin-top: 5px;
     margin-left: 4px;
   }
 }
@@ -368,16 +370,17 @@ table {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  width: 50px;
+  width: 30px;
   height: 30px;
-  /*background-color: #5c6e91;*/
+  background-color: #5c6e91;
   border-radius: 5px;
-  /*color: #fff;*/
+  color: #fff;
   position: relative;
+  top: 2.5px;
 }
 
 .name3 {
-  width: 460px;
+  width: 250px;
 }
 @media (max-width: 576px) {
   .name3 {
@@ -494,7 +497,7 @@ table {
   color: #3f3f3f;
   line-height: 15px;
   text-align: center;
-  /*padding-left: 10px;*/
+  padding-left: 10px;
   opacity: 0.6;
 }
 .table-spare-part-headers4:nth-child(2) {
@@ -541,7 +544,7 @@ table {
 }
 
 .first4 {
-  max-width: 50px;
+  max-width: 75px;
 }
 @media (max-width: 576px) {
   .first4 {
@@ -549,7 +552,7 @@ table {
   }
 }
 .name4 {
-  width: 355px;
+  width: 265px;
 }
 @media (max-width: 576px) {
   .name4 {
@@ -594,7 +597,6 @@ table {
 .details {
   margin-top: 20px;
   margin-bottom: 30px;
-  align-content: center;
 }
 
 .point,
@@ -638,7 +640,7 @@ table {
 }
 .wear-text {
   display: inline-block;
-  width: 128px;
+  width: 175px;
   padding: 10px 0;
   background: #f4f4f2;
   border-radius: 5px;
@@ -663,11 +665,6 @@ table {
   max-width: 45px;
   border: 1px solid #5c6e91;
   border-radius: 5px;
-}
-
-.btn-file {
-  background-color: #5c6e91 !important;
-  border-color:  #5c6e91 !important;
 }
 
 /* table 5 */

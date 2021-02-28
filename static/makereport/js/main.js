@@ -66,7 +66,7 @@ floatingField.each(function() {
 floatingField.blur(function() {
   $(this).parent('.input-block').removeClass('focus');
   //if value is not exists
-  if ($(this).val().length === 0) {
+  if ($(this).val().length == 0) {
     $(this).parent('.input-block').removeClass('has-value');
   }else{
       $(this).parent('.input-block').addClass('has-value');

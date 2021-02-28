@@ -187,7 +187,7 @@
         <text/>
         <text/>
         <text align="center">СЧЕТ-ФАКТУРА №</text>
-        <text align="center" lineheight="1.5">от «__» _________{{ report.created_at.strftime("%Y") }}</text>
+        <text align="center" lineheight="1.5">от «__» _________{{ report.report_date }}</text>
         <text align="center" lineheight="1.5">к договору № {{ report.report_id }} от {{ datetime }}</text>
         <text x="0" y="12" align="left">
                                           Поставщик:

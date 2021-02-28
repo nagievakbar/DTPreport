@@ -1,22 +1,16 @@
 from django import forms
 from .models import *
-import datetime
 
 
 class ReportForm(forms.ModelForm):
     """docstring for ReportForm."""
 
-    created_at = forms.DateField(input_formats=['%d.%m.%Y'], widget=forms.DateInput(
-        attrs={'value': datetime.date.today().strftime("%d.%m.%Y"), 'class': 'input_in'}))
-
-    # media_photo = forms.FileField(widget=forms.FileInput(attrs={'class': 'file-input', 'id': 'chooseFile'}))
+    report_date = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Дата отчёта', 'class': 'input_in'}))
+    report_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Номер отчёта', 'class': 'input_in'}))
 
     class Meta:
         model = Report
-        fields = ['created_at']
-
-        # 'media_photo']
-        # 'created_at',
+        fields = ['report_date', 'report_number']
 
 
 class CarForm(forms.ModelForm):
@@ -56,9 +50,12 @@ class CarForm(forms.ModelForm):
 class ContractForm(forms.ModelForm):
     """docstring for ContractForm."""
 
+    contract_date = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Дата договора', 'class': 'input_in'}))
+    contract_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Номер договора', 'class': 'input_in'}))
+
     class Meta:
         model = Contract
-        fields = ['customer']
+        fields = ['customer', 'contract_date', 'contract_number']
 
 
 class CustomerForm(forms.ModelForm):
@@ -72,11 +69,15 @@ class CustomerForm(forms.ModelForm):
     whom_passport_issued = forms.CharField(
         widget=forms.TextInput(attrs={'placeholder': 'Кем выдан', 'class': 'input_in'}))
     phone_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Телефон', 'class': 'input_in'}))
+    gnu_or_gje = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Г-ну', 'class': 'input_in'}))
+    uvajaemaya = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Уважаемый', 'class': 'input_in'}))
+    vid = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Вид', 'class': 'input_in'}))
+    mesto_osmotra = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Акт осмотра Место', 'class': 'input_in'}))
 
     class Meta:
         model = Customer
         fields = ['name', 'address', 'passport_number', 'when_passport_issued',
-                  'whom_passport_issued', 'phone_number']
+                  'whom_passport_issued', 'phone_number', 'gnu_or_gje', 'uvajaemaya', 'vid', 'mesto_osmotra']
 
 
 class ServiceForm(forms.Form):
@@ -156,6 +157,16 @@ class OPhotoForm(forms.ModelForm):
         fields = ['photos']
 
 
+class ChecksForm(forms.ModelForm):
+    checks = forms.CharField(
+        widget=forms.FileInput(
+            attrs={'id': 'checksinput', 'type': 'file', 'name': 'input', 'multiple': True}))
+
+    class Meta:
+        model = Checks
+        fields = ['checks']
+
+
 class WearForm(forms.Form):
     point = forms.IntegerField(
         widget=forms.TextInput(attrs={'class': 'input work-price-input point-input'}))
@@ -165,10 +176,3 @@ class WearForm(forms.Form):
     accept_wear = forms.IntegerField(
         widget=forms.TextInput(attrs={'class': 'input work-price-input prehnite-input'}))
 
-
-class ReportRateSettingForm(forms.ModelForm):
-    report_rate_price = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'input-rate-price'}))
-
-    class Meta:
-        model = MyUser
-        fields = ['report_rate_price']
