@@ -8,7 +8,7 @@ def get_verifyPkcs7(request, report_id):
     data = {}
     report = Report.objects.get(report_id=report_id)
     pkcs7 = report.pdf_report_pkcs
-    for each in report.pdf_report_pkcs7:
+    for each in pkcs7:
         print(each)
     url = "http://127.0.0.1:9090/dsvs/pkcs7/v1?WSDL"
     # headers = {'content-type': 'application/soap+xml'}
@@ -23,8 +23,10 @@ def get_verifyPkcs7(request, report_id):
 
     response = requests.post(url, data=body, headers=headers)
 
-    with open('data.json', 'w') as f:
-        json.dump(response, f)
+    # with open('data.json', 'w') as f:
+    #     json.dump(response, f)
+
+    print(response.content)
 
 
 def verifyPkcs7(request):
