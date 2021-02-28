@@ -22,8 +22,9 @@ def get_verifyPkcs7(report_id):
 
         response = requests.post(url, data=body, headers=headers)
 
-        with open('data.json', 'w') as f:
-            json.dump(response.content, f)
+        print(response.content)
+        # with open('data.json', 'w') as f:
+        #     json.dump(response.content, f)
 
 
 def verifyPkcs7(request):
