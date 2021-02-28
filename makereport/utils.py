@@ -33,8 +33,8 @@ def verifyPkcs7(request):
         pkcs7 = request.POST.get('pkcs7', None)
         report_id = request.POST.get('report_id', None)
         report = Report.objects.get(report_id=report_id)
-        if not report.pdf_report_pkcs7:
-            report.pdf_report_pkcs7 = []
+        # if not report.pdf_report_pkcs7:
+        report.pdf_report_pkcs7 = []
         report.pdf_report_pkcs7.append(pkcs7)
         report.save()
         get_verifyPkcs7(report_id)
