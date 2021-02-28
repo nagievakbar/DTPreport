@@ -19,7 +19,7 @@ def get_verifyPkcs7(report_id):
                     </pkcs7B64 >
                 </verifyPkcs7 >
             </Body>
-        </Envelope> """.format("each")
+        </Envelope> """.format(each)
 
         response = requests.post(url, data=body, headers=headers)
 
