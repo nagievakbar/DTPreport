@@ -11,7 +11,8 @@ def get_verifyPkcs7(report_id):
     for each in pkcs7:
         url = "http://127.0.0.1:9090/dsvs/pkcs7/v1?WSDL"
         # headers = {'content-type': 'application/soap+xml'}
-        headers = {'content-type': 'text/xml'}
+        headers = {'content-type': 'application/soap+xml'}
+        # headers = {'content-type': 'text/xml'}
         body = """<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
             <Body>
                 <verifyPkcs7 xmlns="http://v1.pkcs7.plugin.server.dsv.eimzo.yt.uz/">
