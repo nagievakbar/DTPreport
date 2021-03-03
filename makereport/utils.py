@@ -1,7 +1,31 @@
-from .models import *
-from django.http import JsonResponse
+import qrcode
 import requests
 import json
+from django.http import JsonResponse
+
+from .models import *
+
+
+def qr_code(success, signature, signAlgName, updateAt, link):
+    str_for_qr_code = "{success}{signature}{signAlgName}{updateAt}{link}".format(
+        success=success, signature=signature, signAlgName=signAlgName, updateAt=updateAt, link=link)
+    print(str_for_qr_code)
+    img = qrcode.make(str_for_qr_code)  # вот сюда любую ссылку вставите он переведет в QR CODE
+    # Create and save the svg file naming "myqr.svg"
+    img.save('qrcode_test.png')
+
+
+def serializing(formatted_output):
+    check = False
+    new_str = ""
+    for element in range(len(formatted_output)):
+        if formatted_output[element] == "<":
+            check = True
+        if not check:
+            new_str = new_str + formatted_output[element]
+        if formatted_output[element] == ">":
+            check = False
+    return new_str
 
 
 def get_verifyPkcs7(report_id):
@@ -23,10 +47,29 @@ def get_verifyPkcs7(report_id):
         </Envelope> """.format(each)
 
         response = requests.post(url, data=body, headers=headers)
+        my_json = response.content.decode('utf8').replace("'", '"')
 
-        print(response)
-        # with open('data.json', 'w') as f:
-        #     json.dump(response.content, f)
+        formatted_output = my_json.replace('\\n', '\n').replace('\\t', '\t')
+
+        get_str = serializing(formatted_output)
+        get_json = json.loads(get_str)
+        success = get_json["success"]
+        signers = get_json["pkcs7Info"]["signers"][0]
+        certificate = signers["certificate"][0]
+        subjectName = certificate["subjectName"]
+        FULL_NAME = subjectName.split(',')[0].split('=')[1]
+        print(FULL_NAME)  # ЗДЕСЬ ИМЯ КЛИЕНТА
+        signAlgName = certificate['signature']['signAlgName']
+
+        signature = certificate['signature']['signature']
+        statusUpdateAt = signers['statusUpdatedAt']
+        print(statusUpdateAt)
+        statusNextUpdateAt = signers['statusNextUpdateAt']
+        print(statusNextUpdateAt)
+        verified = signers['verified']
+        certificateVerified = signers['certificateVerified']
+        LINK = ""  # Here is the link
+        qr_code(success, signature, signAlgName, statusUpdateAt, LINK)
 
 
 def verifyPkcs7(request):
@@ -57,7 +100,8 @@ def get_car_from_search(request):
 
 def get_car_card(request):
     car = get_car_from_search(request)
-    card = """<div class='card'><div class='card-header'> %s %s </div><div class='card-body'> <h5 class='card-title'>Введите ключ для скачивания</h5> <input type="text" id="key-input" class="form-control" required=""> </div> </div>""" % (car.brand, car.car_number,)
+    card = """<div class='card'><div class='card-header'> %s %s </div><div class='card-body'> <h5 class='card-title'>Введите ключ для скачивания</h5> <input type="text" id="key-input" class="form-control" required=""> </div> </div>""" % (
+    car.brand, car.car_number,)
     data = {
         'card': card,
     }
@@ -272,7 +316,6 @@ def get_data_from_wear_form(form):
         'accept_wear': form.cleaned_data['accept_wear'],
     }
     return wear_data
-
 
 # def get_report_cost(report, request):
 #     accept_wear = request.GET.get('id_accept_wear', None)

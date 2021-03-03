@@ -311,20 +311,15 @@
 
             var exampleModal = document.getElementById('exampleModal')
             exampleModal.addEventListener('show.bs.modal', function (event) {
-              // Button that triggered the modal
+
               var button = event.relatedTarget
-              // Extract info from data-bs-* attributes
+
               var recipient = button.getAttribute('data-bs-whatever')
               var report_id = button.getAttribute('data-bs-report')
-              // If necessary, you could initiate an AJAX request here
-              // and then do the updating in a callback.
-              //
-              // Update the modal's content.
+
               var modalFileInput = exampleModal.querySelector('.file')
               var modalReportIdField = exampleModal.querySelector('.report_id')
-              {#var modalBodyInput = exampleModal.querySelector('.modal-body input')#}
-                {#<input name="data" type="file" id="" style="display: none">#}
-              {#modalTitle.textContent = 'New message to ' + recipient#}
+
               modalFileInput.textContent = recipient
               modalReportIdField.value = report_id
             })
@@ -333,26 +328,6 @@
                 console.log('CLICK sign')
                 var pkcs7 = $(this).parents('.modal-body').find('.pkcs7').textContent;
                 console.log(pkcs7)
-
-                {#$.ajax({#}
-                {#    url: '{% url "get_service_cost" %}',#}
-                {#    data: {#}
-                {#        'premium': premium,#}
-                {#        'price': price,#}
-                {#        'nph': nph,#}
-                {#    },#}
-                {#    dataType: 'json',#}
-                {#    success: function (data) {#}
-                {#        console.log('success calculate cost')#}
-                {#        console.log(present_table)#}
-                {#        console.log(psss)#}
-                {#        console.log(last)#}
-                {#        present_table.select()#}
-                        {#last.select()#}
-                {#        service_cost.val(data.service_cost)#}
-                {#    },#}
-                {# }) #}
-
             });
 
             var EIMZO_MAJOR = 3;
