@@ -68,7 +68,7 @@ def get_verifyPkcs7(report_id):
         print(statusNextUpdateAt)
         verified = signers['verified']
         certificateVerified = signers['certificateVerified']
-        LINK = ""  # Here is the link
+        LINK = "{}".format(report.pdf_report.url)  # Here is the link
         qr_code(success, signature, signAlgName, statusUpdateAt, LINK)
 
 
