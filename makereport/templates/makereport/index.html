@@ -134,22 +134,20 @@
 
 
 
-      <div class="up_block">
+     <div class="grid-container">
 
-       <div class="search_block">
+      <div class="block-grid">
+        <div class="search_block">
           <div class="input">
-              <form method = 'GET'>
-                <input type='text' name ="search" placeholder="Поиск" required />
-                <span>
-                <button type = 'submit' style="border: none;background-color: #e5e5e5">
-                    <ion-icon name="search-outline" class = "search_submit">
-                    </ion-icon>
-                    </button>
-                  </span>
-              </form>
+            <input type="email" placeholder="Поиск" required />
+            <span><a href="#">
+                <ion-icon name="search-outline"></ion-icon>
+              </a></span>
           </div>
         </div>
+      </div>
 
+      <div class="block-grid">
         <div class="name_user">
           <div class="select-block">
             <label>Данные</label>
@@ -165,13 +163,17 @@
             </div>
           </div>
         </div>
+      </div>
 
+      <div class="block-grid">
         <div class="data_user">
           <a href="#">
             <button type="button" class="btn data_button">Дата</button>
           </a>
         </div>
+      </div>
 
+      <div class="block-grid">
         <div class="signed_user">
           <div class="select-block">
             <label>Данные</label>
@@ -187,9 +189,9 @@
             </div>
           </div>
         </div>
-
       </div>
 
+    </div>
 
       <div class="table1">
         <table class="table" data-tablesaw-mode="stack">
