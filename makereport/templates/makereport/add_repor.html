@@ -163,7 +163,7 @@
 
 		<section class="padding_phone" style="z-index: 9999 !important;">
 
-                <form method="POST" class="material-form-2" enctype="multipart/form-data">{% csrf_token %}
+                <form method="POST" class="material-form-2" enctype="multipart/form-data" >{% csrf_token %}
 
                     <div class="accordion one">
                     <!-- 1 -->
@@ -190,11 +190,12 @@
                                             {{ car_form.car_color }}
                                             {{ car_form.mileage }}
                                             {{ car_form.release_date }}
-                                            {{ car_form.car_type }}
+
 
                                         </div>
                                         <div class="divider"></div>
                                         <div class="right-inputs">
+                                            {{ car_form.car_type }}
                                             {{ car_form.car_owner }}
                                             {{ car_form.owner_address }}
                                             {{ customer_form.name }}
@@ -296,7 +297,7 @@
                                                 </table>
                                             {% endfor %}
                                             <div id="empty_service_form" style="display:none">
-                                                <table id="empty_service_form" class='no_error' style="display:none">
+                                                <table class='no_error'>
                                                     <tr>
                                                         <td></td>
                                                         <td>{{ service_formset.empty_form.service_id }}</td>
@@ -307,7 +308,7 @@
                                                         <td>{{ service_formset.empty_form.service_cost }}</td>
                                                     </tr>
                                                 </table>
-                                             </div>
+                                            </div>
 {#                                        </tbody>#}
                                     </table>
                                     </div>
