@@ -34,8 +34,8 @@ def get_verifyPkcs7(report_id):
     pkcs7 = report.pdf_report_pkcs7
     for each in pkcs7:
         url = "http://127.0.0.1:9090/dsvs/pkcs7/v1?WSDL"
-        # headers = {'content-type': 'application/soap+xml'}
-        headers = {'content-type': 'text/xml'}
+        headers = {'content-type': 'application/soap+xml'}
+        # headers = {'content-type': 'text/xml'}
         # headers = {'content-type': 'text/xml'}
         body = """<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
             <Body>
@@ -49,10 +49,10 @@ def get_verifyPkcs7(report_id):
         response = requests.post(url, data=body, headers=headers)
         my_json = response.content.decode('utf8').replace("'", '"')
 
-        formatted_output = my_json.replace('\\n', '\n').replace('\\t', '\t')
+        # formatted_output = my_json.replace('\\n', '\n').replace('\\t', '\t')
 
-        get_str = serializing(formatted_output)
-        get_json = json.loads(get_str)
+        # get_str = serializing(formatted_output)
+        get_json = json.loads(my_json)
         success = get_json["success"]
         signers = get_json["pkcs7Info"]["signers"][0]
         certificate = signers["certificate"][0]
