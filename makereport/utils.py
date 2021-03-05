@@ -35,7 +35,7 @@ def get_verifyPkcs7(report_id):
     for each in pkcs7:
         url = "http://127.0.0.1:9090/dsvs/pkcs7/v1?WSDL"
         # headers = {'content-type': 'application/soap+xml'}
-        headers = {'content-type': 'application/soap+xml'}
+        headers = {'content-type': 'text/xml'}
         # headers = {'content-type': 'text/xml'}
         body = """<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
             <Body>
@@ -81,6 +81,7 @@ def verifyPkcs7(request):
         report.pdf_report_pkcs7 = []
         report.pdf_report_pkcs7.append(pkcs7)
         report.save()
+        print(report.pdf_report_pkcs7)
         get_verifyPkcs7(report_id)
         data = {
             'success': 'True',
