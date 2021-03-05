@@ -216,9 +216,10 @@ class Report(models.Model):
     total_report_cost = models.CharField(max_length=15)
     total_report_cost_txt = models.CharField(max_length=200)
 
-    pdf_report = models.FileField(blank=True, null=True, verbose_name='Отчёт в пдф')
+    pdf_report = models.FileField(blank=True, null=True, upload_to='uploads/%Y/%m/%d/', verbose_name='Отчёт в пдф')
     pdf_report_base64 = models.CharField(max_length=1000000, blank=True, null=True)
     pdf_report_pkcs7 = models.JSONField(blank=True, null=True)
+    pdf_report_qr = models.JSONField(blank=True, null=True)
 
     passport_photo = models.FileField(blank=True, null=True, verbose_name='Фото пасспорта')
     registration_photo = models.FileField(blank=True, null=True, verbose_name='Фото тех.пасспорта')
@@ -227,7 +228,6 @@ class Report(models.Model):
     service_data = models.JSONField(blank=True, null=True)
     product_data = models.JSONField(blank=True, null=True)
     consumable_data = models.JSONField(blank=True, null=True)
-
 
     def __str__(self):
         return str(self.report_id)
