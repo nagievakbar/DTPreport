@@ -343,7 +343,8 @@ def user_login(request):
             login(request, user)
             return HttpResponseRedirect(reverse('reports_list'))
         else:
-            context["error"] = "Invalid data"
+            context["error"] = True
+            context["description"] = "Введен неправильный логин или пароль"
             return render(request, "makereport/auth/login_sea.html", context)
     else:
         if request.user.is_anonymous:

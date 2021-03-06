@@ -3,6 +3,9 @@
 	<font name="TNRB" ttf="Times New Roman 400 Bold.ttf"/>
                                      PAGE 1
     <page>
+         {% if qrcode %}  <!-- Это для qrcode сохраните где нужно он будет высвечиваться -->
+        <barcode type="QR" height="1">{{qrcode}}</barcode>
+        {% endif %}
         <text align="center">Договор-счет №{{ report.report_id }}</text>
         <text align="center">на оказание услуг по оценке</text>
         <text/>

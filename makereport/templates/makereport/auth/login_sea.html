@@ -137,7 +137,11 @@
                                 <div class="enter">
 
                                 <h2>Вход</h2>
-                                <p>Заполните пожалуйста пустые поля</p>
+                              {% if error %}
+                                 <p class = {{css}}>{{description}}</p>
+                                {% else %}
+                                 <p>Заполните пожалуйста пустые поля</p>
+                                {% endif %}
 
                                 <div class="input-container ic-1">
                                     <input id="username" name="username" class="input" type="text" autocomplete="new-login" placeholder=" " />

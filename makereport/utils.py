@@ -10,9 +10,10 @@ def qr_code(success, signature, signAlgName, updateAt, link):
     str_for_qr_code = "{success}{signature}{signAlgName}{updateAt}{link}".format(
         success=success, signature=signature, signAlgName=signAlgName, updateAt=updateAt, link=link)
     print(str_for_qr_code)
-    img = qrcode.make(str_for_qr_code)  # вот сюда любую ссылку вставите он переведет в QR CODE
-    # Create and save the svg file naming "myqr.svg"
-    img.save('qrcode_test.png')
+    return str_for_qr_code
+    # img = qrcode.make(str_for_qr_code)  # вот сюда любую ссылку вставите он переведет в QR CODE
+    # # Create and save the svg file naming "myqr.svg"
+    # img.save('qrcode_test.png')
 
 
 def serializing(formatted_output):
@@ -32,44 +33,44 @@ def get_verifyPkcs7(report_id):
     data = {}
     report = Report.objects.get(report_id=report_id)
     pkcs7 = report.pdf_report_pkcs7
-    for each in pkcs7:
-        url = "http://127.0.0.1:9090/dsvs/pkcs7/v1?WSDL"
-        headers = {'content-type': 'application/soap+xml'}
-        # headers = {'content-type': 'text/xml'}
-        # headers = {'content-type': 'text/xml'}
-        body = """<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
-            <Body>
-                <verifyPkcs7 xmlns="http://v1.pkcs7.plugin.server.dsv.eimzo.yt.uz/">
-                    <pkcs7B64 xmlns=""> {} 
-                    </pkcs7B64 >
-                </verifyPkcs7 >
-            </Body>
-        </Envelope> """.format(each)
+    url = "http://127.0.0.1:9090/dsvs/pkcs7/v1?WSDL"
+    headers = {'content-type': 'application/soap+xml'}
+    # headers = {'content-type': 'text/xml'}
+    # headers = {'content-type': 'text/xml'}
+    body = """<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+        <Body>
+            <verifyPkcs7 xmlns="http://v1.pkcs7.plugin.server.dsv.eimzo.yt.uz/">
+                <pkcs7B64 xmlns=""> {} 
+                </pkcs7B64 >
+            </verifyPkcs7 >
+        </Body>
+    </Envelope> """.format(pkcs7)
 
-        response = requests.post(url, data=body, headers=headers)
-        my_json = response.content.decode('utf8').replace("'", '"')
+    response = requests.post(url, data=body, headers=headers)
+    my_json = response.content.decode('utf8').replace("'", '"')
 
-        # formatted_output = my_json.replace('\\n', '\n').replace('\\t', '\t')
+    # formatted_output = my_json.replace('\\n', '\n').replace('\\t', '\t')
 
-        # get_str = serializing(formatted_output)
-        get_json = json.loads(my_json)
-        success = get_json["success"]
-        signers = get_json["pkcs7Info"]["signers"][0]
-        certificate = signers["certificate"][0]
-        subjectName = certificate["subjectName"]
-        FULL_NAME = subjectName.split(',')[0].split('=')[1]
-        print(FULL_NAME)  # ЗДЕСЬ ИМЯ КЛИЕНТА
-        signAlgName = certificate['signature']['signAlgName']
+    # get_str = serializing(formatted_output)
+    get_json = json.loads(my_json)
+    success = get_json["success"]
+    signers = get_json["pkcs7Info"]["signers"][0]
+    certificate = signers["certificate"][0]
+    subjectName = certificate["subjectName"]
+    FULL_NAME = subjectName.split(',')[0].split('=')[1]
+    print(FULL_NAME)  # ЗДЕСЬ ИМЯ КЛИЕНТА
+    signAlgName = certificate['signature']['signAlgName']
 
-        signature = certificate['signature']['signature']
-        statusUpdateAt = signers['statusUpdatedAt']
-        print(statusUpdateAt)
-        statusNextUpdateAt = signers['statusNextUpdateAt']
-        print(statusNextUpdateAt)
-        verified = signers['verified']
-        certificateVerified = signers['certificateVerified']
-        LINK = "https://e-otsenka.uz{}".format(report.pdf_report.url)  # Here is the link
-        qr_code(success, signature, signAlgName, statusUpdateAt, LINK)
+    signature = certificate['signature']['signature']
+    statusUpdateAt = signers['statusUpdatedAt']
+    print(statusUpdateAt)
+    statusNextUpdateAt = signers['statusNextUpdateAt']
+    print(statusNextUpdateAt)
+    verified = signers['verified']
+    certificateVerified = signers['certificateVerified']
+    LINK = "https://e-otsenka.uz{}".format(report.pdf_report.url)  # Here is the link
+    report.pdf_qr_code = qr_code(success, signature, signAlgName, statusUpdateAt, LINK)
+    report.save()
 
 
 def verifyPkcs7(request):

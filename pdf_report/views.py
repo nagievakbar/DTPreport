@@ -22,7 +22,8 @@ class GeneratePDF(View):
             'report': new_report_pdf,
             'services': new_report_pdf.service.all().__len__(),
             'images': images,
-            'datetime': new_report_pdf.report_date
+            'datetime': new_report_pdf.report_date,
+            'qrcode': new_report_pdf.pdf_qr_code
         }
         pdf.generate(context)
         data = pdf.contents()
@@ -32,7 +33,7 @@ class GeneratePDF(View):
         with open(new_report_pdf.pdf_report.path, "rb") as file:
             encoded_string = base64.b64encode(file.read())
         new_report_pdf.pdf_report_base64 = encoded_string
-        # print(new_report_pdf.pdf_report_base64)
+
         new_report_pdf.save()
         return get_response(request, new_report_pdf.report_id)
 
