@@ -114,6 +114,8 @@ class ReportView(View):
         product_formset = self.init_product_formset(request)
         consumable_formset = self.init_consumable_formset(request)
         wear_form = WearForm(request.POST)
+        print("VALIDATION {}{}{}".format(report_form.is_valid(),car_form.is_valid(),customer_form.is_valid()))
+        print(car_form.errors)
         if report_form.is_valid() and car_form.is_valid() and customer_form.is_valid():
             new_contract = Contract()
             new_customer = customer_form.save(commit=False)
@@ -280,7 +282,6 @@ class ReportView(View):
             'wear_form': wear_form,
         }
         return render(request, 'makereport/edit_repor.html', context)
-
     @method_decorator(decorators)
     def delete(self, request, id=None):
         report = Report.objects.get(report_id=id)

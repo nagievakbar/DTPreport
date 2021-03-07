@@ -189,6 +189,13 @@
                                             {{ car_form.chassis }}
                                             {{ car_form.car_color }}
                                             {{ car_form.mileage }}
+                                            {% if car_form.errors.release_date%}
+                                        <div class="alert alert-danger">
+                                            <strong>
+                                                {{car_form.errors.release_date}}
+                                            </strong>
+                                        </div>
+                                        {% endif %}
                                             {{ car_form.release_date }}
 
 
@@ -201,6 +208,13 @@
                                             {{ customer_form.name }}
                                             {{ customer_form.address }}
                                             {{ customer_form.passport_number }}
+                                            {% if customer_form.errors.when_passport_issued %}
+                                        <div class="alert alert-danger">
+                                            <strong>
+                                                {{customer_form.errors.when_passport_issued}}
+                                            </strong>
+                                        </div>
+                                        {% endif %}
                                             {{ customer_form.when_passport_issued }}
                                             {{ customer_form.whom_passport_issued }}
                                             {{ customer_form.phone_number }}

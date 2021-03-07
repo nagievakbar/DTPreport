@@ -45,7 +45,10 @@ class CarForm(forms.ModelForm):
                   'car_type',
                   'car_owner',
                   'owner_address']
-
+    def clean_release_date(self):
+        date = self.cleaned_data
+        print(date)
+        return date 
 
 class ContractForm(forms.ModelForm):
     """docstring for ContractForm."""
@@ -175,4 +178,3 @@ class WearForm(forms.Form):
     wear = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'input work-price-input prehnite-input'}))
     accept_wear = forms.IntegerField(
         widget=forms.TextInput(attrs={'class': 'input work-price-input prehnite-input'}))
-

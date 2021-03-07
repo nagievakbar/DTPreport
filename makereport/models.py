@@ -220,7 +220,7 @@ class Report(models.Model):
     pdf_report_base64 = models.CharField(max_length=1000000, blank=True, null=True)
     pdf_report_pkcs7 = models.JSONField(blank=True, null=True)
     pdf_report_qr = models.JSONField(blank=True, null=True)
-    pdf_qr_code= models.CharField(max_length = 500, blank = True, null= True)
+    pdf_qr_code = models.CharField(max_length = 500, blank = True, null= True)
     
     passport_photo = models.FileField(blank=True, null=True, verbose_name='Фото пасспорта')
     registration_photo = models.FileField(blank=True, null=True, verbose_name='Фото тех.пасспорта')

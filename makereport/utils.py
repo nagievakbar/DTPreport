@@ -1,4 +1,4 @@
-import qrcode
+# import qrcode
 import requests
 import json
 from django.http import JsonResponse
@@ -11,9 +11,9 @@ def qr_code(success, signature, signAlgName, updateAt, link):
         success=success, signature=signature, signAlgName=signAlgName, updateAt=updateAt, link=link)
     print(str_for_qr_code)
     return str_for_qr_code
-    # img = qrcode.make(str_for_qr_code)  # вот сюда любую ссылку вставите он переведет в QR CODE
-    # # Create and save the svg file naming "myqr.svg"
-    # img.save('qrcode_test.png')
+        # img = qrcode.make(str_for_qr_code)  # вот сюда любую ссылку вставите он переведет в QR CODE
+        # # Create and save the svg file naming "myqr.svg"
+        # img.save('qrcode_test.png')
 
 
 def serializing(formatted_output):
