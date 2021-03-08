@@ -12,7 +12,7 @@
                 rel="stylesheet">
 
         <!-- Template Main CSS File -->
-        <link rel="stylesheet" href="{% static '/makereport/css/bootstrap.min.css' %}"> 
+        <link rel="stylesheet" href="{% static '/makereport/css/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static '/makereport/css/fontawsom-all.min.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static '/makereport/css/main.css' %}"/>
         <link rel='stylesheet' href='https://s3-us-west-2.amazonaws.com/s.cdpn.io/123941/tablesaw.stackonly.css'>
@@ -136,7 +136,7 @@
 
       <div class="grid-container">
 
-
+          <div class="block-grid">
             <div class="search_block">
               <div class="input">
                 <input type="email" placeholder="Поиск" required />
@@ -145,9 +145,9 @@
                   </a></span>
               </div>
             </div>
+          </div>
 
-
-     
+          <div class="block-grid">
             <div class="name_user">
               <div class="select-block">
                 <label>Данные</label>
@@ -163,17 +163,17 @@
                 </div>
               </div>
             </div>
+          </div>
 
-
-          
+          <div class="block-grid">
             <div class="data_user">
               <a href="#">
                 <button type="button" class="btn data_button">Дата</button>
               </a>
             </div>
-  
+          </div>
 
-
+          <div class="block-grid">
             <div class="signed_user">
               <div class="select-block">
                 <label>Данные</label>
@@ -189,6 +189,7 @@
                 </div>
               </div>
             </div>
+          </div>
       </div>
 
 
