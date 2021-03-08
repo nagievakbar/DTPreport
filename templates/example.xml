@@ -4,7 +4,7 @@
                                      PAGE 1
     <page>
          {% if qrcode %}  <!-- Это для qrcode сохраните где нужно он будет высвечиваться -->
-        <barcode type="QR" height="1">{{qrcode}}</barcode>
+        <barcode type="QR" height="2">{{qrcode}}</barcode>
         {% endif %}
         <text align="center">Договор-счет №{{ report.report_id }}</text>
         <text align="center">на оказание услуг по оценке</text>

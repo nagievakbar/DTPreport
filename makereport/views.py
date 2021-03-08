@@ -115,7 +115,7 @@ class ReportView(View):
         consumable_formset = self.init_consumable_formset(request)
         wear_form = WearForm(request.POST)
         print("VALIDATION {}{}{}".format(report_form.is_valid(),car_form.is_valid(),customer_form.is_valid()))
-        print(car_form.errors)
+   
         if report_form.is_valid() and car_form.is_valid() and customer_form.is_valid():
             new_contract = Contract()
             new_customer = customer_form.save(commit=False)
@@ -177,7 +177,7 @@ class ReportView(View):
             new_report.set_private_key()
             new_report.save()
             return HttpResponseRedirect('/report/list')
-
+    
         context = {
             'report_form': report_form,
             'car_form': car_form,

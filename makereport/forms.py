@@ -1,7 +1,6 @@
 from django import forms
 from .models import *
-
-
+import datetime
 class ReportForm(forms.ModelForm):
     """docstring for ReportForm."""
 
@@ -45,10 +44,8 @@ class CarForm(forms.ModelForm):
                   'car_type',
                   'car_owner',
                   'owner_address']
-    def clean_release_date(self):
-        date = self.cleaned_data
-        print(date)
-        return date 
+            
+
 
 class ContractForm(forms.ModelForm):
     """docstring for ContractForm."""

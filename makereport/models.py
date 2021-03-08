@@ -211,7 +211,7 @@ class Report(models.Model):
     product_cost = models.IntegerField(default=0)
     product_acc_cost = models.IntegerField(default=0)
     consumable_cost = models.IntegerField(default=0)
-    key = models.CharField(max_length=8, blank=True)
+    key = models.CharField(max_length=600, blank=True)
 
     total_report_cost = models.CharField(max_length=15)
     total_report_cost_txt = models.CharField(max_length=200)
@@ -248,8 +248,8 @@ class Report(models.Model):
         return self.total_report_cost_txt
 
     def set_private_key(self):
-        self.key = str(self.report_id)[0] + self.car.car_number[2] + self.car.car_number[7] + self.car.car_number[5] + \
-                   str(self.contract_id)[0] + str(self.car.release_date)[2] + str(self.car.release_date)[3] + \
+        self.key = str(self.report_id)[0] + self.car.car_number[0] + self.car.car_number[0] + self.car.car_number[0] + \
+                   str(self.contract_id)[0] + str(self.car.release_date)[0] + str(self.car.release_date)[0] + \
                    self.car.brand[0]
 
     class Meta:

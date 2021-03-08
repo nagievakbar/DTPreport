@@ -288,6 +288,34 @@ var EIMZOClient = {
             }
         }
     },
+    append_pkc: function(id, data, pkcs7,timestamper, success, fail){
+        CAPIWS.callFunction({plugin: "pkcs7", name: "append_pkcs7_detached", arguments: [pkcs7,id,]}, function (event, data) {
+            if (data.success) {
+                var pkcs7 = data.pkcs7_64;
+                if(timestamper){
+                    var sn = data.signer_serial_number;
+                    timestamper(data.signature_hex, function(tst){
+                        CAPIWS.callFunction({plugin:"pkcs7", name:"attach_timestamp_token_pkcs7", arguments:[pkcs7, sn, tst]},function(event, data){
+                            if(data.success){
+                                var pkcs7tst = data.pkcs7_64;
+                                success(pkcs7tst);
+                            } else {
+                                fail(null, data.reason);
+                            }
+                        }, function (e) {
+                            fail(e, null);
+                        });
+                    }, fail);
+                } else {
+                    success(pkcs7);
+                }                
+            } else {
+                fail(null, data.reason);
+            }
+        }, function (e) {
+            fail(e, null);
+        });
+    },
     createPkcs7: function(id, data, timestamper, success, fail){
         CAPIWS.callFunction({plugin: "pkcs7", name: "create_pkcs7", arguments: [Base64.encode(data), id, 'yes']}, function (event, data) {
             if (data.success) {
