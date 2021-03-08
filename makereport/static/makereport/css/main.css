@@ -1,10 +1,4 @@
-/* ======================================================================= */
-/* Template Name: 
-/* Author:  
-/* Author URI: 
-/* Version: 
-/* Description: 
-/* ======================================================================= */
+
 
 @import url("icofont.min.css");
 /* @import url("bootstrap.min.css"); */
@@ -41,9 +35,6 @@ a:focus {
     }
 }
 
-/*--------------------------------------------------------------
-# Header
---------------------------------------------------------------*/
 #header {
     position: fixed;
     top: 0;
@@ -73,9 +64,7 @@ a:focus {
     text-decoration: none;
 }
 
-/*------------------------------
-  # Navigation Menu
-  -------------------------------*/
+
 .nav-menu {
     padding-top: 63px;
 }
@@ -153,7 +142,6 @@ a:focus {
     color: #fff;
 }
 
-/* Mobile Navigation */
 .mobile-nav-toggle {
     position: absolute;
     right: 15px;
@@ -178,22 +166,14 @@ a:focus {
     left: 0;
 }
 
-/*-------------------------------
-  # Header-top
-  -------------------------------*/
+
 .header-top {
     width: 100%;
     height: 56px;
     background: #fff;
 }
 
-/*.header-top.header-scrolled, .header.header-inner-pages {
-    background: rgba(40, 58, 90, 0.9);
-  }*/
 
-/*-------------------------------
-  # Navigation Menu
-  -------------------------------*/
 .new-document-part {
     position: absolute;
     top: 0;
@@ -311,9 +291,7 @@ a:focus {
 }
 
 
-/*--------------------------------------------------------------
-# material form
---------------------------------------------------------------*/
+
 .padding_phone {
   margin: 31px auto;
 }
@@ -344,7 +322,7 @@ a:focus {
 
 
 
-/* common */
+
 .save-btn-block {
   width: 100%;
   display: flex;
@@ -373,9 +351,6 @@ a:focus {
 }
 
 
-/*--------------------------------------------------------------
-# file upload
---------------------------------------------------------------*/
 .file-upload {
     display: block;
     height: 40px;
@@ -446,9 +421,7 @@ a:focus {
 }
 
 
-/*--------------------------------------------------------------
-# Select block
---------------------------------------------------------------*/
+
 .select-block {
     background-color: #5c6e91;
     max-width: 900px;
@@ -558,21 +531,7 @@ a:focus {
     left: 0%;
     width: 100%;
 }
-/*.select-block .custom-select::before {
-    border: 0;
-    content: '';
-    position: absolute;
-    left: 50%;
-    width: 0%;
-    bottom: 0;
-    height: 2px;
-    -moz-transition: all 0.3s ease-out;
-    -o-transition: all 0.3s ease-out;
-    -webkit-transition: all 0.3s ease-out;
-    transition: all 0.3s ease-out;
-    background-color: #2196f3;
-  }
-  */
+
 
 .select-block .custom-select .drop-down-list {
     width: 100%;
@@ -623,9 +582,7 @@ a:focus {
 }
 
 
-/*--------------------------------------------------------------
-# up 4 blocks
---------------------------------------------------------------*/
+
 .grid-container {
   display: grid;
   grid-template-columns: 2fr repeat(3, 1fr);
@@ -725,9 +682,7 @@ a:focus {
   
 
 
-/*--------------------------------------------------------------
-# table
---------------------------------------------------------------*/
+
 .table1 {
     margin: 30px auto;
     max-width: 1009px;
@@ -750,15 +705,7 @@ a:focus {
   .table thead th:last-of-type {
       border-right: 0px solid #1d96b2;
     }
-    /* .table thead th:first-child:before {
-      content: '';
-      width: 10px;
-      height: 10px;
-      top: 0;
-      left: 0;
-      background: red;
-      position: absolute;
-     } */
+
   .table thead  {
     background-color: #5c6e91;
     border-bottom: 10px solid #e5e5e5;
@@ -798,9 +745,7 @@ a:focus {
 
 
   
-/*--------------------------------------------------------------
-# desktop 17
---------------------------------------------------------------*/
+
 .top_three_blocks {
     max-width: 1230px;
     padding: 0 30px;
@@ -1041,9 +986,7 @@ a:focus {
 
   
   
-/* ===================================== */
-/* background
-/* ===================================== */
+
 .liquid_shape_first {
     position: absolute;
     right: 0;
@@ -1083,8 +1026,7 @@ a:focus {
   }
   
    .welcome_user {
-    /*width: 377px;
-    height: 101px;*/
+
     margin: 0 auto;
     text-align: center;
     margin-top: 25px;
@@ -1172,8 +1114,7 @@ a:focus {
 
 
 
-/*********************************/
-/*********************************/
+
 .last_bottom_block {
   background: #5c6e91;
   max-width: 887px;
