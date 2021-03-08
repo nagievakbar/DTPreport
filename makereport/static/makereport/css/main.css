@@ -583,26 +583,7 @@ a:focus {
 
 
 
-.grid-container {
-  display: grid;
-  grid-template-columns: 2fr repeat(3, 1fr);
-  grid-template-rows: 40px;
-  grid-column-gap: 30px;
-  grid-row-gap: 10px;
-  margin: 30px;
-}
-@media (max-width: 576px) {
-  .grid-container {
-    grid-column: 4;
-    grid-template-columns: 100%;
-  }
-}
 
-@media (max-width: 992px) {
-  .grid-container {
-    margin: 20px;
-  }
-}
 
 
   .search_block {
