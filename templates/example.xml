@@ -3,9 +3,7 @@
 	<font name="TNRB" ttf="Times New Roman 400 Bold.ttf"/>
                                      PAGE 1
     <page>
-         {% if qrcode %}  <!-- Это для qrcode сохраните где нужно он будет высвечиваться -->
-        <barcode type="QR" height="2">{{qrcode}}</barcode>
-        {% endif %}
+    
         <text align="center">Договор-счет №{{ report.report_id }}</text>
         <text align="center">на оказание услуг по оценке</text>
         <text/>
@@ -156,8 +154,11 @@
         <text lineheight="1.3">  ИНН		      302 667 624			                  телефон:                 {{ report.contract.customer.phone_number }}</text>
          --------------------------------------------table-text--------------------------------------
         <text lineheight="1.3">Директор ООО "AMIR AVTO BAHOLASH"</text>
-        <text lineheight="1.3">Сагдулаев Б.К     _____________________          {{ report.contract.customer.name }}_____________________</text>
-
+        <text lineheight="1.3">Сагдулаев Б.К                 {{ report.contract.customer.name }}_____________________</text>
+        {% if qrcode %}  <!-- Это для qrcode сохраните где нужно он будет высвечиваться -->
+        <barcode x="3" type="QR" height="2">{{ qrcode }}</barcode>   <barcode y='0.4' x="8" type="QR" height="2">{{ qrcode }}</barcode> 
+        {% endif %}
+  
     </page>
     <page>
         <text align="center">АКТ</text>
@@ -180,13 +181,9 @@
         <text/>
         <text>                    Директор                                                          Заказчик:{{ report.contract.customer.name }}</text>
         <text>ООО «AMIR AVTO BAHOLASH»                                                    </text>
-        <text>____________________________                                        ______________________________</text>
-        <text/>
-        <text/>
-        <text/>
-        <text/>
-        <text/>
-        <text/>
+        {% if qrcode %}  <!-- Это для qrcode сохраните где нужно он будет высвечиваться -->
+        <barcode x="4" type="QR" height="2">{{ qrcode }}</barcode>   <barcode y='15.70' x="12" type="QR" height="2">{{ qrcode }}</barcode> 
+        {% endif %}
         <text/>
         <text/>
         <text align="center">СЧЕТ-ФАКТУРА №</text>
@@ -267,10 +264,12 @@
 Директор
 ООО «AMIR AVTO BAHOLASH»
 
-_________ Сагдуллаев Б.К.
+  Сагдуллаев Б.К.
 {{ datetime }}
-
 		</text>
+         {% if qrcode %}  <!-- Это для qrcode сохраните где нужно он будет высвечиваться -->
+        <barcode x="12" y="20.5" type="QR" height="2">{{ qrcode }}</barcode>
+        {% endif %}
 		<text/>
 		<text/>
 		<text fontsize="30" align="center" >Отчет № {{ report.report_id }}
@@ -354,7 +353,13 @@ _________ Сагдуллаев Б.К.
         <text>          С уважением,
          директор  ООО «AMIR AVTO BAHOLASH»  	                            	Сагдуллаев Б.К.
         </text>
-
+        <text/>
+        <text/>
+        <text align='right'> Оценщик </text>
+        {% if qrcode %}  <!-- Это для qrcode сохраните где нужно он будет высвечиваться -->
+        <barcode x="12" y="2" type="QR" height="2">{{ qrcode }}</barcode>
+        <barcode x="15" y="0.5"  type="QR" height="2">{{ qrcode }}</barcode>
+        {% endif %}
     </page>
                                      PAGE 3
     <page>
