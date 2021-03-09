@@ -647,6 +647,12 @@ a:focus {
   }
 }
 
+.search_block .input form #search_button {
+  background: transparent;
+  box-shadow: 0px 0px 0px transparent;
+  border: 0px solid transparent;
+  text-shadow: 0px 0px 0px transparent;
+}
 
   .search_block {
     width: 100%;
