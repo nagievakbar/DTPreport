@@ -17,10 +17,25 @@ class Contract(models.Model):
         verbose_name = 'Контракт'
         verbose_name_plural = 'Контракты'
 
-
+BRANDS = (
+        ('Кобальт', 'Кобальт'),
+        ('Спарк', 'Спарк'),
+        ('Нексия3', 'Нексия3'),
+        ('Малибу','Малибу'),
+        ('Нексия Sonc', 'Нексия Sonc'),
+        ('Дамас', 'Дамас'),
+        ('Тико','Тико'),
+        ('Матиз', 'Матиз'),
+        ('Матиз Бест', 'Матиз Бест'),
+        ('Нексия Donc', 'Нексия Donc'),
+        ('Ласетти','Ласетти'),
+        ('Каптива',  'Каптива'),
+        ('Такума',  'Такума'),
+        ('Эпика',  'Эпика')
+)
 class Car(models.Model):
     car_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
-    brand = models.CharField(max_length=30)
+    brand = models.CharField(max_length=30,choices = BRANDS)
     car_number = models.CharField(max_length=8)
     registration = models.CharField(max_length=15)
     engine_number = models.CharField(max_length=30)
@@ -220,8 +235,9 @@ class Report(models.Model):
     pdf_report_base64 = models.CharField(max_length=1000000, blank=True, null=True)
     pdf_report_pkcs7 = models.JSONField(blank=True, null=True)
     pdf_report_qr = models.JSONField(blank=True, null=True)
-    pdf_qr_code = models.CharField(max_length = 500, blank = True, null= True)
-    
+    pdf_qr_code_user = models.CharField(max_length = 500, blank = True, null= True)
+    pdf_qr_code_admin = models.CharField(max_length = 500, blank = True, null= True)
+    signed = models.BooleanField(default=False)
     passport_photo = models.FileField(blank=True, null=True, verbose_name='Фото пасспорта')
     registration_photo = models.FileField(blank=True, null=True, verbose_name='Фото тех.пасспорта')
 

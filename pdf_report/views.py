@@ -36,7 +36,8 @@ def get_response(request, id):
             'services': new_report_pdf.service.all().__len__(),
             'images': images,
             'datetime': new_report_pdf.report_date,
-            'qrcode': new_report_pdf.pdf_qr_code
+            'qrcode': new_report_pdf.pdf_qr_code_user,
+            'qrcode_admin':new_report_pdf.pdf_qr_code_admin
         }
         pdf.generate(context)
         data = pdf.contents()

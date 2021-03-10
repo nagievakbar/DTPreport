@@ -6,8 +6,8 @@ from django.http import JsonResponse
 from .models import *
 
 
-def qr_code(success, signature, signAlgName, updateAt, link):
-    str_for_qr_code = "{success}{signature}{signAlgName}{updateAt}{link}".format(
+def qr_code(success, signature, signAlgName, updateAt, link, serialNumber):
+    str_for_qr_code = "success: {success}\nsignature:{signature}\nsignAlgName:{signAlgName}\nupdateAt:{updateAt}\nlink:{link}\nserialNumber:{serialNumber}".format(
         success=success, signature=signature, signAlgName=signAlgName, updateAt=updateAt, link=link)
     print(str_for_qr_code)
     return str_for_qr_code
@@ -29,19 +29,17 @@ def serializing(formatted_output):
     return new_str
 
 
-def get_verifyPkcs7(report_id):
+def get_verifyPkcs7(user,report_id):
     data = {}
     report = Report.objects.get(report_id=report_id)
     pkcs7 = report.pdf_report_pkcs7
     url = "http://127.0.0.1:9090/dsvs/pkcs7/v1?WSDL"
-    headers = {'content-type': 'application/soap+xml'}
-    # headers = {'content-type': 'text/xml'}
-    # headers = {'content-type': 'text/xml'}
+    headers = {'content-type': 'text/xml'}
+
     body = """<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
         <Body>
             <verifyPkcs7 xmlns="http://v1.pkcs7.plugin.server.dsv.eimzo.yt.uz/">
-                <pkcs7B64 xmlns=""> {} 
-                </pkcs7B64 >
+                <pkcs7B64 xmlns="">{}</pkcs7B64 >
             </verifyPkcs7 >
         </Body>
     </Envelope> """.format(pkcs7)
@@ -49,13 +47,24 @@ def get_verifyPkcs7(report_id):
     response = requests.post(url, data=body, headers=headers)
     my_json = response.content.decode('utf8').replace("'", '"')
 
-    # formatted_output = my_json.replace('\\n', '\n').replace('\\t', '\t')
+    formatted_output = my_json.replace('\\n', '\n').replace('\\t', '\t')
+    my_file = open('output.txt', 'w')
+    my_file.write(formatted_output)
+    my_file.close()
+    get_str = serializing(formatted_output)
+    my_file_serialized = open('serialized.txt','w')
+    my_file_serialized.write(my_file_serialized)
+    my_file_serialized.close()
+    get_json = json.loads(get_str)
+    index = 0
+   
 
-    # get_str = serializing(formatted_output)
-    get_json = json.loads(my_json)
+    if report.pdf_qr_code_user != None:
+        index = 1
     success = get_json["success"]
     signers = get_json["pkcs7Info"]["signers"][0]
-    certificate = signers["certificate"][0]
+    certificate = signers["certificate"][index]
+    serialNumber = certificate["serialNumber"]
     subjectName = certificate["subjectName"]
     FULL_NAME = subjectName.split(',')[0].split('=')[1]
     print(FULL_NAME)  # ЗДЕСЬ ИМЯ КЛИЕНТА
@@ -69,7 +78,11 @@ def get_verifyPkcs7(report_id):
     verified = signers['verified']
     certificateVerified = signers['certificateVerified']
     LINK = "https://e-otsenka.uz{}".format(report.pdf_report.url)  # Here is the link
-    report.pdf_qr_code = qr_code(success, signature, signAlgName, statusUpdateAt, LINK)
+    if report.signed == False:
+        report.pdf_qr_code_user = qr_code(success, signature, signAlgName, statusUpdateAt, LINK,serialNumber)
+        report.signed = True
+    else:
+        report.pdf_qr_code_user = qr_code(success, signature, signAlgName, statusUpdateAt, LINK,serialNumber)
     report.save()
 
 

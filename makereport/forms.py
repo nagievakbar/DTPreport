@@ -11,11 +11,27 @@ class ReportForm(forms.ModelForm):
         model = Report
         fields = ['report_date', 'report_number']
 
-
+BRANDS = (
+        (0, "Выберите Марку"),
+        ('Кобальт', 'Кобальт'),
+        ('Спарк', 'Спарк'),
+        ('Нексия3', 'Нексия3'),
+        ('Малибу','Малибу'),
+        ('Нексия Sonc', 'Нексия Sonc'),
+        ('Дамас', 'Дамас'),
+        ('Тико','Тико'),
+        ('Матиз', 'Матиз'),
+        ('Матиз Бест', 'Матиз Бест'),
+        ('Нексия Donc', 'Нексия Donc'),
+        ('Ласетти','Ласетти'),
+        ('Каптива',  'Каптива'),
+        ('Такума',  'Такума'),
+        ('Эпика',  'Эпика')
+    )
 class CarForm(forms.ModelForm):
     """docstring for CarForm."""
 
-    brand = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Марка', 'class': 'input_in'}))
+    brand = forms.ChoiceField(choices=BRANDS, widget=forms.Select(attrs={'class':'form-control'}))
     car_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Номер машины', 'class': 'input_in'}))
     registration = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Тех. паспорт', 'class': 'input_in'}))
     engine_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Двигатель', 'class': 'input_in'}))
@@ -44,7 +60,8 @@ class CarForm(forms.ModelForm):
                   'car_type',
                   'car_owner',
                   'owner_address']
-            
+
+
 
 
 class ContractForm(forms.ModelForm):

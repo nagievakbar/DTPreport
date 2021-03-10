@@ -9,7 +9,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.csrf import csrf_protect
 from django.views.generic import View
-
+from django.db.models import Q
 from .forms import *
 from .utils import *
 from .converters import num2text
@@ -103,6 +103,7 @@ class ReportView(View):
         if id:
             print('getting id')
             return self.put(request, id)
+        print(request.POST)
         report_form = ReportForm(request.POST, instance=Report())
         image_form = ImageForm(request.POST, request.FILES)
         passphoto_form = PPhotoForm(request.POST, request.FILES)
@@ -114,8 +115,8 @@ class ReportView(View):
         product_formset = self.init_product_formset(request)
         consumable_formset = self.init_consumable_formset(request)
         wear_form = WearForm(request.POST)
+      
         print("VALIDATION {}{}{}".format(report_form.is_valid(),car_form.is_valid(),customer_form.is_valid()))
-   
         if report_form.is_valid() and car_form.is_valid() and customer_form.is_valid():
             new_contract = Contract()
             new_customer = customer_form.save(commit=False)
@@ -309,13 +310,29 @@ class ReportView(View):
 
 @login_required
 def reports_list(request):
-    if 'search' in request.GET:
-        reports = Report.objects.filter(car__car_number__contains=request.GET['search'])
+    if request.user.is_superuser:
+        return admin_list(request)
     else:
-        reports = Report.objects.all()
-    return render(request, 'makereport/index.html', context={'reports': reports})
+        return user_list_some(request)
+        
+def user_list_some(request):
+    if 'search' in request.GET:
+        reports = Report.objects.filter(car__car_number__contains=request.GET['search'],created_by = request.user.myuser)
+    else:   
+        reports = Report.objects.filter(created_by = request.user)
+    function = "sign()"
+    sign = False
+    return render(request, 'makereport/index.html', context={'sign':sign,'reports':reports,'function_for_sign':function})
 
-
+def admin_list(request):
+    if 'search' in request.GET:
+        reports = Report.objects.filter(Q(car__car_number__contains=request.GET['search']) & Q(Q(signed = True)|Q(created_by = request.user.myuser)))
+    else:   
+        reports = Report.objects.filter(Q(signed = True)|Q(created_by=request.user.myuser))
+    function = "admin_sign()"
+    sign = True
+    return render(request, 'makereport/index.html', context={'sign':sign,'reports':reports,'function_for_sign':function})
+    
 @login_required
 def users_list(request):
     users = User.objects.all()

@@ -230,7 +230,8 @@
                     <td style="border-bottom: 1px solid #fff;" data-title="Отчёт" data-type="currency"><a
                             href="{% url 'get_response' report.report_id %}">Открыть</a></td>
                     <td style="border-bottom: 1px solid #fff;" data-title="Функции" data-type="currency">
-                        <button class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-report="{{ report.report_id }}" data-bs-whatever="{{ report.pdf_report_base64 }}">Подписать</button><br><a
+               
+                        <button class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" sign={{sign}} data-bs-report="{{ report.report_id }}" pkcs7 = {{report.pdf_report_pkcs7}} data-bs-whatever="{{ report.pdf_report_base64 }}">Подписать</button><br><a
                             href="{% url 'edit_report' report.report_id %}">Изменить </a>
 {#                            <a href="#" data-toggle="modal" data-target="#deleteModal" data-bs-whatever="{{ report.report_id }}">Удалить</a>#}
                     </td>
@@ -277,7 +278,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-        <button onclick="sign()" type="button" class="btn btn-primary sign">Подписать</button><br />
+        <button onclick={{function_for_sign}} type="button" class="btn btn-primary sign">Подписать</button><br />
       </div>
     </div>
   </div>
@@ -319,8 +320,15 @@
             exampleModal.addEventListener('show.bs.modal', function (event) {
 
               var button = event.relatedTarget
-
-              var recipient = button.getAttribute('data-bs-whatever')
+              var sign  = button.getAttribute('sign')
+              var recipient =""
+              if (sign){
+                  recipient = button.getAttribute('pkcs7')
+              }
+              else {
+                recipient = button.getAttribute('data-bs-whatever')
+              }
+              
               var report_id = button.getAttribute('data-bs-report')
 
               var modalFileInput = exampleModal.querySelector('.file')
@@ -495,7 +503,79 @@
                 return cookieValue;
             }
             var csrftoken = getCookie('csrftoken');
-
+            admin_sign = function(){
+                 var itm = document.testform.key.value;
+                
+                if (itm) {
+                    var id = document.getElementById(itm);
+                    var vo = JSON.parse(id.getAttribute('vo'));
+                    var data = document.testform.data.value;
+                    var keyId = document.getElementById('keyId').innerHTML;
+                    var report_input = document.getElementById('report_id');
+                    if(keyId){
+                        EIMZOClient.append_pkcs7_attached(keyId, data, null, function(pkcs7){
+                            {#document.testform.pkcs7.value = pkcs7;#}
+                            $.ajax({
+                            type: "POST",
+                            headers:{
+                                "X-CSRFToken": csrftoken
+                            },
+                            url: '{% url "verifyPkcs7" %}',
+                            data: {
+                                'pkcs7': pkcs7,
+                                'report_id': report_input.value,
+                                {#'csrfmiddlewaretoken':{% csrf_token %}#}
+                            },
+                            cache: true,
+                            success: function (data) {
+                                console.log(data.success)
+                            },
+                         })
+                        }, function(e, r){
+                            if(r){
+                                if (r.indexOf("BadPaddingException") != -1) {
+                                    uiShowMessage(errorWrongPassword);
+                                } else {
+                                    uiShowMessage(r);
+                                }
+                            } else {
+                                document.getElementById('keyId').innerHTML = '';
+                                uiShowMessage(errorBrowserWS);
+                            }
+                            if(e) wsError(e);
+                        });
+                    } else {
+                        EIMZOClient.loadKey(vo, function(id){
+                            document.getElementById('keyId').innerHTML = id;
+                            EIMZOClient.createPkcs7(id, data, null, function(pkcs7){
+                                document.testform.pkcs7.value = pkcs7;
+                            }, function(e, r){
+                                if(r){
+                                    if (r.indexOf("BadPaddingException") != -1) {
+                                        uiShowMessage(errorWrongPassword);
+                                    } else {
+                                        uiShowMessage(r);
+                                    }
+                                } else {
+                                    document.getElementById('keyId').innerHTML = '';
+                                    uiShowMessage(errorBrowserWS);
+                                }
+                                if(e) wsError(e);
+                            });
+                        }, function(e, r){
+                            if(r){
+                                if (r.indexOf("BadPaddingException") != -1) {
+                                    uiShowMessage(errorWrongPassword);
+                                } else {
+                                    uiShowMessage(r);
+                                }
+                            } else {
+                                uiShowMessage(errorBrowserWS);
+                            }
+                            if(e) wsError(e);
+                        });
+                    }
+            }
             sign = function () {
                 var itm = document.testform.key.value;
                 if (itm) {
@@ -503,7 +583,7 @@
                     var vo = JSON.parse(id.getAttribute('vo'));
                     var data = document.testform.data.value;
                     var keyId = document.getElementById('keyId').innerHTML;
-                    var report_input = document.getElementById('report_id')
+                    var report_input = document.getElementById('report_id');
                     if(keyId){
                         EIMZOClient.createPkcs7(keyId, data, null, function(pkcs7){
                             {#document.testform.pkcs7.value = pkcs7;#}

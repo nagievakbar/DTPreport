@@ -182,6 +182,13 @@
                                             {{ contract_form.contract_number }}
                                             {{ contract_form.contract_date }}
                                             {{ car_form.car_number }}
+                                              {% if car_form.errors.brand %}
+                                        <div class="alert alert-danger">
+                                            <strong>
+                                                    Марка не выбрана
+                                            </strong>
+                                        </div>
+                                        {% endif %}
                                             {{ car_form.brand }}
                                             {{ car_form.registration }}
                                             {{ car_form.engine_number }}
