@@ -4755,3 +4755,215 @@ Traceback (most recent call last):
   File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/db/backends/sqlite3/base.py", line 413, in execute
     return Database.Cursor.execute(self, query, params)
 django.db.utils.OperationalError: no such table: django_session
+[2021-03-10 12:37:51 +0000] [51144] [INFO] Starting gunicorn 20.0.4
+[2021-03-10 12:37:51 +0000] [51144] [INFO] Listening at: http://127.0.0.1:46710 (51144)
+[2021-03-10 12:37:51 +0000] [51144] [INFO] Using worker: sync
+[2021-03-10 12:37:51 +0000] [51147] [INFO] Booting worker with pid: 51147
+Not Found: /assets/js/bootstrap.min.js
+Not Found: /assets/js/script.js
+Not Found: /assets/js/script.js
+Not Found: /login/assets/js/bootstrap.min.js
+Not Found: /login/assets/js/script.js
+Not Found: /login/assets/js/bootstrap.min.js
+Not Found: /login/assets/js/script.js
+[2021-03-10 12:40:30 +0000] [51144] [INFO] Handling signal: term
+[2021-03-10 12:40:30 +0000] [51147] [INFO] Worker exiting (pid: 51147)
+[2021-03-10 12:40:31 +0000] [51144] [INFO] Shutting down: Master
+[2021-03-10 12:40:31 +0000] [51182] [INFO] Starting gunicorn 20.0.4
+[2021-03-10 12:40:31 +0000] [51182] [INFO] Listening at: http://127.0.0.1:46710 (51182)
+[2021-03-10 12:40:31 +0000] [51182] [INFO] Using worker: sync
+[2021-03-10 12:40:31 +0000] [51185] [INFO] Booting worker with pid: 51185
+[2021-03-10 12:42:19 +0000] [51182] [INFO] Handling signal: term
+[2021-03-10 12:42:19 +0000] [51185] [INFO] Worker exiting (pid: 51185)
+[2021-03-10 12:42:20 +0000] [51182] [INFO] Shutting down: Master
+[2021-03-10 12:42:20 +0000] [51214] [INFO] Starting gunicorn 20.0.4
+[2021-03-10 12:42:20 +0000] [51214] [INFO] Listening at: http://127.0.0.1:46710 (51214)
+[2021-03-10 12:42:20 +0000] [51214] [INFO] Using worker: sync
+[2021-03-10 12:42:20 +0000] [51217] [INFO] Booting worker with pid: 51217
+[2021-03-10 12:42:23 +0000] [51214] [INFO] Handling signal: term
+[2021-03-10 12:42:23 +0000] [51217] [INFO] Worker exiting (pid: 51217)
+[2021-03-10 12:42:23 +0000] [51214] [INFO] Shutting down: Master
+[2021-03-10 12:42:24 +0000] [51220] [INFO] Starting gunicorn 20.0.4
+[2021-03-10 12:42:24 +0000] [51220] [INFO] Listening at: http://127.0.0.1:46710 (51220)
+[2021-03-10 12:42:24 +0000] [51220] [INFO] Using worker: sync
+[2021-03-10 12:42:24 +0000] [51223] [INFO] Booting worker with pid: 51223
+Not Found: /assets/js/bootstrap.min.js
+Not Found: /assets/js/script.js
+Not Found: /assets/js/script.js
+[2021-03-10 12:45:17 +0000] [51223] [INFO] Worker exiting (pid: 51223)
+[2021-03-10 12:45:17 +0000] [51220] [INFO] Handling signal: term
+[2021-03-10 12:45:17 +0000] [51220] [INFO] Shutting down: Master
+[2021-03-10 12:45:18 +0000] [51265] [INFO] Starting gunicorn 20.0.4
+[2021-03-10 12:45:18 +0000] [51265] [INFO] Listening at: http://127.0.0.1:46710 (51265)
+[2021-03-10 12:45:18 +0000] [51265] [INFO] Using worker: sync
+[2021-03-10 12:45:18 +0000] [51268] [INFO] Booting worker with pid: 51268
+[2021-03-10 12:54:24 +0000] [51265] [INFO] Handling signal: term
+[2021-03-10 12:54:24 +0000] [51268] [INFO] Worker exiting (pid: 51268)
+[2021-03-10 12:54:24 +0000] [51265] [INFO] Shutting down: Master
+[2021-03-10 12:54:24 +0000] [51352] [INFO] Starting gunicorn 20.0.4
+[2021-03-10 12:54:24 +0000] [51352] [INFO] Listening at: http://127.0.0.1:46710 (51352)
+[2021-03-10 12:54:24 +0000] [51352] [INFO] Using worker: sync
+[2021-03-10 12:54:24 +0000] [51355] [INFO] Booting worker with pid: 51355
+[2021-03-10 12:55:36 +0000] [51352] [INFO] Handling signal: term
+[2021-03-10 12:55:36 +0000] [51355] [INFO] Worker exiting (pid: 51355)
+[2021-03-10 12:55:36 +0000] [51352] [INFO] Shutting down: Master
+[2021-03-10 12:55:36 +0000] [51382] [INFO] Starting gunicorn 20.0.4
+[2021-03-10 12:55:36 +0000] [51382] [INFO] Listening at: http://127.0.0.1:46710 (51382)
+[2021-03-10 12:55:36 +0000] [51382] [INFO] Using worker: sync
+[2021-03-10 12:55:36 +0000] [51385] [INFO] Booting worker with pid: 51385
+Not Found: /robots.txt
+Not Found: /report/create/generic.html
+[2021-03-10 13:25:11 +0000] [51382] [INFO] Handling signal: term
+[2021-03-10 13:25:11 +0000] [51385] [INFO] Worker exiting (pid: 51385)
+[2021-03-10 13:25:11 +0000] [51382] [INFO] Shutting down: Master
+[2021-03-10 13:25:11 +0000] [51625] [INFO] Starting gunicorn 20.0.4
+[2021-03-10 13:25:11 +0000] [51625] [INFO] Listening at: http://127.0.0.1:46710 (51625)
+[2021-03-10 13:25:11 +0000] [51625] [INFO] Using worker: sync
+[2021-03-10 13:25:11 +0000] [51628] [INFO] Booting worker with pid: 51628
+Not Found: /assets/js/script.js
+Not Found: /assets/js/bootstrap.min.js
+Not Found: /assets/js/script.js
+Not Found: /report/create/generic.html
+Not Found: /favicon.ico
+Not Found: /assets/js/bootstrap.min.js
+Not Found: /assets/js/script.js
+Not Found: /assets/js/script.js
+Not Found: /favicon.ico
+Not Found: /login/assets/js/bootstrap.min.js
+Not Found: /login/assets/js/script.js
+Not Found: /assets/js/bootstrap.min.js
+Not Found: /assets/js/script.js
+Not Found: /assets/js/script.js
+Not Found: /favicon.ico
+Not Found: /login/assets/js/bootstrap.min.js
+Not Found: /login/assets/js/script.js
+Not Found: /login/assets/js/bootstrap.min.js
+Not Found: /login/assets/js/script.js
+Not Found: /login/assets/js/bootstrap.min.js
+Not Found: /login/assets/js/script.js
+Not Found: /login/assets/js/bootstrap.min.js
+Not Found: /login/assets/js/script.js
+Not Found: /login/assets/js/bootstrap.min.js
+Not Found: /login/assets/js/script.js
+Not Found: /login/assets/js/bootstrap.min.js
+Not Found: /login/assets/js/script.js
+Not Found: /login/assets/js/bootstrap.min.js
+Not Found: /login/assets/js/script.js
+Not Found: /login/assets/js/bootstrap.min.js
+Not Found: /login/assets/js/script.js
+Not Found: /login/assets/js/bootstrap.min.js
+Not Found: /login/assets/js/script.js
+Not Found: /login/assets/js/bootstrap.min.js
+Not Found: /login/assets/js/script.js
+Not Found: /login/assets/js/bootstrap.min.js
+Not Found: /login/assets/js/script.js
+Not Found: /assets/js/bootstrap.min.js
+Not Found: /login/assets/js/bootstrap.min.js
+Not Found: /login/assets/js/script.js
+Not Found: /assets/js/script.js
+Not Found: /login/assets/js/script.js
+Not Found: /login/assets/js/bootstrap.min.js
+Not Found: /login/assets/js/script.js
+Not Found: /assets/js/bootstrap.min.js
+Not Found: /assets/js/script.js
+Not Found: /login/assets/js/bootstrap.min.js
+Not Found: /login/assets/js/script.js
+Not Found: /assets/js/script.js
+Not Found: /assets/js/bootstrap.min.js
+Not Found: /assets/js/script.js
+Not Found: /login/assets/js/bootstrap.min.js
+Not Found: /login/assets/js/script.js
+Not Found: /login/assets/js/bootstrap.min.js
+Not Found: /login/assets/js/script.js
+Not Found: /login/assets/js/bootstrap.min.js
+Not Found: /login/assets/js/script.js
+Not Found: /login/assets/js/bootstrap.min.js
+Not Found: /login/assets/js/script.js
+Not Found: /login/assets/js/bootstrap.min.js
+Not Found: /login/assets/js/script.js
+Not Found: /assets/js/bootstrap.min.js
+Not Found: /assets/js/script.js
+Not Found: /assets/js/script.js
+Not Found: /assets/js/script.js
+Not Found: /assets/js/bootstrap.min.js
+Not Found: /assets/js/script.js
+Not Found: /assets/js/bootstrap.min.js
+Not Found: /assets/js/script.js
+Not Found: /assets/js/script.js
+Internal Server Error: /report/ajax/get_service_cost/
+Traceback (most recent call last):
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/vid/makereport/DTPreport/makereport/utils.py", line 228, in get_service_cost
+    service_cost = int((float(norm_per_hour) + float(premium)) * float(price))
+ValueError: could not convert string to float: 
+Internal Server Error: /report/ajax/get_service_cost/
+Traceback (most recent call last):
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/vid/makereport/DTPreport/makereport/utils.py", line 228, in get_service_cost
+    service_cost = int((float(norm_per_hour) + float(premium)) * float(price))
+ValueError: could not convert string to float: 
+Internal Server Error: /report/ajax/get_service_cost/
+Traceback (most recent call last):
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/vid/makereport/DTPreport/makereport/utils.py", line 228, in get_service_cost
+    service_cost = int((float(norm_per_hour) + float(premium)) * float(price))
+ValueError: could not convert string to float: 
+Internal Server Error: /report/ajax/get_service_cost/
+Traceback (most recent call last):
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/vid/makereport/DTPreport/makereport/utils.py", line 228, in get_service_cost
+    service_cost = int((float(norm_per_hour) + float(premium)) * float(price))
+ValueError: could not convert string to float: 
+Internal Server Error: /report/ajax/get_service_cost/
+Traceback (most recent call last):
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/vid/makereport/DTPreport/makereport/utils.py", line 228, in get_service_cost
+    service_cost = int((float(norm_per_hour) + float(premium)) * float(price))
+ValueError: could not convert string to float: 
+Internal Server Error: /report/ajax/get_service_cost/
+Traceback (most recent call last):
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/vid/makereport/DTPreport/makereport/utils.py", line 228, in get_service_cost
+    service_cost = int((float(norm_per_hour) + float(premium)) * float(price))
+ValueError: could not convert string to float: 
+Internal Server Error: /report/ajax/get_product_cost/
+Traceback (most recent call last):
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/vid/makereport/DTPreport/makereport/utils.py", line 239, in get_product_cost
+    total_cost = int(float(quantity) * float(price))
+ValueError: could not convert string to float: 
+Not Found: /assets/js/bootstrap.min.js
+Not Found: /assets/js/script.js
+Not Found: /favicon.ico
+Not Found: /accounts/login/
+Not Found: /favicon.ico
+Not Found: /assets/js/bootstrap.min.js
+Not Found: /assets/js/script.js
+Invalid HTTP_HOST header: '185.196.214.176'. You may need to add '185.196.214.176' to ALLOWED_HOSTS.
+Bad Request: /owa/auth/logon.aspx
+Invalid HTTP_HOST header: '185.196.214.176'. You may need to add '185.196.214.176' to ALLOWED_HOSTS.
+Bad Request: /
+Not Found: /assets/js/bootstrap.min.js
+Not Found: /assets/js/script.js
+Not Found: /assets/js/script.js
