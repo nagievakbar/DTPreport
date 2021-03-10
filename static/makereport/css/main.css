@@ -754,22 +754,7 @@ a:focus {
   color: #6f6f6f;
 }
 
-#id_brand {
-  color: #6f6f6f !important;
-  height: 30px !important;
-  font-style: normal !important;
-  font-weight: normal !important;
-  font-size: 12px !important;
-  padding: 0 !important;
-  box-shadow: none !important;
-  border-color: #ced4da !important;
-  margin-bottom:10px !important;
-}
 
-#id_brand:hover {
-  box-shadow: none !important;
-  border-color: #80bdff !important;
-}
 .data_user {
   width: 100%;
   height: 40px;
