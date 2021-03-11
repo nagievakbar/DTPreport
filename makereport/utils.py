@@ -49,7 +49,6 @@ def get_verifyPkcs7(report_id):
     # my_file.write(response.content)
     # my_file.close()
     my_json = response.content.decode('utf8').replace("'", '"')
-
     formatted_output = my_json.replace('\\n', '\n').replace('\\t', '\t')
     my_file = open('output.txt', 'w')
     my_file.write(formatted_output)
