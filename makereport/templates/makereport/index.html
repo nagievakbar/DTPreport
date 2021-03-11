@@ -326,12 +326,12 @@
               var sign  = button.getAttribute('sign')
               var recipient =""
               if (sign){
-                  recipient = button.getAttribute('pkcs7')
+                  other = button.getAttribute('pkcs7')
               }
               else {
-                recipient = button.getAttribute('data-bs-whatever')
+                
               }
-              
+              recipient = button.getAttribute('data-bs-whatever')
               var report_id = button.getAttribute('data-bs-report')
 
               var modalFileInput = exampleModal.querySelector('.file')
