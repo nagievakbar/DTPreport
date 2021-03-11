@@ -44,7 +44,7 @@ def get_verifyPkcs7(report_id):
                 <pkcs7B64 xmlns="">{}</pkcs7B64 >
             </verifyPkcs7 >
         </Body>
-    </Envelope> """.format(pkcs7)
+    </Envelope> """.format(pkcs7[0])
 
     response = requests.post(url, data=body, headers=headers)
     # my_file = open('response_first.txt', 'w')
