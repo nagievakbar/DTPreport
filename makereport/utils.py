@@ -29,7 +29,7 @@ def serializing(formatted_output):
     return new_str
 
 
-def get_verifyPkcs7(user,report_id):
+def get_verifyPkcs7(report_id):
     data = {}
     report = Report.objects.get(report_id=report_id)
     pkcs7 = report.pdf_report_pkcs7
@@ -98,7 +98,7 @@ def verifyPkcs7(request):
         report.pdf_report_pkcs7 = []
         report.pdf_report_pkcs7.append(pkcs7)
         report.save()
-        print(report.pdf_report_pkcs7)
+
         get_verifyPkcs7(report_id)
         data = {
             'success': 'True',
