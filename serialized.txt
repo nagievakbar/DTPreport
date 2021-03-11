@@ -1,0 +1,67 @@
+{
+  "pkcs7Info": {
+    "signers": [
+      {
+        "signerId": {
+          "issuer": "CN=NASRULLOYEV HAYOTJON XABIBULLOYEVICH,T=Директор,O=DUK YANGI TEXNOLOGIYALAR ILMIY-AXBOROT MARKAZI,OU=ЭРИ яратиш ва реестрни юритиш,L=100115 Тошкент ш. Чилонзор тумани Муқимий кўчаси 166-уй,E=info@yt.uz,C=UZ",
+          "subjectSerialNumber": "77834bee"
+        },
+        "signingTime": "2021.03.11 12:55:01",
+        "signature": "32f87d512a14fb1c71fb79fdada21a6da9831571f5ab923d90e8571e8c7391bd8dbf5fc0756c2779223e4286a222adaa69ab8b75e03af3d62f1bc4e752163f18",
+        "digest": "05d1daa869a5282db90039cb107ba261d0b4776dd10445423ce3628f12642c64",
+        "certificate": [
+          {
+            "serialNumber": "77834bee",
+            "subjectName": "CN=NAGIYEV AKBAR ELMANOVICH,Name=AKBAR,SURNAME=NAGIYEV,L=ЧИЛАНЗАРСКИЙ РАЙОН,ST=ГОРОД ТАШКЕНТ,C=UZ,UID=560904357,1.2.860.3.16.1.2=32812976590026",
+            "validFrom": "2020.11.25 10:32:35",
+            "validTo": "2022.11.25 18:59:59",
+            "issuerName": "CN=NASRULLOYEV HAYOTJON XABIBULLOYEVICH,T=Директор,O=DUK YANGI TEXNOLOGIYALAR ILMIY-AXBOROT MARKAZI,OU=ЭРИ яратиш ва реестрни юритиш,L=100115 Тошкент ш. Чилонзор тумани Муқимий кўчаси 166-уй,E=info@yt.uz,C=UZ",
+            "publicKey": {
+              "keyAlgName": "OZDST-1092-2009-2",
+              "publicKey": "MGAwGQYJKoZcAw8BAQIBMAwGCiqGXAMPAQECAQEDQwAEQGt7ZFXIBzn7ZmW5p1FCJZ9Ol85SzDsIO3y6IqIPlvcxTvngXztvUdn2QP18AogpZ+DGYiT6yn5IDI1q/nYXaFE="
+            },
+            "signature": {
+              "signAlgName": "OZDST-1106-2009-2-AwithOZDST-1092-2009-2",
+              "signature": "5f4ec98c3e518f6c89f7deec93a077dac53642799d8e46172eee07c4312fb496492f93df000673c4feba4f66a0bf8ea1d5abaa6383a4827e05042760e901f363"
+            }
+          },
+          {
+            "serialNumber": "258da73feee7a6b",
+            "subjectName": "CN=NASRULLOYEV HAYOTJON XABIBULLOYEVICH,T=Директор,O=DUK YANGI TEXNOLOGIYALAR ILMIY-AXBOROT MARKAZI,OU=ЭРИ яратиш ва реестрни юритиш,L=100115 Тошкент ш. Чилонзор тумани Муқимий кўчаси 166-уй,E=info@yt.uz,C=UZ",
+            "validFrom": "2020.05.27 04:00:00",
+            "validTo": "2025.05.27 04:00:00",
+            "issuerName": "C=UZ,OU=ERI kalitlarini ro‘yxatga olish organi (O‘ZDST 1092-2009-II),O=AT va kommunikatsiyalarini rivojlantirish vazirligi,CN=mitc.uz",
+            "publicKey": {
+              "keyAlgName": "OZDST-1092-2009-2",
+              "publicKey": "MGAwGQYJKoZcAw8BAQIBMAwGCiqGXAMPAQECAQEDQwAEQHHkDinCquRK5NrYapbR3DSpE7+qqVJ7qDXM/dIApIgO+Yt750+46O1dwz1chTkZc7/ZezmxdtNNIJ2qwefbXr0="
+            },
+            "signature": {
+              "signAlgName": "OZDST-1106-2009-2-AwithOZDST-1092-2009-2",
+              "signature": "18a97f90bd924fe24d143fa94c6ff9efde1eded14abec7e179dfefeaf3243facca99b87371b70da784e9896a04471807db99af0be7c1cc0904aa61d6ca259f55"
+            }
+          }
+        ],
+        "verified": false,
+        "certificateVerified": true,
+        "trustedCertificate": {
+          "serialNumber": "29ce182249b2d8e5207deb74086b4d6",
+          "subjectName": "C=UZ,OU=ERI kalitlarini ro‘yxatga olish organi (O‘ZDST 1092-2009-II),O=AT va kommunikatsiyalarini rivojlantirish vazirligi,CN=mitc.uz",
+          "validFrom": "2020.03.25 12:30:02",
+          "validTo": "2035.03.25 12:30:02",
+          "issuerName": "C=UZ,OU=ERI kalitlarini ro‘yxatga olish organi (O‘ZDST 1092-2009-II),O=AT va kommunikatsiyalarini rivojlantirish vazirligi,CN=mitc.uz",
+          "publicKey": {
+            "keyAlgName": "OZDST-1092-2009-2",
+            "publicKey": "MGAwGQYJKoZcAw8BAQIBMAwGCiqGXAMPAQECAQEDQwAEQI+aPvRfngcv+/Nk1U+bIh/Yn2sxZqViQO47BFq6HQhtrco4AQA32fh+g8Y65J3ZtKRXRDy+0ax1kaRoEPpLREQ="
+          },
+          "signature": {
+            "signAlgName": "OZDST-1106-2009-2-AwithOZDST-1092-2009-2",
+            "signature": "c1d2749535f70d2381e256431c1a3eee3e1d98160674a3d9c54cb7919297555c8649facd9ab8de0eebcfbfe5eb83fee778570e84a86e9786a71c824bdbc0918d"
+          }
+        },
+        "certificateValidAtSigningTime": false,
+        "exception": "ConnectionException: java.net.ConnectException: Connection refused (Connection refused)"
+      }
+    ]
+  },
+  "success": true
+}
