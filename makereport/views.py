@@ -322,7 +322,7 @@ def user_list_some(request):
         reports = Report.objects.filter(created_by = request.user)
     function = "sign()"
     sign = False
-    return render(request, 'makereport/index.html', context={'sign':sign,'reports':reports,'function_for_sign':function})
+    return render(request, 'makereport/index.html', context={'sign':sign,'reports':reports,'function_for_sign':"sign()"})
 
 def admin_list(request):
     if 'search' in request.GET:
