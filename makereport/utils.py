@@ -7,7 +7,7 @@ from .models import *
 
 
 def qr_code(success, signature, signAlgName, updateAt, link, serialNumber):
-    str_for_qr_code = "success: {success}\nsignature:{signature}\nsignAlgName:{signAlgName}\nupdateAt:{updateAt}\nlink:{link}\nserialNumber:{serialNumber}".format(
+    str_for_qr_code = "success: {success}\nsignature:{signature}\nsignAlgName:{signAlgName}\nupdateAt:{updateAt}\nlink:{link}\n".format(
         success=success, signature=signature, signAlgName=signAlgName, updateAt=updateAt, link=link)
     print(str_for_qr_code)
     return str_for_qr_code
