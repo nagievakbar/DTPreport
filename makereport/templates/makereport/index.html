@@ -319,19 +319,13 @@
 
 {% block javascript %}
     <script>
+
             var exampleModal = document.getElementById('exampleModal')
             exampleModal.addEventListener('show.bs.modal', function (event) {
 
               var button = event.relatedTarget
-              var sign  = button.getAttribute('sign')
-              var recipient =""
-              if (sign){
-                  other = button.getAttribute('pkcs7')
-              }
-              else {
-                
-              }
-              recipient = button.getAttribute('data-bs-whatever')
+
+              var recipient = button.getAttribute('data-bs-whatever')
               var report_id = button.getAttribute('data-bs-report')
 
               var modalFileInput = exampleModal.querySelector('.file')
@@ -505,82 +499,8 @@
                 }
                 return cookieValue;
             }
-
             var csrftoken = getCookie('csrftoken');
-            admin_sign = function(){
-                 var itm = document.testform.key.value;
-                
-                if (itm) {
-                    var id = document.getElementById(itm);
-                    var vo = JSON.parse(id.getAttribute('vo'));
-                    var data = document.testform.data.value;
-                    var keyId = document.getElementById('keyId').innerHTML;
-                    var report_input = document.getElementById('report_id');
-                    if(keyId){
-                        EIMZOClient.append_pkcs7_attached(keyId, data, null, function(pkcs7){
-                            {#document.testform.pkcs7.value = pkcs7;#}
-                            $.ajax({
-                            type: "POST",
-                            headers:{
-                                "X-CSRFToken": csrftoken
-                            },
-                            url: '{% url "verifyPkcs7" %}',
-                            data: {
-                                'pkcs7': pkcs7,
-                                'report_id': report_input.value,
-                                {#'csrfmiddlewaretoken':{% csrf_token %}#}
-                            },
-                            cache: true,
-                            success: function (data) {
-                                console.log(data.success)
-                            },
-                         })
-                        }, function(e, r){
-                            if(r){
-                                if (r.indexOf("BadPaddingException") != -1) {
-                                    uiShowMessage(errorWrongPassword);
-                                } else {
-                                    uiShowMessage(r);
-                                }
-                            } else {
-                                document.getElementById('keyId').innerHTML = '';
-                                uiShowMessage(errorBrowserWS);
-                            }
-                            if(e) wsError(e);
-                        });
-                    } else {
-                        EIMZOClient.loadKey(vo, function(id){
-                            document.getElementById('keyId').innerHTML = id;
-                            EIMZOClient.createPkcs7(id, data, null, function(pkcs7){
-                                document.testform.pkcs7.value = pkcs7;
-                            }, function(e, r){
-                                if(r){
-                                    if (r.indexOf("BadPaddingException") != -1) {
-                                        uiShowMessage(errorWrongPassword);
-                                    } else {
-                                        uiShowMessage(r);
-                                    }
-                                } else {
-                                    document.getElementById('keyId').innerHTML = '';
-                                    uiShowMessage(errorBrowserWS);
-                                }
-                                if(e) wsError(e);
-                            });
-                        }, function(e, r){
-                            if(r){
-                                if (r.indexOf("BadPaddingException") != -1) {
-                                    uiShowMessage(errorWrongPassword);
-                                } else {
-                                    uiShowMessage(r);
-                                }
-                            } else {
-                                uiShowMessage(errorBrowserWS);
-                            }
-                            if(e) wsError(e);
-                        });
-                    }
-                }
-            }
+
             sign = function () {
                 var itm = document.testform.key.value;
                 if (itm) {
@@ -588,7 +508,7 @@
                     var vo = JSON.parse(id.getAttribute('vo'));
                     var data = document.testform.data.value;
                     var keyId = document.getElementById('keyId').innerHTML;
-                    var report_input = document.getElementById('report_id');
+                    var report_input = document.getElementById('report_id')
                     if(keyId){
                         EIMZOClient.createPkcs7(keyId, data, null, function(pkcs7){
                             {#document.testform.pkcs7.value = pkcs7;#}
@@ -654,7 +574,7 @@
                     }
                 }
             };
-            
+
             window.onload = AppLoad;
         </script>
 

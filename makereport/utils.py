@@ -45,6 +45,9 @@ def get_verifyPkcs7(user,report_id):
     </Envelope> """.format(pkcs7)
 
     response = requests.post(url, data=body, headers=headers)
+    my_file = open('response_first.txt', 'w')
+    my_file.write(response)
+    my_file.close()
     my_json = response.content.decode('utf8').replace("'", '"')
 
     formatted_output = my_json.replace('\\n', '\n').replace('\\t', '\t')
