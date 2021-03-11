@@ -48,13 +48,13 @@ def get_verifyPkcs7(user,report_id):
     my_json = response.content.decode('utf8').replace("'", '"')
 
     formatted_output = my_json.replace('\\n', '\n').replace('\\t', '\t')
-    my_file = open('output.txt', 'w')
-    my_file.write(formatted_output)
-    my_file.close()
+    # my_file = open('output.txt', 'w')
+    # my_file.write(formatted_output)
+    # my_file.close()
     get_str = serializing(formatted_output)
-    my_file_serialized = open('serialized.txt','w')
-    my_file_serialized.write(my_file_serialized)
-    my_file_serialized.close()
+    # my_file_serialized = open('serialized.txt','w')
+    # my_file_serialized.write(my_file_serialized)
+    # my_file_serialized.close()
     get_json = json.loads(get_str)
     index = 0
    
