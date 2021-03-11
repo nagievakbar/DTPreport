@@ -6,9 +6,9 @@ from django.http import JsonResponse
 from .models import *
 
 
-def qr_code(success, signature, signAlgName, updateAt, link, serialNumber):
-    str_for_qr_code = "success: {success}\nsignature:{signature}\nsignAlgName:{signAlgName}\nupdateAt:{updateAt}\nlink:{link}\n".format(
-        success=success, signature=signature, signAlgName=signAlgName, updateAt=updateAt, link=link)
+def qr_code(success, signature, signAlgName, link, serialNumber):
+    str_for_qr_code = "success: {success}\nsignature:{signature}\nsignAlgName:{signAlgName}\nlink:{link}\n".format(
+        success=success, signature=signature, signAlgName=signAlgName, link=link)
     print(str_for_qr_code)
     return str_for_qr_code
         # img = qrcode.make(str_for_qr_code)  # вот сюда любую ссылку вставите он переведет в QR CODE
@@ -75,18 +75,15 @@ def get_verifyPkcs7(report_id):
     signAlgName = certificate['signature']['signAlgName']
 
     signature = certificate['signature']['signature']
-    statusUpdateAt = signers['statusUpdatedAt']
-    print(statusUpdateAt)
-    statusNextUpdateAt = signers['statusNextUpdateAt']
-    print(statusNextUpdateAt)
+
     verified = signers['verified']
     certificateVerified = signers['certificateVerified']
     LINK = "https://e-otsenka.uz{}".format(report.pdf_report.url)  # Here is the link
     if report.signed == False:
-        report.pdf_qr_code_user = qr_code(success, signature, signAlgName, statusUpdateAt, LINK,serialNumber)
+        report.pdf_qr_code_user = qr_code(success, signature, signAlgName, LINK,serialNumber)
         report.signed = True
     else:
-        report.pdf_qr_code_user = qr_code(success, signature, signAlgName, statusUpdateAt, LINK,serialNumber)
+        report.pdf_qr_code_user = qr_code(success, signature, signAlgName, LINK,serialNumber)
     report.save()
 
 
