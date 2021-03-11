@@ -31,8 +31,10 @@ def serializing(formatted_output):
 
 def get_verifyPkcs7(report_id):
     data = {}
+    print("REPORT ID : ".format(report_id))
     report = Report.objects.get(report_id=report_id)
     pkcs7 = report.pdf_report_pkcs7
+    print("PKCS7 : ".format(pkcs7))
     url = "http://127.0.0.1:9090/dsvs/pkcs7/v1?WSDL"
     headers = {'content-type': 'text/xml'}
 
