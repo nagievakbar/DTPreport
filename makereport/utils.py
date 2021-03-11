@@ -56,7 +56,7 @@ def get_verifyPkcs7(report_id):
     my_file.close()
     get_str = serializing(formatted_output)
     my_file_serialized = open('serialized.txt','w')
-    my_file_serialized.write(my_file_serialized)
+    my_file_serialized.write(get_str)
     my_file_serialized.close()
     get_json = json.loads(get_str)
     index = 0
