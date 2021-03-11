@@ -236,7 +236,7 @@
                             href="{% url 'get_response' report.report_id %}">Открыть</a></td>
                     <td style="border-bottom: 1px solid #fff;" data-title="Функции" data-type="currency">
                
-                        <button class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" sign={{sign}} data-bs-report="{{ report.report_id }}" pkcs7 = {{report.pdf_report_pkcs7}} data-bs-whatever="{{ report.pdf_report_base64 }}">Подписать</button><br><a
+                        <button class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" sign={{sign}} data-bs-report="{{ report.report_id }}" pkcs7 = {{report.pdf_report_pkcs7}} data-bs-whatever = "{{ report.pdf_report_base64 }}">Подписать</button><br><a
                             href="{% url 'edit_report' report.report_id %}">Изменить </a>
 {#                            <a href="#" data-toggle="modal" data-target="#deleteModal" data-bs-whatever="{{ report.report_id }}">Удалить</a>#}
                     </td>
@@ -327,7 +327,7 @@
 
               var recipient = button.getAttribute('data-bs-whatever')
               var report_id = button.getAttribute('data-bs-report')
-
+        
               var modalFileInput = exampleModal.querySelector('.file')
               var modalReportIdField = exampleModal.querySelector('.report_id')
 
