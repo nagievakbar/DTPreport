@@ -19,6 +19,6 @@ urlpatterns = [
     path(r'ajax/get_wear_ajax/', get_wear_ajax, name='get_wear_ajax'),
     path(r'ajax/get_car_card/', get_car_card, name='get_car_card'),
     path(r'ajax/get_btn_to_download/', get_btn_to_download, name='get_btn_to_download'),
-    path(r'ajax/verifyPkcs7/', verifyPkcs7, name='verifyPkcs7')
-
+    path(r'ajax/verifyPkcs7/', verifyPkcs7, name='verifyPkcs7'),
+    path('user_settings/get_template/',get_template, name='upload_template')
 ]

@@ -165,12 +165,14 @@ class Consumable(models.Model):
         verbose_name = 'Расходник'
         verbose_name_plural = 'Расходники'
 
-
+def upload_path_handler(instance, filename):
+    return "templates_xml\_{id}.xml".format(id=instance.user.id)
 class MyUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     report_rate_price = models.IntegerField(default=0, blank=True, null=True)
     report_rate_price_txt = models.CharField(max_length=200, blank=True, null=True)
-
+    template = models.FileField(blank=True, null=True, upload_to=upload_path_handler, verbose_name='Шаблоны для пдф')
+    
     def get_total_report_cost_txt(self):
         self.report_rate_price_txt = num2text(int(self.report_rate_price), main_units=((u'сум', u'сумы', u'сум'), 'f'))
         return self.report_rate_price_txt

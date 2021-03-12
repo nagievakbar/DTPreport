@@ -192,3 +192,12 @@ class WearForm(forms.Form):
     wear = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'input work-price-input prehnite-input'}))
     accept_wear = forms.IntegerField(
         widget=forms.TextInput(attrs={'class': 'input work-price-input prehnite-input'}))
+
+class TemplateForm(forms.Form):
+    template = forms.CharField(
+        widget=forms.FileInput(
+            attrs={'id': 'pphotoinput', 'type': 'file', 'name': 'input', 'multiple': True}))
+
+    class Meta:
+        model = MyUser
+        fields = ['template']

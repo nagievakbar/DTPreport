@@ -10,13 +10,21 @@ import locale
 import base64
 from django.shortcuts import render
 
-
+def get_base_template(request):
+    filename = 'example.xml'
+    response = FileResponse(open(os.path.join(s.MEDIA_ROOT, '../templates/{}'.format(filename)), 'rb'), content_type='text/xml')
+    content = "attachment; filename=%s" % filename
+    response['Content-Disposition'] = content
+    return response
+    
 class GeneratePDF(View):
     def get(self, request, id=id):
         get_response(request, id)
         report_pdf = Report.objects.get(report_id=id)
+ 
         # filename = "%s.pdf" % report_pdf.car.car_number
         filename = str(report_pdf.pdf_report)
+
         response = FileResponse(open(os.path.join(s.MEDIA_ROOT, filename), 'rb'), content_type='application/pdf')
         content = "inline; filename=%s" % filename
         download = request.GET.get("download")
@@ -30,7 +38,14 @@ def get_response(request, id):
         locale.setlocale(locale.LC_ALL, 'C')
         new_report_pdf = Report.objects.get(report_id=id)
         images = Images.objects.filter(report_id=id)
-        pdf = PyPDFML('example.xml')
+        file = request.user.myuser.template
+        if file != None:
+            splited = file.name.split('/')
+            path = os.path.join(s.MEDIA_ROOT,"{}".format(splited[0]))
+            pdf = PyPDFML(splited[-1],path)
+        else:
+            pdf = PyPDFML('example.xml')
+      
         context = {
             'report': new_report_pdf,
             'services': new_report_pdf.service.all().__len__(),

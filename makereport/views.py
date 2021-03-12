@@ -18,6 +18,8 @@ from DTPreport import settings as s
 from DTPreport import urls
 
 
+
+
 class ReportView(View):
     decorators = [login_required]
     extend = False
@@ -321,33 +323,47 @@ def user_list_some(request):
         reports = Report.objects.filter(car__car_number__contains=request.GET['search'],created_by = request.user.myuser)
     else:   
         reports = Report.objects.filter(created_by = request.user)
-    function = "sign()"
-    sign = False
-    return render(request, 'makereport/index.html', context={'sign':sign,'reports':reports,'function_for_sign':function})
+    return render(request, 'makereport/index.html', context={'reports':reports})
 
 def admin_list(request):
     if 'search' in request.GET:
         reports = Report.objects.filter(Q(car__car_number__contains=request.GET['search']) & Q(Q(signed = True)|Q(created_by = request.user.myuser)))
     else:   
         reports = Report.objects.filter(Q(signed = True)|Q(created_by=request.user.myuser))
-    function = "admin_sign()"
-    sign = True
-    return render(request, 'makereport/index.html', context={'sign':sign,'reports':reports,'function_for_sign':function})
+
+    return render(request, 'makereport/index.html', context={'reports':reports})
     
 @login_required
 def users_list(request):
     users = User.objects.all()
     return render(request, 'makereport/users_list.html', context={'users': users})
 
-
+@login_required
+def get_template(request):
+    # if request.method == 'POST' and request.FILES['template']:
+    #     myfile = request.FILES['myfile']
+    #     fs = FileSystemStorage()
+    #     filename = fs.save(myfile.name, myfile)
+    #     uploaded_file_url = fs.url(filename)
+    #     return render(request, 'core/simple_upload.html', {
+    #         'uploaded_file_url': uploaded_file_url
+    #     })
+    user = request.user
+    user.myuser.template.delete()
+    print(request.FILES['file'])
+    user.myuser.template = request.FILES['file'];
+    user.myuser.save()
+    return JsonResponse({})
 class UserSettingsView(View):
     decorators = [login_required]
 
     @method_decorator(decorators)
     def get(self, request):
         user = request.user.myuser
+        templateForm = TemplateForm()
         context = {
             'user': user,
+            'form_upload':templateForm
         }
         return render(request, 'makereport/user_settings.html', context)
 

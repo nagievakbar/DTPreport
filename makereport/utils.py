@@ -6,9 +6,11 @@ from django.http import JsonResponse
 from .models import *
 
 
-def qr_code(success, signature, signAlgName, link, serialNumber):
-    str_for_qr_code = "success: {success}\nsignature:{signature}\nsignAlgName:{signAlgName}\nlink:{link}\n".format(
-        success=success, signature=signature, signAlgName=signAlgName, link=link)
+def qr_code(FULL_NAME):
+    # str_for_qr_code = "success: {success}\nsignature:{signature}\nsignAlgName:{signAlgName}\nlink:{link}\n".format(
+    #     success=success, signature=signature, signAlgName=signAlgName, link=link)
+    str_for_qr_code = "FULL_NAME:{FULL_NAME}".format(
+        FULL_NAME=FULL_NAME)
     print(str_for_qr_code)
     return str_for_qr_code
         # img = qrcode.make(str_for_qr_code)  # вот сюда любую ссылку вставите он переведет в QR CODE
@@ -52,9 +54,9 @@ def get_verifyPkcs7(report_id):
     # my_file.close()
     my_json = response.content.decode('utf8').replace("'", '"')
     formatted_output = my_json.replace('\\n', '\n').replace('\\t', '\t')
-    my_file = open('output.txt', 'w')
-    my_file.write(formatted_output)
-    my_file.close()
+    # my_file = open('output.txt', 'w')
+    # my_file.write(formatted_output)
+    # my_file.close()
     get_str = serializing(formatted_output)
     my_file_serialized = open('serialized.txt','w')
     my_file_serialized.write(get_str)
@@ -80,10 +82,10 @@ def get_verifyPkcs7(report_id):
     certificateVerified = signers['certificateVerified']
     LINK = "https://e-otsenka.uz{}".format(report.pdf_report.url)  # Here is the link
     if report.signed == False:
-        report.pdf_qr_code_user = qr_code(success, signature, signAlgName, LINK,serialNumber)
+        report.pdf_qr_code_user = qr_code(FULL_NAME)
         report.signed = True
     else:
-        report.pdf_qr_code_user = qr_code(success, signature, signAlgName, LINK,serialNumber)
+        report.pdf_qr_code_user = qr_code(FULL_NAME)
     report.save()
 
 

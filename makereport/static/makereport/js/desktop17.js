@@ -6,10 +6,6 @@
 */
 !(function($) {
   "use strict";
-
-
-
-
   $(document).on('click', '.mobile-nav-toggle', function(e) {
     $('body').toggleClass('mobile-nav-active');
     $('.mobile-nav-toggle i').toggleClass('icofont-navigation-menu icofont-close');
@@ -45,6 +41,89 @@ var formItem = $('.material-form .input-block').find('.form-control');
 
 //##case 1 for default style
 //on focus
+
+var Upload = function (file) {
+  this.file = file;
+};
+
+Upload.prototype.getType = function() {
+  return this.file.type;
+};
+Upload.prototype.getSize = function() {
+  return this.file.size;
+};
+Upload.prototype.getName = function() {
+  return this.file.name;
+};
+Upload.prototype.doUpload = function () {
+  var that = this;
+  var formData = new FormData();
+
+  // add assoc key values, this will be posts values
+  formData.append("file", this.file, this.getName());
+  formData.append('type',this.file.type);
+  formData.append("upload_file", true);
+
+  $.ajax({
+      type: "POST",
+      beforeSend: function(xhr, settings) {
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie != '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+            // Only send the token to relative URLs i.e. locally.
+            xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+        }
+      },
+      url: 'get_template/',
+      xhr: function () {
+          var myXhr = $.ajaxSettings.xhr();
+          if (myXhr.upload) {
+              myXhr.upload.addEventListener('progress', that.progressHandling, false);
+          }
+          return myXhr;
+      },
+    
+      success: function (data) {
+          // your callback here
+      },
+      error: function (error) {
+          // handle error
+      },
+      async: true,
+      data: formData,
+      cache: false,
+      contentType: false,
+      processData: false,
+      timeout: 60000
+  });
+};
+
+Upload.prototype.progressHandling = function (event) {
+  var percent = 0;
+  var position = event.loaded || event.position;
+  var total = event.total;
+  var progress_bar_id = "#progress-wrp";
+  if (event.lengthComputable) {
+      percent = Math.ceil(position / total * 100);
+  }
+  // update progressbars classes so it fits your code
+  $(progress_bar_id + " .progress-bar").css("width", +percent + "%");
+  $(progress_bar_id + " .status").text(percent + "%");
+};
+
 formItem.focus(function() {
   $(this).parent('.input-block').addClass('focus');
 });
@@ -72,6 +151,33 @@ floatingField.blur(function() {
       $(this).parent('.input-block').addClass('has-value');
   }
 });
+$('#upload').click(function(){
+    $("#myFile").click();
+ });
+ 
+ function shipOff(event) {
+  var result = document.getElementById('myFile').files[0];
+  var upload = new Upload(result);
+  var content = upload.getType() === "text/xml";
+  if (content){
+    upload.doUpload();
+    alert( "Ваш template успешно загружен")
+  }
+  else {
+    alert( "Файл должен быть в xml формате")
+  }
+ // 
+}
+ $(document).ready(function(){
+  function getFileName(elm) {
+  var file = document.getElementById('myFile').files[0];
+  var reader = new FileReader();
+  reader.readAsText(file, 'UTF-8');
+  reader.onload = shipOff();
+  console.log(file)
+  }
+  $("#myFile").on("change", getFileName);
+});
 
 //dropdown list
 $('body').click(function() {
@@ -86,8 +192,8 @@ $('.custom-select .active-list').click(function() {
 });
 $('.custom-select .drop-down-list li').click(function() {
   var listParent = $(this).parent().parent();
-  //listParent.find('.active-list').trigger("click");
-  listParent.parent('.select-block').removeClass('focus').addClass('added');
-  listParent.find('.active-list').text($(this).text());
-  listParent.find('input.list-field').attr('value', $(this).text());
+
+  listParent.parent('.select-block').removeClass('focus');
+
 });
+

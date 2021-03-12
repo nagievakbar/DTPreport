@@ -568,6 +568,7 @@ class PyPDFML(object):
 
     def jinja2(self, context):
         # env = Environment(loader=PackageLoader('pypdfml', self.template_dir))
+        print("TEMPLATE _DIR {}".format(self.template_dir))
         env = Environment(loader=FileSystemLoader(self.template_dir))
         template = env.get_template(self.template)
         self.xml = template.render(**context).encode('utf-8')
