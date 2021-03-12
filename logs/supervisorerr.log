@@ -650,3 +650,93 @@ Traceback (most recent call last):
   File "/home/vid/makereport/DTPreport/pdf_report/utils.py", line 668, in barcode_cdata
     b = self.barcode_stack.pop()
 IndexError: pop from empty list
+[2021-03-12 17:32:30 +0000] [93647] [INFO] Starting gunicorn 20.0.4
+[2021-03-12 17:32:30 +0000] [93647] [INFO] Listening at: http://127.0.0.1:46710 (93647)
+[2021-03-12 17:32:30 +0000] [93647] [INFO] Using worker: sync
+[2021-03-12 17:32:30 +0000] [93650] [INFO] Booting worker with pid: 93650
+Internal Server Error: /report/ajax/get_service_ajax/
+Traceback (most recent call last):
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/vid/makereport/DTPreport/makereport/utils.py", line 158, in get_service_ajax
+    print(get_brand_nph(request))
+  File "/home/vid/makereport/DTPreport/makereport/utils.py", line 223, in get_brand_nph
+    norm_per_hour = service.BRANDS.get(brand).value_from_object(service)
+AttributeError: 'NoneType' object has no attribute 'value_from_object'
+Internal Server Error: /report/ajax/get_service_ajax/
+Traceback (most recent call last):
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/vid/makereport/DTPreport/makereport/utils.py", line 158, in get_service_ajax
+    print(get_brand_nph(request))
+  File "/home/vid/makereport/DTPreport/makereport/utils.py", line 223, in get_brand_nph
+    norm_per_hour = service.BRANDS.get(brand).value_from_object(service)
+AttributeError: 'NoneType' object has no attribute 'value_from_object'
+Internal Server Error: /report/ajax/get_service_ajax/
+Traceback (most recent call last):
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/vid/makereport/DTPreport/makereport/utils.py", line 158, in get_service_ajax
+    print(get_brand_nph(request))
+  File "/home/vid/makereport/DTPreport/makereport/utils.py", line 223, in get_brand_nph
+    norm_per_hour = service.BRANDS.get(brand).value_from_object(service)
+AttributeError: 'NoneType' object has no attribute 'value_from_object'
+Internal Server Error: /report/ajax/get_service_ajax/
+Traceback (most recent call last):
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/vid/makereport/DTPreport/makereport/utils.py", line 158, in get_service_ajax
+    print(get_brand_nph(request))
+  File "/home/vid/makereport/DTPreport/makereport/utils.py", line 223, in get_brand_nph
+    norm_per_hour = service.BRANDS.get(brand).value_from_object(service)
+AttributeError: 'NoneType' object has no attribute 'value_from_object'
+Internal Server Error: /report/ajax/verifyPkcs7/
+Traceback (most recent call last):
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/vid/makereport/DTPreport/makereport/utils.py", line 102, in verifyPkcs7
+    get_verifyPkcs7(report_id)
+  File "/home/vid/makereport/DTPreport/makereport/utils.py", line 83, in get_verifyPkcs7
+    LINK = "https://e-otsenka.uz{}".format(report.pdf_report.url)  # Here is the link
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/db/models/fields/files.py", line 61, in url
+    self._require_file()
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/db/models/fields/files.py", line 38, in _require_file
+    raise ValueError("The '%s' attribute has no file associated with it." % self.field.name)
+ValueError: The 'pdf_report' attribute has no file associated with it.
+Internal Server Error: /pdf/12/
+Traceback (most recent call last):
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/views/generic/base.py", line 70, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/views/generic/base.py", line 98, in dispatch
+    return handler(request, *args, **kwargs)
+  File "/home/vid/makereport/DTPreport/pdf_report/views.py", line 22, in get
+    get_response(request, id)
+  File "/home/vid/makereport/DTPreport/pdf_report/views.py", line 57, in get_response
+    pdf.generate(context)
+  File "/home/vid/makereport/DTPreport/pdf_report/utils.py", line 601, in generate
+    self.jinja2(context)
+  File "/home/vid/makereport/DTPreport/pdf_report/utils.py", line 573, in jinja2
+    template = env.get_template(self.template)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/jinja2/environment.py", line 883, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/jinja2/environment.py", line 857, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/jinja2/loaders.py", line 115, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/jinja2/loaders.py", line 197, in get_source
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: _1.xml
