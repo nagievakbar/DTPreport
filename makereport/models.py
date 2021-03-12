@@ -166,7 +166,7 @@ class Consumable(models.Model):
         verbose_name_plural = 'Расходники'
 
 def upload_path_handler(instance, filename):
-    return "templates_xml\_{id}.xml".format(id=instance.user.id)
+    return "templates_xml/{id}.xml".format(id=instance.user.id)
 class MyUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     report_rate_price = models.IntegerField(default=0, blank=True, null=True)
