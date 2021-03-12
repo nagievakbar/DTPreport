@@ -212,9 +212,10 @@
         </text>
         <text x="4.5" y="12" align="center">
             Получатель: {{ report.contract.customer.name }}
-            адрес:{{ report.contract.customer.address }}
-            паспорт {{ report.contract.customer.passport_number }} когда выдан {{ report.contract.customer.when_passport_issued }}
-            кем выдан {{ report.contract.customer.whom_passport_issued }}
+            Aдрес:{{ report.contract.customer.address }}
+            Паспорт: {{ report.contract.customer.passport_number }} 
+            Когда выдан: {{ report.contract.customer.when_passport_issued }}
+            Кем выдан: {{ report.contract.customer.whom_passport_issued }}
         </text>
         {# -----------------------------------------table------------------------------------- #}
         <rect x="1.5" y="6.5" width="3" height="1" />

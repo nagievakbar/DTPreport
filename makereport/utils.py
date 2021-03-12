@@ -65,6 +65,7 @@ def get_verifyPkcs7(report_id):
     index = 0
    
     print(get_json)
+    print(report.signed)
     if report.signed == True:
         index = 1
     success = get_json["success"]
