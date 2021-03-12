@@ -64,8 +64,8 @@ def get_verifyPkcs7(report_id):
     get_json = json.loads(get_str)
     index = 0
    
-
-    if report.pdf_qr_code_user != None:
+    print(get_json)
+    if report.signed == True:
         index = 1
     success = get_json["success"]
     signers = get_json["pkcs7Info"]["signers"][0]
