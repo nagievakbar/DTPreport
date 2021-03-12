@@ -740,3 +740,178 @@ Traceback (most recent call last):
   File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/jinja2/loaders.py", line 197, in get_source
     raise TemplateNotFound(template)
 jinja2.exceptions.TemplateNotFound: _1.xml
+Invalid HTTP_HOST header: '185.196.214.176'. You may need to add '185.196.214.176' to ALLOWED_HOSTS.
+Bad Request: /owa/
+[2021-03-12 17:49:49 +0000] [93650] [INFO] Worker exiting (pid: 93650)
+[2021-03-12 17:49:49 +0000] [93647] [INFO] Handling signal: term
+[2021-03-12 17:49:50 +0000] [93647] [INFO] Shutting down: Master
+[2021-03-12 17:49:50 +0000] [93870] [INFO] Starting gunicorn 20.0.4
+[2021-03-12 17:49:50 +0000] [93870] [INFO] Listening at: http://127.0.0.1:46710 (93870)
+[2021-03-12 17:49:50 +0000] [93870] [INFO] Using worker: sync
+[2021-03-12 17:49:50 +0000] [93873] [INFO] Booting worker with pid: 93873
+Internal Server Error: /report/ajax/verifyPkcs7/
+Traceback (most recent call last):
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/urllib3/connection.py", line 170, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/urllib3/connectionpool.py", line 706, in urlopen
+    chunked=chunked,
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/urllib3/connectionpool.py", line 394, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/urllib3/connection.py", line 234, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/usr/lib/python3.6/http/client.py", line 1281, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1327, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1276, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1042, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.6/http/client.py", line 980, in send
+    self.connect()
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/urllib3/connection.py", line 200, in connect
+    conn = self._new_conn()
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/urllib3/connection.py", line 182, in _new_conn
+    self, "Failed to establish a new connection: %s" % e
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7f6646ac2cf8>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/urllib3/connectionpool.py", line 756, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/urllib3/util/retry.py", line 573, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=9090): Max retries exceeded with url: /dsvs/pkcs7/v1?WSDL (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f6646ac2cf8>: Failed to establish a new connection: [Errno 111] Connection refused',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/vid/makereport/DTPreport/makereport/utils.py", line 103, in verifyPkcs7
+    get_verifyPkcs7(report_id)
+  File "/home/vid/makereport/DTPreport/makereport/utils.py", line 51, in get_verifyPkcs7
+    response = requests.post(url, data=body, headers=headers)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/requests/api.py", line 119, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/requests/api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/requests/sessions.py", line 542, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/requests/sessions.py", line 655, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=9090): Max retries exceeded with url: /dsvs/pkcs7/v1?WSDL (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f6646ac2cf8>: Failed to establish a new connection: [Errno 111] Connection refused',))
+Internal Server Error: /report/ajax/verifyPkcs7/
+Traceback (most recent call last):
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/urllib3/connection.py", line 170, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/urllib3/connectionpool.py", line 706, in urlopen
+    chunked=chunked,
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/urllib3/connectionpool.py", line 394, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/urllib3/connection.py", line 234, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/usr/lib/python3.6/http/client.py", line 1281, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1327, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1276, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib/python3.6/http/client.py", line 1042, in _send_output
+    self.send(msg)
+  File "/usr/lib/python3.6/http/client.py", line 980, in send
+    self.connect()
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/urllib3/connection.py", line 200, in connect
+    conn = self._new_conn()
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/urllib3/connection.py", line 182, in _new_conn
+    self, "Failed to establish a new connection: %s" % e
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x7f66469a2390>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/urllib3/connectionpool.py", line 756, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/urllib3/util/retry.py", line 573, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=9090): Max retries exceeded with url: /dsvs/pkcs7/v1?WSDL (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f66469a2390>: Failed to establish a new connection: [Errno 111] Connection refused',))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/vid/makereport/DTPreport/makereport/utils.py", line 103, in verifyPkcs7
+    get_verifyPkcs7(report_id)
+  File "/home/vid/makereport/DTPreport/makereport/utils.py", line 51, in get_verifyPkcs7
+    response = requests.post(url, data=body, headers=headers)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/requests/api.py", line 119, in post
+    return request('post', url, data=data, json=json, **kwargs)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/requests/api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/requests/sessions.py", line 542, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/requests/sessions.py", line 655, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=9090): Max retries exceeded with url: /dsvs/pkcs7/v1?WSDL (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f66469a2390>: Failed to establish a new connection: [Errno 111] Connection refused',))
+Internal Server Error: /report/ajax/verifyPkcs7/
+Traceback (most recent call last):
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/vid/makereport/DTPreport/makereport/utils.py", line 103, in verifyPkcs7
+    get_verifyPkcs7(report_id)
+  File "/home/vid/makereport/DTPreport/makereport/utils.py", line 84, in get_verifyPkcs7
+    LINK = "https://e-otsenka.uz{}".format(report.pdf_report.url)  # Here is the link
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/db/models/fields/files.py", line 61, in url
+    self._require_file()
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/db/models/fields/files.py", line 38, in _require_file
+    raise ValueError("The '%s' attribute has no file associated with it." % self.field.name)
+ValueError: The 'pdf_report' attribute has no file associated with it.
+Internal Server Error: /report/ajax/verifyPkcs7/
+Traceback (most recent call last):
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/core/handlers/base.py", line 181, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/vid/makereport/DTPreport/makereport/utils.py", line 103, in verifyPkcs7
+    get_verifyPkcs7(report_id)
+  File "/home/vid/makereport/DTPreport/makereport/utils.py", line 84, in get_verifyPkcs7
+    LINK = "https://e-otsenka.uz{}".format(report.pdf_report.url)  # Here is the link
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/db/models/fields/files.py", line 61, in url
+    self._require_file()
+  File "/home/vid/makereport/DTPreport/env/lib/python3.6/site-packages/django/db/models/fields/files.py", line 38, in _require_file
+    raise ValueError("The '%s' attribute has no file associated with it." % self.field.name)
+ValueError: The 'pdf_report' attribute has no file associated with it.
