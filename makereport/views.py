@@ -349,7 +349,8 @@ def get_template(request):
     #         'uploaded_file_url': uploaded_file_url
     #     })
     user = request.user
-    user.myuser.template.delete()
+    if user.myuser.template != None:
+        user.myuser.template.delete()
     print(request.FILES['file'])
     user.myuser.template = request.FILES['file'];
     user.myuser.save()
