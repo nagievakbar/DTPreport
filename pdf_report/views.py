@@ -2,7 +2,7 @@ from django.http import FileResponse
 from django.views.generic import View
 import os
 from DTPreport import settings as s
-from makereport.models import Report, Images , Documents
+from makereport.models import Report, Images , Documents ,PassportPhotos ,OtherPhotos ,Checks
 from pdf_report.utils import PyPDFML
 from fpdf import FPDF
 from django.core.files.base import ContentFile
@@ -38,6 +38,9 @@ def get_response(request, id):
         locale.setlocale(locale.LC_ALL, 'C')
         new_report_pdf = Report.objects.get(report_id=id)
         images = Images.objects.filter(report_id=id)
+        passport = PassportPhotos.objects.filter(report_id = id)
+        checks = Checks.objects.filter(report_id = id)
+        other_photos = OtherPhotos.objects.filter(report_id = id)
         file = request.user.myuser.template
         documnet_photo = Documents.objects.first()
         path_for_images = s.MEDIA_ROOT
@@ -59,6 +62,9 @@ def get_response(request, id):
             'qrcode_admin':new_report_pdf.pdf_qr_code_admin,
             'images': images,
             'documnet_photo':documnet_photo,
+            'passport':passport.first().photo,
+            'checks': checks,
+            'other_photos':other_photos,
             }
         pdf.generate(context)
         data = pdf.contents()

@@ -179,7 +179,7 @@
 {#                                            <input type="text" placeholder="Отчёт" class="input_in">#}
                                             {{ report_form.created_at }}
                                             {{ car_form.car_number }}
-                                            {{ car_form.brand }}
+                                            {{ car_form.brand_text }}
                                             {{ car_form.registration }}
                                             {{ car_form.engine_number }}
                                             {{ car_form.body_number }}
@@ -208,20 +208,8 @@
                         <!-- 1 -->
                         <div class="row">
 
-                            <div class="col-lg-4">
-                                <div class="select-block">
-                                    <label>Марка машины</label>
-                                    <div class="custom-select">
-                                        <div class="active-list">0</div>
-                                        <input type="text" class="list-field" value="0" />
-                                        <ul class="drop-down-list">
-                                            <li>1</li>
-                                            <li>2</li>
-                                            <li>3</li>
-                                            <li>4</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                        <div class="col-lg-4">   
+                                 {{car_form.brand}}
                             </div>
                             <div class="col-lg-4">
                                 <div class="select-block">

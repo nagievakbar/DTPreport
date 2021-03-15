@@ -1528,18 +1528,27 @@
    </page>
 
 
-   <page>
+  
        
-        {% set count = namespace(value=1) %}
+      {% set count = namespace(value=1) %}
       {% for image in images %}
-        {% if loop.index is not divisibleby 2 %}
+    {% if loop.first or loop.index % 6 == 1 %}
+             <page>
+      {% endif %}
+    
+    {% if loop.index is not divisibleby 2 %}
        <image src = "{{ image.image }}" x='0.5' y = '{{30 - count.value*8}}' height='7.5' width = '10'/>
        {% else %}
         <image src = "{{ image.image }}" x='10.8' y = '{{30 - count.value*8}}' height='7.5' width = '10'/>
         {% set count.value = count.value + 1 %}
+     {% endif %}
+
+      {% if loop.last or loop.index % 6 == 0 %}
+              </page>
         {% endif %}
+
        {% endfor %} 
-       </page>
+ 
 </pdf>
 
 
