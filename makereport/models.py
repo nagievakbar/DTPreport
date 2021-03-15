@@ -35,6 +35,7 @@ BRANDS = (
 )
 class Car(models.Model):
     car_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
+    brand_text = models.CharField(max_length=30)
     brand = models.CharField(max_length=30,choices = BRANDS)
     car_number = models.CharField(max_length=8)
     registration = models.CharField(max_length=15)
@@ -55,7 +56,16 @@ class Car(models.Model):
         verbose_name = 'Машину'
         verbose_name_plural = 'Машины'
 
-
+class Documents(models.Model):
+    license =  models.ImageField(blank=True, null=True, verbose_name='Лицензия')
+    guvonhnoma = models.ImageField(blank = True, null = True, verbose_name = 'Гувохнома')
+    certificate = models.ImageField(blank=True, null=True, verbose_name='Сертификат')
+    insurance = models.ImageField(blank = True, null = True, verbose_name = 'Cтраховка')
+    class Meta:
+        verbose_name = 'Фотографии для документа'
+        verbose_name_plural = 'Фотографии для документов'
+    def __str__(self):
+        return "Документ № {}".format(self.id)
 class Customer(models.Model):
     customer_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     name = models.CharField(max_length=100, verbose_name='ФИО')

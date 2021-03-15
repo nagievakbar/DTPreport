@@ -212,10 +212,9 @@
         </text>
         <text x="4.5" y="12" align="center">
             Получатель: {{ report.contract.customer.name }}
-            Aдрес:{{ report.contract.customer.address }}
-            Паспорт: {{ report.contract.customer.passport_number }} 
-            Когда выдан: {{ report.contract.customer.when_passport_issued }}
-            Кем выдан: {{ report.contract.customer.whom_passport_issued }}
+            адрес:{{ report.contract.customer.address }}
+            паспорт {{ report.contract.customer.passport_number }} когда выдан {{ report.contract.customer.when_passport_issued }}
+            кем выдан {{ report.contract.customer.whom_passport_issued }}
         </text>
         {# -----------------------------------------table------------------------------------- #}
         <rect x="1.5" y="6.5" width="3" height="1" />
@@ -372,6 +371,20 @@
          {% if qrcode %}
          <barcode x="15" y="0.5"  type="QR" height="2">{{ qrcode }}</barcode>
            {% endif %}
+    </page>
+    <page>
+    {% if documnet_photo.license %}
+    <image height="14.5" width="9.5" y='15' x='1' src="{{ documnet_photo.license}}"/>
+    {% endif %}
+    {% if documnet_photo.guvonhnoma %}
+    <image  height="14.5" width="9.5" y='15' x='11' src="{{documnet_photo.guvonhnoma}}"/>
+    {% endif %}
+    {% if documnet_photo.certificate %}
+    <image  height="14.5" width="9.5" y='0.5' x='1' src="{{documnet_photo.certificate}}"/>
+        {% endif %}
+    {% if documnet_photo.insurance %}
+    <image  height="14.5" width="9.5"  y='0.5' x='11' src="{{documnet_photo.insurance}}"/>
+    {% endif %}
     </page>
                                      PAGE 3
     <page>
@@ -1179,7 +1192,7 @@
             <rect x="14" y="-{{ 6 + loop.index/2+0.1}} " width="2" height="0.5"/>
             <rect x="16" y="-{{ 6 + loop.index/2+0.1}} " width="3" height="0.5"/>
             <text x="2.6" y="-{{ 6 + loop.index/2}}" >{{ service.service_id }}</text>
-            <text x="3.5" y="-{{ 6 + loop.index/2 }}" lineheight="1.5"> {{ service.name }} </text>
+            <text x="3.5" y="-{{ 6 + loop.index/2 }}" lineheight="1.5"> {{ service.name[0:40] }}  </text>
             <text x="11.3" y="-{{ 6 + loop.index/2 }}" lineheight="1.5"> {{ service.norm_per_hour }} </text>
             <text x="13" y="-{{ 6 + loop.index/2 }}" lineheight="1.5"> {{ service.premium }} </text>
             <text x="14.5" y="-{{ 6 + loop.index/2 }}" lineheight="1.5"> {{ service.price }} </text>
@@ -1195,10 +1208,12 @@
         {% endfor %}
 
     </page>
+
     <page>
         <text>
             2. Стоимость запасных частей
         </text>
+  
          {% for product in report.product_data %}
             {% if loop.first %}
                 <rect x="2" y="-{{ 5 + loop.index/2+0.1}} " width="1.5" height="1"/>
@@ -1336,6 +1351,7 @@
         <rect x="10" y="22" height="1" width="6"/>
         <rect x="16" y="22" height="1" width="3"/>
         <text x="3" y="25.4">Cтоимость работ</text>
+        
         <text x="3" y="24.4">Cтоимость запасных частей</text>
         <text x="3" y="23.4">Cтоимость материалов</text>
         <text x="3" y="22.4">Срем=Сраб+См+Сзч</text>
@@ -1510,21 +1526,20 @@
 Согласно статьи 18, Закона Республики Узбекистан №811-I от 19.08.1999 года «Об оценочной деятельности»
 Отчёт, составленный в порядке, предусмотренном настоящим Законом.</text>
    </page>
-   <page>
-       {% for image in images %}
-           {% if loop.index/3 <= 1 %}
-{#                <image  src="{{ image.image }}" x="{{ loop.index + 5 }}" y="15" height="3" width="4" />#}
-                <text x="{{ loop.index + 5 }}" y="15">1st {{ loop.length }}</text>
-           {% elif 1 < loop.index/3 <= 2 %}
-{#                <image  src="{{ image.image }}" x="{{ loop.index + 2 }}" y="10" height="3" width="4" />#}
-                <text x="{{ loop.index + 2 }}" y="10">2nd</text>
-           {% elif 2 < loop.index/3 <= 3 %}
-{#                <image  src="{{ image.image }}" x="{{ loop.index - 1 }}" y="10" height="3" width="4" />#}
-                <text x="{{ loop.index - 1 }}" y="5">3th</text>
-           {% endif %}
 
-       {% endfor %}
-   </page>
+
+   <page>
+       
+        {% set count = namespace(value=1) %}
+      {% for image in images %}
+        {% if loop.index is not divisibleby 2 %}
+       <image src = "{{ image.image }}" x='0.5' y = '{{30 - count.value*8}}' height='7.5' width = '10'/>
+       {% else %}
+        <image src = "{{ image.image }}" x='10.8' y = '{{30 - count.value*8}}' height='7.5' width = '10'/>
+        {% set count.value = count.value + 1 %}
+        {% endif %}
+       {% endfor %} 
+       </page>
 </pdf>
 
 

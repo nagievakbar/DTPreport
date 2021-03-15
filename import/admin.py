@@ -1,5 +1,5 @@
 from django.contrib import admin
-from makereport.models import Product, Service, Consumable
+from makereport.models import Product, Service, Consumable , Documents
 from import_export.admin import ImportExportModelAdmin
 
 
@@ -55,3 +55,4 @@ class ConsumableAdmin(ImportExportModelAdmin):
 admin.site.register(Consumable, ConsumableAdmin)
 admin.site.register(Service, ServiceAdmin)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(Documents)

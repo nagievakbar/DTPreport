@@ -77,7 +77,7 @@ class ReportView(View):
             wear_form = WearForm()
             total_price_report = 0
             template = 'makereport/add_repor.html'
-
+            print(car_form.as_ul())
         context = {
             'report_form': report_form,
             'car_form': car_form,

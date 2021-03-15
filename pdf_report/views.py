@@ -2,7 +2,7 @@ from django.http import FileResponse
 from django.views.generic import View
 import os
 from DTPreport import settings as s
-from makereport.models import Report, Images
+from makereport.models import Report, Images , Documents
 from pdf_report.utils import PyPDFML
 from fpdf import FPDF
 from django.core.files.base import ContentFile
@@ -39,21 +39,27 @@ def get_response(request, id):
         new_report_pdf = Report.objects.get(report_id=id)
         images = Images.objects.filter(report_id=id)
         file = request.user.myuser.template
+        documnet_photo = Documents.objects.first()
+        path_for_images = s.MEDIA_ROOT
+        print(images)
         if file != None:
             splited = file.name.split('/')
             path = os.path.join(s.MEDIA_ROOT,"{}".format(splited[0]))
+            print("path_for_images {}".format(path_for_images))
+            print("path {}".format(path))
             pdf = PyPDFML(splited[-1],path)
         else:
             pdf = PyPDFML('example.xml')
-      
+        image_variable = 0;
         context = {
             'report': new_report_pdf,
             'services': new_report_pdf.service.all().__len__(),
-            'images': images,
             'datetime': new_report_pdf.report_date,
             'qrcode': new_report_pdf.pdf_qr_code_user,
-            'qrcode_admin':new_report_pdf.pdf_qr_code_admin
-        }
+            'qrcode_admin':new_report_pdf.pdf_qr_code_admin,
+            'images': images,
+            'documnet_photo':documnet_photo,
+            }
         pdf.generate(context)
         data = pdf.contents()
         filename = "%s.pdf" % new_report_pdf.car.car_number

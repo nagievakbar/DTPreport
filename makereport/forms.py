@@ -30,8 +30,8 @@ BRANDS = (
     )
 class CarForm(forms.ModelForm):
     """docstring for CarForm."""
-
-    brand = forms.ChoiceField(choices=BRANDS, widget=forms.Select(attrs={'class':'form-control'}))
+    brand_text = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Марка', 'class': 'input_in'}))
+    brand = forms.ChoiceField(choices=BRANDS, widget=forms.Select(attrs={'class':'form-control select-block'}))
     car_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Номер машины', 'class': 'input_in'}))
     registration = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Тех. паспорт', 'class': 'input_in'}))
     engine_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Двигатель', 'class': 'input_in'}))
@@ -48,7 +48,8 @@ class CarForm(forms.ModelForm):
 
     class Meta:
         model = Car
-        fields = ['brand',
+        fields = ['brand_text',
+                  'brand',
                   'car_number',
                   'registration',
                   'engine_number',

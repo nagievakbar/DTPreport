@@ -236,7 +236,7 @@
                             href="{% url 'get_response' report.report_id %}">Открыть</a></td>
                     <td style="border-bottom: 1px solid #fff;" data-title="Функции" data-type="currency">
                
-                        <button class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" sign={{report.signed}} data-bs-report="{{ report.report_id }}" pkcs7 = {{report.pdf_report_pkcs7[0]}} data-bs-whatever="{{ report.pdf_report_base64 }}">Подписать</button><br><a
+                        <button class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" sign={{report.signed}} data-bs-report="{{ report.report_id }}" pkcs7 = {{report.pdf_report_pkcs7.0}} data-bs-whatever="{{ report.pdf_report_base64 }}">Подписать</button><br><a
                             href="{% url 'edit_report' report.report_id %}">Изменить </a>
 {#                            <a href="#" data-toggle="modal" data-target="#deleteModal" data-bs-whatever="{{ report.report_id }}">Удалить</a>#}
                     </td>
@@ -332,6 +332,7 @@
   
               if (sign[0]=='T'){
                   recipient = button.getAttribute('pkcs7');
+                  alert(recipient);
               }
               else {
              
@@ -545,7 +546,7 @@
                             },
                             cache: true,
                             success: function (data) {
-                                console.log(data.success)
+                                alert("Ваша подпись была успешна добавлена!")
                             },
                          })
                         }, function(e, r){
@@ -605,7 +606,7 @@
                     if(keyId){
                         EIMZOClient.createPkcs7(keyId, data, null, function(pkcs7){
                             {#document.testform.pkcs7.value = pkcs7;#}
-                            $.ajax({
+                             $.ajax({
                             type: "POST",
                             headers:{
                                 "X-CSRFToken": csrftoken
@@ -618,7 +619,7 @@
                             },
                             cache: true,
                             success: function (data) {
-                                console.log(data.success)
+                                alert("Вы успешно подписали документ!")
                             },
                          })
                         }, function(e, r){

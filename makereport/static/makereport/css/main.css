@@ -516,6 +516,46 @@ a:focus {
 
   overflow: hidden;
 }
+#id_brand {
+  background-color: #5c6e91;
+  color: white;
+  max-width: 900px;
+  height: 40px;
+  position: relative;
+  margin-bottom: 20px;
+
+  border-radius: 5px;
+  width: 100%;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+#id_brand:focus {
+  box-shadow: none;
+  border-color: none;
+  }
+.select-block option {
+  left: 30px;
+  top: 12px;
+  margin: 0;
+  position: absolute;
+  max-width: 870px;
+  margin-left: 20px;
+  height: 40px;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+ 
+  z-index: 1;
+  color: #fff;
+  font-weight: normal;
+  font-size: 15px;
+
+  overflow: hidden;
+}
+
 
 .select-block.focus label {
   top: 2px;
@@ -528,6 +568,7 @@ a:focus {
   top: 2px;
   font-size: 12px;
 }
+
 
 .select-block.added.focus label {
   top: 2px;
@@ -754,21 +795,7 @@ a:focus {
   color: #6f6f6f;
 }
 
-#id_brand {
-  color: #6f6f6f;
-  height: 30px;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 12px;
-  padding: 0;
-  box-shadow: none;
-  border-color: #ced4da;
-  margin-bottom:10px;
-}
-#id_brand:hover {
-  box-shadow: none;
-  border-color: #80bdff;
-}
+
 .data_user {
   width: 100%;
   height: 40px;

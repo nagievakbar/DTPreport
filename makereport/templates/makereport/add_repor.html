@@ -30,7 +30,6 @@
     <link href="{% static '/path/to/css/fileinput.css' %}" media="all" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
     <link href="{% static '/path/to/themes/explorer-fas/theme.css' %}" media="all" rel="stylesheet" type="text/css">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
     <script src="{% static '/path/to/jquery-3.3.1.min.js' %}" ></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="{% static '/path/to/js/plugins/piexif.js' %}" type="text/javascript"></script>
@@ -45,23 +44,11 @@
 {#	<script src="{% static '/makereport/js/jquery-1.12.4.js' %}"></script>#}
 	<script src="{% static '/makereport/js/script.min.js' %}"> </script>
 	<script src="{% static '/makereport/js/main.js' %}"></script>
-	<script src="{% static '/makereport/js/desktop3.js' %}"></script>
-    <style>
-                #id_brand {
-            color: #6f6f6f;
-            height: 30px;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 12px;
-            padding: 0;
+	
+ <style>
+     #id_brand:focus {
             box-shadow: none;
-            border-color: #ced4da;
-            margin-bottom:10px;
-            }
-
-            #id_brand:hover {
-            box-shadow: none;
-            border-color: #80bdff;
+            border-color: none;
             }
     </style>
 </head>
@@ -174,9 +161,19 @@
 			</div>
 		</div>
 		<!-- ======= Header ======= -->
-
-
-
+                         {% if car_form.errors.brand %}
+                                    <div class="alert alert-danger">
+                                            <strong>
+                                                    Марка не выбрана
+                                            </strong>
+                                      </div>     
+                                        {% endif %} 
+                 <div class="alert alert-danger">
+                                            <strong>
+                                                  {{car_form.errors}}
+                                            </strong>
+                                      </div>    
+    
 
 		<section class="padding_phone" style="z-index: 9999 !important;">
 
@@ -186,27 +183,25 @@
                     <!-- 1 -->
                         <div class="accordion-item">
                             <div class="accordion-header active-accordion">
-                                <span class="accordion-title">Данные</span>
+                                <span class="accordion-title">Данные
+                           
+                                
+                                </span>
                                 <img src="{% static '/makereport/img/Polygon.png' %}" alt="polygon" class="polygon">
                             </div>
                             <div class="inside-content accordion-content" style="display: block;">
                                 <div class="accordion-content-wrapper">
                                     <div class="inputs_big">
                                         <div class="left-inputs">
+                                            
 {#                                            <input type="text" placeholder="Отчёт" class="input_in">#}
                                             {{ report_form.report_number }}
                                             {{ report_form.report_date }}
                                             {{ contract_form.contract_number }}
                                             {{ contract_form.contract_date }}
                                             {{ car_form.car_number }}
-                                              {% if car_form.errors.brand %}
-                                        <div class="alert alert-danger">
-                                            <strong>
-                                                    Марка не выбрана
-                                            </strong>
-                                        </div>
-                                        {% endif %}
-                                            {{ car_form.brand }}
+                                              {% comment %} {% endcomment %}
+                                            {{ car_form.brand_text }}
                                             {{ car_form.registration }}
                                             {{ car_form.engine_number }}
                                             {{ car_form.body_number }}
@@ -255,19 +250,10 @@
                         <div class="row">
 
                             <div class="col-lg-4">
-                                <div class="select-block">
-                                    <label>Марка машины</label>
-                                    <div class="custom-select">
-                                        <div class="active-list">0</div>
-                                        <input type="text" class="list-field" value="0" />
-                                        <ul class="drop-down-list">
-                                            <li>1</li>
-                                            <li>2</li>
-                                            <li>3</li>
-                                            <li>4</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                    
+                                       
+                                         {{car_form.brand}}
+                               
                             </div>
                             <div class="col-lg-4">
                                 <div class="select-block">
@@ -812,6 +798,7 @@
 
 
     {% block javascript %}
+    
         <script>
 
             $(document).on('keypress', "form", function (event) {
@@ -1056,15 +1043,7 @@
                 }
             });
 
-            {# $(document).on('keypress', ".prehnite-input", function (e) {#}
-            {#    console.log('CLICK point-input')#}
-            {#    var key = e.which;#}
-            {#    if (key === 13) {#}
-            {#        var point = $(this).val(),#}
-            {#            accept_weight = $(this).parents('.details').find('.accept-wear-input')#}
-            {#            accept_weight.select()#}
-            {#    }#}
-            {# });#}
+          
 
              $(document).on('keypress', ".prehnite-input", function (e) {
                 console.log('CLICK accept_weight')
@@ -1096,6 +1075,7 @@
                  });
                  */
                 $(document).ready(function () {
+       
                     $("#test-upload").fileinput({
                         'theme': 'fas',
                         'showPreview': false,
@@ -1113,11 +1093,7 @@
                         {#initialCaption: "Фото Машины",#}
                         showUpload: false,
                         required: false,
-                        {#initialPreviewConfig: [#}
-                        {#    {caption: "nature-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1},#}
-                        {#    {caption: "nature-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2},#}
-                        {#    {caption: "nature-3.jpg", size: 632762, width: "120px", url: "{$url}", key: 3}#}
-                        {#]#}
+                  
                     });
                     $("#pphotoinput").fileinput({
                         'theme': 'fas',
@@ -1130,11 +1106,7 @@
                         {#initialCaption: "Фото Машины",#}
                         showUpload: false,
                         required: false,
-                        {#initialPreviewConfig: [#}
-                        {#    {caption: "nature-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1},#}
-                        {#    {caption: "nature-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2},#}
-                        {#    {caption: "nature-3.jpg", size: 632762, width: "120px", url: "{$url}", key: 3}#}
-                        {#]#}
+                
                     });
                      $("#ophotoinput").fileinput({
                         'theme': 'fas',
@@ -1147,11 +1119,7 @@
                         {#initialCaption: "Фото чеков",#}
                         showUpload: false,
                         required: false,
-                        {#initialPreviewConfig: [#}
-                        {#    {caption: "nature-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1},#}
-                        {#    {caption: "nature-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2},#}
-                        {#    {caption: "nature-3.jpg", size: 632762, width: "120px", url: "{$url}", key: 3}#}
-                        {#]#}
+                    
                     });
                      $("#checksinput").fileinput({
                         'theme': 'fas',
@@ -1161,20 +1129,15 @@
                         initialPreview: [
                         ],
                         initialCaption: 'Выберите фото тех паспорта',
-                        {#initialCaption: "Фото чеков",#}
-                        showUpload: false,
-                        required: false,
-                        {#initialPreviewConfig: [#}
-                        {#    {caption: "nature-1.jpg", size: 329892, width: "120px", url: "{$url}", key: 1},#}
-                        {#    {caption: "nature-2.jpg", size: 872378, width: "120px", url: "{$url}", key: 2},#}
-                        {#    {caption: "nature-3.jpg", size: 632762, width: "120px", url: "{$url}", key: 3}#}
-                        {#]#}
+                        
                     });
                 });
         </script>
+
     {% endblock %}
 
-
+<script src="{% static '/makereport/js/desktop3.js' %}"></script>
 </body>
+
 
 </html>
