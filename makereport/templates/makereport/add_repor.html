@@ -917,6 +917,7 @@
                         success: function (data) {
                             console.log('success')
                             last_input_quantity.select()
+                            console.log("data : " + data.name)
                             last_input_name.val(data.name)
                             {#last_input_unit.val(data.unit)#}
                             last_input_price.val(data.price)
@@ -998,7 +999,7 @@
                         dataType: 'json',
                         success: function (data) {
                             console.log('success calculate cost')
-                            present_table.select()
+                            console.log("data total" + data.total_cost)
                             cost.val(data.total_cost)
                         },
                     })

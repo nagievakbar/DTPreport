@@ -13,7 +13,7 @@ from django.db.models import Q
 from .forms import *
 from .utils import *
 from .converters import num2text
-from pdf_report.views import get_response
+from pdf_report.views import create_base64
 from DTPreport import settings as s
 from DTPreport import urls
 
@@ -57,7 +57,6 @@ class ReportView(View):
             consumable_formset = consumable_form(initial=report.consumable_data, prefix='consumable')
             wear_form = WearForm(initial=report.wear_data)
             total_price_report = report.total_report_cost
-
             template = 'makereport/edit_repor.html'
         else:
             print('get method without id')
@@ -179,6 +178,8 @@ class ReportView(View):
                 new_report.get_total_report_price()
             new_report.set_private_key()
             new_report.save()
+            create_base64(request,new_report)
+            print(new_report.pdf_report_base64)
             return HttpResponseRedirect('/report/list')
     
         context = {
@@ -268,7 +269,7 @@ class ReportView(View):
                 wd = get_data_from_wear_form(wear_form)
                 new_report.wear_data.update(wd)
                 new_report.get_total_report_price()
-            get_response(request,new_report.id)
+            create_base64(request,new_report.id)
             new_report.save()
             return HttpResponseRedirect('/report/list')
 

@@ -72,6 +72,38 @@ def get_response(request, id):
         new_report_pdf.pdf_report.save(filename, ContentFile(data))
         with open(new_report_pdf.pdf_report.path, "rb") as file:
             encoded_string = base64.b64encode(file.read())
-        new_report_pdf.pdf_report_base64 = encoded_string
+        new_report_pdf.pdf_report_base64 = encoded_string.decode('ascii')
+        print( new_report_pdf.pdf_report_base64[0:10])
+        new_report_pdf.save()
+
+def create_base64(request, new_report_pdf):
+        locale.setlocale(locale.LC_ALL, 'C')
+        file = request.user.myuser.template
+        if file != None:
+            splited = file.name.split('/')
+            path = os.path.join(s.MEDIA_ROOT,"{}".format(splited[0]))
+            pdf = PyPDFML(splited[-1],path)
+        else:
+            pdf = PyPDFML('example.xml')
+        image_variable = 0;
+        context = {
+            'report': new_report_pdf,
+            'services': new_report_pdf.service.all().__len__(),
+            'datetime': new_report_pdf.report_date,
+            'qrcode': new_report_pdf.pdf_qr_code_user,
+            'qrcode_admin':new_report_pdf.pdf_qr_code_admin,
+            'images': "",
+            'documnet_photo':"",
+            'passport':"",
+            'checks': "",
+            'other_photos':"",
+            }
+        pdf.generate(context)
+        data = pdf.contents()
+        filename = "%s.pdf" % new_report_pdf.car.car_number
+        new_report_pdf.pdf_report.save(filename, ContentFile(data))
+        with open(new_report_pdf.pdf_report.path, "rb") as file:
+            encoded_string = base64.b64encode(file.read())
+        new_report_pdf.pdf_report_base64 = encoded_string.decode('ascii')
 
         new_report_pdf.save()
