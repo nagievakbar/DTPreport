@@ -108,4 +108,850 @@ TEMPLATE _DIR /home/vid/makereport/DTPreport/media/templates_xml
 get_product_acc_cost
 REPORT ID : 
 PKCS7 : 
-{'pkcs7Info': {'signers': [{'signerId': {'issuer': 'CN=NASRULLOYEV HAYOTJON XABIBULLOYEVICH,T=Директор,O=DUK YANGI TEXNOLOGIYALAR ILMIY-AXBOROT MARKAZI,OU=ЭРИ яратиш ва реестрни юритиш,L=100115 Тошкент ш. Чилонзор тумани Муқимий кўчаси 166-уй,E=info@yt.uz,C=UZ', 'subjectSerialNumber': '778137f9'}, 'signingTime': '2021.03.12 17:59:39', 'signature': 'fa301df99e8ce7b30306309cfae6e2d7c4869cf5b311e9ee0405c07884ac6393a6a586c08f7a814470fea56a64187d47b3415a77574b20fe270febd4e0f20b2a', 'digest': 'c4821ba5ea1eff91dd2f6d0e8cea35079c98e8af7adb7884d3b25ac23b8f8111', 'certificate': [{'serialNumber': '778137f9', 'subjectName': 'CN=IKROMXO‘JAYEV MURODXO‘JA AXMET-O‘G‘LI,Name=MURODXO‘JA,SURNAME=IKROMXO‘JAYEV,L=ЮНУСАБАДСКИЙ РАЙОН,ST=ГОРОД ТАШКЕНТ,C=UZ,UID=543135673,1.2.860.3.16.1.2=31401966520023', 'validFrom': '2020.09.14 12:27:21', 'validTo': '2022.09.14 18:59:59', 'issuerName': 'CN=NASRULLOYEV HAYOTJON XABIBULLOYEVICH,T=Директор,O=DUK YANGI TEXNOLOGIYALAR ILMIY-AXBOROT MARKAZI,OU=ЭРИ яратиш ва реестрни юритиш,L=100115 Тошкент ш. Чилонзор тумани Муқимий кўчаси 166-уй,E=info@yt.uz,C=UZ', 'publicKey': {'keyAlgName': 'OZDST-1092-2009-2', 'publicKey': 'MGAwGQYJKoZcAw8BAQIBMAwGCiqGXAMPAQECAQEDQwAEQKmw1wAMqwoLAnSbN3vSqZjh5C2gmld+o3D4+j+2J8peP7eBC18HWtEdyBAHP9+nU/xES8HMloojzozIDO9ETbM='}, 'signature': {'signAlgName': 'OZDST-1106-2009-2-AwithOZDST-1092-2009-2', 'signature': '36f9d10719bd3fbe865e734ee443ab083aecae3402aad6e0f3994729ece5d098008048ea9cb6ce4888476e6a7283b0b2666b9279eb8706af98ee112ba64bdda7'}}, {'serialNumber': '258da73feee7a6b', 'subjectName': 'CN=NASRULLOYEV HAYOTJON XABIBULLOYEVICH,T=Директор,O=DUK YANGI TEXNOLOGIYALAR ILMIY-AXBOROT MARKAZI,OU=ЭРИ яратиш ва реестрни юритиш,L=100115 Тошкент ш. Чилонзор тумани Муқимий кўчаси 166-уй,E=info@yt.uz,C=UZ', 'validFrom': '2020.05.27 04:00:00', 'validTo': '2025.05.27 04:00:00', 'issuerName': 'C=UZ,OU=ERI kalitlarini ro‘yxatga olish organi (O‘ZDST 1092-2009-II),O=AT va kommunikatsiyalarini rivojlantirish vazirligi,CN=mitc.uz', 'publicKey': {'keyAlgName': 'OZDST-1092-2009-2', 'publicKey': 'MGAwGQYJKoZcAw8BAQIBMAwGCiqGXAMPAQECAQEDQwAEQHHkDinCquRK5NrYapbR3DSpE7+qqVJ7qDXM/dIApIgO+Yt750+46O1dwz1chTkZc7/ZezmxdtNNIJ2qwefbXr0='}, 'signature': {'signAlgName': 'OZDST-1106-2009-2-AwithOZDST-1092-2009-2', 'signature': '18a97f90bd924fe24d143fa94c6ff9efde1eded14abec7e179dfefeaf3243facca99b87371b70da784e9896a04471807db99af0be7c1cc0904aa61d6ca259f55'}}], 'OCSPResponse': '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', 'statusUpdatedAt': '2021.03.12 17:59:36', 'statusNextUpdateAt': '2021.03.12 18:00:36', 'verified': False, 'certificateVerified': True, 'trustedCertificate': {'serialNumber': '29ce182249b2d8e5207deb74086b4d6', 'subjectName': 'C=UZ,OU=ERI kalitlarini ro‘yxatga olish organi (O‘ZDST 1092-2009-II),O=AT va kommunikatsiyalarini rivojlantirish vazirligi,CN=mitc.uz', 'validFrom': '2020.03.25 12:30:02', 'validTo': '2035.03.25 12:30:02', 'issuerName': 'C=UZ,OU=ERI kalitlarini ro‘yxatga olish organi (O‘ZDST 1092-2009-II),O=AT va kommunikatsiyalarini rivojlantirish vazirligi,CN=mitc.uz', 'publicKey': {'keyAlgName': 'OZDST-1092-2009-2', 'publicKey': 'MGAwGQYJKoZcAw8BAQIBMAwGCiqGXAMPAQECAQEDQwAEQI+aPvRfngcv+/Nk1U+bIh/Yn2sxZqViQO47BFq6HQhtrco4AQA32fh+g8Y65J3ZtKRXRDy+0ax1kaRoEPpLREQ='}, 'signature': {'signAlgName': 'OZDST-1106-2009-2-AwithOZDST-1092-2009-2', 'signature': 'c1d2749535f70d2381e256431c1a3eee3e1d98160674a3d9c54cb7919297555c8649facd9ab8de0eebcfbfe5eb83fee778570e84a86e9786a71c824bdbc0918d'}}, 'certificateValidAtSigningTime': True}]}, 'success': True}
+{'pkcs7Info': {'signers': [{'signerId': {'issuer': 'CN=NASRULLOYEV HAYOTJON XABIBULLOYEVICH,T=Директор,O=DUK YANGI TEXNOLOGIYALAR ILMIY-AXBOROT MARKAZI,OU=ЭРИ яратиш ва реестрни юритиш,L=100115 Тошкент ш. Чилонзор тумани Муқимий кўчаси 166-уй,E=info@yt.uz,C=UZ', 'subjectSerialNumber': '778137f9'}, 'signingTime': '2021.03.12 17:59:39', 'signature': 'fa301df99e8ce7b30306309cfae6e2d7c4869cf5b311e9ee0405c07884ac6393a6a586c08f7a814470fea56a64187d47b3415a77574b20fe270febd4e0f20b2a', 'digest': 'c4821ba5ea1eff91dd2f6d0e8cea35079c98e8af7adb7884d3b25ac23b8f8111', 'certificate': [{'serialNumber': '778137f9', 'subjectName': 'CN=IKROMXO‘JAYEV MURODXO‘JA AXMET-O‘G‘LI,Name=MURODXO‘JA,SURNAME=IKROMXO‘JAYEV,L=ЮНУСАБАДСКИЙ РАЙОН,ST=ГОРОД ТАШКЕНТ,C=UZ,UID=543135673,1.2.860.3.16.1.2=31401966520023', 'validFrom': '2020.09.14 12:27:21', 'validTo': '2022.09.14 18:59:59', 'issuerName': 'CN=NASRULLOYEV HAYOTJON XABIBULLOYEVICH,T=Директор,O=DUK YANGI TEXNOLOGIYALAR ILMIY-AXBOROT MARKAZI,OU=ЭРИ яратиш ва реестрни юритиш,L=100115 Тошкент ш. Чилонзор тумани Муқимий кўчаси 166-уй,E=info@yt.uz,C=UZ', 'publicKey': {'keyAlgName': 'OZDST-1092-2009-2', 'publicKey': 'MGAwGQYJKoZcAw8BAQIBMAwGCiqGXAMPAQECAQEDQwAEQKmw1wAMqwoLAnSbN3vSqZjh5C2gmld+o3D4+j+2J8peP7eBC18HWtEdyBAHP9+nU/xES8HMloojzozIDO9ETbM='}, 'signature': {'signAlgName': 'OZDST-1106-2009-2-AwithOZDST-1092-2009-2', 'signature': '36f9d10719bd3fbe865e734ee443ab083aecae3402aad6e0f3994729ece5d098008048ea9cb6ce4888476e6a7283b0b2666b9279eb8706af98ee112ba64bdda7'}}, {'serialNumber': '258da73feee7a6b', 'subjectName': 'CN=NASRULLOYEV HAYOTJON XABIBULLOYEVICH,T=Директор,O=DUK YANGI TEXNOLOGIYALAR ILMIY-AXBOROT MARKAZI,OU=ЭРИ яратиш ва реестрни юритиш,L=100115 Тошкент ш. Чилонзор тумани Муқимий кўчаси 166-уй,E=info@yt.uz,C=UZ', 'validFrom': '2020.05.27 04:00:00', 'validTo': '2025.05.27 04:00:00', 'issuerName': 'C=UZ,OU=ERI kalitlarini ro‘yxatga olish organi (O‘ZDST 1092-2009-II),O=AT va kommunikatsiyalarini rivojlantirish vazirligi,CN=mitc.uz', 'publicKey': {'keyAlgName': 'OZDST-1092-2009-2', 'publicKey': 'MGAwGQYJKoZcAw8BAQIBMAwGCiqGXAMPAQECAQEDQwAEQHHkDinCquRK5NrYapbR3DSpE7+qqVJ7qDXM/dIApIgO+Yt750+46O1dwz1chTkZc7/ZezmxdtNNIJ2qwefbXr0='}, 'signature': {'signAlgName': 'OZDST-1106-2009-2-AwithOZDST-1092-2009-2', 'signature': '18a97f90bd924fe24d143fa94c6ff9efde1eded14abec7e179dfefeaf3243facca99b87371b70da784e9896a04471807db99af0be7c1cc0904aa61d6ca259f55'}}], 'OCSPResponse': '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', 'statusUpdatedAt': '2021.03.12 17:59:36', 'statusNextUpdateAt': '2021.03.12 18:00:36', 'verified': False, 'certificateVerified': True, 'trustedCertificate': {'serialNumber': '29ce182249b2d8e5207deb74086b4d6', 'subjectName': 'C=UZ,OU=ERI kalitlarini ro‘yxatga olish organi (O‘ZDST 1092-2009-II),O=AT va kommunikatsiyalarini rivojlantirish vazirligi,CN=mitc.uz', 'validFrom': '2020.03.25 12:30:02', 'validTo': '2035.03.25 12:30:02', 'issuerName': 'C=UZ,OU=ERI kalitlarini ro‘yxatga olish organi (O‘ZDST 1092-2009-II),O=AT va kommunikatsiyalarini rivojlantirish vazirligi,CN=mitc.uz', 'publicKey': {'keyAlgName': 'OZDST-1092-2009-2', 'publicKey': 'MGAwGQYJKoZcAw8BAQIBMAwGCiqGXAMPAQECAQEDQwAEQI+aPvRfngcv+/Nk1U+bIh/Yn2sxZqViQO47BFq6HQhtrco4AQA32fh+g8Y65J3ZtKRXRDy+0ax1kaRoEPpLREQ='}, 'signature': {'signAlgName': 'OZDST-1106-2009-2-AwithOZDST-1092-2009-2', 'signature': 'c1d2749535f70d2381e256431c1a3eee3e1d98160674a3d9c54cb7919297555c8649facd9ab8de0eebcfbfe5eb83fee778570e84a86e9786a71c824bdbc0918d'}}, 'certificateValidAtSigningTime': True}]}, 'success': True}<QuerySet [<Images: Images object (38)>]>
+path_for_images /home/vid/makereport/DTPreport/media
+path /home/vid/makereport/DTPreport/media/templates_xml
+TEMPLATE _DIR /home/vid/makereport/DTPreport/media/templates_xml
+get_product_acc_cost
+<QuerySet [<Images: Images object (35)>]>
+path_for_images /home/vid/makereport/DTPreport/media
+path /home/vid/makereport/DTPreport/media/templates_xml
+TEMPLATE _DIR /home/vid/makereport/DTPreport/media/templates_xml
+get_product_acc_cost
+<QuerySet [<Images: Images object (39)>]>
+path_for_images /home/vid/makereport/DTPreport/media
+path /home/vid/makereport/DTPreport/media/templates_xml
+TEMPLATE _DIR /home/vid/makereport/DTPreport/media/templates_xml
+get_product_acc_cost
+get method without id
+<li><label for="id_brand_text">Brand text:</label> <input type="text" name="brand_text" placeholder="Марка" class="input_in" required id="id_brand_text"></li>
+<li><label for="id_brand">Brand:</label> <select name="brand" class="form-control select-block" id="id_brand">
+  <option value="0">Выберите Марку</option>
+
+  <option value="Кобальт">Кобальт</option>
+
+  <option value="Спарк">Спарк</option>
+
+  <option value="Нексия3">Нексия3</option>
+
+  <option value="Малибу">Малибу</option>
+
+  <option value="Нексия Sonc">Нексия Sonc</option>
+
+  <option value="Дамас">Дамас</option>
+
+  <option value="Тико">Тико</option>
+
+  <option value="Матиз">Матиз</option>
+
+  <option value="Матиз Бест">Матиз Бест</option>
+
+  <option value="Нексия Donc">Нексия Donc</option>
+
+  <option value="Ласетти">Ласетти</option>
+
+  <option value="Каптива">Каптива</option>
+
+  <option value="Такума">Такума</option>
+
+  <option value="Эпика">Эпика</option>
+
+</select></li>
+<li><label for="id_car_number">Car number:</label> <input type="text" name="car_number" placeholder="Номер машины" class="input_in" required id="id_car_number"></li>
+<li><label for="id_registration">Registration:</label> <input type="text" name="registration" placeholder="Тех. паспорт" class="input_in" required id="id_registration"></li>
+<li><label for="id_engine_number">Engine number:</label> <input type="text" name="engine_number" placeholder="Двигатель" class="input_in" required id="id_engine_number"></li>
+<li><label for="id_body_number">Body number:</label> <input type="text" name="body_number" placeholder="Кузов" class="input_in" required id="id_body_number"></li>
+<li><label for="id_chassis">Chassis:</label> <input type="text" name="chassis" placeholder="Шасси" class="input_in" required id="id_chassis"></li>
+<li><label for="id_car_color">Car color:</label> <input type="text" name="car_color" placeholder="Цвет окраски" class="input_in" required id="id_car_color"></li>
+<li><label for="id_mileage">Mileage:</label> <input type="text" name="mileage" placeholder="Пробег" class="input_in" required id="id_mileage"></li>
+<li><label for="id_release_date">Release date:</label> <input type="text" name="release_date" placeholder="Год и месяц выпуска" class="input_in" required id="id_release_date"></li>
+<li><label for="id_car_type">Car type:</label> <input type="text" name="car_type" placeholder="Тип" class="input_in" required id="id_car_type"></li>
+<li><label for="id_car_owner">Car owner:</label> <input type="text" name="car_owner" placeholder="Владелец" class="input_in" required id="id_car_owner"></li>
+<li><label for="id_owner_address">Owner address:</label> <input type="text" name="owner_address" placeholder="Адрес владельца" class="input_in" required id="id_owner_address"></li>
+100000
+Автомобиль - мойка общая, Вымыть верх и низ автомобиля,
+0.67
+None
+Автомобиль - внутренняя уборка. Произвести уборку салона и багажника, вычистить и протереть сидения, панели, обивки, коврики, стекла.
+0.59
+100000
+Автомобиль - мойка общая, Вымыть верх и низ автомобиля,
+0.67
+get method without id
+<li><label for="id_brand_text">Brand text:</label> <input type="text" name="brand_text" placeholder="Марка" class="input_in" required id="id_brand_text"></li>
+<li><label for="id_brand">Brand:</label> <select name="brand" class="form-control select-block" id="id_brand">
+  <option value="0">Выберите Марку</option>
+
+  <option value="Кобальт">Кобальт</option>
+
+  <option value="Спарк">Спарк</option>
+
+  <option value="Нексия3">Нексия3</option>
+
+  <option value="Малибу">Малибу</option>
+
+  <option value="Нексия Sonc">Нексия Sonc</option>
+
+  <option value="Дамас">Дамас</option>
+
+  <option value="Тико">Тико</option>
+
+  <option value="Матиз">Матиз</option>
+
+  <option value="Матиз Бест">Матиз Бест</option>
+
+  <option value="Нексия Donc">Нексия Donc</option>
+
+  <option value="Ласетти">Ласетти</option>
+
+  <option value="Каптива">Каптива</option>
+
+  <option value="Такума">Такума</option>
+
+  <option value="Эпика">Эпика</option>
+
+</select></li>
+<li><label for="id_car_number">Car number:</label> <input type="text" name="car_number" placeholder="Номер машины" class="input_in" required id="id_car_number"></li>
+<li><label for="id_registration">Registration:</label> <input type="text" name="registration" placeholder="Тех. паспорт" class="input_in" required id="id_registration"></li>
+<li><label for="id_engine_number">Engine number:</label> <input type="text" name="engine_number" placeholder="Двигатель" class="input_in" required id="id_engine_number"></li>
+<li><label for="id_body_number">Body number:</label> <input type="text" name="body_number" placeholder="Кузов" class="input_in" required id="id_body_number"></li>
+<li><label for="id_chassis">Chassis:</label> <input type="text" name="chassis" placeholder="Шасси" class="input_in" required id="id_chassis"></li>
+<li><label for="id_car_color">Car color:</label> <input type="text" name="car_color" placeholder="Цвет окраски" class="input_in" required id="id_car_color"></li>
+<li><label for="id_mileage">Mileage:</label> <input type="text" name="mileage" placeholder="Пробег" class="input_in" required id="id_mileage"></li>
+<li><label for="id_release_date">Release date:</label> <input type="text" name="release_date" placeholder="Год и месяц выпуска" class="input_in" required id="id_release_date"></li>
+<li><label for="id_car_type">Car type:</label> <input type="text" name="car_type" placeholder="Тип" class="input_in" required id="id_car_type"></li>
+<li><label for="id_car_owner">Car owner:</label> <input type="text" name="car_owner" placeholder="Владелец" class="input_in" required id="id_car_owner"></li>
+<li><label for="id_owner_address">Owner address:</label> <input type="text" name="owner_address" placeholder="Адрес владельца" class="input_in" required id="id_owner_address"></li>
+get method without id
+<li><label for="id_brand_text">Brand text:</label> <input type="text" name="brand_text" placeholder="Марка" class="input_in" required id="id_brand_text"></li>
+<li><label for="id_brand">Brand:</label> <select name="brand" class="form-control select-block" id="id_brand">
+  <option value="0">Выберите Марку</option>
+
+  <option value="Кобальт">Кобальт</option>
+
+  <option value="Спарк">Спарк</option>
+
+  <option value="Нексия3">Нексия3</option>
+
+  <option value="Малибу">Малибу</option>
+
+  <option value="Нексия Sonc">Нексия Sonc</option>
+
+  <option value="Дамас">Дамас</option>
+
+  <option value="Тико">Тико</option>
+
+  <option value="Матиз">Матиз</option>
+
+  <option value="Матиз Бест">Матиз Бест</option>
+
+  <option value="Нексия Donc">Нексия Donc</option>
+
+  <option value="Ласетти">Ласетти</option>
+
+  <option value="Каптива">Каптива</option>
+
+  <option value="Такума">Такума</option>
+
+  <option value="Эпика">Эпика</option>
+
+</select></li>
+<li><label for="id_car_number">Car number:</label> <input type="text" name="car_number" placeholder="Номер машины" class="input_in" required id="id_car_number"></li>
+<li><label for="id_registration">Registration:</label> <input type="text" name="registration" placeholder="Тех. паспорт" class="input_in" required id="id_registration"></li>
+<li><label for="id_engine_number">Engine number:</label> <input type="text" name="engine_number" placeholder="Двигатель" class="input_in" required id="id_engine_number"></li>
+<li><label for="id_body_number">Body number:</label> <input type="text" name="body_number" placeholder="Кузов" class="input_in" required id="id_body_number"></li>
+<li><label for="id_chassis">Chassis:</label> <input type="text" name="chassis" placeholder="Шасси" class="input_in" required id="id_chassis"></li>
+<li><label for="id_car_color">Car color:</label> <input type="text" name="car_color" placeholder="Цвет окраски" class="input_in" required id="id_car_color"></li>
+<li><label for="id_mileage">Mileage:</label> <input type="text" name="mileage" placeholder="Пробег" class="input_in" required id="id_mileage"></li>
+<li><label for="id_release_date">Release date:</label> <input type="text" name="release_date" placeholder="Год и месяц выпуска" class="input_in" required id="id_release_date"></li>
+<li><label for="id_car_type">Car type:</label> <input type="text" name="car_type" placeholder="Тип" class="input_in" required id="id_car_type"></li>
+<li><label for="id_car_owner">Car owner:</label> <input type="text" name="car_owner" placeholder="Владелец" class="input_in" required id="id_car_owner"></li>
+<li><label for="id_owner_address">Owner address:</label> <input type="text" name="owner_address" placeholder="Адрес владельца" class="input_in" required id="id_owner_address"></li>
+100000
+Автомобиль - мойка общая, Вымыть верх и низ автомобиля,
+get method without id
+<li><label for="id_brand_text">Brand text:</label> <input type="text" name="brand_text" placeholder="Марка" class="input_in" required id="id_brand_text"></li>
+<li><label for="id_brand">Brand:</label> <select name="brand" class="form-control select-block" id="id_brand">
+  <option value="0">Выберите Марку</option>
+
+  <option value="Кобальт">Кобальт</option>
+
+  <option value="Спарк">Спарк</option>
+
+  <option value="Нексия3">Нексия3</option>
+
+  <option value="Малибу">Малибу</option>
+
+  <option value="Нексия Sonc">Нексия Sonc</option>
+
+  <option value="Дамас">Дамас</option>
+
+  <option value="Тико">Тико</option>
+
+  <option value="Матиз">Матиз</option>
+
+  <option value="Матиз Бест">Матиз Бест</option>
+
+  <option value="Нексия Donc">Нексия Donc</option>
+
+  <option value="Ласетти">Ласетти</option>
+
+  <option value="Каптива">Каптива</option>
+
+  <option value="Такума">Такума</option>
+
+  <option value="Эпика">Эпика</option>
+
+</select></li>
+<li><label for="id_car_number">Car number:</label> <input type="text" name="car_number" placeholder="Номер машины" class="input_in" required id="id_car_number"></li>
+<li><label for="id_registration">Registration:</label> <input type="text" name="registration" placeholder="Тех. паспорт" class="input_in" required id="id_registration"></li>
+<li><label for="id_engine_number">Engine number:</label> <input type="text" name="engine_number" placeholder="Двигатель" class="input_in" required id="id_engine_number"></li>
+<li><label for="id_body_number">Body number:</label> <input type="text" name="body_number" placeholder="Кузов" class="input_in" required id="id_body_number"></li>
+<li><label for="id_chassis">Chassis:</label> <input type="text" name="chassis" placeholder="Шасси" class="input_in" required id="id_chassis"></li>
+<li><label for="id_car_color">Car color:</label> <input type="text" name="car_color" placeholder="Цвет окраски" class="input_in" required id="id_car_color"></li>
+<li><label for="id_mileage">Mileage:</label> <input type="text" name="mileage" placeholder="Пробег" class="input_in" required id="id_mileage"></li>
+<li><label for="id_release_date">Release date:</label> <input type="text" name="release_date" placeholder="Год и месяц выпуска" class="input_in" required id="id_release_date"></li>
+<li><label for="id_car_type">Car type:</label> <input type="text" name="car_type" placeholder="Тип" class="input_in" required id="id_car_type"></li>
+<li><label for="id_car_owner">Car owner:</label> <input type="text" name="car_owner" placeholder="Владелец" class="input_in" required id="id_car_owner"></li>
+<li><label for="id_owner_address">Owner address:</label> <input type="text" name="owner_address" placeholder="Адрес владельца" class="input_in" required id="id_owner_address"></li>
+get method without id
+<li><label for="id_brand_text">Brand text:</label> <input type="text" name="brand_text" placeholder="Марка" class="input_in" required id="id_brand_text"></li>
+<li><label for="id_brand">Brand:</label> <select name="brand" class="form-control select-block" id="id_brand">
+  <option value="0">Выберите Марку</option>
+
+  <option value="Кобальт">Кобальт</option>
+
+  <option value="Спарк">Спарк</option>
+
+  <option value="Нексия3">Нексия3</option>
+
+  <option value="Малибу">Малибу</option>
+
+  <option value="Нексия Sonc">Нексия Sonc</option>
+
+  <option value="Дамас">Дамас</option>
+
+  <option value="Тико">Тико</option>
+
+  <option value="Матиз">Матиз</option>
+
+  <option value="Матиз Бест">Матиз Бест</option>
+
+  <option value="Нексия Donc">Нексия Donc</option>
+
+  <option value="Ласетти">Ласетти</option>
+
+  <option value="Каптива">Каптива</option>
+
+  <option value="Такума">Такума</option>
+
+  <option value="Эпика">Эпика</option>
+
+</select></li>
+<li><label for="id_car_number">Car number:</label> <input type="text" name="car_number" placeholder="Номер машины" class="input_in" required id="id_car_number"></li>
+<li><label for="id_registration">Registration:</label> <input type="text" name="registration" placeholder="Тех. паспорт" class="input_in" required id="id_registration"></li>
+<li><label for="id_engine_number">Engine number:</label> <input type="text" name="engine_number" placeholder="Двигатель" class="input_in" required id="id_engine_number"></li>
+<li><label for="id_body_number">Body number:</label> <input type="text" name="body_number" placeholder="Кузов" class="input_in" required id="id_body_number"></li>
+<li><label for="id_chassis">Chassis:</label> <input type="text" name="chassis" placeholder="Шасси" class="input_in" required id="id_chassis"></li>
+<li><label for="id_car_color">Car color:</label> <input type="text" name="car_color" placeholder="Цвет окраски" class="input_in" required id="id_car_color"></li>
+<li><label for="id_mileage">Mileage:</label> <input type="text" name="mileage" placeholder="Пробег" class="input_in" required id="id_mileage"></li>
+<li><label for="id_release_date">Release date:</label> <input type="text" name="release_date" placeholder="Год и месяц выпуска" class="input_in" required id="id_release_date"></li>
+<li><label for="id_car_type">Car type:</label> <input type="text" name="car_type" placeholder="Тип" class="input_in" required id="id_car_type"></li>
+<li><label for="id_car_owner">Car owner:</label> <input type="text" name="car_owner" placeholder="Владелец" class="input_in" required id="id_car_owner"></li>
+<li><label for="id_owner_address">Owner address:</label> <input type="text" name="owner_address" placeholder="Адрес владельца" class="input_in" required id="id_owner_address"></li>
+get method without id
+<li><label for="id_brand_text">Brand text:</label> <input type="text" name="brand_text" placeholder="Марка" class="input_in" required id="id_brand_text"></li>
+<li><label for="id_brand">Brand:</label> <select name="brand" class="form-control select-block" id="id_brand">
+  <option value="0">Выберите Марку</option>
+
+  <option value="Кобальт">Кобальт</option>
+
+  <option value="Спарк">Спарк</option>
+
+  <option value="Нексия3">Нексия3</option>
+
+  <option value="Малибу">Малибу</option>
+
+  <option value="Нексия Sonc">Нексия Sonc</option>
+
+  <option value="Дамас">Дамас</option>
+
+  <option value="Тико">Тико</option>
+
+  <option value="Матиз">Матиз</option>
+
+  <option value="Матиз Бест">Матиз Бест</option>
+
+  <option value="Нексия Donc">Нексия Donc</option>
+
+  <option value="Ласетти">Ласетти</option>
+
+  <option value="Каптива">Каптива</option>
+
+  <option value="Такума">Такума</option>
+
+  <option value="Эпика">Эпика</option>
+
+</select></li>
+<li><label for="id_car_number">Car number:</label> <input type="text" name="car_number" placeholder="Номер машины" class="input_in" required id="id_car_number"></li>
+<li><label for="id_registration">Registration:</label> <input type="text" name="registration" placeholder="Тех. паспорт" class="input_in" required id="id_registration"></li>
+<li><label for="id_engine_number">Engine number:</label> <input type="text" name="engine_number" placeholder="Двигатель" class="input_in" required id="id_engine_number"></li>
+<li><label for="id_body_number">Body number:</label> <input type="text" name="body_number" placeholder="Кузов" class="input_in" required id="id_body_number"></li>
+<li><label for="id_chassis">Chassis:</label> <input type="text" name="chassis" placeholder="Шасси" class="input_in" required id="id_chassis"></li>
+<li><label for="id_car_color">Car color:</label> <input type="text" name="car_color" placeholder="Цвет окраски" class="input_in" required id="id_car_color"></li>
+<li><label for="id_mileage">Mileage:</label> <input type="text" name="mileage" placeholder="Пробег" class="input_in" required id="id_mileage"></li>
+<li><label for="id_release_date">Release date:</label> <input type="text" name="release_date" placeholder="Год и месяц выпуска" class="input_in" required id="id_release_date"></li>
+<li><label for="id_car_type">Car type:</label> <input type="text" name="car_type" placeholder="Тип" class="input_in" required id="id_car_type"></li>
+<li><label for="id_car_owner">Car owner:</label> <input type="text" name="car_owner" placeholder="Владелец" class="input_in" required id="id_car_owner"></li>
+<li><label for="id_owner_address">Owner address:</label> <input type="text" name="owner_address" placeholder="Адрес владельца" class="input_in" required id="id_owner_address"></li>
+get method without id
+<li><label for="id_brand_text">Brand text:</label> <input type="text" name="brand_text" placeholder="Марка" class="input_in" required id="id_brand_text"></li>
+<li><label for="id_brand">Brand:</label> <select name="brand" class="form-control select-block" id="id_brand">
+  <option value="0">Выберите Марку</option>
+
+  <option value="Кобальт">Кобальт</option>
+
+  <option value="Спарк">Спарк</option>
+
+  <option value="Нексия3">Нексия3</option>
+
+  <option value="Малибу">Малибу</option>
+
+  <option value="Нексия Sonc">Нексия Sonc</option>
+
+  <option value="Дамас">Дамас</option>
+
+  <option value="Тико">Тико</option>
+
+  <option value="Матиз">Матиз</option>
+
+  <option value="Матиз Бест">Матиз Бест</option>
+
+  <option value="Нексия Donc">Нексия Donc</option>
+
+  <option value="Ласетти">Ласетти</option>
+
+  <option value="Каптива">Каптива</option>
+
+  <option value="Такума">Такума</option>
+
+  <option value="Эпика">Эпика</option>
+
+</select></li>
+<li><label for="id_car_number">Car number:</label> <input type="text" name="car_number" placeholder="Номер машины" class="input_in" required id="id_car_number"></li>
+<li><label for="id_registration">Registration:</label> <input type="text" name="registration" placeholder="Тех. паспорт" class="input_in" required id="id_registration"></li>
+<li><label for="id_engine_number">Engine number:</label> <input type="text" name="engine_number" placeholder="Двигатель" class="input_in" required id="id_engine_number"></li>
+<li><label for="id_body_number">Body number:</label> <input type="text" name="body_number" placeholder="Кузов" class="input_in" required id="id_body_number"></li>
+<li><label for="id_chassis">Chassis:</label> <input type="text" name="chassis" placeholder="Шасси" class="input_in" required id="id_chassis"></li>
+<li><label for="id_car_color">Car color:</label> <input type="text" name="car_color" placeholder="Цвет окраски" class="input_in" required id="id_car_color"></li>
+<li><label for="id_mileage">Mileage:</label> <input type="text" name="mileage" placeholder="Пробег" class="input_in" required id="id_mileage"></li>
+<li><label for="id_release_date">Release date:</label> <input type="text" name="release_date" placeholder="Год и месяц выпуска" class="input_in" required id="id_release_date"></li>
+<li><label for="id_car_type">Car type:</label> <input type="text" name="car_type" placeholder="Тип" class="input_in" required id="id_car_type"></li>
+<li><label for="id_car_owner">Car owner:</label> <input type="text" name="car_owner" placeholder="Владелец" class="input_in" required id="id_car_owner"></li>
+<li><label for="id_owner_address">Owner address:</label> <input type="text" name="owner_address" placeholder="Адрес владельца" class="input_in" required id="id_owner_address"></li>
+get method without id
+<li><label for="id_brand_text">Brand text:</label> <input type="text" name="brand_text" placeholder="Марка" class="input_in" required id="id_brand_text"></li>
+<li><label for="id_brand">Brand:</label> <select name="brand" class="form-control select-block" id="id_brand">
+  <option value="0">Выберите Марку</option>
+
+  <option value="Кобальт">Кобальт</option>
+
+  <option value="Спарк">Спарк</option>
+
+  <option value="Нексия3">Нексия3</option>
+
+  <option value="Малибу">Малибу</option>
+
+  <option value="Нексия Sonc">Нексия Sonc</option>
+
+  <option value="Дамас">Дамас</option>
+
+  <option value="Тико">Тико</option>
+
+  <option value="Матиз">Матиз</option>
+
+  <option value="Матиз Бест">Матиз Бест</option>
+
+  <option value="Нексия Donc">Нексия Donc</option>
+
+  <option value="Ласетти">Ласетти</option>
+
+  <option value="Каптива">Каптива</option>
+
+  <option value="Такума">Такума</option>
+
+  <option value="Эпика">Эпика</option>
+
+</select></li>
+<li><label for="id_car_number">Car number:</label> <input type="text" name="car_number" placeholder="Номер машины" class="input_in" required id="id_car_number"></li>
+<li><label for="id_registration">Registration:</label> <input type="text" name="registration" placeholder="Тех. паспорт" class="input_in" required id="id_registration"></li>
+<li><label for="id_engine_number">Engine number:</label> <input type="text" name="engine_number" placeholder="Двигатель" class="input_in" required id="id_engine_number"></li>
+<li><label for="id_body_number">Body number:</label> <input type="text" name="body_number" placeholder="Кузов" class="input_in" required id="id_body_number"></li>
+<li><label for="id_chassis">Chassis:</label> <input type="text" name="chassis" placeholder="Шасси" class="input_in" required id="id_chassis"></li>
+<li><label for="id_car_color">Car color:</label> <input type="text" name="car_color" placeholder="Цвет окраски" class="input_in" required id="id_car_color"></li>
+<li><label for="id_mileage">Mileage:</label> <input type="text" name="mileage" placeholder="Пробег" class="input_in" required id="id_mileage"></li>
+<li><label for="id_release_date">Release date:</label> <input type="text" name="release_date" placeholder="Год и месяц выпуска" class="input_in" required id="id_release_date"></li>
+<li><label for="id_car_type">Car type:</label> <input type="text" name="car_type" placeholder="Тип" class="input_in" required id="id_car_type"></li>
+<li><label for="id_car_owner">Car owner:</label> <input type="text" name="car_owner" placeholder="Владелец" class="input_in" required id="id_car_owner"></li>
+<li><label for="id_owner_address">Owner address:</label> <input type="text" name="owner_address" placeholder="Адрес владельца" class="input_in" required id="id_owner_address"></li>
+get method without id
+<li><label for="id_brand_text">Brand text:</label> <input type="text" name="brand_text" placeholder="Марка" class="input_in" required id="id_brand_text"></li>
+<li><label for="id_brand">Brand:</label> <select name="brand" class="form-control select-block" id="id_brand">
+  <option value="0">Выберите Марку</option>
+
+  <option value="Кобальт">Кобальт</option>
+
+  <option value="Спарк">Спарк</option>
+
+  <option value="Нексия3">Нексия3</option>
+
+  <option value="Малибу">Малибу</option>
+
+  <option value="Нексия Sonc">Нексия Sonc</option>
+
+  <option value="Дамас">Дамас</option>
+
+  <option value="Тико">Тико</option>
+
+  <option value="Матиз">Матиз</option>
+
+  <option value="Матиз Бест">Матиз Бест</option>
+
+  <option value="Нексия Donc">Нексия Donc</option>
+
+  <option value="Ласетти">Ласетти</option>
+
+  <option value="Каптива">Каптива</option>
+
+  <option value="Такума">Такума</option>
+
+  <option value="Эпика">Эпика</option>
+
+</select></li>
+<li><label for="id_car_number">Car number:</label> <input type="text" name="car_number" placeholder="Номер машины" class="input_in" required id="id_car_number"></li>
+<li><label for="id_registration">Registration:</label> <input type="text" name="registration" placeholder="Тех. паспорт" class="input_in" required id="id_registration"></li>
+<li><label for="id_engine_number">Engine number:</label> <input type="text" name="engine_number" placeholder="Двигатель" class="input_in" required id="id_engine_number"></li>
+<li><label for="id_body_number">Body number:</label> <input type="text" name="body_number" placeholder="Кузов" class="input_in" required id="id_body_number"></li>
+<li><label for="id_chassis">Chassis:</label> <input type="text" name="chassis" placeholder="Шасси" class="input_in" required id="id_chassis"></li>
+<li><label for="id_car_color">Car color:</label> <input type="text" name="car_color" placeholder="Цвет окраски" class="input_in" required id="id_car_color"></li>
+<li><label for="id_mileage">Mileage:</label> <input type="text" name="mileage" placeholder="Пробег" class="input_in" required id="id_mileage"></li>
+<li><label for="id_release_date">Release date:</label> <input type="text" name="release_date" placeholder="Год и месяц выпуска" class="input_in" required id="id_release_date"></li>
+<li><label for="id_car_type">Car type:</label> <input type="text" name="car_type" placeholder="Тип" class="input_in" required id="id_car_type"></li>
+<li><label for="id_car_owner">Car owner:</label> <input type="text" name="car_owner" placeholder="Владелец" class="input_in" required id="id_car_owner"></li>
+<li><label for="id_owner_address">Owner address:</label> <input type="text" name="owner_address" placeholder="Адрес владельца" class="input_in" required id="id_owner_address"></li>
+get method without id
+<li><label for="id_brand_text">Brand text:</label> <input type="text" name="brand_text" placeholder="Марка" class="input_in" required id="id_brand_text"></li>
+<li><label for="id_brand">Brand:</label> <select name="brand" class="form-control select-block" id="id_brand">
+  <option value="0">Выберите Марку</option>
+
+  <option value="Кобальт">Кобальт</option>
+
+  <option value="Спарк">Спарк</option>
+
+  <option value="Нексия3">Нексия3</option>
+
+  <option value="Малибу">Малибу</option>
+
+  <option value="Нексия Sonc">Нексия Sonc</option>
+
+  <option value="Дамас">Дамас</option>
+
+  <option value="Тико">Тико</option>
+
+  <option value="Матиз">Матиз</option>
+
+  <option value="Матиз Бест">Матиз Бест</option>
+
+  <option value="Нексия Donc">Нексия Donc</option>
+
+  <option value="Ласетти">Ласетти</option>
+
+  <option value="Каптива">Каптива</option>
+
+  <option value="Такума">Такума</option>
+
+  <option value="Эпика">Эпика</option>
+
+</select></li>
+<li><label for="id_car_number">Car number:</label> <input type="text" name="car_number" placeholder="Номер машины" class="input_in" required id="id_car_number"></li>
+<li><label for="id_registration">Registration:</label> <input type="text" name="registration" placeholder="Тех. паспорт" class="input_in" required id="id_registration"></li>
+<li><label for="id_engine_number">Engine number:</label> <input type="text" name="engine_number" placeholder="Двигатель" class="input_in" required id="id_engine_number"></li>
+<li><label for="id_body_number">Body number:</label> <input type="text" name="body_number" placeholder="Кузов" class="input_in" required id="id_body_number"></li>
+<li><label for="id_chassis">Chassis:</label> <input type="text" name="chassis" placeholder="Шасси" class="input_in" required id="id_chassis"></li>
+<li><label for="id_car_color">Car color:</label> <input type="text" name="car_color" placeholder="Цвет окраски" class="input_in" required id="id_car_color"></li>
+<li><label for="id_mileage">Mileage:</label> <input type="text" name="mileage" placeholder="Пробег" class="input_in" required id="id_mileage"></li>
+<li><label for="id_release_date">Release date:</label> <input type="text" name="release_date" placeholder="Год и месяц выпуска" class="input_in" required id="id_release_date"></li>
+<li><label for="id_car_type">Car type:</label> <input type="text" name="car_type" placeholder="Тип" class="input_in" required id="id_car_type"></li>
+<li><label for="id_car_owner">Car owner:</label> <input type="text" name="car_owner" placeholder="Владелец" class="input_in" required id="id_car_owner"></li>
+<li><label for="id_owner_address">Owner address:</label> <input type="text" name="owner_address" placeholder="Адрес владельца" class="input_in" required id="id_owner_address"></li>
+get method without id
+<li><label for="id_brand_text">Brand text:</label> <input type="text" name="brand_text" placeholder="Марка" class="input_in" required id="id_brand_text"></li>
+<li><label for="id_brand">Brand:</label> <select name="brand" class="form-control select-block" id="id_brand">
+  <option value="0">Выберите Марку</option>
+
+  <option value="Кобальт">Кобальт</option>
+
+  <option value="Спарк">Спарк</option>
+
+  <option value="Нексия3">Нексия3</option>
+
+  <option value="Малибу">Малибу</option>
+
+  <option value="Нексия Sonc">Нексия Sonc</option>
+
+  <option value="Дамас">Дамас</option>
+
+  <option value="Тико">Тико</option>
+
+  <option value="Матиз">Матиз</option>
+
+  <option value="Матиз Бест">Матиз Бест</option>
+
+  <option value="Нексия Donc">Нексия Donc</option>
+
+  <option value="Ласетти">Ласетти</option>
+
+  <option value="Каптива">Каптива</option>
+
+  <option value="Такума">Такума</option>
+
+  <option value="Эпика">Эпика</option>
+
+</select></li>
+<li><label for="id_car_number">Car number:</label> <input type="text" name="car_number" placeholder="Номер машины" class="input_in" required id="id_car_number"></li>
+<li><label for="id_registration">Registration:</label> <input type="text" name="registration" placeholder="Тех. паспорт" class="input_in" required id="id_registration"></li>
+<li><label for="id_engine_number">Engine number:</label> <input type="text" name="engine_number" placeholder="Двигатель" class="input_in" required id="id_engine_number"></li>
+<li><label for="id_body_number">Body number:</label> <input type="text" name="body_number" placeholder="Кузов" class="input_in" required id="id_body_number"></li>
+<li><label for="id_chassis">Chassis:</label> <input type="text" name="chassis" placeholder="Шасси" class="input_in" required id="id_chassis"></li>
+<li><label for="id_car_color">Car color:</label> <input type="text" name="car_color" placeholder="Цвет окраски" class="input_in" required id="id_car_color"></li>
+<li><label for="id_mileage">Mileage:</label> <input type="text" name="mileage" placeholder="Пробег" class="input_in" required id="id_mileage"></li>
+<li><label for="id_release_date">Release date:</label> <input type="text" name="release_date" placeholder="Год и месяц выпуска" class="input_in" required id="id_release_date"></li>
+<li><label for="id_car_type">Car type:</label> <input type="text" name="car_type" placeholder="Тип" class="input_in" required id="id_car_type"></li>
+<li><label for="id_car_owner">Car owner:</label> <input type="text" name="car_owner" placeholder="Владелец" class="input_in" required id="id_car_owner"></li>
+<li><label for="id_owner_address">Owner address:</label> <input type="text" name="owner_address" placeholder="Адрес владельца" class="input_in" required id="id_owner_address"></li>
+get method without id
+<li><label for="id_brand_text">Brand text:</label> <input type="text" name="brand_text" placeholder="Марка" class="input_in" required id="id_brand_text"></li>
+<li><label for="id_brand">Brand:</label> <select name="brand" class="form-control select-block" id="id_brand">
+  <option value="0">Выберите Марку</option>
+
+  <option value="Кобальт">Кобальт</option>
+
+  <option value="Спарк">Спарк</option>
+
+  <option value="Нексия3">Нексия3</option>
+
+  <option value="Малибу">Малибу</option>
+
+  <option value="Нексия Sonc">Нексия Sonc</option>
+
+  <option value="Дамас">Дамас</option>
+
+  <option value="Тико">Тико</option>
+
+  <option value="Матиз">Матиз</option>
+
+  <option value="Матиз Бест">Матиз Бест</option>
+
+  <option value="Нексия Donc">Нексия Donc</option>
+
+  <option value="Ласетти">Ласетти</option>
+
+  <option value="Каптива">Каптива</option>
+
+  <option value="Такума">Такума</option>
+
+  <option value="Эпика">Эпика</option>
+
+</select></li>
+<li><label for="id_car_number">Car number:</label> <input type="text" name="car_number" placeholder="Номер машины" class="input_in" required id="id_car_number"></li>
+<li><label for="id_registration">Registration:</label> <input type="text" name="registration" placeholder="Тех. паспорт" class="input_in" required id="id_registration"></li>
+<li><label for="id_engine_number">Engine number:</label> <input type="text" name="engine_number" placeholder="Двигатель" class="input_in" required id="id_engine_number"></li>
+<li><label for="id_body_number">Body number:</label> <input type="text" name="body_number" placeholder="Кузов" class="input_in" required id="id_body_number"></li>
+<li><label for="id_chassis">Chassis:</label> <input type="text" name="chassis" placeholder="Шасси" class="input_in" required id="id_chassis"></li>
+<li><label for="id_car_color">Car color:</label> <input type="text" name="car_color" placeholder="Цвет окраски" class="input_in" required id="id_car_color"></li>
+<li><label for="id_mileage">Mileage:</label> <input type="text" name="mileage" placeholder="Пробег" class="input_in" required id="id_mileage"></li>
+<li><label for="id_release_date">Release date:</label> <input type="text" name="release_date" placeholder="Год и месяц выпуска" class="input_in" required id="id_release_date"></li>
+<li><label for="id_car_type">Car type:</label> <input type="text" name="car_type" placeholder="Тип" class="input_in" required id="id_car_type"></li>
+<li><label for="id_car_owner">Car owner:</label> <input type="text" name="car_owner" placeholder="Владелец" class="input_in" required id="id_car_owner"></li>
+<li><label for="id_owner_address">Owner address:</label> <input type="text" name="owner_address" placeholder="Адрес владельца" class="input_in" required id="id_owner_address"></li>
+100000
+Автомобиль - мойка общая, Вымыть верх и низ автомобиля,
+0.5
+100000
+Автомобиль - мойка днища, арок колес и закрытых полостей для антикоррозионной обработки. Произвести мойку днища, арок колес и закрытых полостей кузова.
+0.7
+None
+Автомобиль - внутренняя уборка. Произвести уборку салона и багажника, вычистить и протереть сидения, панели, обивки, коврики, стекла.
+0.5
+100000
+Автомобиль - мойка общая, Вымыть верх и низ автомобиля,
+0.5
+100000
+Автомобиль - мойка днища, арок колес и закрытых полостей для антикоррозионной обработки. Произвести мойку днища, арок колес и закрытых полостей кузова.
+0.7
+None
+Автомобиль - внутренняя уборка. Произвести уборку салона и багажника, вычистить и протереть сидения, панели, обивки, коврики, стекла.
+0.5
+get method without id
+<li><label for="id_brand_text">Brand text:</label> <input type="text" name="brand_text" placeholder="Марка" class="input_in" required id="id_brand_text"></li>
+<li><label for="id_brand">Brand:</label> <select name="brand" class="form-control select-block" id="id_brand">
+  <option value="0">Выберите Марку</option>
+
+  <option value="Кобальт">Кобальт</option>
+
+  <option value="Спарк">Спарк</option>
+
+  <option value="Нексия3">Нексия3</option>
+
+  <option value="Малибу">Малибу</option>
+
+  <option value="Нексия Sonc">Нексия Sonc</option>
+
+  <option value="Дамас">Дамас</option>
+
+  <option value="Тико">Тико</option>
+
+  <option value="Матиз">Матиз</option>
+
+  <option value="Матиз Бест">Матиз Бест</option>
+
+  <option value="Нексия Donc">Нексия Donc</option>
+
+  <option value="Ласетти">Ласетти</option>
+
+  <option value="Каптива">Каптива</option>
+
+  <option value="Такума">Такума</option>
+
+  <option value="Эпика">Эпика</option>
+
+</select></li>
+<li><label for="id_car_number">Car number:</label> <input type="text" name="car_number" placeholder="Номер машины" class="input_in" required id="id_car_number"></li>
+<li><label for="id_registration">Registration:</label> <input type="text" name="registration" placeholder="Тех. паспорт" class="input_in" required id="id_registration"></li>
+<li><label for="id_engine_number">Engine number:</label> <input type="text" name="engine_number" placeholder="Двигатель" class="input_in" required id="id_engine_number"></li>
+<li><label for="id_body_number">Body number:</label> <input type="text" name="body_number" placeholder="Кузов" class="input_in" required id="id_body_number"></li>
+<li><label for="id_chassis">Chassis:</label> <input type="text" name="chassis" placeholder="Шасси" class="input_in" required id="id_chassis"></li>
+<li><label for="id_car_color">Car color:</label> <input type="text" name="car_color" placeholder="Цвет окраски" class="input_in" required id="id_car_color"></li>
+<li><label for="id_mileage">Mileage:</label> <input type="text" name="mileage" placeholder="Пробег" class="input_in" required id="id_mileage"></li>
+<li><label for="id_release_date">Release date:</label> <input type="text" name="release_date" placeholder="Год и месяц выпуска" class="input_in" required id="id_release_date"></li>
+<li><label for="id_car_type">Car type:</label> <input type="text" name="car_type" placeholder="Тип" class="input_in" required id="id_car_type"></li>
+<li><label for="id_car_owner">Car owner:</label> <input type="text" name="car_owner" placeholder="Владелец" class="input_in" required id="id_car_owner"></li>
+<li><label for="id_owner_address">Owner address:</label> <input type="text" name="owner_address" placeholder="Адрес владельца" class="input_in" required id="id_owner_address"></li>
+get method without id
+<li><label for="id_brand_text">Brand text:</label> <input type="text" name="brand_text" placeholder="Марка" class="input_in" required id="id_brand_text"></li>
+<li><label for="id_brand">Brand:</label> <select name="brand" class="form-control select-block" id="id_brand">
+  <option value="0">Выберите Марку</option>
+
+  <option value="Кобальт">Кобальт</option>
+
+  <option value="Спарк">Спарк</option>
+
+  <option value="Нексия3">Нексия3</option>
+
+  <option value="Малибу">Малибу</option>
+
+  <option value="Нексия Sonc">Нексия Sonc</option>
+
+  <option value="Дамас">Дамас</option>
+
+  <option value="Тико">Тико</option>
+
+  <option value="Матиз">Матиз</option>
+
+  <option value="Матиз Бест">Матиз Бест</option>
+
+  <option value="Нексия Donc">Нексия Donc</option>
+
+  <option value="Ласетти">Ласетти</option>
+
+  <option value="Каптива">Каптива</option>
+
+  <option value="Такума">Такума</option>
+
+  <option value="Эпика">Эпика</option>
+
+</select></li>
+<li><label for="id_car_number">Car number:</label> <input type="text" name="car_number" placeholder="Номер машины" class="input_in" required id="id_car_number"></li>
+<li><label for="id_registration">Registration:</label> <input type="text" name="registration" placeholder="Тех. паспорт" class="input_in" required id="id_registration"></li>
+<li><label for="id_engine_number">Engine number:</label> <input type="text" name="engine_number" placeholder="Двигатель" class="input_in" required id="id_engine_number"></li>
+<li><label for="id_body_number">Body number:</label> <input type="text" name="body_number" placeholder="Кузов" class="input_in" required id="id_body_number"></li>
+<li><label for="id_chassis">Chassis:</label> <input type="text" name="chassis" placeholder="Шасси" class="input_in" required id="id_chassis"></li>
+<li><label for="id_car_color">Car color:</label> <input type="text" name="car_color" placeholder="Цвет окраски" class="input_in" required id="id_car_color"></li>
+<li><label for="id_mileage">Mileage:</label> <input type="text" name="mileage" placeholder="Пробег" class="input_in" required id="id_mileage"></li>
+<li><label for="id_release_date">Release date:</label> <input type="text" name="release_date" placeholder="Год и месяц выпуска" class="input_in" required id="id_release_date"></li>
+<li><label for="id_car_type">Car type:</label> <input type="text" name="car_type" placeholder="Тип" class="input_in" required id="id_car_type"></li>
+<li><label for="id_car_owner">Car owner:</label> <input type="text" name="car_owner" placeholder="Владелец" class="input_in" required id="id_car_owner"></li>
+<li><label for="id_owner_address">Owner address:</label> <input type="text" name="owner_address" placeholder="Адрес владельца" class="input_in" required id="id_owner_address"></li>
+100000
+Автомобиль - мойка общая, Вымыть верх и низ автомобиля,
+0.67
+100000
+Автомобиль - мойка днища, арок колес и закрытых полостей для антикоррозионной обработки. Произвести мойку днища, арок колес и закрытых полостей кузова.
+0.8
+100000
+Автомобиль - мойка днища, арок колес и закрытых полостей для антикоррозионной обработки. Произвести мойку днища, арок колес и закрытых полостей кузова.
+0.8
+100000
+Автомобиль - мойка общая, Вымыть верх и низ автомобиля,
+0.75
+get method without id
+<li><label for="id_brand_text">Brand text:</label> <input type="text" name="brand_text" placeholder="Марка" class="input_in" required id="id_brand_text"></li>
+<li><label for="id_brand">Brand:</label> <select name="brand" class="form-control select-block" id="id_brand">
+  <option value="0">Выберите Марку</option>
+
+  <option value="Кобальт">Кобальт</option>
+
+  <option value="Спарк">Спарк</option>
+
+  <option value="Нексия3">Нексия3</option>
+
+  <option value="Малибу">Малибу</option>
+
+  <option value="Нексия Sonc">Нексия Sonc</option>
+
+  <option value="Дамас">Дамас</option>
+
+  <option value="Тико">Тико</option>
+
+  <option value="Матиз">Матиз</option>
+
+  <option value="Матиз Бест">Матиз Бест</option>
+
+  <option value="Нексия Donc">Нексия Donc</option>
+
+  <option value="Ласетти">Ласетти</option>
+
+  <option value="Каптива">Каптива</option>
+
+  <option value="Такума">Такума</option>
+
+  <option value="Эпика">Эпика</option>
+
+</select></li>
+<li><label for="id_car_number">Car number:</label> <input type="text" name="car_number" placeholder="Номер машины" class="input_in" required id="id_car_number"></li>
+<li><label for="id_registration">Registration:</label> <input type="text" name="registration" placeholder="Тех. паспорт" class="input_in" required id="id_registration"></li>
+<li><label for="id_engine_number">Engine number:</label> <input type="text" name="engine_number" placeholder="Двигатель" class="input_in" required id="id_engine_number"></li>
+<li><label for="id_body_number">Body number:</label> <input type="text" name="body_number" placeholder="Кузов" class="input_in" required id="id_body_number"></li>
+<li><label for="id_chassis">Chassis:</label> <input type="text" name="chassis" placeholder="Шасси" class="input_in" required id="id_chassis"></li>
+<li><label for="id_car_color">Car color:</label> <input type="text" name="car_color" placeholder="Цвет окраски" class="input_in" required id="id_car_color"></li>
+<li><label for="id_mileage">Mileage:</label> <input type="text" name="mileage" placeholder="Пробег" class="input_in" required id="id_mileage"></li>
+<li><label for="id_release_date">Release date:</label> <input type="text" name="release_date" placeholder="Год и месяц выпуска" class="input_in" required id="id_release_date"></li>
+<li><label for="id_car_type">Car type:</label> <input type="text" name="car_type" placeholder="Тип" class="input_in" required id="id_car_type"></li>
+<li><label for="id_car_owner">Car owner:</label> <input type="text" name="car_owner" placeholder="Владелец" class="input_in" required id="id_car_owner"></li>
+<li><label for="id_owner_address">Owner address:</label> <input type="text" name="owner_address" placeholder="Адрес владельца" class="input_in" required id="id_owner_address"></li>
+<QueryDict: {'csrfmiddlewaretoken': ['84CUZAUd3PeZkeGm9ufkuhxN7CdR1o517JDsKpjctYqIDsaKDiW9byId8pOAyU1r'], 'report_number': ['5'], 'report_date': ['16.03.2021'], 'car_number': ['F123FF'], 'brand_text': ['Cobalt'], 'registration': ['123'], 'engine_number': ['123'], 'body_number': ['Седан'], 'chassis': ['й'], 'car_color': ['й'], 'mileage': ['2000'], 'release_date': ['2000'], 'car_type': ['2000'], 'car_owner': ['Владимир'], 'owner_address': ['Шайхонтахур'], 'name': ['Бобур'], 'address': ['Чиланзхар'], 'passport_number': ['АА465А'], 'when_passport_issued': ['2000-05-05'], 'whom_passport_issued': ['Ровд'], 'phone_number': ['+998935856774'], 'gnu_or_gje': ['ф'], 'uvajaemaya': ['ф'], 'vid': ['ф'], 'mesto_osmotra': ['ф'], 'brand': ['Кобальт'], 'service-TOTAL_FORMS': ['3'], 'service-INITIAL_FORMS': ['0'], 'service-MIN_NUM_FORMS': ['0'], 'service-MAX_NUM_FORMS': ['1000'], 'service-0-service_id': ['1'], 'service-0-name': ['Автомобиль - мойка общая, Вымыть верх и низ автомобиля,'], 'service-0-norm_per_hour': ['0.75'], 'service-0-premium': ['50'], 'service-0-price': ['100000'], 'service-0-service_cost': ['5075000'], 'service-1-service_id': [''], 'service-1-name': [''], 'service-1-norm_per_hour': [''], 'service-1-premium': [''], 'service-1-price': [''], 'service-1-service_cost': [''], 'service-__prefix__-service_id': [''], 'service-__prefix__-name': [''], 'service-__prefix__-norm_per_hour': [''], 'service-__prefix__-premium': [''], 'service-__prefix__-price': [''], 'service-__prefix__-service_cost': [''], 'service-2-service_id': [''], 'service-2-name': [''], 'service-2-norm_per_hour': [''], 'service-2-premium': [''], 'service-2-price': [''], 'service-2-service_cost': [''], 'product-TOTAL_FORMS': ['3'], 'product-INITIAL_FORMS': ['0'], 'product-MIN_NUM_FORMS': ['0'], 'product-MAX_NUM_FORMS': ['1000'], 'product-0-product_id': ['1'], 'product-0-name': ['Деталь1'], 'product-0-quantity': ['50'], 'product-0-price': ['10000'], 'product-0-product_cost': ['5000'], 'product-1-product_id': [''], 'product-1-name': [''], 'product-1-quantity': [''], 'product-1-price': [''], 'product-1-product_cost': [''], 'product-__prefix__-product_id': [''], 'product-__prefix__-name': [''], 'product-__prefix__-quantity': [''], 'product-__prefix__-price': [''], 'product-__prefix__-product_cost': [''], 'product-2-product_id': [''], 'product-2-name': [''], 'product-2-quantity': [''], 'product-2-price': [''], 'product-2-product_cost': [''], 'consumable-TOTAL_FORMS': ['3'], 'consumable-INITIAL_FORMS': ['0'], 'consumable-MIN_NUM_FORMS': ['0'], 'consumable-MAX_NUM_FORMS': ['1000'], 'consumable-0-consumable_id': ['1'], 'consumable-0-name': ['Расходник1'], 'consumable-0-unit': ['кг'], 'consumable-0-quantity': ['50'], 'consumable-0-price': ['10000'], 'consumable-0-consumable_cost': ['5000'], 'consumable-1-consumable_id': [''], 'consumable-1-name': [''], 'consumable-1-unit': [''], 'consumable-1-quantity': [''], 'consumable-1-price': [''], 'consumable-1-consumable_cost': [''], 'consumable-__prefix__-consumable_id': [''], 'consumable-__prefix__-name': [''], 'consumable-__prefix__-unit': [''], 'consumable-__prefix__-quantity': [''], 'consumable-__prefix__-price': [''], 'consumable-__prefix__-consumable_cost': [''], 'consumable-2-consumable_id': [''], 'consumable-2-name': [''], 'consumable-2-unit': [''], 'consumable-2-quantity': [''], 'consumable-2-price': [''], 'consumable-2-consumable_cost': [''], 'point': ['6'], 'weight': ['6'], 'wear': ['66'], 'accept_wear': ['66']}>
+VALIDATION TrueTrueTrue
+{'service_id': 1, 'name': 'Автомобиль - мойка общая, Вымыть верх и низ автомобиля,', 'norm_per_hour': 0.75, 'premium': '50', 'price': 100000, 'service_cost': 5075000}
+service_id=1 add to report
+<QuerySet [<Service: Автомобиль - мойка общая, Вымыть верх и низ автомобиля,>]>
+get_total_report_price
+get_product_acc_cost
+TEMPLATE _DIR /home/vid/makereport/DTPreport/media/templates_xml
+get_product_acc_cost
+example.xml
+get method without id
+<li><label for="id_brand_text">Brand text:</label> <input type="text" name="brand_text" placeholder="Марка" class="input_in" required id="id_brand_text"></li>
+<li><label for="id_brand">Brand:</label> <select name="brand" class="form-control select-block" id="id_brand">
+  <option value="0">Выберите Марку</option>
+
+  <option value="Кобальт">Кобальт</option>
+
+  <option value="Спарк">Спарк</option>
+
+  <option value="Нексия3">Нексия3</option>
+
+  <option value="Малибу">Малибу</option>
+
+  <option value="Нексия Sonc">Нексия Sonc</option>
+
+  <option value="Дамас">Дамас</option>
+
+  <option value="Тико">Тико</option>
+
+  <option value="Матиз">Матиз</option>
+
+  <option value="Матиз Бест">Матиз Бест</option>
+
+  <option value="Нексия Donc">Нексия Donc</option>
+
+  <option value="Ласетти">Ласетти</option>
+
+  <option value="Каптива">Каптива</option>
+
+  <option value="Такума">Такума</option>
+
+  <option value="Эпика">Эпика</option>
+
+</select></li>
+<li><label for="id_car_number">Car number:</label> <input type="text" name="car_number" placeholder="Номер машины" class="input_in" required id="id_car_number"></li>
+<li><label for="id_registration">Registration:</label> <input type="text" name="registration" placeholder="Тех. паспорт" class="input_in" required id="id_registration"></li>
+<li><label for="id_engine_number">Engine number:</label> <input type="text" name="engine_number" placeholder="Двигатель" class="input_in" required id="id_engine_number"></li>
+<li><label for="id_body_number">Body number:</label> <input type="text" name="body_number" placeholder="Кузов" class="input_in" required id="id_body_number"></li>
+<li><label for="id_chassis">Chassis:</label> <input type="text" name="chassis" placeholder="Шасси" class="input_in" required id="id_chassis"></li>
+<li><label for="id_car_color">Car color:</label> <input type="text" name="car_color" placeholder="Цвет окраски" class="input_in" required id="id_car_color"></li>
+<li><label for="id_mileage">Mileage:</label> <input type="text" name="mileage" placeholder="Пробег" class="input_in" required id="id_mileage"></li>
+<li><label for="id_release_date">Release date:</label> <input type="text" name="release_date" placeholder="Год и месяц выпуска" class="input_in" required id="id_release_date"></li>
+<li><label for="id_car_type">Car type:</label> <input type="text" name="car_type" placeholder="Тип" class="input_in" required id="id_car_type"></li>
+<li><label for="id_car_owner">Car owner:</label> <input type="text" name="car_owner" placeholder="Владелец" class="input_in" required id="id_car_owner"></li>
+<li><label for="id_owner_address">Owner address:</label> <input type="text" name="owner_address" placeholder="Адрес владельца" class="input_in" required id="id_owner_address"></li>
+100000
+Автомобиль - мойка общая, Вымыть верх и низ автомобиля,
+0.75
+<QueryDict: {'csrfmiddlewaretoken': ['yNYud320UIDjV6C8BJ3CcSQMtD4QXZwQxsZ2YSrZkRP2ek6w5xKrT91cuqFzuvsg'], 'report_number': ['5'], 'report_date': ['16.03.2021'], 'car_number': ['F123FF'], 'brand_text': ['Cobalt'], 'registration': ['123'], 'engine_number': ['123'], 'body_number': ['Седан'], 'chassis': ['й'], 'car_color': ['й'], 'mileage': ['2000'], 'release_date': ['2000'], 'car_type': ['2000'], 'car_owner': ['Владимир'], 'owner_address': ['Шайхонтахур'], 'name': ['Бобур'], 'address': ['Чиланзхар'], 'passport_number': ['АА465А'], 'when_passport_issued': ['2000-05-05'], 'whom_passport_issued': ['Ровд'], 'phone_number': ['+998935856774'], 'gnu_or_gje': ['ф'], 'uvajaemaya': ['ф'], 'vid': ['ф'], 'mesto_osmotra': ['ф'], 'brand': ['Кобальт'], 'service-TOTAL_FORMS': ['3'], 'service-INITIAL_FORMS': ['0'], 'service-MIN_NUM_FORMS': ['0'], 'service-MAX_NUM_FORMS': ['1000'], 'service-0-service_id': ['1'], 'service-0-name': ['Автомобиль - мойка общая, Вымыть верх и низ автомобиля,'], 'service-0-norm_per_hour': ['0.75'], 'service-0-premium': ['10'], 'service-0-price': ['100000'], 'service-0-service_cost': ['1075000'], 'service-1-service_id': [''], 'service-1-name': [''], 'service-1-norm_per_hour': [''], 'service-1-premium': [''], 'service-1-price': [''], 'service-1-service_cost': [''], 'service-__prefix__-service_id': [''], 'service-__prefix__-name': [''], 'service-__prefix__-norm_per_hour': [''], 'service-__prefix__-premium': [''], 'service-__prefix__-price': [''], 'service-__prefix__-service_cost': [''], 'service-2-service_id': [''], 'service-2-name': [''], 'service-2-norm_per_hour': [''], 'service-2-premium': [''], 'service-2-price': [''], 'service-2-service_cost': [''], 'product-TOTAL_FORMS': ['3'], 'product-INITIAL_FORMS': ['0'], 'product-MIN_NUM_FORMS': ['0'], 'product-MAX_NUM_FORMS': ['1000'], 'product-0-product_id': ['1'], 'product-0-name': ['Деталь1'], 'product-0-quantity': ['10'], 'product-0-price': ['10000'], 'product-0-product_cost': ['1000'], 'product-1-product_id': [''], 'product-1-name': [''], 'product-1-quantity': [''], 'product-1-price': [''], 'product-1-product_cost': [''], 'product-__prefix__-product_id': [''], 'product-__prefix__-name': [''], 'product-__prefix__-quantity': [''], 'product-__prefix__-price': [''], 'product-__prefix__-product_cost': [''], 'product-2-product_id': [''], 'product-2-name': [''], 'product-2-quantity': [''], 'product-2-price': [''], 'product-2-product_cost': [''], 'consumable-TOTAL_FORMS': ['3'], 'consumable-INITIAL_FORMS': ['0'], 'consumable-MIN_NUM_FORMS': ['0'], 'consumable-MAX_NUM_FORMS': ['1000'], 'consumable-0-consumable_id': ['1'], 'consumable-0-name': ['Расходник1'], 'consumable-0-unit': ['кг'], 'consumable-0-quantity': ['10'], 'consumable-0-price': ['10000'], 'consumable-0-consumable_cost': ['1000'], 'consumable-1-consumable_id': [''], 'consumable-1-name': [''], 'consumable-1-unit': [''], 'consumable-1-quantity': [''], 'consumable-1-price': [''], 'consumable-1-consumable_cost': [''], 'consumable-__prefix__-consumable_id': [''], 'consumable-__prefix__-name': [''], 'consumable-__prefix__-unit': [''], 'consumable-__prefix__-quantity': [''], 'consumable-__prefix__-price': [''], 'consumable-__prefix__-consumable_cost': [''], 'consumable-2-consumable_id': [''], 'consumable-2-name': [''], 'consumable-2-unit': [''], 'consumable-2-quantity': [''], 'consumable-2-price': [''], 'consumable-2-consumable_cost': [''], 'point': ['8'], 'weight': ['5'], 'wear': ['59'], 'accept_wear': ['59']}>
+VALIDATION TrueTrueTrue
+{'service_id': 1, 'name': 'Автомобиль - мойка общая, Вымыть верх и низ автомобиля,', 'norm_per_hour': 0.75, 'premium': '10', 'price': 100000, 'service_cost': 1075000}
+service_id=1 add to report
+<QuerySet [<Service: Автомобиль - мойка общая, Вымыть верх и низ автомобиля,>]>
+get_total_report_price
+get_product_acc_cost
+TEMPLATE _DIR /home/vid/makereport/DTPreport/media/templates_xml
+get_product_acc_cost
+<QuerySet [<Images: Images object (46)>, <Images: Images object (47)>, <Images: Images object (48)>, <Images: Images object (49)>, <Images: Images object (50)>, <Images: Images object (51)>]>
+path_for_images /home/vid/makereport/DTPreport/media
+path /home/vid/makereport/DTPreport/media/templates_xml
+TEMPLATE _DIR /home/vid/makereport/DTPreport/media/templates_xml
+get_product_acc_cost
+JVBERi0xLj
+<QueryDict: {'csrfmiddlewaretoken': ['yNYud320UIDjV6C8BJ3CcSQMtD4QXZwQxsZ2YSrZkRP2ek6w5xKrT91cuqFzuvsg'], 'report_number': ['5'], 'report_date': ['16.03.2021'], 'car_number': ['F123FF'], 'brand_text': ['Cobalt'], 'registration': ['123'], 'engine_number': ['123'], 'body_number': ['Седан'], 'chassis': ['й'], 'car_color': ['й'], 'mileage': ['2000'], 'release_date': ['2000'], 'car_type': ['2000'], 'car_owner': ['Владимир'], 'owner_address': ['Шайхонтахур'], 'name': ['Бобур'], 'address': ['Чиланзхар'], 'passport_number': ['АА465А'], 'when_passport_issued': ['2000-05-05'], 'whom_passport_issued': ['Ровд'], 'phone_number': ['+998935856774'], 'gnu_or_gje': ['ф'], 'uvajaemaya': ['ф'], 'vid': ['ф'], 'mesto_osmotra': ['ф'], 'brand': ['Кобальт'], 'service-TOTAL_FORMS': ['3'], 'service-INITIAL_FORMS': ['0'], 'service-MIN_NUM_FORMS': ['0'], 'service-MAX_NUM_FORMS': ['1000'], 'service-0-service_id': ['1'], 'service-0-name': ['Автомобиль - мойка общая, Вымыть верх и низ автомобиля,'], 'service-0-norm_per_hour': ['0.75'], 'service-0-premium': ['10'], 'service-0-price': ['100000'], 'service-0-service_cost': ['1075000'], 'service-1-service_id': [''], 'service-1-name': [''], 'service-1-norm_per_hour': [''], 'service-1-premium': [''], 'service-1-price': [''], 'service-1-service_cost': [''], 'service-__prefix__-service_id': [''], 'service-__prefix__-name': [''], 'service-__prefix__-norm_per_hour': [''], 'service-__prefix__-premium': [''], 'service-__prefix__-price': [''], 'service-__prefix__-service_cost': [''], 'service-2-service_id': [''], 'service-2-name': [''], 'service-2-norm_per_hour': [''], 'service-2-premium': [''], 'service-2-price': [''], 'service-2-service_cost': [''], 'product-TOTAL_FORMS': ['3'], 'product-INITIAL_FORMS': ['0'], 'product-MIN_NUM_FORMS': ['0'], 'product-MAX_NUM_FORMS': ['1000'], 'product-0-product_id': ['1'], 'product-0-name': ['Деталь1'], 'product-0-quantity': ['10'], 'product-0-price': ['10000'], 'product-0-product_cost': ['1000'], 'product-1-product_id': [''], 'product-1-name': [''], 'product-1-quantity': [''], 'product-1-price': [''], 'product-1-product_cost': [''], 'product-__prefix__-product_id': [''], 'product-__prefix__-name': [''], 'product-__prefix__-quantity': [''], 'product-__prefix__-price': [''], 'product-__prefix__-product_cost': [''], 'product-2-product_id': [''], 'product-2-name': [''], 'product-2-quantity': [''], 'product-2-price': [''], 'product-2-product_cost': [''], 'consumable-TOTAL_FORMS': ['3'], 'consumable-INITIAL_FORMS': ['0'], 'consumable-MIN_NUM_FORMS': ['0'], 'consumable-MAX_NUM_FORMS': ['1000'], 'consumable-0-consumable_id': ['1'], 'consumable-0-name': ['Расходник1'], 'consumable-0-unit': ['кг'], 'consumable-0-quantity': ['10'], 'consumable-0-price': ['10000'], 'consumable-0-consumable_cost': ['1000'], 'consumable-1-consumable_id': [''], 'consumable-1-name': [''], 'consumable-1-unit': [''], 'consumable-1-quantity': [''], 'consumable-1-price': [''], 'consumable-1-consumable_cost': [''], 'consumable-__prefix__-consumable_id': [''], 'consumable-__prefix__-name': [''], 'consumable-__prefix__-unit': [''], 'consumable-__prefix__-quantity': [''], 'consumable-__prefix__-price': [''], 'consumable-__prefix__-consumable_cost': [''], 'consumable-2-consumable_id': [''], 'consumable-2-name': [''], 'consumable-2-unit': [''], 'consumable-2-quantity': [''], 'consumable-2-price': [''], 'consumable-2-consumable_cost': [''], 'point': ['8'], 'weight': ['5'], 'wear': ['59'], 'accept_wear': ['59']}>
+VALIDATION TrueTrueTrue
+{'service_id': 1, 'name': 'Автомобиль - мойка общая, Вымыть верх и низ автомобиля,', 'norm_per_hour': 0.75, 'premium': '10', 'price': 100000, 'service_cost': 1075000}
+service_id=1 add to report
+<QuerySet [<Service: Автомобиль - мойка общая, Вымыть верх и низ автомобиля,>]>
+get_total_report_price
+get_product_acc_cost
+TEMPLATE _DIR /home/vid/makereport/DTPreport/media/templates_xml
+get_product_acc_cost
+<QuerySet [<Images: Images object (40)>, <Images: Images object (41)>, <Images: Images object (42)>, <Images: Images object (43)>, <Images: Images object (44)>, <Images: Images object (45)>]>
+path_for_images /home/vid/makereport/DTPreport/media
+path /home/vid/makereport/DTPreport/media/templates_xml
+TEMPLATE _DIR /home/vid/makereport/DTPreport/media/templates_xml
+get_product_acc_cost
+JVBERi0xLj
+<QuerySet [<Images: Images object (40)>, <Images: Images object (41)>, <Images: Images object (42)>, <Images: Images object (43)>, <Images: Images object (44)>, <Images: Images object (45)>]>
+path_for_images /home/vid/makereport/DTPreport/media
+path /home/vid/makereport/DTPreport/media/templates_xml
+TEMPLATE _DIR /home/vid/makereport/DTPreport/media/templates_xml
+get_product_acc_cost
+JVBERi0xLj
+<QuerySet [<Images: Images object (52)>, <Images: Images object (53)>, <Images: Images object (54)>, <Images: Images object (55)>, <Images: Images object (56)>, <Images: Images object (57)>]>
+path_for_images /home/vid/makereport/DTPreport/media
+path /home/vid/makereport/DTPreport/media/templates_xml
+TEMPLATE _DIR /home/vid/makereport/DTPreport/media/templates_xml
+get_product_acc_cost
+JVBERi0xLj
+REPORT ID : 
+PKCS7 : 
+{'pkcs7Info': {'signers': [{'signerId': {'issuer': 'CN=NASRULLOYEV HAYOTJON XABIBULLOYEVICH,T=Директор,O=DUK YANGI TEXNOLOGIYALAR ILMIY-AXBOROT MARKAZI,OU=ЭРИ яратиш ва реестрни юритиш,L=100115 Тошкент ш. Чилонзор тумани Муқимий кўчаси 166-уй,E=info@yt.uz,C=UZ', 'subjectSerialNumber': '778137f9'}, 'signingTime': '2021.03.16 12:28:18', 'signature': '5a94ceee9ff47c2d7968c811fed39203cf700b60dc66bc18e49351bd1375f3960bdaf901761e6eb2724a6ab8a5abe551223f48311978b04d2eef78ff000f2e87', 'digest': 'c4821ba5ea1eff91dd2f6d0e8cea35079c98e8af7adb7884d3b25ac23b8f8111', 'certificate': [{'serialNumber': '778137f9', 'subjectName': 'CN=IKROMXO‘JAYEV MURODXO‘JA AXMET-O‘G‘LI,Name=MURODXO‘JA,SURNAME=IKROMXO‘JAYEV,L=ЮНУСАБАДСКИЙ РАЙОН,ST=ГОРОД ТАШКЕНТ,C=UZ,UID=543135673,1.2.860.3.16.1.2=31401966520023', 'validFrom': '2020.09.14 12:27:21', 'validTo': '2022.09.14 18:59:59', 'issuerName': 'CN=NASRULLOYEV HAYOTJON XABIBULLOYEVICH,T=Директор,O=DUK YANGI TEXNOLOGIYALAR ILMIY-AXBOROT MARKAZI,OU=ЭРИ яратиш ва реестрни юритиш,L=100115 Тошкент ш. Чилонзор тумани Муқимий кўчаси 166-уй,E=info@yt.uz,C=UZ', 'publicKey': {'keyAlgName': 'OZDST-1092-2009-2', 'publicKey': 'MGAwGQYJKoZcAw8BAQIBMAwGCiqGXAMPAQECAQEDQwAEQKmw1wAMqwoLAnSbN3vSqZjh5C2gmld+o3D4+j+2J8peP7eBC18HWtEdyBAHP9+nU/xES8HMloojzozIDO9ETbM='}, 'signature': {'signAlgName': 'OZDST-1106-2009-2-AwithOZDST-1092-2009-2', 'signature': '36f9d10719bd3fbe865e734ee443ab083aecae3402aad6e0f3994729ece5d098008048ea9cb6ce4888476e6a7283b0b2666b9279eb8706af98ee112ba64bdda7'}}, {'serialNumber': '258da73feee7a6b', 'subjectName': 'CN=NASRULLOYEV HAYOTJON XABIBULLOYEVICH,T=Директор,O=DUK YANGI TEXNOLOGIYALAR ILMIY-AXBOROT MARKAZI,OU=ЭРИ яратиш ва реестрни юритиш,L=100115 Тошкент ш. Чилонзор тумани Муқимий кўчаси 166-уй,E=info@yt.uz,C=UZ', 'validFrom': '2020.05.27 04:00:00', 'validTo': '2025.05.27 04:00:00', 'issuerName': 'C=UZ,OU=ERI kalitlarini ro‘yxatga olish organi (O‘ZDST 1092-2009-II),O=AT va kommunikatsiyalarini rivojlantirish vazirligi,CN=mitc.uz', 'publicKey': {'keyAlgName': 'OZDST-1092-2009-2', 'publicKey': 'MGAwGQYJKoZcAw8BAQIBMAwGCiqGXAMPAQECAQEDQwAEQHHkDinCquRK5NrYapbR3DSpE7+qqVJ7qDXM/dIApIgO+Yt750+46O1dwz1chTkZc7/ZezmxdtNNIJ2qwefbXr0='}, 'signature': {'signAlgName': 'OZDST-1106-2009-2-AwithOZDST-1092-2009-2', 'signature': '18a97f90bd924fe24d143fa94c6ff9efde1eded14abec7e179dfefeaf3243facca99b87371b70da784e9896a04471807db99af0be7c1cc0904aa61d6ca259f55'}}], 'OCSPResponse': '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', 'statusUpdatedAt': '2021.03.16 12:28:24', 'statusNextUpdateAt': '2021.03.16 12:29:24', 'verified': False, 'certificateVerified': True, 'trustedCertificate': {'serialNumber': '29ce182249b2d8e5207deb74086b4d6', 'subjectName': 'C=UZ,OU=ERI kalitlarini ro‘yxatga olish organi (O‘ZDST 1092-2009-II),O=AT va kommunikatsiyalarini rivojlantirish vazirligi,CN=mitc.uz', 'validFrom': '2020.03.25 12:30:02', 'validTo': '2035.03.25 12:30:02', 'issuerName': 'C=UZ,OU=ERI kalitlarini ro‘yxatga olish organi (O‘ZDST 1092-2009-II),O=AT va kommunikatsiyalarini rivojlantirish vazirligi,CN=mitc.uz', 'publicKey': {'keyAlgName': 'OZDST-1092-2009-2', 'publicKey': 'MGAwGQYJKoZcAw8BAQIBMAwGCiqGXAMPAQECAQEDQwAEQI+aPvRfngcv+/Nk1U+bIh/Yn2sxZqViQO47BFq6HQhtrco4AQA32fh+g8Y65J3ZtKRXRDy+0ax1kaRoEPpLREQ='}, 'signature': {'signAlgName': 'OZDST-1106-2009-2-AwithOZDST-1092-2009-2', 'signature': 'c1d2749535f70d2381e256431c1a3eee3e1d98160674a3d9c54cb7919297555c8649facd9ab8de0eebcfbfe5eb83fee778570e84a86e9786a71c824bdbc0918d'}}, 'certificateValidAtSigningTime': True}]}, 'success': True}
+False
+IKROMXO‘JAYEV MURODXO‘JA AXMET-O‘G‘LI
+FULL_NAME:IKROMXO‘JAYEV MURODXO‘JA AXMET-O‘G‘LI
+REPORT ID : 
+PKCS7 : 
+{'pkcs7Info': {'signers': [{'signerId': {'issuer': 'CN=NASRULLOYEV HAYOTJON XABIBULLOYEVICH,T=Директор,O=DUK YANGI TEXNOLOGIYALAR ILMIY-AXBOROT MARKAZI,OU=ЭРИ яратиш ва реестрни юритиш,L=100115 Тошкент ш. Чилонзор тумани Муқимий кўчаси 166-уй,E=info@yt.uz,C=UZ', 'subjectSerialNumber': '778137f9'}, 'signingTime': '2021.03.16 12:28:24', 'signature': 'b68e5429d5cf1f79f3d20872767be1a581aab87cf8e0e87468babb2206c1fc7d876d7808c6321e59e422e4e3274048bbb3745990d9bbcd38b82599c387877086', 'digest': 'c4821ba5ea1eff91dd2f6d0e8cea35079c98e8af7adb7884d3b25ac23b8f8111', 'certificate': [{'serialNumber': '778137f9', 'subjectName': 'CN=IKROMXO‘JAYEV MURODXO‘JA AXMET-O‘G‘LI,Name=MURODXO‘JA,SURNAME=IKROMXO‘JAYEV,L=ЮНУСАБАДСКИЙ РАЙОН,ST=ГОРОД ТАШКЕНТ,C=UZ,UID=543135673,1.2.860.3.16.1.2=31401966520023', 'validFrom': '2020.09.14 12:27:21', 'validTo': '2022.09.14 18:59:59', 'issuerName': 'CN=NASRULLOYEV HAYOTJON XABIBULLOYEVICH,T=Директор,O=DUK YANGI TEXNOLOGIYALAR ILMIY-AXBOROT MARKAZI,OU=ЭРИ яратиш ва реестрни юритиш,L=100115 Тошкент ш. Чилонзор тумани Муқимий кўчаси 166-уй,E=info@yt.uz,C=UZ', 'publicKey': {'keyAlgName': 'OZDST-1092-2009-2', 'publicKey': 'MGAwGQYJKoZcAw8BAQIBMAwGCiqGXAMPAQECAQEDQwAEQKmw1wAMqwoLAnSbN3vSqZjh5C2gmld+o3D4+j+2J8peP7eBC18HWtEdyBAHP9+nU/xES8HMloojzozIDO9ETbM='}, 'signature': {'signAlgName': 'OZDST-1106-2009-2-AwithOZDST-1092-2009-2', 'signature': '36f9d10719bd3fbe865e734ee443ab083aecae3402aad6e0f3994729ece5d098008048ea9cb6ce4888476e6a7283b0b2666b9279eb8706af98ee112ba64bdda7'}}, {'serialNumber': '258da73feee7a6b', 'subjectName': 'CN=NASRULLOYEV HAYOTJON XABIBULLOYEVICH,T=Директор,O=DUK YANGI TEXNOLOGIYALAR ILMIY-AXBOROT MARKAZI,OU=ЭРИ яратиш ва реестрни юритиш,L=100115 Тошкент ш. Чилонзор тумани Муқимий кўчаси 166-уй,E=info@yt.uz,C=UZ', 'validFrom': '2020.05.27 04:00:00', 'validTo': '2025.05.27 04:00:00', 'issuerName': 'C=UZ,OU=ERI kalitlarini ro‘yxatga olish organi (O‘ZDST 1092-2009-II),O=AT va kommunikatsiyalarini rivojlantirish vazirligi,CN=mitc.uz', 'publicKey': {'keyAlgName': 'OZDST-1092-2009-2', 'publicKey': 'MGAwGQYJKoZcAw8BAQIBMAwGCiqGXAMPAQECAQEDQwAEQHHkDinCquRK5NrYapbR3DSpE7+qqVJ7qDXM/dIApIgO+Yt750+46O1dwz1chTkZc7/ZezmxdtNNIJ2qwefbXr0='}, 'signature': {'signAlgName': 'OZDST-1106-2009-2-AwithOZDST-1092-2009-2', 'signature': '18a97f90bd924fe24d143fa94c6ff9efde1eded14abec7e179dfefeaf3243facca99b87371b70da784e9896a04471807db99af0be7c1cc0904aa61d6ca259f55'}}], 'OCSPResponse': 'MIILbzCBrqIWBBR85LubMK7raH1+9ew8NHM0PUx34RgPMjAyMTAzMTYxMjI4MjdaMGcwZTA9MAkGBSsOAwIaBQAEFKkfi3M2DJRpvSomUYQmFRQuiDS9BBQ+919MDPnj5ri/r5bKOj5QiP7pwwIEd4E3+YAAGA8yMDIxMDMxNjEyMjgyNFqgERgPMjAyMTAzMTYxMjI5MjRaoRowGDAWBgkrBgEFBQcwAQIBAf8EBgF4OwJE7zAPBgsqhlwDDwEBAgICAgUAA0EAM0ZRn1oPq+IA2XN+S99NssiT5freUXmDLGceqKmym5OVJWpVbR/JAb5uYMNeR+UDkQf+8gCwnT0L4c/DHRnHEaCCCmYwggpiMIIGRzCCBe+gAwIBAgIEd4R7bjAPBgsqhlwDDwEBAgICAgUAMIIBQTEjMCEGA1UEAwwaT01PTk9WIE9UQUpPTiBKVVJBUVVMT1ZJQ0gxGTAXBgNVBAwMENCU0LjRgNC10LrRgtC+0YAxNzA1BgNVBAoMLkRVSyBZQU5HSSBURVhOT0xPR0lZQUxBUiBJTE1JWS1BWEJPUk9UIE1BUktBWkkxQTA/BgNVBAsMONCt0KDQmCDRj9GA0LDRgtC40Ygg0LLQsCDRgNC10LXRgdGC0YDQuNC90Lgg0Y7RgNC40YLQuNGIMVswWQYDVQQHDFIxMDAwOTYg0KLQvtGI0LrQtdC90YIg0YguINCn0LjQu9C+0L3Qt9C+0YAg0YLRg9C8LiDQnNGD0pvQuNC80LjQuSDQutGe0YcuIDE2Ni3Rg9C5MRkwFwYJKoZIhvcNAQkBFgppbmZvQHl0LnV6MQswCQYDVQQGEwJVWjAeFw0yMTAxMDQwNDAwMDBaFw0yNjAxMDQwNDAwMDBaMIGmMRowGAYDVQQDDBHQodC70YPQttCx0LAgT0NTUDEzMDEGA1UECgwqWUFOR0kgVEVYTk9MT0dJWUFMQVIgSUxNSVktQVhCT1JPVCBNQVJLQVpJMRowGAYDVQQLDBHQptCg0KHQntCaINCt0KbQnzEqMCgGA1UEBwwh0LMu0KLQsNGI0LrQtdC90YIg0YPQuy7QkNCx0LDQuSA0MQswCQYDVQQGEwJVWjBgMBkGCSqGXAMPAQECATAMBgoqhlwDDwEBAgEBA0MABEAq6gEYP3trNBQdV1Ap6XiLOLI1oxybCoMY2kqGVnx3IUPEkvfKulzA9MUZ86m/NBXOj32RbUF5P8imt35Uoq7to4IDXzCCA1swgdwGA1UdIwSB1DCB0YAUxgo9De1oyHYrSgnI0MBVt76jsJmhga6kgaswgagxCzAJBgNVBAYTAlVaMUkwRwYDVQQLDEBFUkkga2FsaXRsYXJpbmkgcm/igJh5eGF0Z2Egb2xpc2ggb3JnYW5pIChP4oCYWkRTVCAxMDkyLTIwMDktSUkpMTwwOgYDVQQKDDNBVCB2YSBrb21tdW5pa2F0c2l5YWxhcmluaSByaXZvamxhbnRpcmlzaCB2YXppcmxpZ2kxEDAOBgNVBAMMB21pdGMudXqCCBnekVXyAAYIMB0GA1UdDgQWBBR85LubMK7raH1+9ew8NHM0PUx34TAOBgNVHQ8BAf8EBAMCAcIwFgYDVR0lAQH/BAwwCgYIKwYBBQUHAwkwgYsGCCsGAQUFBwEBBH8wfTBTBggrBgEFBQcwAoZHaHR0cDovL2UtaW16by51ei9kaXJlY3RvcnkvY2VydGlmaWNhdGVzLzIwMjEvMDEvMDQvMTlkZTkxNTVmMjAwMDYwOC5jZXIwJgYIKwYBBQUHMAGGGmh0dHA6Ly9lLWltem8udXovY2Ftcy9vY3NwMIIBowYDVR0fBIIBmjCCAZYwggGSoEOgQYY/aHR0cDovL2UtaW16by51ei9kaXJlY3RvcnkvY3Jscy8yMDIxLzAxLzA0LzE5ZGU5MTU1ZjIwMDA2MDguY3JsooIBSaSCAUUwggFBMSMwIQYDVQQDDBpPTU9OT1YgT1RBSk9OIEpVUkFRVUxPVklDSDEZMBcGA1UEDAwQ0JTQuNGA0LXQutGC0L7RgDE3MDUGA1UECgwuRFVLIFlBTkdJIFRFWE5PTE9HSVlBTEFSIElMTUlZLUFYQk9ST1QgTUFSS0FaSTFBMD8GA1UECww40K3QoNCYINGP0YDQsNGC0LjRiCDQstCwINGA0LXQtdGB0YLRgNC40L3QuCDRjtGA0LjRgtC40YgxWzBZBgNVBAcMUjEwMDA5NiDQotC+0YjQutC10L3RgiDRiC4g0KfQuNC70L7QvdC30L7RgCDRgtGD0LwuINCc0YPSm9C40LzQuNC5INC60Z7Rhy4gMTY2LdGD0LkxGTAXBgkqhkiG9w0BCQEWCmluZm9AeXQudXoxCzAJBgNVBAYTAlVaMA8GCyqGXAMPAQECAgICBQADQQDhnTKhPoh66uI1A/+E1QyoxubTiIXrf8QvDcnivdMXwmYzuz7oOsgK69gupX7P6YXVrYrveWT6bsZqR3oGVsoXMIIEEzCCA7ugAwIBAgIIGd6RVfIABggwDwYLKoZcAw8BAQICAgIFADCBqDELMAkGA1UEBhMCVVoxSTBHBgNVBAsMQEVSSSBrYWxpdGxhcmluaSByb+KAmHl4YXRnYSBvbGlzaCBvcmdhbmkgKE/igJhaRFNUIDEwOTItMjAwOS1JSSkxPDA6BgNVBAoMM0FUIHZhIGtvbW11bmlrYXRzaXlhbGFyaW5pIHJpdm9qbGFudGlyaXNoIHZhemlybGlnaTEQMA4GA1UEAwwHbWl0Yy51ejAeFw0yMTAxMDQwNDAwMDBaFw0yNjAxMDQwNDAwMDBaMIIBQTEjMCEGA1UEAwwaT01PTk9WIE9UQUpPTiBKVVJBUVVMT1ZJQ0gxGTAXBgNVBAwMENCU0LjRgNC10LrRgtC+0YAxNzA1BgNVBAoMLkRVSyBZQU5HSSBURVhOT0xPR0lZQUxBUiBJTE1JWS1BWEJPUk9UIE1BUktBWkkxQTA/BgNVBAsMONCt0KDQmCDRj9GA0LDRgtC40Ygg0LLQsCDRgNC10LXRgdGC0YDQuNC90Lgg0Y7RgNC40YLQuNGIMVswWQYDVQQHDFIxMDAwOTYg0KLQvtGI0LrQtdC90YIg0YguINCn0LjQu9C+0L3Qt9C+0YAg0YLRg9C8LiDQnNGD0pvQuNC80LjQuSDQutGe0YcuIDE2Ni3Rg9C5MRkwFwYJKoZIhvcNAQkBFgppbmZvQHl0LnV6MQswCQYDVQQGEwJVWjBgMBkGCSqGXAMPAQECATAMBgoqhlwDDwEBAgEBA0MABEA+eGaZWzX8Z/UCeypb+HX9trMM/Fir4XGYArim4IVPHru/kJVYfmuOgXyq8qLrljLA/nGclmM+0CZRH8OCOcdSo4IBJTCCASEwDAYDVR0TBAUwAwEBATAdBgNVHQ4EFgQUxgo9De1oyHYrSgnI0MBVt76jsJkwgeQGA1UdIwSB3DCB2YAUh3w/WSDy1FSlQlJCwOQQ8yMW0Bahga6kgaswgagxCzAJBgNVBAYTAlVaMUkwRwYDVQQLDEBFUkkga2FsaXRsYXJpbmkgcm/igJh5eGF0Z2Egb2xpc2ggb3JnYW5pIChP4oCYWkRTVCAxMDkyLTIwMDktSUkpMTwwOgYDVQQKDDNBVCB2YSBrb21tdW5pa2F0c2l5YWxhcmluaSByaXZvamxhbnRpcmlzaCB2YXppcmxpZ2kxEDAOBgNVBAMMB21pdGMudXqCEAKc4YIkmy2OUgfet0CGtNYwCwYDVR0PBAQDAgGGMA8GCyqGXAMPAQECAgICBQADQQDRn7msFH3XBGzo0b3qEmgOW+TnLm0FCMFUTcZcBUftjbmKjAFgZeOR+ziMjDqB6X5P9Ope7GerzZN0eyg3abzE', 'statusUpdatedAt': '2021.03.16 12:28:24', 'statusNextUpdateAt': '2021.03.16 12:29:24', 'verified': False, 'certificateVerified': True, 'trustedCertificate': {'serialNumber': '29ce182249b2d8e5207deb74086b4d6', 'subjectName': 'C=UZ,OU=ERI kalitlarini ro‘yxatga olish organi (O‘ZDST 1092-2009-II),O=AT va kommunikatsiyalarini rivojlantirish vazirligi,CN=mitc.uz', 'validFrom': '2020.03.25 12:30:02', 'validTo': '2035.03.25 12:30:02', 'issuerName': 'C=UZ,OU=ERI kalitlarini ro‘yxatga olish organi (O‘ZDST 1092-2009-II),O=AT va kommunikatsiyalarini rivojlantirish vazirligi,CN=mitc.uz', 'publicKey': {'keyAlgName': 'OZDST-1092-2009-2', 'publicKey': 'MGAwGQYJKoZcAw8BAQIBMAwGCiqGXAMPAQECAQEDQwAEQI+aPvRfngcv+/Nk1U+bIh/Yn2sxZqViQO47BFq6HQhtrco4AQA32fh+g8Y65J3ZtKRXRDy+0ax1kaRoEPpLREQ='}, 'signature': {'signAlgName': 'OZDST-1106-2009-2-AwithOZDST-1092-2009-2', 'signature': 'c1d2749535f70d2381e256431c1a3eee3e1d98160674a3d9c54cb7919297555c8649facd9ab8de0eebcfbfe5eb83fee778570e84a86e9786a71c824bdbc0918d'}}, 'certificateValidAtSigningTime': True}]}, 'success': True}
+True
+NASRULLOYEV HAYOTJON XABIBULLOYEVICH
+FULL_NAME:NASRULLOYEV HAYOTJON XABIBULLOYEVICH
+<QuerySet [<Images: Images object (52)>, <Images: Images object (53)>, <Images: Images object (54)>, <Images: Images object (55)>, <Images: Images object (56)>, <Images: Images object (57)>]>
+path_for_images /home/vid/makereport/DTPreport/media
+path /home/vid/makereport/DTPreport/media/templates_xml
+TEMPLATE _DIR /home/vid/makereport/DTPreport/media/templates_xml
