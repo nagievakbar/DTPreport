@@ -252,15 +252,21 @@
                             </div>
                             <div class="col-lg-4">
                                 <div class="select-block">
-                                    <label>TEST</label>
+                                    <label>Надбавка</label>
                                     <div class="custom-select">
-                                        <div class="active-list">0</div>
-                                        <input type="text" class="list-field" value="0" />
+                                        <div class="active-list"> 0 </div>
+                                        <input type="text" id="procent" class="list-field" value="0" />
                                         <ul class="drop-down-list">
-                                            <li>1</li>
-                                            <li>2</li>
-                                            <li>3</li>
-                                            <li>4</li>
+                                            <li>10 %</li>
+                                            <li>20 %</li>
+                                            <li>30 %</li>
+                                            <li>40 %</li>
+                                            <li>50 %</li>
+                                            <li>60 %</li>
+                                            <li>70 %</li>
+                                            <li>80 %</li>
+                                            <li>90 %</li>
+                                            <li>100 %</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -269,13 +275,19 @@
                                 <div class="select-block">
                                     <label>TEST</label>
                                     <div class="custom-select">
-                                        <div class="active-list">0</div>
+                                        <div id = "" class="active-list">0</div>
                                         <input type="text" class="list-field" value="0" />
                                         <ul class="drop-down-list">
-                                            <li>1</li>
-                                            <li>2</li>
-                                            <li>3</li>
-                                            <li>4</li>
+                                       <li>10 %</li>
+                                            <li>20 %</li>
+                                            <li>30 %</li>
+                                            <li>40 %</li>
+                                            <li>50 %</li>
+                                            <li>60 %</li>
+                                            <li>70 %</li>
+                                            <li>80 %</li>
+                                            <li>90 %</li>
+                                            <li>100 %</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -800,34 +812,31 @@
                 return event.key !== "Enter";
             });
 
-            $(document).on('keypress', ".allowance2", function (e) {
-                var key = e.which;
-                if (key === 13) {
-                    console.log('CLICK-Service')
-                    console.log($('#empty_service_form').html())
+            function add_service() {
+                    console.log('CLICK-Service');
+                   
                     var form_idx = $('#id_service-TOTAL_FORMS').val();
+                     console.log( "FORM IDX" + form_idx);
                     $('#service_formset').append($('#empty_service_form').html().replace(/__prefix__/g, form_idx));
-                    $('#id_service-TOTAL_FORMS').val(parseInt(form_idx) + 1);2
-                }
-            });
-            $(document).on('keypress', ".time3", function (e) {
-                var key = e.which;
-                if (key === 13) {
+                    $('#id_service-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+         
+            };
+        
+          function add_product() {
                     console.log('CLICK-Product')
                     var form_idx = $('#id_product-TOTAL_FORMS').val();
                     $('#product_formset').append($('#empty_product_form').html().replace(/__prefix__/g, form_idx));
                     $('#id_product-TOTAL_FORMS').val(parseInt(form_idx) + 1);
-                }
-            });
-            $(document).on('keypress', ".allowance4", function (e) {
-                var key = e.which;
-                if (key === 13) {
-                    console.log('CLICK-Consumable')
+                
+            }
+     
+            function add_consumable() {
+
                     var form_idx = $('#id_consumable-TOTAL_FORMS').val();
                     $('#consumable_formset').append($('#empty_consum_form').html().replace(/__prefix__/g, form_idx));
                     $('#id_consumable-TOTAL_FORMS').val(parseInt(form_idx) + 1);
-                }
-            });
+                
+            }
 
             $(document).on('keypress', ".first2", function (e) {
                 console.log('CLICK service_id')
@@ -837,10 +846,15 @@
                         last_input_name = $(this).parents('tr').find('.name2'),
                         last_input_nph = $(this).parents('tr').find('.time2'),
                         last_input_price = $(this).parents('tr').find('.price2'),
-                        last_input_premium = $(this).parents('tr').find('.allowance2')
-
-                    brand = $('#id_brand').val()
-
+                        last_input_premium = $(this).parents('tr').find('.allowance2'),
+                        present_table = $(this).parents().next().find('.first2'),
+                        service_cost = $(this).parents('tr').find('.sum2'),
+                        brand = $('#id_brand').val();
+                         console.log(last_input_premium.val());
+                    {% comment %} if (brand == 0) {
+                        alert("Пожалуйста, выберите марку!");
+                    }
+                    else  {% endcomment %}
                     $.ajax({
                         url: '{% url "get_service_ajax" %}',
                         data: {
@@ -850,15 +864,24 @@
                         dataType: 'json',
                         success: function (data) {
                             console.log('success')
-                            last_input_premium.select()
+                          
                             last_input_name.val(data.name)
                             last_input_nph.val(data.norm_per_hour)
                             last_input_price.val(data.price)
+                            get_procent(last_input_premium);
+                           last_input_premium.select()
+                            
                         },
                     })
                 }
             });
-
+            function get_procent(item){
+                if (item.val() == ""){
+                    var procent = $("#procent").val().split(" ")[0];
+                    console.log(procent);
+                    item.val(procent);
+                }
+            }
             $(document).on('keypress', ".allowance2", function (e) {
                 console.log('CLICK premium')
                 var key = e.which;
@@ -873,7 +896,7 @@
                         psss = $(this).parents('div').find('.no_error').next(),
                         {#next_service_id = $(this).parents('.div').find('.no_error').next()#}
                         last = $(this).parents('tbody').find('tr').first().find('.first2')
-
+                    console.log("ssssss"  + premium);            
                     $.ajax({
                         url: '{% url "get_service_cost" %}',
                         data: {
@@ -883,18 +906,23 @@
                         },
                         dataType: 'json',
                         success: function (data) {
-                            console.log('success calculate cost')
-                            console.log(present_table)
-                            console.log(psss)
-                            console.log(last)
+                         
                             present_table.select()
                             {#last.select()#}
+                      
+                            if (!service_cost.val()){
+                                add_service();
+                            }
                             service_cost.val(data.service_cost)
+                            
                         },
+                        error: function(xhr, ajaxOptions, thrownError){
+                            console.log("error")
+                        }
                     })
                 }
             });
-
+        
             $(document).on('keypress', ".count", function (e) {
                 console.log('CLICK product_id')
                 var key = e.which;
@@ -906,7 +934,10 @@
                         last_input_quantity = $(this).parents('tr').find('.time3')
 
                     brand = $('#id_brand').val()
-
+                    {% comment %} if (brand == 0) {
+                        alert("Пожалуйста, выберите марку!");
+                    }
+                    else {% endcomment %}
                     $.ajax({
                         url: '{% url "get_product_ajax" %}',
                         data: {
@@ -916,11 +947,13 @@
                         dataType: 'json',
                         success: function (data) {
                             console.log('success')
-                            last_input_quantity.select()
                             console.log("data : " + data.name)
+                              last_input_quantity.select()
                             last_input_name.val(data.name)
                             {#last_input_unit.val(data.unit)#}
                             last_input_price.val(data.price)
+                            get_procent(last_input_quantity);
+                          
                         },
                     })
                 }
@@ -934,7 +967,7 @@
                         price = $(this).parents('tr').find('.price4').val(),
                         cost = $(this).parents('tr').find('.sum4'),
                         last = $(this).parents('tbody').find('tr').last(),
-                        present_table = $(this).parents('.no_error').next().find('.first4')
+                        present_table = $(this).parents('.no_error').next().find('.first4');
                     {#last.clone().insertAfter(last);#}
                     $.ajax({
                         url: '{% url "get_consumable_cost" %}',
@@ -944,10 +977,16 @@
                         },
                         dataType: 'json',
                         success: function (data) {
-                            console.log('success calculate cost')
+                            console.log('success calculate cost   ' + quantity)
                             present_table.select()
+                            if (!cost.val()){
+                                add_consumable()
+                            }
                             cost.val(data.total_cost)
                         },
+                        error: function(xhr, ajaxOptions, thrownError){
+                            console.log("error")
+                        }
                     })
                 }
             });
@@ -960,8 +999,8 @@
                         last_input_name = $(this).parents('tr').find('.name4'),
                         last_input_unit = $(this).parents('tr').find('.time4'),
                         last_input_price = $(this).parents('tr').find('.price4'),
-                        last_input_price_cons = $(this).parents('tr').find('.allowance4')
-
+                        last_input_price_cons = $(this).parents('tr').find('.allowance4'),
+                        cost = $(this).parents('tr').find('.sum4')
                     $.ajax({
                         url: '{% url "get_consumable_ajax" %}',
                         data: {
@@ -969,12 +1008,17 @@
                         },
                         dataType: 'json',
                         success: function (data) {
-                            console.log('success')
+                        
+                            get_procent(last_input_price_cons)
                             last_input_price_cons.select()
                             last_input_name.val(data.name)
                             last_input_unit.val(data.unit)
                             last_input_price.val(data.price)
+                           
                         },
+                        error: function(xhr, ajaxOptions, thrownError){
+                            console.log("error")
+                        }
                     })
                 }
             });
@@ -988,7 +1032,7 @@
                         cost = $(this).parents('tr').find('.sum3'),
                         last = $(this).parents('tbody').find('tr').last(),
                         present_table = $(this).parents('.no_error').next().find('.count')
-
+                    console.log("item 3" + quantity)
                     {#last.clone().insertAfter(last);#}
                     $.ajax({
                         url: '{% url "get_product_cost" %}',
@@ -1000,8 +1044,15 @@
                         success: function (data) {
                             console.log('success calculate cost')
                             console.log("data total" + data.total_cost)
-                            cost.val(data.total_cost)
+                            present_table.select();
+                            if(!cost.val()){
+                                add_product();
+                            }
+                            cost.val(data.total_cost);
                         },
+                        error: function(xhr, ajaxOptions, thrownError){
+                            console.log("error")
+                        }
                     })
                 }
             });
