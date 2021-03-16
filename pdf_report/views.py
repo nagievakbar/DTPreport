@@ -62,7 +62,7 @@ def get_response(request, id):
             'qrcode_admin':new_report_pdf.pdf_qr_code_admin,
             'images': images,
             'documnet_photo':documnet_photo,
-            'passport':passport.first().photo,
+            'passport':passport,
             'checks': checks,
             'other_photos':other_photos,
             }

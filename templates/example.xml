@@ -14,7 +14,7 @@
         <text align="justify" lineheight="1.5">       ООО "AMIR AVTO BAHOLASH"   именуемое   в   дальнейшем   "Исполнитель",   в   лице   директора Сагдуллаева Б.К.,  действующего  на  основании  Устава  и  лицензии  на  осуществление  оценочной   деятельности   RR-0184    выданная   Госкомимуществом   РУз 12.05.2014г.,   полис  страхования  профессиональной ответственности оценщиков №11/3-6/0769 от 08.11.2019г. c одной  стороны  и {{ report.contract.customer }} именуемое в дальнейшем "Заказчик", с другой стороны, заключили настоящий договор о нижеследующем:</text>
         <text font="TNRB" align="center" lineheight="2">1.Предмет договора.</text>
         <text align="justify" lineheight="1.5">1.1. В соответствии с условиями настоящего договора Заказчик поручает, Исполнитель предоставляет комплекс работ (услуг), связанных с определением стоимости имущества Заказчика</text>
-        <text align="justify" lineheight="1.5">1.2. Наименование а/м оценки: автомобиль марки {{ report.car.brand_text }} гос№ {{ report.car.car_number }}</text>
+        <text align="justify" lineheight="1.5">1.2. Наименование а/м оценки: автомобиль марки {{ report.car.brand }} гос№ {{ report.car.car_number }}</text>
         <text align="justify" lineheight="1.5">1.3. Зарегистрированного по адресу: {{ report.car.owner_address }}</text>
         <text align="justify" lineheight="1.5">1.4. Цель оценки: определение стоимости ущерба транспортного средства</text>
         <text font="TNRB" align="center" lineheight="2">2. Стоимость услуг, порядок их сдачи и оплаты</text>
@@ -1497,7 +1497,7 @@
        <text x="8.5" y="23.4">государственный номер</text>
        <text x="13.5" y="23.4">Рыночная стоимость ущерба</text>
        {# -------------------- #}
-       <text x="4.8" y="22.4">{{ report.car.brand }}</text>
+       <text x="4.8" y="22.4">{{ report.car.brand_text }}</text>
        <text x="9.4" y="22.4">{{ report.car.car_number}}</text>
        <text x="15.2" y="22.4">{{ report.total_report_cost}}</text>
        {# -------------------- #}
@@ -1526,33 +1526,52 @@
 Согласно статьи 18, Закона Республики Узбекистан №811-I от 19.08.1999 года «Об оценочной деятельности»
 Отчёт, составленный в порядке, предусмотренном настоящим Законом.</text>
    </page>
-  
+
    <page>
-    <image src = "{{ passport }}" y='0.5' x='0.5' height='29' width = '20'/>
-   </page>
+    {% for pass in passport %}
+    {% if loop.index % 2 == 0 %}
+        <image src = "{{ pass.photo }}" y='15' x='0.5'  height='14.5' width = '20'/>
+    {% elif loop.index % 2 == 1 %}
+        <image src = "{{ pass.photo }}" y='0.2' x='0.5' height='14.5' width = '20'/>
+    {% endif %}
+ 
+    {% endfor %} 
+  </page>
+
+     <page>
+    {% for photo in other_photos %}
+    {% if loop.index % 2 == 0 %}
+        <image src = "{{ photo.photos }}" y='15' x='0.5'  height='14.5' width = '20'/>
+    {% elif loop.index % 2 == 1 %}
+        <image src = "{{ photo.photos }}" y='0.2' x='0.5' height='14.5' width = '20'/>
+    {% endif %}
+ 
+    {% endfor %} 
+  </page>
+
 
     {% set count = namespace(value=1) %}
       {% for image in images %}
-    {% if loop.first or loop.index % 6 == 1 %}
+             {% if loop.first or loop.index % 9 == 1 %}
              <page>
-      {% endif %}
-    
-    {% if loop.index is not divisibleby 2 %}
-       <image src = "{{ image.image }}" x='0.5' y = '{{29 - count.value*9}}' height='8.5' width = '10'/>
-       {% else %}
-        <image src = "{{ image.image }}" x='10.8' y = '{{29 - count.value*9}}' height='8.5' width = '10'/>
+            {% endif %}
+     {% if loop.index % 3 == 1 %}
+       <image src = "{{ image.image }}" x='0.2' y = '{{29 - count.value*9}}' height='8.5' width = '6.6'/>
+      {% elif loop.index % 3 == 2 %}
+         <image src = "{{ image.image }}" x='7.2' y = '{{29 - count.value*9}}' height='8.5' width = '6.6'/>
+       {% elif loop.index % 3 == 0 %}
+        <image src = "{{ image.image }}" x='14.2' y = '{{29 - count.value*9}}' height='8.5' width = '6.6'/>
         {% set count.value = count.value + 1 %}
      {% endif %}
 
-      {% if loop.last or loop.index % 6 == 0 %}
+      {% if loop.last or loop.index % 9 == 0 %}
       {% set count.value = 1 %}
               </page>
         {% endif %}
 
-       {% endfor %} 
+     {% endfor %} 
 
 </pdf>
-
 
 
 

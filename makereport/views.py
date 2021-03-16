@@ -32,7 +32,7 @@ class ReportView(View):
         ophotos = None
         checks = None
         if id:
-            print('get method with report id=%.d' % id)
+      
             images = Images.objects.filter(report_id=id)
             pphotos = PassportPhotos.objects.filter(report_id=id)
             ophotos = OtherPhotos.objects.filter(report_id=id)
@@ -59,7 +59,7 @@ class ReportView(View):
             total_price_report = report.total_report_cost
             template = 'makereport/edit_repor.html'
         else:
-            print('get method without id')
+   
             image_form = ImageForm(instance=Images())
             passphoto_form = PPhotoForm(instance=PassportPhotos())
             otherphoto_form = OPhotoForm(instance=OtherPhotos())
@@ -76,7 +76,7 @@ class ReportView(View):
             wear_form = WearForm()
             total_price_report = 0
             template = 'makereport/add_repor.html'
-            print(car_form.as_ul())
+  
         context = {
             'report_form': report_form,
             'car_form': car_form,
@@ -102,9 +102,9 @@ class ReportView(View):
     def post(self, request, id=None, extend=0):
         total_report_price = 0
         if id:
-            print('getting id')
+     
             return self.put(request, id)
-        print(request.POST)
+
         report_form = ReportForm(request.POST, instance=Report())
         image_form = ImageForm(request.POST, request.FILES)
         passphoto_form = PPhotoForm(request.POST, request.FILES)
@@ -179,7 +179,6 @@ class ReportView(View):
             new_report.set_private_key()
             new_report.save()
             create_base64(request,new_report)
-            print(new_report.pdf_report_base64)
             return HttpResponseRedirect('/report/list')
     
         context = {
@@ -352,7 +351,7 @@ def get_template(request):
     user = request.user
     if user.myuser.template != None:
         user.myuser.template.delete()
-    print(request.FILES['file'])
+  
     user.myuser.template = request.FILES['file'];
     user.myuser.save()
     return JsonResponse({})
