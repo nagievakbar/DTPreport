@@ -86,6 +86,7 @@ def create_base64(request, new_report_pdf):
         else:
             pdf = PyPDFML('example.xml')
         image_variable = 0;
+        
         context = {
             'report': new_report_pdf,
             'services': new_report_pdf.service.all().__len__(),
@@ -98,6 +99,7 @@ def create_base64(request, new_report_pdf):
             'checks': "",
             'other_photos':"",
             }
+
         pdf.generate(context)
         data = pdf.contents()
         filename = "%s.pdf" % new_report_pdf.car.car_number

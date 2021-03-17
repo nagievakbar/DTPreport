@@ -334,15 +334,12 @@
               var button = event.relatedTarget;
               var recipient = "";
               var sign = button.getAttribute('sign');
-              var bb =button.getAttribute("bb");
-              console.log(sign);
               exampleModal.querySelector('.sign').value = sign;
               if (sign[0]=='T'){
                   recipient = button.getAttribute('pkcs7');
               }
               else {
                   recipient = button.getAttribute('data-bs-whatever');
-                console.log(recipient);
               }
              
               var report_id = button.getAttribute('data-bs-report');
