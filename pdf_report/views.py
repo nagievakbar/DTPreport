@@ -70,10 +70,10 @@ def get_response(request, id):
         data = pdf.contents()
         filename = "%s.pdf" % new_report_pdf.car.car_number
         new_report_pdf.pdf_report.save(filename, ContentFile(data))
-        with open(new_report_pdf.pdf_report.path, "rb") as file:
-            encoded_string = base64.b64encode(file.read())
-        new_report_pdf.pdf_report_base64 = encoded_string.decode('ascii')
-        print( new_report_pdf.pdf_report_base64[0:10])
+        # with open(new_report_pdf.pdf_report.path, "rb") as file:
+        #     encoded_string = base64.b64encode(file.read())
+        # new_report_pdf.pdf_report_base64 = encoded_string.decode('ascii')
+        # print( new_report_pdf.pdf_report_base64[0:10])
         new_report_pdf.save()
 
 def create_base64(request, new_report_pdf):
