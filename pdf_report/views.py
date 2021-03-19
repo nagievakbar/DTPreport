@@ -57,13 +57,13 @@ def get_response(request, id):
         pdf = PyPDFML(splited[-1], path)
     else:
         pdf = PyPDFML('example.xml')
-    image_variable = 0;
+
     context = {
         'contract': contract,
         'report': new_report_pdf,
         'services': new_report_pdf.service.all().__len__(),
         'datetime': new_report_pdf.report_date,
-        'qrcode': "qweqweqweqweqweqwewqewqewqeqwewqeqwe",
+        'qrcode': new_report_pdf.pdf_qr_code_user,
         'qrcode_admin': new_report_pdf.pdf_qr_code_admin,
         'images': images,
         'documnet_photo': documnet_photo,
@@ -91,7 +91,6 @@ def create_base64(request, new_report_pdf):
         pdf = PyPDFML(splited[-1], path)
     else:
         pdf = PyPDFML('example.xml')
-    image_variable = 0;
 
     context = {
         'contract': "",
