@@ -109,6 +109,9 @@
         <text align="justify" lineheight="1.3">4.2.2. Отказаться от поручаемых работ по настоящему договору по  своей инициативе только в тех случаях, когда Исполнитель не приступил к исполнению настоящего договора в указанные в нем сроки. В случае начала выполнения работ Исполнителем, работа завершается на основании двухстороннего акта на выполненную часть работы.</text>
         <text align="justify" lineheight="1.3">4.3. Исполнитель обязан:</text>
         <text align="justify" lineheight="1.3">4.3.1. Выполнять работы в соответствии со Стандартами оценки и нормативно-правовыми актами регламентирующими оценочную деятельность в Республике Узбекистан.</text>
+           {% if qrcode%}
+          <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
+        {%endif %}
     </page>
     <page>
         <text align="justify" lineheight="1.2">4.3.2. Выполнять работы в заданные сроки.</text>
@@ -153,15 +156,14 @@
         <text lineheight="1.3">  МФО                      01067   ОКОНХ     84500  </text>
         <text lineheight="1.3">  ИНН		      302 667 624			                  телефон:                 {{ report.contract.customer.phone_number }}</text>
          --------------------------------------------table-text--------------------------------------
-        <text lineheight="1.3">Директор ООО "AMIR AVTO BAHOLASH"</text>
+        <text lineheight="1.3">Директор ООО "AMIR AVTO BAHOLASH" Сагдулаев Б.К    </text>
         <text/>
-        <text lineheight="1.3">Сагдулаев Б.К                                {{ report.contract.customer.name }} </text>
-        {% if qrcode_admin %}  <!-- Это для qrcode сохраните где нужно он будет высвечиваться -->
-        <barcode y='1' x="5" type="QR" height="2">{{ qrcode_admin }}</barcode>  
-        {% endif %}
+        <text lineheight="1.3">                                                                                {{ report.contract.customer.name }} </text>
          {% if qrcode %}
-        <barcode  y='1' x="12" type="QR" height="2">{{ qrcode }}</barcode> 
+        <barcode   y='1' x="4" type="QR" height="2">{{ qrcode }}</barcode> 
+       
         {% endif %}
+ 
     </page>
     <page>
         <text align="center">АКТ</text>
@@ -184,12 +186,12 @@
         <text>                                               Директор           </text>
         <text align="center">ООО «AMIR AVTO BAHOLASH»                               Заказчик:{{ report.contract.customer.name }}</text>
         <text>                                                 </text>
-        {% if qrcode_admin %}  <!-- Это для qrcode сохраните где нужно он будет высвечиваться -->
-        <barcode x="6.5"  y='17' type="QR" height="2">{{ qrcode_admin }}</barcode>  
-        {% endif %}
+
         {% if qrcode %}
-        <barcode  y='17' x="14" type="QR" height="2">{{ qrcode }}</barcode> 
+        <barcode x="6.5"  y='17'  type="QR" height="2">{{ qrcode }}</barcode> 
+       
         {% endif %}
+
         <text/>
         <text/>
           <text/>
@@ -275,8 +277,9 @@
   Сагдуллаев Б.К.
 {{ datetime }}
 		</text>
-         {% if qrcode_admin %}  <!-- Это для qrcode сохраните где нужно он будет высвечиваться -->
-        <barcode x="12" y="20.5" type="QR" height="2">{{ qrcode_admin }}</barcode>
+         {% if qrcode %}  <!-- Это для qrcode сохраните где нужно он будет высвечиваться -->
+        <barcode x="12" y="20.5" type="QR" height="2">{{ qrcode }}</barcode>
+         
         {% endif %}
 		<text/>
 		<text/>
@@ -364,28 +367,13 @@
         <text/>
         <text/>
         <text align='right'> Оценщик </text>
-        {% if qrcode_admin %}  <!-- Это для qrcode сохраните где нужно он будет высвечиваться -->
-        <barcode x="12" y="2" type="QR" height="2">{{ qrcode_admin }}</barcode>
-       
-        {% endif %}
+
          {% if qrcode %}
-         <barcode x="15" y="0.5"  type="QR" height="2">{{ qrcode }}</barcode>
+         <barcode  x="12" y="2"  type="QR" height="2">{{ qrcode }}</barcode>
+         
            {% endif %}
     </page>
-    <page>
-    {% if documnet_photo.license %}
-    <image height="14.5" width="9.5" y='15' x='1' src="{{ documnet_photo.license}}"/>
-    {% endif %}
-    {% if documnet_photo.guvonhnoma %}
-    <image  height="14.5" width="9.5" y='15' x='11' src="{{documnet_photo.guvonhnoma}}"/>
-    {% endif %}
-    {% if documnet_photo.certificate %}
-    <image  height="14.5" width="9.5" y='0.5' x='1' src="{{documnet_photo.certificate}}"/>
-        {% endif %}
-    {% if documnet_photo.insurance %}
-    <image  height="14.5" width="9.5"  y='0.5' x='11' src="{{documnet_photo.insurance}}"/>
-    {% endif %}
-    </page>
+    
                                      PAGE 3
     <page>
         <text fontsize="14" align="center">СОДЕРЖАНИЕ:</text>
@@ -427,6 +415,9 @@
             Копия письма-заявки от Заказчика.
             Фотоснимки оцениваемого объекта
             </text>
+        {% if qrcode%}
+          <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
+        {%endif %}
     </page>
                                      PAGE 4
     <page>
@@ -451,6 +442,9 @@
 			<text lineheight="1.2" align="justify" fontsize="11">    Рыночная стоимость – расчетная величина, равная денежной сумме, за которую предполагается переход имущества из рук в руки на дату оценки в результате коммерческой сделки между добровольным покупателем и добровольным продавцом после адекватного маркетинга; при этом полагается, что каждая из сторон действовала компетентно, расчётливо и без принуждения;</text>
             <text lineheight="1.2" align="justify" fontsize="11">    Аналог объекта оценки – сходный, по основным экономическим, материальным, техническим и другим характеристикам с объектом оценки другой объект, цена которого известна из сделки, состоявшейся при сходных условиях;</text>
             <text lineheight="1.2" align="justify" fontsize="11">   Элементы сравнения – конкретные характеристики объектов имущества и сделок, которые приводят к вариациям в ценах, уплачиваемых за недвижимость. Элементы сравнения включают следующее (хотя их круг этим не ограничивается): виды передаваемых имущественных прав, условия финансирования, условия продажи, условия рынка, местоположение, физические и экономические характеристики;</text>
+        {% if qrcode%}
+          <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
+        {%endif %}
     </page>
                                                                      PAGE 5
     <page>
@@ -473,7 +467,9 @@
         <text lineheight="1.2" align="justify" fontsize="11">    Согласование результатов  –  событие , возникшее в процессе движения по дороге получение итоговой стоимости и имущества на основании результатов,полученных с помощью различных подходов;</text>
         <text lineheight="1.2" align="justify" fontsize="11">      Дата оценки имущества – дата, по состоянию на которую произведена оценка объекта оценки;</text>
         <text lineheight="1.2" align="justify" fontsize="11">   Отчет об  оценке  –  документ, содержащий обоснование мнения оценщика о  стоимости оцениваемого объекта;</text>
-
+        {% if qrcode%}
+          <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
+        {%endif %}
     </page>
                                              PAGE 6
     <page>
@@ -505,6 +501,9 @@
             •Информация об истории АТС.
       Полученная информация была подкреплена физическим осмотром подлежащего оценке объекта. В процессе обследования были осмотрены конструктивные элементы АМТС, определены степени износа, произведены необходимые замеры, произведен опрос специалистов.
         </text>
+        {% if qrcode%}
+          <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
+        {%endif %}
     </page>
                                                  PAGE 7
     <page>
@@ -628,6 +627,9 @@
            <text lineheight="1" x="8" y="2.8">
                 {{ datetime }}
            </text>
+        {% if qrcode%}
+          <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
+        {%endif %}
     </page>
                                                  PAGE 7
     <page>
@@ -682,6 +684,9 @@
 
 
         </text>
+        {% if qrcode%}
+          <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
+        {%endif %}
     </page>
                                                           PAGE 8
     <page>
@@ -746,6 +751,9 @@
           источников   и   считаются   достоверными .  Тем  не  менее ,  Оценщик  не   может   гарантировать   их
           абсолютную точность, поэтому там, где это возможно, делаются ссылки на источник информации.
           </text>
+        {% if qrcode%}
+          <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
+        {%endif %}
     </page>
     <page>
           <text lineheight="1.5" align="justify" fontsize="11">
@@ -764,7 +772,9 @@
           Национальные стандарты оценки имущества Республики Узбекистан (НСОИ №2)  «Рыночная стоимость как база оценки». (Утверждено постановлением Госкомимущества Республики Узбекистан от 14.06.2006 г. № 01/19-20, зарегистрировано в Министерстве Юстиции Республики Узбекистан от 24.07.2006г. № 1605);
           Национальные   стандарты    оценки   имущества  Республики Узбекистан (НСОИ 7) «Общие требования, предъявляемые к внутренним правилам контроля качества работы оценщиков», зарегистрировано в Министерстве Юстиции Республики Узбекистан от 5.09.2008 г № 1851;
           </text>
-
+    {% if qrcode %}
+        <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
+        {% endif %}
     </page>
     <page>
         <text  font="TNRB" >             6.ОСНОВНАЯ ЧАСТЬ.</text>
@@ -843,6 +853,9 @@
         приносят   доходы   владельцам  при использовании в съемках фильмов, в  демонстрационных  пробегах
         раритетных автомобилей  с призовым фондом и экспонировании на выставках раритетных автомобилей.
         </text>
+            {% if qrcode %}
+      <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
+        {% endif %}
     </page>
     <page>
             <text lineheight="1.3" align="justify">
@@ -864,6 +877,9 @@
                 • индексации    цен -  определение   стоимости   ТС и   их   комплектующих   заключается   в   приведении стоимости объектов к действующему уровню цен с помощью корректирующих индексов.;
                 • расчет   по   цене однородного объекта - производят с помощью подбора для оцениваемого объекта аналогичного объекта, похожего по конструкции, используемым материалам и технологии изготовления.
             </text>
+                {% if qrcode %}
+        <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
+        {% endif %}
       </page>
     <page>
         <text lineheight="1.3" align="justify">
@@ -962,6 +978,9 @@
         <text lineheight="1" x="17.5" y="2.8">
             10
         </text>
+            {% if qrcode %}
+        <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
+        {% endif %}
     </page>
     <page>
         <text align="center" lineheight="1" font="TNRB">
@@ -1096,6 +1115,9 @@
        (Cрем)учитывается его частичное обновление при замене поврежденных деталей с расчетным процентом
         износа (Итр (физический, функциональный и внешний)) на новые.
         </text>
+            {% if qrcode %}
+        <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
+        {% endif %}
     </page>
     <page>
         <text>
@@ -1146,6 +1168,9 @@
         формуле:
         </text>
         <image src="czhizh.png" width="6" height="0.6" x="7.45" y="9"/>
+            {% if qrcode %}
+        <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
+        {% endif %}
     </page>
     <page>
         <text font="TNRB">             6.4.6 Калькуляция (смета)</text>
@@ -1206,7 +1231,9 @@
 времени  принимаются  надбавки  в следуюших размерах свыше 5 до 8 лет - 10%,свыше 8  лет - 20%</text>
             {% endif %}
         {% endfor %}
-
+        {% if qrcode%}
+          <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
+        {%endif %}
     </page>
 
     <page>
@@ -1276,6 +1303,9 @@
                 <text x="2" y="-{{ 8 + loop.index/2 }}" font="TNRB" >Примечание:  Цены на запасные части указаны среднорыночные по г. Ташкенту</text>
             {% endif %}
         {% endfor %}
+            {% if qrcode %}
+     <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
+        {% endif %}
     </page>
     <page>
         <text font="TNRB">             6.4.6 Калькуляция (смета)</text>
@@ -1333,7 +1363,9 @@
                     <text x="17" y="-{{ 6.5 + loop.index/2 }}" lineheight="1.5" font="TNRB">{{ report.consumable_cost }}</text>
                 {% endif %}
         {% endfor %}
-
+        {% if qrcode%}
+          <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
+        {%endif %}
     </page>
     <page>
         <text>Таким образом, Итог стоимости ущерба транспортного средства составляет:
@@ -1394,7 +1426,9 @@
 основе  которых . Оценщиком  сделано  заключение , какие  из  этих результатов вносят больший вклад,
 а какие меньший в общую итоговую величину стоимости.
 </text>
-
+        {% if qrcode%}
+          <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
+        {%endif %}
     </page>
     <page>
         <text lineheight="1.5" align="justify">     Помимо качества и количества информации, Оценщик учитывал само назначение оценки.
@@ -1481,6 +1515,9 @@
         <text x="13.2" y="6.5" font="TNRB">использовался</text>
         <text x="17.2" y="7" font="TNRB">Не</text>
         <text x="16.2" y="6.5" font="TNRB">использовался</text>
+             {% if qrcode%}
+          <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
+        {%endif %}
     </page>
    <page><text font="TNRB" lineheight="1.5">7.2 Вывод об итоговой стоимости ущерба</text>
        <text align="justify" lineheight="1.5">     Проведенные исследования и анализ имеющейся в нашей распоряжении информации, с учетом сделанных допущений и принятых ограничений, позволяют сделать вывод, что рыночная стоимость ущерба оцениваемого автомобиля  на дату оценки составляет:</text>
@@ -1525,6 +1562,9 @@
 настоящего отчета об оценке;
 Согласно статьи 18, Закона Республики Узбекистан №811-I от 19.08.1999 года «Об оценочной деятельности»
 Отчёт, составленный в порядке, предусмотренном настоящим Законом.</text>
+        {% if qrcode%}
+          <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
+        {%endif %}
    </page>
 
    <page>
@@ -1570,6 +1610,21 @@
         {% endif %}
 
      {% endfor %} 
+
+    <page>
+    {% if documnet_photo.license %}
+    <image height="14.5" width="9.5" y='15' x='1' src="{{ documnet_photo.license}}"/>
+    {% endif %}
+    {% if documnet_photo.guvonhnoma %}
+    <image  height="14.5" width="9.5" y='15' x='11' src="{{documnet_photo.guvonhnoma}}"/>
+    {% endif %}
+    {% if documnet_photo.certificate %}
+    <image  height="14.5" width="9.5" y='0.5' x='1' src="{{documnet_photo.certificate}}"/>
+        {% endif %}
+    {% if documnet_photo.insurance %}
+    <image  height="14.5" width="9.5"  y='0.5' x='11' src="{{documnet_photo.insurance}}"/>
+    {% endif %}
+    </page>
 
 </pdf>
 

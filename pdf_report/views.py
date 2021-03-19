@@ -58,7 +58,7 @@ def get_response(request, id):
             'report': new_report_pdf,
             'services': new_report_pdf.service.all().__len__(),
             'datetime': new_report_pdf.report_date,
-            'qrcode': new_report_pdf.pdf_qr_code_user,
+            'qrcode': "qweqweqweqweqweqwewqewqewqeqwewqeqwe",
             'qrcode_admin':new_report_pdf.pdf_qr_code_admin,
             'images': images,
             'documnet_photo':documnet_photo,
