@@ -954,4 +954,48 @@ FULL_NAME:NASRULLOYEV HAYOTJON XABIBULLOYEVICH
 <QuerySet [<Images: Images object (52)>, <Images: Images object (53)>, <Images: Images object (54)>, <Images: Images object (55)>, <Images: Images object (56)>, <Images: Images object (57)>]>
 path_for_images /home/vid/makereport/DTPreport/media
 path /home/vid/makereport/DTPreport/media/templates_xml
+TEMPLATE _DIR /home/vid/makereport/DTPreport/media/templates_xml<QuerySet [<Images: Images object (58)>, <Images: Images object (59)>, <Images: Images object (60)>, <Images: Images object (61)>, <Images: Images object (62)>, <Images: Images object (63)>, <Images: Images object (64)>, <Images: Images object (65)>, <Images: Images object (66)>, <Images: Images object (67)>, <Images: Images object (68)>, <Images: Images object (69)>, <Images: Images object (70)>, <Images: Images object (71)>, <Images: Images object (72)>]>
+path_for_images /home/vid/makereport/DTPreport/media
+path /home/vid/makereport/DTPreport/media/templates_xml
 TEMPLATE _DIR /home/vid/makereport/DTPreport/media/templates_xml
+get_product_acc_cost
+<QuerySet [<Images: Images object (40)>, <Images: Images object (41)>, <Images: Images object (42)>, <Images: Images object (43)>, <Images: Images object (44)>, <Images: Images object (45)>]>
+path_for_images /home/vid/makereport/DTPreport/media
+path /home/vid/makereport/DTPreport/media/templates_xml
+TEMPLATE _DIR /home/vid/makereport/DTPreport/media/templates_xml
+get_product_acc_cost
+<QuerySet [<Images: Images object (40)>, <Images: Images object (41)>, <Images: Images object (42)>, <Images: Images object (43)>, <Images: Images object (44)>, <Images: Images object (45)>]>
+path_for_images /home/vid/makereport/DTPreport/media
+path /home/vid/makereport/DTPreport/media/templates_xml
+TEMPLATE _DIR /home/vid/makereport/DTPreport/media/templates_xml
+get_product_acc_cost
+<QuerySet [<Images: Images object (40)>, <Images: Images object (41)>, <Images: Images object (42)>, <Images: Images object (43)>, <Images: Images object (44)>, <Images: Images object (45)>]>
+path_for_images /home/vid/makereport/DTPreport/media
+path /home/vid/makereport/DTPreport/media/templates_xml
+TEMPLATE _DIR /home/vid/makereport/DTPreport/media/templates_xml
+get_product_acc_cost
+<QuerySet [<Images: Images object (40)>, <Images: Images object (41)>, <Images: Images object (42)>, <Images: Images object (43)>, <Images: Images object (44)>, <Images: Images object (45)>]>
+path_for_images /home/vid/makereport/DTPreport/media
+path /home/vid/makereport/DTPreport/media/templates_xml
+TEMPLATE _DIR /home/vid/makereport/DTPreport/media/templates_xml
+get_product_acc_cost
+<QuerySet [<Images: Images object (40)>, <Images: Images object (41)>, <Images: Images object (42)>, <Images: Images object (43)>, <Images: Images object (44)>, <Images: Images object (45)>]>
+path_for_images /home/vid/makereport/DTPreport/media
+path /home/vid/makereport/DTPreport/media/templates_xml
+TEMPLATE _DIR /home/vid/makereport/DTPreport/media/templates_xml
+get_product_acc_cost
+<QuerySet [<Images: Images object (58)>, <Images: Images object (59)>, <Images: Images object (60)>, <Images: Images object (61)>, <Images: Images object (62)>, <Images: Images object (63)>, <Images: Images object (64)>, <Images: Images object (65)>, <Images: Images object (66)>, <Images: Images object (67)>, <Images: Images object (68)>, <Images: Images object (69)>, <Images: Images object (70)>, <Images: Images object (71)>, <Images: Images object (72)>]>
+path_for_images /home/vid/makereport/DTPreport/media
+path /home/vid/makereport/DTPreport/media/templates_xml
+TEMPLATE _DIR /home/vid/makereport/DTPreport/media/templates_xml
+get_product_acc_cost
+<QuerySet [<Images: Images object (40)>, <Images: Images object (41)>, <Images: Images object (42)>, <Images: Images object (43)>, <Images: Images object (44)>, <Images: Images object (45)>]>
+path_for_images /home/vid/makereport/DTPreport/media
+path /home/vid/makereport/DTPreport/media/templates_xml
+TEMPLATE _DIR /home/vid/makereport/DTPreport/media/templates_xml
+get_product_acc_cost
+<QuerySet [<Images: Images object (40)>, <Images: Images object (41)>, <Images: Images object (42)>, <Images: Images object (43)>, <Images: Images object (44)>, <Images: Images object (45)>]>
+path_for_images /home/vid/makereport/DTPreport/media
+path /home/vid/makereport/DTPreport/media/templates_xml
+TEMPLATE _DIR /home/vid/makereport/DTPreport/media/templates_xml
+get_product_acc_cost

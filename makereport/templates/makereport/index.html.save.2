@@ -1,0 +1,683 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+        <title>Отчёты</title>
+        <meta content="" name="description">
+        <meta content="" name="keywords">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+                rel="stylesheet">
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+	<link href="{% static 'vendor/icofont/icofont.min.css'%}" rel="stylesheet">
+    
+        <!-- Template Main CSS File -->
+     <link rel="stylesheet" href="{% static '/makereport/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static '/makereport/css/fontawsom-all.min.css' %}"> 
+        <link rel="stylesheet" type="text/css" href="{% static '/makereport/css/main.css' %}"/>
+        
+         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">
+     <link rel='stylesheet' href='https://s3-us-west-2.amazonaws.com/s.cdpn.io/123941/tablesaw.stackonly.css'> 
+        <script src="{% static '/makereport/js/jquery-1.12.4.js' %}"></script>
+        <script src="{% static '/makereport/js/desktop6.js' %}"></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+        <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/tablesaw.stackonly.js'></script>
+        <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"> 
+        <script src="{% static '/makereport/js/e-imzo.js' %}" type="text/javascript"></script>
+        <script src="{% static '/makereport/js/e-imzo-client.js' %}" type="text/javascript"></script>
+{#        <script src="{% static '/makereport/js/bootstrap.min.js' %}" type="text/javascript"></script>#}
+{#        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>#}
+           <link rel="stylesheet" type="text/css" href="{% static '/makereport/css/modal.css' %}"/>
+          {% comment %} <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous"> {% endcomment %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    </head>
+
+<body>
+
+  <!-- ======= Mobile nav toggle button ======= -->
+  <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
+
+  <!-- ======= Header ======= -->
+  <header id="header">
+    <div class="d-flex flex-column">
+
+      <div class="profile">
+        <h2><a href="{% url 'search' %}">LOGO</a></h2>
+      </div>
+
+      <nav class="nav-menu">
+        <ul>
+          <li><a href="{% url 'new_report' %}"><svg width="16" height="20" viewBox="0 0 16 20" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M2.14062 20H13.8594C14.8287 20 15.6172 19.2115 15.6172 18.2422V5.85938H11.5156C10.5463 5.85938 9.75781 5.07086 9.75781 4.10156V0H2.14062C1.17133 0 0.382812 0.788516 0.382812 1.75781V18.2422C0.382812 19.2115 1.17133 20 2.14062 20ZM4.48438 8.24219H11.5156C11.8395 8.24219 12.1016 8.50426 12.1016 8.82812C12.1016 9.15199 11.8395 9.41406 11.5156 9.41406H4.48438C4.16051 9.41406 3.89844 9.15199 3.89844 8.82812C3.89844 8.50426 4.16051 8.24219 4.48438 8.24219ZM4.48438 10.5859H11.5156C11.8395 10.5859 12.1016 10.848 12.1016 11.1719C12.1016 11.4957 11.8395 11.7578 11.5156 11.7578H4.48438C4.16051 11.7578 3.89844 11.4957 3.89844 11.1719C3.89844 10.848 4.16051 10.5859 4.48438 10.5859ZM4.48438 12.9297H11.5156C11.8395 12.9297 12.1016 13.1918 12.1016 13.5156C12.1016 13.8395 11.8395 14.1016 11.5156 14.1016H4.48438C4.16051 14.1016 3.89844 13.8395 3.89844 13.5156C3.89844 13.1918 4.16051 12.9297 4.48438 12.9297ZM4.48438 15.2734H9.17188C9.49574 15.2734 9.75781 15.5355 9.75781 15.8594C9.75781 16.1832 9.49574 16.4453 9.17188 16.4453H4.48438C4.16051 16.4453 3.89844 16.1832 3.89844 15.8594C3.89844 15.5355 4.16051 15.2734 4.48438 15.2734Z"
+                  fill="white"></path>
+              </svg><br>Новый документ </a>
+          </li>
+          <li><a href="#"><svg width="20" height="18" viewBox="0 0 20 18" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M5.86123 9.69051H14.1292C14.1325 9.69051 14.1356 9.69051 14.1389 9.69051C14.5632 9.69051 14.9063 9.34643 14.9063 8.92298C14.9063 8.83429 14.8916 8.74804 14.8635 8.66882L13.8612 2.99338C13.7966 2.62659 13.4785 2.35934 13.1059 2.35934H6.88387C6.51118 2.35934 6.19301 2.62627 6.1281 2.99338L5.10514 8.79023C5.06587 9.01343 5.12706 9.24263 5.27305 9.4164C5.41825 9.5899 5.6342 9.69051 5.86123 9.69051Z"
+                  fill="white"></path>
+                <path
+                  d="M8.76768 10.733C8.70362 10.3669 8.38525 10.0992 8.01276 10.0992H1.79032C1.41767 10.0992 1.09929 10.3669 1.0346 10.733L0.011632 16.5297C-0.027633 16.7536 0.0335523 16.9831 0.179386 17.1565C0.324741 17.3303 0.540539 17.4309 0.767404 17.4309H9.03546C9.03961 17.4309 9.04232 17.4309 9.04552 17.4309C9.46945 17.4309 9.81273 17.0869 9.81273 16.6632C9.81273 16.5741 9.79756 16.4881 9.76942 16.4093L8.76768 10.733Z"
+                  fill="white"></path>
+                <path
+                  d="M19.957 16.4092L18.955 10.7329C18.8905 10.3668 18.5726 10.0991 18.1995 10.0991H11.9775C11.605 10.0991 11.2865 10.3668 11.2219 10.7329L10.1988 16.5296C10.1597 16.7536 10.2209 16.983 10.367 17.1565C10.5121 17.3303 10.728 17.4309 10.9549 17.4309H19.2228C19.2272 17.4309 19.2298 17.4309 19.2327 17.4309C19.657 17.4309 20.0001 17.0868 20.0001 16.6631C20.0001 16.5741 19.9847 16.4881 19.957 16.4092Z"
+                  fill="white"></path>
+                <path
+                  d="M15.3575 3.89365H16.3805V4.91667C16.3805 5.3405 16.7236 5.68426 17.1476 5.68426C17.5716 5.68426 17.9147 5.3405 17.9147 4.91667V3.89365H18.938C19.3622 3.89365 19.7053 3.5499 19.7053 3.12628C19.7053 2.70261 19.3622 2.35934 18.938 2.35934H17.9147V1.33637C17.9147 0.912755 17.5716 0.569 17.1476 0.569C16.7236 0.569 16.3805 0.912755 16.3805 1.33637V2.35934H15.3575C14.9332 2.35934 14.5901 2.70261 14.5901 3.12628C14.5901 3.5499 14.9333 3.89365 15.3575 3.89365Z"
+                  fill="white"></path>
+              </svg><br>Дополнительно</a>
+          </li>
+          <li><a href="{% url 'user_settings' %}"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M18.9025 7.82833L17.3358 7.62917C17.2067 7.23167 17.0475 6.84833 16.8617 6.48417L17.8292 5.23833C18.2208 4.73417 18.175 4.0225 17.7275 3.58917L16.415 2.27667C15.9775 1.825 15.2658 1.78 14.7608 2.17083L13.5167 3.13833C13.1525 2.9525 12.7692 2.79333 12.3708 2.66417L12.1717 1.1C12.0967 0.4725 11.5642 0 10.9333 0H9.06667C8.43583 0 7.90333 0.4725 7.82833 1.0975L7.62917 2.66417C7.23083 2.79333 6.8475 2.95167 6.48333 3.13833L5.23833 2.17083C4.735 1.78 4.02333 1.825 3.58917 2.2725L2.27667 3.58417C1.825 4.0225 1.77917 4.73417 2.17083 5.23917L3.13833 6.48417C2.95167 6.84833 2.79333 7.23167 2.66417 7.62917L1.1 7.82833C0.4725 7.90333 0 8.43583 0 9.06667V10.9333C0 11.5642 0.4725 12.0967 1.0975 12.1717L2.66417 12.3708C2.79333 12.7683 2.9525 13.1517 3.13833 13.5158L2.17083 14.7617C1.77917 15.2658 1.825 15.9775 2.2725 16.4108L3.585 17.7233C4.02333 18.1742 4.73417 18.2192 5.23917 17.8283L6.48417 16.8608C6.84833 17.0475 7.23167 17.2067 7.62917 17.335L7.82833 18.8983C7.90333 19.5275 8.43583 20 9.06667 20H10.9333C11.5642 20 12.0967 19.5275 12.1717 18.9025L12.3708 17.3358C12.7683 17.2067 13.1517 17.0475 13.5158 16.8617L14.7617 17.8292C15.2658 18.2208 15.9775 18.175 16.4108 17.7275L17.7233 16.415C18.175 15.9767 18.2208 15.2658 17.8292 14.7608L16.8617 13.5158C17.0483 13.1517 17.2075 12.7683 17.3358 12.3708L18.8992 12.1717C19.5267 12.0967 19.9992 11.5642 19.9992 10.9333V9.06667C20 8.43583 19.5275 7.90333 18.9025 7.82833ZM10 14.1667C7.7025 14.1667 5.83333 12.2975 5.83333 10C5.83333 7.7025 7.7025 5.83333 10 5.83333C12.2975 5.83333 14.1667 7.7025 14.1667 10C14.1667 12.2975 12.2975 14.1667 10 14.1667Z"
+                  fill="white"></path>
+              </svg><br>Настройка</a>
+          </li>
+          <li class="active"><a href="{% url 'reports_list' %}"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M19.2857 5.00001H15.7143V0.714299C15.7143 0.319796 15.3945 0 15 0H0.714299C0.319796 0 0 0.319796 0 0.714299V17.1428C0 18.7208 1.27918 20 2.85715 20H17.1428C18.7208 20 20 18.7208 20 17.1428V5.71427C20 5.31981 19.6802 5.00001 19.2857 5.00001ZM5.71427 3.57141H9.99998C10.3945 3.57141 10.7143 3.89121 10.7143 4.28571C10.7143 4.68021 10.3945 5.00001 9.99998 5.00001H5.71427C5.31977 5.00001 4.99997 4.68021 4.99997 4.28571C4.99997 3.89121 5.31981 3.57141 5.71427 3.57141ZM12.1428 17.1428H3.57141C3.17691 17.1428 2.85711 16.823 2.85711 16.4285C2.85711 16.034 3.17691 15.7142 3.57141 15.7142H12.1428C12.5373 15.7142 12.8571 16.034 12.8571 16.4285C12.8571 16.823 12.5373 17.1428 12.1428 17.1428ZM12.1428 14.2857H3.57141C3.17691 14.2857 2.85711 13.9659 2.85711 13.5714C2.85711 13.1769 3.17691 12.8571 3.57141 12.8571H12.1428C12.5373 12.8571 12.8571 13.1769 12.8571 13.5714C12.8571 13.9659 12.5373 14.2857 12.1428 14.2857ZM12.1428 11.4286H3.57141C3.17691 11.4286 2.85711 11.1088 2.85711 10.7143C2.85711 10.3198 3.17691 9.99998 3.57141 9.99998H12.1428C12.5373 9.99998 12.8571 10.3198 12.8571 10.7143C12.8571 11.1088 12.5373 11.4286 12.1428 11.4286ZM12.1428 8.57142H3.57141C3.17691 8.57142 2.85711 8.25163 2.85711 7.85712C2.85711 7.46262 3.17691 7.14282 3.57141 7.14282H12.1428C12.5373 7.14282 12.8571 7.46262 12.8571 7.85712C12.8571 8.25163 12.5373 8.57142 12.1428 8.57142ZM18.5714 17.1428C18.5714 17.9318 17.9318 18.5714 17.1428 18.5714C16.3539 18.5714 15.7143 17.9318 15.7143 17.1428V6.42857H18.5714V17.1428H18.5714Z"
+                  fill="white"></path>
+              </svg><br>Отчёты</a>
+          </li>
+          <li><a href="{% url 'users_list' %}"><svg width="22" height="22" viewBox="0 0 30 30" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0)">
+                  <path
+                    d="M14.7861 14.4511C16.7714 14.4511 18.4905 13.739 19.8952 12.3342C21.2998 10.9295 22.0118 9.21086 22.0118 7.22531C22.0118 5.24046 21.2998 3.52156 19.8949 2.11646C18.4901 0.712049 16.7712 0 14.7861 0C12.8005 0 11.0819 0.712049 9.67722 2.11669C8.27258 3.52133 7.5603 5.24023 7.5603 7.22531C7.5603 9.21086 8.27258 10.9298 9.67745 12.3344C11.0823 13.7388 12.8012 14.4511 14.7861 14.4511Z"
+                    fill="white"></path>
+                  <path
+                    d="M27.4293 23.0684C27.3888 22.4839 27.3069 21.8462 27.1863 21.1729C27.0645 20.4945 26.9077 19.8531 26.72 19.267C26.5262 18.6611 26.2625 18.0628 25.9366 17.4895C25.5983 16.8944 25.2009 16.3762 24.7551 15.9498C24.2889 15.5037 23.718 15.145 23.0579 14.8834C22.4001 14.6232 21.6711 14.4914 20.8913 14.4914C20.5851 14.4914 20.2889 14.617 19.717 14.9894C19.3649 15.219 18.9532 15.4845 18.4936 15.7781C18.1006 16.0285 17.5682 16.2631 16.9106 16.4755C16.2691 16.6831 15.6177 16.7884 14.9748 16.7884C14.3318 16.7884 13.6807 16.6831 13.0384 16.4755C12.3816 16.2634 11.8492 16.0288 11.4566 15.7784C11.0014 15.4875 10.5894 15.222 10.2321 14.9892C9.66084 14.6168 9.36444 14.4911 9.0582 14.4911C8.27818 14.4911 7.54942 14.6232 6.89184 14.8837C6.23221 15.1448 5.66115 15.5035 5.19446 15.95C4.74883 16.3767 4.35127 16.8946 4.01344 17.4895C3.68774 18.0628 3.42407 18.6609 3.22998 19.2672C3.04252 19.8534 2.88574 20.4945 2.76398 21.1729C2.64336 21.8453 2.56142 22.4832 2.5209 23.0691C2.48108 23.6432 2.46094 24.2389 2.46094 24.8407C2.46094 26.4067 2.95875 27.6744 3.94042 28.6094C4.90996 29.532 6.19284 30.0001 7.75289 30.0001H22.198C23.7581 30.0001 25.0405 29.5323 26.0103 28.6094C26.9922 27.6751 27.49 26.4071 27.49 24.8404C27.4898 24.236 27.4694 23.6397 27.4293 23.0684Z"
+                    fill="white"></path>
+                </g>
+                <defs>
+                  <clippath id="clip0">
+                    <rect width="29.9999" height="30" fill="white"></rect>
+                  </clippath>
+                </defs>
+              </svg><br>Пользователи</a>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+
+
+  <main id="main">
+
+    <!-- ======= Header ======= -->
+    <div class="header-top">
+      <div class="container">
+
+        <nav class="new-document-part">
+          <ul>
+            <li><a href="{% url 'new_report' %}" class="new-document-btn">Новый документ</a></li>
+          </ul>
+        </nav>
+
+        <nav class="user-profile-part">
+          <ul>
+            <li class="img-user-profile"><img src="{% static '/makereport/img/user.png' %}"></li>
+            <li class="user-name-btn"><a href="#">{{ user.username }}</a></li>
+            <li><a href="{% url 'user_logout' %}" class="log-out-btn">Выйти</a></li>
+          </ul>
+        </nav>
+
+      </div>
+    </div>
+    <!-- ======= Header ======= -->
+
+
+
+      <div class="grid-container">
+
+          <div class="block-grid">
+            <div class="search_block">
+          <div class="input">
+          <form method = 'GET'> 
+            <input type='text' name ="search" placeholder="Поиск" required />
+            <span>
+            <button style="background-color: transparent;border:none;" type = 'submit'>
+                <ion-icon name="search-outline" class = "search_submit">
+                </ion-icon>
+            </button>
+              </span>
+          </form>
+          
+          </div>
+        </div>
+          </div>
+
+          <div class="block-grid">
+            <div class="name_user">
+              <div class="select-block">
+                <label>Данные</label>
+                <div class="custom-select">
+                  <div class="active-list">Australia</div>
+                  <input type="text" class="list-field" value="Australia" />
+                  <ul class="drop-down-list">
+                    <li>Australia</li>
+                    <li>India</li>
+                    <li>UAE</li>
+                    <li>USA</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="block-grid">
+            <div class="data_user">
+              <a href="#">
+                <button type="button" class="btn data_button">Дата</button>
+              </a>
+            </div>
+          </div>
+
+          <div class="block-grid">
+            <div class="signed_user">
+              <div class="select-block">
+                <label>Данные</label>
+                <div class="custom-select">
+                  <div class="active-list">Australia</div>
+                  <input type="text" class="list-field" value="Australia" />
+                  <ul class="drop-down-list">
+                    <li>Australia</li>
+                    <li>India</li>
+                    <li>UAE</li>
+                    <li>USA</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+
+
+      <div class="table1">
+        <table class="table" data-tablesaw-mode="stack">
+
+          <thead>
+            <tr>
+              <th style="width: 34px;">№</th>
+              <th style="width: 136px;">Дата</th>
+              <th style="width: 136px;">Марка машины</th>
+              <th style="width: 136px;">Номер</th>
+              <th style="width: 136px;">Исполнитель</th>
+{#              <th style="width: 136px;">Договор</th>#}
+              <th style="width: 136px;">Ключ</th>
+              <th style="width: 136px;">Отчёт</th>
+              <th style="width: 159px;">Функции</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for report in reports %}
+                <tr >
+                    <td style="border-bottom: 1px solid #fff;" data-title="№">{{ report.report_id }}</td>
+{#                  <td style="border-bottom: 1px solid #fff;" data-title="Дата">{{ report.created_at|date:"d.m.Y" }}</td>#}
+                    <td style="border-bottom: 1px solid #fff;" data-title="Дата">{{ report.report_date }}</td>
+                    <td style="border-bottom: 1px solid #fff;" data-title="Марка машины">{{ report.car.brand }}</td>
+                    <td style="border-bottom: 1px solid #fff;" data-title="Номер">{{ report.car.car_number }}</td>
+                    <td style="border-bottom: 1px solid #fff;"
+                        data-title="Исполнитель">{{ report.created_by.user }}</td>
+{#                  <td style="border-bottom: 1px solid #fff;" data-title="Договор">{{ report.contract }}</td>#}
+                    <td style="border-bottom: 1px solid #fff;" data-title="Ключ">{{ report.key }}</td>
+                    <td style="border-bottom: 1px solid #fff;" data-title="Отчёт" data-type="currency"><a
+                            href="{% url 'get_response' report.report_id %}">Открыть</a></td>
+                    <td style="border-bottom: 1px solid #fff;" data-title="Функции" data-type="currency">
+               
+                        <button class="btn btn-primary" 
+                          href="#" data-bs-toggle="modal" 
+                          data-bs-target="#exampleModal"
+                           sign= "{{report.signed}}"
+                            data-bs-report= "{{report.report_id}}"
+                            pkcs7 = "{{report.pdf_report_pkcs7.0}}"
+                            data-bs-whatever = "{{report.pdf_report_base64}}" >Подписать</button><br><a
+                            href="{% url 'edit_report' report.report_id %}">Изменить </a>
+{#                            <a href="#" data-toggle="modal" data-target="#deleteModal" data-bs-whatever="{{ report.report_id }}">Удалить</a>#}
+                    </td>
+                </tr>
+
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+
+      <svg class="liquid_shape_first" width="302" height="261" viewBox="0 0 302 261" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path opacity="0.1" d="M270.752 -179.869C335.462 -170.06 413.703 -182.881 453.096 -130.674C492.522 -78.4224 459.489 -6.66316 450.329 58.1232C441.133 123.161 452.701 201.032 400.542 241.033C348.193 281.179 275.687 249.581 210.084 242.367C140.593 234.724 52.4779 256.191 13.1867 198.433C-25.9933 140.838 33.4778 68.6878 45.2454 0.0547791C56.3985 -64.9946 27.7037 -146.142 79.3285 -187.332C131.195 -228.714 205.12 -189.818 270.752 -179.869Z" fill="#5C6E91"/>
+        <path opacity="0.1" d="M266.187 -152.282C322.397 -143.754 390.361 -154.901 424.579 -109.513C458.827 -64.0867 430.132 -1.70074 422.175 54.6232C414.188 111.165 424.236 178.865 378.929 213.641C333.456 248.543 270.474 221.073 213.488 214.801C153.125 208.157 76.5846 226.819 42.4545 176.606C8.42104 126.534 60.0803 63.8078 70.3021 4.13969C79.9902 -52.4129 55.0647 -122.961 99.9082 -158.77C144.962 -194.747 209.177 -160.932 266.187 -152.282Z" fill="#5C6E91"/>
+        </svg>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Подписание документа</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+        </button>
+      </div>
+      <div class="modal-body">
+        <form name=testform>
+            <div class="container-fluid">
+                <div class="col-md-6">
+                    <label id="message"></label>
+                    Выберите ключ <br />
+                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="key" onchange="cbChanged(this)">
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <textarea class="file" name="data" style="display: none"></textarea > {# style="display: none" #}
+                </div>
+                
+                <label id="keyId" style="display: none"></label><br />
+                 <input id= "sign" class="sign" style="display: none"/>
+                <input id="report_id" class="report_id" style="display: none"/>
+{#                Подписанный документ PKCS#7<br />#}
+                <textarea class="pkcs7" name="pkcs7" style="display: none"></textarea><br /> {# style="display: none" #}
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+        <button onclick="sign_decide()" type="button" class="btn btn-primary">Подписать</button><br />
+      </div>
+    </div>
+  </div>
+</div>
+
+{#<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">#}
+{#  <div class="modal-dialog" role="document">#}
+{#    <div class="modal-content">#}
+{#      <div class="modal-header">#}
+{#        <h5 class="modal-title" id="exampleModalLabel">Удаление отчёта</h5>#}
+{#        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">#}
+{#          <span aria-hidden="true">&times;</span>#}
+{#        </button>#}
+{#      </div>#}
+{#      <div class="modal-body">#}
+{#        <form name=testform>#}
+{#            <div class="container-fluid">#}
+{#                <h3>Вы хотите удалить отчёт?</h3>#}
+{#            </div>#}
+{#        </form>#}
+{#      </div>#}
+{#      <div class="modal-footer">#}
+{#        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>#}
+{#        <button type="button" class="btn btn-primary deleteButton">Удалить</button>#}
+{#      </div>#}
+{#    </div>#}
+{#  </div>#}
+{#</div>#}
+
+</main>
+
+
+</body>
+
+{% block javascript %}
+    <script>
+
+            var exampleModal = document.getElementById('exampleModal')
+            exampleModal.addEventListener('show.bs.modal', function (event) {
+
+              var button = event.relatedTarget;
+              var recipient = "";
+              var sign = button.getAttribute('sign');
+              var bb =button.getAttribute("bb");
+              
+              exampleModal.querySelector('.sign').value = sign;
+              if (sign[0]=='T'){
+                  recipient = button.getAttribute('pkcs7');
+              }
+              else {
+                  recipient = button.getAttribute('data-bs-whatever');
+               
+              }
+             
+              var report_id = button.getAttribute('data-bs-report');
+
+              var modalFileInput = exampleModal.querySelector('.file');
+              var modalReportIdField = exampleModal.querySelector('.report_id');
+              
+              modalFileInput.textContent = recipient
+              modalReportIdField.value = report_id
+            })
+
+            $(document).on('click', ".btn btn-primary sign", function (e) {
+                console.log('CLICK sign')
+                var pkcs7 = $(this).parents('.modal-body').find('.pkcs7').textContent;
+                console.log(pkcs7)
+            });
+
+            var EIMZO_MAJOR = 3;
+            var EIMZO_MINOR = 37;
+
+
+            var errorCAPIWS = 'Ошибка соединения с E-IMZO. Возможно у вас не установлен модуль E-IMZO или Браузер E-IMZO.';
+            var errorBrowserWS = 'Браузер не поддерживает технологию WebSocket. Установите последнюю версию браузера.';
+            var errorUpdateApp = 'ВНИМАНИЕ !!! Установите новую версию приложения E-IMZO или Браузера E-IMZO.<br /><a href="https://e-imzo.uz/main/downloads/" role="button">Скачать ПО E-IMZO</a>';
+            var errorWrongPassword = 'Пароль неверный.';
+
+
+            var AppLoad = function () {
+                EIMZOClient.API_KEYS = [
+                    'localhost', '96D0C1491615C82B9A54D9989779DF825B690748224C2B04F500F370D51827CE2644D8D4A82C18184D73AB8530BB8ED537269603F61DB0D03D2104ABF789970B',
+                    '127.0.0.1', 'A7BCFA5D490B351BE0754130DF03A068F855DB4333D43921125B9CF2670EF6A40370C646B90401955E1F7BC9CDBF59CE0B2C5467D820BE189C845D0B79CFC96F',
+                    'null',      'E0A205EC4E7B78BBB56AFF83A733A1BB9FD39D562E67978CC5E7D73B0951DB1954595A20672A63332535E13CC6EC1E1FC8857BB09E0855D7E76E411B6FA16E9D',
+		    		'dls.yt.uz', 'EDC1D4AB5B02066FB3FEB9382DE6A7F8CBD095E46474B07568BC44C8DAE27B3893E75B79280EA82A38AD42D10EA0D600E6CE7E89D1629221E4363E2D78650516'
+                ];
+                uiLoading();
+                EIMZOClient.checkVersion(function(major, minor){
+                    var newVersion = EIMZO_MAJOR * 100 + EIMZO_MINOR;
+                    var installedVersion = parseInt(major) * 100 + parseInt(minor);
+                    if(installedVersion < newVersion) {
+                        uiUpdateApp();
+                    } else {
+                        EIMZOClient.installApiKeys(function(){
+                            uiLoadKeys();
+                        },function(e, r){
+                            if(r){
+                                uiShowMessage(r);
+                            } else {
+                                wsError(e);
+                            }
+                        });
+                    }
+                }, function(e, r){
+                    if(r){
+                        uiShowMessage(r);
+                    } else {
+                        uiNotLoaded(e);
+                    }
+                });
+            }
+
+
+            var uiShowMessage = function(message){
+                alert(message);
+            }
+
+            var uiLoading = function(){
+                var l = document.getElementById('message');
+                l.innerHTML = 'Загрузка ...';
+                l.style.color = 'red';
+            }
+
+            var uiNotLoaded = function(e){
+                var l = document.getElementById('message');
+                l.innerHTML = '';
+                if (e) {
+                    wsError(e);
+                } else {
+                    uiShowMessage(errorBrowserWS);
+                }
+            }
+
+            var uiUpdateApp = function(){
+                var l = document.getElementById('message');
+                l.innerHTML = errorUpdateApp;
+            }
+
+            var uiLoadKeys = function(){
+                uiClearCombo();
+                EIMZOClient.listAllUserKeys(function(o, i){
+                    var itemId = "itm-" + o.serialNumber + "-" + i;
+                    return itemId;
+                },function(itemId, v){
+                    return uiCreateItem(itemId, v);
+                },function(items, firstId){
+                    uiFillCombo(items);
+                    uiLoaded();
+                    uiComboSelect(firstId);
+                },function(e, r){
+                    uiShowMessage(errorCAPIWS);
+                });
+            }
+
+            var uiComboSelect = function(itm){
+                if(itm){
+                    var id = document.getElementById(itm);
+                    id.setAttribute('selected','true');
+                }
+            }
+
+            var cbChanged = function(c){
+                document.getElementById('keyId').innerHTML = '';
+            }
+
+            var uiClearCombo = function(){
+                var combo = document.testform.key;
+                combo.length = 0;
+            }
+
+            var uiFillCombo = function(items){
+                var combo = document.testform.key;
+                for (var itm in items) {
+                    combo.append(items[itm]);
+                }
+            }
+
+            var uiLoaded = function(){
+                var l = document.getElementById('message');
+                l.innerHTML = '';
+            }
+
+            var uiCreateItem = function (itmkey, vo) {
+                var now = new Date();
+                vo.expired = dates.compare(now, vo.validTo) > 0;
+                var itm = document.createElement("option");
+                itm.value = itmkey;
+                itm.text = vo.CN;
+                if (!vo.expired) {
+
+                } else {
+                    itm.style.color = 'gray';
+                    itm.text = itm.text + ' (срок истек)';
+                }
+                itm.setAttribute('vo',JSON.stringify(vo));
+                itm.setAttribute('id',itmkey);
+                return itm;
+            }
+
+            var wsError = function (e) {
+                if (e) {
+                    uiShowMessage(errorCAPIWS + " : " + e);
+                } else {
+                    uiShowMessage(errorBrowserWS);
+                }
+            };
+
+            verify = function () {
+                var pkcs7 = document.testform.pkcs7.value;
+                EIMZOClient.verifyPkcs7(pkcs7,)
+            }
+
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = jQuery.trim(cookies[i]);
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            var csrftoken = getCookie('csrftoken');
+             sign_decide = function(){
+                 var choice = document.getElementById("sign").value;
+                 if (choice[0] == "T"){
+                     admin_sign();
+                 }
+                 else {
+                     sign();
+                 }
+             }
+             admin_sign = function(){
+                 var itm = document.testform.key.value;
+                if (itm) {
+                    var id = document.getElementById(itm);
+                    var vo = JSON.parse(id.getAttribute('vo'));
+                    var data = document.testform.data.value;
+                    var keyId = document.getElementById('keyId').innerHTML;
+                    var report_input = document.getElementById('report_id');
+                    if(keyId){
+                        EIMZOClient.append_pkcs7_attached(keyId, data, null, function(pkcs7){
+                            {#document.testform.pkcs7.value = pkcs7;#}
+                            $.ajax({
+                            type: "POST",
+                            headers:{
+                                "X-CSRFToken": csrftoken
+                            },
+                            url: '{% url "verifyPkcs7" %}',
+                            data: {
+                                'pkcs7': pkcs7,
+                                'report_id': report_input.value,
+                                {#'csrfmiddlewaretoken':{% csrf_token %}#}
+                            },
+                            cache: true,
+                            success: function (data) {
+                                alert("Ваша подпись была успешна добавлена!")
+                            },
+                         })
+                        }, function(e, r){
+                            if(r){
+                                if (r.indexOf("BadPaddingException") != -1) {
+                                    uiShowMessage(errorWrongPassword);
+                                } else {
+                                    uiShowMessage(r);
+                                }
+                            } else {
+                                document.getElementById('keyId').innerHTML = '';
+                                uiShowMessage(errorBrowserWS);
+                            }
+                            if(e) wsError(e);
+                        });
+                    } else {
+                        EIMZOClient.loadKey(vo, function(id){
+                            document.getElementById('keyId').innerHTML = id;
+                            EIMZOClient.createPkcs7(id, data, null, function(pkcs7){
+                                document.testform.pkcs7.value = pkcs7;
+                            }, function(e, r){
+                                if(r){
+                                    if (r.indexOf("BadPaddingException") != -1) {
+                                        uiShowMessage(errorWrongPassword);
+                                    } else {
+                                        uiShowMessage(r);
+                                    }
+                                } else {
+                                    document.getElementById('keyId').innerHTML = '';
+                                    uiShowMessage(errorBrowserWS);
+                                }
+                                if(e) wsError(e);
+                            });
+                        }, function(e, r){
+                            if(r){
+                                if (r.indexOf("BadPaddingException") != -1) {
+                                    uiShowMessage(errorWrongPassword);
+                                } else {
+                                    uiShowMessage(r);
+                                }
+                            } else {
+                                uiShowMessage(errorBrowserWS);
+                            }
+                            if(e) wsError(e);
+                        });
+                    }
+                }
+            }
+            sign = function () {
+                var itm = document.testform.key.value;
+                if (itm) {
+                    var id = document.getElementById(itm);
+                    var vo = JSON.parse(id.getAttribute('vo'));
+                    var data = document.testform.data.value;
+                    var keyId = document.getElementById('keyId').innerHTML;
+                    var report_input = document.getElementById('report_id')
+                    if(keyId){
+                        EIMZOClient.createPkcs7(keyId, data, null, function(pkcs7){
+                            {#document.testform.pkcs7.value = pkcs7;#}
+                             $.ajax({
+                            type: "POST",
+                            headers:{
+                                "X-CSRFToken": csrftoken
+                            },
+                            url: '{% url "verifyPkcs7" %}',
+                            data: {
+                                'pkcs7': pkcs7,
+                                'report_id': report_input.value,
+                                {#'csrfmiddlewaretoken':{% csrf_token %}#}
+                            },
+                            cache: true,
+                            success: function (data) {
+                                alert("Вы успешно подписали документ!")
+                            },
+                         })
+                        }, function(e, r){
+                            if(r){
+                                if (r.indexOf("BadPaddingException") != -1) {
+                                    uiShowMessage(errorWrongPassword);
+                                } else {
+                                    uiShowMessage(r);
+                                }
+                            } else {
+                                document.getElementById('keyId').innerHTML = '';
+                                uiShowMessage(errorBrowserWS);
+                            }
+                            if(e) wsError(e);
+                        });
+                    } else {
+                        EIMZOClient.loadKey(vo, function(id){
+                            document.getElementById('keyId').innerHTML = id;
+                            EIMZOClient.createPkcs7(id, data, null, function(pkcs7){
+                                document.testform.pkcs7.value = pkcs7;
+                            }, function(e, r){
+                                if(r){
+                                    if (r.indexOf("BadPaddingException") != -1) {
+                                        uiShowMessage(errorWrongPassword);
+                                    } else {
+                                        uiShowMessage(r);
+                                    }
+                                } else {
+                                    document.getElementById('keyId').innerHTML = '';
+                                    uiShowMessage(errorBrowserWS);
+                                }
+                                if(e) wsError(e);
+                            });
+                        }, function(e, r){
+                            if(r){
+                                if (r.indexOf("BadPaddingException") != -1) {
+                                    uiShowMessage(errorWrongPassword);
+                                } else {
+                                    uiShowMessage(r);
+                                }
+                            } else {
+                                uiShowMessage(errorBrowserWS);
+                            }
+                            if(e) wsError(e);
+                        });
+                    }
+                }
+            };
+
+            window.onload = AppLoad;
+        </script>
+
+{% endblock %}
+
+</html>
