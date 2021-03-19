@@ -18,8 +18,6 @@ from DTPreport import settings as s
 from DTPreport import urls
 
 
-
-
 class ReportView(View):
     decorators = [login_required]
     extend = False
@@ -32,7 +30,7 @@ class ReportView(View):
         ophotos = None
         checks = None
         if id:
-      
+
             images = Images.objects.filter(report_id=id)
             pphotos = PassportPhotos.objects.filter(report_id=id)
             ophotos = OtherPhotos.objects.filter(report_id=id)
@@ -43,6 +41,7 @@ class ReportView(View):
             checks_form = ChecksForm(instance=Checks(), use_required_attribute=False)
             report = Report.objects.get(report_id=id)
             contract = Contract.objects.get(contract_id=report.contract_id)
+            contract_form = ContractForm(instance=contract)
             report_form = ReportForm(instance=report)
             car = Car.objects.get(car_id=report.car_id)
             car.release_date = car.release_date.strftime('%Y')
@@ -59,8 +58,9 @@ class ReportView(View):
             total_price_report = report.total_report_cost
             template = 'makereport/edit_repor.html'
         else:
-   
+
             image_form = ImageForm(instance=Images())
+            contract_form = ContractForm(request.POST, instance=Contract())
             passphoto_form = PPhotoForm(instance=PassportPhotos())
             otherphoto_form = OPhotoForm(instance=OtherPhotos())
             checks_form = ChecksForm(instance=Checks())
@@ -76,8 +76,9 @@ class ReportView(View):
             wear_form = WearForm()
             total_price_report = 0
             template = 'makereport/add_repor.html'
-  
+
         context = {
+            'contract_form': contract_form,
             'report_form': report_form,
             'car_form': car_form,
             'customer_form': customer_form,
@@ -102,9 +103,8 @@ class ReportView(View):
     def post(self, request, id=None, extend=0):
         total_report_price = 0
         if id:
-     
             return self.put(request, id)
-
+        contract_form = ContractForm(request.POST, instance=Contract())
         report_form = ReportForm(request.POST, instance=Report())
         image_form = ImageForm(request.POST, request.FILES)
         passphoto_form = PPhotoForm(request.POST, request.FILES)
@@ -116,10 +116,10 @@ class ReportView(View):
         product_formset = self.init_product_formset(request)
         consumable_formset = self.init_consumable_formset(request)
         wear_form = WearForm(request.POST)
-      
-        print("VALIDATION {}{}{}".format(report_form.is_valid(),car_form.is_valid(),customer_form.is_valid()))
-        if report_form.is_valid() and car_form.is_valid() and customer_form.is_valid():
-            new_contract = Contract()
+
+        print("VALIDATION {}{}{}".format(report_form.is_valid(), car_form.is_valid(), customer_form.is_valid()))
+        if report_form.is_valid() and car_form.is_valid() and customer_form.is_valid() and contract_form.is_valid():
+            new_contract = contract_form.save()
             new_customer = customer_form.save(commit=False)
             new_customer.save()
             new_contract.customer = new_customer
@@ -178,10 +178,11 @@ class ReportView(View):
                 new_report.get_total_report_price()
             new_report.set_private_key()
             new_report.save()
-            create_base64(request,new_report)
+            create_base64(request, new_report)
             return HttpResponseRedirect('/report/list')
-    
+
         context = {
+            'contract_form': contract_form,
             'report_form': report_form,
             'car_form': car_form,
             'customer_form': customer_form,
@@ -200,6 +201,7 @@ class ReportView(View):
     def put(self, request, id=None):
         report = Report.objects.get(report_id=id)
         contract = Contract.objects.get(contract_id=report.contract_id)
+        contract_form = ContractForm(instance=contract)
         image_form = ImageForm(request.POST, request.FILES)
         passphoto_form = PPhotoForm(request.POST, request.FILES)
         otherphoto_form = OPhotoForm(request.POST, request.FILES)
@@ -214,8 +216,8 @@ class ReportView(View):
         product_formset = self.init_product_formset(request)
         consumable_formset = self.init_consumable_formset(request)
         wear_form = WearForm(request.POST)
-        if report_form.is_valid() and car_form.is_valid() and customer_form.is_valid():
-            new_contract = Contract()
+        if report_form.is_valid() and car_form.is_valid() and customer_form.is_valid() and contract_form.is_valid():
+            new_contract = contract_form.save()
             new_customer = customer_form.save(commit=False)
             new_customer.save()
             new_contract.customer = new_customer
@@ -268,11 +270,12 @@ class ReportView(View):
                 wd = get_data_from_wear_form(wear_form)
                 new_report.wear_data.update(wd)
                 new_report.get_total_report_price()
-            create_base64(request,new_report.id)
+            create_base64(request, new_report.id)
             new_report.save()
             return HttpResponseRedirect('/report/list')
 
         context = {
+            'contract_form': contract_form,
             'report_form': report_form,
             'car_form': car_form,
             'customer_form': customer_form,
@@ -286,6 +289,7 @@ class ReportView(View):
             'wear_form': wear_form,
         }
         return render(request, 'makereport/edit_repor.html', context)
+
     @method_decorator(decorators)
     def delete(self, request, id=None):
         report = Report.objects.get(report_id=id)
@@ -317,26 +321,31 @@ def reports_list(request):
         return admin_list(request)
     else:
         return user_list_some(request)
-        
+
+
 def user_list_some(request):
     if 'search' in request.GET:
-        reports = Report.objects.filter(car__car_number__contains=request.GET['search'],created_by = request.user.myuser)
-    else:   
-        reports = Report.objects.filter(created_by = request.user)
-    return render(request, 'makereport/index.html', context={'reports':reports})
+        reports = Report.objects.filter(car__car_number__contains=request.GET['search'], created_by=request.user.myuser)
+    else:
+        reports = Report.objects.filter(created_by=request.user)
+    return render(request, 'makereport/index.html', context={'reports': reports})
+
 
 def admin_list(request):
     if 'search' in request.GET:
-        reports = Report.objects.filter(Q(car__car_number__contains=request.GET['search']) & Q(Q(signed = True)|Q(created_by = request.user.myuser)))
-    else:   
-        reports = Report.objects.filter(Q(signed = True)|Q(created_by=request.user.myuser))
+        reports = Report.objects.filter(
+            Q(car__car_number__contains=request.GET['search']) & Q(Q(signed=True) | Q(created_by=request.user.myuser)))
+    else:
+        reports = Report.objects.filter(Q(signed=True) | Q(created_by=request.user.myuser))
 
-    return render(request, 'makereport/index.html', context={'reports':reports})
-    
+    return render(request, 'makereport/index.html', context={'reports': reports})
+
+
 @login_required
 def users_list(request):
     users = User.objects.all()
     return render(request, 'makereport/users_list.html', context={'users': users})
+
 
 @login_required
 def get_template(request):
@@ -351,10 +360,12 @@ def get_template(request):
     user = request.user
     if user.myuser.template != None:
         user.myuser.template.delete()
-  
+
     user.myuser.template = request.FILES['file'];
     user.myuser.save()
     return JsonResponse({})
+
+
 class UserSettingsView(View):
     decorators = [login_required]
 
@@ -364,7 +375,7 @@ class UserSettingsView(View):
         templateForm = TemplateForm()
         context = {
             'user': user,
-            'form_upload':templateForm
+            'form_upload': templateForm
         }
         return render(request, 'makereport/user_settings.html', context)
 

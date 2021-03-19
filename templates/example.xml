@@ -4,12 +4,14 @@
                                      PAGE 1
     <page>
     
-        <text align="center">Договор-счет №{{ report.report_id }}</text>
+        {% if contract %}
+        <text align="center">Договор-счет № {{ contract.contract_number }} </text>
         <text align="center">на оказание услуг по оценке</text>
         <text/>
         <text>г.Ташкент</text>
         <text/>
-        <text x="17.5"  y="27">{{ datetime }}</text>
+        <text x="17.5"  y="27">{{ contract.contract_date }}</text>
+        {% endif %}
         <text/>
         <text align="justify" lineheight="1.5">       ООО "AMIR AVTO BAHOLASH"   именуемое   в   дальнейшем   "Исполнитель",   в   лице   директора Сагдуллаева Б.К.,  действующего  на  основании  Устава  и  лицензии  на  осуществление  оценочной   деятельности   RR-0184    выданная   Госкомимуществом   РУз 12.05.2014г.,   полис  страхования  профессиональной ответственности оценщиков №11/3-6/0769 от 08.11.2019г. c одной  стороны  и {{ report.contract.customer }} именуемое в дальнейшем "Заказчик", с другой стороны, заключили настоящий договор о нижеследующем:</text>
         <text font="TNRB" align="center" lineheight="2">1.Предмет договора.</text>

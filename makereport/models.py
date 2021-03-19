@@ -5,7 +5,7 @@ from .converters import num2text
 
 class Contract(models.Model):
     contract_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
-    customer = models.ForeignKey('Customer', on_delete=models.CASCADE, related_name='Customer', verbose_name='Клиент')
+    customer = models.ForeignKey('Customer', null=True, blank=True, on_delete=models.CASCADE, related_name='Customer', verbose_name='Клиент')
     pdf_contract = models.FileField(blank=True, null=True, verbose_name='Контракт в пдф')
     contract_date = models.CharField(max_length=10, null=True, blank=True)
     contract_number = models.CharField(max_length=10, null=True, blank=True)
@@ -17,26 +17,29 @@ class Contract(models.Model):
         verbose_name = 'Контракт'
         verbose_name_plural = 'Контракты'
 
+
 BRANDS = (
-        ('Кобальт', 'Кобальт'),
-        ('Спарк', 'Спарк'),
-        ('Нексия3', 'Нексия3'),
-        ('Малибу','Малибу'),
-        ('Нексия Sonc', 'Нексия Sonc'),
-        ('Дамас', 'Дамас'),
-        ('Тико','Тико'),
-        ('Матиз', 'Матиз'),
-        ('Матиз Бест', 'Матиз Бест'),
-        ('Нексия Donc', 'Нексия Donc'),
-        ('Ласетти','Ласетти'),
-        ('Каптива',  'Каптива'),
-        ('Такума',  'Такума'),
-        ('Эпика',  'Эпика')
+    ('Кобальт', 'Кобальт'),
+    ('Спарк', 'Спарк'),
+    ('Нексия3', 'Нексия3'),
+    ('Малибу', 'Малибу'),
+    ('Нексия Sonc', 'Нексия Sonc'),
+    ('Дамас', 'Дамас'),
+    ('Тико', 'Тико'),
+    ('Матиз', 'Матиз'),
+    ('Матиз Бест', 'Матиз Бест'),
+    ('Нексия Donc', 'Нексия Donc'),
+    ('Ласетти', 'Ласетти'),
+    ('Каптива', 'Каптива'),
+    ('Такума', 'Такума'),
+    ('Эпика', 'Эпика')
 )
+
+
 class Car(models.Model):
     car_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     brand_text = models.CharField(max_length=30)
-    brand = models.CharField(max_length=30,choices = BRANDS)
+    brand = models.CharField(max_length=30, choices=BRANDS)
     car_number = models.CharField(max_length=8)
     registration = models.CharField(max_length=15)
     engine_number = models.CharField(max_length=30)
@@ -56,16 +59,21 @@ class Car(models.Model):
         verbose_name = 'Машину'
         verbose_name_plural = 'Машины'
 
+
 class Documents(models.Model):
-    license =  models.ImageField(blank=True, null=True, verbose_name='Лицензия')
-    guvonhnoma = models.ImageField(blank = True, null = True, verbose_name = 'Гувохнома')
+    license = models.ImageField(blank=True, null=True, verbose_name='Лицензия')
+    guvonhnoma = models.ImageField(blank=True, null=True, verbose_name='Гувохнома')
     certificate = models.ImageField(blank=True, null=True, verbose_name='Сертификат')
-    insurance = models.ImageField(blank = True, null = True, verbose_name = 'Cтраховка')
+    insurance = models.ImageField(blank=True, null=True, verbose_name='Cтраховка')
+
     class Meta:
         verbose_name = 'Фотографии для документа'
         verbose_name_plural = 'Фотографии для документов'
+
     def __str__(self):
         return "Документ № {}".format(self.id)
+
+
 class Customer(models.Model):
     customer_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     name = models.CharField(max_length=100, verbose_name='ФИО')
@@ -175,14 +183,17 @@ class Consumable(models.Model):
         verbose_name = 'Расходник'
         verbose_name_plural = 'Расходники'
 
+
 def upload_path_handler(instance, filename):
     return "templates_xml/{id}.xml".format(id=instance.user.id)
+
+
 class MyUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     report_rate_price = models.IntegerField(default=0, blank=True, null=True)
     report_rate_price_txt = models.CharField(max_length=200, blank=True, null=True)
     template = models.FileField(blank=True, null=True, upload_to=upload_path_handler, verbose_name='Шаблоны для пдф')
-    
+
     def get_total_report_cost_txt(self):
         self.report_rate_price_txt = num2text(int(self.report_rate_price), main_units=((u'сум', u'сумы', u'сум'), 'f'))
         return self.report_rate_price_txt
@@ -247,8 +258,8 @@ class Report(models.Model):
     pdf_report_base64 = models.CharField(max_length=1000000, blank=True, null=True)
     pdf_report_pkcs7 = models.JSONField(blank=True, null=True)
     pdf_report_qr = models.JSONField(blank=True, null=True)
-    pdf_qr_code_user = models.CharField(max_length = 500, blank = True, null= True)
-    pdf_qr_code_admin = models.CharField(max_length = 500, blank = True, null= True)
+    pdf_qr_code_user = models.CharField(max_length=500, blank=True, null=True)
+    pdf_qr_code_admin = models.CharField(max_length=500, blank=True, null=True)
     signed = models.BooleanField(default=False)
     passport_photo = models.FileField(blank=True, null=True, verbose_name='Фото пасспорта')
     registration_photo = models.FileField(blank=True, null=True, verbose_name='Фото тех.пасспорта')
@@ -272,7 +283,9 @@ class Report(models.Model):
             '{:,}'.format(int(self.service_cost + self.get_product_acc_cost() + self.consumable_cost)).split(','))
 
     def get_total_report_cost_txt(self):
-        self.total_report_cost_txt = num2text(int(self.service_cost + self.get_product_acc_cost() + self.consumable_cost), main_units=((u'сум', u'сумы', u'суммов'), 'f'))
+        self.total_report_cost_txt = num2text(
+            int(self.service_cost + self.get_product_acc_cost() + self.consumable_cost),
+            main_units=((u'сум', u'сумы', u'суммов'), 'f'))
         return self.total_report_cost_txt
 
     def set_private_key(self):
