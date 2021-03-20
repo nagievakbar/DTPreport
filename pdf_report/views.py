@@ -43,12 +43,12 @@ def get_response(request, id):
     contract = Contract.objects.get(contract_id=new_report_pdf.contract_id)
     images = Images.objects.filter(report_id=id)
     passport = PassportPhotos.objects.filter(report_id=id)
-    checks = Checks.objects.filter(report_id=424).first()
+    checks = Checks.objects.filter(report_id=id).first()
     other_photos = OtherPhotos.objects.filter(report_id=id)
     file = request.user.myuser.template
     document_photo = Documents.objects.first()
     path_for_images = s.MEDIA_ROOT
-
+    print(checks.checks)
     if file != None:
         splited = file.name.split('/')
         path = os.path.join(s.MEDIA_ROOT, "{}".format(splited[0]))
