@@ -43,12 +43,12 @@ def get_response(request, id):
     contract = Contract.objects.get(contract_id=new_report_pdf.contract_id)
     images = Images.objects.filter(report_id=id)
     passport = PassportPhotos.objects.filter(report_id=id)
-    checks = Checks.objects.filter(report_id=id)
+    checks = Checks.objects.filter(report_id=424).first()
     other_photos = OtherPhotos.objects.filter(report_id=id)
     file = request.user.myuser.template
-    documnet_photo = Documents.objects.first()
+    document_photo = Documents.objects.first()
     path_for_images = s.MEDIA_ROOT
-    print(images)
+
     if file != None:
         splited = file.name.split('/')
         path = os.path.join(s.MEDIA_ROOT, "{}".format(splited[0]))
@@ -66,7 +66,7 @@ def get_response(request, id):
         'qrcode': new_report_pdf.pdf_qr_code_user,
         'qrcode_admin': new_report_pdf.pdf_qr_code_admin,
         'images': images,
-        'documnet_photo': documnet_photo,
+        'document_photo': document_photo,
         'passport': passport,
         'checks': checks,
         'other_photos': other_photos,
@@ -100,7 +100,7 @@ def create_base64(request, new_report_pdf):
         'qrcode': new_report_pdf.pdf_qr_code_user,
         'qrcode_admin': new_report_pdf.pdf_qr_code_admin,
         'images': "",
-        'documnet_photo': "",
+        'document_photo': "",
         'passport': "",
         'checks': "",
         'other_photos': "",

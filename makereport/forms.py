@@ -177,6 +177,7 @@ class OPhotoForm(forms.ModelForm):
 
 class ChecksForm(forms.ModelForm):
     checks = forms.CharField(
+        required=False,
         widget=forms.FileInput(
             attrs={'id': 'checksinput', 'type': 'file', 'name': 'input', 'multiple': True}))
 
