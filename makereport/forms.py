@@ -147,6 +147,7 @@ class ConsumableForm(forms.Form):
 
 class ImageForm(forms.ModelForm):
     image = forms.CharField(
+        required=False,
         widget=forms.FileInput(
             attrs={'id': 'imageinput', 'type': 'file', 'name': 'input', 'multiple': True, 'required': False}))
 
@@ -157,6 +158,7 @@ class ImageForm(forms.ModelForm):
 
 class PPhotoForm(forms.ModelForm):
     photo = forms.CharField(
+        required=False,
         widget=forms.FileInput(
             attrs={'id': 'pphotoinput', 'type': 'file', 'name': 'input', 'multiple': True}))
 
@@ -167,6 +169,7 @@ class PPhotoForm(forms.ModelForm):
 
 class OPhotoForm(forms.ModelForm):
     photos = forms.CharField(
+        required=False,
         widget=forms.FileInput(
             attrs={'id': 'ophotoinput', 'type': 'file', 'name': 'input', 'multiple': True}))
 

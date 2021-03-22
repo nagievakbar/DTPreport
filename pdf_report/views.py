@@ -48,7 +48,6 @@ def get_response(request, id):
     file = request.user.myuser.template
     document_photo = Documents.objects.first()
     path_for_images = s.MEDIA_ROOT
-    print(checks.checks)
     if file != None:
         splited = file.name.split('/')
         path = os.path.join(s.MEDIA_ROOT, "{}".format(splited[0]))
