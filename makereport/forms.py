@@ -1,6 +1,8 @@
 from django import forms
 from .models import *
 import datetime
+
+
 class ReportForm(forms.ModelForm):
     """docstring for ReportForm."""
 
@@ -11,27 +13,30 @@ class ReportForm(forms.ModelForm):
         model = Report
         fields = ['report_date', 'report_number']
 
+
 BRANDS = (
-        (0, "Выберите Марку"),
-        ('Кобальт', 'Кобальт'),
-        ('Спарк', 'Спарк'),
-        ('Нексия3', 'Нексия3'),
-        ('Малибу','Малибу'),
-        ('Нексия Sonc', 'Нексия Sonc'),
-        ('Дамас', 'Дамас'),
-        ('Тико','Тико'),
-        ('Матиз', 'Матиз'),
-        ('Матиз Бест', 'Матиз Бест'),
-        ('Нексия Donc', 'Нексия Donc'),
-        ('Ласетти','Ласетти'),
-        ('Каптива',  'Каптива'),
-        ('Такума',  'Такума'),
-        ('Эпика',  'Эпика')
-    )
+    (0, "Выберите Марку"),
+    ('Кобальт', 'Кобальт'),
+    ('Спарк', 'Спарк'),
+    ('Нексия3', 'Нексия3'),
+    ('Малибу', 'Малибу'),
+    ('Нексия Sonc', 'Нексия Sonc'),
+    ('Дамас', 'Дамас'),
+    ('Тико', 'Тико'),
+    ('Матиз', 'Матиз'),
+    ('Матиз Бест', 'Матиз Бест'),
+    ('Нексия Donc', 'Нексия Donc'),
+    ('Ласетти', 'Ласетти'),
+    ('Каптива', 'Каптива'),
+    ('Такума', 'Такума'),
+    ('Эпика', 'Эпика')
+)
+
+
 class CarForm(forms.ModelForm):
     """docstring for CarForm."""
     brand_text = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Марка', 'class': 'input_in'}))
-    brand = forms.ChoiceField(choices=BRANDS, widget=forms.Select(attrs={'class':'form-control select-block'}))
+    brand = forms.ChoiceField(choices=BRANDS, widget=forms.Select(attrs={'class': 'form-control select-block'}))
     car_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Номер машины', 'class': 'input_in'}))
     registration = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Тех. паспорт', 'class': 'input_in'}))
     engine_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Двигатель', 'class': 'input_in'}))
@@ -63,13 +68,26 @@ class CarForm(forms.ModelForm):
                   'owner_address']
 
 
-
-
 class ContractForm(forms.ModelForm):
     """docstring for ContractForm."""
 
     contract_date = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Дата договора', 'class': 'input_in'}))
-    contract_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Номер договора', 'class': 'input_in'}))
+    contract_number = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'Номер договора', 'class': 'input_in'}))
+
+    class Meta:
+        model = Contract
+        fields = ['contract_date', 'contract_number']
+
+
+class ContractFormEdit(forms.ModelForm):
+    """docstring for ContractForm."""
+    contract_date = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={'placeholder': 'Дата договора', 'class': 'input_in'}))
+    contract_number = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={'placeholder': 'Номер договора', 'class': 'input_in'}))
 
     class Meta:
         model = Contract
@@ -87,15 +105,33 @@ class CustomerForm(forms.ModelForm):
     whom_passport_issued = forms.CharField(
         widget=forms.TextInput(attrs={'placeholder': 'Кем выдан', 'class': 'input_in'}))
     phone_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Телефон', 'class': 'input_in'}))
-    gnu_or_gje = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Г-ну', 'class': 'input_in'}))
+    gnu_or_gje = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'Г-ну', 'class': 'input_in'}))
     uvajaemaya = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Уважаемый', 'class': 'input_in'}))
     vid = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Вид', 'class': 'input_in'}))
-    mesto_osmotra = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Акт осмотра Место', 'class': 'input_in'}))
+    mesto_osmotra = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'Акт осмотра Место', 'class': 'input_in'}))
 
     class Meta:
         model = Customer
         fields = ['name', 'address', 'passport_number', 'when_passport_issued',
                   'whom_passport_issued', 'phone_number', 'gnu_or_gje', 'uvajaemaya', 'vid', 'mesto_osmotra']
+
+
+class CustomerFormEdit(forms.ModelForm):
+    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Заказчик', 'class': 'input_in'}))
+    address = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Адрес заказчика', 'class': 'input_in'}))
+    passport_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Паспорт', 'class': 'input_in'}))
+    when_passport_issued = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'Когда выдан', 'class': 'input_in'}))
+    whom_passport_issued = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'Кем выдан', 'class': 'input_in'}))
+    phone_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Телефон', 'class': 'input_in'}))
+
+    class Meta:
+        model = Customer
+        fields = ['name', 'address', 'passport_number', 'when_passport_issued',
+                  'whom_passport_issued', 'phone_number']
 
 
 class ServiceForm(forms.Form):
@@ -106,7 +142,7 @@ class ServiceForm(forms.Form):
     norm_per_hour = forms.FloatField(
         widget=forms.NumberInput(attrs={'class': 'input2 work-price-input2 time2'}))
     premium = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'input2 work-price-input2 allowance2' }))  # 'value': '0'
+        widget=forms.TextInput(attrs={'class': 'input2 work-price-input2 allowance2'}))  # 'value': '0'
     price = forms.IntegerField(
         widget=forms.NumberInput(attrs={'class': 'input2 work-price-input2 price2'}))
     service_cost = forms.IntegerField(
@@ -121,7 +157,7 @@ class ProductForm(forms.Form):
     name = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 name3', }))
     # unit = forms.CharField(
-        # widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 name3', 'readonly': ''}))
+    # widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 name3', 'readonly': ''}))
     quantity = forms.IntegerField(
         widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 time3', }))  # 'value': '0'
     price = forms.IntegerField(
@@ -197,6 +233,7 @@ class WearForm(forms.Form):
     wear = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'input work-price-input prehnite-input'}))
     accept_wear = forms.IntegerField(
         widget=forms.TextInput(attrs={'class': 'input work-price-input prehnite-input'}))
+
 
 class TemplateForm(forms.Form):
     template = forms.CharField(

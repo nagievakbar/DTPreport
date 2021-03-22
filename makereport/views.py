@@ -201,28 +201,32 @@ class ReportView(View):
     def put(self, request, id=None):
         report = Report.objects.get(report_id=id)
         contract = Contract.objects.get(contract_id=report.contract_id)
-        contract_form = ContractForm(instance=contract)
+        contract_form = ContractFormEdit(instance=contract)
         image_form = ImageForm(request.POST, request.FILES)
         passphoto_form = PPhotoForm(request.POST, request.FILES)
         otherphoto_form = OPhotoForm(request.POST, request.FILES)
         checks_form = ChecksForm(request.POST, request.FILES)
-        report_form = ReportForm(request.POST, instance=report)
+        # report_form = ReportForm(request.POST, instance=report)
         # report_form.created_at = report_form.created_at.strptime('%d. %m. %Y')
         car = Car.objects.get(car_id=report.car_id)
         car_form = CarForm(request.POST, instance=car)
         customer = Customer.objects.get(customer_id=contract.customer_id)
-        customer_form = CustomerForm(request.POST, instance=customer)
+        customer_form = CustomerFormEdit(request.POST, instance=customer)
         service_formset = self.init_service_formset(request)
         product_formset = self.init_product_formset(request)
         consumable_formset = self.init_consumable_formset(request)
         wear_form = WearForm(request.POST)
-        if report_form.is_valid() and car_form.is_valid() and customer_form.is_valid() and contract_form.is_valid():
-            new_contract = contract_form.save()
+        print("VALIDATION {}{}".format(car_form.is_valid(), customer_form.is_valid()))
+        print(service_formset)
+
+        # report_form.is_valid() and 
+        if car_form.is_valid() and customer_form.is_valid():
+            new_contract = contract
             new_customer = customer_form.save(commit=False)
             new_customer.save()
             new_contract.customer = new_customer
             new_contract.save()
-            new_report = report_form.save(commit=False)
+            new_report = report
             new_report.contract = new_contract
             new_car = car_form.save()
             new_car.save()
@@ -251,17 +255,17 @@ class ReportView(View):
                     for chunk in request.FILES['checks'].chunks():
                         destination.write(chunk)
             for form in service_formset.forms:
-                if form.is_valid():
+                if form.is_valid() and form.cleaned_data:
                     sd = get_data_from_service_form(form)
                     add_service_to_report(new_report, sd.__getitem__('service_id'), sd.__getitem__('service_cost'))
                     new_report.service_data.append(sd)
             for form in product_formset.forms:
-                if form.is_valid():
+                if form.is_valid() and form.cleaned_data:
                     pd = get_data_from_product_form(form)
                     add_product_to_report(new_report, pd.__getitem__('product_id'), pd.__getitem__('product_cost'))
                     new_report.product_data.append(pd)
             for form in consumable_formset.forms:
-                if form.is_valid():
+                if form.is_valid() and form.cleaned_data:
                     cd = get_data_from_consum_form(form)
                     add_consumable_to_report(new_report, cd.__getitem__('consumable_id'),
                                              cd.__getitem__('consumable_cost'))
@@ -270,13 +274,12 @@ class ReportView(View):
                 wd = get_data_from_wear_form(wear_form)
                 new_report.wear_data.update(wd)
                 new_report.get_total_report_price()
-            create_base64(request, new_report.id)
+            create_base64(request, new_report)
             new_report.save()
             return HttpResponseRedirect('/report/list')
 
         context = {
             'contract_form': contract_form,
-            'report_form': report_form,
             'car_form': car_form,
             'customer_form': customer_form,
             'image_form': image_form,

@@ -158,6 +158,15 @@
 		</div>
 		<!-- ======= Header ======= -->
 
+              {% if car_form.errors.brand %}
+                                    <div class="alert alert-danger">
+                                            <strong>
+                                                    Марка не выбрана
+                                            </strong>
+                                      </div>
+              {% endif %}
+
+       
 
 
 
