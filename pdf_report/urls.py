@@ -4,5 +4,6 @@ from .views import *
 
 urlpatterns = [
     path('<int:id>/', GeneratePDF.as_view(), name='get_response'),
+    path('mixing/<int:id>', GenerateMixing.as_view(), name='get_mixing'),
     path("download_xml/", get_base_template, name='download_xml')
 ]

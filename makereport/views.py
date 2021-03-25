@@ -18,6 +18,172 @@ from DTPreport import settings as s
 from DTPreport import urls
 
 
+class ReportEditView(View):
+    decorators = [login_required]
+    extend = False
+
+    @method_decorator(decorators)
+    def get(self, request, id=None):
+        images = Images.objects.filter(report_id=id)
+        pphotos = PassportPhotos.objects.filter(report_id=id)
+        ophotos = OtherPhotos.objects.filter(report_id=id)
+        checks = Checks.objects.filter(report_id=id)
+        image_form = ImageForm(instance=Images(), use_required_attribute=False)
+        passphoto_form = PPhotoForm(instance=PassportPhotos(), use_required_attribute=False)
+        otherphoto_form = OPhotoForm(instance=OtherPhotos(), use_required_attribute=False)
+        checks_form = ChecksForm(instance=Checks(), use_required_attribute=False)
+        report = Report.objects.get(report_id=id)
+        contract = Contract.objects.get(contract_id=report.contract_id)
+        contract_form = ContractForm(instance=contract)
+        report_form = ReportForm(instance=Report())
+        car = Car.objects.get(car_id=report.car_id)
+        car.release_date = car.release_date.strftime('%Y')
+        car_form = CarForm(instance=car)
+        customer = Customer.objects.get(customer_id=contract.customer_id)
+        customer_form = CustomerForm(instance=customer)
+        service_form = formset_factory(ServiceForm, extra=1)
+        service_formset = service_form(initial=report.service_data, prefix='service')
+        product_form = formset_factory(ProductForm, extra=1)
+        product_formset = product_form(initial=report.product_data, prefix='product')
+        consumable_form = formset_factory(ConsumableForm, extra=1)
+        consumable_formset = consumable_form(initial=report.consumable_data, prefix='consumable')
+        wear_form = WearForm(initial=report.wear_data)
+        total_price_report = report.total_report_cost
+        template = 'makereport/add_repor.html'
+        context = {
+            'contract_form': contract_form,
+            'report_form': report_form,
+            'car_form': car_form,
+            'customer_form': customer_form,
+            'service_formset': service_formset,
+            'product_formset': product_formset,
+            'consumable_formset': consumable_formset,
+            'wear_form': wear_form,
+            'report': report or None,
+            'total_price_report': total_price_report,
+            'image_form': image_form or None,
+            'passphoto_form': passphoto_form or None,
+            'otherphoto_form': otherphoto_form or None,
+            'checks_form': checks_form or None,
+            'images': images or None,
+            'pphotos': pphotos or None,
+            'ophotos': ophotos or None,
+            'checks': checks or None,
+        }
+        return render(request, template, context)
+
+    def post(self, request, id=None):
+        total_report_price = 0
+        contract_form = ContractForm(request.POST, instance=Contract())
+        report_form = ReportForm(request.POST, instance=Report())
+        image_form = ImageForm(request.POST, request.FILES)
+        passphoto_form = PPhotoForm(request.POST, request.FILES)
+        otherphoto_form = OPhotoForm(request.POST, request.FILES)
+        checks_form = ChecksForm(request.POST, request.FILES)
+        car_form = CarForm(request.POST, instance=Car())
+        customer_form = CustomerForm(request.POST, instance=Customer())
+        service_formset = self.init_service_formset(request)
+        product_formset = self.init_product_formset(request)
+        consumable_formset = self.init_consumable_formset(request)
+        wear_form = WearForm(request.POST)
+
+        print("VALIDATION {}{}{}".format(report_form.is_valid(), car_form.is_valid(), customer_form.is_valid()))
+        print(car_form.errors)
+        if report_form.is_valid() and car_form.is_valid() and customer_form.is_valid() and contract_form.is_valid():
+            new_contract = contract_form.save()
+            new_customer = customer_form.save(commit=False)
+            new_customer.save()
+            new_contract.customer = new_customer
+            new_contract.save()
+            new_report = report_form.save(commit=False)
+            new_report.contract = new_contract
+            new_car = car_form.save()
+            new_car.save()
+            new_report.car = new_car
+            new_report.created_by = request.user.myuser
+            new_report.save()
+            save_path = str(s.MEDIA_ROOT + "/")
+            for each in request.FILES.getlist('image'):
+                Images.objects.create(image=each, report=new_report)
+                with open(save_path + each.name, 'wb+') as destination:
+                    for chunk in request.FILES['image'].chunks():
+                        destination.write(chunk)
+            for each in request.FILES.getlist('photo'):
+                PassportPhotos.objects.create(photo=each, report=new_report)
+                with open(save_path + each.name, 'wb+') as destination:
+                    for chunk in request.FILES['photo'].chunks():
+                        destination.write(chunk)
+            for each in request.FILES.getlist('photos'):
+                OtherPhotos.objects.create(photos=each, report=new_report)
+                with open(save_path + each.name, 'wb+') as destination:
+                    for chunk in request.FILES['photos'].chunks():
+                        destination.write(chunk)
+            for each in request.FILES.getlist('checks'):
+                Checks.objects.create(checks=each, report=new_report)
+                with open(save_path + each.name, 'wb+') as destination:
+                    for chunk in request.FILES['checks'].chunks():
+                        destination.write(chunk)
+            new_report.service_data = []
+            new_report.product_data = []
+            new_report.consumable_data = []
+            new_report.wear_data = {}
+            for form in service_formset.forms:
+                if form.is_valid() and form.cleaned_data:
+                    sd = get_data_from_service_form(form)
+                    add_service_to_report(new_report, sd.__getitem__('service_id'), sd.__getitem__('service_cost'))
+                    new_report.service_data.append(sd)
+            for form in product_formset.forms:
+                if form.is_valid() and form.cleaned_data:
+                    pd = get_data_from_product_form(form)
+                    add_product_to_report(new_report, pd.__getitem__('product_id'), pd.__getitem__('product_cost'))
+                    new_report.product_data.append(pd)
+            for form in consumable_formset.forms:
+                if form.is_valid() and form.cleaned_data:
+                    cd = get_data_from_consum_form(form)
+                    add_consumable_to_report(new_report, cd.__getitem__('consumable_id'),
+                                             cd.__getitem__('consumable_cost'))
+                    new_report.consumable_data.append(cd)
+            if wear_form.is_valid():
+                wd = get_data_from_wear_form(wear_form)
+                new_report.wear_data.update(wd)
+                new_report.get_total_report_price()
+            new_report.set_private_key()
+            new_report.save()
+            create_base64(request, new_report)
+            return HttpResponseRedirect('/report/list_edit')
+
+        context = {
+            'contract_form': contract_form,
+            'report_form': report_form,
+            'car_form': car_form,
+            'customer_form': customer_form,
+            'service_formset': service_formset,
+            'product_formset': product_formset,
+            'consumable_formset': consumable_formset,
+            'wear_form': wear_form,
+            'image_form': image_form,
+            'passphoto_form': passphoto_form,
+            'otherphoto_form': otherphoto_form,
+            'checks_form': checks_form,
+        }
+        return render(request, 'makereport/add_repor.html', context)
+
+    def init_service_formset(self, request):
+        service_form = formset_factory(ServiceForm, extra=2)
+        service_formset = service_form(request.POST, prefix='service')
+        return service_formset
+
+    def init_product_formset(self, request):
+        product_form = formset_factory(ProductForm, extra=2)
+        product_formset = product_form(request.POST, prefix='product')
+        return product_formset
+
+    def init_consumable_formset(self, request):
+        consumable_form = formset_factory(ConsumableForm, extra=2)
+        consumable_formset = consumable_form(request.POST, prefix='consumable')
+        return consumable_formset
+
+
 class ReportView(View):
     decorators = [login_required]
     extend = False
@@ -30,7 +196,6 @@ class ReportView(View):
         ophotos = None
         checks = None
         if id:
-
             images = Images.objects.filter(report_id=id)
             pphotos = PassportPhotos.objects.filter(report_id=id)
             ophotos = OtherPhotos.objects.filter(report_id=id)
@@ -326,6 +491,15 @@ def reports_list(request):
         return user_list_some(request)
 
 
+@login_required
+def reports_edit_list(request):
+    if 'search' in request.GET:
+        reports = Report.objects.filter(car__car_number=request.GET['search'])
+    else:
+        reports = Report.objects.all()
+    return render(request, 'makereport/additional.html', context={'reports': reports})
+
+
 def user_list_some(request):
     if 'search' in request.GET:
         reports = Report.objects.filter(car__car_number__contains=request.GET['search'], created_by=request.user.myuser)
@@ -410,4 +584,14 @@ def user_logout(request):
 
 
 def search(request):
-    return render(request, "makereport/auth/search.html")
+    errors = "Введите ключ"
+    if 'key' in request.GET:
+        report = Report.objects.filter(key=request.GET['key'])
+        if report.exists():
+            return HttpResponseRedirect('pdf/mixing/{}'.format(report.first().report_id))
+        else:
+            errors = 'Такого ключа не существует'
+    context = {
+        'errors': errors
+    }
+    return render(request, "makereport/auth/search.html", context=context)

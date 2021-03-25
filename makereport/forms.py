@@ -32,6 +32,12 @@ BRANDS = (
     ('Эпика', 'Эпика')
 )
 
+TYPE_CAR = (
+    (0, 'Выберите тип машины'),
+    ('Грузовой', 'Грузовой'),
+    ('Легковой', 'Легковой')
+)
+
 
 class CarForm(forms.ModelForm):
     """docstring for CarForm."""
@@ -50,6 +56,10 @@ class CarForm(forms.ModelForm):
     car_owner = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Владелец', 'class': 'input_in'}))
     owner_address = forms.CharField(
         widget=forms.TextInput(attrs={'placeholder': 'Адрес владельца', 'class': 'input_in'}))
+    type_of_car = forms.ChoiceField(
+        required=False,
+        choices=TYPE_CAR,
+        widget=forms.Select(attrs={'class': 'form-control'}))
 
     class Meta:
         model = Car
@@ -65,7 +75,8 @@ class CarForm(forms.ModelForm):
                   'release_date',
                   'car_type',
                   'car_owner',
-                  'owner_address']
+                  'owner_address',
+                  'type_of_car']
 
 
 class ContractForm(forms.ModelForm):

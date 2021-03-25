@@ -1,0 +1,209 @@
+<pdf filename="mixing.pdf" pagesize="A4" unit="cm" margin="0.5,1,0.5,1">
+    <font name="TNR" ttf="Times New Roman 400.ttf"/>
+    <font name="TNRB" ttf="Times New Roman 400 Bold.ttf"/>
+    PAGE 1
+    {#    #}
+    {#    margin between new line 0.4#}
+    {#    #}
+    {#    #}
+    {#    -0.5 to get text for row#}
+    {#    #}
+    <page>
+        <image x="9" y="27.7" src="AAB.png" width="3" height="2"/>
+
+        <rect x="0.5" y="25.7" width="20" height="1" fill="0.5,0.5,0.5"/>
+        <rect x="0.5" y="18.7" width="20" height="7"/>
+        <rect x="0.5" y="17.7" width="20" height="1" fill="0.5,0.5,0.5"/>
+        <rect x="0.5" y="13.7" width="20" height="4"/>
+        <rect x="0.5" y="12.7" width="20" height="1" fill="0.5,0.5,0.5"/>
+        <rect x="0.5" y="8.7" width="20" height="4"/>
+        <rect x="0.5" y="7.7" width="20" height="1" fill="0.5,0.5,0.5"/>
+        <rect x="0.5" y="0.7" width="20" height="7"/>
+        {#            inside  table left side first #}
+        <rect x="0.5" y="24.2" width="5" height="1.5"/>
+        <rect x="0.5" y="22.7" width="5" height="1.5"/>
+        <rect x="0.5" y="19.7" width="5" height="3"/>
+        <rect x="0.5" y="18.7" width="5" height="1"/>
+        {#            inside  table right side first #}
+        <rect x="5.5" y="24.2" width="15" height="1.5"/>
+        <rect x="5.5" y="22.7" width="15" height="1.5"/>
+        <rect x="5.5" y="19.7" width="15" height="3"/>
+        <rect x="5.5" y="18.7" width="15" height="1"/>
+        {#            inside  table left side second #}
+        <rect x="0.5" y="16.2" width="5" height="1.5"/>
+        <rect x="0.5" y="14.7" width="5" height="1.5"/>
+        <rect x="0.5" y="13.7" width="5" height="1"/>
+        {#            inside  table right side second #}
+        <rect x="5.5" y="16.2" width="15" height="1.5"/>
+        <rect x="5.5" y="14.7" width="15" height="1.5"/>
+        <rect x="5.5" y="13.7" width="15" height="1"/>
+        {#            inside  table left side third #}
+        <rect x="0.5" y="11.2" width="5" height="1.5"/>
+        <rect x="0.5" y="8.7" width="5" height="2.5"/>
+        {#            inside  table right side third #}
+        <rect x="5.5" y="11.2" width="15" height="1.5"/>
+        <rect x="5.5" y="8.7" width="15" height="2.5"/>
+        {#            inside  table left side fourth #}
+        <rect x="0.5" y="6.2" width="5" height="1.5"/>
+        <rect x="0.5" y="4.2" width="5" height="2"/>
+        <rect x="0.5" y="3.2" width="5" height="1"/>
+        <rect x="0.5" y="0.7" width="5" height="2.5"/>
+        {#            inside  table right side fourth #}
+        <rect x="5.5" y="6.2" width="15" height="1.5"/>
+        <rect x="5.5" y="4.2" width="15" height="2"/>
+        <rect x="5.5" y="3.2" width="15" height="1"/>
+        <rect x="5.5" y="0.7" width="15" height="2.5"/>
+        <text/>
+        <text/>
+        <text/>
+        <text align="center">Информационный лист об электронном отчете № {{ report.report_number }}</text>
+        {#                      headers#}
+        <text x="9" y="26.2">1. Обьект оценки</text>
+
+        <text x="8.7" y="18.2">2. Сведения о заказчике</text>
+
+        <text x="8.5" y="13.2">2.1 Сведения об исполнителе</text>
+
+        <text x="9.2" y="8.2">3. Другие свдения</text>
+        {#                       end headers#}
+        {#        first column of first table#}
+        <text x="0.7" y="25.2">Движимое имущество :</text>
+
+        <text x="0.7" y="23.7">Место регистрации</text>
+        <text x="0.7" y="23.3">объекта оценки:</text>
+
+        <text x="0.7" y="22.2">Ущерб</text>
+        <text x="0.7" y="21.8">автотранспортного</text>
+        <text x="0.7" y="21.4">средства по состоянию</text>
+        <text x="0.7" y="21">на 13 октябрь 2020 года :</text>
+
+        <text x="0.7" y="19.2">Владелец :</text>
+        {#        second column of first table#}
+        <text x="5.7" y="25.2">Движимое имущество легковой автомобиль НЕКСИЯ гос. номер</text>
+        <text x="5.7" y="24.8">01 563 YBA 1997г/выпуска</text>
+
+        <text x="5.7" y="23.7">РУз г. Ташкент Чиланзарский р-н, Чиланзар- 1А, гараж там же</text>
+
+        <text x="5.7" y="22.2">УЩЕРБ</text>
+
+        <text x="5.7" y="19.2">{{ car.car_owner }}</text>
+        {#      first column of second table#}
+        <text x="0.7" y="17.2">Заказчик :</text>
+
+        <text x="0.7" y="15.7">Адрес Заказчика :</text>
+
+        <text x="0.7" y="14.2">Паспортные данные :</text>
+        {#      second column of second table#}
+        <text x="5.7" y="17.2">{{ customer.name }}</text>
+
+        <text x="5.7" y="15.7">{{ customer.address }}</text>
+
+        <text x="5.7" y="14.2">{{ customer.passport_number }}</text>
+        {#      first column of third table#}
+        <text x="0.7" y="12.2">Исполнитель :</text>
+
+        <text x="0.7" y="10.7">Реквизиты исполнителя :</text>
+        {#      second column of third table#}
+        <text x="5.7" y="12.2">ООО «AMIR AVTO BAHOLASH»</text>
+
+        <text x="5.7" y="10.7">г.Ташкент Чиланзарский район, ул. Бунёдкор, 118 р/с 20208000298017089001,</text>
+        <text x="5.7" y="10.3">в Чиланзар.ф-л АИКБ "Ипак Йули", МФО 01067, ИНН 302667624 ОКЭД 68310.</text>
+        {#      first column of fourth table#}
+        <text x="0.7" y="7.2">Цель и назначение оценки :</text>
+
+        <text x="0.7" y="5.7">Вид определяемой</text>
+        <text x="0.7" y="5.3">стоимости:</text>
+
+        <text x="0.7" y="3.7">Форма отчета :</text>
+
+        <text x="0.7" y="2.7">П Сведения о Лицензии и</text>
+        <text x="0.7" y="2.3">Страховом полисе</text>
+        <text x="0.7" y="1.9">Исполнителя</text>
+        {#      second column of fourth table#}
+        <text x="5.7" y="7.2">Определение рыночной стоимости затрат на восстановление</text>
+        <text x="5.7" y="6.8">АМТС, пострадавшего в результате ДТП</text>
+
+        <text x="5.7" y="5.7">Результаты оценки предполагается использовать в целях</text>
+        <text x="5.7" y="5.3">разрешения спора о величине причиненного имуществу ущерба</text>
+
+
+        <text x="5.7" y="3.7">Электронная</text>
+
+        <text x="5.7" y="2.7">Лицензия на осуществление оценочной деятельности выданная ГКИ РУз серия</text>
+        <text x="5.7" y="2.3">BL001 №0033 рег№ RR 0184 от выданная 12.05.2014г., Полис страхования</text>
+        <text x="5.7" y="1.9">профессиональной ответственности оценочной организации №15-13-457от 26.10.2020г,</text>
+        <text x="5.7" y="1.5">страховая компания - ООО СК «XALQ SUG`URTA».</text>
+
+    </page>
+    <page>
+        <image x="9" y="27.7" src="AAB.png" width="3" height="2"/>
+
+
+        {#            inside  table left side first #}
+        <rect x="0.5" y="25.7" width="5" height="1.5"/>
+        <rect x="0.5" y="24.7" width="5" height="1"/>
+        <rect x="0.5" y="23.7" width="5" height="1"/>
+        <rect x="0.5" y="22.7" width="5" height="1"/>
+        <rect x="0.5" y="21.2" width="5" height="1.5"/>
+        {#            inside  table right side first #}
+        <rect x="5.5" y="25.7" width="15" height="1.5"/>
+        <rect x="5.5" y="24.7" width="15" height="1"/>
+        <rect x="5.5" y="23.7" width="15" height="1"/>
+        <rect x="5.5" y="22.7" width="15" height="1"/>
+        <rect x="5.5" y="21.2" width="15" height="1.5"/>
+        {#        first column of first table#}
+        <text x="0.7" y="26.7">Законодательные или</text>
+        <text x="0.7" y="26.3">договорные ограничения</text>
+
+        <text x="0.7" y="25.2">Основание для проведения</text>
+        <text x="0.7" y="24.8">оценки</text>
+
+        <text x="0.7" y="24.2">Дата оценки</text>
+
+        <text x="0.7" y="23.2">Дата составления отчета об</text>
+        <text x="0.7" y="22.8">оценки</text>
+
+        <text x="0.7" y="22.2">Код для просмотра и</text>
+        <text x="0.7" y="21.8">скачиванию отчета с</text>
+        <text x="0.7" y="21.4">сайта</text>
+          {#        second column of first table#}
+        <text x="5.7" y="26.7">Закон «об оценочной деятельности»  N 811-I от 19.08.1999 г, НСО 1-6, 13.</text>
+        <text x="5.7" y="26.3">договорные ограничения</text>
+
+        <text x="5.7" y="25.2">Договор  № {{ contract.contract_number }} от {{ contract.contract_date }}</text>
+
+
+        <text x="5.7" y="24.2">Дата оценки</text>
+
+        <text x="5.7" y="23.2">{{ report.report_date }}</text>
+
+
+        <text x="5.7" y="22.2">{{  report.key}}</text>
+        <text/>
+        <text/>
+        <text/>
+        <text/>
+        <text/>
+        <text/>
+        <text/>
+        <text/>
+        <text/>
+        <text/>
+        <text/>
+        <text/>
+        <text/>
+        <text/>
+        <text/>
+        <text/>
+        <text/>
+        <text/>
+        <text/>
+        <text/>
+        <text>                  Данный электронный отчёт составлен по ЕНСО Зарегистрированный Министерством юстиции Республики Узбекистан от 4 июня 2020 г. Регистрационный №3239, НСО№4 в соответствии с законодательством об оценочной деятельности и оформлены в виде отчета об оценке стоимости объекта оценки, подтвержденного на основании собранной информации и расчетов, Глава 2. Требования к содержанию отчета об оценке, пункт 40
+                  Данный отчета об оценке выполнен в формате электронного документа, утверждённый оценщиком и руководителем оценочной организации с использованием электронно-цифровой подписи!
+        </text>
+         <text/>
+        <text/>
+         <barcode  type="QR" height="2"> https://e-otsenka.uz/pdf/{{report.report_id}}</barcode>
+    </page>
+</pdf>

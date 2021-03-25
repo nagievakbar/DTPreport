@@ -2,7 +2,6 @@ from django.urls import path
 from .views import *
 from .utils import *
 
-
 urlpatterns = [
     path('list', reports_list, name='reports_list'),
     path('create/', ReportView.as_view(), name='new_report'),
@@ -20,5 +19,7 @@ urlpatterns = [
     path(r'ajax/get_car_card/', get_car_card, name='get_car_card'),
     path(r'ajax/get_btn_to_download/', get_btn_to_download, name='get_btn_to_download'),
     path(r'ajax/verifyPkcs7/', verifyPkcs7, name='verifyPkcs7'),
-    path('user_settings/get_template/',get_template, name='upload_template')
+    path('user_settings/get_template/', get_template, name='upload_template'),
+    path('list_edit', reports_edit_list, name='reports_edit_list'),
+    path('<int:id>/add/', ReportEditView.as_view(), name='add_report'),
 ]

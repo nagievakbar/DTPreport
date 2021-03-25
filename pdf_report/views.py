@@ -1,8 +1,8 @@
-from django.http import FileResponse
+from django.http import FileResponse, JsonResponse
 from django.views.generic import View
 import os
 from DTPreport import settings as s
-from makereport.models import Report, Images, Documents, PassportPhotos, OtherPhotos, Checks, Contract
+from makereport.models import Report, Images, Documents, PassportPhotos, OtherPhotos, Checks, Contract, Car, Customer
 from pdf_report.utils import PyPDFML
 from fpdf import FPDF
 from django.core.files.base import ContentFile
@@ -18,6 +18,26 @@ def get_base_template(request):
     content = "attachment; filename=%s" % filename
     response['Content-Disposition'] = content
     return response
+
+
+class GenerateMixing(View):
+    def get(self, request, id=None):
+        pdf = PyPDFML('mixing.xml')
+        report = Report.objects.get(report_id=id)
+        car = report.car
+        contract = report.contract
+        customer = contract.customer
+        context = {
+            'car': car,
+            'customer': customer,
+            'report': report,
+            'contract': contract,
+        }
+        pdf.generate(context)
+        data = pdf.contents()
+        response = FileResponse(ContentFile(data), content_type='application/pdf')
+
+        return response
 
 
 class GeneratePDF(View):
@@ -45,10 +65,12 @@ def get_response(request, id):
     passport = PassportPhotos.objects.filter(report_id=id)
     checks = Checks.objects.filter(report_id=id).first()
     other_photos = OtherPhotos.objects.filter(report_id=id)
-    file = request.user.myuser.template
+    file = None
+    if hasattr(request.user, "myuser"):
+        file = request.user.myuser.template
     document_photo = Documents.objects.first()
     path_for_images = s.MEDIA_ROOT
-    if file != None:
+    if file is not None:
         splited = file.name.split('/')
         path = os.path.join(s.MEDIA_ROOT, "{}".format(splited[0]))
         print("path_for_images {}".format(path_for_images))

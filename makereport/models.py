@@ -1,11 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 from .converters import num2text
+import random
 
 
 class Contract(models.Model):
     contract_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
-    customer = models.ForeignKey('Customer', null=True, blank=True, on_delete=models.CASCADE, related_name='Customer', verbose_name='Клиент')
+    customer = models.ForeignKey('Customer', null=True, blank=True, on_delete=models.CASCADE, related_name='Customer',
+                                 verbose_name='Клиент')
     pdf_contract = models.FileField(blank=True, null=True, verbose_name='Контракт в пдф')
     contract_date = models.CharField(max_length=10, null=True, blank=True)
     contract_number = models.CharField(max_length=10, null=True, blank=True)
@@ -51,6 +53,7 @@ class Car(models.Model):
     car_type = models.CharField(max_length=20)
     car_owner = models.CharField(max_length=60)
     owner_address = models.CharField(max_length=100)
+    type_of_car = models.CharField(max_length=50, choices=(('Грузовой', 'Грузовой'), ('Легковой', 'Легковой')))
 
     def __str__(self):
         return str(self.car_number) + ' ' + str(self.brand)
@@ -289,8 +292,9 @@ class Report(models.Model):
         return self.total_report_cost_txt
 
     def set_private_key(self):
+        figure = random.randint(0, 9)
         self.key = str(self.report_id)[0] + self.car.car_number[0] + self.car.car_number[0] + self.car.car_number[0] + \
-                   str(self.contract_id)[0] + str(self.car.release_date)[0] + str(self.car.release_date)[0] + \
+                   str(self.contract_id)[0] + str(self.car.release_date)[0] + figure + \
                    self.car.brand[0]
 
     class Meta:
