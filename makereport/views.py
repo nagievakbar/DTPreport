@@ -112,7 +112,7 @@ class ChecksView(View):
 
 def hold_image():
     last_hold = HoldsImages.objects.last()
-    if last_hold.report is not None:
+    if last_hold is None  or last_hold.report is not None:
         holds_image = HoldsImages.objects.create()
         print("CREATED NEW ONE ")
         holds_image.save()
