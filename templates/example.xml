@@ -74,11 +74,11 @@
         <text x="9.15" y="16.1">1</text>
         <text x="9.15" y="15.6">0</text>
 
-        <text x="10.4" y="16.1">300 000</text>
-        <text x="10.9" y="15.6">0</text>
+        <text x="10.4" y="16.1">{{ calculation.opr_damage }}</text>
+        <text x="10.9" y="15.6">{{ calculation.departure }}</text>
 
-        <text x="12.4" y="16.1">300 000</text>
-        <text x="12.9" y="15.6">0</text>
+        <text x="12.4" y="16.1">{{ calculation.opr_damage }}</text>
+        <text x="12.9" y="15.6">{{ calculation.departure }}</text>
 
         <text x="14.7" y="16.1">Без акциз</text>
         <text x="14.7" y="15.6">Без акциз</text>
@@ -86,7 +86,7 @@
         <text x="17.3" y="16.1">Без НДС</text>
         <text x="17.3" y="15.6">Без НДС</text>
 
-        <text x="12.8" y="15.1" font="TNRB">300 000</text>
+        <text x="12.8" y="15.1" font="TNRB">{{ calculation.total }}</text>
          --------------------------table-text--------------------------
         <text/>
         <text/>
