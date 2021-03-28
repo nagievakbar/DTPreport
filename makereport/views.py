@@ -5,17 +5,128 @@ from django.forms import formset_factory
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
+import os
+from django.http import FileResponse, JsonResponse
 from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import ensure_csrf_cookie
-from django.views.decorators.csrf import csrf_protect
+from django.core.files.storage import default_storage
 from django.views.generic import View
 from django.db.models import Q
 from .forms import *
 from .utils import *
-from .converters import num2text
+
 from pdf_report.views import create_base64
 from DTPreport import settings as s
-from DTPreport import urls
+
+
+class ImageDelete(View):
+    def post(self, request):
+        image = Images.objects.get(image_id=request.POST['key'])
+        image.delete()
+        return JsonResponse({'errors': True})
+
+
+class ImageView(View):
+    def post(self, request):
+        hold_image = HoldsImages.objects.get(id=request.POST['id'])
+        image = Images.objects.create(
+            image=request.FILES['image'],
+        )
+        hold_image.image.add(image)
+        hold_image.save()
+        image.save()
+        link_img = "{}{}".format(s.URL_FILES, image.image.url)
+        print(link_img)
+        link_delete = "{}/report/image/delete/".format(s.URL_FILES)
+        return JsonResponse(
+            response_image(link_img=link_img, link_delete=link_delete, image=image.image, id=image.image_id))
+
+
+class PPhotoDelete(View):
+    def post(self, request):
+        image = PassportPhotos.objects.get(p_photo_id=request.POST['key'])
+        image.delete()
+        return JsonResponse({'errors': True})
+
+
+class PPhotoView(View):
+    def post(self, request):
+        hold_image = HoldsImages.objects.get(id=request.POST['id'])
+        image = PassportPhotos.objects.create(
+            photo=request.FILES['photo'],
+        )
+        hold_image.pp_photo.add(image)
+        hold_image.save()
+        image.save()
+        link_img = "{}{}".format(s.URL_FILES, image.photo.url)
+        print(link_img)
+        link_delete = "{}/report/pphoto/delete/".format(s.URL_FILES)
+        return JsonResponse(
+            response_image(link_img=link_img, link_delete=link_delete, image=image.photo, id=image.p_photo_id))
+
+
+class OPhotoDelete(View):
+    def post(self, request):
+        image = OtherPhotos.objects.get(o_photo_id=request.POST['key'])
+        image.delete()
+        return JsonResponse({'errors': True})
+
+
+class OPhotoView(View):
+    def post(self, request, id=None):
+        hold_image = HoldsImages.objects.get(id=request.POST['id'])
+        image = OtherPhotos.objects.create(
+            photos=request.FILES['photos'],
+        )
+        hold_image.o_images.add(image)
+        hold_image.save()
+        image.save()
+        link_img = "{}{}".format(s.URL_FILES, image.photos.url)
+        print(link_img)
+        link_delete = "{}/report/ophoto/delete/".format(s.URL_FILES)
+        return JsonResponse(
+            response_image(link_img=link_img, link_delete=link_delete, image=image.photos, id=image.o_photo_id))
+
+
+class ChecksDelete(View):
+    def post(self, request):
+        image = Checks.objects.get(checks_id=request.POST['key'])
+        image.delete()
+        return JsonResponse({'errors': True})
+
+
+class ChecksView(View):
+    def post(self, request, id=None):
+        hold_image = HoldsImages.objects.get(id=request.POST['id'])
+        image = Checks.objects.create(
+            checks = request.FILES['checks'],
+        )
+        hold_image.checks.add(image)
+        hold_image.save()
+        image.save()
+        link_img = "{}{}".format(s.URL_FILES, image.checks.url)
+        print(link_img)
+        link_delete = "{}/report/checks/delete/".format(s.URL_FILES)
+        return JsonResponse(
+            response_image(link_img=link_img, link_delete=link_delete, image=image.checks, id=image.checks_id))
+
+
+def hold_image():
+    last_hold = HoldsImages.objects.last()
+    if last_hold.report is not None:
+        holds_image = HoldsImages.objects.create()
+        print("CREATED NEW ONE ")
+        holds_image.save()
+        return holds_image
+    for image in last_hold.image.all():
+        image.delete()
+    for pphotos in last_hold.pp_photo.all():
+        pphotos.delete()
+    for o_images in last_hold.o_images.all():
+        o_images.delete()
+    for checks in last_hold.checks.all():
+        checks.delete()
+    return last_hold
+
 
 
 class ReportEditView(View):
@@ -24,10 +135,15 @@ class ReportEditView(View):
 
     @method_decorator(decorators)
     def get(self, request, id=None):
-        images = Images.objects.filter(report_id=id)
-        pphotos = PassportPhotos.objects.filter(report_id=id)
-        ophotos = OtherPhotos.objects.filter(report_id=id)
-        checks = Checks.objects.filter(report_id=id)
+        calculation = Calculation.objects.get(report_id=id)
+        calculation_form = CalculationForm(instance=calculation)
+        holds_image = HoldsImages.objects.get(report_id=id)
+        new_hold_images = hold_image()
+        new_hold_images.set_new(holds_image)
+        images = new_hold_images.image_previous.all()
+        pphotos = new_hold_images.pp_photo_previous.all()
+        ophotos = new_hold_images.o_images_previous.all()
+        checks = new_hold_images.checks_previous.all()
         image_form = ImageForm(instance=Images(), use_required_attribute=False)
         passphoto_form = PPhotoForm(instance=PassportPhotos(), use_required_attribute=False)
         otherphoto_form = OPhotoForm(instance=OtherPhotos(), use_required_attribute=False)
@@ -35,7 +151,7 @@ class ReportEditView(View):
         report = Report.objects.get(report_id=id)
         contract = Contract.objects.get(contract_id=report.contract_id)
         contract_form = ContractForm(instance=contract)
-        report_form = ReportForm(instance=Report())
+        report_form = ReportForm(initial={'total_report_cost': report.total_report_cost}, instance=Report())
         car = Car.objects.get(car_id=report.car_id)
         car.release_date = car.release_date.strftime('%Y')
         car_form = CarForm(instance=car)
@@ -49,8 +165,11 @@ class ReportEditView(View):
         consumable_formset = consumable_form(initial=report.consumable_data, prefix='consumable')
         wear_form = WearForm(initial=report.wear_data)
         total_price_report = report.total_report_cost
+
         template = 'makereport/add_repor.html'
         context = {
+            'id_image': new_hold_images.id,
+            'calculation_form': calculation_form,
             'contract_form': contract_form,
             'report_form': report_form,
             'car_form': car_form,
@@ -73,7 +192,12 @@ class ReportEditView(View):
         return render(request, template, context)
 
     def post(self, request, id=None):
-        total_report_price = 0
+        holds_images = HoldsImages.objects.get(id=request.POST['id'])
+        images = holds_images.image_concatinate()
+        pphotos = holds_images.pp_photo_concatinate()
+        ophotos = holds_images.o_photo_concatinate()
+        checks = holds_images.check_concatinate()
+        calculation_form = CalculationForm(request.POST, instance=Calculation())
         contract_form = ContractForm(request.POST, instance=Contract())
         report_form = ReportForm(request.POST, instance=Report())
         image_form = ImageForm(request.POST, request.FILES)
@@ -89,12 +213,17 @@ class ReportEditView(View):
 
         print("VALIDATION {}{}{}".format(report_form.is_valid(), car_form.is_valid(), customer_form.is_valid()))
         print(car_form.errors)
-        if report_form.is_valid() and car_form.is_valid() and customer_form.is_valid() and contract_form.is_valid():
+        if report_form.is_valid() \
+                and car_form.is_valid() \
+                and customer_form.is_valid() \
+                and contract_form.is_valid() \
+                and calculation_form.is_valid():
             new_contract = contract_form.save()
             new_customer = customer_form.save(commit=False)
             new_customer.save()
             new_contract.customer = new_customer
             new_contract.save()
+
             new_report = report_form.save(commit=False)
             new_report.contract = new_contract
             new_car = car_form.save()
@@ -102,27 +231,12 @@ class ReportEditView(View):
             new_report.car = new_car
             new_report.created_by = request.user.myuser
             new_report.save()
-            save_path = str(s.MEDIA_ROOT + "/")
-            for each in request.FILES.getlist('image'):
-                Images.objects.create(image=each, report=new_report)
-                with open(save_path + each.name, 'wb+') as destination:
-                    for chunk in request.FILES['image'].chunks():
-                        destination.write(chunk)
-            for each in request.FILES.getlist('photo'):
-                PassportPhotos.objects.create(photo=each, report=new_report)
-                with open(save_path + each.name, 'wb+') as destination:
-                    for chunk in request.FILES['photo'].chunks():
-                        destination.write(chunk)
-            for each in request.FILES.getlist('photos'):
-                OtherPhotos.objects.create(photos=each, report=new_report)
-                with open(save_path + each.name, 'wb+') as destination:
-                    for chunk in request.FILES['photos'].chunks():
-                        destination.write(chunk)
-            for each in request.FILES.getlist('checks'):
-                Checks.objects.create(checks=each, report=new_report)
-                with open(save_path + each.name, 'wb+') as destination:
-                    for chunk in request.FILES['checks'].chunks():
-                        destination.write(chunk)
+            holds_images.report = new_report
+            holds_images.store_add()
+            holds_images.save()
+            new_calculation = calculation_form.save()
+            new_calculation.report = new_report
+            new_calculation.save()
             new_report.service_data = []
             new_report.product_data = []
             new_report.consumable_data = []
@@ -153,6 +267,8 @@ class ReportEditView(View):
             return HttpResponseRedirect('/report/list_edit')
 
         context = {
+            'id_image': holds_images.id,
+            'calculation_form': calculation_form,
             'contract_form': contract_form,
             'report_form': report_form,
             'car_form': car_form,
@@ -165,6 +281,10 @@ class ReportEditView(View):
             'passphoto_form': passphoto_form,
             'otherphoto_form': otherphoto_form,
             'checks_form': checks_form,
+            'images': images or None,
+            'pphotos': pphotos or None,
+            'ophotos': ophotos or None,
+            'checks': checks or None,
         }
         return render(request, 'makereport/add_repor.html', context)
 
@@ -196,10 +316,13 @@ class ReportView(View):
         ophotos = None
         checks = None
         if id:
-            images = Images.objects.filter(report_id=id)
-            pphotos = PassportPhotos.objects.filter(report_id=id)
-            ophotos = OtherPhotos.objects.filter(report_id=id)
-            checks = Checks.objects.filter(report_id=id)
+            holds_image = HoldsImages.objects.get(report_id=id)
+            images = holds_image.image.all()
+            pphotos = holds_image.pp_photo.all()
+            ophotos = holds_image.o_images.all()
+            checks = holds_image.checks.all()
+            calculation = Calculation.objects.get(report_id=id)
+            calculation_form = calculation
             image_form = ImageForm(instance=Images(), use_required_attribute=False)
             passphoto_form = PPhotoForm(instance=PassportPhotos(), use_required_attribute=False)
             otherphoto_form = OPhotoForm(instance=OtherPhotos(), use_required_attribute=False)
@@ -221,11 +344,12 @@ class ReportView(View):
             consumable_formset = consumable_form(initial=report.consumable_data, prefix='consumable')
             wear_form = WearForm(initial=report.wear_data)
             total_price_report = report.total_report_cost
+
             template = 'makereport/edit_repor.html'
         else:
-
+            calculation_form = CalculationForm(instance=Calculation())
             image_form = ImageForm(instance=Images())
-            contract_form = ContractForm(request.POST, instance=Contract())
+            contract_form = ContractForm(instance=Contract())
             passphoto_form = PPhotoForm(instance=PassportPhotos())
             otherphoto_form = OPhotoForm(instance=OtherPhotos())
             checks_form = ChecksForm(instance=Checks())
@@ -241,8 +365,11 @@ class ReportView(View):
             wear_form = WearForm()
             total_price_report = 0
             template = 'makereport/add_repor.html'
+            holds_image = hold_image()
 
         context = {
+            'id_image': holds_image.id,
+            'calculation_form': calculation_form,
             'contract_form': contract_form,
             'report_form': report_form,
             'car_form': car_form,
@@ -269,12 +396,20 @@ class ReportView(View):
         total_report_price = 0
         if id:
             return self.put(request, id)
+        print("THIS IS HERE")
+        print(request.POST['id'])
+        holds_images = HoldsImages.objects.get(id=request.POST['id'])
+        images = holds_images.image.all()
+        pphotos = holds_images.pp_photo.all()
+        ophotos = holds_images.o_images.all()
+        checks = holds_images.checks.all()
+        calculation_form = CalculationForm(request.POST, instance=Calculation())
         contract_form = ContractForm(request.POST, instance=Contract())
         report_form = ReportForm(request.POST, instance=Report())
-        image_form = ImageForm(request.POST, request.FILES)
-        passphoto_form = PPhotoForm(request.POST, request.FILES)
-        otherphoto_form = OPhotoForm(request.POST, request.FILES)
-        checks_form = ChecksForm(request.POST, request.FILES)
+        image_form = ImageForm(instance=Images(), use_required_attribute=False)
+        passphoto_form = PPhotoForm(instance=PassportPhotos(), use_required_attribute=False)
+        otherphoto_form = OPhotoForm(instance=OtherPhotos(), use_required_attribute=False)
+        checks_form = ChecksForm(instance=Checks(), use_required_attribute=False)
         car_form = CarForm(request.POST, instance=Car())
         customer_form = CustomerForm(request.POST, instance=Customer())
         service_formset = self.init_service_formset(request)
@@ -283,7 +418,8 @@ class ReportView(View):
         wear_form = WearForm(request.POST)
 
         print("VALIDATION {}{}{}".format(report_form.is_valid(), car_form.is_valid(), customer_form.is_valid()))
-        if report_form.is_valid() and car_form.is_valid() and customer_form.is_valid() and contract_form.is_valid():
+        if report_form.is_valid() and car_form.is_valid() and customer_form.is_valid() and contract_form.is_valid() and calculation_form.is_valid():
+
             new_contract = contract_form.save()
             new_customer = customer_form.save(commit=False)
             new_customer.save()
@@ -291,32 +427,17 @@ class ReportView(View):
             new_contract.save()
             new_report = report_form.save(commit=False)
             new_report.contract = new_contract
+
             new_car = car_form.save()
             new_car.save()
             new_report.car = new_car
             new_report.created_by = request.user.myuser
             new_report.save()
-            save_path = str(s.MEDIA_ROOT + "/")
-            for each in request.FILES.getlist('image'):
-                Images.objects.create(image=each, report=new_report)
-                with open(save_path + each.name, 'wb+') as destination:
-                    for chunk in request.FILES['image'].chunks():
-                        destination.write(chunk)
-            for each in request.FILES.getlist('photo'):
-                PassportPhotos.objects.create(photo=each, report=new_report)
-                with open(save_path + each.name, 'wb+') as destination:
-                    for chunk in request.FILES['photo'].chunks():
-                        destination.write(chunk)
-            for each in request.FILES.getlist('photos'):
-                OtherPhotos.objects.create(photos=each, report=new_report)
-                with open(save_path + each.name, 'wb+') as destination:
-                    for chunk in request.FILES['photos'].chunks():
-                        destination.write(chunk)
-            for each in request.FILES.getlist('checks'):
-                Checks.objects.create(checks=each, report=new_report)
-                with open(save_path + each.name, 'wb+') as destination:
-                    for chunk in request.FILES['checks'].chunks():
-                        destination.write(chunk)
+            holds_images.report = new_report
+            holds_images.save()
+            new_calculation = calculation_form.save()
+            new_calculation.report = new_report
+            new_calculation.save()
             new_report.service_data = []
             new_report.product_data = []
             new_report.consumable_data = []
@@ -347,6 +468,8 @@ class ReportView(View):
             return HttpResponseRedirect('/report/list')
 
         context = {
+            'id_image': holds_images.id,
+            'calculation_form': calculation_form,
             'contract_form': contract_form,
             'report_form': report_form,
             'car_form': car_form,
@@ -359,20 +482,29 @@ class ReportView(View):
             'passphoto_form': passphoto_form,
             'otherphoto_form': otherphoto_form,
             'checks_form': checks_form,
+            'images': images or None,
+            'pphotos': pphotos or None,
+            'ophotos': ophotos or None,
+            'checks': checks or None,
         }
         return render(request, 'makereport/add_repor.html', context)
 
     @method_decorator(decorators)
     def put(self, request, id=None):
+        holds_images = HoldsImages.objects.get(id=request.POST['id'])
+        images = holds_images.image.all()
+        pphotos = holds_images.pp_photo.all()
+        ophotos = holds_images.o_images.all()
+        checks = holds_images.checks.all()
+        calculation = Calculation.objects.get(report_id=id)
         report = Report.objects.get(report_id=id)
         contract = Contract.objects.get(contract_id=report.contract_id)
         contract_form = ContractFormEdit(instance=contract)
-        image_form = ImageForm(request.POST, request.FILES)
-        passphoto_form = PPhotoForm(request.POST, request.FILES)
-        otherphoto_form = OPhotoForm(request.POST, request.FILES)
-        checks_form = ChecksForm(request.POST, request.FILES)
-        # report_form = ReportForm(request.POST, instance=report)
-        # report_form.created_at = report_form.created_at.strptime('%d. %m. %Y')
+        image_form = ImageForm(instance=Images(), use_required_attribute=False)
+        passphoto_form = PPhotoForm(instance=PassportPhotos(), use_required_attribute=False)
+        otherphoto_form = OPhotoForm(instance=OtherPhotos(), use_required_attribute=False)
+        checks_form = ChecksForm(instance=Checks(), use_required_attribute=False)
+
         car = Car.objects.get(car_id=report.car_id)
         car_form = CarForm(request.POST, instance=car)
         customer = Customer.objects.get(customer_id=contract.customer_id)
@@ -398,27 +530,6 @@ class ReportView(View):
             new_report.car = new_car
             new_report.created_by = request.user.myuser
             new_report.save()
-            save_path = str(s.MEDIA_ROOT + "/")
-            for each in request.FILES.getlist('image'):
-                Images.objects.create(image=each, report=new_report)
-                with open(save_path + each.name, 'wb+') as destination:
-                    for chunk in request.FILES['image'].chunks():
-                        destination.write(chunk)
-            for each in request.FILES.getlist('photo'):
-                PassportPhotos.objects.create(photo=each, report=new_report)
-                with open(save_path + each.name, 'wb+') as destination:
-                    for chunk in request.FILES['photo'].chunks():
-                        destination.write(chunk)
-            for each in request.FILES.getlist('photos'):
-                OtherPhotos.objects.create(photos=each, report=new_report)
-                with open(save_path + each.name, 'wb+') as destination:
-                    for chunk in request.FILES['photos'].chunks():
-                        destination.write(chunk)
-            for each in request.FILES.getlist('checks'):
-                Checks.objects.create(chekcs=each, report=new_report)
-                with open(save_path + each.name, 'wb+') as destination:
-                    for chunk in request.FILES['checks'].chunks():
-                        destination.write(chunk)
             for form in service_formset.forms:
                 if form.is_valid() and form.cleaned_data:
                     sd = get_data_from_service_form(form)
@@ -444,6 +555,7 @@ class ReportView(View):
             return HttpResponseRedirect('/report/list')
 
         context = {
+            'id_image': holds_images.id,
             'contract_form': contract_form,
             'car_form': car_form,
             'customer_form': customer_form,
@@ -455,6 +567,10 @@ class ReportView(View):
             'product_formset': product_formset,
             'consumable_formset': consumable_formset,
             'wear_form': wear_form,
+            'images': images or None,
+            'pphotos': pphotos or None,
+            'ophotos': ophotos or None,
+            'checks': checks or None,
         }
         return render(request, 'makereport/edit_repor.html', context)
 
@@ -538,7 +654,7 @@ def get_template(request):
     if user.myuser.template != None:
         user.myuser.template.delete()
 
-    user.myuser.template = request.FILES['file'];
+    user.myuser.template = request.FILES['file']
     user.myuser.save()
     return JsonResponse({})
 

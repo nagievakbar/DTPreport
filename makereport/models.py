@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.files.storage import default_storage
 from .converters import num2text
 import random
 
@@ -128,7 +129,7 @@ class Product(models.Model):
 
 
 class Service(models.Model):
-    service_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
+    service_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='id')
     name = models.CharField(max_length=1000, blank=True, null=True)
     nexia3 = models.FloatField(blank=True, null=True, verbose_name='Нексия 3')
     cobalt = models.FloatField(blank=True, null=True, verbose_name='Кобальт')
@@ -202,15 +203,71 @@ class MyUser(models.Model):
         return self.report_rate_price_txt
 
 
+class HoldsImages(models.Model):
+    image = models.ManyToManyField('Images')
+    image_previous = models.ManyToManyField('Images', related_name="image_previous")
+    pp_photo = models.ManyToManyField('PassportPhotos')
+    pp_photo_previous = models.ManyToManyField('PassportPhotos', related_name="pp_photo_previous")
+    o_images = models.ManyToManyField('OtherPhotos')
+    o_images_previous = models.ManyToManyField('OtherPhotos', related_name="o_photo_previous")
+    checks = models.ManyToManyField('Checks')
+    checks_previous = models.ManyToManyField('Checks', related_name="check_previous")
+    report = models.ForeignKey('Report', blank=True, null=True, on_delete=models.CASCADE)
+
+    def create_new(self, old):
+        self.image.set(old.image.all())
+        self.pp_photo.set(old.pp_photo.all())
+        self.o_images.set(old.o_images.all())
+        self.checks.set(old.checks.all())
+        self.save()
+
+    def set_new(self, old):
+        self._clear()
+        self.image_previous.set(old.image.all())
+        self.pp_photo_previous.set(old.pp_photo.all())
+        self.o_images_previous.set(old.o_images.all())
+        self.checks_previous.set(old.checks.all())
+        self.save()
+
+    def store_add(self):
+        self._store(self.image_previous.all(), self.image)
+        self._store(self.pp_photo_previous.all(), self.pp_photo)
+        self._store(self.o_images_previous.all(), self.o_images)
+        self._store(self.checks_previous.all(), self.checks)
+        self.save()
+
+    def _clear(self):
+        self.image_previous.clear()
+        self.pp_photo_previous.clear()
+        self.o_images_previous.clear()
+        self.checks_previous.clear()
+
+    def image_concatinate(self):
+        return list(self.image_previous.all()) + list(self.image.all())
+
+    def pp_photo_concatinate(self):
+        return list(self.pp_photo_previous.all()) + list(self.pp_photo.all())
+
+    def check_concatinate(self):
+        return list(self.checks_previous.all()) + list(self.checks.all())
+
+    def o_photo_concatinate(self):
+        return list(self.o_images.all()) + list(self.o_images_previous.all())
+
+    def _store(self, from_model, to_model):
+        for each in from_model:
+            to_model.add(each)
+
+
 class Images(models.Model):
     image_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     image = models.ImageField(blank=True, null=True, verbose_name='Фото')
     report = models.ForeignKey('Report', on_delete=models.CASCADE, blank=True, null=True, related_name='reportImages',
                                verbose_name='Отчёт')
 
-    # def save(self, *args, **kwargs):
-    #     self.objects.create(something=kwargs['something'])
-    #     super(Images, self).save(*args, **kwargs)
+    def delete(self, *args, **kwargs):
+        default_storage.delete(self.image.path)
+        super(Images, self).delete(*args, **kwargs)
 
 
 class PassportPhotos(models.Model):
@@ -219,6 +276,10 @@ class PassportPhotos(models.Model):
     report = models.ForeignKey('Report', on_delete=models.CASCADE, blank=True, null=True, related_name='reportPPhotos',
                                verbose_name='Отчёт')
 
+    def delete(self, *args, **kwargs):
+        default_storage.delete(self.photo.path)
+        super(PassportPhotos, self).delete(*args, **kwargs)
+
 
 class OtherPhotos(models.Model):
     o_photo_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
@@ -226,12 +287,20 @@ class OtherPhotos(models.Model):
     report = models.ForeignKey('Report', on_delete=models.CASCADE, blank=True, null=True, related_name='reportOPhotos',
                                verbose_name='Отчёт')
 
+    def delete(self, *args, **kwargs):
+        default_storage.delete(self.photos.path)
+        super(OtherPhotos, self).delete(*args, **kwargs)
+
 
 class Checks(models.Model):
     checks_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     checks = models.ImageField(blank=True, null=True, verbose_name='Фото чеков')
     report = models.ForeignKey('Report', on_delete=models.CASCADE, blank=True, null=True, related_name='reportChecks',
                                verbose_name='Отчёт')
+
+    def delete(self, *args, **kwargs):
+        default_storage.delete(self.checks.path)
+        super(Checks, self).delete(*args, **kwargs)
 
 
 class Report(models.Model):
@@ -292,7 +361,7 @@ class Report(models.Model):
         return self.total_report_cost_txt
 
     def set_private_key(self):
-        figure = random.randint(0, 9)
+        figure = str(random.randint(0, 9))
         self.key = str(self.report_id)[0] + self.car.car_number[0] + self.car.car_number[0] + self.car.car_number[0] + \
                    str(self.contract_id)[0] + str(self.car.release_date)[0] + figure + \
                    self.car.brand[0]
@@ -300,3 +369,12 @@ class Report(models.Model):
     class Meta:
         verbose_name = 'Отчёт'
         verbose_name_plural = 'Отчёты'
+
+
+class Calculation(models.Model):
+    total = models.CharField(max_length=20)
+    departure = models.CharField(max_length=20)
+    opr_ust = models.CharField(max_length=20)
+    opr_damage = models.CharField(max_length=20)
+    report = models.ForeignKey('Report', on_delete=models.CASCADE, related_name='report', verbose_name='Репорт',
+                               null=True, blank=True)

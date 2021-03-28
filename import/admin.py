@@ -1,9 +1,11 @@
 from django.contrib import admin
-from makereport.models import Product, Service, Consumable , Documents
+from makereport.models import Product, Service, Consumable, Documents
 from import_export.admin import ImportExportModelAdmin
+from .resources import *
 
 
 class ProductAdmin(ImportExportModelAdmin):
+    resource_class = ProductResources
     list_display = ('product_id', 'unit',
                     'price',
                     'nexia3',
@@ -25,6 +27,7 @@ class ProductAdmin(ImportExportModelAdmin):
 
 
 class ServiceAdmin(ImportExportModelAdmin):
+    resource_class = ServiceResources
     list_display = ('service_id',
                     'price',
                     'nexia3',
@@ -46,6 +49,7 @@ class ServiceAdmin(ImportExportModelAdmin):
 
 
 class ConsumableAdmin(ImportExportModelAdmin):
+    resource_class = ConsumableResources
     list_display = ('consumable_id', 'name', 'unit',
                     'price',
                     )

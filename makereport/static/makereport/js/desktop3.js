@@ -88,7 +88,7 @@ $('.custom-select .drop-down-list li').click(function() {
   var listParent = $(this).parent().parent();
   listParent.find('.active-list').trigger("click");
   listParent.parent('.select-block').removeClass('focus').addClass('added');
-  console.log('text ARe setted');
   listParent.find('.active-list').text($(this).text());
   listParent.find('input.list-field').attr('value', $(this).text());
 });
+

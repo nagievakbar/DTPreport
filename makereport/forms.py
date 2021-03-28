@@ -8,10 +8,13 @@ class ReportForm(forms.ModelForm):
 
     report_date = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Дата отчёта', 'class': 'input_in'}))
     report_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Номер отчёта', 'class': 'input_in'}))
+    total_report_cost = forms.CharField(widget=forms.TextInput(attrs={'class': 'invisible_class all_sum'}))
 
     class Meta:
         model = Report
-        fields = ['report_date', 'report_number']
+        fields = ['report_date', 'report_number', 'total_report_cost']
+
+
 
 
 BRANDS = (
@@ -91,6 +94,22 @@ class ContractForm(forms.ModelForm):
         fields = ['contract_date', 'contract_number']
 
 
+class CalculationForm(forms.ModelForm):
+    total = forms.CharField(widget=forms.TextInput(attrs={'class': 'input2 work-price-input2 price_all total'}))
+    departure = forms.CharField(widget=forms.TextInput(attrs={'class': 'input2 work-price-input2 price_3 total'}))
+    opr_ust = forms.CharField(widget=forms.TextInput(attrs={'class': 'input2 work-price-input2 price_2 total'}))
+    opr_damage = forms.CharField(widget=forms.TextInput(attrs={'class': 'input2 work-price-input2 price_1 total'}))
+
+    class Meta:
+        model = Calculation
+        fields = [
+            'total',
+            'departure',
+            'opr_ust',
+            'opr_damage',
+        ]
+
+
 class ContractFormEdit(forms.ModelForm):
     """docstring for ContractForm."""
     contract_date = forms.CharField(
@@ -149,7 +168,7 @@ class ServiceForm(forms.Form):
     service_id = forms.IntegerField(
         widget=forms.NumberInput(attrs={'class': 'input2 work-price-input2 first2'}))
     name = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'input2 work-price-input2 name2'}))
+        widget=forms.Textarea(attrs={'class': 'input2 work-price-input2 name2'}))
     norm_per_hour = forms.FloatField(
         widget=forms.NumberInput(attrs={'class': 'input2 work-price-input2 time2'}))
     premium = forms.CharField(
@@ -166,7 +185,7 @@ class ProductForm(forms.Form):
     product_id = forms.IntegerField(
         widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 count'}))
     name = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 name3', }))
+        widget=forms.Textarea(attrs={'class': 'input3 work-price-input3 name3', }))
     # unit = forms.CharField(
     # widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 name3', 'readonly': ''}))
     quantity = forms.IntegerField(
@@ -181,7 +200,7 @@ class ConsumableForm(forms.Form):
     consumable_id = forms.IntegerField(
         widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 first4'}))
     name = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 name4', }))
+        widget=forms.Textarea(attrs={'class': 'input4 work-price-input4 name4', }))
     unit = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 time4', }))
     quantity = forms.IntegerField(

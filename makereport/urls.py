@@ -22,4 +22,12 @@ urlpatterns = [
     path('user_settings/get_template/', get_template, name='upload_template'),
     path('list_edit', reports_edit_list, name='reports_edit_list'),
     path('<int:id>/add/', ReportEditView.as_view(), name='add_report'),
+    path(r'image/display/', ImageView.as_view(), name='image_view'),
+    path(r'image/delete/', ImageDelete.as_view(), name='image_delete'),
+    path(r'pphoto/display/', PPhotoView.as_view(), name='pphoto_view'),
+    path(r'pphoto/delete/', PPhotoDelete.as_view(), name='pphoto_delete'),
+    path(r'ophoto/display/', OPhotoView.as_view(), name='ophoto_view'),
+    path(r'ophoto/delete/', OPhotoDelete.as_view(), name='ophoto_delete'),
+    path(r'checks/display/', ChecksView.as_view(), name='checks_view'),
+    path(r'checks/delete/', ChecksDelete.as_view(), name='chekcs_delete'),
 ]

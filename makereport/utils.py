@@ -2,7 +2,7 @@
 import requests
 import json
 from django.http import JsonResponse
-
+from django.core.files.storage import default_storage
 from .models import *
 
 
@@ -13,9 +13,9 @@ def qr_code(FULL_NAME):
         FULL_NAME=FULL_NAME)
     print(str_for_qr_code)
     return str_for_qr_code
-        # img = qrcode.make(str_for_qr_code)  # вот сюда любую ссылку вставите он переведет в QR CODE
-        # # Create and save the svg file naming "myqr.svg"
-        # img.save('qrcode_test.png')
+    # img = qrcode.make(str_for_qr_code)  # вот сюда любую ссылку вставите он переведет в QR CODE
+    # # Create and save the svg file naming "myqr.svg"
+    # img.save('qrcode_test.png')
 
 
 def serializing(formatted_output):
@@ -63,7 +63,7 @@ def get_verifyPkcs7(report_id):
     # my_file_serialized.close()
     get_json = json.loads(get_str)
     index = 0
-   
+
     print(get_json)
     print(report.signed)
     if report.signed == True:
@@ -120,7 +120,7 @@ def get_car_from_search(request):
 def get_car_card(request):
     car = get_car_from_search(request)
     card = """<div class='card'><div class='card-header'> %s %s </div><div class='card-body'> <h5 class='card-title'>Введите ключ для скачивания</h5> <input type="text" id="key-input" class="form-control" required=""> </div> </div>""" % (
-    car.brand, car.car_number,)
+        car.brand, car.car_number,)
     data = {
         'card': card,
     }
@@ -240,7 +240,7 @@ def get_service_cost(request):
 def get_product_cost(request):
     quantity = request.GET.get('quantity', None)
     price = request.GET.get('price', None)
-    total_cost = int(float(quantity) * float(price)/100.0)
+    total_cost = int(float(quantity) * float(price) / 100.0)
 
     data = {
         'total_cost': total_cost,
@@ -251,7 +251,7 @@ def get_product_cost(request):
 def get_consumable_cost(request):
     quantity = request.GET.get('quantity', None)
     price = request.GET.get('price', None)
-    total_cost = int(float(quantity) * float(price)/100.0)
+    total_cost = int(float(quantity) * float(price) / 100.0)
 
     data = {
         'total_cost': total_cost,
@@ -336,6 +336,7 @@ def get_data_from_wear_form(form):
     }
     return wear_data
 
+
 # def get_report_cost(report, request):
 #     accept_wear = request.GET.get('id_accept_wear', None)
 #     wear = ((0.208 - 0.003 * float(point)) * float(weight) ** 0.7) * 100
@@ -345,3 +346,21 @@ def get_data_from_wear_form(form):
 #         'total_report_cost': total_report_cost
 #     }
 #     return JsonResponse(data)
+def response_image(link_img, link_delete, image , id):
+    return {
+        'errors': "",
+        'initialPreview': [
+            link_img
+        ],
+        'initialPreviewConfig': [{
+            'caption': image.name,
+            'width': '120px',
+            'size': image.size,
+            'url': link_delete,
+            'key': id,
+        }],
+        'initialPreviewThumbTags': [
+
+        ],
+        'append': True
+    }

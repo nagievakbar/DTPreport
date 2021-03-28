@@ -2,7 +2,8 @@ from django.http import FileResponse, JsonResponse
 from django.views.generic import View
 import os
 from DTPreport import settings as s
-from makereport.models import Report, Images, Documents, PassportPhotos, OtherPhotos, Checks, Contract, Car, Customer
+from makereport.models import Report, Images, Documents, PassportPhotos, OtherPhotos, Checks, Contract, Calculation, \
+    HoldsImages
 from pdf_report.utils import PyPDFML
 from fpdf import FPDF
 from django.core.files.base import ContentFile
@@ -60,11 +61,13 @@ class GeneratePDF(View):
 def get_response(request, id):
     locale.setlocale(locale.LC_ALL, 'C')
     new_report_pdf = Report.objects.get(report_id=id)
+    calculation = Calculation.objects.get(report_id=id)
     contract = Contract.objects.get(contract_id=new_report_pdf.contract_id)
-    images = Images.objects.filter(report_id=id)
-    passport = PassportPhotos.objects.filter(report_id=id)
-    checks = Checks.objects.filter(report_id=id).first()
-    other_photos = OtherPhotos.objects.filter(report_id=id)
+    holds_images = HoldsImages.objects.get(report_id=id)
+    images = holds_images.image.all()
+    passport = holds_images.pp_photo.all()
+    checks = holds_images.checks.first()
+    other_photos = holds_images.o_images.all()
     file = None
     if hasattr(request.user, "myuser"):
         file = request.user.myuser.template
@@ -80,6 +83,7 @@ def get_response(request, id):
         pdf = PyPDFML('example.xml')
 
     context = {
+        'calculation': calculation,
         'contract': contract,
         'report': new_report_pdf,
         'services': new_report_pdf.service.all().__len__(),
@@ -105,6 +109,7 @@ def get_response(request, id):
 
 def create_base64(request, new_report_pdf):
     locale.setlocale(locale.LC_ALL, 'C')
+
     file = request.user.myuser.template
     if file != None:
         splited = file.name.split('/')
@@ -114,6 +119,7 @@ def create_base64(request, new_report_pdf):
         pdf = PyPDFML('example.xml')
 
     context = {
+        'calculation': "",
         'contract': "",
         'report': new_report_pdf,
         'services': new_report_pdf.service.all().__len__(),

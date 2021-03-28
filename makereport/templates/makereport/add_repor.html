@@ -180,7 +180,7 @@
     <section class="padding_phone" style="z-index: 9999 !important;">
 
         <form method="POST" class="material-form-2" enctype="multipart/form-data">{% csrf_token %}
-
+            <input type="number" value="{{ id_image }}" id="id_image" name="id" style="display: none"/>
             <div class="accordion one">
                 <!-- 1 -->
                 <div class="accordion-item">
@@ -201,6 +201,13 @@
                                     {{ report_form.report_date }}
                                     {{ contract_form.contract_number }}
                                     {{ contract_form.contract_date }}
+                                    {% if car_form.errors.car_number %}
+                                        <div class="alert alert-danger">
+                                            <strong>
+                                                {{ car_form.errors.car_number }}
+                                            </strong>
+                                        </div>
+                                    {% endif %}
                                     {{ car_form.car_number }}
                                     {% comment %} {% endcomment %}
                                     {{ car_form.brand_text }}
@@ -291,7 +298,7 @@
                             <label>Сумма</label>
                             <div class="custom-select">
                                 <div id="" class="active-list">0</div>
-                                <input type="text" class="list-field" value="0"/>
+                                <input type="text" id="price_all_services" class="list-field" value="0"/>
                                 <ul class="drop-down-list">
                                     <li>10000</li>
                                     <li>20000</li>
@@ -326,8 +333,8 @@
                                         <th class="table-headers">Наименование</th>
                                         <th class="table-headers">Нор/час</th>
                                         <th class="table-headers">Надбавка</th>
-                                        <th class="table-headers" >Цена</th>
-                                        <th class="table-headers" >Сумма</th>
+                                        <th class="table-headers">Цена</th>
+                                        <th class="table-headers">Сумма</th>
                                     </tr>
                                     {{ service_formset.management_form }}
                                     {% for form in service_formset.forms %}
@@ -377,9 +384,9 @@
                                     {#                                        <tbody>#}
                                     <tr>
                                         <th class="table-spare-part-headers" style="width: 20px;text-align: left">№</th>
-                                        <th class="table-spare-part-headers" >ID</th>
+                                        <th class="table-spare-part-headers">ID</th>
                                         <th class="table-spare-part-headers">Наименование</th>
-                                        <th class="table-spare-part-headers" >Кол-во</th>
+                                        <th class="table-spare-part-headers">Кол-во</th>
                                         <th class="table-spare-part-headers">Цена</th>
                                         <th class="table-spare-part-headers">Сумма</th>
                                     </tr>
@@ -453,11 +460,11 @@
                                     <tr>
                                         <th class="table-spare-part-headers4" style="text-align: left">№</th>
                                         <th class="table-spare-part-headers4">ID</th>
-                                        <th class="table-spare-part-headers4" style="width:420px;">Наименование</th>
-                                        <th class="table-spare-part-headers4" style="width:100px;">Ед.измерения</th>
-                                        <th class="table-spare-part-headers4" style="width:110px;">Надбавка</th>
-                                        <th class="table-spare-part-headers4" style="width:140px;">Ед.расхода</th>
-                                        <th class="table-spare-part-headers4" style="width:100px;">Сумма</th>
+                                        <th class="table-spare-part-headers4">Наименование</th>
+                                        <th class="table-spare-part-headers4">Ед.измерения</th>
+                                        <th class="table-spare-part-headers4">Надбавка</th>
+                                        <th class="table-spare-part-headers4">Ед.расхода</th>
+                                        <th class="table-spare-part-headers4">Сумма</th>
                                     </tr>
                                     {{ consumable_formset.management_form }}
                                     {% for form in consumable_formset.forms %}
@@ -465,7 +472,7 @@
                                         {#                                        {{ form.errors }}#}
                                         <table class='no_error'>
                                             <tr>
-                                                <td>{{ forloop.counter }}</td>
+                                                <td class="id_padding">{{ forloop.counter }}</td>
                                                 <td>{{ form.consumable_id }}</td>
                                                 <td>{{ form.name }}</td>
                                                 <td>{{ form.unit }}</td>
@@ -478,7 +485,7 @@
                                     <div id="empty_consum_form" style="display:none">
                                         <table class='no_error'>
                                             <tr>
-                                                <td>{{ consumable_formset.empty_form.consumable_id }}</td>
+                                                <td class="id_padding"> {{ consumable_formset.empty_form.consumable_id }}</td>
                                                 <td>{{ consumable_formset.empty_form.name }}</td>
                                                 <td>{{ consumable_formset.empty_form.unit }}</td>
                                                 <td>{{ consumable_formset.empty_form.quantity }}</td>
@@ -695,7 +702,11 @@
 
                             <div class="panel_price">
                                 <a href="#">
-                                    <button type="button" class="btn panel_price_button">0 UZS</button>
+                                    {{ report_form.total_report_cost }}
+
+                                    <button type="button" class="btn panel_price_button"><label id="all_sum">0</label>
+                                        UZS
+                                    </button>
                                 </a>
                             </div>
 
@@ -713,9 +724,7 @@
                                     </div>
                                     <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 work_work"
                                          style="border: none;padding-left: 0;">
-                                        <input class="input2 work-price-input2"
-                                               id="price_1"
-                                               style="border: 2px solid #5c6e91;height: 35px">
+                                        {{ calculation_form.opr_damage }}
                                     </div>
                                 </div>
 
@@ -725,9 +734,7 @@
                                     </div>
                                     <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 work_work"
                                          style="border: none;padding-left: 0;">
-                                        <input class="input2 work-price-input2"
-                                               id="price_2"
-                                               style="border: 2px solid #5c6e91;height: 35px">
+                                        {{ calculation_form.opr_ust }}
                                     </div>
                                 </div>
 
@@ -737,9 +744,7 @@
                                     </div>
                                     <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 work_work"
                                          style="border: none;padding-left: 0;">
-                                        <input class="input2 work-price-input2"
-                                               id="price_3"
-                                               style="border: 2px solid #5c6e91;height: 35px">
+                                        {{ calculation_form.departure }}
                                     </div>
                                 </div>
 
@@ -749,16 +754,15 @@
                                     </div>
                                     <div class="col-sm-7 col-md-7 col-lg-7 col-xl-7 work_work"
                                          style="border: none;padding-left: 0;">
-                                        <input class="input2 work-price-input2"
-                                               id="price_all"
-                                               style="border: 2px solid #5c6e91;height: 35px">
+                                        {{ calculation_form.total }}
                                     </div>
                                 </div>
 
                                 <div class="row last_details_price">
                                     <div class="col-sm-12">
                                         <div class="save-btn-block">
-                                            <button class="save-btn" type="submit">Сохранить</button>
+
+                                            <button class="save-btn">Сохранить</button>
                                         </div>
                                     </div>
                                 </div>
@@ -815,7 +819,9 @@
                     </div>
                 </div>
             </div>
+
         </form>
+
     </section>
 
 
@@ -842,19 +848,19 @@
 
 </main><!-- End #main -->
 
-
+{% csrf_token %}
 {% block javascript %}
 
     <script>
-
+        var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
         $(document).on('keypress', "form", function (event) {
             return event.key !== "Enter";
         });
         $('.work-price-input2').on('change', function (event) {
-            var price_1 = $('#price_1').val() ? parseInt($('#price_1').val()) : 0;
-            var price_2 = $('#price_2').val() ? parseInt($('#price_2').val()) : 0;
-            var price_3 = $('#price_3').val() ? parseInt($('#price_3').val()) : 0;
-            $('#price_all').val(price_1 + price_2 + price_3);
+            var price_1 = $('.price_1').val() ? parseInt($('.price_1').val()) : 0;
+            var price_2 = $('.price_2').val() ? parseInt($('.price_2').val()) : 0;
+            var price_3 = $('.price_3').val() ? parseInt($('.price_3').val()) : 0;
+            $('.price_all').val(price_1 + price_2 + price_3);
         })
 
         function add_service() {
@@ -908,10 +914,10 @@
                     dataType: 'json',
                     success: function (data) {
                         console.log('success')
-
+                        set_price(data.price, last_input_price);
                         last_input_name.val(data.name)
                         last_input_nph.val(data.norm_per_hour)
-                        last_input_price.val(data.price)
+
                         get_procent(last_input_premium);
                         last_input_premium.select()
 
@@ -919,6 +925,11 @@
                 })
             }
         });
+
+        function set_price(coming_price, set_class) {
+            var price = $("#price_all_services").val()
+            set_class.val(coming_price ? coming_price : price);
+        }
 
         function get_procent(item) {
             if (item.val() == "") {
@@ -928,21 +939,53 @@
             }
         }
 
+        $(document).on('keypress', ".price2", function (e) {
+            var key = e.which;
+            if (13 === key) {
+                var price = $(this).val(),
+                    last_input_premium = $(this).parents('tr').find('.allowance2').val(),
+                    nph = $(this).parents('tr').find('.time2').val(),
+                    service_cost = $(this).parents('tr').find('.sum2');
+                $.ajax({
+                    url: '{% url "get_service_cost" %}',
+                    data: {
+                        'premium': last_input_premium,
+                        'price': price,
+                        'nph': nph,
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        calculate_total_sum(data.service_cost - service_cost.val());
+                        service_cost.val(data.service_cost)
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+
+                    }
+                })
+            }
+        })
+
+        function calculate_total_sum(sum) {
+            var input = $(".all_sum");
+            var label = $("#all_sum");
+            var previous = input.val() === "" ? 0 : parseInt(input.val().replace(/\s/g, ''));
+            console.log(sum + " VALUE PREVIOUS");
+            var full_sum = sum + previous;
+            input.val(full_sum);
+            label.text(full_sum);
+        }
+
         $(document).on('keypress', ".allowance2", function (e) {
             console.log('CLICK premium')
             var key = e.which;
-            var service_cost;
-            var nph;
             if (key === 13) {
                 var premium = $(this).val(),
                     price = $(this).parents('tr').find('.price2').val(),
                     nph = $(this).parents('tr').find('.time2').val(),
                     service_cost = $(this).parents('tr').find('.sum2'),
-                    present_table = $(this).parents().next().find('.first2'),
-                    psss = $(this).parents('div').find('.no_error').next(),
-                    {#next_service_id = $(this).parents('.div').find('.no_error').next()#}
-                    last = $(this).parents('tbody').find('tr').first().find('.first2')
-                console.log("ssssss" + premium);
+                    present_table = $(this).parents().next().find('.first2');
+                console.log("NPH  " + nph);
+                console.log("Premium  " + premium);
                 $.ajax({
                     url: '{% url "get_service_cost" %}',
                     data: {
@@ -952,13 +995,13 @@
                     },
                     dataType: 'json',
                     success: function (data) {
-
-                        present_table.select()
                         {#last.select()#}
 
                         if (!service_cost.val()) {
                             add_service();
+                            present_table.select()
                         }
+                        calculate_total_sum(data.service_cost - service_cost.val());
                         service_cost.val(data.service_cost)
 
                     },
@@ -980,10 +1023,7 @@
                     last_input_quantity = $(this).parents('tr').find('.time3')
 
                 brand = $('#id_brand').val()
-                {% comment %} if (brand == 0) {
-                    alert("Пожалуйста, выберите марку!");
-                }
-                else {% endcomment %}
+
                 $.ajax({
                     url: '{% url "get_product_ajax" %}',
                     data: {
@@ -994,17 +1034,42 @@
                     success: function (data) {
                         console.log('success')
                         console.log("data : " + data.name)
+                        set_price(data.price, last_input_price);
                         last_input_quantity.select()
                         last_input_name.val(data.name)
-                        {#last_input_unit.val(data.unit)#}
-                        last_input_price.val(data.price)
                         get_procent(last_input_quantity);
 
                     },
                 })
             }
         });
+        $(document).on('keypress', ".price4", function (e) {
 
+            var key = e.which;
+            if (key === 13) {
+                var price = $(this).val(),
+                    quantity = $(this).parents('tr').find('.allowance4').val(),
+                    cost = $(this).parents('tr').find('.sum4'),
+                    last = $(this).parents('tbody').find('tr').last(),
+                    present_table = $(this).parents('.no_error').next().find('.first4');
+                {#last.clone().insertAfter(last);#}
+                $.ajax({
+                    url: '{% url "get_consumable_cost" %}',
+                    data: {
+                        'quantity': quantity,
+                        'price': price,
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        calculate_total_sum(data.total_cost - cost.val());
+                        cost.val(data.total_cost)
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        console.log("error")
+                    }
+                })
+            }
+        });
         $(document).on('keypress', ".allowance4", function (e) {
             console.log('CLICK quantity-cons')
             var key = e.which;
@@ -1028,6 +1093,7 @@
                         if (!cost.val()) {
                             add_consumable()
                         }
+                        calculate_total_sum(data.total_cost - cost.val());
                         cost.val(data.total_cost)
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
@@ -1056,10 +1122,11 @@
                     success: function (data) {
 
                         get_procent(last_input_price_cons)
+                        set_price(data.price, last_input_price);
                         last_input_price_cons.select()
                         last_input_name.val(data.name)
                         last_input_unit.val(data.unit)
-                        last_input_price.val(data.price)
+
 
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
@@ -1068,7 +1135,30 @@
                 })
             }
         });
-
+        $(document).on('keypress', ".price3", function (e) {
+            console.log('CLICK quantity')
+            var key = e.which;
+            if (key === 13) {
+                var price = $(this).val(),
+                    quantity = $(this).parents('tr').find('.time3').val(),
+                    cost = $(this).parents('tr').find('.sum3');
+                $.ajax({
+                    url: '{% url "get_product_cost" %}',
+                    data: {
+                        'quantity': quantity,
+                        'price': price,
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        calculate_total_sum(data.total_cost - cost.val());
+                        cost.val(data.total_cost);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        console.log("error")
+                    }
+                })
+            }
+        });
         $(document).on('keypress', ".time3", function (e) {
             console.log('CLICK quantity')
             var key = e.which;
@@ -1094,6 +1184,7 @@
                         if (!cost.val()) {
                             add_product();
                         }
+                        calculate_total_sum(data.total_cost - cost.val());
                         cost.val(data.total_cost);
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
@@ -1167,6 +1258,9 @@
          });
          */
         $(document).ready(function () {
+            calculate_total_sum(0);
+
+
 
             $("#test-upload").fileinput({
                 'theme': 'fas',
@@ -1176,46 +1270,153 @@
             });
             $("#imageinput").fileinput({
                 'theme': 'fas',
-                {#'uploadUrl': '#',#}
-                overwriteInitial: false,
-                initialPreviewAsData: true,
-                initialPreview: [],
-                initialCaption: 'Выберите фото машины',
+                'uploadUrl': '{% url 'image_view' %}',
+                'overwriteInitial': false,
+                'uploadAsync': true,
+                'initialPreviewAsData': true,
+                'initialPreview': [
+                    {% for each in images %}
+                        "http://127.0.0.1:8000{{ each.image.url }}",
+                    {% endfor %}
+                ],
+                'initialPreviewConfig': [
 
-                showUpload: false,
-                required: false,
-
+                    {% for each in images %}
+                        {
+                            url: '{% url 'image_delete' %}',
+                            key: {{ each.image_id }},
+                        },
+                    {% endfor %}
+                ],
+                'ajaxSettings': {
+                    headers: {
+                        'X-CSRFToken': csrftoken,
+                    }
+                },
+                'uploadExtraData': {
+                    id: {{ id_image }},
+                },
+                'initialCaption': 'Выберите фото машины',
+                'showUpload': true,
+                'required': true,
+                'ajaxDeleteSettings': {
+                    headers: {
+                        'X-CSRFToken': csrftoken,
+                    }
+                }
             });
-            $("#pphotoinput").fileinput({
-                'theme': 'fas',
-                {#'uploadUrl': '#',#}
-                overwriteInitial: false,
-                initialPreviewAsData: true,
-                initialPreview: [],
-                initialCaption: 'Выберите фото паспорта',
 
-                showUpload: false,
-                required: false,
+            $("#pphotoinput").fileinput({
+               'theme': 'fas',
+                'initialCaption': 'Выберите фото паспорта',
+                'uploadUrl': '{% url 'pphoto_view' %}',
+                'overwriteInitial': false,
+                'uploadAsync': true,
+                'initialPreviewAsData': true,
+                'initialPreview': [
+                    {% for each in pphotos %}
+                        "http://127.0.0.1:8000{{ each.photo.url }}",
+                    {% endfor %}
+                ],
+                'initialPreviewConfig': [
+
+                    {% for each in pphotos %}
+                        {
+                            url: '{% url 'pphoto_delete' %}',
+                            key: {{ each.p_photo_id }},
+                        },
+                    {% endfor %}
+                ],
+                'ajaxSettings': {
+                    headers: {
+                        'X-CSRFToken': csrftoken,
+                    }
+                },
+                'uploadExtraData': {
+                    id: {{ id_image }},
+                },
+                'showUpload': true,
+                'required': true,
+                'ajaxDeleteSettings': {
+                    headers: {
+                        'X-CSRFToken': csrftoken,
+                    }
+                }
 
             });
             $("#ophotoinput").fileinput({
                 'theme': 'fas',
-                {#'uploadUrl': '#',#}
-                overwriteInitial: false,
-                initialPreviewAsData: true,
-                initialPreview: [],
-                initialCaption: 'Выберите фото тех паспорта',
-                showUpload: false,
-                required: false,
+              'initialCaption': 'Выберите тех фото паспорта',
+               'uploadUrl': '{% url 'ophoto_view' %}',
+                'overwriteInitial': false,
+                'uploadAsync': true,
+                'initialPreviewAsData': true,
+                'initialPreview': [
+                    {% for each in ophotos %}
+                        "http://127.0.0.1:8000{{ each.photos.url }}",
+                    {% endfor %}
+                ],
+                'initialPreviewConfig': [
 
+                    {% for each in ophotos %}
+                        {
+                            url: '{% url 'ophoto_delete' %}',
+                            key: {{ each.o_photo_id }},
+                        },
+                    {% endfor %}
+                ],
+                'ajaxSettings': {
+                    headers: {
+                        'X-CSRFToken': csrftoken,
+                    }
+                },
+                'uploadExtraData': {
+                    id: {{ id_image }},
+                },
+                'showUpload': true,
+                'required': true,
+                'ajaxDeleteSettings': {
+                    headers: {
+                        'X-CSRFToken': csrftoken,
+                    }
+                }
             });
             $("#checksinput").fileinput({
                 'theme': 'fas',
-                {#'uploadUrl': '#',#}
-                overwriteInitial: false,
-                initialPreviewAsData: true,
-                initialPreview: [],
-                initialCaption: 'Выберите фото чеков',
+                 initialCaption: 'Выберите фото чеков',
+                    'uploadUrl': '{% url 'checks_view' %}',
+                'overwriteInitial': false,
+                'uploadAsync': true,
+                'initialPreviewAsData': true,
+                'initialPreview': [
+                    {% for each in checks %}
+                        "http://127.0.0.1:8000{{ each.checks.url }}",
+                    {% endfor %}
+                ],
+                'initialPreviewConfig': [
+
+                    {% for each in checks %}
+                        {
+                            url: '{% url 'chekcs_delete' %}',
+                            key: {{ each.checks_id }},
+                        },
+                    {% endfor %}
+                ],
+                'ajaxSettings': {
+                    headers: {
+                        'X-CSRFToken': csrftoken,
+                    }
+                },
+                'uploadExtraData': {
+                    id: {{ id_image }},
+                },
+                'showUpload': true,
+                'required': true,
+                'ajaxDeleteSettings': {
+                    headers: {
+                        'X-CSRFToken': csrftoken,
+                    }
+                }
 
             });
         });
