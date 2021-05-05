@@ -31,7 +31,7 @@ ALLOWED_HOSTS = ['makereport.elite-house.uz',
                  'e-otsenka.uz',
                  'localhost'
                  ]
-URL_FILES = 'https://e-otsenka.uz'
+URL_FILES = 'http://127.0.0.1:8000'
 
 # Application definition
 

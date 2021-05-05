@@ -1259,8 +1259,7 @@
          */
         $(document).ready(function () {
             calculate_total_sum(0);
-
-
+            const server = "http://127.0.0.1:8000"
 
             $("#test-upload").fileinput({
                 'theme': 'fas',
@@ -1276,7 +1275,7 @@
                 'initialPreviewAsData': true,
                 'initialPreview': [
                     {% for each in images %}
-                        "https://e-otsenka.uz{{ each.image.url }}",
+                        `${server}{{ each.image.url }}`,
                     {% endfor %}
                 ],
                 'initialPreviewConfig': [
@@ -1315,7 +1314,7 @@
                 'initialPreviewAsData': true,
                 'initialPreview': [
                     {% for each in pphotos %}
-                        "https://e-otsenka.uz{{ each.photo.url }}",
+                        `${server}{{ each.photo.url }}`,
                     {% endfor %}
                 ],
                 'initialPreviewConfig': [
@@ -1353,7 +1352,7 @@
                 'initialPreviewAsData': true,
                 'initialPreview': [
                     {% for each in ophotos %}
-                        "https://e-otsenka.uz{{ each.photos.url }}",
+                            `${server}{{ each.photos.url }}`,
                     {% endfor %}
                 ],
                 'initialPreviewConfig': [
@@ -1390,7 +1389,7 @@
                 'initialPreviewAsData': true,
                 'initialPreview': [
                     {% for each in checks %}
-                        "https://e-otsenka.uz{{ each.checks.url }}",
+                          `${server}{{ each.checks.url }}`,
                     {% endfor %}
                 ],
                 'initialPreviewConfig': [

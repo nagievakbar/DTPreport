@@ -181,7 +181,7 @@
     <section class="padding_phone" style="z-index: 9999 !important;">
 
         <form method="POST" class="material-form-2" enctype="multipart/form-data">{% csrf_token %}
-             <input type="number" value="{{ id_image }}" id="id_image" name="id" style="display: none"/>
+            <input type="number" value="{{ id_image }}" id="id_image" name="id" style="display: none"/>
             <div class="accordion one">
                 <!-- 1 -->
                 <div class="accordion-item">
@@ -795,6 +795,7 @@
 {% block javascript %}
     <script>
         var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+
         function calculate_total_sum(sum) {
             var input = $(".all_sum");
             var label = $("#all_sum");
@@ -1201,7 +1202,7 @@
          });
          */
         $(document).ready(function () {
-
+            const server = "http://127.0.0.1:8000"
             calculate_total_sum(0);
             $("#test-upload").fileinput({
                 'theme': 'fas',
@@ -1209,7 +1210,7 @@
                 'allowedFileExtensions': ['jpg', 'png', 'gif'],
                 'elErrorContainer': '#errorBlock'
             });
-        $("#imageinput").fileinput({
+            $("#imageinput").fileinput({
                 'theme': 'fas',
                 'uploadUrl': '{% url 'image_view' %}',
                 'overwriteInitial': false,
@@ -1217,7 +1218,7 @@
                 'initialPreviewAsData': true,
                 'initialPreview': [
                     {% for each in images %}
-                        "https://e-otsenka.uz{{ each.image.url }}",
+                        `${server}{{ each.image.url }}`,
                     {% endfor %}
                 ],
                 'initialPreviewConfig': [
@@ -1248,7 +1249,7 @@
             });
 
             $("#pphotoinput").fileinput({
-               'theme': 'fas',
+                'theme': 'fas',
                 'initialCaption': 'Выберите фото паспорта',
                 'uploadUrl': '{% url 'pphoto_view' %}',
                 'overwriteInitial': false,
@@ -1256,7 +1257,7 @@
                 'initialPreviewAsData': true,
                 'initialPreview': [
                     {% for each in pphotos %}
-                        "https://e-otsenka.uz{{ each.photo.url }}",
+                        `${server}{{ each.photo.url }}`,
                     {% endfor %}
                 ],
                 'initialPreviewConfig': [
@@ -1287,14 +1288,14 @@
             });
             $("#ophotoinput").fileinput({
                 'theme': 'fas',
-              'initialCaption': 'Выберите тех фото паспорта',
-               'uploadUrl': '{% url 'ophoto_view' %}',
+                'initialCaption': 'Выберите тех фото паспорта',
+                'uploadUrl': '{% url 'ophoto_view' %}',
                 'overwriteInitial': false,
                 'uploadAsync': true,
                 'initialPreviewAsData': true,
                 'initialPreview': [
                     {% for each in ophotos %}
-                        "https://e-otsenka.uz{{ each.photos.url }}",
+                         `${server}{{ each.photos.url }}`,
                     {% endfor %}
                 ],
                 'initialPreviewConfig': [
