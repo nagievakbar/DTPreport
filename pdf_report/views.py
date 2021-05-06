@@ -9,6 +9,7 @@ from fpdf import FPDF
 from django.core.files.base import ContentFile
 import locale
 import base64
+import  jinja2
 from django.shortcuts import render
 
 
@@ -70,17 +71,9 @@ def get_response(request, id):
     other_photos = holds_images.o_images.all()
     file = None
     if hasattr(request.user, "myuser"):
-        file = request.user.myuser.template
+        file = request.user.myuser.template.name
     document_photo = Documents.objects.first()
     path_for_images = s.MEDIA_ROOT
-    if file is not None:
-        splited = file.name.split('/')
-        path = os.path.join(s.MEDIA_ROOT, "{}".format(splited[0]))
-        print("path_for_images {}".format(path_for_images))
-        print("path {}".format(path))
-        pdf = PyPDFML(splited[-1], path)
-    else:
-        pdf = PyPDFML('example.xml')
 
     context = {
         'calculation': calculation,
@@ -96,28 +89,25 @@ def get_response(request, id):
         'checks': checks,
         'other_photos': other_photos,
     }
-    pdf.generate(context)
+    try:
+        splited = file.split('/')
+        path = os.path.join(s.MEDIA_ROOT, "{}".format(splited[0]))
+        print("path_for_images {}".format(path_for_images))
+        print("path {}".format(path))
+        pdf = PyPDFML(splited[-1], path)
+        pdf.generate(context)
+    except jinja2.exceptions.TemplateNotFound:
+        pdf = PyPDFML('example.xml')
+        pdf.generate(context)
     data = pdf.contents()
     filename = "%s.pdf" % new_report_pdf.car.car_number
     new_report_pdf.pdf_report.save(filename, ContentFile(data))
-    # with open(new_report_pdf.pdf_report.path, "rb") as file:
-    #     encoded_string = base64.b64encode(file.read())
-    # new_report_pdf.pdf_report_base64 = encoded_string.decode('ascii')
-    # print( new_report_pdf.pdf_report_base64[0:10])
     new_report_pdf.save()
 
 
 def create_base64(request, new_report_pdf):
     locale.setlocale(locale.LC_ALL, 'C')
-
     file = request.user.myuser.template
-    if file != None:
-        splited = file.name.split('/')
-        path = os.path.join(s.MEDIA_ROOT, "{}".format(splited[0]))
-        pdf = PyPDFML(splited[-1], path)
-    else:
-        pdf = PyPDFML('example.xml')
-
     context = {
         'calculation': "",
         'contract': "",
@@ -132,8 +122,14 @@ def create_base64(request, new_report_pdf):
         'checks': "",
         'other_photos': "",
     }
-
-    pdf.generate(context)
+    try:
+        splited = file.name.split('/')
+        path = os.path.join(s.MEDIA_ROOT, "{}".format(splited[0]))
+        pdf = PyPDFML(splited[-1], path)
+        pdf.generate(context)
+    except jinja2.exceptions.TemplateNotFound:
+        pdf = PyPDFML('example.xml')
+        pdf.generate(context)
     data = pdf.contents()
     filename = "%s.pdf" % new_report_pdf.car.car_number
     new_report_pdf.pdf_report.save(filename, ContentFile(data))
