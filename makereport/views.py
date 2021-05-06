@@ -651,6 +651,7 @@ def get_template(request):
     #         'uploaded_file_url': uploaded_file_url
     #     })
     user = request.user
+
     if user.myuser.template != None:
         user.myuser.template.delete()
 

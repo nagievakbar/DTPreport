@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.core.files.storage import default_storage
 from .converters import num2text
 import random
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class Contract(models.Model):
@@ -197,6 +199,12 @@ class MyUser(models.Model):
     report_rate_price = models.IntegerField(default=0, blank=True, null=True)
     report_rate_price_txt = models.CharField(max_length=200, blank=True, null=True)
     template = models.FileField(blank=True, null=True, upload_to=upload_path_handler, verbose_name='Шаблоны для пдф')
+
+    @receiver(post_save, sender=User)
+    def update_profile_signal(sender, instance, created, **kwargs):
+        if created:
+            MyUser.objects.create(user=instance)
+        instance.myuser.save()
 
     def get_total_report_cost_txt(self):
         self.report_rate_price_txt = num2text(int(self.report_rate_price), main_units=((u'сум', u'сумы', u'сум'), 'f'))

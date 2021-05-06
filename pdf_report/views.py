@@ -69,12 +69,8 @@ def get_response(request, id):
     passport = holds_images.pp_photo.all()
     checks = holds_images.checks.first()
     other_photos = holds_images.o_images.all()
-    file = None
-    if hasattr(request.user, "myuser"):
-        file = request.user.myuser.template.name
     document_photo = Documents.objects.first()
     path_for_images = s.MEDIA_ROOT
-
     context = {
         'calculation': calculation,
         'contract': contract,
@@ -90,7 +86,8 @@ def get_response(request, id):
         'other_photos': other_photos,
     }
     try:
-        splited = file.split('/')
+        file = request.user.myuser.template
+        splited = file.name.split('/')
         path = os.path.join(s.MEDIA_ROOT, "{}".format(splited[0]))
         print("path_for_images {}".format(path_for_images))
         print("path {}".format(path))
@@ -107,7 +104,6 @@ def get_response(request, id):
 
 def create_base64(request, new_report_pdf):
     locale.setlocale(locale.LC_ALL, 'C')
-    file = request.user.myuser.template
     context = {
         'calculation': "",
         'contract': "",
@@ -123,6 +119,7 @@ def create_base64(request, new_report_pdf):
         'other_photos': "",
     }
     try:
+        file = request.user.myuser.template
         splited = file.name.split('/')
         path = os.path.join(s.MEDIA_ROOT, "{}".format(splited[0]))
         pdf = PyPDFML(splited[-1], path)
