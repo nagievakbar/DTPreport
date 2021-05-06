@@ -29,13 +29,15 @@ DEBUG = True
 ALLOWED_HOSTS = ['makereport.elite-house.uz',
                  '127.0.0.1',
                  'e-otsenka.uz',
-                 'localhost'
+                 'localhost',
+                 '184.196.214.55'
                  ]
 URL_FILES = 'http://127.0.0.1:8000'
 
 # Application definition
 
 INSTALLED_APPS = [
+    'django',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
