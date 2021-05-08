@@ -219,6 +219,42 @@
             кем выдан {{ report.contract.customer.whom_passport_issued }}
         </text>
         {# -----------------------------------------table------------------------------------- #}
+        <text x="1.6" y="7.2" fontsize="8.2">Наименование товаров</text>
+        <text x="1.6" y="7.0" fontsize="8.2">(работ. услуг)</text>
+        <text x="1.6" y="5.7" fontsize="8.2">За оценочные услуги</text>
+        <text x="1.6" y="5.2" fontsize="8.5">        ИТОГО   </text>
+        <text x="1.6" y="4.6" fontsize="8.5">   Всего к оплате    </text>
+        <text x="1.6" y="4.6" fontsize ="8.5" >   Всего к оплате    </text>
+
+        <text x="4.6" y="7.0" fontsize="8.2">Един. изм</text>
+        <text x="4.6" y="6.0" fontsize="9">     шт</text>
+{#        <text x="4.6" y="5.2" fontsize="8.5">           </text>#}
+        <text x="4.6" y="4.6" fontsize ="8.5" >   300000,00 сум (Тристо тысяч сум), 00 тийин   </text>
+        <text x="4.6" y="4.6" fontsize ="8.5" >   300000,00 сум (Тристо тысяч сум), 00 тийин   </text>
+
+         <text x="6.1" y="7.0" fontsize="8.2"> Кол-во</text>
+         <text x="6.1" y="6.0" fontsize="9">     1</text>
+
+        <text x="7.6" y="7.0" fontsize="8.2">  Стоимость</text>
+        <text x="7.6" y="6.8" fontsize="8.2">   поставки</text>
+        <text x="7.6" y="6.0" fontsize="9"> 300 000,0</text>
+        <text x="7.6" y="5.2" fontsize="8.5"> 300 000,0  </text>
+
+        <text x="9.6" y="7.2" fontsize="8.2">   Акциозный налог</text>
+        <text x="9.6" y="6.6" fontsize="8.2">Ставка</text>
+        <text x="11.1" y="6.6" fontsize="8.2">Ставка</text>
+        <text x="9.6" y="6.0" fontsize="8.2">  Без акциза</text>
+        <text x="9.6" y="5.2" fontsize="8.2">  Без акциза</text>
+
+        <text x="12.6" y="7.2" fontsize="8.2">           НДС</text>
+        <text x="12.6" y="6.6" fontsize="8.2">Ставка</text>
+        <text x="14.1" y="6.6" fontsize="8.2">Ставка</text>
+        <text x="12.6" y="6.0" fontsize="8.2">  Без НДС</text>
+        <text x="12.6" y="5.2" fontsize="8.2">  Без НДС</text>
+
+        <text x="15.6" y="7.2" fontsize="9.2">              Стоимость</text>
+        <text x="15.6" y="6.9" fontsize="9.2">  поставки с учетом НДС</text>
+
         <rect x="1.5" y="6.5" width="3" height="1" />
         <rect x="4.5" y="6.5" width="1.5" height="1" />
         <rect x="6" y="6.5" width="1.5" height="1" />
@@ -801,7 +837,7 @@
         <text x="2" y="13">Серия,номер техпаспорта         {{ report.car.registration }}</text>
         <text x="11" y="13">Цвет                                             {{ report.car.car_color }}</text>
         <text x="2" y="12.5">Двигатель №                               {{ report.car.engine_number }}</text>
-        <text x="11" y="12.5">Тип                                               {{ report.car.car_type }}</text>
+        <text x="11" y="12.5">Тип                                               {{ report.car.type_of_car }}</text>
         <text x="2" y="12">Кузов №                                      {{ report.car.body_number }}</text>
         <text x="11" y="12">Шасси №                                      {{ report.car.chassis }}</text>
         <text x="2" y="11.5">Пробег                                        {{ report.car.mileage }}</text>

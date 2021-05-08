@@ -90,7 +90,6 @@ class Customer(models.Model):
     phone_number = models.CharField(max_length=20, verbose_name='Тел. номер')
     gnu_or_gje = models.CharField(max_length=40)
     uvajaemaya = models.CharField(max_length=40)
-    vid = models.CharField(max_length=100)
     mesto_osmotra = models.CharField(max_length=200)
 
     def __str__(self):
@@ -317,6 +316,17 @@ class OtherPhotos(models.Model):
     def delete(self, *args, **kwargs):
         default_storage.delete(self.photos.path)
         super(OtherPhotos, self).delete(*args, **kwargs)
+
+
+class CustomSum(models.Model):
+    sum = models.IntegerField(default=0, verbose_name="Введите сумму")
+
+    class Meta:
+        verbose_name = 'Сумма'
+        verbose_name_plural = 'Сумма'
+
+    def __str__(self):
+        return str(self.sum)
 
 
 class Checks(models.Model):

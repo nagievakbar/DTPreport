@@ -346,7 +346,7 @@ def get_data_from_wear_form(form):
 #         'total_report_cost': total_report_cost
 #     }
 #     return JsonResponse(data)
-def response_image(link_img, link_delete, image , id):
+def response_image(link_img, link_delete, image, id):
     return {
         'errors': "",
         'initialPreview': [
@@ -364,3 +364,8 @@ def response_image(link_img, link_delete, image , id):
         ],
         'append': True
     }
+
+
+def get_prices():
+    prices = CustomSum.objects.order_by('sum')
+    return prices

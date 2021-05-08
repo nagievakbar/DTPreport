@@ -211,11 +211,18 @@
                                     {{ car_form.car_color }}
                                     {{ car_form.mileage }}
                                     {{ car_form.release_date }}
-
+                                    {% if car_form.errors.type_of_car %}
+                                        <div class="alert alert-danger">
+                                            <strong>
+                                                Выберите тип машины
+                                            </strong>
+                                        </div>
+                                    {% endif %}
+                                    {{ car_form.type_of_car }}
                                 </div>
                                 <div class="divider"></div>
                                 <div class="right-inputs">
-                                    {{ car_form.car_type }}
+
                                     {{ car_form.car_owner }}
                                     {{ car_form.owner_address }}
                                     {{ customer_form.name }}
@@ -242,15 +249,6 @@
                                 <div class="active-list"> 0</div>
                                 <input type="text" id="procent" class="list-field" value="0"/>
                                 <ul class="drop-down-list">
-                                    <li>1 %</li>
-                                    <li>2 %</li>
-                                    <li>3 %</li>
-                                    <li>4 %</li>
-                                    <li>5 %</li>
-                                    <li>6 %</li>
-                                    <li>7 %</li>
-                                    <li>8 %</li>
-                                    <li>9 %</li>
                                     <li>10 %</li>
                                     <li>20 %</li>
                                 </ul>
@@ -264,9 +262,9 @@
                                 <div id="" class="active-list">0</div>
                                 <input type="text" id="price_all_services" class="list-field" value="0"/>
                                 <ul class="drop-down-list">
-                                    <li>10000</li>
-                                    <li>20000</li>
-                                    <li>30000</li>
+                                    {% for price in prices %}
+                                        <li>{{ price.sum }}</li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </div>
@@ -1202,7 +1200,7 @@
          });
          */
         $(document).ready(function () {
-            const  server = "http://e-otsenka.uz"
+            const server = "http://e-otsenka.uz"
             calculate_total_sum(0);
             $("#test-upload").fileinput({
                 'theme': 'fas',
@@ -1295,7 +1293,7 @@
                 'initialPreviewAsData': true,
                 'initialPreview': [
                     {% for each in ophotos %}
-                         `${server}{{ each.photos.url }}`,
+                        `${server}{{ each.photos.url }}`,
                     {% endfor %}
                 ],
                 'initialPreviewConfig': [

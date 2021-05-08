@@ -55,7 +55,7 @@ class CarForm(forms.ModelForm):
     mileage = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Пробег', 'class': 'input_in'}))
     release_date = forms.DateField(input_formats=['%Y'], widget=forms.DateInput(
         attrs={'placeholder': 'Год и месяц выпуска', 'class': 'input_in'}))
-    car_type = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Тип', 'class': 'input_in'}))
+
     car_owner = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Владелец', 'class': 'input_in'}))
     owner_address = forms.CharField(
         widget=forms.TextInput(attrs={'placeholder': 'Адрес владельца', 'class': 'input_in'}))
@@ -76,7 +76,6 @@ class CarForm(forms.ModelForm):
                   'car_color',
                   'mileage',
                   'release_date',
-                  'car_type',
                   'car_owner',
                   'owner_address',
                   'type_of_car']
@@ -138,14 +137,14 @@ class CustomerForm(forms.ModelForm):
     gnu_or_gje = forms.CharField(
         widget=forms.TextInput(attrs={'placeholder': 'Г-ну', 'class': 'input_in'}))
     uvajaemaya = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Уважаемый', 'class': 'input_in'}))
-    vid = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Вид', 'class': 'input_in'}))
+
     mesto_osmotra = forms.CharField(
         widget=forms.TextInput(attrs={'placeholder': 'Акт осмотра Место', 'class': 'input_in'}))
 
     class Meta:
         model = Customer
         fields = ['name', 'address', 'passport_number', 'when_passport_issued',
-                  'whom_passport_issued', 'phone_number', 'gnu_or_gje', 'uvajaemaya', 'vid', 'mesto_osmotra']
+                  'whom_passport_issued', 'phone_number', 'gnu_or_gje', 'uvajaemaya', 'mesto_osmotra']
 
 
 class CustomerFormEdit(forms.ModelForm):
