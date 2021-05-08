@@ -98,7 +98,7 @@ class ChecksView(View):
     def post(self, request, id=None):
         hold_image = HoldsImages.objects.get(id=request.POST['id'])
         image = Checks.objects.create(
-            checks = request.FILES['checks'],
+            checks=request.FILES['checks'],
         )
         hold_image.checks.add(image)
         hold_image.save()
@@ -112,7 +112,7 @@ class ChecksView(View):
 
 def hold_image():
     last_hold = HoldsImages.objects.last()
-    if last_hold is None  or last_hold.report is not None:
+    if last_hold is None or last_hold.report is not None:
         holds_image = HoldsImages.objects.create()
         print("CREATED NEW ONE ")
         holds_image.save()
@@ -128,7 +128,7 @@ def hold_image():
     return last_hold
 
 
-
+# Additional thingsss
 class ReportEditView(View):
     decorators = [login_required]
     extend = False
@@ -172,6 +172,7 @@ class ReportEditView(View):
             'calculation_form': calculation_form,
             'contract_form': contract_form,
             'report_form': report_form,
+            'id': report.report_id,
             'car_form': car_form,
             'customer_form': customer_form,
             'service_formset': service_formset,
@@ -271,6 +272,7 @@ class ReportEditView(View):
             'calculation_form': calculation_form,
             'contract_form': contract_form,
             'report_form': report_form,
+            'id': holds_images.report.report_id,
             'car_form': car_form,
             'customer_form': customer_form,
             'service_formset': service_formset,
@@ -316,6 +318,7 @@ class ReportView(View):
         ophotos = None
         checks = None
         if id:
+            report_id = id
             holds_image = HoldsImages.objects.get(report_id=id)
             images = holds_image.image.all()
             pphotos = holds_image.pp_photo.all()
@@ -347,6 +350,7 @@ class ReportView(View):
 
             template = 'makereport/edit_repor.html'
         else:
+            report_id = 0
             calculation_form = CalculationForm(instance=Calculation())
             image_form = ImageForm(instance=Images())
             contract_form = ContractForm(instance=Contract())
@@ -369,6 +373,7 @@ class ReportView(View):
 
         context = {
             'id_image': holds_image.id,
+            'id': report_id,
             'calculation_form': calculation_form,
             'contract_form': contract_form,
             'report_form': report_form,
@@ -472,6 +477,7 @@ class ReportView(View):
             'calculation_form': calculation_form,
             'contract_form': contract_form,
             'report_form': report_form,
+            'id': 0,
             'car_form': car_form,
             'customer_form': customer_form,
             'service_formset': service_formset,
@@ -558,6 +564,7 @@ class ReportView(View):
             'id_image': holds_images.id,
             'contract_form': contract_form,
             'car_form': car_form,
+            'id': id,
             'customer_form': customer_form,
             'image_form': image_form,
             'passphoto_form': passphoto_form,
@@ -627,9 +634,9 @@ def user_list_some(request):
 def admin_list(request):
     if 'search' in request.GET:
         reports = Report.objects.filter(
-            Q(car__car_number__contains=request.GET['search']) & Q(Q(signed=True) | Q(created_by=request.user.myuser)))
+            car__car_number__contains=request.GET['search'])
     else:
-        reports = Report.objects.filter(Q(signed=True) | Q(created_by=request.user.myuser))
+        reports = Report.objects.all()
 
     return render(request, 'makereport/index.html', context={'reports': reports})
 
@@ -642,20 +649,34 @@ def users_list(request):
 
 @login_required
 def get_template(request):
-    # if request.method == 'POST' and request.FILES['template']:
-    #     myfile = request.FILES['myfile']
-    #     fs = FileSystemStorage()
-    #     filename = fs.save(myfile.name, myfile)
-    #     uploaded_file_url = fs.url(filename)
-    #     return render(request, 'core/simple_upload.html', {
-    #         'uploaded_file_url': uploaded_file_url
-    #     })
     user = request.user
-
     if user.myuser.template != None:
         user.myuser.template.delete()
 
     user.myuser.template = request.FILES['file']
+    user.myuser.save()
+    return JsonResponse({})
+
+
+@login_required
+def get_template_mixing(request):
+    user = request.user
+    if user.myuser.template_mixing != None:
+        user.myuser.template_mixing.delete()
+
+    user.myuser.template_mixing = request.FILES['file']
+    user.myuser.save()
+
+    return JsonResponse({})
+
+
+@login_required
+def get_template_agreement(request):
+    user = request.user
+    if user.myuser.template_agreement != None:
+        user.myuser.template_agreement.delete()
+
+    user.myuser.template_agreement = request.FILES['file']
     user.myuser.save()
     return JsonResponse({})
 
@@ -705,7 +726,7 @@ def search(request):
     if 'key' in request.GET:
         report = Report.objects.filter(key=request.GET['key'])
         if report.exists():
-            return HttpResponseRedirect('pdf/mixing/{}'.format(report.first().report_id))
+            return HttpResponseRedirect('pdf/{}/'.format(report.first().report_id))
         else:
             errors = 'Такого ключа не существует'
     context = {

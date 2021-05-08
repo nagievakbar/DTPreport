@@ -330,11 +330,11 @@
           <ul class="drop-down-list">
             <li>
               <div>
-                <input type="file"   class = "input" id="myFile" name="custom_template" style="display: none;">
+                <input type="file"   class = "input" id="mixingFile" name="custom_template" style="display: none;">
                 <button type="button" class="btn save_button">
-                  <a href="{% url 'download_xml' %}"> Скачать Шаблон</a>
+                  <a href="{% url 'download_xml_mixing' %}"> Скачать Шаблон</a>
                 </button>
-                <button type="button" id="upload" class="btn save_button">
+                <button type="button" id="upload_mixing" class="btn save_button">
                   Добавить файл 
                 </button>
               </div>
@@ -345,29 +345,45 @@
       </div>
 
       <div class="select-block">
-        <label>Договор шаблон</label>
+        <label>Договор Шаблона</label>
         <div class="custom-select">
-          <div class="active-list">0</div>
-          <input type="text" class="list-field" value="0" />
+          <div class="active-list"></div>
+          <input type="text" class="list-field" value="Australia" />
           <ul class="drop-down-list">
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
+            <li>
+              <div>
+                <input type="file"   class = "input" id="agreementFile" name="custom_template" style="display: none;">
+                <button type="button" class="btn save_button">
+                  <a href="{% url 'download_xml_agreement' %}"> Скачать Шаблон</a>
+                </button>
+                <button type="button" id="upload_agreement" class="btn save_button">
+                  Добавить файл
+                </button>
+              </div>
+            </li>
           </ul>
         </div>
       </div>
-      <div class="select-block">
-        <label>Отчёт шаблон</label>
+
+        <div class="select-block">
+        <label>Отчет шаблона</label>
         <div class="custom-select">
-          <div class="active-list">0</div>
-          <input type="text" class="list-field" value="0" />
+          <div class="active-list"></div>
+          <input type="text" class="list-field" value="Australia" />
           <ul class="drop-down-list">
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
+            <li>
+              <div>
+                <input type="file"   class = "input" id="myFile" name="custom_template" style="display: none;">
+                <button type="button" class="btn save_button">
+                  <a href="{% url 'download_xml' %}"> Скачать Шаблон</a>
+                </button>
+                <button type="button" id="upload" class="btn save_button">
+                  Добавить файл
+                </button>
+              </div>
+            </li>
           </ul>
+
         </div>
       </div>
 

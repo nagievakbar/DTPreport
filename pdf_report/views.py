@@ -2,21 +2,34 @@ from django.http import FileResponse, JsonResponse
 from django.views.generic import View
 import os
 from DTPreport import settings as s
-from makereport.models import Report, Images, Documents, PassportPhotos, OtherPhotos, Checks, Contract, Calculation, \
+from makereport.models import Report, Documents, Contract, Calculation, \
     HoldsImages
 from pdf_report.utils import PyPDFML
 from fpdf import FPDF
 from django.core.files.base import ContentFile
 import locale
 import base64
-import  jinja2
-from django.shortcuts import render
+import jinja2
 
 
 def get_base_template(request):
     filename = 'example.xml'
+    return get_file(filename)
+
+
+def get_base_mixing_template(request):
+    filename = 'mixing.xml'
+    return get_file(filename)
+
+
+def get_base_agreement_template(request):
+    filename = 'agreem.xml'
+    return get_file(filename)
+
+
+def get_file(filename, content_type='text/xml'):
     response = FileResponse(open(os.path.join(s.MEDIA_ROOT, '../templates/{}'.format(filename)), 'rb'),
-                            content_type='text/xml')
+                            content_type=content_type)
     content = "attachment; filename=%s" % filename
     response['Content-Disposition'] = content
     return response
@@ -24,7 +37,8 @@ def get_base_template(request):
 
 class GenerateMixing(View):
     def get(self, request, id=None):
-        pdf = PyPDFML('mixing.xml')
+        if id == 0:
+            return get_file('mixing.pdf', content_type='application/pdf')
         report = Report.objects.get(report_id=id)
         car = report.car
         contract = report.contract
@@ -35,19 +49,54 @@ class GenerateMixing(View):
             'report': report,
             'contract': contract,
         }
-        pdf.generate(context)
+        try:
+            file = request.user.myuser.template_mixing
+            splited = file.name.split('/')
+            path = os.path.join(s.MEDIA_ROOT, "{}".format(splited[0]))
+            pdf = PyPDFML(splited[-1], path)
+            pdf.generate(context)
+        except:
+            pdf = PyPDFML('mixing.xml')
+            pdf.generate(context)
         data = pdf.contents()
         response = FileResponse(ContentFile(data), content_type='application/pdf')
+        return response
 
+
+class GenerateAgreement(View):
+    def get(self, request, id=None):
+        if id == 0:
+            return get_file('agreement.pdf', content_type='application/pdf')
+        report = Report.objects.get(report_id=id)
+        calculation = Calculation.objects.get(report_id=id)
+        contract = report.contract
+        context = {
+            'calculation': calculation,
+            'report': report,
+            'contract': contract,
+        }
+        try:
+            file = request.user.myuser.template_agreement
+            splited = file.name.split('/')
+            path = os.path.join(s.MEDIA_ROOT, "{}".format(splited[0]))
+            pdf = PyPDFML(splited[-1], path)
+            pdf.generate(context)
+        except:
+            pdf = PyPDFML('agreem.xml')
+            pdf.generate(context)
+
+        data = pdf.contents()
+        response = FileResponse(ContentFile(data), content_type='application/pdf')
         return response
 
 
 class GeneratePDF(View):
-    def get(self, request, id=id):
+    def get(self, request,  id=None):
+        if type(id) is not int or id <= 0:
+            return get_file('base.pdf', content_type='application/pdf')
         get_response(request, id)
         report_pdf = Report.objects.get(report_id=id)
 
-        # filename = "%s.pdf" % report_pdf.car.car_number
         filename = str(report_pdf.pdf_report)
 
         response = FileResponse(open(os.path.join(s.MEDIA_ROOT, filename), 'rb'), content_type='application/pdf')
@@ -89,8 +138,6 @@ def get_response(request, id):
         file = request.user.myuser.template
         splited = file.name.split('/')
         path = os.path.join(s.MEDIA_ROOT, "{}".format(splited[0]))
-        print("path_for_images {}".format(path_for_images))
-        print("path {}".format(path))
         pdf = PyPDFML(splited[-1], path)
         pdf.generate(context)
     except jinja2.exceptions.TemplateNotFound:
