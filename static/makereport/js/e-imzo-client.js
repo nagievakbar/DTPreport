@@ -23,11 +23,11 @@ var dates = {
         //                  attributes.  **NOTE** month is 0-11.
         return (
             d.constructor === Date ? d :
-            d.constructor === Array ? new Date(d[0], d[1], d[2]) :
-            d.constructor === Number ? new Date(d) :
-            d.constructor === String ? new Date(d) :
-            typeof d === "object" ? new Date(d.year, d.month, d.date) :
-            NaN
+                d.constructor === Array ? new Date(d[0], d[1], d[2]) :
+                    d.constructor === Number ? new Date(d) :
+                        d.constructor === String ? new Date(d) :
+                            typeof d === "object" ? new Date(d.year, d.month, d.date) :
+                                NaN
         );
     },
     compare: function (a, b) {
@@ -41,8 +41,8 @@ var dates = {
         return (
             isFinite(a = this.convert(a).valueOf()) &&
             isFinite(b = this.convert(b).valueOf()) ?
-            (a > b) - (a < b) :
-            NaN
+                (a > b) - (a < b) :
+                NaN
         );
     },
     inRange: function (d, start, end) {
@@ -56,8 +56,8 @@ var dates = {
             isFinite(d = this.convert(d).valueOf()) &&
             isFinite(start = this.convert(start).valueOf()) &&
             isFinite(end = this.convert(end).valueOf()) ?
-            start <= d && d <= end :
-            NaN
+                start <= d && d <= end :
+                NaN
         );
     }
 };
@@ -94,14 +94,17 @@ String.prototype.splitKeep = function (splitter, ahead) {
                 result.push(part);
                 lastIndex = nextIndex;
             }
-        };
+        }
+        ;
         if (lastIndex < self.length) {
             var part = self.substring(lastIndex, self.length);
             result.push(part);
-        };
+        }
+        ;
     } else {
         result.add(self);
-    };
+    }
+    ;
     return result;
 };
 
@@ -109,7 +112,8 @@ var EIMZOClient = {
     NEW_API: false,
     API_KEYS: [
         'localhost', '96D0C1491615C82B9A54D9989779DF825B690748224C2B04F500F370D51827CE2644D8D4A82C18184D73AB8530BB8ED537269603F61DB0D03D2104ABF789970B',
-        '127.0.0.1', 'A7BCFA5D490B351BE0754130DF03A068F855DB4333D43921125B9CF2670EF6A40370C646B90401955E1F7BC9CDBF59CE0B2C5467D820BE189C845D0B79CFC96F'
+        '127.0.0.1', 'A7BCFA5D490B351BE0754130DF03A068F855DB4333D43921125B9CF2670EF6A40370C646B90401955E1F7BC9CDBF59CE0B2C5467D820BE189C845D0B79CFC96F',
+        'e-otsenka.uz', '53B925F2B659F7BAB4306ED57731E7FCF620A484D8D7D5E7317968EA7655965B1EF1A536726D24280FB0A6283239C2C1C15D920F67BF397F8BC75DA58859E29E'
     ],
     checkVersion: function (success, fail) {
         CAPIWS.version(function (event, data) {
@@ -327,7 +331,7 @@ var EIMZOClient = {
             }
         }
     },
-   
+
     createPkcs7: function (id, data, timestamper, success, fail) {
         CAPIWS.callFunction({
             plugin: "pkcs7",
