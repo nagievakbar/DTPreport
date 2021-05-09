@@ -248,6 +248,13 @@
                                     {{ car_form.owner_address }}
                                     {{ customer_form.name }}
                                     {{ customer_form.address }}
+                                    {% if customer_form.errors.passport_number %}
+                                        <div class="alert alert-danger">
+                                            <strong>
+                                               {{ customer_form.errors.passport_number }}
+                                            </strong>
+                                        </div>
+                                    {% endif %}
                                     {{ customer_form.passport_number }}
                                     {% if customer_form.errors.when_passport_issued %}
                                         <div class="alert alert-danger">
