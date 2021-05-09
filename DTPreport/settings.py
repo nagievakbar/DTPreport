@@ -29,6 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['makereport.elite-house.uz',
                  '127.0.0.1',
                  'e-otsenka.uz',
+                 'e-imzo.uz'
                  'localhost',
                  '184.196.214.55'
                  ]
