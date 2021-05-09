@@ -174,7 +174,13 @@
         </div>
 
     {% endif %}
-
+        <div class="alert alert-danger">
+            <strong>
+                {{ car_form.errors }}
+                {{ report_form.errors }}
+                {{ customer_form.errors }}
+            </strong>
+        </div>
 
 
     <section class="padding_phone" style="z-index: 9999 !important;">
