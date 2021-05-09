@@ -372,7 +372,7 @@ class ReportView(View):
             total_price_report = 0
             template = 'makereport/add_repor.html'
             holds_image = hold_image()
-
+        print(len(consumable_formset))
         context = {
             'id_image': holds_image.id,
             'id': report_id,

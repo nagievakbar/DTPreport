@@ -278,6 +278,7 @@
                                 <ul class="drop-down-list">
                                     <li>10 %</li>
                                     <li>20 %</li>
+                                    <li>Отменить</li>
                                 </ul>
                             </div>
                         </div>
@@ -342,7 +343,7 @@
                                     <div id="empty_service_form" style="display:none">
                                         <table class='no_error'>
                                             <tr>
-                                                <td></td>
+                                                <td>replace_counter</td>
                                                 <td>{{ service_formset.empty_form.service_id }}</td>
                                                 <td>{{ service_formset.empty_form.name }}</td>
                                                 <td>{{ service_formset.empty_form.norm_per_hour }}</td>
@@ -385,7 +386,7 @@
                                         {#                                        {{ form.errors }}#}
                                         <table class='no_error'>
                                             <tr>
-                                                <td>{{ forloop.counter }}</td>
+                                                <td id="counter_id">{{ forloop.counter }}</td>
                                                 <td>{{ form.product_id }}</td>
                                                 <td>{{ form.name }}</td>
                                                 {#                                                <td>{{ form.unit }}</td>#}
@@ -398,7 +399,7 @@
                                     <div id="empty_product_form" style="display:none">
                                         <table class='no_error'>
                                             <tr>
-                                                <td>{{ product_formset.total_form_count }}</td>
+                                                <td id="counter_id">replace_counter</td>
                                                 <td>{{ product_formset.empty_form.product_id }}</td>
                                                 <td>{{ product_formset.empty_form.name }}</td>
                                                 {#                                                        <td>{{ product_formset.empty_form.unit }}</td>#}
@@ -474,7 +475,8 @@
                                     <div id="empty_consum_form" style="display:none">
                                         <table class='no_error'>
                                             <tr>
-                                                <td class="id_padding"> {{ consumable_formset.empty_form.consumable_id }}</td>
+                                                <td class="id_padding">replace_counter</td>
+                                                <td >{{consumable_formset.empty_form.consumable_id }}</td>
                                                 <td>{{ consumable_formset.empty_form.name }}</td>
                                                 <td>{{ consumable_formset.empty_form.unit }}</td>
                                                 <td>{{ consumable_formset.empty_form.quantity }}</td>
@@ -841,6 +843,16 @@
 {% block javascript %}
 
     <script>
+        var addServiceCounter = $('#service_formset').find('table').length - 1;
+        var addProductCounter =  $('#product_formset').find('table').length - 1;
+        var addConsumableCounter =  $('#consumable_formset').find('table').length - 1;
+
+        function textAreaAdjust(element) {
+            element.style.height  = '1px';
+            element.style.height = (5 + element.scrollHeight) + "px";
+        }
+
+
         var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
         $(document).on('keypress', "form", function (event) {
             return event.key !== "Enter";
@@ -853,27 +865,24 @@
         })
 
         function add_service() {
-            console.log('CLICK-Service');
-            var form_idx = $('#id_service-TOTAL_FORMS').val();
-            console.log("FORM IDX" + form_idx);
-            $('#service_formset').append($('#empty_service_form').html().replace(/__prefix__/g, form_idx));
-            $('#id_service-TOTAL_FORMS').val(parseInt(form_idx) + 1);
-
-        };
+            var newTag = $('#empty_service_form').html();
+            console.log('LEFNTHFSAFS');
+            console.log();
+            $('#service_formset').append(newTag.replace('replace_counter', addServiceCounter));
+            addServiceCounter++;
+        }
 
         function add_product() {
             console.log('CLICK-Product')
-            var form_idx = $('#id_product-TOTAL_FORMS').val();
-            $('#product_formset').append($('#empty_product_form').html().replace(/__prefix__/g, form_idx));
-            $('#id_product-TOTAL_FORMS').val(parseInt(form_idx) + 1);
-
+            $('#product_formset').append($('#empty_product_form').html().replace('replace_counter', addProductCounter));
+            addProductCounter++;
         }
 
         function add_consumable() {
 
             var form_idx = $('#id_consumable-TOTAL_FORMS').val();
-            $('#consumable_formset').append($('#empty_consum_form').html().replace(/__prefix__/g, form_idx));
-            $('#id_consumable-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+            $('#consumable_formset').append($('#empty_consum_form').html().replace('replace_counter', addConsumableCounter));
+            addConsumableCounter++;
 
         }
 
@@ -904,8 +913,10 @@
                     success: function (data) {
                         console.log('success')
                         set_price(data.price, last_input_price);
-                        last_input_name.val(data.name)
-                        last_input_nph.val(data.norm_per_hour)
+                        last_input_name.val(data.name);
+                        console.log(last_input_name);
+                        textAreaAdjust(last_input_name[0]);
+                        last_input_nph.val(data.norm_per_hour);
 
                         get_procent(last_input_premium);
                         last_input_premium.select()
@@ -923,7 +934,6 @@
         function get_procent(item) {
             if (item.val() == "") {
                 var procent = $("#procent").val().split(" ")[0];
-                console.log(procent);
                 item.val(procent);
             }
         }
@@ -1026,6 +1036,7 @@
                         set_price(data.price, last_input_price);
                         last_input_quantity.select()
                         last_input_name.val(data.name)
+                        textAreaAdjust(last_input_name[0]);
                         get_procent(last_input_quantity);
 
                     },
@@ -1114,6 +1125,7 @@
                         set_price(data.price, last_input_price);
                         last_input_price_cons.select()
                         last_input_name.val(data.name)
+                        textAreaAdjust(last_input_name[0]);
                         last_input_unit.val(data.unit)
 
 
@@ -1238,18 +1250,12 @@
         $(".btn-info").on('click', function () {
             $("#file-4").fileinput('refresh', {previewClass: 'bg-info'});
         });
-        /*
-         $('#file-4').on('fileselectnone', function() {
-         alert('Huh! You selected no files.');
-         });
-         $('#file-4').on('filebrowse', function() {
-         alert('File browse clicked for #file-4');
-         });
-         */
+
+
+
         $(document).ready(function () {
             calculate_total_sum(0);
-            const server = "http://e-otsenka.uz"
-
+            const server = "http://e-otsenka.uz";
             $("#test-upload").fileinput({
                 'theme': 'fas',
                 'showPreview': false,

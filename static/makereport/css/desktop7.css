@@ -241,8 +241,7 @@ table {
 }
 
 .table-headers:nth-child(4) {
-    width: 30%;
-    padding-left: 20px;
+    width: 10%;
     text-align: left;
 }
 
@@ -250,24 +249,23 @@ table {
     padding-left: 60px;
     text-align: left;
     width: 60%;
+    padding-right: 300px;
 }
 
-.table-headers:nth-child(5) {
-    width: 100%;
-    text-align: left;
-    padding-right: 60px;
-}
+/*.table-headers:nth-child(5) {*/
+/*    width: 100%;*/
+/*    text-align: left;*/
+/*    padding-right: 60px;*/
+/*}*/
 
 .table-headers:nth-child(6) {
-    width: 100%;
     text-align: left;
-    padding-right: 80px;
+    padding-left: 10px;
 }
 
 .table-headers:nth-child(7) {
     width: 100%;
-    text-align: left;
-    padding-right: 60px;
+
 }
 
 
@@ -315,7 +313,7 @@ table {
 }
 
 .name2 {
-    width: 240px;
+    width: 390px;
 }
 
 @media (max-width: 576px) {
@@ -325,19 +323,19 @@ table {
 }
 
 .time2 {
-    max-width: 100px;
+    max-width: 55px;
 }
 
 .allowance2 {
-    max-width: 100px;
+    max-width: 35px;
 }
 
 .price2 {
-    max-width: 100px;
+    max-width: 70px;
 }
 
 .sum2 {
-    max-width: 100px;
+    max-width: 80px;
 }
 
 /*  */
@@ -395,17 +393,17 @@ table {
 
 .table-spare-part-headers:nth-child(4) {
     text-align: left;
-    padding-left: 180px;
+    padding-left: 240px;
 }
 
 .table-spare-part-headers:nth-child(5) {
-    text-align: left;
-    padding-left: 75px;
+       text-align: left;
+    padding-left: 10px;
 }
 
 .table-spare-part-headers:nth-child(6) {
-    text-align: left;
-    padding-left: 80px;
+   text-align: left;
+    padding-left: 60px;
 }
 
 .input3 {
@@ -459,7 +457,7 @@ table {
 }
 
 .name3 {
-    width: 250px;
+        width: 320px;
 }
 
 @media (max-width: 576px) {
@@ -467,17 +465,19 @@ table {
         width: 95%;
     }
 }
-
+#counter_id{
+    padding-top: 15px;
+}
 .time3 {
-    max-width: 100px;
+       max-width: 30px;
 }
 
 .price3 {
-    max-width: 100px;
+   max-width: 80px;
 }
 
 .sum3 {
-    max-width: 100px;
+    max-width: 80px;
 }
 
 .responsive-table {
@@ -648,7 +648,7 @@ table {
 }
 
 .first4 {
-    max-width: 75px;
+        max-width: 31px;
 }
 
 @media (max-width: 576px) {
@@ -658,7 +658,7 @@ table {
 }
 
 .name4 {
-    width: 265px;
+   width: 453px;
 }
 
 @media (max-width: 576px) {
@@ -669,19 +669,19 @@ table {
 }
 
 .time4 {
-    max-width: 100px;
+     max-width: 30px;
 }
 
 .allowance4 {
-    max-width: 100px;
+   max-width: 40px;
 }
 
 .price4 {
-    max-width: 100px;
+    max-width: 60px;
 }
 
 .sum4 {
-    max-width: 100px;
+        max-width: 80px;
 }
 
 
@@ -913,30 +913,33 @@ table {
     height: 35px;
 }
 
-#consumable_formset .table-spare-part-headers4:nth-child(2){
+#consumable_formset .table-spare-part-headers4:nth-child(2) {
     text-align: left;
     padding-left: 10px;
 }
-#consumable_formset .table-spare-part-headers4:nth-child(3){
-  padding-left: 70px;
+
+#consumable_formset .table-spare-part-headers4:nth-child(3) {
+        padding-left: 20px;
 }
 
 
-#consumable_formset .table-spare-part-headers4:nth-child(4){
-    padding-left: 180px;
+#consumable_formset .table-spare-part-headers4:nth-child(4) {
+    padding-left: 340px;
 }
-#consumable_formset .table-spare-part-headers4:nth-child(5){
-    padding-left: 30px;
+
+#consumable_formset .table-spare-part-headers4:nth-child(5) {
+    padding-left: 1px;
 }
 
 
-#consumable_formset .table-spare-part-headers4:nth-child(6){
-    padding-left: 50px;
-}
-#consumable_formset .table-spare-part-headers4:nth-child(7){
-    padding-left: 50px;
+#consumable_formset .table-spare-part-headers4:nth-child(6) {
+    padding-left: 0px;
 }
 
-#consumable_formset .id_padding{
-  padding-left: 10px;
+#consumable_formset .table-spare-part-headers4:nth-child(7) {
+   padding-left: 9px;
+}
+
+#consumable_formset .id_padding {
+    padding-left: 10px;
 }
