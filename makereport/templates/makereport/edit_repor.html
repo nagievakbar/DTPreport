@@ -227,6 +227,13 @@
                                     {{ car_form.owner_address }}
                                     {{ customer_form.name }}
                                     {{ customer_form.address }}
+                                     {% if car_form.errors.car_number %}
+                                        <div class="alert alert-danger">
+                                            <strong>
+                                                {{ car_form.errors.car_number }}
+                                            </strong>
+                                        </div>
+                                    {% endif %}
                                     {{ customer_form.passport_number }}
                                     {{ customer_form.when_passport_issued }}
                                     {{ customer_form.whom_passport_issued }}
