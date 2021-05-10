@@ -1,0 +1,314 @@
+{
+  'csrfmiddlewaretoken': [
+    '21iIgfIc7FbdRSFAbA6DlZLS8g4wtrYmfp0FuEjBMFgl0m4kRs436BNcWYFDySGE'
+  ],
+  'id': [
+    '15'
+  ],
+  'report_number': [
+    '124214'
+  ],
+  'report_date': [
+    '124124'
+  ],
+  'contract_number': [
+    '222222'
+  ],
+  'contract_date': [
+    '222222'
+  ],
+  'car_number': [
+    '21421'
+  ],
+  'brand_text': [
+    '0000'
+  ],
+  'registration': [
+    '214214'
+  ],
+  'engine_number': [
+    '412412'
+  ],
+  'body_number': [
+    '412'
+  ],
+  'chassis': [
+    '42142'
+  ],
+  'car_color': [
+    '214'
+  ],
+  'mileage': [
+    '124124'
+  ],
+  'release_date': [
+    '2000'
+  ],
+  'type_of_car': [
+    '��������'
+  ],
+  'car_owner': [
+    '214214'
+  ],
+  'owner_address': [
+    '9305 Gerwig Lane, Suite e'
+  ],
+  'name': [
+    'miranda storey'
+  ],
+  'address': [
+    '9305 Gerwig Lane, Suite e'
+  ],
+  'passport_number': [
+    '214124'
+  ],
+  'when_passport_issued': [
+    '2016-04-24'
+  ],
+  'whom_passport_issued': [
+    '2124'
+  ],
+  'phone_number': [
+    '84103636800'
+  ],
+  'gnu_or_gje': [
+    '214214'
+  ],
+  'uvajaemaya': [
+    '214214'
+  ],
+  'mesto_osmotra': [
+    '21421'
+  ],
+  'brand': [
+    '����'
+  ],
+  'service-TOTAL_FORMS': [
+    '2'
+  ],
+  'service-INITIAL_FORMS': [
+    '0'
+  ],
+  'service-MIN_NUM_FORMS': [
+    '0'
+  ],
+  'service-MAX_NUM_FORMS': [
+    '1000'
+  ],
+  'service-0-service_id': [
+    '1'
+  ],
+  'service-0-name': [
+    '���������� - ����� �����, ������ ���� � ��� ����������,'
+  ],
+  'service-0-norm_per_hour': [
+    '0.5'
+  ],
+  'service-0-premium': [
+    '2'
+  ],
+  'service-0-price': [
+    '100000'
+  ],
+  'service-0-service_cost': [
+    '250000'
+  ],
+  'service-1-service_id': [
+    '3'
+  ],
+  'service-1-name': [
+    '���������� - ���������� ������. ���������� ������ ������ � ���������, ��������� � ��������� �������, ������, ������, �������, ������.'
+  ],
+  'service-1-norm_per_hour': [
+    '0.4'
+  ],
+  'service-1-premium': [
+    '4'
+  ],
+  'service-1-price': [
+    '0'
+  ],
+  'service-1-service_cost': [
+    '0'
+  ],
+  'service-__prefix__-service_id': [
+    ''
+  ],
+  'service-__prefix__-name': [
+    ''
+  ],
+  'service-__prefix__-norm_per_hour': [
+    ''
+  ],
+  'service-__prefix__-premium': [
+    ''
+  ],
+  'service-__prefix__-price': [
+    ''
+  ],
+  'service-__prefix__-service_cost': [
+    ''
+  ],
+  'product-TOTAL_FORMS': [
+    '2'
+  ],
+  'product-INITIAL_FORMS': [
+    '0'
+  ],
+  'product-MIN_NUM_FORMS': [
+    '0'
+  ],
+  'product-MAX_NUM_FORMS': [
+    '1000'
+  ],
+  'product-0-product_id': [
+    ''
+  ],
+  'product-0-name': [
+    ''
+  ],
+  'product-0-quantity': [
+    ''
+  ],
+  'product-0-price': [
+    ''
+  ],
+  'product-0-product_cost': [
+    ''
+  ],
+  'product-1-product_id': [
+    ''
+  ],
+  'product-1-name': [
+    ''
+  ],
+  'product-1-quantity': [
+    ''
+  ],
+  'product-1-price': [
+    ''
+  ],
+  'product-1-product_cost': [
+    ''
+  ],
+  'product-__prefix__-product_id': [
+    ''
+  ],
+  'product-__prefix__-name': [
+    ''
+  ],
+  'product-__prefix__-quantity': [
+    ''
+  ],
+  'product-__prefix__-price': [
+    ''
+  ],
+  'product-__prefix__-product_cost': [
+    ''
+  ],
+  'consumable-TOTAL_FORMS': [
+    '2'
+  ],
+  'consumable-INITIAL_FORMS': [
+    '0'
+  ],
+  'consumable-MIN_NUM_FORMS': [
+    '0'
+  ],
+  'consumable-MAX_NUM_FORMS': [
+    '1000'
+  ],
+  'consumable-0-consumable_id': [
+    ''
+  ],
+  'consumable-0-name': [
+    ''
+  ],
+  'consumable-0-unit': [
+    ''
+  ],
+  'consumable-0-quantity': [
+    ''
+  ],
+  'consumable-0-price': [
+    ''
+  ],
+  'consumable-0-consumable_cost': [
+    ''
+  ],
+  'consumable-1-consumable_id': [
+    ''
+  ],
+  'consumable-1-name': [
+    ''
+  ],
+  'consumable-1-unit': [
+    ''
+  ],
+  'consumable-1-quantity': [
+    ''
+  ],
+  'consumable-1-price': [
+    ''
+  ],
+  'consumable-1-consumable_cost': [
+    ''
+  ],
+  'consumable-__prefix__-consumable_id': [
+    ''
+  ],
+  'consumable-__prefix__-name': [
+    ''
+  ],
+  'consumable-__prefix__-unit': [
+    ''
+  ],
+  'consumable-__prefix__-quantity': [
+    ''
+  ],
+  'consumable-__prefix__-price': [
+    ''
+  ],
+  'consumable-__prefix__-consumable_cost': [
+    ''
+  ],
+  'point': [
+    '23'
+  ],
+  'weight': [
+    '23'
+  ],
+  'wear': [
+    '124'
+  ],
+  'accept_wear': [
+    '124'
+  ],
+  'image': [
+    ''
+  ],
+  'photo': [
+    ''
+  ],
+  'photos': [
+    ''
+  ],
+  'checks': [
+    ''
+  ],
+  'total_report_cost': [
+    '860000'
+  ],
+  'opr_damage': [
+    '213213'
+  ],
+  'opr_ust': [
+    '1232132'
+  ],
+  'departure': [
+    '123213'
+  ],
+  'total': [
+    '1568558'
+  ]
+}

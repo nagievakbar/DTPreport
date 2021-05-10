@@ -261,9 +261,7 @@ def get_consumable_cost(request):
 
 def add_service_to_report(report, service_id, cost):
     report.service.add(Service.objects.get(service_id=service_id))
-    print('service_id={} add to report'.format(service_id))
-    print(report.service.all())
-    # print('something wrong with add service to report')
+
     calculate_service_cost(report, cost)
 
 

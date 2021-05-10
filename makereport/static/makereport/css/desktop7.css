@@ -1,6 +1,4 @@
-/*--------------------------------------------------------------
-accordion
---------------------------------------------------------------*/
+
 .accordion {
     max-width: 900px;
     margin: 0 auto;
@@ -313,6 +311,7 @@ table {
 }
 
 .name2 {
+    margin-top: 2px;
     width: 390px;
 }
 
@@ -397,12 +396,12 @@ table {
 }
 
 .table-spare-part-headers:nth-child(5) {
-       text-align: left;
+    text-align: left;
     padding-left: 10px;
 }
 
 .table-spare-part-headers:nth-child(6) {
-   text-align: left;
+    text-align: left;
     padding-left: 60px;
 }
 
@@ -449,7 +448,7 @@ table {
     justify-content: center;
     width: 30px;
     height: 30px;
-
+    margin-bottom: 7px;
     border-radius: 5px;
     color: black;
     position: relative;
@@ -457,7 +456,7 @@ table {
 }
 
 .name3 {
-        width: 320px;
+    width: 320px;
 }
 
 @media (max-width: 576px) {
@@ -465,15 +464,17 @@ table {
         width: 95%;
     }
 }
-#counter_id{
+
+#counter_id {
     padding-top: 15px;
 }
+
 .time3 {
-       max-width: 30px;
+    max-width: 30px;
 }
 
 .price3 {
-   max-width: 80px;
+    max-width: 80px;
 }
 
 .sum3 {
@@ -648,7 +649,7 @@ table {
 }
 
 .first4 {
-        max-width: 31px;
+    max-width: 31px;
 }
 
 @media (max-width: 576px) {
@@ -658,7 +659,9 @@ table {
 }
 
 .name4 {
-   width: 453px;
+    width: 453px;
+    margin-top: 10px;
+    margin-bottom: 8px;
 }
 
 @media (max-width: 576px) {
@@ -669,11 +672,11 @@ table {
 }
 
 .time4 {
-     max-width: 30px;
+    max-width: 30px;
 }
 
 .allowance4 {
-   max-width: 40px;
+    max-width: 40px;
 }
 
 .price4 {
@@ -681,7 +684,7 @@ table {
 }
 
 .sum4 {
-        max-width: 80px;
+    max-width: 80px;
 }
 
 
@@ -904,8 +907,7 @@ table {
 }
 
 .name3 {
-
-    margin-top: 15px;
+    margin-top: 12px;
 }
 
 .total {
@@ -919,7 +921,7 @@ table {
 }
 
 #consumable_formset .table-spare-part-headers4:nth-child(3) {
-        padding-left: 20px;
+    padding-left: 20px;
 }
 
 
@@ -937,7 +939,7 @@ table {
 }
 
 #consumable_formset .table-spare-part-headers4:nth-child(7) {
-   padding-left: 9px;
+    padding-left: 9px;
 }
 
 #consumable_formset .id_padding {

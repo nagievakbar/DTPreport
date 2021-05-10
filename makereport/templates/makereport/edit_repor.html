@@ -829,28 +829,29 @@
         })
 
         function add_service() {
-            var addServiceCounter = $('#service_formset').find('table').length - 1;
             var newTag = $('#empty_service_form').html();
-
-            console.log(newTag);
-            console.log();
-            $('#service_formset').append(newTag.replace('replace_counter', addServiceCounter));
-
+            var updatedTag = newTag.replace(/__prefix__/g, addServiceCounter - 1);
+            $('#service_formset').append(updatedTag.replace('replace_counter', addServiceCounter));
+            $('#id_service-TOTAL_FORMS').val(addServiceCounter);
+            addServiceCounter++;
         }
 
         function add_product() {
-            console.log('CLICK-Product')
-            $('#product_formset').append($('#empty_product_form').html().replace('replace_counter', addProductCounter));
+            var newTag = $('#empty_product_form').html();
+            var updatedTag = newTag.replace(/__prefix__/g, addProductCounter - 1);
+            $('#product_formset').append(updatedTag.replace('replace_counter', addProductCounter));
+            $('#id_product-TOTAL_FORMS').val(addProductCounter);
             addProductCounter++;
         }
 
         function add_consumable() {
-
-            var form_idx = $('#id_consumable-TOTAL_FORMS').val();
-            $('#consumable_formset').append($('#empty_consum_form').html().replace('replace_counter', addConsumableCounter));
+            var newTag = $('#empty_consum_form').html();
+            var updatedTag = newTag.replace(/__prefix__/g, addConsumableCounter - 1);
+            $('#consumable_formset').append(updatedTag.replace('replace_counter', addConsumableCounter));
+            $('#id_consumable-TOTAL_FORMS').val(addConsumableCounter);
             addConsumableCounter++;
-
         }
+
 
         $(document).on('keypress', ".first2", function (e) {
             console.log('CLICK service_id')

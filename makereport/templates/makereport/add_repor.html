@@ -244,7 +244,7 @@
                                     {% if customer_form.errors.passport_number %}
                                         <div class="alert alert-danger">
                                             <strong>
-                                               {{ customer_form.errors.passport_number }}
+                                                {{ customer_form.errors.passport_number }}
                                             </strong>
                                         </div>
                                     {% endif %}
@@ -483,7 +483,7 @@
                                         <table class='no_error'>
                                             <tr>
                                                 <td class="id_padding">replace_counter</td>
-                                                <td >{{consumable_formset.empty_form.consumable_id }}</td>
+                                                <td>{{ consumable_formset.empty_form.consumable_id }}</td>
                                                 <td>{{ consumable_formset.empty_form.name }}</td>
                                                 <td>{{ consumable_formset.empty_form.unit }}</td>
                                                 <td>{{ consumable_formset.empty_form.quantity }}</td>
@@ -851,11 +851,11 @@
 
     <script>
         var addServiceCounter = $('#service_formset').find('table').length - 1;
-        var addProductCounter =  $('#product_formset').find('table').length - 1;
-        var addConsumableCounter =  $('#consumable_formset').find('table').length - 1;
+        var addProductCounter = $('#product_formset').find('table').length - 1;
+        var addConsumableCounter = $('#consumable_formset').find('table').length - 1;
 
         function textAreaAdjust(element) {
-            element.style.height  = '1px';
+            element.style.height = '1px';
             element.style.height = (5 + element.scrollHeight) + "px";
         }
 
@@ -873,24 +873,26 @@
 
         function add_service() {
             var newTag = $('#empty_service_form').html();
-            console.log('LEFNTHFSAFS');
-            console.log();
-            $('#service_formset').append(newTag.replace('replace_counter', addServiceCounter));
+            var updatedTag = newTag.replace(/__prefix__/g, addServiceCounter - 1);
+            $('#service_formset').append(updatedTag.replace('replace_counter', addServiceCounter));
+            $('#id_service-TOTAL_FORMS').val(addServiceCounter);
             addServiceCounter++;
         }
 
         function add_product() {
-            console.log('CLICK-Product')
-            $('#product_formset').append($('#empty_product_form').html().replace('replace_counter', addProductCounter));
+            var newTag = $('#empty_product_form').html();
+            var updatedTag = newTag.replace(/__prefix__/g, addProductCounter - 1);
+            $('#product_formset').append(updatedTag.replace('replace_counter', addProductCounter));
+            $('#id_product-TOTAL_FORMS').val(addProductCounter);
             addProductCounter++;
         }
 
         function add_consumable() {
-
-            var form_idx = $('#id_consumable-TOTAL_FORMS').val();
-            $('#consumable_formset').append($('#empty_consum_form').html().replace('replace_counter', addConsumableCounter));
+            var newTag = $('#empty_consum_form').html();
+            var updatedTag = newTag.replace(/__prefix__/g, addConsumableCounter - 1);
+            $('#consumable_formset').append(updatedTag.replace('replace_counter', addConsumableCounter));
+            $('#id_consumable-TOTAL_FORMS').val(addConsumableCounter);
             addConsumableCounter++;
-
         }
 
         $(document).on('keypress', ".first2", function (e) {
@@ -1257,7 +1259,6 @@
         $(".btn-info").on('click', function () {
             $("#file-4").fileinput('refresh', {previewClass: 'bg-info'});
         });
-
 
 
         $(document).ready(function () {

@@ -372,7 +372,7 @@ class ReportView(View):
             total_price_report = 0
             template = 'makereport/add_repor.html'
             holds_image = hold_image()
-        print(len(consumable_formset))
+
         context = {
             'id_image': holds_image.id,
             'id': report_id,
@@ -402,10 +402,10 @@ class ReportView(View):
     @method_decorator(decorators)
     def post(self, request, id=None, extend=0):
         total_report_price = 0
+
         if id:
             return self.put(request, id)
         print("THIS IS HERE")
-        print(request.POST['id'])
         holds_images = HoldsImages.objects.get(id=request.POST['id'])
         images = holds_images.image.all()
         pphotos = holds_images.pp_photo.all()
@@ -540,6 +540,12 @@ class ReportView(View):
             new_report.car = new_car
             new_report.created_by = request.user.myuser
             new_report.save()
+            new_report.product_data.clear()
+            new_report.service_data.clear()
+            new_report.consumable_data.clear()
+            report.consumable.clear()
+            report.service.clear()
+            report.product.clear()
             for form in service_formset.forms:
                 if form.is_valid() and form.cleaned_data:
                     sd = get_data_from_service_form(form)
@@ -596,6 +602,7 @@ class ReportView(View):
         return render(request, 'makereport/delete_report.html', context=context)
 
     def init_service_formset(self, request):
+
         service_form = formset_factory(ServiceForm, extra=2)
         service_formset = service_form(request.POST, prefix='service')
         return service_formset
