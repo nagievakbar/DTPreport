@@ -363,6 +363,15 @@
                                     {#                                        </tbody>#}
                                 </table>
                             </div>
+                            <div>
+                                <ul class="responsive-table">
+                                    <li class="table-row">
+                                        <div class="col col-1" data-label="">Общая<span>стоимость</span></div>
+                                        <div class="col col-2" data-label="Эксплуатационныйизнос"><span
+                                                id="all_service_cost">{{ report.service_cost }}</span></div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -422,20 +431,11 @@
                             </div>
                             <div>
                                 <ul class="responsive-table">
-
                                     <li class="table-row">
-                                        <div class="col col-1" data-label=""></div>
-                                        <div class="col col-2" data-label="">0</div>
+                                        <div class="col col-1" data-label="">Общая<span>стоимость</span></div>
+                                        <div class="col col-2" data-label="Эксплуатационныйизнос"><span
+                                                id="all_product_cost">{{ report.product_cost }}</span></div>
                                     </li>
-                                    <li class="table-row">
-                                        <div class="col col-1" data-label="">Эксплуатационный<span>износ</span></div>
-                                        <div class="col col-2" data-label="Эксплуатационныйизнос">0</div>
-                                    </li>
-                                    <li class="table-row">
-                                        <div class="col col-1" data-label="">С<span>минусом</span>износа</div>
-                                        <div class="col col-2" data-label="Сминусомизноса">0</div>
-                                    </li>
-
                                 </ul>
                             </div>
                         </div>
@@ -495,6 +495,15 @@
 
                                     </tbody>
                                 </table>
+                            </div>
+                            <div>
+                                <ul class="responsive-table">
+                                    <li class="table-row">
+                                        <div class="col col-1" data-label="">Общая<span>стоимость</span></div>
+                                        <div class="col col-2" data-label="Эксплуатационныйизнос"><span
+                                                id="all_consumable_cost">{{ report.consumable_cost }}</span></div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -855,8 +864,11 @@
         var addConsumableCounter = $('#consumable_formset').find('table').length - 1;
 
         function textAreaAdjust(element) {
-            element.style.height = '1px';
-            element.style.height = (5 + element.scrollHeight) + "px";
+            element.style.height = "1px";
+            if (element.scrollHeight === 0) {
+                element.style.height = "30px";
+            } else
+                element.style.height = (5 + element.scrollHeight) + "px";
         }
 
 
@@ -963,7 +975,9 @@
                     },
                     dataType: 'json',
                     success: function (data) {
-                        calculate_total_sum(data.service_cost - service_cost.val());
+                        var sum = data.service_cost - service_cost.val();
+                        calculate_total_sum(sum);
+                        calculate_exact_sum(sum, 'service');
                         service_cost.val(data.service_cost)
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
@@ -980,6 +994,14 @@
             console.log(sum + " VALUE PREVIOUS");
             var full_sum = sum + previous;
             input.val(full_sum);
+            label.text(full_sum);
+        }
+
+        function calculate_exact_sum(sum, tag) {
+            var tag = `#all_${tag}_cost`;
+            var label = $(tag);
+            var previous = label.text() === "" ? 0 : parseInt(label.text().replace(/\s/g, ''));
+            var full_sum = previous + sum;
             label.text(full_sum);
         }
 
@@ -1009,7 +1031,9 @@
                             add_service();
                             present_table.select()
                         }
-                        calculate_total_sum(data.service_cost - service_cost.val());
+                        var sum = data.service_cost - service_cost.val();
+                        calculate_total_sum(sum);
+                        calculate_exact_sum(sum, 'service');
                         service_cost.val(data.service_cost)
 
                     },
@@ -1070,7 +1094,9 @@
                     },
                     dataType: 'json',
                     success: function (data) {
-                        calculate_total_sum(data.total_cost - cost.val());
+                        var sum = data.total_cost - cost.val();
+                        calculate_total_sum(sum);
+                        calculate_exact_sum(sum, 'consumable');
                         cost.val(data.total_cost)
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
@@ -1102,7 +1128,9 @@
                         if (!cost.val()) {
                             add_consumable()
                         }
-                        calculate_total_sum(data.total_cost - cost.val());
+                        var sum = data.total_cost - cost.val();
+                        calculate_total_sum(sum);
+                        calculate_exact_sum(sum, 'consumable');
                         cost.val(data.total_cost)
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
@@ -1160,7 +1188,9 @@
                     },
                     dataType: 'json',
                     success: function (data) {
-                        calculate_total_sum(data.total_cost - cost.val());
+                        var sum = data.total_cost - cost.val();
+                        calculate_total_sum(sum);
+                        calculate_exact_sum(sum, 'product')
                         cost.val(data.total_cost);
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
@@ -1194,7 +1224,9 @@
                         if (!cost.val()) {
                             add_product();
                         }
-                        calculate_total_sum(data.total_cost - cost.val());
+                        var sum = data.total_cost - cost.val();
+                        calculate_total_sum(sum);
+                        calculate_exact_sum(sum, 'product')
                         cost.val(data.total_cost);
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
