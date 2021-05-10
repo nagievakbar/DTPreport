@@ -240,7 +240,7 @@ def get_service_cost(request):
 def get_product_cost(request):
     quantity = request.GET.get('quantity', None)
     price = request.GET.get('price', None)
-    total_cost = int(float(quantity) * float(price) / 100.0)
+    total_cost = int(float(quantity) * float(price))
 
     data = {
         'total_cost': total_cost,
@@ -251,7 +251,7 @@ def get_product_cost(request):
 def get_consumable_cost(request):
     quantity = request.GET.get('quantity', None)
     price = request.GET.get('price', None)
-    total_cost = int(float(quantity) * float(price) / 100.0)
+    total_cost = int(float(quantity) * float(price))
 
     data = {
         'total_cost': total_cost,
