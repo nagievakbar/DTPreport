@@ -55,7 +55,7 @@ class GenerateMixing(View):
             path = os.path.join(s.MEDIA_ROOT, "{}".format(splited[0]))
             pdf = PyPDFML(splited[-1], path)
             pdf.generate(context)
-        except:
+        except (jinja2.exceptions.TemplateNotFound, AttributeError):
             pdf = PyPDFML('mixing.xml')
             pdf.generate(context)
         data = pdf.contents()
@@ -81,7 +81,7 @@ class GenerateAgreement(View):
             path = os.path.join(s.MEDIA_ROOT, "{}".format(splited[0]))
             pdf = PyPDFML(splited[-1], path)
             pdf.generate(context)
-        except:
+        except (jinja2.exceptions.TemplateNotFound, AttributeError):
             pdf = PyPDFML('agreem.xml')
             pdf.generate(context)
 
@@ -140,7 +140,7 @@ def get_response(request, id):
         path = os.path.join(s.MEDIA_ROOT, "{}".format(splited[0]))
         pdf = PyPDFML(splited[-1], path)
         pdf.generate(context)
-    except jinja2.exceptions.TemplateNotFound:
+    except (jinja2.exceptions.TemplateNotFound, AttributeError):
         pdf = PyPDFML('example.xml')
         pdf.generate(context)
     data = pdf.contents()
@@ -171,7 +171,7 @@ def create_base64(request, new_report_pdf):
         path = os.path.join(s.MEDIA_ROOT, "{}".format(splited[0]))
         pdf = PyPDFML(splited[-1], path)
         pdf.generate(context)
-    except jinja2.exceptions.TemplateNotFound:
+    except (jinja2.exceptions.TemplateNotFound, AttributeError):
         pdf = PyPDFML('example.xml')
         pdf.generate(context)
     data = pdf.contents()
