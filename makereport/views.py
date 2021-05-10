@@ -173,7 +173,7 @@ class ReportEditView(View):
             'contract_form': contract_form,
             'report_form': report_form,
             'id': report.report_id,
-            'prices' : get_prices(),
+            'prices': get_prices(),
             'car_form': car_form,
             'customer_form': customer_form,
             'service_formset': service_formset,
@@ -566,8 +566,8 @@ class ReportView(View):
                 wd = get_data_from_wear_form(wear_form)
                 new_report.wear_data.update(wd)
                 new_report.get_total_report_price()
-            create_base64(request, new_report)
             new_report.save()
+            create_base64(request, new_report)
             return HttpResponseRedirect('/report/list')
 
         context = {
@@ -661,36 +661,42 @@ def users_list(request):
 
 @login_required
 def get_template(request):
-    user = request.user
-    if user.myuser.template != None:
-        user.myuser.template.delete()
-
-    user.myuser.template = request.FILES['file']
-    user.myuser.save()
-    return JsonResponse({})
+    try:
+        TemplateBase.objects.first().delete()
+    finally:
+        new_template = TemplateBase.objects.create()
+        new_template.template = request.FILES['file']
+        new_template.save()
+        return JsonResponse({})
 
 
 @login_required
 def get_template_mixing(request):
-    user = request.user
-    if user.myuser.template_mixing != None:
-        user.myuser.template_mixing.delete()
-
-    user.myuser.template_mixing = request.FILES['file']
-    user.myuser.save()
-
-    return JsonResponse({})
+    try:
+        TemplateMixing.objects.first().delete()
+    finally:
+        new_template = TemplateMixing.objects.create()
+        new_template.template = request.FILES['file']
+        new_template.save()
+        return JsonResponse({})
 
 
 @login_required
 def get_template_agreement(request):
-    user = request.user
-    if user.myuser.template_agreement != None:
-        user.myuser.template_agreement.delete()
+    try:
+        TemplateAgreement.objects.first().delete()
+    finally:
+        new_template = TemplateAgreement.objects.create()
+        new_template.template = request.FILES['file']
+        new_template.save()
+        return JsonResponse({})
 
-    user.myuser.template_agreement = request.FILES['file']
-    user.myuser.save()
-    return JsonResponse({})
+
+
+
+def delete_old(template):
+    if template is not None:
+        template.delete()
 
 
 class UserSettingsView(View):

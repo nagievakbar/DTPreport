@@ -190,27 +190,48 @@ class Consumable(models.Model):
 
 
 def handler_base(instance, filename):
-    return "templates_xml/base_{id}.xml".format(id=instance.user.id)
+    return "templates_xml/base.xml"
 
 
 def handler_base_mixing(instance, filename):
-    return "templates_xml/mixing_{id}.xml".format(id=instance.user.id)
+    return "templates_xml/mixing.xml"
 
 
 def handler_base_agreement(instance, filename):
-    return "templates_xml/agreement_{id}.xml".format(id=instance.user.id)
+    return "templates_xml/agreement.xml"
+
+
+class TemplateBase(models.Model):
+    template = models.FileField(blank=True, null=True, upload_to=handler_base,
+                                verbose_name='Шаблон для отчета')
+
+    def delete(self, *args, **kwargs):
+        default_storage.delete(self.template.path)
+        super(TemplateBase, self).delete(*args, **kwargs)
+
+
+class TemplateMixing(models.Model):
+    template = models.FileField(blank=True, null=True, upload_to=handler_base_mixing,
+                                       verbose_name='Шаблоны для заключения')
+
+    def delete(self, *args, **kwargs):
+        default_storage.delete(self.template.path)
+        super(TemplateMixing, self).delete(*args, **kwargs)
+
+
+class TemplateAgreement(models.Model):
+    template = models.FileField(blank=True, null=True, upload_to=handler_base_agreement,
+                                          verbose_name='Шаблоны для догвора')
+
+    def delete(self, *args, **kwargs):
+        default_storage.delete(self.template.path)
+        super(TemplateAgreement, self).delete(*args, **kwargs)
 
 
 class MyUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     report_rate_price = models.IntegerField(default=0, blank=True, null=True)
     report_rate_price_txt = models.CharField(max_length=200, blank=True, null=True)
-    template = models.FileField(blank=True, null=True, upload_to=handler_base,
-                                verbose_name='Шаблон для отчета')
-    template_mixing = models.FileField(blank=True, null=True, upload_to=handler_base_mixing,
-                                       verbose_name='Шаблоны для заключения')
-    template_agreement = models.FileField(blank=True, null=True, upload_to=handler_base_agreement,
-                                          verbose_name='Шаблоны для догвора')
 
     @receiver(post_save, sender=User)
     def update_profile_signal(sender, instance, created, **kwargs):
@@ -221,12 +242,6 @@ class MyUser(models.Model):
     def get_total_report_cost_txt(self):
         self.report_rate_price_txt = num2text(int(self.report_rate_price), main_units=((u'сум', u'сумы', u'сум'), 'f'))
         return self.report_rate_price_txt
-
-    def delete(self, *args, **kwargs):
-        default_storage.delete(self.template.path)
-        default_storage.delete(self.template_mixing.path)
-        default_storage.delete(self.template_agreement.path)
-        super(MyUser, self).delete(*args, **kwargs)
 
 
 class HoldsImages(models.Model):

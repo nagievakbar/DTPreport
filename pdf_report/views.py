@@ -3,7 +3,7 @@ from django.views.generic import View
 import os
 from DTPreport import settings as s
 from makereport.models import Report, Documents, Contract, Calculation, \
-    HoldsImages
+    HoldsImages, TemplateBase, TemplateMixing, TemplateAgreement
 from pdf_report.utils import PyPDFML
 from fpdf import FPDF
 from django.core.files.base import ContentFile
@@ -50,13 +50,17 @@ class GenerateMixing(View):
             'contract': contract,
         }
         try:
-            file = request.user.myuser.template_mixing
+            file = TemplateMixing.objects.first().template
+            print("asdsad")
+            print(file)
             splited = file.name.split('/')
+            print(splited)
             path = os.path.join(s.MEDIA_ROOT, "{}".format(splited[0]))
             pdf = PyPDFML(splited[-1], path)
             pdf.generate(context)
         except (jinja2.exceptions.TemplateNotFound, AttributeError):
             pdf = PyPDFML('mixing.xml')
+            print("ERROR OCCURED")
             pdf.generate(context)
         data = pdf.contents()
         response = FileResponse(ContentFile(data), content_type='application/pdf')
@@ -76,7 +80,7 @@ class GenerateAgreement(View):
             'contract': contract,
         }
         try:
-            file = request.user.myuser.template_agreement
+            file = TemplateAgreement.objects.first().template
             splited = file.name.split('/')
             path = os.path.join(s.MEDIA_ROOT, "{}".format(splited[0]))
             pdf = PyPDFML(splited[-1], path)
@@ -91,14 +95,12 @@ class GenerateAgreement(View):
 
 
 class GeneratePDF(View):
-    def get(self, request,  id=None):
+    def get(self, request, id=None):
         if type(id) is not int or id <= 0:
             return get_file('base.pdf', content_type='application/pdf')
-        get_response(request, id)
+        get_response(request,id)
         report_pdf = Report.objects.get(report_id=id)
-
         filename = str(report_pdf.pdf_report)
-
         response = FileResponse(open(os.path.join(s.MEDIA_ROOT, filename), 'rb'), content_type='application/pdf')
         content = "inline; filename=%s" % filename
         download = request.GET.get("download")
@@ -135,7 +137,7 @@ def get_response(request, id):
         'other_photos': other_photos,
     }
     try:
-        file = request.user.myuser.template
+        file = TemplateBase.objects.first().template
         splited = file.name.split('/')
         path = os.path.join(s.MEDIA_ROOT, "{}".format(splited[0]))
         pdf = PyPDFML(splited[-1], path)
@@ -166,7 +168,7 @@ def create_base64(request, new_report_pdf):
         'other_photos': "",
     }
     try:
-        file = request.user.myuser.template
+        file = TemplateBase.objects.first().template
         splited = file.name.split('/')
         path = os.path.join(s.MEDIA_ROOT, "{}".format(splited[0]))
         pdf = PyPDFML(splited[-1], path)
