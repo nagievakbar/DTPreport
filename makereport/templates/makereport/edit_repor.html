@@ -1188,14 +1188,15 @@
                 })
             }
         });
-        $(document).on('keypress', ".weight-input", function (e) {
+          $(document).on('keypress', ".weight-input", function (e) {
             console.log('CLICK point-input')
             var key = e.which;
             if (key === 13) {
-                var point = $(this).val(),
-                    weight = $(this).parents('.details').find('.weight-input').val(),
-                    wear = $(this).parents('.details').find('.prehnite-input')
 
+                var weight = $(this).val(),
+                    point = $(this).parents('.details').find('.point-input').val(),
+                    wear = $(this).parents('.details').find('.prehnite-input');
+                console.log(`THE POINT ${point}  weight  ${weight}`);
                 $.ajax({
                     url: '{% url "get_wear_ajax" %}',
                     data: {
