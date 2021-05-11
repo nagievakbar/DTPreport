@@ -692,6 +692,7 @@
                             }
                         } else {
                             document.getElementById('keyId').innerHTML = '';
+                            console.log(e)
                             uiShowMessage(errorBrowserWS);
                         }
                         if (e) wsError(e);
@@ -713,6 +714,7 @@
                                 uiShowMessage(errorBrowserWS);
                             }
                             if (e) wsError(e);
+                              console.log(e)
                         });
                     }, function (e, r) {
                         if (r) {
@@ -725,6 +727,7 @@
                             uiShowMessage(errorBrowserWS);
                         }
                         if (e) wsError(e);
+                          console.log(e)
                     });
                 }
             }
