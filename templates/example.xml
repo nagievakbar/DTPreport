@@ -159,8 +159,8 @@
          --------------------------------------------table-text--------------------------------------
         <text lineheight="1.3">Директор ООО "AMIR AVTO BAHOLASH" Сагдулаев Б.К        {{ report.contract.customer.name }}  </text>
 
-         {% if qrcode %}
-        <barcode   y='1' x="4" type="QR" height="2">{{ qrcode }}</barcode>
+         {% if qrcode_company %}
+        <barcode   y='1' x="4" type="QR" height="2">{{ qrcode_company }}</barcode>
 
         {% endif %}
 
@@ -313,8 +313,8 @@
   Сагдуллаев Б.К.
 {{ datetime }}
 		</text>
-         {% if qrcode %}  <!-- Это для qrcode сохраните где нужно он будет высвечиваться -->
-        <barcode x="12" y="20.5" type="QR" height="2">{{ qrcode }}</barcode>
+         {% if qrcode_company %}  <!-- Это для qrcode сохраните где нужно он будет высвечиваться -->
+        <barcode x="12" y="20.5" type="QR" height="2">{{ qrcode_company }}</barcode>
 
         {% endif %}
 		<text/>
@@ -386,8 +386,10 @@
         </text>
         <text  align="center" >Автомобиль марки {{ report.car.brand }} государственный номер: {{ report.car.car_number }}
         </text>
-        <text fontsize="20" align="center" lineheight="1.5" >{{ report.total_report_cost }}
-        </text>
+        <text fontsize="20" align="center" lineheight="1.5" >{{ report.total_report_cost }}    </text>
+        <text fontsize="12" y="11.5" x="0" align="center" lineheight="1.5" >{{ report.total_report_cost_txt }}    </text>
+        <text></text>
+
         <text align="justify">
       Оценка произведена в соответствии с требованиями Закона «Об оценочной деятельности» № 811-I от 19.08.1999г и Национальными Стандартами оценки имущества  РУз зарегистрированными Министерством юстиции №1 за №01/19-19, №2- за  № 01/19-20, №3 за № 01/19-21 от 14.06.2006 года,  и №7 за №1851 от 05.09.2008 года., с соблюдением Правил  внутреннего контроля   качества ООО «AMIR AVTO BAHOLASH», утвержденных  2014г.
     В соответствии с Законом  Республики Узбекистан  «Об оценочной  деятельности» ст. 18: «стоимость объекта оценки, указанная в отчете, носит рекомендательный характер…». Окончательную стоимость объекта определяет собственник объекта при совершении с ним какой-либо сделки.
@@ -404,8 +406,8 @@
         <text/>
         <text align='right'> Оценщик </text>
 
-         {% if qrcode %}
-         <barcode  x="12" y="2"  type="QR" height="2">{{ qrcode }}</barcode>
+         {% if qrcode_company %}
+         <barcode  x="12" y="2"  type="QR" height="2">{{ qrcode_company }}</barcode>
 
            {% endif %}
     </page>

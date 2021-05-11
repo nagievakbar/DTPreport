@@ -153,7 +153,7 @@ def get_response(request, id, obj):
         'services': new_report_pdf.service.all().__len__(),
         'datetime': new_report_pdf.report_date,
         'qrcode': new_report_pdf.pdf_qr_code_user,
-        'qrcode_admin': new_report_pdf.pdf_qr_code_company,
+        'qrcode_company': new_report_pdf.pdf_qr_code_company,
         'images': images,
         'document_photo': document_photo,
         'passport': passport,
