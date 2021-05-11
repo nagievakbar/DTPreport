@@ -695,7 +695,7 @@
                             console.log(e)
                             uiShowMessage(errorBrowserWS);
                         }
-                        if (e) wsError(e);
+                        if (e) wsError(r);
                     });
                 } else {
                     EIMZOClient.loadKey(vo, function (id) {
@@ -714,7 +714,7 @@
                                 uiShowMessage(errorBrowserWS);
                             }
                             if (e) wsError(e);
-                              console.log(e)
+                              console.log(r)
                         });
                     }, function (e, r) {
                         if (r) {
@@ -727,7 +727,7 @@
                             uiShowMessage(errorBrowserWS);
                         }
                         if (e) wsError(e);
-                          console.log(e)
+                          console.log(r)
                     });
                 }
             }
