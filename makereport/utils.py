@@ -100,7 +100,7 @@ def verifyPkcs7(request):
         report.pdf_report_pkcs7.append(pkcs7)
         report.save()
 
-        get_verifyPkcs7(report_id, report.POST.get('sign_from', None))
+        get_verifyPkcs7(report_id, request.POST.get('sign_from', None))
         data = {
             'success': 'True',
         }
