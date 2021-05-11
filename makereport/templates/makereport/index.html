@@ -643,7 +643,8 @@
         var csrftoken = getCookie('csrftoken');
         sign_decide = function () {
             var choice = document.getElementById("sign").value;
-            console.log("adasdasd")
+            console.log('sign decide')
+            console.log(choice)
             if (choice[0] === "T") {
                 adding_sign();
             } else {
@@ -653,7 +654,7 @@
         adding_sign = function () {
             var sign_from = document.getElementById('sign_from');
             console.log(sign_from.value);
-            console.log("sadsdsdasd");
+            console.log("in");
             var itm = document.testform.key.value;
             if (itm) {
                 var id = document.getElementById(itm);
