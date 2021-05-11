@@ -31,7 +31,7 @@ def serializing(formatted_output):
     return new_str
 
 
-def get_verifyPkcs7(report_id, sign_from = None):
+def get_verifyPkcs7(report_id, sign_from=None):
     data = {}
     print("REPORT ID : ".format(report_id))
     report = Report.objects.get(report_id=report_id)
@@ -58,7 +58,7 @@ def get_verifyPkcs7(report_id, sign_from = None):
     # my_file.write(formatted_output)
     # my_file.close()
     get_str = serializing(formatted_output)
-    my_file_serialized = open('serialized.txt','w')
+    my_file_serialized = open('serialized.txt', 'w')
     my_file_serialized.write(get_str)
     my_file_serialized.close()
     get_json = json.loads(get_str)

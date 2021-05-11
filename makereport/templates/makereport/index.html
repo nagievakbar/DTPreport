@@ -460,6 +460,9 @@
             var sign_from = button.getAttribute('sign_from');
             exampleModal.querySelector('.sign').value = sign;
             exampleModal.querySelector('#sign_from').value = sign_from;
+            console.log('Check')
+            console.log(sign[0])
+            console.log(sign[0] === 'T')
             if (sign[0] === 'T') {
                 recipient = button.getAttribute('pkcs7');
             } else {
