@@ -675,7 +675,7 @@
                             url: '{% url "verifyPkcs7" %}',
                             data: {
                                 'pkcs7': pkcs7,
-                                'sign_from': sign_from,
+                                'sign_from': sign_from.value,
                                 'report_id': report_input.value,
                                 {#'csrfmiddlewaretoken':{% csrf_token %}#}
                             },
@@ -755,7 +755,7 @@
                             },
                             url: '{% url "verifyPkcs7" %}',
                             data: {
-                                'pkcs7': pkcs7.value,
+                                'pkcs7': pkcs7,
                                 'sign_from': sign_from.value,
                                 'report_id': report_input.value,
                                 {#'csrfmiddlewaretoken':{% csrf_token %}#}
