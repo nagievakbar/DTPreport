@@ -3,10 +3,11 @@ from django.views.generic import View
 import os
 from DTPreport import settings as s
 from makereport.models import Report, Documents, Contract, Calculation, \
-    HoldsImages, TemplateBase, TemplateMixing, TemplateAgreement
+    HoldsImages, TemplateBase, TemplateMixing, TemplateAgreement, TemplateAdditional
 from pdf_report.utils import PyPDFML
-from fpdf import FPDF
+
 from django.core.files.base import ContentFile
+
 import locale
 import base64
 import jinja2
@@ -94,11 +95,20 @@ class GenerateAgreement(View):
         return response
 
 
+class GenerateAdditional(View):
+    def get(self, request, id=None):
+        if id == 0:
+            return get_file('base.pdf', content_type='application/pdf')
+        data = get_additional(request, id)
+        response = FileResponse(ContentFile(data), content_type='application/pdf')
+        return response
+
+
 class GeneratePDF(View):
     def get(self, request, id=None):
         if type(id) is not int or id <= 0:
             return get_file('base.pdf', content_type='application/pdf')
-        get_response(request,id)
+        get_base(request, id)
         report_pdf = Report.objects.get(report_id=id)
         filename = str(report_pdf.pdf_report)
         response = FileResponse(open(os.path.join(s.MEDIA_ROOT, filename), 'rb'), content_type='application/pdf')
@@ -110,7 +120,21 @@ class GeneratePDF(View):
         return response
 
 
-def get_response(request, id):
+def get_base(request, id):
+    obj = TemplateBase.objects
+    new_report_pdf = Report.objects.get(report_id=id)
+    data = get_response(request, id, obj=obj)
+    filename = "%s.pdf" % new_report_pdf.car.car_number
+    new_report_pdf.pdf_report.save(filename, ContentFile(data))
+    new_report_pdf.save()
+
+
+def get_additional(request, id):
+    obj = TemplateAdditional.objects
+    return get_response(request, id, obj=obj)
+
+
+def get_response(request, id, obj):
     locale.setlocale(locale.LC_ALL, 'C')
     new_report_pdf = Report.objects.get(report_id=id)
     calculation = Calculation.objects.get(report_id=id)
@@ -129,7 +153,7 @@ def get_response(request, id):
         'services': new_report_pdf.service.all().__len__(),
         'datetime': new_report_pdf.report_date,
         'qrcode': new_report_pdf.pdf_qr_code_user,
-        'qrcode_admin': new_report_pdf.pdf_qr_code_admin,
+        'qrcode_admin': new_report_pdf.pdf_qr_code_company,
         'images': images,
         'document_photo': document_photo,
         'passport': passport,
@@ -137,7 +161,7 @@ def get_response(request, id):
         'other_photos': other_photos,
     }
     try:
-        file = TemplateBase.objects.first().template
+        file = obj.first().template
         splited = file.name.split('/')
         path = os.path.join(s.MEDIA_ROOT, "{}".format(splited[0]))
         pdf = PyPDFML(splited[-1], path)
@@ -145,10 +169,7 @@ def get_response(request, id):
     except (jinja2.exceptions.TemplateNotFound, AttributeError):
         pdf = PyPDFML('example.xml')
         pdf.generate(context)
-    data = pdf.contents()
-    filename = "%s.pdf" % new_report_pdf.car.car_number
-    new_report_pdf.pdf_report.save(filename, ContentFile(data))
-    new_report_pdf.save()
+    return pdf.contents()
 
 
 def create_base64(request, new_report_pdf):
@@ -160,7 +181,7 @@ def create_base64(request, new_report_pdf):
         'services': new_report_pdf.service.all().__len__(),
         'datetime': new_report_pdf.report_date,
         'qrcode': new_report_pdf.pdf_qr_code_user,
-        'qrcode_admin': new_report_pdf.pdf_qr_code_admin,
+        'qrcode_admin': new_report_pdf.pdf_qr_code_company,
         'images': "",
         'document_photo': "",
         'passport': "",

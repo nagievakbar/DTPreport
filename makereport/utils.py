@@ -31,7 +31,7 @@ def serializing(formatted_output):
     return new_str
 
 
-def get_verifyPkcs7(report_id):
+def get_verifyPkcs7(report_id, sign_from = None):
     data = {}
     print("REPORT ID : ".format(report_id))
     report = Report.objects.get(report_id=report_id)
@@ -81,12 +81,12 @@ def get_verifyPkcs7(report_id):
 
     verified = signers['verified']
     certificateVerified = signers['certificateVerified']
-    LINK = "https://e-otsenka.uz{}".format(report.pdf_report.url)  # Here is the link
-    if report.signed == False:
+    LINK = "http://e-otsenka.uz{}".format(report.pdf_report.url)  # Here is the link
+    if sign_from == 1:
         report.pdf_qr_code_user = qr_code(FULL_NAME)
-        report.signed = True
     else:
-        report.pdf_qr_code_user = qr_code(FULL_NAME)
+        report.pdf_qr_code_company = qr_code(FULL_NAME)
+    report.signed = True
     report.save()
 
 
@@ -100,7 +100,7 @@ def verifyPkcs7(request):
         report.pdf_report_pkcs7.append(pkcs7)
         report.save()
 
-        get_verifyPkcs7(report_id)
+        get_verifyPkcs7(report_id, report.POST.get('sign_from', None))
         data = {
             'success': 'True',
         }

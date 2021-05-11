@@ -16,7 +16,7 @@ class ReportForm(forms.ModelForm):
 
 
 BRANDS = (
-    (0, "Выберите Марку"),
+    ('Выберите Марку', "Выберите Марку"),
     ('Кобальт', 'Кобальт'),
     ('Спарк', 'Спарк'),
     ('Нексия3', 'Нексия3'),
@@ -43,7 +43,8 @@ TYPE_CAR = (
 class CarForm(forms.ModelForm):
     """docstring for CarForm."""
     brand_text = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Марка', 'class': 'input_in'}))
-    brand = forms.ChoiceField(choices=BRANDS, widget=forms.Select(attrs={'class': 'form-control select-block'}))
+    brand = forms.ChoiceField(choices=BRANDS, required=False,
+                              widget=forms.Select(attrs={'class': 'form-control select-block'}))
     car_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Номер машины', 'class': 'input_in'}))
     registration = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Тех. паспорт', 'class': 'input_in'}))
     engine_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Двигатель', 'class': 'input_in'}))
@@ -257,7 +258,9 @@ class WearForm(forms.Form):
         widget=forms.TextInput(attrs={'class': 'input work-price-input point-input'}))
     weight = forms.IntegerField(
         widget=forms.TextInput(attrs={'class': 'input work-price-input weight-input'}))
-    wear = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'input work-price-input prehnite-input'}))
+    wear = forms.IntegerField(
+        required=True,
+        widget=forms.TextInput(attrs={'class': 'input work-price-input prehnite-input', 'readonly': ""}))
     accept_wear = forms.IntegerField(
         widget=forms.TextInput(attrs={'class': 'input work-price-input prehnite-input'}))
 

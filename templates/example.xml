@@ -1315,9 +1315,9 @@
             <rect x="12.5" y="-{{ 5 + loop.index/2+0.1}} " width="1.5" height="0.5"/>
             <rect x="14" y="-{{ 5 + loop.index/2+0.1}} " width="2" height="0.5"/>
             <rect x="16" y="-{{ 5 + loop.index/2+0.1}} " width="3" height="0.5"/>
-            <text x="2.6" y="-{{ 5 + loop.index/2}}" >{{ product.product_id }}</text>
+            <text x="2.6" y="-{{ 5 + loop.index/2}}" >{{ loop.index }}</text>
             <text x="3.5" y="-{{ 5 + loop.index/2 }}" lineheight="1.5"> {{ product.name }} </text>
-            <text x="11.3" y="-{{ 5 + loop.index/2 }}" lineheight="1.5"> {{ product.unit }} </text>
+            <text x="11.3" y="-{{ 5 + loop.index/2 }}" lineheight="1.5"> шт </text>
             <text x="13" y="-{{ 5 + loop.index/2 }}" lineheight="1.5"> {{ product.quantity }} </text>
             <text x="14.5" y="-{{ 5 + loop.index/2 }}" lineheight="1.5"> {{ product.price }} </text>
             <text x="17" y="-{{ 5 + loop.index/2 }}" lineheight="1.5"> {{ product.product_cost }} </text>
@@ -1436,7 +1436,8 @@
         </text>
         <rect x="3" y="19" height="1" width="15"/>
         <rect x="3" y="18" height="1" width="15"/>
-        <text x="9" y="19.35" font="TNRB" fontsize="15"> {{ report.total_report_cost }}</text>
+        <text x="0"  align="center" y="19.35" font="TNRB" fontsize="15"> {{ report.total_report_cost }}</text>
+        <text x="0" y="18.35" align="center" font="TNRB" fontsize="13"> {{ report.total_report_cost_txt }}</text>
         <text x="3" y="17" font="TNRB">6.5 Определение стоимости сравнительным подходом</text>
         <text x="2" y="16" lineheight="1.5">    Сравнительный подход основан на сравнении объекта оценки с аналогичными и применяется  тогда,
 когда затратную часть определить невозможно в силу авторских изменений, внесенных в конструкцию
@@ -1577,8 +1578,9 @@
        {# -------------------- #}
        {# -------------------- #}
        <rect x="3" y="20" height="1" width="16"/>
-       <text x="10.5" y="20.35" font="TNRB" fontsize="13">{{ report.total_report_cost}}</text>
-       <text x="0" y="19" font="TNRB" fontsize="12" align="center">{{ report.get_total_report_cost_txt()}}</text>
+        <rect x="3" y="19" height="1" width="16"/>
+       <text x="0" align="center" y="20.35" font="TNRB" fontsize="13">{{ report.total_report_cost}}</text>
+       <text x="0" y="19.3" font="TNRB" fontsize="12" align="center">{{ report.get_total_report_cost_txt()}}</text>
        <text x="2" y="18" font="TNRB">ВЫВОДЫ</text>
        <text x="2" y="17" >   Таким образом, мы пришли к выводу, что АМТС может быть отремонтировано в условиях СТО</text>
        <text x="2" y="16" lineheight="1.5">   При   ремонте  в  условиях  СТО , возможно выявление скрытых  дефектов ,  что повлечет  за собой

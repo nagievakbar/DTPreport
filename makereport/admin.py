@@ -20,7 +20,7 @@ class UserAdmin(BaseUserAdmin):
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 admin.site.register(CustomSum)
-admin.site.register(TemplateMixing)
+
 @admin.register(Report)
 class ReportAdmin(admin.ModelAdmin):
     list_display = ('report_id',

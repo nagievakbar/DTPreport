@@ -161,7 +161,9 @@ $('#upload_agreement').click(function () {
 $('#upload_mixing').click(function () {
     $("#mixingFile").click();
 });
-
+$('#upload_additional').click(function () {
+    $("#additionalFile").click();
+});
 function shipOff(name, tag) {
     var result = document.getElementById(tag).files[0];
     var upload = new Upload(result, name);
@@ -191,6 +193,7 @@ $(document).ready(function () {
     $("#myFile").on("change", getFileName('myFile', 'base'));
     $("#mixingFile").on("change", getFileName('mixingFile', 'mixing'));
      $("#agreementFile").on("change", getFileName('agreementFile', 'agreement'));
+      $("#additionalFile").on("change", getFileName('additionalFile', 'additional'));
 });
 
 //dropdown list

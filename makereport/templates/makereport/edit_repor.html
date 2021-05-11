@@ -397,10 +397,22 @@
                             </div>
                           <div>
                                 <ul class="responsive-table">
-                                    <li class="table-row">
+                                   <li class="table-row">
                                         <div class="col col-1" data-label="">Общая<span>стоимость</span></div>
                                         <div class="col col-2" data-label="Эксплуатационныйизнос"><span
                                                 id="all_product_cost">{{ report.product_cost }}</span></div>
+                                    </li>
+                                    <li class="table-row">
+                                        <div class="col col-1" data-label="">Износ<span>Ки</span></div>
+                                        <div class="col col-2" data-label="Эксплуатационныйизнос"><span
+                                                id="product_wear_show">{{ report.wear_data.accept_wear }}</span></div>
+                                    </li>
+                                    <li class="table-row">
+                                        <div class="col col-1" data-label="">
+                                            Общая<span>стоимость</span><span>c</span><span>учетом</span><span>износа</span>
+                                        </div>
+                                        <div class="col col-2" data-label="Эксплуатационныйизнос"><span
+                                                id="product_overall_cost">0</span></div>
                                     </li>
                                 </ul>
                             </div>
@@ -496,7 +508,7 @@
                                     {{ wear_form.weight }}
                                 </div>
                                 <div class="wear">
-                                    <span class="wear-text">Износ, % </span>
+                                       <span class="prehnite-text">Износ</span>
                                     {#                                        <input type="text" class="input work-price-input wear-input">#}
                                     {{ wear_form.wear }}
                                 </div>
@@ -736,21 +748,20 @@
             </div>
             <div class="material-form-2">
                 <div class="last_bottom_block col-12">
-                    <div class="row">
+                   <div class="row">
 
-                        <div class="col-lg-4 white_blocks">
-                            <div class="white_block">
+                        {#                        <div class="col-lg-4 white_blocks">#}
+                        {#                            <div class="white_block">#}
+                        {##}
+                        {#                            </div>#}
+                        {#                            <div class="little_white_block">#}
+                        {#                                <span>№{{ report_number }}</span>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
 
-                            </div>
-                            <div class="little_white_block">
-                                <span>№23</span>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-8">
+                        <div class="col-lg-12">
                             <div class="row">
-
-                                <div class="col-lg-4 download_button">
+                                <div class="col-lg-3 download_button">
                                     <div class="panel_user" id="download_button1">
                                         <a href="{% url 'get_mixing' id %}">
                                             <button type="button" class="btn panel_button">Скачать</button>
@@ -758,7 +769,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-4 download_button">
+                                <div class="col-lg-3 download_button">
                                     <div class="panel_user" id="download_button2">
                                         <a href="{% url 'get_agreement' id %}">
                                             <button type="button" class="btn panel_button">Скачать</button>
@@ -766,7 +777,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-4 download_button">
+                                <div class="col-lg-3 download_button">
                                     <div class="panel_user" id="download_button3">
                                         <a href="{% url 'get_response' id %}">
                                             <button type="button" class="btn panel_button">Скачать</button>
@@ -774,6 +785,13 @@
                                     </div>
                                 </div>
 
+                                <div class="col-lg-3 download_button">
+                                    <div class="panel_user" id="download_button4">
+                                        <a href="{% url 'get_additional' id %}">
+                                            <button type="button" class="btn panel_button">Скачать</button>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -812,7 +830,7 @@
 
 
     <script>
-        var addServiceCounter = $('#service_formset').find('table').length - 1;
+       var addServiceCounter = $('#service_formset').find('table').length - 1;
         var addProductCounter = $('#product_formset').find('table').length - 1;
         var addConsumableCounter = $('#consumable_formset').find('table').length - 1;
 
@@ -824,6 +842,16 @@
                 element.style.height = (5 + element.scrollHeight) + "px";
         }
 
+        function calculate_product_overall_sum(){
+            var total = $('#all_product_cost');
+            var int_total = getDouble(total);
+            var procent = getDouble($('#product_wear_show'));
+            var clean_total = int_total - int_total*procent/100;
+            $('#product_overall_cost').text(parseInt(clean_total));
+        }
+        function getDouble(element){
+            return element.text() === "" ? 0 : parseFloat(element.text().replace(/\s/g, ''));
+        }
 
         var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
         $(document).on('keypress', "form", function (event) {
@@ -860,10 +888,11 @@
             addConsumableCounter++;
         }
 
-        $(document).on('keypress', ".first2", function (e) {
+        $(document).on('keydown', ".first2", function (e) {
             console.log('CLICK service_id')
             var key = e.which;
-            if (key === 13) {
+            if (key === 9) {
+                e.preventDefault();
                 var service_id = $(this).val(),
                     last_input_name = $(this).parents('tr').find('.name2'),
                     last_input_nph = $(this).parents('tr').find('.time2'),
@@ -958,10 +987,11 @@
             label.text(full_sum);
         }
 
-        $(document).on('keypress', ".allowance2", function (e) {
+        $(document).on('keydown', ".allowance2", function (e) {
             console.log('CLICK premium')
             var key = e.which;
-            if (key === 13) {
+            if (key === 9) {
+                e.preventDefault();
                 var premium = $(this).val(),
                     price = $(this).parents('tr').find('.price2').val(),
                     nph = $(this).parents('tr').find('.time2').val(),
@@ -997,10 +1027,11 @@
             }
         });
 
-        $(document).on('keypress', ".count", function (e) {
+        $(document).on('keydown', ".count", function (e) {
             console.log('CLICK product_id')
             var key = e.which;
-            if (key === 13) {
+            if (key === 9) {
+                e.preventDefault();
                 var product_id = $(this).val(),
                     last_input_name = $(this).parents('tr').find('.name3'),
                     {#last_input_unit = $(this).parents('tr').find('.input-unit'),#}
@@ -1020,8 +1051,8 @@
                         console.log('success')
                         console.log("data : " + data.name)
                         set_price(data.price, last_input_price);
-                        last_input_quantity.select()
-                        last_input_name.val(data.name)
+                        last_input_quantity.select();
+                        last_input_name.val(data.name);
                         textAreaAdjust(last_input_name[0]);
                         get_procent(last_input_quantity);
 
@@ -1029,10 +1060,11 @@
                 })
             }
         });
-        $(document).on('keypress', ".price4", function (e) {
+        $(document).on('keydown', ".price4", function (e) {
 
             var key = e.which;
-            if (key === 13) {
+            if (key === 9) {
+                e.preventDefault();
                 var price = $(this).val(),
                     quantity = $(this).parents('tr').find('.allowance4').val(),
                     cost = $(this).parents('tr').find('.sum4'),
@@ -1058,10 +1090,11 @@
                 })
             }
         });
-        $(document).on('keypress', ".allowance4", function (e) {
+        $(document).on('keydown', ".allowance4", function (e) {
             console.log('CLICK quantity-cons')
             var key = e.which;
-            if (key === 13) {
+            if (key === 9) {
+                e.preventDefault();
                 var quantity = $(this).val(),
                     price = $(this).parents('tr').find('.price4').val(),
                     cost = $(this).parents('tr').find('.sum4'),
@@ -1093,10 +1126,11 @@
             }
         });
 
-        $(document).on('keypress', ".first4", function (e) {
+        $(document).on('keydown', ".first4", function (e) {
             console.log('CLICK consumable_id')
             var key = e.which;
-            if (key === 13) {
+            if (key === 9) {
+                e.preventDefault();
                 var consumable_id = $(this).val(),
                     last_input_name = $(this).parents('tr').find('.name4'),
                     last_input_unit = $(this).parents('tr').find('.time4'),
@@ -1126,10 +1160,11 @@
                 })
             }
         });
-        $(document).on('keypress', ".price3", function (e) {
+        $(document).on('keydown', ".price3", function (e) {
             console.log('CLICK quantity')
             var key = e.which;
-            if (key === 13) {
+            if (key === 9) {
+                e.preventDefault();
                 var price = $(this).val(),
                     quantity = $(this).parents('tr').find('.time3').val(),
                     cost = $(this).parents('tr').find('.sum3');
@@ -1152,10 +1187,11 @@
                 })
             }
         });
-        $(document).on('keypress', ".time3", function (e) {
+        $(document).on('keydown', ".time3", function (e) {
             console.log('CLICK quantity')
             var key = e.which;
-            if (key === 13) {
+            if (key === 9) {
+                e.preventDefault();
                 var quantity = $(this).val(),
                     price = $(this).parents('tr').find('.price3').val(),
                     cost = $(this).parents('tr').find('.sum3'),
@@ -1179,7 +1215,8 @@
                         }
                         var sum = data.total_cost - cost.val();
                         calculate_total_sum(sum);
-                        calculate_exact_sum(sum, 'product')
+                        calculate_exact_sum(sum, 'product');
+                        calculate_product_overall_sum();
                         cost.val(data.total_cost);
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
@@ -1188,11 +1225,11 @@
                 })
             }
         });
-          $(document).on('keypress', ".weight-input", function (e) {
+        $(document).on('keydown', ".weight-input", function (e) {
             console.log('CLICK point-input')
             var key = e.which;
-            if (key === 13) {
-
+            if (key === 9) {
+                e.preventDefault();
                 var weight = $(this).val(),
                     point = $(this).parents('.details').find('.point-input').val(),
                     wear = $(this).parents('.details').find('.prehnite-input');
@@ -1205,18 +1242,21 @@
                     },
                     dataType: 'json',
                     success: function (data) {
-                        console.log('success calculate cost')
-                        wear.select()
-                        wear.val(data.wear)
+                        console.log('success calculate cost');
+                        wear.select();
+                        $('#product_wear_show').text(data.wear);
+                        calculate_product_overall_sum();
+                        wear.val(data.wear);
                     },
                 })
             }
         });
 
-        $(document).on('keypress', ".point-input", function (e) {
+        $(document).on('keydown', ".point-input", function (e) {
             console.log('CLICK point-input')
             var key = e.which;
-            if (key === 13) {
+            if (key === 9) {
+                e.preventDefault();
                 var point = $(this).val(),
                     weight = $(this).parents('.details').find('.weight-input')
                 weight.select()
@@ -1224,10 +1264,11 @@
         });
 
 
-        $(document).on('keypress', ".prehnite-input", function (e) {
+        $(document).on('keydown', ".prehnite-input", function (e) {
             console.log('CLICK accept_weight')
             var key = e.which;
-            if (key === 13) {
+            if (key === 9) {
+                e.preventDefault();
                 var point = $(this).val(),
                     btn = $(document).find('#imageinput')
                 btn.focus()
@@ -1252,6 +1293,7 @@
 
             const server = "http://e-otsenka.uz"
             calculate_total_sum(0);
+            calculate_product_overall_sum();
             $('textarea').trigger('keyup');
             $("#test-upload").fileinput({
                 'theme': 'fas',

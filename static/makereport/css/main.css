@@ -1,10 +1,4 @@
-/* ======================================================================= */
-/* Template Name: 
-/* Author:  
-/* Author URI: 
-/* Version: 
-/* Description: 
-/* ======================================================================= */
+
 
 @import url("icofont.min.css");
 @import url("bootstrap.min.css");
@@ -1386,6 +1380,10 @@ tbody tr td a {
 
 #download_button3::before {
     content: 'Отчет';
+}
+
+#download_button4::before {
+    content: 'Дополнительно';
 }
 
 .panel_button {

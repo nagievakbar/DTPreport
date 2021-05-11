@@ -1382,6 +1382,10 @@ tbody tr td a {
     content: 'Отчет';
 }
 
+#download_button4::before {
+    content: 'Дополнительно';
+}
+
 .panel_button {
     width: 158px;
     height: 25px;

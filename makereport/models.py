@@ -24,6 +24,7 @@ class Contract(models.Model):
 
 
 BRANDS = (
+    ('Выберите Марку', 'Выберите Марку'),
     ('Кобальт', 'Кобальт'),
     ('Спарк', 'Спарк'),
     ('Нексия3', 'Нексия3'),
@@ -44,7 +45,7 @@ BRANDS = (
 class Car(models.Model):
     car_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     brand_text = models.CharField(max_length=30)
-    brand = models.CharField(max_length=30, choices=BRANDS)
+    brand = models.CharField(max_length=30, choices=BRANDS, null=True, blank=True)
     car_number = models.CharField(max_length=8)
     registration = models.CharField(max_length=15)
     engine_number = models.CharField(max_length=30)
@@ -201,6 +202,10 @@ def handler_base_agreement(instance, filename):
     return "templates_xml/agreement.xml"
 
 
+def handler_base_additional(instance, filename):
+    return "templates_xml/additional.xml"
+
+
 class TemplateBase(models.Model):
     template = models.FileField(blank=True, null=True, upload_to=handler_base,
                                 verbose_name='Шаблон для отчета')
@@ -212,16 +217,25 @@ class TemplateBase(models.Model):
 
 class TemplateMixing(models.Model):
     template = models.FileField(blank=True, null=True, upload_to=handler_base_mixing,
-                                       verbose_name='Шаблоны для заключения')
+                                verbose_name='Шаблоны для заключения')
 
     def delete(self, *args, **kwargs):
         default_storage.delete(self.template.path)
         super(TemplateMixing, self).delete(*args, **kwargs)
 
 
+class TemplateAdditional(models.Model):
+    template = models.FileField(blank=True, null=True, upload_to=handler_base_additional,
+                                verbose_name='Шаблоны для дополнения')
+
+    def delete(self, *args, **kwargs):
+        default_storage.delete(self.template.path)
+        super(TemplateAdditional, self).delete(*args, **kwargs)
+
+
 class TemplateAgreement(models.Model):
     template = models.FileField(blank=True, null=True, upload_to=handler_base_agreement,
-                                          verbose_name='Шаблоны для догвора')
+                                verbose_name='Шаблоны для догвора')
 
     def delete(self, *args, **kwargs):
         default_storage.delete(self.template.path)
@@ -383,8 +397,10 @@ class Report(models.Model):
     pdf_report_pkcs7 = models.JSONField(blank=True, null=True)
     pdf_report_qr = models.JSONField(blank=True, null=True)
     pdf_qr_code_user = models.CharField(max_length=500, blank=True, null=True)
-    pdf_qr_code_admin = models.CharField(max_length=500, blank=True, null=True)
+    pdf_qr_code_company = models.CharField(max_length=500, blank=True, null=True)
     signed = models.BooleanField(default=False)
+    signed_by_boss = models.BooleanField(default=False)
+
     passport_photo = models.FileField(blank=True, null=True, verbose_name='Фото пасспорта')
     registration_photo = models.FileField(blank=True, null=True, verbose_name='Фото тех.пасспорта')
 
@@ -395,6 +411,19 @@ class Report(models.Model):
 
     def __str__(self):
         return str(self.report_id)
+
+    def delete(self, *args, **kwargs):
+        try:
+            default_storage.delete(self.passport_photo.path)
+            default_storage.delete(self.registration_photo.path)
+            default_storage.delete(self.pdf_report)
+        except ValueError:
+            pass
+        finally:
+            self.car.delete()
+            self.contract.customer.delete()
+            self.contract.delete()
+        return super(Report, self).delete(*args, **kwargs)
 
     def get_product_acc_cost(self):
         print('get_product_acc_cost')

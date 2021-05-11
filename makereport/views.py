@@ -158,11 +158,11 @@ class ReportEditView(View):
         customer = Customer.objects.get(customer_id=contract.customer_id)
         customer_form = CustomerForm(instance=customer)
         service_form = formset_factory(ServiceForm, extra=1)
-        service_formset = service_form(initial=report.service_data, prefix='service')
+        service_formset = service_form(prefix='service')
         product_form = formset_factory(ProductForm, extra=1)
-        product_formset = product_form(initial=report.product_data, prefix='product')
+        product_formset = product_form(prefix='product')
         consumable_form = formset_factory(ConsumableForm, extra=1)
-        consumable_formset = consumable_form(initial=report.consumable_data, prefix='consumable')
+        consumable_formset = consumable_form(prefix='consumable')
         wear_form = WearForm(initial=report.wear_data)
         total_price_report = report.total_report_cost
 
@@ -265,7 +265,10 @@ class ReportEditView(View):
                 new_report.get_total_report_price()
             new_report.set_private_key()
             new_report.save()
-            create_base64(request, new_report)
+            try:
+                create_base64(request, new_report)
+            except KeyError:
+                pass
             return HttpResponseRedirect('/report/list_edit')
 
         context = {
@@ -472,7 +475,10 @@ class ReportView(View):
                 new_report.get_total_report_price()
             new_report.set_private_key()
             new_report.save()
-            create_base64(request, new_report)
+            try:
+                create_base64(request, new_report)
+            except KeyError:
+                pass
             return HttpResponseRedirect('/report/list')
 
         context = {
@@ -567,7 +573,10 @@ class ReportView(View):
                 new_report.wear_data.update(wd)
                 new_report.get_total_report_price()
             new_report.save()
-            create_base64(request, new_report)
+            try:
+                create_base64(request, new_report)
+            except KeyError:
+                pass
             return HttpResponseRedirect('/report/list')
 
         context = {
@@ -592,15 +601,6 @@ class ReportView(View):
         }
         return render(request, 'makereport/edit_repor.html', context)
 
-    @method_decorator(decorators)
-    def delete(self, request, id=None):
-        report = Report.objects.get(report_id=id)
-        if request.method == 'POST':
-            report.delete()
-            return redirect('reports_list')
-        context = {'report': report}
-        return render(request, 'makereport/delete_report.html', context=context)
-
     def init_service_formset(self, request):
 
         service_form = formset_factory(ServiceForm, extra=2)
@@ -616,6 +616,15 @@ class ReportView(View):
         consumable_form = formset_factory(ConsumableForm, extra=2)
         consumable_formset = consumable_form(request.POST, prefix='consumable')
         return consumable_formset
+
+
+def delete(request):
+    try:
+        report = Report.objects.get(report_id=request.GET.get('id', 0))
+        report.delete()
+    finally:
+        pass
+    return JsonResponse({})
 
 
 @login_required
@@ -691,8 +700,15 @@ def get_template_agreement(request):
         new_template.save()
         return JsonResponse({})
 
-
-
+@login_required
+def get_template_additional(request):
+    try:
+        TemplateAdditional.objects.first().delete()
+    finally:
+        new_template = TemplateAdditional.objects.create()
+        new_template.template = request.FILES['file']
+        new_template.save()
+        return JsonResponse({})
 
 def delete_old(template):
     if template is not None:
