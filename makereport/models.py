@@ -243,16 +243,6 @@ class TemplateAgreement(models.Model):
         super(TemplateAgreement, self).delete(*args, **kwargs)
 
 
-class MyUser(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    report_rate_price = models.IntegerField(default=0, blank=True, null=True)
-    report_rate_price_txt = models.CharField(max_length=200, blank=True, null=True)
-
-    @receiver(post_save, sender=User)
-    def update_profile_signal(sender, instance, created, **kwargs):
-        if created:
-            MyUser.objects.create(user=instance)
-        instance.myuser.save()
 
 
 class HoldsImages(models.Model):
