@@ -460,8 +460,6 @@
 
         var exampleModal = document.getElementById('exampleModal')
         exampleModal.addEventListener('show.bs.modal', function (event) {
-
-
             var button = event.relatedTarget;
             var recipient = "";
             var sign = button.getAttribute('sign');
@@ -483,7 +481,9 @@
             modalFileInput.textContent = recipient
             modalReportIdField.value = report_id
         })
-
+        $('#exampleModal').on('hidden.bs.modal', function (e) {
+         location.reload();
+        })
         $(document).on('click', ".btn btn-primary sign", function (e) {
             console.log('CLICK sign')
             var pkcs7 = $(this).parents('.modal-body').find('.pkcs7').textContent;
