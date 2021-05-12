@@ -10,7 +10,7 @@ def qr_code(signature):
     # str_for_qr_code = "success: {success}\nsignature:{signature}\nsignAlgName:{signAlgName}\nlink:{link}\n".format(
     #     success=success, signature=signature, signAlgName=signAlgName, link=link)
     str_for_qr_code = "signature:{signature}".format(
-        signature=signature[:16])
+        signature=signature[:22])
     print(str_for_qr_code)
     return str_for_qr_code
     # img = qrcode.make(str_for_qr_code)  # вот сюда любую ссылку вставите он переведет в QR CODE
