@@ -95,7 +95,7 @@
         <text/>
         <text/>
         <text lineheight="1.3">2.2.  Заказчик обязуется оплатить за услуги в сумме </text>
-        <text x="11.5" y="14.45" font="TNRB">{{ report.created_by.get_total_report_cost_txt() }} </text>
+        <text x="11.5" y="14.45" font="TNRB" fontsize="10">{{ report.created_by.get_total_report_cost_txt() }} </text>
         <text align="justify" lineheight="1.3">2.3. Заказчик производит 100% предоплату в течении 3-х банковских дней со дня подписания договора, в случае не оплаты в течении указанного срока договор считается аннулированным.</text>
         <text align="justify" lineheight="1.3">2.4.  Исполнитель передает Заказчику один экземпляр письменного Отчета об оценке.</text>
         <text font="TNRB" align="center" lineheight="1.6">3. Сроки выполнения работ</text>
@@ -1582,7 +1582,7 @@
        <rect x="3" y="20" height="1" width="16"/>
         <rect x="3" y="19" height="1" width="16"/>
        <text x="0" align="center" y="20.35" font="TNRB" fontsize="13">{{ report.total_report_cost}}</text>
-       <text x="0" y="19.3" font="TNRB" fontsize="12" align="center">{{ report.get_total_report_cost_txt()}}</text>
+       <text x="0" y="19.3" font="TNRB" fontsize="10" align="center">{{ report.get_total_report_cost_txt()}}</text>
        <text x="2" y="18" font="TNRB">ВЫВОДЫ</text>
        <text x="2" y="17" >   Таким образом, мы пришли к выводу, что АМТС может быть отремонтировано в условиях СТО</text>
        <text x="2" y="16" lineheight="1.5">   При   ремонте  в  условиях  СТО , возможно выявление скрытых  дефектов ,  что повлечет  за собой
