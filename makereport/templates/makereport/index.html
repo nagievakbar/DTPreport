@@ -318,7 +318,7 @@
                                     sign="{{ report.signed }}"
                                     sign_from='0'
                                     data-bs-report="{{ report.report_id }}"
-                                    pkcs7="{{ report.pdf_report_pkcs7.0 }}"
+{#                                    pkcs7="{{ report.pdf_report_pkcs7.0 }}"#}
                                     data-bs-whatever="{{ report.pdf_report_base64 }}">Компания
                             </button>
                             <button class="btn btn-primary"
@@ -327,7 +327,7 @@
                                     sign="{{ report.signed }}"
                                     sign_from='1'
                                     data-bs-report="{{ report.report_id }}"
-                                    pkcs7="{{ report.pdf_report_pkcs7.0 }}"
+{#                                    pkcs7="{{ report.pdf_report_pkcs7.0 }}"#}
                                     data-bs-whatever="{{ report.pdf_report_base64 }}">Руководитель
                             </button>
                         </div>
@@ -463,13 +463,10 @@
             console.log('Check')
             console.log(sign[0])
             console.log(sign[0] === 'T')
-            if (sign[0] === 'T') {
-                recipient = button.getAttribute('pkcs7');
-            } else {
-                console.log('get this')
-                recipient = button.getAttribute('data-bs-whatever');
-            }
-
+            {#if (sign[0] === 'T') {#}
+            {#    recipient = button.getAttribute('pkcs7');} else {#}
+            {#    console.log('get this')}#}
+              recipient = button.getAttribute('data-bs-whatever');
             var report_id = button.getAttribute('data-bs-report');
 
             var modalFileInput = exampleModal.querySelector('.file');
