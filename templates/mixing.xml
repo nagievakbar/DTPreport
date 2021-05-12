@@ -84,7 +84,7 @@
         <text x="5.7" y="23.7">РУз г. Ташкент Чиланзарский р-н, Чиланзар- 1А, гараж там же</text>
 
         <text x="5.7" y="22.2">{{ report.total_report_cost }}</text>
-
+        <text x="5.7" y="22.0">{{ report.get_total_report_cost_txt() }}</text>
         <text x="5.7" y="19.2">{{ car.car_owner }}</text>
         {#      first column of second table#}
         <text x="0.7" y="17.2">Заказчик :</text>
