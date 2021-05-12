@@ -74,13 +74,12 @@
 
         <text x="0.7" y="22.2">Ущерб</text>
         <text x="0.7" y="21.8">автотранспортного</text>
-        <text x="0.7" y="21.4">средства по состоянию</text>
-        <text x="0.7" y="21">на 13 октябрь 2020 года :</text>
+        <text x="0.7" y="21.4">средства по состоянию :</text>
 
         <text x="0.7" y="19.2">Владелец :</text>
         {#        second column of first table#}
-        <text x="5.7" y="25.2">Движимое имущество легковой автомобиль НЕКСИЯ гос. номер</text>
-        <text x="5.7" y="24.8">01 563 YBA 1997г/выпуска</text>
+        <text x="5.7" y="25.2">Движимое имущество легковой автомобиль {{ car.brand_text }} гос. номер</text>
+        <text x="5.7" y="24.8">{{ car.car_number }} {{ car.release_date }}/выпуска</text>
 
         <text x="5.7" y="23.7">РУз г. Ташкент Чиланзарский р-н, Чиланзар- 1А, гараж там же</text>
 
@@ -173,7 +172,7 @@
         <text x="5.7" y="25.2">Договор  № {{ contract.contract_number }} от {{ contract.contract_date }}</text>
 
 
-        <text x="5.7" y="24.2">Дата оценки</text>
+        <text x="5.7" y="24.2">{{ datetime }}</text>
 
         <text x="5.7" y="23.2">{{ report.report_date }}</text>
 
