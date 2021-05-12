@@ -216,7 +216,7 @@
          <text/>
         <text/>
         {% if qrcode %}
-         <barcode  type="QR" height="2">qrcode</barcode>
+         <barcode  type="QR" height="2">{{ qrcode }}</barcode>
         {% endif %}
     </page>
 </pdf>

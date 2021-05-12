@@ -74,7 +74,7 @@
         <text x="9.15" y="16.1">1</text>
         <text x="9.15" y="15.6">0</text>
 
-         <text x="10.4" y="16.1">{{ calculation.opr_damage }}</text>
+        <text x="10.4" y="16.1">{{ calculation.opr_damage }}</text>
         <text x="10.3" y="15.6">{{ calculation.departure }}</text>
 
         <text x="12.4" y="16.1">{{ calculation.opr_damage }}</text>
