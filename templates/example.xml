@@ -186,8 +186,8 @@
         <text align="center">ООО «AMIR AVTO BAHOLASH»                               Заказчик:{{ report.contract.customer.name }}</text>
         <text>                                                 </text>
 
-        {% if qrcode %}
-        <barcode x="6.5"  y='16'  type="QR" height="2">{{ qrcode }}</barcode>
+        {% if qrcode_company %}
+        <barcode x="6.5"  y='16'  type="QR" height="2">{{ qrcode_company }}</barcode>
         {% endif %}
 
         <text/>
