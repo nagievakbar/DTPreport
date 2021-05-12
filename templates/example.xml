@@ -410,7 +410,7 @@
         <text  align="center" >Автомобиль марки {{ report.car.brand_text }} государственный номер: {{ report.car.car_number }}
         </text>
         <text fontsize="18" align="center" lineheight="1.5" >{{ report.total_report_cost }}    </text>
-        <text fontsize="12" y="11.5" x="0" align="center" lineheight="1.5" >{{ report.get_total_report_cost_txt() }}    </text>
+        <text fontsize="12" align="center" lineheight="1.5" >{{ report.get_total_report_cost_txt() }} </text>
         <text></text>
 
         <text align="justify">
