@@ -152,7 +152,7 @@
         <text lineheight="1.3">  телефон:               279-46-60       </text>
         <text lineheight="1.3">  Р/с №                     20208000298017089001                      серия паспорта/права     {{ report.contract.customer.passport_number }}</text>
         <text lineheight="1.3">  в		             Чиланз. ф-л. ОАИКБ "Ипак Йули"   когда выдан           {{ report.contract.customer.when_passport_issued }}</text>
-        <text lineheight="1.3">  город	             Ташкент                                               кем выдан              {{ report.contract.customer.whom_passport_issued }}</text>
+        <text lineheight="1.3">  город	             Ташкент                                               кем выдан              {{ report.contract.customer.whom_passport_issued[:30] }}</text>
         <text lineheight="1.3">  МФО                      01067   ОКОНХ     84500  </text>
         <text lineheight="1.3">  ИНН		      302 667 624			                  телефон:                 {{ report.contract.customer.phone_number }}</text>
          --------------------------------------------table-text--------------------------------------
