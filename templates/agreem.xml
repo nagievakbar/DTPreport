@@ -161,7 +161,6 @@
 
          {% if qrcode %}
         <barcode   y='1' x="4" type="QR" height="2">{{ qrcode }}</barcode>
-
         {% endif %}
 
     </page>

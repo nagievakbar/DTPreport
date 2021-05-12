@@ -78,6 +78,7 @@ class GenerateAgreement(View):
         context = {
             'calculation': calculation,
             'report': report,
+            'qrcode': report.pdf_qr_code_user,
             'contract': contract,
         }
         try:

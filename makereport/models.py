@@ -435,7 +435,7 @@ class Report(models.Model):
     def get_total_report_cost_txt(self):
         self.total_report_cost_txt = num2text(
             int(self.service_cost + self.get_product_acc_cost() + self.consumable_cost),
-            main_units=((u'сум', u'сумы', u'суммов'), 'f'))
+            main_units=((u'сум', u'сум', u'суммов'), 'f'))
         return self.total_report_cost_txt
 
     def set_private_key(self):
@@ -460,8 +460,8 @@ class Calculation(models.Model):
 
     def get_total_report_cost_txt(self):
         if self.total == "":
-            return num2text(0, main_units=((u'сумм', u'сумм', u'сумм'), 'f'))
+            return num2text(0, main_units=((u'сумм', u'сумм', u'суммов'), 'f'))
         else:
             report_rate_price_txt = num2text(int(self.total.strip().replace(' ', "")),
-                                             main_units=((u'сумм', u'сумм', u'сумм'), 'f'))
+                                             main_units=((u'сумм', u'сумм', u'суммов'), 'f'))
             return report_rate_price_txt
