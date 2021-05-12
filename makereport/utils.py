@@ -58,16 +58,12 @@ def get_verifyPkcs7(report_id, sign_from=None):
     # my_file.write(formatted_output)
     # my_file.close()
     get_str = serializing(formatted_output)
-    # my_file_serialized = open('serialized.txt', 'w')
-    # my_file_serialized.write(get_str)
-    # my_file_serialized.close()
+
     get_json = json.loads(get_str)
     index = 0
 
     print(get_json)
     print(report.signed)
-    if report.signed == True:
-        index = 1
     success = get_json["success"]
     signers = get_json["pkcs7Info"]["signers"][0]
     certificate = signers["certificate"][index]
@@ -82,6 +78,7 @@ def get_verifyPkcs7(report_id, sign_from=None):
     verified = signers['verified']
     certificateVerified = signers['certificateVerified']
     LINK = "http://e-otsenka.uz{}".format(report.pdf_report.url)  # Here is the link
+
     if sign_from == 1:
         report.pdf_qr_code_user = qr_code(FULL_NAME)
     else:
@@ -99,7 +96,9 @@ def verifyPkcs7(request):
         report.pdf_report_pkcs7 = []
         report.pdf_report_pkcs7.append(pkcs7)
         report.save()
-
+        my_file_serialized = open('serialized.txt', 'w')
+        my_file_serialized.write(str(request.POST))
+        my_file_serialized.close()
         get_verifyPkcs7(report_id, request.POST.get('sign_from', None))
         data = {
             'success': 'True',
