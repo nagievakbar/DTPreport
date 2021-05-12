@@ -13,8 +13,8 @@ class Contract(models.Model):
     customer = models.ForeignKey('Customer', null=True, blank=True, on_delete=models.CASCADE, related_name='Customer',
                                  verbose_name='Клиент')
     pdf_contract = models.FileField(blank=True, null=True, verbose_name='Контракт в пдф')
-    contract_date = models.CharField(max_length=10, null=True, blank=True)
-    contract_number = models.CharField(max_length=10, null=True, blank=True)
+    contract_date = models.CharField(max_length=20, null=True, blank=True)
+    contract_number = models.CharField(max_length=20, null=True, blank=True)
 
     def __str__(self):
         return str(self.contract_id)
@@ -47,13 +47,13 @@ class Car(models.Model):
     car_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     brand_text = models.CharField(max_length=30)
     brand = models.CharField(max_length=30, choices=BRANDS, null=True, blank=True)
-    car_number = models.CharField(max_length=8)
+    car_number = models.CharField(max_length=20)
     registration = models.CharField(max_length=15)
     engine_number = models.CharField(max_length=30)
     body_number = models.CharField(max_length=30)
     chassis = models.CharField(max_length=30)
     car_color = models.CharField(max_length=20)
-    mileage = models.CharField(max_length=10)
+    mileage = models.CharField(max_length=20)
     release_date = models.DateField()
     car_type = models.CharField(max_length=20)
     car_owner = models.CharField(max_length=60)
@@ -86,7 +86,7 @@ class Customer(models.Model):
     customer_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     name = models.CharField(max_length=100, verbose_name='ФИО')
     address = models.CharField(max_length=100)
-    passport_number = models.CharField(max_length=9, verbose_name='Паспорт')
+    passport_number = models.CharField(max_length=20, verbose_name='Паспорт')
     when_passport_issued = models.DateField()
     whom_passport_issued = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=20, verbose_name='Тел. номер')
@@ -105,7 +105,7 @@ class Customer(models.Model):
 class Product(models.Model):
     product_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     name = models.CharField(max_length=100, )
-    unit = models.CharField(max_length=10, verbose_name='Ед.измер.')
+    unit = models.CharField(max_length=20, verbose_name='Ед.измер.')
     nexia3 = models.FloatField(blank=True, null=True, verbose_name='Нексия 3')
     cobalt = models.FloatField(blank=True, null=True, verbose_name='Кобальт')
     malibu = models.FloatField(blank=True, null=True, verbose_name='Малибу')
@@ -179,7 +179,7 @@ class Service(models.Model):
 class Consumable(models.Model):
     consumable_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     name = models.CharField(max_length=100)
-    unit = models.CharField(max_length=10, verbose_name='Ед.измер.')
+    unit = models.CharField(max_length=20, verbose_name='Ед.измер.')
 
     price = models.IntegerField(blank=True, null=True, verbose_name='Цена')
 
@@ -358,8 +358,8 @@ class Checks(models.Model):
 
 class Report(models.Model):
     report_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
-    report_number = models.CharField(max_length=10)
-    report_date = models.CharField(max_length=10)
+    report_number = models.CharField(max_length=20)
+    report_date = models.CharField(max_length=20)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_by', verbose_name='Создан')
     created_at = models.DateField(blank=True, null=True, verbose_name='Время создания')
 
@@ -376,7 +376,7 @@ class Report(models.Model):
     consumable_cost = models.IntegerField(default=0)
     key = models.CharField(max_length=13, blank=True)
 
-    total_report_cost = models.CharField(max_length=15)
+    total_report_cost = models.CharField(max_length=20)
     total_report_cost_txt = models.CharField(max_length=200)
 
     pdf_report = models.FileField(blank=True, null=True, upload_to='uploads/%Y/%m/%d/', verbose_name='Отчёт в пдф')
