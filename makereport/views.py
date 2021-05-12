@@ -721,13 +721,7 @@ class UserSettingsView(View):
 
     @method_decorator(decorators)
     def get(self, request):
-        user = request.user.myuser
-        templateForm = TemplateForm()
-        context = {
-            'user': user,
-            'form_upload': templateForm
-        }
-        return render(request, 'makereport/user_settings.html', context)
+        return render(request, 'makereport/user_settings.html')
 
 
 def user_login(request):

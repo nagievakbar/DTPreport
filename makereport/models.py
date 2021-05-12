@@ -243,20 +243,7 @@ class TemplateAgreement(models.Model):
         super(TemplateAgreement, self).delete(*args, **kwargs)
 
 
-class MyUser(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    report_rate_price = models.IntegerField(default=0, blank=True, null=True)
-    report_rate_price_txt = models.CharField(max_length=200, blank=True, null=True)
 
-    @receiver(post_save, sender=User)
-    def update_profile_signal(sender, instance, created, **kwargs):
-        if created:
-            MyUser.objects.create(user=instance)
-        instance.myuser.save()
-
-    def get_total_report_cost_txt(self):
-        self.report_rate_price_txt = num2text(int(self.report_rate_price), main_units=((u'сум', u'сумы', u'сум'), 'f'))
-        return self.report_rate_price_txt
 
 
 class HoldsImages(models.Model):
@@ -374,7 +361,7 @@ class Report(models.Model):
     report_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     report_number = models.CharField(max_length=10)
     report_date = models.CharField(max_length=10)
-    created_by = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name='created_by', verbose_name='Создан')
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_by', verbose_name='Создан')
     created_at = models.DateField(blank=True, null=True, verbose_name='Время создания')
 
     car = models.ForeignKey('Car', on_delete=models.CASCADE, related_name='Car', verbose_name='Машина')
