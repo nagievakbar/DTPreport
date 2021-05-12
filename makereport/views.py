@@ -151,7 +151,7 @@ class ReportEditView(View):
         report = Report.objects.get(report_id=id)
         contract = Contract.objects.get(contract_id=report.contract_id)
         contract_form = ContractForm(instance=contract)
-        report_form = ReportForm(initial={'total_report_cost': report.total_report_cost}, instance=Report())
+        report_form = ReportForm(instance=Report())
         car = Car.objects.get(car_id=report.car_id)
         car.release_date = car.release_date.strftime('%Y')
         car_form = CarForm(instance=car)
@@ -227,6 +227,7 @@ class ReportEditView(View):
             new_contract.save()
 
             new_report = report_form.save(commit=False)
+            new_report.report_number
             new_report.contract = new_contract
             new_car = car_form.save()
             new_car.save()

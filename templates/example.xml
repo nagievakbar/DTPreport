@@ -168,7 +168,7 @@
     <page>
         <text align="center">АКТ</text>
         <text align="center">Сдачи-приёмки выполненных работ и услуг</text>
-        <text align="center">Договор №{{ report.report_id }} от {{ datetime }}</text>
+        <text align="center">Договор №{{ report.report_number }} от {{ datetime }}</text>
         <text/>
         <text align="left" lineheight="1.2">            ЗАКАЗЧИК:{{ report.contract.customer.name }}</text>
         <text align="left" lineheight="1.2">            Дата составления отчёта: {{ datetime }}</text>
@@ -200,7 +200,7 @@
         <text/>
         <text align="center">СЧЕТ-ФАКТУРА №</text>
         <text align="center" lineheight="1.5">от «__» _________{{ report.report_date }}</text>
-        <text align="center" lineheight="1.5">к договору № {{ report.report_id }} от {{ datetime }}</text>
+        <text align="center" lineheight="1.5">к договору № {{ report.report_number }} от {{ datetime }}</text>
         <text x="0" y="12" align="left">
                                           Поставщик:
                         ООО «AMIR AVTO BAHOLASH»
@@ -319,7 +319,7 @@
         {% endif %}
 		<text/>
 		<text/>
-		<text fontsize="30" align="center" >Отчет № {{ report.report_id }}
+		<text fontsize="30" align="center" >Отчет № {{ report.report_number }}
 		</text>
 		<text align="center">Об оценки по определению рыночной стоимости ущерба автотранспортного средства марки
 		</text>
@@ -378,7 +378,7 @@
         <text  align="center" font="TNRB" >Уважаемый  {{ report.contract.customer.name }}
         </text>
         <text align="justify">
-       В соответствии с Договором об оценке имущества № {{ report.report_id }}  от {{ datetime }},оценщики ООО «AMIR AVTO BAHOLASH» провели оценку транспортного  средства марки {{ report.car.brand_text }} Государственный номер:{{ report.car.car_number }} зарегистрированного по адресу:{{ report.contract.customer.address }}, Республика Узбекистан.
+       В соответствии с Договором об оценке имущества № {{ report.report_number }}  от {{ datetime }},оценщики ООО «AMIR AVTO BAHOLASH» провели оценку транспортного  средства марки {{ report.car.brand_text }} Государственный номер:{{ report.car.car_number }} зарегистрированного по адресу:{{ report.contract.customer.address }}, Республика Узбекистан.
        Цель оценки: Определение рыночной стоимости затрат на восстановление АМТС, пострадавшего в результате ДТП.
      Обращаю Ваше внимание на то, что это письмо не является отчетом по оценке имущества, а только предваряет отчет, приведенный ниже.
     Предлагаемый Вашему вниманию Отчет, который  содержит описание расчета  стоимости движимого имущества, собранную информацию, этапы проведенного исследования и сделанные выводы. Кроме того, в Отчет включены гарантии объективности и независимости оценщиков, а также сделанные допущения и принятые ограничения. Отдельные части анализа, приведенного Отчете, не могут трактоваться раздельно, а только в связи с полным его текстом, с учетом принятых допущений и ограничений.
