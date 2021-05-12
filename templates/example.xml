@@ -15,7 +15,7 @@
         <text align="justify" lineheight="1.5">       ООО "AMIR AVTO BAHOLASH"   именуемое   в   дальнейшем   "Исполнитель",   в   лице   директора Сагдуллаева Б.К.,  действующего  на  основании  Устава  и  лицензии  на  осуществление  оценочной   деятельности   RR-0184    выданная   Госкомимуществом   РУз 12.05.2014г.,   полис  страхования  профессиональной ответственности оценщиков №11/3-6/0769 от 08.11.2019г. c одной  стороны  и {{ report.contract.customer }} именуемое в дальнейшем "Заказчик", с другой стороны, заключили настоящий договор о нижеследующем:</text>
         <text font="TNRB" align="center" lineheight="2">1.Предмет договора.</text>
         <text align="justify" lineheight="1.5">1.1. В соответствии с условиями настоящего договора Заказчик поручает, Исполнитель предоставляет комплекс работ (услуг), связанных с определением стоимости имущества Заказчика</text>
-        <text align="justify" lineheight="1.5">1.2. Наименование а/м оценки: автомобиль марки {{ report.car.brand }} гос№ {{ report.car.car_number }}</text>
+        <text align="justify" lineheight="1.5">1.2. Наименование а/м оценки: автомобиль марки {{ report.car.brand_text }} гос№ {{ report.car.car_number }}</text>
         <text align="justify" lineheight="1.5">1.3. Зарегистрированного по адресу: {{ report.car.owner_address }}</text>
         <text align="justify" lineheight="1.5">1.4. Цель оценки: определение стоимости ущерба транспортного средства</text>
         <text font="TNRB" align="center" lineheight="2">2. Стоимость услуг, порядок их сдачи и оплаты</text>
@@ -323,7 +323,7 @@
 		</text>
 		<text align="center">Об оценки по определению рыночной стоимости ущерба автотранспортного средства марки
 		</text>
-		<text fontsize="12" align="center">{{ report.car.brand }}, гос. номер {{ report.car.car_number}}
+		<text fontsize="12" align="center">{{ report.car.brand_text }}, гос. номер {{ report.car.car_number}}
 		</text>
 		<text/>
 		<text/>
@@ -378,13 +378,13 @@
         <text  align="center" font="TNRB" >Уважаемый  {{ report.contract.customer.name }}
         </text>
         <text align="justify">
-       В соответствии с Договором об оценке имущества № {{ report.report_id }}  от {{ datetime }},оценщики ООО «AMIR AVTO BAHOLASH» провели оценку транспортного  средства марки {{ report.car.brand }} Государственный номер:{{ report.car.car_number }} зарегистрированного по адресу:{{ report.contract.customer.address }}, Республика Узбекистан.
+       В соответствии с Договором об оценке имущества № {{ report.report_id }}  от {{ datetime }},оценщики ООО «AMIR AVTO BAHOLASH» провели оценку транспортного  средства марки {{ report.car.brand_text }} Государственный номер:{{ report.car.car_number }} зарегистрированного по адресу:{{ report.contract.customer.address }}, Республика Узбекистан.
        Цель оценки: Определение рыночной стоимости затрат на восстановление АМТС, пострадавшего в результате ДТП.
      Обращаю Ваше внимание на то, что это письмо не является отчетом по оценке имущества, а только предваряет отчет, приведенный ниже.
     Предлагаемый Вашему вниманию Отчет, который  содержит описание расчета  стоимости движимого имущества, собранную информацию, этапы проведенного исследования и сделанные выводы. Кроме того, в Отчет включены гарантии объективности и независимости оценщиков, а также сделанные допущения и принятые ограничения. Отдельные части анализа, приведенного Отчете, не могут трактоваться раздельно, а только в связи с полным его текстом, с учетом принятых допущений и ограничений.
         На основании информации, предоставленной и проанализированной в приведенном ниже отчете об оценке имущества, мы пришли к заключению, что рекомендуемая рыночная стоимость реального ущерба имущества по состоянию на			{{ datetime }}	, составляет:
         </text>
-        <text  align="center" >Автомобиль марки {{ report.car.brand }} государственный номер: {{ report.car.car_number }}
+        <text  align="center" >Автомобиль марки {{ report.car.brand_text }} государственный номер: {{ report.car.car_number }}
         </text>
         <text fontsize="20" align="center" lineheight="1.5" >{{ report.total_report_cost }}    </text>
         <text fontsize="12" y="11.5" x="0" align="center" lineheight="1.5" >{{ report.total_report_cost_txt }}    </text>
@@ -584,7 +584,7 @@
            <text lineheight="1" x="1" y="27.4">       Объект оценки (наименование и краткое
        описание):  </text>
            <text lineheight="1" x="8.7" y="27.4">       Движимое имущество: легковой автомобиль
-       {{ report.car.brand }} гос№ {{ report.car.car_number }}
+       {{ report.car.brand_text }} гос№ {{ report.car.car_number }}
           </text>
 
            <text lineheight="1" x="1" y="26.2">      Собственник:                                                         {{ report.car.car_owner }}</text>
@@ -745,7 +745,7 @@
           </text>
           <text lineheight="2" x="6.2" y="18.2">
               Марка
-          {{ report.car.brand }}
+          {{ report.car.brand_text }}
           </text>
           <text lineheight="2" x="8.5" y="18.2">
               Государственный номер
@@ -833,7 +833,7 @@
 
         Идентификация и техническое освидетельствование объекта были произведены лично Оценщиком. В ходе идентификации установлено следующее:
         </text>
-        <text x="2" y="14">Марка,модель                              {{ report.car.brand }}</text>
+        <text x="2" y="14">Марка,модель                              {{ report.car.brand_text }}</text>
         <text x="2" y="13.5">Гос.номер                                   {{ report.car.car_number }}</text>
         <text x="11" y="13.5">Дата и год выпуска                    {{ report.car.release_date }}</text>
         <text x="2" y="13">Серия,номер техпаспорта         {{ report.car.registration }}</text>
