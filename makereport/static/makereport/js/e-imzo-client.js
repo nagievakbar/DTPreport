@@ -23,11 +23,11 @@ var dates = {
         //                  attributes.  **NOTE** month is 0-11.
         return (
             d.constructor === Date ? d :
-            d.constructor === Array ? new Date(d[0], d[1], d[2]) :
-            d.constructor === Number ? new Date(d) :
-            d.constructor === String ? new Date(d) :
-            typeof d === "object" ? new Date(d.year, d.month, d.date) :
-            NaN
+                d.constructor === Array ? new Date(d[0], d[1], d[2]) :
+                    d.constructor === Number ? new Date(d) :
+                        d.constructor === String ? new Date(d) :
+                            typeof d === "object" ? new Date(d.year, d.month, d.date) :
+                                NaN
         );
     },
     compare: function (a, b) {
@@ -41,8 +41,8 @@ var dates = {
         return (
             isFinite(a = this.convert(a).valueOf()) &&
             isFinite(b = this.convert(b).valueOf()) ?
-            (a > b) - (a < b) :
-            NaN
+                (a > b) - (a < b) :
+                NaN
         );
     },
     inRange: function (d, start, end) {
@@ -56,8 +56,8 @@ var dates = {
             isFinite(d = this.convert(d).valueOf()) &&
             isFinite(start = this.convert(start).valueOf()) &&
             isFinite(end = this.convert(end).valueOf()) ?
-            start <= d && d <= end :
-            NaN
+                start <= d && d <= end :
+                NaN
         );
     }
 };
@@ -94,14 +94,17 @@ String.prototype.splitKeep = function (splitter, ahead) {
                 result.push(part);
                 lastIndex = nextIndex;
             }
-        };
+        }
+        ;
         if (lastIndex < self.length) {
             var part = self.substring(lastIndex, self.length);
             result.push(part);
-        };
+        }
+        ;
     } else {
         result.add(self);
-    };
+    }
+    ;
     return result;
 };
 
@@ -328,7 +331,7 @@ var EIMZOClient = {
             }
         }
     },
-   
+
     createPkcs7: function (id, data, timestamper, success, fail) {
         CAPIWS.callFunction({
             plugin: "pkcs7",
@@ -372,30 +375,14 @@ var EIMZOClient = {
                 arguments: [pkcs7, id]
             },
             function (event, data) {
+                 console.log(data)
+                console.log("e-imzo uz")
                 if (data.success) {
                     var pkcs7 = data.pkcs7_64;
-                    if (timestamper) {
-                        var sn = data.signer_serial_number;
-                        timestamper(data.signature_hex, function (tst) {
-                            CAPIWS.callFunction({
-                                plugin: "pkcs7",
-                                name: "attach_timestamp_token_pkcs7",
-                                arguments: [pkcs7, sn, tst]
-                            }, function (event, data) {
-                                if (data.success) {
-                                    var pkcs7tst = data.pkcs7_64;
-                                    success(pkcs7tst);
-                                } else {
-                                    fail(null, data.reason);
-                                }
-                            }, function (e) {
-                                fail(e, null);
-                            });
-                        }, fail);
-                    } else {
                         success(pkcs7);
-                    }
                 } else {
+                    console.log("failed")
+                    console.log(data.reason);
                     fail(null, data.reason);
                 }
             },
