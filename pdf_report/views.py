@@ -48,7 +48,7 @@ class GenerateMixing(View):
             'car': car,
             'customer': customer,
             'report': report,
-            'qrcode': "{company} {user}".format(company=report.pdf_qr_code_company, user=report.pdf_qr_code_user),
+            'qrcode': get_qrc_code(qr_company=report.pdf_qr_code_company, qr_user=report.pdf_qr_code_user),
             'contract': contract,
         }
         try:
@@ -79,7 +79,7 @@ class GenerateAgreement(View):
         context = {
             'calculation': calculation,
             'report': report,
-            'qrcode': "{company} {user}".format(company=report.pdf_qr_code_company, user=report.pdf_qr_code_user),
+            'qrcode': get_qrc_code(qr_company=report.pdf_qr_code_company, qr_user=report.pdf_qr_code_user),
             'contract': contract,
         }
         try:
@@ -96,7 +96,14 @@ class GenerateAgreement(View):
         response = FileResponse(ContentFile(data), content_type='application/pdf')
         return response
 
-
+def get_qrc_code(qr_company, qr_user):
+    if (qr_company is not None and qr_user is not None) and (qr_company != "" and qr_user != ""):
+        return "{company} {user}".format(company=qr_company, user=qr_user)
+    elif qr_company is not None and qr_company != "":
+        return  qr_company
+    elif qr_user is not None and qr_user != "":
+        return qr_user
+    return None
 class GenerateAdditional(View):
     def get(self, request, id=None):
         if id == 0:
