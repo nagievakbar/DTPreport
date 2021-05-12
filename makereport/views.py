@@ -630,10 +630,9 @@ def delete(request):
 
 @login_required
 def reports_list(request):
-    if request.user.is_superuser:
+
         return admin_list(request)
-    else:
-        return user_list_some(request)
+
 
 
 @login_required
