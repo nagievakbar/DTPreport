@@ -243,6 +243,17 @@ class TemplateAgreement(models.Model):
         super(TemplateAgreement, self).delete(*args, **kwargs)
 
 
+class MyUser(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    report_rate_price = models.IntegerField(default=0, blank=True, null=True)
+    report_rate_price_txt = models.CharField(max_length=200, blank=True, null=True)
+
+    @receiver(post_save, sender=User)
+    def update_profile_signal(sender, instance, created, **kwargs):
+        if created:
+            MyUser.objects.create(user=instance)
+        instance.myuser.save()
+
 
 
 
@@ -449,3 +460,7 @@ class Calculation(models.Model):
     opr_damage = models.CharField(max_length=20)
     report = models.ForeignKey('Report', on_delete=models.CASCADE, related_name='report', verbose_name='Репорт',
                                null=True, blank=True)
+
+    def get_total_report_cost_txt(self):
+        report_rate_price_txt = num2text(int(self.total.strip().replace(' ', "")), main_units=((u'сум', u'сумы', u'сум'), 'f'))
+        return report_rate_price_txt
