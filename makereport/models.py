@@ -97,6 +97,10 @@ class Customer(models.Model):
     def __str__(self):
         return str(self.name)
 
+    def name_respect(self):
+        name_new = self.name.split(' ')
+        return "{first} {second}".format(first=name_new[1], second=name_new[2])
+
     class Meta:
         verbose_name = 'Клиента'
         verbose_name_plural = 'Клиенты'
@@ -241,8 +245,6 @@ class TemplateAgreement(models.Model):
     def delete(self, *args, **kwargs):
         default_storage.delete(self.template.path)
         super(TemplateAgreement, self).delete(*args, **kwargs)
-
-
 
 
 class HoldsImages(models.Model):
