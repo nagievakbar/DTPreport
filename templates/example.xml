@@ -74,11 +74,11 @@
         <text x="9.15" y="16.1">1</text>
         <text x="9.15" y="15.6">0</text>
 
-        <text x="10.4" y="16.1">{{ calculation.opr_damage }}</text>
-        <text x="10.3" y="15.6">{{ calculation.departure }}</text>
+        <text x="10.4" y="16.1">0</text>
+        <text x="10.3" y="15.6">0</text>
 
-        <text x="12.4" y="16.1">{{ calculation.opr_damage }}</text>
-        <text x="12.3" y="15.6">{{ calculation.departure }}</text>
+        <text x="12.4" y="16.1">0</text>
+        <text x="12.3" y="15.6">0</text>
 
         <text x="14.7" y="16.1">Без акциз</text>
         <text x="14.7" y="15.6">Без акциз</text>
@@ -86,7 +86,7 @@
         <text x="17.3" y="16.1">Без НДС</text>
         <text x="17.3" y="15.6">Без НДС</text>
 
-        <text x="12.8" y="15.1" font="TNRB">{{ calculation.total }}</text>
+        <text x="12.8" y="15.1" font="TNRB">0</text>
          --------------------------table-text--------------------------
         <text/>
         <text/>
@@ -94,7 +94,7 @@
         <text/>
         <text/>
         <text/>
-        <text lineheight="1.3">2.2.  Заказчик обязуется оплатить за услуги в сумме  {{ calculation.get_total_report_cost_txt() }} </text>
+        <text lineheight="1.3">2.2.  Заказчик обязуется оплатить за услуги в сумме 0  </text>
         <text align="justify" lineheight="1.3">2.3. Заказчик производит 100% предоплату в течении 3-х банковских дней со дня подписания договора, в случае не оплаты в течении указанного срока договор считается аннулированным.</text>
         <text align="justify" lineheight="1.3">2.4.  Исполнитель передает Заказчику один экземпляр письменного Отчета об оценке.</text>
         <text font="TNRB" align="center" lineheight="1.6">3. Сроки выполнения работ</text>
@@ -148,7 +148,7 @@
 
          --------------------------------------------table-text--------------------------------------
         <text lineheight="1.3">  Поставщик:          ООО "AMIR AVTO BAHOLASH"    {{ report.contract.customer.name }}</text>
-        <text lineheight="1.3">  Адрес:                  г.Ташкент, пр-т.Бунедкор, 118          {{ report.contract.customer.address }}</text>
+        <text lineheight="1.3">  Адрес:                  г.Ташкент, пр-т.Бунедкор, 118          {{ report.contract.customer.address[:30] }}</text>
         <text lineheight="1.3">  телефон:               279-46-60       </text>
         <text lineheight="1.3">  Р/с №                     20208000298017089001                      серия паспорта/права     {{ report.contract.customer.passport_number }}</text>
         <text lineheight="1.3">  в		             Чиланз. ф-л. ОАИКБ "Ипак Йули"   когда выдан           {{ report.contract.customer.when_passport_issued }}</text>
@@ -227,15 +227,15 @@
         <text x="4.6" y="7.0" fontsize="8.2">Един. изм</text>
         <text x="4.6" y="6.0" fontsize="9">     шт</text>
 {#        <text x="4.6" y="5.2" fontsize="8.5">           </text>#}
-        <text x="4.6" y="4.6" font="TNRB" fontsize ="8.5" >   {{ calculation.total }},00 сум ({{ calculation.get_total_report_cost_txt()[:72] }}.), 00 тийин   </text>
+        <text x="4.6" y="4.6" font="TNRB" fontsize ="8.5" >   0,00 сум 0, 00 тийин   </text>
 
          <text x="6.1" y="7.0" fontsize="8.2"> Кол-во</text>
          <text x="6.1" y="6.0" fontsize="9">     1</text>
 
         <text x="7.6" y="7.0" fontsize="8.2">  Стоимость</text>
         <text x="7.6" y="6.8" fontsize="8.2">   поставки</text>
-        <text x="7.6" y="6.0" fontsize="9">  {{ calculation.total }},00</text>
-        <text x="7.6" y="5.2" fontsize="8.5"> {{ calculation.total }},00  </text>
+        <text x="7.6" y="6.0" fontsize="9">  0 ,00</text>
+        <text x="7.6" y="5.2" fontsize="8.5"> 0,00  </text>
 
         <text x="9.6" y="7.2" fontsize="8.2">   Акциозный налог</text>
         <text x="9.6" y="6.6" fontsize="8.2">Ставка</text>
@@ -325,7 +325,7 @@
 		<text/>
 		<text/>
 		<text/>
-        <text>Регистрационный            {{ report.car.registration }}
+        <text>Регистрационный            {{ report.report_number }}
 номер:
 		</text>
         <text>Цель оценки:                    Определение рыночной стоимости затрат на восстановление АМТС,
@@ -372,7 +372,7 @@
         <text align="center" x="7" >
 г-ну {{ report.contract.customer.name }}
         </text>
-        <text  align="center" font="TNRB" >Уважаемый  {{ report.contract.customer.name }}
+        <text  align="center" font="TNRB" >Уважаемый  {{ report.contract.customer.gnu_or_gje }}
         </text>
         <text align="justify">
        В соответствии с Договором об оценке имущества № {{ report.report_number }}  от {{ datetime }},оценщики ООО «AMIR AVTO BAHOLASH» провели оценку транспортного  средства марки {{ report.car.brand_text }} Государственный номер:{{ report.car.car_number }} зарегистрированного по адресу:{{ report.contract.customer.address }}, Республика Узбекистан.
@@ -383,8 +383,8 @@
         </text>
         <text  align="center" >Автомобиль марки {{ report.car.brand_text }} государственный номер: {{ report.car.car_number }}
         </text>
-        <text fontsize="20" align="center" lineheight="1.5" >{{ report.total_report_cost }}    </text>
-        <text fontsize="12" y="11.5" x="0" align="center" lineheight="1.5" >{{ report.total_report_cost_txt }}    </text>
+        <text fontsize="20" align="center" lineheight="1.5" >{{ calculation.total }}    </text>
+        <text fontsize="12" y="10.5" x="0" align="center" lineheight="1.5" >{{ calculation.get_total_report_cost_txt() }}    </text>
         <text></text>
 
         <text align="justify">
