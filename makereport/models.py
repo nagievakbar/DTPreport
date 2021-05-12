@@ -5,6 +5,7 @@ from .converters import num2text
 import random
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+import uuid
 
 
 class Contract(models.Model):
@@ -387,7 +388,7 @@ class Report(models.Model):
     product_cost = models.IntegerField(default=0)
     product_acc_cost = models.IntegerField(default=0)
     consumable_cost = models.IntegerField(default=0)
-    key = models.CharField(max_length=600, blank=True)
+    key = models.CharField(max_length=13, blank=True)
 
     total_report_cost = models.CharField(max_length=15)
     total_report_cost_txt = models.CharField(max_length=200)
@@ -442,10 +443,11 @@ class Report(models.Model):
         return self.total_report_cost_txt
 
     def set_private_key(self):
-        figure = str(random.randint(0, 9))
-        self.key = str(self.report_id)[0] + self.car.car_number[0] + self.car.car_number[0] + self.car.car_number[0] + \
-                   str(self.contract_id)[0] + str(self.car.release_date)[0] + figure + \
-                   self.car.brand[0]
+        while True:
+            figure = uuid.uuid4().hex[:12].upper()
+            if not self.objects.filter(key=figure).exists():
+                break
+        self.key = figure
 
     class Meta:
         verbose_name = 'Отчёт'

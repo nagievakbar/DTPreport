@@ -6,11 +6,11 @@ from django.core.files.storage import default_storage
 from .models import *
 
 
-def qr_code(FULL_NAME):
+def qr_code(signature):
     # str_for_qr_code = "success: {success}\nsignature:{signature}\nsignAlgName:{signAlgName}\nlink:{link}\n".format(
     #     success=success, signature=signature, signAlgName=signAlgName, link=link)
-    str_for_qr_code = "signature:{FULL_NAME}".format(
-        signature=FULL_NAME)
+    str_for_qr_code = "signature:{signature}".format(
+        signature=signature)
     print(str_for_qr_code)
     return str_for_qr_code
     # img = qrcode.make(str_for_qr_code)  # вот сюда любую ссылку вставите он переведет в QR CODE
