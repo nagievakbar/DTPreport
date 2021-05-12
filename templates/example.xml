@@ -370,9 +370,9 @@
 р/с: 20208000200244206001  Чиланзарский ф-л ОАИКБ «Ипак Йули», ИНН 302 667624 ОКЭД 68310
         </text>
         <text align="center" x="7" >
-г-ну {{ report.contract.customer.name }}
+г-ну {{ report.contract.customer.gnu_or_gje }}
         </text>
-        <text  align="center" font="TNRB" >Уважаемый  {{ report.contract.customer.gnu_or_gje }}
+        <text  align="center" font="TNRB" >Уважаемый  {{ report.contract.customer.name }}
         </text>
         <text align="justify">
        В соответствии с Договором об оценке имущества № {{ report.report_number }}  от {{ datetime }},оценщики ООО «AMIR AVTO BAHOLASH» провели оценку транспортного  средства марки {{ report.car.brand_text }} Государственный номер:{{ report.car.car_number }} зарегистрированного по адресу:{{ report.contract.customer.address }}, Республика Узбекистан.
@@ -383,8 +383,8 @@
         </text>
         <text  align="center" >Автомобиль марки {{ report.car.brand_text }} государственный номер: {{ report.car.car_number }}
         </text>
-        <text fontsize="20" align="center" lineheight="1.5" >{{ calculation.total }}    </text>
-        <text fontsize="12" y="10.5" x="0" align="center" lineheight="1.5" >{{ calculation.get_total_report_cost_txt() }}    </text>
+        <text fontsize="18" align="center" lineheight="1.5" >{{ calculation.total }}    </text>
+        <text fontsize="12" y="10.9" x="0" align="center" lineheight="1.5" >{{ calculation.get_total_report_cost_txt() }}    </text>
         <text></text>
 
         <text align="justify">
