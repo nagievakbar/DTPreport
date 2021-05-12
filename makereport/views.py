@@ -168,6 +168,7 @@ class ReportEditView(View):
 
         template = 'makereport/add_repor.html'
         context = {
+            'base' : False,
             'id_image': new_hold_images.id,
             'calculation_form': calculation_form,
             'contract_form': contract_form,
@@ -273,6 +274,7 @@ class ReportEditView(View):
             return HttpResponseRedirect('/report/list_edit')
 
         context = {
+            'base': False,
             'id_image': holds_images.id,
             'calculation_form': calculation_form,
             'contract_form': contract_form,
@@ -378,6 +380,7 @@ class ReportView(View):
             holds_image = hold_image()
 
         context = {
+            'base': True,
             'id_image': holds_image.id,
             'id': report_id,
             'calculation_form': calculation_form,
@@ -483,6 +486,7 @@ class ReportView(View):
             return HttpResponseRedirect('/report/list')
 
         context = {
+            'base': True,
             'id_image': holds_images.id,
             'calculation_form': calculation_form,
             'contract_form': contract_form,
@@ -581,6 +585,7 @@ class ReportView(View):
             return HttpResponseRedirect('/report/list')
 
         context = {
+            'base': True,
             'id_image': holds_images.id,
             'contract_form': contract_form,
             'prices': get_prices(),

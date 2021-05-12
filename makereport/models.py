@@ -99,7 +99,10 @@ class Customer(models.Model):
 
     def name_respect(self):
         name_new = self.name.split(' ')
-        return "{first} {second}".format(first=name_new[1], second=name_new[2])
+        try:
+            return "{first} {second}".format(first=name_new[1], second=name_new[2])
+        except IndexError:
+            return self.name
 
     class Meta:
         verbose_name = 'Клиента'

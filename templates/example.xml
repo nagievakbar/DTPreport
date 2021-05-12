@@ -198,7 +198,7 @@
           <text/>
         <text/>
         <text align="center">СЧЕТ-ФАКТУРА №</text>
-        <text align="center" lineheight="1.5">от «__» _________{{ report.report_date }}</text>
+        <text align="center" lineheight="1.5">от {{ report.report_date }}</text>
         <text align="center" lineheight="1.5">к договору № {{ report.report_number }} от {{ datetime }}</text>
         <text x="0" y="12" align="left">
                                           Поставщик:
@@ -288,7 +288,32 @@
         <rect x="4.5" y="4.5" width="15" height="0.5"/>
         {# -----------------------------------------table------------------------------------- #}
         {# -----------------------------------------table-text------------------------------------ #}
-
+        <text></text>
+     <text></text>
+     <text></text>
+     <text></text>
+     <text></text>
+     <text></text>
+     <text></text>
+        <text></text>
+     <text></text>
+     <text></text>
+     <text></text>
+     <text></text>
+    <text></text>
+     <text></text>
+     <text></text>
+     <text></text>
+     <text></text>
+        <text></text>
+     <text></text>
+     <text></text>
+     <text></text>
+     <text></text>
+        <text fontsize="10">Руководитель: Сагдуллаев Бобир Камилович                                  Получила (а) ______________</text>
+        <text fontsize="9" font="TNRB">                                                                                             (подпись покупателя или уполномоченного представителя)</text>
+        <text fontsize="10">Главный бухгалтер: ________________________                               {{ report.contract.customer.name }} </text>
+                <text fontsize="9" font="TNRB">                                                                                                                        (Ф.И.О получателя)</text>
         {# -----------------------------------------table-text------------------------------------ #}
     </page>
     <page>
@@ -373,10 +398,10 @@
         <text align="center" x="7" >
 г-ну {{ report.contract.customer.gnu_or_gje }}
         </text>
-        <text  align="center" font="TNRB" >Уважаемый  {{ report.contract.customer.name }}
+        <text  align="center" font="TNRB" >Уважаемый  {{ report.contract.customer.name_respect() }}
         </text>
         <text align="justify">
-       В соответствии с Договором об оценке имущества № {{ report.report_number }}  от {{ datetime }},оценщики ООО «AMIR AVTO BAHOLASH» провели оценку транспортного  средства марки {{ report.car.brand_text }} Государственный номер:{{ report.car.car_number }} зарегистрированного по адресу:{{ report.contract.customer.address }}, Республика Узбекистан.
+       В соответствии с Договором об оценке имущества № {{ report.report_number }}  от {{ datetime }},оценщики ООО «AMIR AVTO BAHOLASH» провели оценку транспортного  средства марки {{ report.car.brand_text }} Государственный номер:{{ report.car.car_number }} зарегистрированного по адресу:{{ report.contract.customer.address[:50] }}, Республика Узбекистан.
        Цель оценки: Определение рыночной стоимости затрат на восстановление АМТС, пострадавшего в результате ДТП.
      Обращаю Ваше внимание на то, что это письмо не является отчетом по оценке имущества, а только предваряет отчет, приведенный ниже.
     Предлагаемый Вашему вниманию Отчет, который  содержит описание расчета  стоимости движимого имущества, собранную информацию, этапы проведенного исследования и сделанные выводы. Кроме того, в Отчет включены гарантии объективности и независимости оценщиков, а также сделанные допущения и принятые ограничения. Отдельные части анализа, приведенного Отчете, не могут трактоваться раздельно, а только в связи с полным его текстом, с учетом принятых допущений и ограничений.
@@ -385,7 +410,7 @@
         <text  align="center" >Автомобиль марки {{ report.car.brand_text }} государственный номер: {{ report.car.car_number }}
         </text>
         <text fontsize="18" align="center" lineheight="1.5" >{{ report.total_report_cost }}    </text>
-        <text fontsize="12" y="10.9" x="0" align="center" lineheight="1.5" >{{ report.get_total_report_cost_txt() }}    </text>
+        <text fontsize="12" y="11.5" x="0" align="center" lineheight="1.5" >{{ report.get_total_report_cost_txt() }}    </text>
         <text></text>
 
         <text align="justify">
@@ -586,12 +611,12 @@
           </text>
 
            <text lineheight="1" x="1" y="26.2">      Собственник:                                                         {{ report.car.car_owner }}</text>
-           <text lineheight="1" x="1" y="25.2">      Реквизиты собственника:                                     {{ report.car.owner_address }}</text>
+           <text lineheight="1" x="1" y="25.2">      Реквизиты собственника:                                     {{ report.car.owner_address[:40] }}</text>
            <text lineheight="1" x="1" y="24.2">      Заказчик оценки:                                                   {{ report.contract.customer.name }}</text>
            <text lineheight="1" x="1" y="23.2">      Реквизиты заказчика: </text>
            <text lineheight="1.2" x="8" y="24.2">
 
-               Адрес: {{ report.contract.customer.address }}
+               Адрес: {{ report.contract.customer.address[:35] }}
                паспорт серия: {{ report.contract.customer.passport_number }}
                дата выдачи  {{ report.contract.customer.when_passport_issued }} года
                от {{ report.contract.customer.whom_passport_issued }} </text>

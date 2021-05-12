@@ -807,7 +807,7 @@
 
                         <div class="col-lg-12">
                             <div class="row">
-                                <div class="col-lg-3 download_button">
+                                <div class="col-lg-4 download_button">
                                     <div class="panel_user" id="download_button1">
                                         <a href="{% url 'get_mixing' id %}">
                                             <button type="button" class="btn panel_button">Скачать</button>
@@ -815,30 +815,30 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-3 download_button">
+                                <div class="col-lg-4 download_button">
                                     <div class="panel_user" id="download_button2">
                                         <a href="{% url 'get_agreement' id %}">
                                             <button type="button" class="btn panel_button">Скачать</button>
                                         </a>
                                     </div>
                                 </div>
-
-                                <div class="col-lg-3 download_button">
+                                {% if base %}
+                                <div class="col-lg-4 download_button">
                                     <div class="panel_user" id="download_button3">
                                         <a href="{% url 'get_response' id %}">
                                             <button type="button" class="btn panel_button">Скачать</button>
                                         </a>
                                     </div>
                                 </div>
-
-                                <div class="col-lg-3 download_button">
+                                {% else %}
+                                <div class="col-lg-4 download_button">
                                     <div class="panel_user" id="download_button4">
                                         <a href="{% url 'get_additional' id %}">
                                             <button type="button" class="btn panel_button">Скачать</button>
                                         </a>
                                     </div>
                                 </div>
-
+                                {% endif %}
                             </div>
                         </div>
 
