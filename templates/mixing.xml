@@ -79,7 +79,7 @@
         <text x="0.7" y="19.2">Владелец :</text>
         {#        second column of first table#}
         <text x="5.7" y="25.2">Движимое имущество легковой автомобиль {{ car.brand_text }} гос. номер</text>
-        <text x="5.7" y="24.8">{{ car.car_number }} {{ car.release_date[:3] }}год/выпуска</text>
+        <text x="5.7" y="24.8">{{ car.car_number }} {{ car.release_date.year}}год/выпуска</text>
 
         <text x="5.7" y="23.7">РУз г. Ташкент Чиланзарский р-н, Чиланзар- 1А, гараж там же</text>
 
