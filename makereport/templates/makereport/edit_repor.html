@@ -1274,7 +1274,12 @@
                 btn.focus()
             }
         });
-
+         $(".prehnite-input").on('keydown', function (e){
+             var weight = $(this).val();
+             console.log(weight);
+             $('#product_wear_show').text(weight);
+             calculate_product_overall_sum();
+         })
         $(".btn-warning").on('click', function () {
             var $el = $("#file-4");
             if ($el.attr('disabled')) {

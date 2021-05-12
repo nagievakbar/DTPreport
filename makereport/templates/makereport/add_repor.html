@@ -1236,6 +1236,7 @@
                 })
             }
         });
+
         $(document).on('keydown', ".time3", function (e) {
             console.log('CLICK quantity')
             var key = e.which;
@@ -1300,7 +1301,12 @@
                 })
             }
         });
-
+         $(".prehnite-input").on('keydown', function (e){
+             var weight = $(this).val();
+             console.log(weight);
+             $('#product_wear_show').text(weight);
+             calculate_product_overall_sum();
+         })
         $(document).on('keydown', ".point-input", function (e) {
             console.log('CLICK point-input')
             var key = e.which;
