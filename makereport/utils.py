@@ -9,7 +9,7 @@ from .models import *
 def qr_code(signature , valid_from):
     # str_for_qr_code = "success: {success}\nsignature:{signature}\nsignAlgName:{signAlgName}\nlink:{link}\n".format(
     #     success=success, signature=signature, signAlgName=signAlgName, link=link)
-    str_for_qr_code = "signature:{signature}    valid from: {valid_from}".format(
+    str_for_qr_code = "signature:{signature}           from: {valid_from}".format(
         signature=signature[:22], valid_from=valid_from)
     print(str_for_qr_code)
     return str_for_qr_code
