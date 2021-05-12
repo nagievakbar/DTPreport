@@ -448,7 +448,7 @@ class Report(models.Model):
             if not Report.objects.filter(key=figure).exists():
                 break
         self.key = figure
-        self.save()
+
 
     class Meta:
         verbose_name = 'Отчёт'
