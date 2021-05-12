@@ -149,6 +149,9 @@ class ReportEditView(View):
         otherphoto_form = OPhotoForm(instance=OtherPhotos(), use_required_attribute=False)
         checks_form = ChecksForm(instance=Checks(), use_required_attribute=False)
         report = Report.objects.get(report_id=id)
+        report.consumable_cost = 0
+        report.product_cost = 0
+        report.service_cost = 0
         contract = Contract.objects.get(contract_id=report.contract_id)
         contract_form = ContractForm(instance=contract)
         report_form = ReportForm(instance=Report())
@@ -228,7 +231,7 @@ class ReportEditView(View):
             new_contract.save()
 
             new_report = report_form.save(commit=False)
-            new_report.report_number
+
             new_report.contract = new_contract
             new_car = car_form.save()
             new_car.save()
