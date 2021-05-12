@@ -232,7 +232,7 @@ class ReportEditView(View):
             new_car = car_form.save()
             new_car.save()
             new_report.car = new_car
-            new_report.created_by = request.user.myuser
+            new_report.created_by = request.user
             new_report.save()
             holds_images.report = new_report
             holds_images.store_add()
@@ -443,7 +443,7 @@ class ReportView(View):
             new_car = car_form.save()
             new_car.save()
             new_report.car = new_car
-            new_report.created_by = request.user.myuser
+            new_report.created_by = request.user
             new_report.save()
             holds_images.report = new_report
             holds_images.save()
@@ -545,7 +545,7 @@ class ReportView(View):
             new_car = car_form.save()
             new_car.save()
             new_report.car = new_car
-            new_report.created_by = request.user.myuser
+            new_report.created_by = request.user
             new_report.save()
             new_report.product_data.clear()
             new_report.service_data.clear()
@@ -647,7 +647,7 @@ def reports_edit_list(request):
 
 def user_list_some(request):
     if 'search' in request.GET:
-        reports = Report.objects.filter(car__car_number__contains=request.GET['search'], created_by=request.user.myuser)
+        reports = Report.objects.filter(car__car_number__contains=request.GET['search'], created_by=request.user)
     else:
         reports = Report.objects.filter(created_by=request.user)
     return render(request, 'makereport/index.html', context={'reports': reports})
