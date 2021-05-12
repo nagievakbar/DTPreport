@@ -310,30 +310,34 @@
                     <td style="border-bottom: 1px solid #fff;" data-title="Отчёт" data-type="currency"><a
                             href="{% url 'get_response' report.report_id %}">Открыть</a></td>
                     <td style="border-bottom: 1px solid #fff;" data-title="Функции" data-type="currency">
-                        <span>Подписать</span>
-                        <div class="inline_button">
-                             {% if report.pdf_qr_code_company == None %}
-                            <button class="btn btn-primary"
-                                    href="#" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal"
-                                    sign="{{ report.signed }}"
-                                    sign_from='0'
-                                    data-bs-report="{{ report.report_id }}"
-{#                                    pkcs7="{{ report.pdf_report_pkcs7.0 }}"#}
-                                    data-bs-whatever="{{ report.pdf_report_base64 }}">Компания
-                            </button>
-                            {% endif %}
-                         {% if report.pdf_qr_code_user == None %}
-                            <button class="btn btn-primary"
-                                    href="#" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal"
-                                    sign="{{ report.signed }}"
-                                    sign_from='1'
-                                    data-bs-report="{{ report.report_id }}"
-{#                                    pkcs7="{{ report.pdf_report_pkcs7.0 }}"#}
-                                    data-bs-whatever="{{ report.pdf_report_base64 }}">Руководитель
-                            </button>
+                        {% if report.pdf_qr_code_company == None or report.pdf_qr_code_user == None %}
+                            <span>Подписать</span>
+                        {% else %}
+                            <span>Документ подписан</span>
                         {% endif %}
+                        <div class="inline_button">
+                            {% if report.pdf_qr_code_company == None %}
+                                <button class="btn btn-primary"
+                                        href="#" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal"
+                                        sign="{{ report.signed }}"
+                                        sign_from='0'
+                                        data-bs-report="{{ report.report_id }}"
+                                        {#                                    pkcs7="{{ report.pdf_report_pkcs7.0 }}"#}
+                                        data-bs-whatever="{{ report.pdf_report_base64 }}">Компания
+                                </button>
+                            {% endif %}
+                            {% if report.pdf_qr_code_user == None %}
+                                <button class="btn btn-primary"
+                                        href="#" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal"
+                                        sign="{{ report.signed }}"
+                                        sign_from='1'
+                                        data-bs-report="{{ report.report_id }}"
+                                        {#                                    pkcs7="{{ report.pdf_report_pkcs7.0 }}"#}
+                                        data-bs-whatever="{{ report.pdf_report_base64 }}">Руководитель
+                                </button>
+                            {% endif %}
                         </div>
                         <a href="{% url 'edit_report' report.report_id %}">Изменить </a>
                         <button class="" type="button" onclick="myFunction({{ report.report_id }})">Удалить</button>
@@ -470,7 +474,7 @@
             {#if (sign[0] === 'T') {#}
             {#    recipient = button.getAttribute('pkcs7');} else {#}
             {#    console.log('get this')}#}
-              recipient = button.getAttribute('data-bs-whatever');
+            recipient = button.getAttribute('data-bs-whatever');
             var report_id = button.getAttribute('data-bs-report');
 
             var modalFileInput = exampleModal.querySelector('.file');
@@ -650,7 +654,7 @@
             var choice = document.getElementById("sign").value;
             console.log('sign decide')
             console.log(choice)
-                 sign();
+            sign();
             {#if (choice[0] === "T") {#}
             {#    adding_sign();} else {}#}
         }
