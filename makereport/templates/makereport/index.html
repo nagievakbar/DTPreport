@@ -649,11 +649,9 @@
             var choice = document.getElementById("sign").value;
             console.log('sign decide')
             console.log(choice)
-            if (choice[0] === "T") {
-                adding_sign();
-            } else {
-                sign();
-            }
+             sign();
+            {#if (choice[0] === "T") {#}
+            {#    adding_sign();} else {}#}
         }
         adding_sign = function () {
             var sign_from = document.getElementById('sign_from');
