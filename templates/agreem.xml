@@ -94,8 +94,8 @@
         <text/>
         <text/>
         <text/>
-        <text lineheight="1.3">2.2.  Заказчик обязуется оплатить за услуги в сумме </text>
-        <text x="11.5" y="14.45" font="TNRB">{{ report.created_by.get_total_report_cost_txt() }} </text>
+        <text lineheight="1.3">2.2.  Заказчик обязуется оплатить за услуги в сумме  {{ calculation.get_total_report_cost_txt() }}   </text>
+
         <text align="justify" lineheight="1.3">2.3. Заказчик производит 100% предоплату в течении 3-х банковских дней со дня подписания договора, в случае не оплаты в течении указанного срока договор считается аннулированным.</text>
         <text align="justify" lineheight="1.3">2.4.  Исполнитель передает Заказчику один экземпляр письменного Отчета об оценке.</text>
         <text font="TNRB" align="center" lineheight="1.6">3. Сроки выполнения работ</text>

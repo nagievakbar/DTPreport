@@ -255,8 +255,6 @@ class MyUser(models.Model):
         instance.myuser.save()
 
 
-
-
 class HoldsImages(models.Model):
     image = models.ManyToManyField('Images')
     image_previous = models.ManyToManyField('Images', related_name="image_previous")
@@ -447,7 +445,6 @@ class Report(models.Model):
                 break
         self.key = figure
 
-
     class Meta:
         verbose_name = 'Отчёт'
         verbose_name_plural = 'Отчёты'
@@ -462,5 +459,9 @@ class Calculation(models.Model):
                                null=True, blank=True)
 
     def get_total_report_cost_txt(self):
-        report_rate_price_txt = num2text(int(self.total.strip().replace(' ', "")), main_units=((u'сум', u'сумы', u'сум'), 'f'))
-        return report_rate_price_txt
+        if self.total == "":
+            return num2text(0, main_units=((u'сумм', u'сумм', u'сумм'), 'f'))
+        else:
+            report_rate_price_txt = num2text(int(self.total.strip().replace(' ', "")),
+                                             main_units=((u'сумм', u'сумм', u'сумм'), 'f'))
+            return report_rate_price_txt

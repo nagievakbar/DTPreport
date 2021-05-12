@@ -174,8 +174,9 @@ def get_response(request, id, obj):
 
 def create_base64(request, new_report_pdf):
     locale.setlocale(locale.LC_ALL, 'C')
+    calculation = Calculation.objects.create()
     context = {
-        'calculation': "",
+        'calculation': calculation,
         'contract': "",
         'report': new_report_pdf,
         'services': new_report_pdf.service.all().__len__(),

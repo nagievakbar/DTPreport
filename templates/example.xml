@@ -94,7 +94,7 @@
         <text/>
         <text/>
         <text/>
-        <text lineheight="1.3">2.2.  Заказчик обязуется оплатить за услуги в сумме  {{ calculation.total }}, 00 сум</text>
+        <text lineheight="1.3">2.2.  Заказчик обязуется оплатить за услуги в сумме  {{ calculation.get_total_report_cost_txt() }} </text>
         <text align="justify" lineheight="1.3">2.3. Заказчик производит 100% предоплату в течении 3-х банковских дней со дня подписания договора, в случае не оплаты в течении указанного срока договор считается аннулированным.</text>
         <text align="justify" lineheight="1.3">2.4.  Исполнитель передает Заказчику один экземпляр письменного Отчета об оценке.</text>
         <text font="TNRB" align="center" lineheight="1.6">3. Сроки выполнения работ</text>
@@ -178,8 +178,8 @@
         <text align="left" lineheight="1.2">            Выполнено работ и услуг: отчет об оценке рыночной стоимости ущерба</text>
         <text align="left" lineheight="1.2">            Отчет, заключение: в письменной форме.</text>
         <text/>
-        <text>Договорная стоимость работ составляет: {{ calculation.total }},00 сум ({{ calculation.get_total_report_cost_txt() }}.) , 00 тийин без НДС.</text>
-        <text>Работа выполнена на сумму {{ calculation.total }},00 сум ({{ calculation.get_total_report_cost_txt() }}.) , 00 тийин,с учётом надбавки.</text>
+        <text>Договорная стоимость работ составляет: {{ calculation.total }},00 сум {{ calculation.get_total_report_cost_txt() }} , 00 тийин без НДС.</text>
+        <text>Работа выполнена на сумму {{ calculation.total }},00 сум {{ calculation.get_total_report_cost_txt() }} , 00 тийин,с учётом надбавки.</text>
         <text/>
         <text/>
         <text>                                               Директор           </text>
