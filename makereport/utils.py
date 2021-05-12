@@ -6,11 +6,11 @@ from django.core.files.storage import default_storage
 from .models import *
 
 
-def qr_code(signature):
+def qr_code(signature , valid_from):
     # str_for_qr_code = "success: {success}\nsignature:{signature}\nsignAlgName:{signAlgName}\nlink:{link}\n".format(
     #     success=success, signature=signature, signAlgName=signAlgName, link=link)
-    str_for_qr_code = "signature:{signature}".format(
-        signature=signature[:22])
+    str_for_qr_code = "signature:{signature}    valid from: {valid_from}".format(
+        signature=signature[:22], valid_from=valid_from)
     print(str_for_qr_code)
     return str_for_qr_code
     # img = qrcode.make(str_for_qr_code)  # вот сюда любую ссылку вставите он переведет в QR CODE
@@ -69,6 +69,7 @@ def get_verifyPkcs7(report_id, sign_from=None):
     certificate = signers["certificate"][index]
     serialNumber = certificate["serialNumber"]
     subjectName = certificate["subjectName"]
+    valid_from = certificate['validFrom']
     FULL_NAME = subjectName.split(',')[0].split('=')[1]
     print(FULL_NAME)  # ЗДЕСЬ ИМЯ КЛИЕНТА
     signAlgName = certificate['signature']['signAlgName']
@@ -80,9 +81,9 @@ def get_verifyPkcs7(report_id, sign_from=None):
     LINK = "http://e-otsenka.uz{}".format(report.pdf_report.url)  # Here is the link
 
     if sign_from == 1:
-        report.pdf_qr_code_user = qr_code(signature)
+        report.pdf_qr_code_user = qr_code(signature,valid_from)
     else:
-        report.pdf_qr_code_company = qr_code(signature)
+        report.pdf_qr_code_company = qr_code(signature,valid_from)
     report.signed = True
     report.save()
 
