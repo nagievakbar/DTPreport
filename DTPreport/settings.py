@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'qij#o3(%qzx#1i3@zk98s_6nx3^7i303ap^ob@*yq!lp$oe9d@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['makereport.elite-house.uz',
                  '127.0.0.1',
@@ -33,7 +33,7 @@ ALLOWED_HOSTS = ['makereport.elite-house.uz',
                  'localhost',
                  '184.196.214.55'
                  ]
-URL_FILES = 'http://e-otsenka.uz'
+URL_FILES = 'http://127.0.0.1:8000'
 
 # Application definition
 
