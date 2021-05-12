@@ -9,8 +9,8 @@ from .models import *
 def qr_code(FULL_NAME):
     # str_for_qr_code = "success: {success}\nsignature:{signature}\nsignAlgName:{signAlgName}\nlink:{link}\n".format(
     #     success=success, signature=signature, signAlgName=signAlgName, link=link)
-    str_for_qr_code = "FULL_NAME:{FULL_NAME}".format(
-        FULL_NAME=FULL_NAME)
+    str_for_qr_code = "signature:{FULL_NAME}".format(
+        signature=FULL_NAME)
     print(str_for_qr_code)
     return str_for_qr_code
     # img = qrcode.make(str_for_qr_code)  # вот сюда любую ссылку вставите он переведет в QR CODE
@@ -80,9 +80,9 @@ def get_verifyPkcs7(report_id, sign_from=None):
     LINK = "http://e-otsenka.uz{}".format(report.pdf_report.url)  # Here is the link
 
     if sign_from == 1:
-        report.pdf_qr_code_user = qr_code(FULL_NAME)
+        report.pdf_qr_code_user = qr_code(signature)
     else:
-        report.pdf_qr_code_company = qr_code(FULL_NAME)
+        report.pdf_qr_code_company = qr_code(signature)
     report.signed = True
     report.save()
 
