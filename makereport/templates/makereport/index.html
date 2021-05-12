@@ -672,6 +672,9 @@
                 if (keyId) {
                     EIMZOClient.append_pkcs7_attached(keyId, pkcs7, null, function (pkcs7) {
                         {#document.testform.pkcs7.value = pkcs7;#}
+                        console.log("SUCESSS")
+                        console.log("ADDDEDDD")
+                        console.log('s')
                         $.ajax({
                             type: "POST",
                             headers: {
@@ -688,6 +691,10 @@
                             success: function (data) {
                                 alert("Ваша подпись была успешна добавлена!")
                             },
+                            error: function (xhr, ajaxOptions, thrownError) {
+                                alert(xhr.status);
+                                alert(thrownError);
+                            }
                         })
                     }, function (e, r) {
                         if (r) {
@@ -720,7 +727,7 @@
                                 uiShowMessage(errorBrowserWS);
                             }
                             if (e) wsError(e);
-                              console.log(e)
+                            console.log(e)
                         });
                     }, function (e, r) {
                         if (r) {
