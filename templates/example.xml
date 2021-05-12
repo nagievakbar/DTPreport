@@ -1439,7 +1439,7 @@
         <rect x="3" y="19" height="1" width="15"/>
         <rect x="3" y="18" height="1" width="15"/>
         <text x="0"  align="center" y="19.35" font="TNRB" fontsize="15"> {{ report.total_report_cost }}</text>
-        <text x="0" y="18.35" align="center" font="TNRB" fontsize="13"> {{ report.total_report_cost_txt }}</text>
+        <text x="0" y="18.35" align="center" font="TNRB" fontsize="10"> {{ report.total_report_cost_txt }}</text>
         <text x="3" y="17" font="TNRB">6.5 Определение стоимости сравнительным подходом</text>
         <text x="2" y="16" lineheight="1.5">    Сравнительный подход основан на сравнении объекта оценки с аналогичными и применяется  тогда,
 когда затратную часть определить невозможно в силу авторских изменений, внесенных в конструкцию
