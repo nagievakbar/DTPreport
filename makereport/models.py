@@ -445,7 +445,7 @@ class Report(models.Model):
     def set_private_key(self):
         while True:
             figure = uuid.uuid4().hex[:12].upper()
-            if not self.objects.filter(key=figure).exists():
+            if not Report.objects.filter(key=figure).exists():
                 break
         self.key = figure
 
