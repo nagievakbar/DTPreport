@@ -99,7 +99,7 @@ def verifyPkcs7(request):
         my_file_serialized = open('serialized.txt', 'w')
         my_file_serialized.write(str(request.POST))
         my_file_serialized.close()
-        get_verifyPkcs7(report_id, request.POST.get('sign_from', None))
+        get_verifyPkcs7(report_id, int(request.POST.get('sign_from', None)))
         data = {
             'success': 'True',
         }
