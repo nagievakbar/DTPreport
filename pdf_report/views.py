@@ -48,6 +48,7 @@ class GenerateMixing(View):
             'car': car,
             'customer': customer,
             'report': report,
+            'qrcode': report.pdf_qr_code_company,
             'contract': contract,
         }
         try:

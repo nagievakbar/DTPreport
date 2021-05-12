@@ -75,7 +75,7 @@
         <text x="0.7" y="22.2">Ущерб</text>
         <text x="0.7" y="21.8">автотранспортного</text>
         <text x="0.7" y="21.4">средства по состоянию :</text>
-
+        <text x="0.7" y="21">{{ report.report_date }}</text>
         <text x="0.7" y="19.2">Владелец :</text>
         {#        second column of first table#}
         <text x="5.7" y="25.2">Движимое имущество легковой автомобиль {{ car.brand_text }} гос. номер</text>
@@ -144,12 +144,14 @@
         <rect x="0.5" y="23.7" width="5" height="1"/>
         <rect x="0.5" y="22.7" width="5" height="1"/>
         <rect x="0.5" y="21.2" width="5" height="1.5"/>
+        <rect x="0.5" y="19.7" width="5" height="1.5"/>
         {#            inside  table right side first #}
         <rect x="5.5" y="25.7" width="15" height="1.5"/>
         <rect x="5.5" y="24.7" width="15" height="1"/>
         <rect x="5.5" y="23.7" width="15" height="1"/>
         <rect x="5.5" y="22.7" width="15" height="1"/>
         <rect x="5.5" y="21.2" width="15" height="1.5"/>
+        <rect x="5.5" y="19.7" width="15" height="1.5"/>
         {#        first column of first table#}
         <text x="0.7" y="26.7">Законодательные или</text>
         <text x="0.7" y="26.3">договорные ограничения</text>
@@ -165,6 +167,8 @@
         <text x="0.7" y="22.2">Код для просмотра и</text>
         <text x="0.7" y="21.8">скачиванию отчета с</text>
         <text x="0.7" y="21.4">сайта</text>
+
+        <text x="0.7" y="20.5">Код для QR код</text>
           {#        second column of first table#}
         <text x="5.7" y="26.7">Закон «об оценочной деятельности»  N 811-I от 19.08.1999 г, НСО 1-6, 13.</text>
         <text x="5.7" y="26.3">договорные ограничения</text>
@@ -178,6 +182,14 @@
 
 
         <text x="5.7" y="22.2">{{  report.key}}</text>
+
+        <barcode  x="5.7" y="19.7" type="QR" height="1.5"> https://e-otsenka.uz/pdf/{{report.report_id}}</barcode>
+        <text/>
+        <text/>
+        <text/>
+        <text/>
+        <text/>
+        <text/>
         <text/>
         <text/>
         <text/>
@@ -203,6 +215,8 @@
         </text>
          <text/>
         <text/>
-         <barcode  type="QR" height="2"> https://e-otsenka.uz/pdf/{{report.report_id}}</barcode>
+        {% if qrcode %}
+         <barcode  type="QR" height="2">qrcode</barcode>
+        {% endif %}
     </page>
 </pdf>

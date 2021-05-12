@@ -127,11 +127,11 @@ class CustomerForm(forms.ModelForm):
 
     name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Заказчик', 'class': 'input_in'}))
     address = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Адрес заказчика', 'class': 'input_in'}))
-    passport_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Паспорт', 'class': 'input_in'}))
+    passport_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Паспорт / Р/c № / в ', 'class': 'input_in'}))
     when_passport_issued = forms.CharField(
-        widget=forms.TextInput(attrs={'placeholder': 'Когда выдан', 'class': 'input_in'}))
+        widget=forms.TextInput(attrs={'placeholder': 'Когда выдан / город', 'class': 'input_in'}))
     whom_passport_issued = forms.CharField(
-        widget=forms.TextInput(attrs={'placeholder': 'Кем выдан', 'class': 'input_in'}))
+        widget=forms.TextInput(attrs={'placeholder': 'Кем выдан / МФО ОКЕД ИНН', 'class': 'input_in'}))
     phone_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Телефон', 'class': 'input_in'}))
     gnu_or_gje = forms.CharField(
         widget=forms.TextInput(attrs={'placeholder': 'Г-ну', 'class': 'input_in'}))
