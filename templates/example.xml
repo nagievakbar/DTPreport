@@ -187,7 +187,7 @@
         <text>                                                 </text>
 
         {% if qrcode %}
-        <barcode x="6.5"  y='15'  type="QR" height="2">{{ qrcode }}</barcode>
+        <barcode x="6.5"  y='16'  type="QR" height="2">{{ qrcode }}</barcode>
         {% endif %}
 
         <text/>
