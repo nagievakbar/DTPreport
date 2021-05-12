@@ -657,8 +657,7 @@
         }
         adding_sign = function () {
             var sign_from = document.getElementById('sign_from');
-            console.log(sign_from.value);
-            console.log("in");
+
             var itm = document.testform.key.value;
             if (itm) {
                 var id = document.getElementById(itm);
@@ -667,8 +666,11 @@
                 var keyId = document.getElementById('keyId').innerHTML;
                 var report_input = document.getElementById('report_id');
                 var sign_from = document.getElementById('sign_from');
+                var pkcs7 = document.getElementsByClassName('file');
+                console.log("in");
+                console.log(keyId);
                 if (keyId) {
-                    EIMZOClient.append_pkcs7_attached(keyId, data, null, function (pkcs7) {
+                    EIMZOClient.append_pkcs7_attached(keyId, pkcs7, null, function (pkcs7) {
                         {#document.testform.pkcs7.value = pkcs7;#}
                         $.ajax({
                             type: "POST",
