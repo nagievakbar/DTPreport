@@ -6,7 +6,7 @@ from django.core.files.storage import default_storage
 from .models import *
 
 
-def qr_code(signature , valid_from):
+def qr_code(signature, valid_from):
     # str_for_qr_code = "success: {success}\nsignature:{signature}\nsignAlgName:{signAlgName}\nlink:{link}\n".format(
     #     success=success, signature=signature, signAlgName=signAlgName, link=link)
     str_for_qr_code = "signature:{signature}           from: {valid_from}".format(
@@ -81,9 +81,9 @@ def get_verifyPkcs7(report_id, sign_from=None):
     LINK = "http://e-otsenka.uz{}".format(report.pdf_report.url)  # Here is the link
 
     if sign_from == 1:
-        report.pdf_qr_code_user = qr_code(signature,valid_from)
+        report.pdf_qr_code_user = qr_code(signature, valid_from)
     else:
-        report.pdf_qr_code_company = qr_code(signature,valid_from)
+        report.pdf_qr_code_company = qr_code(signature, valid_from)
     report.signed = True
     report.save()
 
@@ -259,28 +259,37 @@ def get_consumable_cost(request):
     return JsonResponse(data)
 
 
-def add_service_to_report(report, service_id, cost):
-    report.service.add(Service.objects.get(service_id=service_id))
-
-    calculate_service_cost(report, cost)
-
-
 def calculate_service_cost(report, cost):
     report.service_cost = report.service_cost + cost
 
 
 def add_product_to_report(report, product_id, cost):
-    report.product.add(Product.objects.get(product_id=product_id))
+    try:
+        report.product.add(Product.objects.get(product_id=product_id))
+    except Product.DoesNotExist:
+        pass
+
     calculate_product_cost(report, cost)
+
+
+def add_service_to_report(report, service_id, cost):
+    try:
+        report.service.add(Service.objects.get(service_id=service_id))
+    except Service.DoesNotExist:
+        pass
+    calculate_service_cost(report, cost)
+
+
+def add_consumable_to_report(report, consumable_id, cost):
+    try:
+        report.consumable.add(Consumable.objects.get(consumable_id=consumable_id))
+    except Consumable.DoesNotExist:
+        pass
+    calculate_consumable_cost(report, cost)
 
 
 def calculate_product_cost(report, cost):
     report.product_cost = report.product_cost + cost
-
-
-def add_consumable_to_report(report, consumable_id, cost):
-    report.consumable.add(Consumable.objects.get(consumable_id=consumable_id))
-    calculate_consumable_cost(report, cost)
 
 
 def calculate_consumable_cost(report, cost):

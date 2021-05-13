@@ -417,6 +417,10 @@ class Report(models.Model):
             self.contract.delete()
         return super(Report, self).delete(*args, **kwargs)
 
+    def precise_iznos_ki(self):
+        return "{0:.1f}".format(self.product_cost - self.product_acc_cost)
+    def precise_acc_cost(self):
+        return "{0:.1f}".format(self.product_acc_cost)
     def get_product_acc_cost(self):
         print('get_product_acc_cost')
         self.product_acc_cost = (self.product_cost * (1 - self.wear_data.__getitem__('accept_wear') / 100))

@@ -1340,7 +1340,7 @@
             <rect x="12.5" y="-{{ 5 + loop.index/2+0.1}} " width="1.5" height="0.5"/>
             <rect x="14" y="-{{ 5 + loop.index/2+0.1}} " width="2" height="0.5"/>
             <rect x="16" y="-{{ 5 + loop.index/2+0.1}} " width="3" height="0.5"/>
-            <text x="2.6" y="-{{ 5 + loop.index/2}}" >{{ loop.index }}</text>
+            <text x="2.6" y="-{{ 5 + loop.index/2}}" >{{ product.product_id }}</text>
             <text x="3.5" y="-{{ 5 + loop.index/2 }}" lineheight="1.5"> {{ product.name }} </text>
             <text x="11.3" y="-{{ 5 + loop.index/2 }}" lineheight="1.5"> шт </text>
             <text x="13" y="-{{ 5 + loop.index/2 }}" lineheight="1.5"> {{ product.quantity }} </text>
@@ -1359,8 +1359,8 @@
                 <text x="2.5" y="-{{ 6.5 + loop.index/2 }}" lineheight="1.5"> Cтоимость запасных частей с учетом износа</text>
                 <text x="14.5" y="-{{ 6 + loop.index/2 }}" lineheight="1.5">  {{ report.wear_data.accept_wear }} %</text>
                 <text x="17" y="-{{ 5.5 + loop.index/2 }}" lineheight="1.5" font="TNRB">{{ report.product_cost }}</text>
-                <text x="17" y="-{{ 6 + loop.index/2 }}" lineheight="1.5" font="TNRB">{{ report.product_cost - report.product_acc_cost }}</text>
-                <text x="17" y="-{{ 6.5 + loop.index/2 }}" lineheight="1.5" font="TNRB">{{ report.product_acc_cost }}</text>
+                <text x="17" y="-{{ 6 + loop.index/2 }}" lineheight="1.5" font="TNRB">{{ report.precise_iznos_ki() }}</text>
+                    <text x="17" y="-{{ 6.5 + loop.index/2 }}" lineheight="1.5" font="TNRB">{{ report.precise_acc_cost() }}</text>
                 <text x="2" y="-{{ 7 + loop.index/2 }}" font="TNRB" >Примечание:  Цены на запасные части указаны среднорыночные по г. Ташкенту</text>
             {% endif %}
         {% endfor %}
@@ -1450,7 +1450,7 @@
         <text x="3" y="23.4">Cтоимость материалов</text>
         <text x="3" y="22.4">Срем=Сраб+См+Сзч</text>
         <text x="11" y="25.4">{{ report.service_cost }}</text>
-        <text x="11" y="24.4">{{ report.product_acc_cost}}</text>
+        <text x="11" y="24.4">{{ report.precise_acc_cost()}}</text>
         <text x="11" y="23.4">{{ report.consumable_cost}}</text>
         <text x="11" y="22.4">{{ report.total_report_cost}}</text>
         <text x="17" y="25.4">сум</text>
