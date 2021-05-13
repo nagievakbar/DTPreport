@@ -329,7 +329,7 @@
 
                                 </table>
                             </div>
-                          <div>
+                            <div>
                                 <ul class="responsive-table">
                                     <li class="table-row">
                                         <div class="col col-1" data-label="">Общая<span>стоимость</span></div>
@@ -395,9 +395,9 @@
                                 </table>
 
                             </div>
-                          <div>
+                            <div>
                                 <ul class="responsive-table">
-                                   <li class="table-row">
+                                    <li class="table-row">
                                         <div class="col col-1" data-label="">Общая<span>стоимость</span></div>
                                         <div class="col col-2" data-label="Эксплуатационныйизнос"><span
                                                 id="all_product_cost">{{ report.product_cost }}</span></div>
@@ -474,7 +474,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                        <div>
+                            <div>
                                 <ul class="responsive-table">
                                     <li class="table-row">
                                         <div class="col col-1" data-label="">Общая<span>стоимость</span></div>
@@ -508,7 +508,7 @@
                                     {{ wear_form.weight }}
                                 </div>
                                 <div class="wear">
-                                       <span class="prehnite-text">Износ</span>
+                                    <span class="prehnite-text">Износ</span>
                                     {#                                        <input type="text" class="input work-price-input wear-input">#}
                                     {{ wear_form.wear }}
                                 </div>
@@ -748,7 +748,7 @@
             </div>
             <div class="material-form-2">
                 <div class="last_bottom_block col-12">
-                   <div class="row">
+                    <div class="row">
 
                         {#                        <div class="col-lg-4 white_blocks">#}
                         {#                            <div class="white_block">#}
@@ -785,13 +785,13 @@
                                     </div>
                                 </div>
 
-{#                                <div class="col-lg-3 download_button">#}
-{#                                    <div class="panel_user" id="download_button4">#}
-{#                                        <a href="{% url 'get_additional' id %}">#}
-{#                                            <button type="button" class="btn panel_button">Скачать</button>#}
-{#                                        </a>#}
-{#                                    </div>#}
-{#                                </div>#}
+                                {#                                <div class="col-lg-3 download_button">#}
+                                {#                                    <div class="panel_user" id="download_button4">#}
+                                {#                                        <a href="{% url 'get_additional' id %}">#}
+                                {#                                            <button type="button" class="btn panel_button">Скачать</button>#}
+                                {#                                        </a>#}
+                                {#                                    </div>#}
+                                {#                                </div>#}
                             </div>
                         </div>
 
@@ -830,7 +830,7 @@
 
 
     <script>
-       var addServiceCounter = $('#service_formset').find('table').length - 1;
+        var addServiceCounter = $('#service_formset').find('table').length - 1;
         var addProductCounter = $('#product_formset').find('table').length - 1;
         var addConsumableCounter = $('#consumable_formset').find('table').length - 1;
 
@@ -842,14 +842,15 @@
                 element.style.height = (5 + element.scrollHeight) + "px";
         }
 
-        function calculate_product_overall_sum(){
+        function calculate_product_overall_sum() {
             var total = $('#all_product_cost');
             var int_total = getDouble(total);
             var procent = getDouble($('#product_wear_show'));
-            var clean_total = int_total - int_total*procent/100;
+            var clean_total = int_total - int_total * procent / 100;
             $('#product_overall_cost').text(parseInt(clean_total));
         }
-        function getDouble(element){
+
+        function getDouble(element) {
             return element.text() === "" ? 0 : parseFloat(element.text().replace(/\s/g, ''));
         }
 
@@ -941,9 +942,10 @@
             }
         }
 
-        $(document).on('keypress', ".price2", function (e) {
+        $(document).on('keydown', ".price2", function (e) {
             var key = e.which;
-            if (13 === key) {
+            if (9 === key) {
+                e.preventDefault();
                 var price = $(this).val(),
                     last_input_premium = $(this).parents('tr').find('.allowance2').val(),
                     nph = $(this).parents('tr').find('.time2').val(),
@@ -1178,7 +1180,8 @@
                     success: function (data) {
                         var sum = data.total_cost - cost.val();
                         calculate_total_sum(sum);
-                        calculate_exact_sum(sum, 'product')
+                        calculate_exact_sum(sum, 'product');
+                        calculate_product_overall_sum();
                         cost.val(data.total_cost);
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
@@ -1274,12 +1277,12 @@
                 btn.focus()
             }
         });
-         $(".prehnite-input").on('keydown', function (e){
-             var weight = $(this).val();
-             console.log(weight);
-             $('#product_wear_show').text(weight);
-             calculate_product_overall_sum();
-         })
+        $(".prehnite-input").on('keydown', function (e) {
+            var weight = $(this).val();
+            console.log(weight);
+            $('#product_wear_show').text(weight);
+            calculate_product_overall_sum();
+        })
         $(".btn-warning").on('click', function () {
             var $el = $("#file-4");
             if ($el.attr('disabled')) {

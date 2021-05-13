@@ -990,9 +990,10 @@
             }
         }
 
-        $(document).on('keypress', ".price2", function (e) {
+            $(document).on('keydown', ".price2", function (e) {
             var key = e.which;
-            if (13 === key) {
+            if (9 === key) {
+                e.preventDefault();
                 var price = $(this).val(),
                     last_input_premium = $(this).parents('tr').find('.allowance2').val(),
                     nph = $(this).parents('tr').find('.time2').val(),
@@ -1228,6 +1229,7 @@
                         var sum = data.total_cost - cost.val();
                         calculate_total_sum(sum);
                         calculate_exact_sum(sum, 'product')
+                        calculate_product_overall_sum();
                         cost.val(data.total_cost);
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
