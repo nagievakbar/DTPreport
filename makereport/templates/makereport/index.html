@@ -466,6 +466,12 @@
                     alert("Вы успешно добавили в pdf!");
                     $(`#${id}`).remove();
                 },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(xhr)
+                    console.log(ajaxOptions)
+                    console.log(thrownError)
+                        console.log("error")
+                    }
             })
         } else {
             txt = "You pressed Cancel!";
