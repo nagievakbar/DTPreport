@@ -307,8 +307,9 @@
                         data-title="Исполнитель">{{ report.created_by }}</td>
                     {#                  <td style="border-bottom: 1px solid #fff;" data-title="Договор">{{ report.contract }}</td>#}
                     <td style="border-bottom: 1px solid #fff;" data-title="Ключ">{{ report.key }}</td>
-                    <td style="border-bottom: 1px solid #fff;" data-title="Отчёт" data-type="currency"><a
-                            href="{% url 'get_response' report.report_id %}">Открыть</a></td>
+                    <td style="border-bottom: 1px solid #fff;" data-title="Отчёт" data-type="currency">
+                        <button type="button"  onclick="makePdf({{ report.report_id }})">Отчет в pdf</button>
+                    </td>
                     <td style="border-bottom: 1px solid #fff;" data-title="Функции" data-type="currency">
 {#                        {% if report.pdf_qr_code_company == None or report.pdf_qr_code_user == None %}#}
 {#                            <span>Подпись</span>#}
@@ -338,7 +339,7 @@
 {#                                        data-bs-whatever="{{ report.pdf_report_base64 }}">Руководителя#}
 {#                                </button>#}
 {#                            {% endif %}#}
-                        </div>
+
                         <a href="{% url 'edit_report' report.report_id %}">Изменить </a>
                         <button class="" type="button" onclick="myFunction({{ report.report_id }})">Удалить</button>
                         {#                            <a href="#" data-toggle="modal" data-target="#deleteModal" data-bs-whatever="{{ report.report_id }}">Удалить</a>#}
@@ -435,6 +436,22 @@
 
 </body>
 <script>
+   function makePdf(id){
+       if (id){
+           $.ajax({
+                type: "GET",
+                headers: {
+                    "X-CSRFToken": csrftoken
+                },
+                url: `{% url "make_pdf" %}?id=${id}`,
+                success: function (data) {
+                    alert("Вы успешно удалили!");
+                    $(`#${id}`).remove();
+                },
+            })
+       }
+   }
+
     function myFunction(id) {
         var txt;
         console.log(id);
@@ -446,7 +463,7 @@
                 },
                 url: `{% url "delete_report"%}?id=${id}`,
                 success: function (data) {
-                    alert("Вы успешно удалили!");
+                    alert("Вы успешно добавили в pdf!");
                     $(`#${id}`).remove();
                 },
             })

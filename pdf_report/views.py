@@ -96,14 +96,17 @@ class GenerateAgreement(View):
         response = FileResponse(ContentFile(data), content_type='application/pdf')
         return response
 
+
 def get_qrc_code(qr_company, qr_user):
     if (qr_company is not None and qr_user is not None) and (qr_company != "" and qr_user != ""):
         return "{company} {user}".format(company=qr_company, user=qr_user)
     elif qr_company is not None and qr_company != "":
-        return  qr_company
+        return qr_company
     elif qr_user is not None and qr_user != "":
         return qr_user
     return None
+
+
 class GenerateAdditional(View):
     def get(self, request, id=None):
         if id == 0:
@@ -117,26 +120,25 @@ class GeneratePDF(View):
     def get(self, request, id=None):
         if type(id) is not int or id <= 0:
             return get_file('base.pdf', content_type='application/pdf')
-        get_base(request, id)
         report_pdf = Report.objects.get(report_id=id)
-        print(report_pdf.pdf_report.path)
-        print(report_pdf.pdf_report.name)
         response = FileResponse(open(os.path.join(report_pdf.pdf_report.path), 'rb'), content_type='application/pdf')
-        # content = "inline; filename=%s" % filename
-        # download = request.GET.get("download")
-        # if download:
         content = "attachment; filename='%s'" % report_pdf.pdf_report.name + ".pdf"
         response['Content-Disposition'] = content
         return response
 
 
-def get_base(request, id):
-    obj = TemplateBase.objects
-    new_report_pdf = Report.objects.get(report_id=id)
-    data = get_response(request, id, obj=obj)
-    filename = "%s.pdf" % new_report_pdf.car.car_number
-    new_report_pdf.pdf_report.save(filename, ContentFile(data))
-    new_report_pdf.save()
+def get_base(request):
+    try:
+        id = request.GET.get('id', 0)
+        obj = TemplateBase.objects
+        new_report_pdf = Report.objects.get(report_id=id)
+        data = get_response(request, id, obj=obj)
+        filename = "%s.pdf" % new_report_pdf.car.car_number
+        new_report_pdf.pdf_report.save(filename, ContentFile(data))
+        new_report_pdf.save()
+    except Report.DoesNotExist:
+        pass
+    return JsonResponse({})
 
 
 def get_additional(request, id):
