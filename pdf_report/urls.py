@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from .views import *
-
+from .tasks import get_base
 urlpatterns = [
     path('<int:id>/', GeneratePDF.as_view(), name='get_response'),
     path('mixing/<int:id>', GenerateMixing.as_view(), name='get_mixing'),

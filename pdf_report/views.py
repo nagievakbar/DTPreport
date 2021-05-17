@@ -127,13 +127,7 @@ class GeneratePDF(View):
         return response
 
 
-def get_base(request):
-    try:
-        id = request.GET.get('id', 0)
-        make_pdf.delay(id)
-    except Report.DoesNotExist:
-        pass
-    return JsonResponse({})
+
 
 
 def get_additional(request, id):
