@@ -182,6 +182,9 @@
         <barcode   y='0.1' x="4" type="QR" height="2">{{ qrcode_company }}</barcode>
 
         {% endif %}
+            {% if qrcode%}
+          <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
+        {%endif %}
         <text   y='0.5' x="0" align="center">2</text>
         <text   y='0.5' x="17" >Оценщик</text>
     </page>
@@ -317,6 +320,9 @@
         {# -----------------------------------------table-text------------------------------------ #}
         <text   y='0.5' x="0" align="center">3</text>
         <text   y='0.5' x="17" >Оценщик</text>
+            {% if qrcode%}
+          <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
+        {%endif %}
     </page>
     <page>
 		<image src="AAB.png" height="5" width="9" x="1" y="24" />
@@ -382,6 +388,9 @@
 		<text/>
             <text   y='0.5' x="0" align="center">4</text>
         <text   y='0.5' x="17" >Оценщик</text>
+            {% if qrcode%}
+          <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
+        {%endif %}
 	</page>
                                      PAGE 2
     <page>
@@ -431,13 +440,16 @@
         </text>
         <text/>
         <text/>
-        <text align='right'> Оценщик </text>
+         <text   y='0.5' x="17" > Оценщик </text>
 
          {% if qrcode_company %}
          <barcode  x="12" y="2"  type="QR" height="2">{{ qrcode_company }}</barcode>
 
            {% endif %}
       <text   y='0.5' x="0" align="center">5</text>
+            {% if qrcode%}
+          <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
+        {%endif %}
     </page>
 
                                      PAGE 3
