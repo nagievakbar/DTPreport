@@ -5,7 +5,7 @@ from DTPreport import settings as s
 from makereport.models import Report, Documents, Contract, Calculation, \
     HoldsImages, TemplateBase, TemplateMixing, TemplateAgreement, TemplateAdditional
 from pdf_report.utils import PyPDFML
-
+from .tasks import make_pdf
 from django.core.files.base import ContentFile
 
 import locale
@@ -130,12 +130,7 @@ class GeneratePDF(View):
 def get_base(request):
     try:
         id = request.GET.get('id', 0)
-        obj = TemplateBase.objects
-        new_report_pdf = Report.objects.get(report_id=id)
-        data = get_response(id, obj=obj)
-        filename = "%s.pdf" % new_report_pdf.car.car_number
-        new_report_pdf.pdf_report.save(filename, ContentFile(data))
-        new_report_pdf.save()
+        make_pdf.delay(id)
     except Report.DoesNotExist:
         pass
     return JsonResponse({})
