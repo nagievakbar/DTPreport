@@ -5,7 +5,7 @@ from DTPreport import settings as s
 from makereport.models import Report, Documents, Contract, Calculation, \
     HoldsImages, TemplateBase, TemplateMixing, TemplateAgreement, TemplateAdditional
 from pdf_report.utils import PyPDFML
-from .tasks import make_pdf
+
 from django.core.files.base import ContentFile
 
 import locale
