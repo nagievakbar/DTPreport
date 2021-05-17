@@ -4,7 +4,7 @@ $('#sign').on('click', function () {
 $('#sign_boss').on('click', function () {
     loadModels($(this))
 })
-
+var url = "http://e-otsenka.uz/report/ajax/verifyPkcs7/";
 function loadModels(object) {
     let sign = object.attr('sign');
     let sign_form = object.attr('sign_from')
@@ -249,7 +249,7 @@ adding_sign = function () {
                     headers: {
                         "X-CSRFToken": csrftoken
                     },
-                    url: '{% url "verifyPkcs7" %}',
+                    url: url,
                     data: {
                         'pkcs7': pkcs7,
                         'sign_from': sign_from.value,
@@ -334,7 +334,7 @@ sign = function () {
                     headers: {
                         "X-CSRFToken": csrftoken
                     },
-                    url: '{% url "verifyPkcs7" %}',
+                    url: url,
                     data: {
                         'pkcs7': pkcs7,
                         'sign_from': sign_from.value,
