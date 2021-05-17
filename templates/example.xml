@@ -204,7 +204,7 @@
         <text/>
         <text/>
         <text x="7" y="19">Директор                                                                                </text>
-        <text x="4.7" y="18.6">ООО «AMIR AVTO BAHOLASH»                                     Заказчик:{{ report.contract.customer.name }}</text>
+        <text x="4.7" y="18.6">ООО «AMIR AVTO BAHOLASH»                       Заказчик:{{ report.contract.customer.name }}</text>
         <text/>
             <text/>
         {% if qrcode_company %}
