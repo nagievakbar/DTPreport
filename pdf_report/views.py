@@ -132,7 +132,7 @@ def get_base(request):
         id = request.GET.get('id', 0)
         obj = TemplateBase.objects
         new_report_pdf = Report.objects.get(report_id=id)
-        data = get_response(request, id, obj=obj)
+        data = get_response(id, obj=obj)
         filename = "%s.pdf" % new_report_pdf.car.car_number
         new_report_pdf.pdf_report.save(filename, ContentFile(data))
         new_report_pdf.save()
@@ -143,10 +143,10 @@ def get_base(request):
 
 def get_additional(request, id):
     obj = TemplateAdditional.objects
-    return get_response(request, id, obj=obj)
+    return get_response( id, obj=obj)
 
 
-def get_response(request, id, obj):
+def get_response( id, obj):
     locale.setlocale(locale.LC_ALL, 'C')
     new_report_pdf = Report.objects.get(report_id=id)
     calculation = Calculation.objects.get(report_id=id)
