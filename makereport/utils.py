@@ -229,7 +229,8 @@ def get_service_cost(request):
     premium = request.GET.get('premium', None)
     norm_per_hour = request.GET.get('nph', None)
     price = request.GET.get('price', None)
-    service_cost = int((float(norm_per_hour) + float(premium)) * float(price))
+    double_norm_per_hour = float(norm_per_hour)
+    service_cost = int((double_norm_per_hour + float(premium)/100*double_norm_per_hour) * float(price))
 
     data = {
         'service_cost': service_cost,

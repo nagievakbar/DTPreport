@@ -119,12 +119,13 @@ class GeneratePDF(View):
             return get_file('base.pdf', content_type='application/pdf')
         get_base(request, id)
         report_pdf = Report.objects.get(report_id=id)
-        filename = str(report_pdf.pdf_report)
-        response = FileResponse(open(os.path.join(s.MEDIA_ROOT, filename), 'rb'), content_type='application/pdf')
-        content = "inline; filename=%s" % filename
-        download = request.GET.get("download")
-        if download:
-            content = "attachment; filename='%s'" % filename
+        print(report_pdf.pdf_report.path)
+        print(report_pdf.pdf_report.name)
+        response = FileResponse(open(os.path.join(report_pdf.pdf_report.path), 'rb'), content_type='application/pdf')
+        # content = "inline; filename=%s" % filename
+        # download = request.GET.get("download")
+        # if download:
+        content = "attachment; filename='%s'" % report_pdf.pdf_report.name + ".pdf"
         response['Content-Disposition'] = content
         return response
 

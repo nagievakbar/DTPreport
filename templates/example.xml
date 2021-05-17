@@ -191,10 +191,10 @@
     <page>
         <text align="center">АКТ</text>
         <text align="center">Сдачи-приёмки выполненных работ и услуг</text>
-        <text align="center">Договор №{{ report.report_number }} от {{ datetime }}</text>
+        <text align="center">Договор №{{ contract.contract_number }} от {{ contract.contract_date }}</text>
         <text/>
         <text align="left" lineheight="1.2">            ЗАКАЗЧИК:{{ report.contract.customer.name }}</text>
-        <text align="left" lineheight="1.2">            Дата составления отчёта: {{ datetime }}</text>
+        <text align="left" lineheight="1.2">            Дата составления отчёта: {{ report.report_date }}</text>
         <text align="left" lineheight="1.2">            Место составления: г. Ташкент</text>
         <text/>
         <text align="justify" lineheight="1.2">Мы, нижеподписавшиеся, директор ООО «AMIR AVTO BAHOLASH» Сагдуллаев Б К., с одной стороны и Заказчик {{ report.contract.customer.name }}  с другой стороны, составили настоящий акт в том, что выполненные работы и услуги удовлетворяют полностью условиям договора, оформлены и сданы Заказчику  (полностью, частично)  в надлежащем порядке, претензии не имеет.</text>
@@ -222,7 +222,7 @@
         <text/>
         <text align="center">СЧЕТ-ФАКТУРА №</text>
         <text align="center" lineheight="1.5">от {{ report.report_date }}</text>
-        <text align="center" lineheight="1.5">к договору № {{ report.report_number }} от {{ datetime }}</text>
+        <text align="center" lineheight="1.5">к договору № {{ contract.contract_number }} от {{ contract.contract_date }}</text>
         <text x="0" y="12" align="left">
                                           Поставщик:
                         ООО «AMIR AVTO BAHOLASH»
@@ -342,7 +342,7 @@
 ООО «AMIR AVTO BAHOLASH»
 
   Сагдуллаев Б.К.
-{{ datetime }}
+{{ report.report_date }}
 		</text>
          {% if qrcode_company %}  <!-- Это для qrcode сохраните где нужно он будет высвечиваться -->
         <barcode x="12" y="20.5" type="QR" height="2">{{ qrcode_company }}</barcode>
@@ -371,9 +371,9 @@
         </text>
         <text>Место регистрации:         {{ report.car.owner_address }}
 		</text>
-        <text>Дата оценки:                   {{ datetime }}
+        <text>Дата оценки:                   {{ report.report_date }}
 		</text>
-        <text>Дата составления           {{ datetime }}
+        <text>Дата составления           {{ report.report_date }}
 отчёта:
 		</text>
         <text/> <text font="TNRB">Заказчик:                        {{ report.contract.customer.name }}
@@ -414,11 +414,11 @@
         <text  align="center" font="TNRB" >Уважаемый  {{ report.contract.customer.name_respect() }}
         </text>
         <text align="justify">
-       В соответствии с Договором об оценке имущества № {{ report.report_number }}  от {{ datetime }},оценщики ООО «AMIR AVTO BAHOLASH» провели оценку транспортного  средства марки {{ report.car.brand_text }} Государственный номер:{{ report.car.car_number }} зарегистрированного по адресу:{{ report.car.owner_address[:50] }}, Республика Узбекистан.
+       В соответствии с Договором об оценке имущества № {{ contract.contract_number }}  от {{ contract.contract_date }},оценщики ООО «AMIR AVTO BAHOLASH» провели оценку транспортного  средства марки {{ report.car.brand_text }} Государственный номер:{{ report.car.car_number }} зарегистрированного по адресу:{{ report.car.owner_address[:50] }}, Республика Узбекистан.
        Цель оценки: Определение рыночной стоимости затрат на восстановление АМТС, пострадавшего в результате ДТП.
      Обращаю Ваше внимание на то, что это письмо не является отчетом по оценке имущества, а только предваряет отчет, приведенный ниже.
     Предлагаемый Вашему вниманию Отчет, который  содержит описание расчета  стоимости движимого имущества, собранную информацию, этапы проведенного исследования и сделанные выводы. Кроме того, в Отчет включены гарантии объективности и независимости оценщиков, а также сделанные допущения и принятые ограничения. Отдельные части анализа, приведенного Отчете, не могут трактоваться раздельно, а только в связи с полным его текстом, с учетом принятых допущений и ограничений.
-        На основании информации, предоставленной и проанализированной в приведенном ниже отчете об оценке имущества, мы пришли к заключению, что рекомендуемая рыночная стоимость реального ущерба имущества по состоянию на			{{ datetime }}	, составляет:
+        На основании информации, предоставленной и проанализированной в приведенном ниже отчете об оценке имущества, мы пришли к заключению, что рекомендуемая рыночная стоимость реального ущерба имущества по состоянию на {{ report.report_date }}	, составляет:
         </text>
         <text  align="center" >Автомобиль марки {{ report.car.brand_text }} государственный номер: {{ report.car.car_number }}
         </text>
@@ -704,14 +704,14 @@
            <text lineheight="1" x="1" y="3.9">      Основание для проведения оценки:</text>
            <text lineheight="1" x="8" y="4.6">
 
-               Договор  №{{ contract.contract_number }} от {{ datetime }}</text>
+               Договор  №{{ contract.contract_number }} от {{ report.contract.contract_date }}</text>
            <text lineheight="1" x="1" y="3.2">      Дата оценки:</text>
            <text lineheight="1" x="8" y="3.5">
-                {{ datetime }}
+                {{ report.report_date }}
            </text>
            <text lineheight="1" x="1" y="2.5">      Дата представления отчета об оценке:</text>
            <text lineheight="1" x="8" y="2.8">
-                {{ datetime }}
+                 {{ report.report_date }}
            </text>
         {% if qrcode%}
           <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
@@ -1689,7 +1689,76 @@
      <text   y='0.5' x="0" align="center">24</text>
         <text   y='0.5' x="17" >Оценщик</text>
    </page>
-    {% set pagination = namespace(value=25) %}
+    <page>
+     <text align="center">СПИСОК ИСПОЛЬЗОВАННОЙ ЛИТЕРАТУРЫ И</text>
+        <text align="center">ИНФОРМАЦИОННЫХ ИСТОЧНИКОВ</text>
+        <text></text>
+        <text>1.    Гражданский кодекс Республики Узбекистан;</text>
+                <text></text>
+         <text>2.    Закон Республики Узбекистан «Об оценочной деятельности»;</text>
+                <text></text>
+         <text>3.   Закон РУз «Об обязательном страховании гражданской ответственности владельцев транспортных средств» от 21.04.2008 г. N 155;</text>
+                <text></text>
+         <text>4.   Национальные Стандарты Оценки Имущества РУз;</text>
+                <text></text>
+         <text>5.    Методическое руководство по определению стоимости автотранспортных средств с учетом их
+естественного износа и технического состояния на момент предъявления. РД-37.009.015-98 (с изменениями №1, №2, №3, №4 и №5)</text>
+                <text></text>
+        <text>6.     Нормы времени на технической обслуживание и ремонт автомобилей производства АО "Уздэуавто" (Издание 3. 2007 год)</text>
+                <text></text>
+         {% if qrcode%}
+          <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
+        {%endif %}
+     <text   y='0.5' x="0" align="center">25</text>
+        <text   y='0.5' x="17" >Оценщик</text>
+    </page>
+<page>
+         <image src="AAB.png" height="5" width="8" x="2" y="24" />
+		<text/>
+		<text  x="10" fontsize="10" align="justify">ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ
+		</text>
+		<text  x="10" fontsize="20" align="justify">  «AMIR AVTO BAHOLASH»
+		</text>
+		<text/>
+        <text/>
+        <line/>
+        <text/>
+		<text fontsize="9" align="center">"г.Ташкент ул. Бунедкор 118, тел.: 279-46-60, факс: 279-33-38, МФО 01067
+р/с: 20208000200244206001  Чиланзарский ф-л ОАИКБ «Ипак Йули», ИНН 302 667624 ОКЭД 68310
+        </text>
+     <text align="center">АКТ</text>
+    <text align="center">осмотра автомобиля № {{ report.report_number }}</text>
+    <text align="right">{{ report.report_date }}</text>
+    <text>Мною, оценщиком ООО «AMIR AVTO BAHOLASH» Б. Сагдуллаеву, на основании Договора № {{ contract.contract_number }} от {{ contract.contract_date }} произведег осмотр а/м {{ report.car.brand_text }}, гос № {{ report.car.car_number }} техпаспорт  № {{ report.car.registration }}, кузов № {{ report.car.body_number }}, двигатель № {{ report.car.engine_number }}, пробег автомобиля {{ report.car.mileage }} км, владелец {{ report.car.car_owner }}, Место осмотра {{ contract.customer.mesto_osmotra }} </text>
+    <text></text>
+    <text align="center" font="TNRB">При осмотре установлено:</text>
+    <text></text>
+    <text>1.    Все записи указанные в настоящем Акте соответствуют техническому паспорту осматриваемого
+автотранспортного средства</text>
+    <text></text>
+    <text>2.    При осмотре установлено, что оцениваемое автотранспортное средство при ДТП деформировано с
+образованием трещин, изгибов, складок и требует замены запасных частей, указанных в Калькуляции</text>
+    <text></text>
+    <text>3.     При осмотре установлено, что оцениваемое автотранспортное средство при ДТП деформировано с
+образованием трещин, изгибов, складок и требует ремонта указанных в Калькуляции.</text>
+    <text></text>
+    <text>      Акт составлен по наружному осмотру. При этим присутствовали :</text>
+    <text></text>
+    <text>      Заказчик (довереное лицо)   {{ contract.customer.name }}</text>
+    <text></text>
+    <text>      Эксперт,оценщик   Сагдуллаев Бобур Камилович</text>
+    <text></text>
+    <text></text>
+    <text>Возможны скрытые дефекты аварийного характера, которые могут быть выявлены при разборке автомобиля.</text>
+    <text x="17" y="13.85">____________</text>
+    <text  x="17.5" y="13.55" fontsize="8">(подпись)</text>
+     {% if qrcode%}
+          <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
+        {%endif %}
+     <text   y='0.5' x="0" align="center">26</text>
+        <text   y='0.5' x="17" >Оценщик</text>
+</page>
+    {% set pagination = namespace(value=27) %}
     {% if passport %}
    <page>
     {% for pass in passport %}
