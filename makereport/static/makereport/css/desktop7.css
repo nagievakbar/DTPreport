@@ -386,18 +386,18 @@ table {
 }
 
 .table-spare-part-headers:nth-child(3) {
-    text-align: left;
-    padding-left: 25px;
-}
-
-.table-spare-part-headers:nth-child(4) {
-    text-align: left;
+   text-align: left;
     padding-left: 240px;
 }
 
-.table-spare-part-headers:nth-child(5) {
-    text-align: left;
+.table-spare-part-headers:nth-child(4) {
+    text-align: center;
     padding-left: 10px;
+}
+
+.table-spare-part-headers:nth-child(5) {
+     text-align: left;
+    padding-left: 60px;
 }
 
 .table-spare-part-headers:nth-child(6) {

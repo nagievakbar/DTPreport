@@ -263,12 +263,7 @@ def calculate_service_cost(report, cost):
     report.service_cost = report.service_cost + cost
 
 
-def add_product_to_report(report, product_id, cost):
-    try:
-        report.product.add(Product.objects.get(product_id=product_id))
-    except Product.DoesNotExist:
-        pass
-
+def add_product_to_report(report, cost):
     calculate_product_cost(report, cost)
 
 
@@ -298,7 +293,6 @@ def calculate_consumable_cost(report, cost):
 
 def get_data_from_service_form(form):
     if form.cleaned_data:
-        print(form.cleaned_data)
         service_data = {
             'service_id': form.cleaned_data['service_id'],
             'name': form.cleaned_data['name'],
@@ -312,7 +306,6 @@ def get_data_from_service_form(form):
 
 def get_data_from_product_form(form):
     product_data = {
-        'product_id': form.cleaned_data['product_id'],
         'name': form.cleaned_data['name'],
         # 'unit': form.cleaned_data['unit'],
         'quantity': form.cleaned_data['quantity'],
@@ -335,15 +328,20 @@ def get_data_from_consum_form(form):
 
 
 def get_data_from_wear_form(form):
+
     wear_data = {
-        'point': form.cleaned_data['point'],
-        'weight': form.cleaned_data['weight'],
-        'wear': form.cleaned_data['wear'],
-        'accept_wear': form.cleaned_data['accept_wear'],
+        'point': checkOnNone(form.cleaned_data['point']),
+        'weight': checkOnNone(form.cleaned_data['weight']),
+        'wear': checkOnNone(form.cleaned_data['wear']),
+        'accept_wear': checkOnNone(form.cleaned_data['accept_wear']),
     }
+    print(wear_data)
     return wear_data
 
-
+def checkOnNone(data):
+    if data is None:
+        return 0
+    return  data
 # def get_report_cost(report, request):
 #     accept_wear = request.GET.get('id_accept_wear', None)
 #     wear = ((0.208 - 0.003 * float(point)) * float(weight) ** 0.7) * 100

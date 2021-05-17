@@ -132,7 +132,8 @@
         <text x="5.7" y="2.3">BL001 №0033 рег№ RR 0184 от выданная 12.05.2014г., Полис страхования</text>
         <text x="5.7" y="1.9">профессиональной ответственности оценочной организации №15-13-457от 26.10.2020г,</text>
         <text x="5.7" y="1.5">страховая компания - ООО СК «XALQ SUG`URTA».</text>
-
+          <text   y='0.2' x="0" align="center">1</text>
+        <text   y='0.2' x="15" >Оценщик</text>
     </page>
     <page>
         <image x="9" y="27.7" src="AAB.png" width="3" height="2"/>
@@ -218,5 +219,7 @@
         {% if qrcode %}
          <barcode  type="QR" height="2.5">{{ qrcode }}</barcode>
         {% endif %}
+        <text   y='0.5' x="0" align="center">2</text>
+        <text   y='0.5' x="15" >Оценщик</text>
     </page>
 </pdf>

@@ -1385,6 +1385,12 @@ tbody tr td a {
 #download_button4::before {
     content: 'Дополнительно';
 }
+#download_button5::before {
+    content: 'Подпись компании';
+}
+#download_button6::before {
+    content: 'Подпись руководителя';
+}
 
 .panel_button {
     width: 158px;

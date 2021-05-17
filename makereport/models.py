@@ -13,8 +13,8 @@ class Contract(models.Model):
     customer = models.ForeignKey('Customer', null=True, blank=True, on_delete=models.CASCADE, related_name='Customer',
                                  verbose_name='Клиент')
     pdf_contract = models.FileField(blank=True, null=True, verbose_name='Контракт в пдф')
-    contract_date = models.CharField(max_length=20, null=True, blank=True)
-    contract_number = models.CharField(max_length=20, null=True, blank=True)
+    contract_date = models.CharField(max_length=20, null=True, blank=True, default="")
+    contract_number = models.CharField(max_length=20, null=True, blank=True, default="")
 
     def __str__(self):
         return str(self.contract_id)
@@ -41,24 +41,28 @@ BRANDS = (
     ('Такума', 'Такума'),
     ('Эпика', 'Эпика')
 )
+TYPE_OF_CAR = (
+    ('Выберите тип машины', 'Выберите тип машины'),
+    ('Грузовой', 'Грузовой'),
+    ('Легковой', 'Легковой'))
 
 
 class Car(models.Model):
     car_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
-    brand_text = models.CharField(max_length=30)
+    brand_text = models.CharField(max_length=30, blank=True, null=True, )
     brand = models.CharField(max_length=30, choices=BRANDS, null=True, blank=True)
-    car_number = models.CharField(max_length=20)
-    registration = models.CharField(max_length=15)
-    engine_number = models.CharField(max_length=30)
-    body_number = models.CharField(max_length=30)
-    chassis = models.CharField(max_length=30)
-    car_color = models.CharField(max_length=20)
-    mileage = models.CharField(max_length=20)
-    release_date = models.DateField()
-    car_type = models.CharField(max_length=20)
-    car_owner = models.CharField(max_length=60)
-    owner_address = models.CharField(max_length=100)
-    type_of_car = models.CharField(max_length=50, choices=(('Грузовой', 'Грузовой'), ('Легковой', 'Легковой')))
+    car_number = models.CharField(max_length=20, blank=True, null=True, )
+    registration = models.CharField(max_length=15, blank=True, null=True, )
+    engine_number = models.CharField(max_length=30, blank=True, null=True, )
+    body_number = models.CharField(max_length=30, blank=True, null=True, )
+    chassis = models.CharField(max_length=30, blank=True, null=True, )
+    car_color = models.CharField(max_length=20, blank=True, null=True, )
+    mileage = models.CharField(max_length=20, blank=True, null=True, )
+    release_date = models.CharField(max_length=20, blank=True, null=True, )
+    car_type = models.CharField(max_length=20, blank=True, null=True, )
+    car_owner = models.CharField(max_length=60, blank=True, null=True, )
+    owner_address = models.CharField(max_length=100, blank=True, null=True, )
+    type_of_car = models.CharField(max_length=50, choices=TYPE_OF_CAR)
 
     def __str__(self):
         return str(self.car_number) + ' ' + str(self.brand)
@@ -84,15 +88,15 @@ class Documents(models.Model):
 
 class Customer(models.Model):
     customer_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
-    name = models.CharField(max_length=100, verbose_name='ФИО')
-    address = models.CharField(max_length=100)
-    passport_number = models.CharField(max_length=20, verbose_name='Паспорт')
-    when_passport_issued = models.DateField()
-    whom_passport_issued = models.CharField(max_length=50)
-    phone_number = models.CharField(max_length=20, verbose_name='Тел. номер')
-    gnu_or_gje = models.CharField(max_length=40)
-    uvajaemaya = models.CharField(max_length=40)
-    mesto_osmotra = models.CharField(max_length=200)
+    name = models.CharField(max_length=100, verbose_name='ФИО', blank=True, null=True, )
+    address = models.CharField(max_length=100, blank=True, null=True, )
+    passport_number = models.CharField(max_length=20, verbose_name='Паспорт', blank=True, null=True, )
+    when_passport_issued = models.CharField(max_length=20)
+    whom_passport_issued = models.CharField(max_length=50, blank=True, null=True, )
+    phone_number = models.CharField(max_length=20, verbose_name='Тел. номер', blank=True, null=True, )
+    gnu_or_gje = models.CharField(max_length=40, blank=True, null=True, )
+    uvajaemaya = models.CharField(max_length=40, blank=True, null=True, )
+    mesto_osmotra = models.CharField(max_length=200, blank=True, null=True, )
 
     def __str__(self):
         return str(self.name)
@@ -281,6 +285,7 @@ class HoldsImages(models.Model):
         self._store(self.pp_photo_previous.all(), self.pp_photo)
         self._store(self.o_images_previous.all(), self.o_images)
         self._store(self.checks_previous.all(), self.checks)
+        self._clear()
         self.save()
 
     def _clear(self):
@@ -340,7 +345,7 @@ class OtherPhotos(models.Model):
 
 
 class CustomSum(models.Model):
-    sum = models.IntegerField(default=0, verbose_name="Введите сумму")
+    sum = models.IntegerField(default=0, verbose_name="Введите сумму", blank=True, null=True, )
 
     class Meta:
         verbose_name = 'Сумма'
@@ -363,8 +368,8 @@ class Checks(models.Model):
 
 class Report(models.Model):
     report_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
-    report_number = models.CharField(max_length=20)
-    report_date = models.CharField(max_length=20)
+    report_number = models.CharField(max_length=20, blank=True, null=True, )
+    report_date = models.CharField(max_length=20, blank=True, null=True, )
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_by', verbose_name='Создан')
     created_at = models.DateField(blank=True, null=True, verbose_name='Время создания')
 
@@ -375,14 +380,14 @@ class Report(models.Model):
     product = models.ManyToManyField(Product, related_name='Детали', verbose_name='Детали')
     consumable = models.ManyToManyField(Consumable, related_name='Расходники', verbose_name='Расходники')
 
-    service_cost = models.IntegerField(default=0)
-    product_cost = models.IntegerField(default=0)
-    product_acc_cost = models.IntegerField(default=0)
-    consumable_cost = models.IntegerField(default=0)
+    service_cost = models.IntegerField(default=0, blank=True, null=True, )
+    product_cost = models.IntegerField(default=0, blank=True, null=True, )
+    product_acc_cost = models.IntegerField(default=0, blank=True, null=True, )
+    consumable_cost = models.IntegerField(default=0, blank=True, null=True, )
     key = models.CharField(max_length=13, blank=True)
 
-    total_report_cost = models.CharField(max_length=20)
-    total_report_cost_txt = models.CharField(max_length=200)
+    total_report_cost = models.CharField(max_length=20, blank=True, null=True, )
+    total_report_cost_txt = models.CharField(max_length=200, blank=True, null=True, )
 
     pdf_report = models.FileField(blank=True, null=True, upload_to='uploads/%Y/%m/%d/', verbose_name='Отчёт в пдф')
     pdf_report_base64 = models.CharField(max_length=1000000, blank=True, null=True)
@@ -418,24 +423,56 @@ class Report(models.Model):
         return super(Report, self).delete(*args, **kwargs)
 
     def precise_iznos_ki(self):
-        return "{0:.1f}".format(self.product_cost - self.product_acc_cost)
+        try:
+            return "{0:.1f}".format(self.product_cost - self.product_acc_cost)
+        except TypeError:
+            return 0
+
+    def update(self):
+        self.product_cost = 0
+        self.consumable_cost = 0
+        self.service_cost = 0
+        self.service_data = []
+        self.product_data = []
+        self.consumable_data = []
+        self.wear_data = {}
+
     def precise_acc_cost(self):
-        return "{0:.1f}".format(self.product_acc_cost)
+        try:
+            return "{0:.1f}".format(self.product_acc_cost)
+        except TypeError:
+            return 0
+
     def get_product_acc_cost(self):
         print('get_product_acc_cost')
-        self.product_acc_cost = (self.product_cost * (1 - self.wear_data.__getitem__('accept_wear') / 100))
-        return self.product_acc_cost
+        try:
+            print(self.wear_data.__getitem__('accept_wear'))
+            self.product_acc_cost = (self.product_cost * (1 - self.wear_data.__getitem__('accept_wear') / 100))
+            return self.product_acc_cost
+        except TypeError:
+            return 0
 
     def get_total_report_price(self):
         print('get_total_report_price')
-        self.total_report_cost = ' '.join(
-            '{:,}'.format(int(self.service_cost + self.get_product_acc_cost() + self.consumable_cost)).split(','))
+        try:
+            print("TOTAL SUM")
+            print(self.service_cost)
+            print(self.get_product_acc_cost())
+            print(self.consumable_cost)
+            print(int(self.service_cost + self.get_product_acc_cost() + self.consumable_cost));
+            self.total_report_cost = ' '.join(
+                '{:,}'.format(int(self.service_cost + self.get_product_acc_cost() + self.consumable_cost)).split(','))
+        except TypeError:
+            return 0
 
     def get_total_report_cost_txt(self):
-        self.total_report_cost_txt = num2text(
-            int(self.service_cost + self.get_product_acc_cost() + self.consumable_cost),
-            main_units=((u'сум', u'сум', u'суммов'), 'f'))
-        return self.total_report_cost_txt
+        try:
+            self.total_report_cost_txt = num2text(
+                int(self.service_cost + self.get_product_acc_cost() + self.consumable_cost),
+                main_units=((u'сум', u'сум', u'суммов'), 'f'))
+            return self.total_report_cost_txt
+        except TypeError:
+            return 0
 
     def set_private_key(self):
         while True:

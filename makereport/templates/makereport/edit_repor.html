@@ -949,7 +949,9 @@
                 var price = $(this).val(),
                     last_input_premium = $(this).parents('tr').find('.allowance2').val(),
                     nph = $(this).parents('tr').find('.time2').val(),
-                    service_cost = $(this).parents('tr').find('.sum2');
+                    service_cost = $(this).parents('tr').find('.sum2'),
+                    counter = $(this).parents('tr'),
+                    parent = $(this).parents();
                 $.ajax({
                     url: '{% url "get_service_cost" %}',
                     data: {
@@ -959,7 +961,14 @@
                     },
                     dataType: 'json',
                     success: function (data) {
+                        console.log("sad")
                         var sum = data.service_cost - service_cost.val();
+
+                        if (addingTable(counter, addServiceCounter)) {
+                            add_service();
+                        }
+                        const present_table = parent.next().find('.first2');
+                        present_table.select()
                         calculate_total_sum(sum);
                         calculate_exact_sum(sum, 'service');
                         service_cost.val(data.service_cost)
@@ -989,6 +998,12 @@
             label.text(full_sum);
         }
 
+        function addingTable(object, compare) {
+            var counter = parseInt(object.find("td:first-child").text())
+            console.log(`${counter}    ${compare}`)
+            return counter === compare - 1;
+        }
+
         $(document).on('keydown', ".allowance2", function (e) {
             console.log('CLICK premium')
             var key = e.which;
@@ -998,9 +1013,9 @@
                     price = $(this).parents('tr').find('.price2').val(),
                     nph = $(this).parents('tr').find('.time2').val(),
                     service_cost = $(this).parents('tr').find('.sum2'),
-                    present_table = $(this).parents().next().find('.first2');
-                console.log("NPH  " + nph);
-                console.log("Premium  " + premium);
+                    counter = $(this).parents('tr'),
+                    parent = $(this).parents();
+
                 $.ajax({
                     url: '{% url "get_service_cost" %}',
                     data: {
@@ -1011,16 +1026,17 @@
                     dataType: 'json',
                     success: function (data) {
                         {#last.select()#}
+                        console.log(addingTable(counter, addServiceCounter))
 
-                        if (!service_cost.val()) {
+                        if (addingTable(counter, addServiceCounter)) {
                             add_service();
-                            present_table.select()
                         }
+                        const present_table = parent.next().find('.first2');
+                        present_table.select()
                         var sum = data.service_cost - service_cost.val();
                         calculate_total_sum(sum);
                         calculate_exact_sum(sum, 'service');
                         service_cost.val(data.service_cost)
-
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
                         console.log("error")
@@ -1036,7 +1052,6 @@
                 e.preventDefault();
                 var product_id = $(this).val(),
                     last_input_name = $(this).parents('tr').find('.name3'),
-                    {#last_input_unit = $(this).parents('tr').find('.input-unit'),#}
                     last_input_price = $(this).parents('tr').find('.price3'),
                     last_input_quantity = $(this).parents('tr').find('.time3')
 
@@ -1071,7 +1086,8 @@
                     quantity = $(this).parents('tr').find('.allowance4').val(),
                     cost = $(this).parents('tr').find('.sum4'),
                     last = $(this).parents('tbody').find('tr').last(),
-                    present_table = $(this).parents('.no_error').next().find('.first4');
+                    counter = $(this).parents('tr'),
+                    parent = $(this).parents();
                 {#last.clone().insertAfter(last);#}
                 $.ajax({
                     url: '{% url "get_consumable_cost" %}',
@@ -1082,6 +1098,11 @@
                     dataType: 'json',
                     success: function (data) {
                         var sum = data.total_cost - cost.val();
+                        if (addingTable(counter, addConsumableCounter)) {
+                            add_consumable();
+                        }
+                        const present_table = parent.next().find('.first4');
+                        present_table.select()
                         calculate_total_sum(sum);
                         calculate_exact_sum(sum, 'consumable');
                         cost.val(data.total_cost)
@@ -1101,7 +1122,9 @@
                     price = $(this).parents('tr').find('.price4').val(),
                     cost = $(this).parents('tr').find('.sum4'),
                     last = $(this).parents('tbody').find('tr').last(),
-                    present_table = $(this).parents('.no_error').next().find('.first4');
+                    present_table = $(this).parents('.no_error').next().find('.first4'),
+                    counter = $(this).parents('tr'),
+                    parent = $(this).parents();
                 {#last.clone().insertAfter(last);#}
                 $.ajax({
                     url: '{% url "get_consumable_cost" %}',
@@ -1111,11 +1134,12 @@
                     },
                     dataType: 'json',
                     success: function (data) {
-                        console.log('success calculate cost   ' + quantity)
-                        present_table.select()
-                        if (!cost.val()) {
-                            add_consumable()
+
+                        if (addingTable(counter, addConsumableCounter)) {
+                            add_consumable();
                         }
+                        const present_table = parent.next().find('.first4');
+                        present_table.select()
                         var sum = data.total_cost - cost.val();
                         calculate_total_sum(sum);
                         calculate_exact_sum(sum, 'consumable');
@@ -1169,7 +1193,9 @@
                 e.preventDefault();
                 var price = $(this).val(),
                     quantity = $(this).parents('tr').find('.time3').val(),
-                    cost = $(this).parents('tr').find('.sum3');
+                    cost = $(this).parents('tr').find('.sum3'),
+                    counter = $(this).parents('tr'),
+                    parent = $(this).parents();
                 $.ajax({
                     url: '{% url "get_product_cost" %}',
                     data: {
@@ -1179,8 +1205,13 @@
                     dataType: 'json',
                     success: function (data) {
                         var sum = data.total_cost - cost.val();
+                        if (addingTable(counter, addProductCounter)) {
+                            add_product();
+                        }
+                        const present_table = parent.next().find('.name3');
+                        present_table.select()
                         calculate_total_sum(sum);
-                        calculate_exact_sum(sum, 'product');
+                        calculate_exact_sum(sum, 'product')
                         calculate_product_overall_sum();
                         cost.val(data.total_cost);
                     },
@@ -1190,6 +1221,7 @@
                 })
             }
         });
+
         $(document).on('keydown', ".time3", function (e) {
             console.log('CLICK quantity')
             var key = e.which;
@@ -1199,7 +1231,8 @@
                     price = $(this).parents('tr').find('.price3').val(),
                     cost = $(this).parents('tr').find('.sum3'),
                     last = $(this).parents('tbody').find('tr').last(),
-                    present_table = $(this).parents('.no_error').next().find('.count')
+                    counter = $(this).parents('tr'),
+                    parent = $(this).parents();
                 console.log("item 3" + quantity)
                 {#last.clone().insertAfter(last);#}
                 $.ajax({
@@ -1210,12 +1243,11 @@
                     },
                     dataType: 'json',
                     success: function (data) {
-                        console.log('success calculate cost')
-                        console.log("data total" + data.total_cost)
-                        present_table.select();
-                        if (!cost.val()) {
+                        if (addingTable(counter, addProductCounter)) {
                             add_product();
                         }
+                        const present_table = parent.next().find('.name3');
+                        present_table.select()
                         var sum = data.total_cost - cost.val();
                         calculate_total_sum(sum);
                         calculate_exact_sum(sum, 'product');
@@ -1254,7 +1286,12 @@
                 })
             }
         });
-
+        $(".prehnite-input").on('keydown', function (e) {
+            var weight = $(this).val();
+            console.log(weight);
+            $('#product_wear_show').text(weight);
+            calculate_product_overall_sum();
+        })
         $(document).on('keydown', ".point-input", function (e) {
             console.log('CLICK point-input')
             var key = e.which;
@@ -1277,12 +1314,7 @@
                 btn.focus()
             }
         });
-        $(".prehnite-input").on('keydown', function (e) {
-            var weight = $(this).val();
-            console.log(weight);
-            $('#product_wear_show').text(weight);
-            calculate_product_overall_sum();
-        })
+
         $(".btn-warning").on('click', function () {
             var $el = $("#file-4");
             if ($el.attr('disabled')) {
@@ -1295,14 +1327,11 @@
             $("#file-4").fileinput('refresh', {previewClass: 'bg-info'});
         });
 
-
         $(document).ready(function () {
 
 
             const server = "http://e-otsenka.uz"
-            calculate_total_sum(0);
-            calculate_product_overall_sum();
-            $('textarea').trigger('keyup');
+
             $("#test-upload").fileinput({
                 'theme': 'fas',
                 'showPreview': false,
@@ -1422,6 +1451,8 @@
                     }
                 }
             });
+            calculate_total_sum(0);
+            calculate_product_overall_sum();
         });
     </script>
 {% endblock %}

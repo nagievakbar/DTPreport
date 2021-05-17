@@ -2,115 +2,136 @@
 	<font name="TNR" ttf="Times New Roman 400.ttf"/>
 	<font name="TNRB" ttf="Times New Roman 400 Bold.ttf"/>
                                      PAGE 1
-    <page>
+     <page>
         {% if contract %}
-        <text align="center">Договор-счет № {{ contract.contract_number }} </text>
-        <text align="center">на оказание услуг по оценке</text>
-        <text/>
-        <text>г.Ташкент</text>
-        <text/>
-        <text x="17.5"  y="27">{{ contract.contract_date }}</text>
+        <text  fontsize="10" align="center">Договор-счет № {{ contract.contract_number }} </text>
+        <text  fontsize="10" align="center">на оказание услуг по оценке</text>
+        <text fontsize="10"  x="2" y="27.5">г.Ташкент</text>
+        <text fontsize="10" x="17.5"  y="27.5">{{ contract.contract_date }}</text>
         {% endif %}
-        <text/>
-        <text align="justify" lineheight="1.5">       ООО "AMIR AVTO BAHOLASH"   именуемое   в   дальнейшем   "Исполнитель",   в   лице   директора Сагдуллаева Б.К.,  действующего  на  основании  Устава  и  лицензии  на  осуществление  оценочной   деятельности   RR-0184    выданная   Госкомимуществом   РУз 12.05.2014г.,   полис  страхования  профессиональной ответственности оценщиков №11/3-6/0769 от 08.11.2019г. c одной  стороны  и {{ report.contract.customer }} именуемое в дальнейшем "Заказчик", с другой стороны, заключили настоящий договор о нижеследующем:</text>
-        <text font="TNRB" align="center" lineheight="2">1.Предмет договора.</text>
-        <text align="justify" lineheight="1.5">1.1. В соответствии с условиями настоящего договора Заказчик поручает, Исполнитель предоставляет комплекс работ (услуг), связанных с определением стоимости имущества Заказчика</text>
-        <text align="justify" lineheight="1.5">1.2. Наименование а/м оценки: автомобиль марки {{ report.car.brand_text }} гос№ {{ report.car.car_number }}</text>
-        <text align="justify" lineheight="1.5">1.3. Зарегистрированного по адресу: {{ report.car.owner_address }}</text>
-        <text align="justify" lineheight="1.5">1.4. Цель оценки: определение стоимости ущерба транспортного средства</text>
-        <text font="TNRB" align="center" lineheight="2">2. Стоимость услуг, порядок их сдачи и оплаты</text>
-        <text align="justify" lineheight="1.5">2.1. Стоимость работ по настоящему договору составляет (сум):</text>
+        <text></text>
+     <text></text>
+        <text fontsize="10" align="justify" lineheight="1.5">       ООО "AMIR AVTO BAHOLASH"   именуемое   в   дальнейшем   "Исполнитель",   в   лице   директора Сагдуллаева Б.К.,  действующего  на  основании  Устава  и  лицензии  на  осуществление  оценочной   деятельности   RR-0184    выданная   Госкомимуществом   РУз 12.05.2014г.,   полис  страхования  профессиональной ответственности оценщиков №11/3-6/0769 от 08.11.2019г. c одной  стороны  и {{ report.contract.customer }} именуемое в дальнейшем "Заказчик", с другой стороны, заключили настоящий договор о нижеследующем:</text>
+        <text  fontsize="10" font="TNRB" align="center" lineheight="2">1.Предмет договора.</text>
+        <text  fontsize="10" align="justify" lineheight="1.5">1.1. В соответствии с условиями настоящего договора Заказчик поручает, Исполнитель предоставляет комплекс работ (услуг), связанных с определением стоимости имущества Заказчика</text>
+        <text fontsize="10" align="justify" lineheight="1.5">1.2. Наименование а/м оценки: автомобиль марки {{ report.car.brand_text }} гос№ {{ report.car.car_number }}</text>
+        <text fontsize="10" align="justify" lineheight="1.5">1.3. Зарегистрированного по адресу: {{ report.car.owner_address }}</text>
+        <text  fontsize="10" align="justify" lineheight="1.5">1.4. Цель оценки: определение стоимости ущерба транспортного средства</text>
+        <text fontsize="10"  font="TNRB" align="center" lineheight="2">2. Стоимость услуг, порядок их сдачи и оплаты</text>
+        <text fontsize="10" align="justify" lineheight="1.5">2.1. Стоимость работ по настоящему договору составляет (сум):</text>
          --------------------------table--------------------------
-        <rect x="2" y="16.5" width="5" height="1"/>
-        <rect x="7" y="16.5" width="1.5" height="1"/>
-        <rect x="8.5" y="16.5" width="1.5" height="1"/>
-        <rect x="10" y="16.5" width="2" height="1"/>
-        <rect x="12" y="16.5" width="2" height="1"/>
-        <rect x="14" y="16.5" width="3" height="1"/>
-        <rect x="17" y="16.5" width="2" height="1"/>
+        <rect x="2" y="18.5" width="5" height="1"/>
+        <rect x="7" y="18.5" width="1.5" height="1"/>
+        <rect x="8.5" y="18.5" width="1.5" height="1"/>
+        <rect x="10" y="18.5" width="2" height="1"/>
+        <rect x="12" y="18.5" width="2" height="1"/>
+        <rect x="14" y="18.5" width="3" height="1"/>
+        <rect x="17" y="18.5" width="2" height="1"/>
 
-        <rect x="2" y="16" width="5" height="0.5"/>
-        <rect x="7" y="16" width="1.5" height="0.5"/>
-        <rect x="8.5" y="16" width="1.5" height="0.5"/>
-        <rect x="10" y="16" width="2" height="0.5"/>
-        <rect x="12" y="16" width="2" height="0.5"/>
-        <rect x="14" y="16" width="3" height="0.5"/>
-        <rect x="17" y="16" width="2" height="0.5"/>
+        <rect x="2" y="18" width="5" height="0.5"/>
+        <rect x="7" y="18" width="1.5" height="0.5"/>
+        <rect x="8.5" y="18" width="1.5" height="0.5"/>
+        <rect x="10" y="18" width="2" height="0.5"/>
+        <rect x="12" y="18" width="2" height="0.5"/>
+        <rect x="14" y="18" width="3" height="0.5"/>
+        <rect x="17" y="18" width="2" height="0.5"/>
 
-        <rect x="2" y="15.5" width="5" height="0.5"/>
-        <rect x="7" y="15.5" width="1.5" height="0.5"/>
-        <rect x="8.5" y="15.5" width="1.5" height="0.5"/>
-        <rect x="10" y="15.5" width="2" height="0.5"/>
-        <rect x="12" y="15.5" width="2" height="0.5"/>
-        <rect x="14" y="15.5" width="3" height="0.5"/>
-        <rect x="17" y="15.5" width="2" height="0.5"/>
+        <rect x="2" y="17.5" width="5" height="0.5"/>
+        <rect x="7" y="17.5" width="1.5" height="0.5"/>
+        <rect x="8.5" y="17.5" width="1.5" height="0.5"/>
+        <rect x="10" y="17.5" width="2" height="0.5"/>
+        <rect x="12" y="17.5" width="2" height="0.5"/>
+        <rect x="14" y="17.5" width="3" height="0.5"/>
+        <rect x="17" y="17.5" width="2" height="0.5"/>
 
-        <rect x="2" y="15" width="5" height="0.5"/>
-        <rect x="7" y="15" width="12" height="0.5"/>
-
-        <rect x="14" y="16.5" width="1.5" height="0.5"/>
-        <rect x="15.5" y="16.5" width="1.5" height="0.5"/>
+        <rect x="2" y="17" width="5" height="0.5"/>
+        <rect x="7" y="17" width="1.5" height="0.5"/>
+        <rect x="8.5" y="17" width="1.5" height="0.5"/>
+        <rect x="10" y="17" width="2" height="0.5"/>
+        <rect x="12" y="17" width="2" height="0.5"/>
         <rect x="14" y="17" width="3" height="0.5"/>
+        <rect x="17" y="17" width="2" height="0.5"/>
+
+        <rect x="2" y="16.5" width="5" height="0.5"/>
+        <rect x="7" y="16.5" width="12" height="0.5"/>
+
+        <rect x="14" y="18.5" width="1.5" height="0.5"/>
+        <rect x="15.5" y="18.5" width="1.5" height="0.5"/>
+        <rect x="14" y="19" width="3" height="0.5"/>
          --------------------------table--------------------------
          --------------------------table-text--------------------------
-        <text x="2.8" y="16.9">Наименование услуг</text>
-        <text x="7.2" y="16.9">ед.изм</text>
-        <text x="8.9" y="16.9">к-во</text>
-        <text x="10.5" y="16.9">цена</text>
-        <text x="12.2" y="17.1">стоимость</text>
-        <text x="12.2" y="16.7">поставки</text>
-        <text x="15" y="17.15" fontsize="10">акциз</text>
-        <text x="14.3" y="16.65" fontsize="10">ставка</text>
-        <text x="15.8" y="16.65" fontsize="10">сумма</text>
-        <text x="17.6" y="16.9" >НДС</text>
+        <text x="2.8" y="18.9">Наименование услуг</text>
+        <text x="7.2" y="18.9">ед.изм</text>
+        <text x="8.9" y="18.9">к-во</text>
+        <text x="10.5" y="18.9">цена</text>
+        <text x="12.2" y="19.1">стоимость</text>
+        <text x="12.2" y="18.7">поставки</text>
+        <text x="15" y="19.15" fontsize="10">акциз</text>
+{#    ss#}
+        <text x="14.3" y="18.65" fontsize="10">ставка</text>
+        <text x="15.8" y="18.65" fontsize="10">сумма</text>
+        <text x="17.6" y="18.9" >НДС</text>
 
-        <text x="2.2" y="16.1">опр.сто-ти ущерба АМТС</text>
-        <text x="2.2" y="15.6">выезд</text>
-        <text x="2.2" y="15.1">ИТОГО:</text>
+        <text x="2.2" y="18.1">опр.сто-ти ущерба АМТС</text>
+        <text x="2.2" y="17.6">выезд</text>
+         <text x="2.2" y="17.1">Опр ст.УТС</text>
+        <text x="2.2" y="16.6">ИТОГО:</text>
 
-        <text x="7.4" y="16.1">шт</text>
-        <text x="7.4" y="15.6">час</text>
+        <text x="7.4" y="18.1">шт</text>
+        <text x="7.4" y="17.6">час</text>
+        <text x="7.4" y="17.1">шт</text>
 
-        <text x="9.15" y="16.1">1</text>
-        <text x="9.15" y="15.6">0</text>
+        <text x="9.15" y="18.1">1</text>
+        <text x="9.15" y="17.6">0</text>
+        <text x="9.15" y="17.1">1</text>
 
-        <text x="10.4" y="16.1">{{ calculation.opr_damage }}</text>
-        <text x="10.3" y="15.6">{{ calculation.departure }}</text>
+        <text x="10.4" y="18.1">{{ calculation.opr_damage }}</text>
+        <text x="10.3" y="17.6">{{ calculation.departure }}</text>
+        <text x="10.3" y="17.1">{{ calculation.opr_ust }}</text>
 
-        <text x="12.4" y="16.1">{{ calculation.opr_damage }}</text>
-        <text x="12.3" y="15.6">{{ calculation.departure }}</text>
+        <text x="12.4" y="18.1">{{ calculation.opr_damage }}</text>
+        <text x="12.3" y="17.6">{{ calculation.departure }}</text>
+        <text x="12.3" y="17.1">{{ calculation.opr_ust }}</text>
 
-        <text x="14.7" y="16.1">Без акциз</text>
-        <text x="14.7" y="15.6">Без акциз</text>
+        <text x="14.7" y="18.1">Без акциз</text>
+        <text x="14.7" y="17.6">Без акциз</text>
+        <text x="14.7" y="17.1">Без акциз</text>
 
-        <text x="17.3" y="16.1">Без НДС</text>
-        <text x="17.3" y="15.6">Без НДС</text>
+        <text x="17.3" y="18.1">Без НДС</text>
+        <text x="17.3" y="17.6">Без НДС</text>
+        <text x="17.3" y="17.1">Без НДС</text>
 
-        <text x="12.8" y="15.1" font="TNRB">{{ calculation.total }}</text>
+        <text x="12.8" y="16.6" font="TNRB">{{ calculation.total }}</text>
          --------------------------table-text--------------------------
         <text/>
         <text/>
-        <text/>
-        <text/>
-        <text/>
-        <text/>
-        <text lineheight="1.3">2.2.  Заказчик обязуется оплатить за услуги в сумме  {{ calculation.get_total_report_cost_txt() }}   </text>
 
-        <text align="justify" lineheight="1.3">2.3. Заказчик производит 100% предоплату в течении 3-х банковских дней со дня подписания договора, в случае не оплаты в течении указанного срока договор считается аннулированным.</text>
-        <text align="justify" lineheight="1.3">2.4.  Исполнитель передает Заказчику один экземпляр письменного Отчета об оценке.</text>
-        <text font="TNRB" align="center" lineheight="1.6">3. Сроки выполнения работ</text>
-        <text align="justify" lineheight="1.3">3.1. Датой начала выполнения работ по оценке каждого объекта оценки  является дата поступления на расчетный счет Исполнителяп редоплаты (в размере 100% от стоимости работ) согласно п.2.3. настоящего договора.</text>
-        <text align="justify" lineheight="1.3">3.2. Окончание выполнения работ по оценке объектов через 10 рабочих дней с момента их начала Исполнитель имеет право выполнить работы досрочно.</text>
-		<text font="TNRB" align="center" lineheight="1.6">4. Права и обязанности сторон.</text>
-        <text align="justify" lineheight="1.3">4.1. Заказчик обязан:</text>
-        <text align="justify" lineheight="1.3">4.1.1. Оплатить стоимость работы, указанной в п.2.1. настоящего договора, за услуги Исполнителя и принять у него работу в соответствии с пунктом п.2.4.</text>
-        <text align="justify" lineheight="1.3">4.1.2. Обеспечить предоставление транспорта для выезда оценщика к месту нахождения автомобиля и  исходной информации, необходимой для проведения оценочных работ по настоящему договору и других сведений необходимых для осуществления оценки.</text>
-        <text align="justify" lineheight="1.3">4.2. Заказчик имеет право:</text>
-        <text align="justify" lineheight="1.3">4.2.1. Отказаться принять работы по оценке при условии нарушения ИсполнителемСтандартов оценки и требований нормативно-правовых актов, регламентирующих оценочную деятельность.</text>
-        <text align="justify" lineheight="1.3">4.2.2. Отказаться от поручаемых работ по настоящему договору по  своей инициативе только в тех случаях, когда Исполнитель не приступил к исполнению настоящего договора в указанные в нем сроки. В случае начала выполнения работ Исполнителем, работа завершается на основании двухстороннего акта на выполненную часть работы.</text>
-        <text align="justify" lineheight="1.3">4.3. Исполнитель обязан:</text>
-        <text align="justify" lineheight="1.3">4.3.1. Выполнять работы в соответствии со Стандартами оценки и нормативно-правовыми актами регламентирующими оценочную деятельность в Республике Узбекистан.</text>
-
+        <text/>
+        <text/>
+        <text/>
+        <text/>
+        <text/>
+        <text/>
+        <text fontsize="10" lineheight="1.3">2.2.  Заказчик обязуется оплатить за услуги в сумме  {{ calculation.get_total_report_cost_txt() }}  </text>
+        <text fontsize="10" align="justify" lineheight="1.3">2.3. Заказчик производит 100% предоплату в течении 3-х банковских дней со дня подписания договора, в случае не оплаты в течении указанного срока договор считается аннулированным.</text>
+        <text fontsize="10" align="justify" lineheight="1.3">2.4.  Исполнитель передает Заказчику один экземпляр письменного Отчета об оценке.</text>
+        <text fontsize="10" font="TNRB" align="center" lineheight="1.6">3. Сроки выполнения работ</text>
+        <text fontsize="10" align="justify" lineheight="1.3">3.1. Датой начала выполнения работ по оценке каждого объекта оценки  является дата поступления на расчетный счет Исполнителяп редоплаты (в размере 100% от стоимости работ) согласно п.2.3. настоящего договора.</text>
+        <text fontsize="10" align="justify" lineheight="1.3">3.2. Окончание выполнения работ по оценке объектов через 10 рабочих дней с момента их начала Исполнитель имеет право выполнить работы досрочно.</text>
+		<text fontsize="10" font="TNRB" align="center" lineheight="1.6">4. Права и обязанности сторон.</text>
+        <text fontsize="10" align="justify" lineheight="1.3">4.1. Заказчик обязан:</text>
+        <text fontsize="10" align="justify" lineheight="1.3">4.1.1. Оплатить стоимость работы, указанной в п.2.1. настоящего договора, за услуги Исполнителя и принять у него работу в соответствии с пунктом п.2.4.</text>
+        <text fontsize="10"  align="justify" lineheight="1.3">4.1.2. Обеспечить предоставление транспорта для выезда оценщика к месту нахождения автомобиля и  исходной информации, необходимой для проведения оценочных работ по настоящему договору и других сведений необходимых для осуществления оценки.</text>
+        <text fontsize="10" align="justify" lineheight="1.3">4.2. Заказчик имеет право:</text>
+        <text fontsize="10" align="justify" lineheight="1.3">4.2.1. Отказаться принять работы по оценке при условии нарушения ИсполнителемСтандартов оценки и требований нормативно-правовых актов, регламентирующих оценочную деятельность.</text>
+        <text fontsize="10" align="justify" lineheight="1.3">4.2.2. Отказаться от поручаемых работ по настоящему договору по  своей инициативе только в тех случаях, когда Исполнитель не приступил к исполнению настоящего договора в указанные в нем сроки. В случае начала выполнения работ Исполнителем, работа завершается на основании двухстороннего акта на выполненную часть работы.</text>
+        <text fontsize="10" align="justify" lineheight="1.3">4.3. Исполнитель обязан:</text>
+        <text fontsize="10" align="justify" lineheight="1.3">4.3.1. Выполнять работы в соответствии со Стандартами оценки и нормативно-правовыми актами регламентирующими оценочную деятельность в Республике Узбекистан.</text>
+        {% if qrcode%}
+          <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
+        {%endif %}
+        <text   y='1.5' x="0" align="center">1</text>
+        <text   y='1.5' x="15" >Оценщик</text>
     </page>
     <page>
         <text align="justify" lineheight="1.2">4.3.2. Выполнять работы в заданные сроки.</text>
@@ -155,11 +176,13 @@
         <text lineheight="1.3">  МФО                      01067   ОКОНХ     84500  </text>
         <text lineheight="1.3">  ИНН		      302 667 624			                  телефон:                 {{ report.contract.customer.phone_number }}</text>
          --------------------------------------------table-text--------------------------------------
-        <text lineheight="1.3">Директор ООО "AMIR AVTO BAHOLASH" Сагдулаев Б.К        {{ report.contract.customer.name }}  </text>
-
+        <text lineheight="1.3">Директор ООО "AMIR AVTO BAHOLASH"                       </text>
+        <text>                          Сагдулаев Б.К                                            {{ report.contract.customer.name }}</text>
          {% if qrcode %}
         <barcode   y='0.5' x="18" type="QR" height="2.5">{{ qrcode }}</barcode>
         {% endif %}
-
+        <text   y='1.5' x="0" align="center">2</text>
+        <text   y='1.5' x="15" >Оценщик</text>
     </page>
 </pdf>
+
