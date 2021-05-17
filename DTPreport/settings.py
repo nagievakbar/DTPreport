@@ -26,6 +26,13 @@ SECRET_KEY = 'qij#o3(%qzx#1i3@zk98s_6nx3^7i303ap^ob@*yq!lp$oe9d@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 CELERY_CACHE_BACKEND = 'default'
+BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Africa/Nairobi'
+
 ALLOWED_HOSTS = ['makereport.elite-house.uz',
                  '127.0.0.1',
                  'e-otsenka.uz',
