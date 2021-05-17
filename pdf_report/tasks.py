@@ -1,8 +1,9 @@
 from celery import shared_task
 from django.core.files.base import ContentFile
-from  .views import  get_response
+from pdf_report.views import get_response
 
-from makereport.models import  TemplateBase, Report
+from makereport.models import TemplateBase, Report
+
 
 @shared_task(name="make_pdf")
 def make_pdf(id):
