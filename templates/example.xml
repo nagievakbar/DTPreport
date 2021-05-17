@@ -130,8 +130,8 @@
         {% if qrcode%}
           <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
         {%endif %}
-        <text   y='1.5' x="0" align="center">1</text>
-        <text   y='1.5' x="15" >Оценщик</text>
+        <text   y='0.5' x="0" align="center">1</text>
+        <text   y='0.5' x="17" >Оценщик</text>
     </page>
     <page>
         <text align="justify" lineheight="1.2">4.3.2. Выполнять работы в заданные сроки.</text>
