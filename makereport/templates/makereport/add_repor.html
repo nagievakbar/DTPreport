@@ -838,7 +838,7 @@
                                         </div>
                                     </div>
                                 {% endif %}
-                             {% if report.pdf_qr_code_company == None %}
+                             {% if report.pdf_qr_code_company == None and id != 0%}
                                 <div class="col-lg-2 download_button">
                                     <div class="panel_user" id="download_button5">
                                         <button class="btn panel_button"
@@ -855,7 +855,7 @@
                                     </div>
                                 </div>
                               {% endif %}
-                            {% if report.pdf_qr_code_user == None %}
+                            {% if report.pdf_qr_code_user == None and id != 0 %}
                                 <div class="col-lg-3 download_button">
                                     <div class="panel_user" id="download_button6">
 
