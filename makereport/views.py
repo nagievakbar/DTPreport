@@ -1,6 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.core.files.base import ContentFile
 from django.core.files.storage import FileSystemStorage
 from django.forms import formset_factory
 from django.http import HttpResponseRedirect
@@ -15,7 +14,7 @@ from django.db.models import Q
 from .forms import *
 from .utils import *
 
-from pdf_report.views import create_base64,get_response
+from pdf_report.views import create_base64
 from DTPreport import settings as s
 
 
@@ -627,43 +626,43 @@ class ReportView(View):
                 new_report.wear_data.update(wd)
                 new_report.get_total_report_price()
             new_report.save()
-            data = get_response(id, obj=TemplateBase.objects)
-            filename = "%s.pdf" % new_report.car.car_number
-            new_report.pdf_report.save(filename, ContentFile(data))
-            new_report.save()
             context['report'] = new_report
             total_price_report = new_report.total_report_cost
             context['total_price_report'] = total_price_report
 
-
-            context = {
-                'base': True,
-                'id_image': holds_images.id,
-                'id': id,
-                'calculation_form': calculation_form,
-                'contract_form': contract_form,
-                'report_form': report_form,
-                'car_form': car_form,
-                'prices': get_prices(),
-                'customer_form': customer_form,
-                'service_formset': service_formset,
-                'product_formset': product_formset,
-                'consumable_formset': consumable_formset,
-                'wear_form': wear_form,
-                'report': new_report,
-                'total_price_report': total_price_report,
-                'image_form': image_form or None,
-                'passphoto_form': passphoto_form or None,
-                'otherphoto_form': otherphoto_form or None,
-                'checks_form': checks_form or None,
-                'images': images or None,
-                'pphotos': pphotos or None,
-                'ophotos': ophotos or None,
-                'checks': checks or None,
-            }
-            print("PRODUCT_COST")
-            print(new_report.product_cost)
-            return render(request, 'makereport/add_repor.html', context)
+            try:
+                create_base64(request, new_report)
+            except KeyError:
+                pass
+            finally:
+                context = {
+                    'base': True,
+                    'id_image': holds_images.id,
+                    'id': id,
+                    'calculation_form': calculation_form,
+                    'contract_form': contract_form,
+                    'report_form': report_form,
+                    'car_form': car_form,
+                    'prices': get_prices(),
+                    'customer_form': customer_form,
+                    'service_formset': service_formset,
+                    'product_formset': product_formset,
+                    'consumable_formset': consumable_formset,
+                    'wear_form': wear_form,
+                    'report': new_report,
+                    'total_price_report': total_price_report,
+                    'image_form': image_form or None,
+                    'passphoto_form': passphoto_form or None,
+                    'otherphoto_form': otherphoto_form or None,
+                    'checks_form': checks_form or None,
+                    'images': images or None,
+                    'pphotos': pphotos or None,
+                    'ophotos': ophotos or None,
+                    'checks': checks or None,
+                }
+                print("PRODUCT_COST")
+                print(new_report.product_cost)
+                return render(request, 'makereport/add_repor.html', context)
         return render(request, 'makereport/add_repor.html', context)
 
     def init_service_formset(self, request):
