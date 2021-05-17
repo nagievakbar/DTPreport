@@ -445,9 +445,15 @@
                 },
                 url: `{% url "make_pdf" %}?id=${id}`,
                 success: function (data) {
-                    alert("Вы успешно удалили!");
-                    $(`#${id}`).remove();
+                    alert("Вы успешно добавили в pdf!");
+
                 },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(xhr)
+                    console.log(ajaxOptions)
+                    console.log(thrownError)
+                        console.log("error")
+                    }
             })
        }
    }
@@ -463,7 +469,8 @@
                 },
                 url: `{% url "delete_report"%}?id=${id}`,
                 success: function (data) {
-                    alert("Вы успешно добавили в pdf!");
+                    alert("Вы успешно удалили!");
+                    $(`#${id}`).remove();
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     console.log(xhr)
