@@ -464,7 +464,6 @@
                 url: `{% url "delete_report"%}?id=${id}`,
                 success: function (data) {
                     alert("Вы успешно добавили в pdf!");
-                    $(`#${id}`).remove();
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     console.log(xhr)
