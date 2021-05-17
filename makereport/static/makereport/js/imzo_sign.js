@@ -4,22 +4,24 @@ $('#sign').on('click', function () {
 $('#sign_boss').on('click', function () {
     loadModels($(this))
 })
-
+var sign_user;
+var url = "http://e-otsenka.uz/report/ajax/verifyPkcs7/";
 function loadModels(object) {
     let sign = object.attr('sign');
     let sign_form = object.attr('sign_from')
-    let model = $("#exampleModal");
+        var model = $("#exampleModal");
     model.modal('show');
+    sign_user = sign_form;
+
     model.find('.sign').val(sign)
-    model.find('#sign_form').val(sign_form)
+    model.find('.sign_form').val(sign_form)
     let recipient = object.attr('data-bs-whatever');
     let report_id = object.attr('data-bs-report');
     var modalFileInput = model.find('.file');
     var modalReportIdField = model.find('.report_id');
     modalFileInput.text(recipient)
     modalReportIdField.val(report_id)
-    console.log(modalFileInput.text())
-    console.log(modalReportIdField.text())
+
 }
 
 $('#close_model').on('click', function () {
@@ -217,10 +219,12 @@ function getCookie(name) {
 }
 
 var csrftoken = getCookie('csrftoken');
-sign_decide = function () {
+sign_decide = function (obj) {
+    var model = $("#sign_boss");
+
     var choice = document.getElementById("sign").value;
     console.log('sign decide')
-    console.log(choice)
+     console.log(sign_user);
     sign();
 
 }
@@ -249,7 +253,7 @@ adding_sign = function () {
                     headers: {
                         "X-CSRFToken": csrftoken
                     },
-                    url: '{% url "verifyPkcs7" %}',
+                    url: url,
                     data: {
                         'pkcs7': pkcs7,
                         'sign_from': sign_from.value,
@@ -316,6 +320,7 @@ adding_sign = function () {
 }
 sign = function () {
     var sign_from = document.getElementById('sign_from');
+     var report_input = document.getElementById('report_id');
     console.log(sign_from.value);
     console.log("sadsdsdasd");
     var itm = document.testform.key.value;
@@ -325,7 +330,6 @@ sign = function () {
         var data = document.testform.data.value;
         var keyId = document.getElementById('keyId').innerHTML;
         var report_input = document.getElementById('report_id');
-        var sign_from = document.getElementById('sign_from');
         if (keyId) {
             EIMZOClient.createPkcs7(keyId, data, null, function (pkcs7) {
 
@@ -334,10 +338,10 @@ sign = function () {
                     headers: {
                         "X-CSRFToken": csrftoken
                     },
-                    url: '{% url "verifyPkcs7" %}',
+                    url: url,
                     data: {
                         'pkcs7': pkcs7,
-                        'sign_from': sign_from.value,
+                        'sign_from': sign_user,
                         'report_id': report_input.value,
 
                     },

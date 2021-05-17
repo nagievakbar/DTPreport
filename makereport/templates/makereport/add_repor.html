@@ -846,7 +846,7 @@
                                                 data-bs-target="#exampleModal"
                                                 id="sign"
                                                 sign="{{ report.signed }}"
-                                                sign_from='0'
+                                                    sign_from='0'
                                                 type="button"
                                                 data-bs-report="{{ report.report_id }}"
                                                 {#                                    pkcs7="{{ report.pdf_report_pkcs7.0 }}"#}
@@ -930,8 +930,8 @@
                             </div>
 
                             <label id="keyId" style="display: none"></label><br/>
-                            <input id="sign" class="sign" style="display: none"/>
-                            <input id="sign_from" class="sign" style="display: none"/>
+                            <input id="sign" class="sign" class="sign" style="display: none"/>
+                            <input id="sign_from" class="sign_from" style="display: none"/>
                             <input id="report_id" class="report_id" style="display: none"/>
                             {#                Подписанный документ PKCS#7<br />#}
                             <textarea class="pkcs7" name="pkcs7" style="display: none"></textarea><br/>
@@ -942,7 +942,7 @@
                 <div class="modal-footer">
                     <button id="close_model" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть
                     </button>
-                    <button onclick="sign_decide()" type="button" class="btn btn-primary btn-link sign">Подписать
+                    <button onclick="sign_decide(this)" type="button" class="btn btn-primary btn-link sign">Подписать
                     </button>
                     <br/>
                 </div>
