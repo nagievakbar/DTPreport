@@ -1,10 +1,19 @@
 from celery import shared_task
 from django.core.files.base import ContentFile
 from django.http import JsonResponse
-
+from PIL import Image
 from pdf_report.views import get_response
 
-from makereport.models import TemplateBase, Report
+from makereport.models import TemplateBase, Report, Images
+
+
+@shared_task(name="reduce image")
+def reduce_image(image):
+    image_opened = Image.open(image.path)
+    width, height = image_opened.size
+    image_opened = image_opened.resize((int(width / 2), int(height / 2)), Image.ANTIALIAS)
+    image_opened.save(image.path, quality=10)
+
 
 def get_base(request):
     try:
@@ -14,6 +23,7 @@ def get_base(request):
         pass
     return JsonResponse({})
 
+
 @shared_task(name="make_pdf")
 def make_pdf(id):
     obj = TemplateBase.objects
@@ -22,4 +32,3 @@ def make_pdf(id):
     filename = "%s.pdf" % new_report_pdf.car.car_number
     new_report_pdf.pdf_report.save(filename, ContentFile(data))
     new_report_pdf.save()
-
