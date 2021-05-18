@@ -184,7 +184,7 @@
 
         <text x="5.7" y="22.2">{{  report.key}}</text>
 
-        <barcode  x="5.7" y="19.7" type="QR" height="1.5"> https://e-otsenka.uz/pdf/{{report.report_id}}</barcode>
+        <barcode  x="5.7" y="19.7" type="QR" height="1.5"> http://e-otsenka.uz/pdf/{{report.report_id}}</barcode>
         <text/>
         <text/>
         <text/>
