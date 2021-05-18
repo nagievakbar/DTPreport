@@ -16,6 +16,7 @@ from .utils import *
 
 from pdf_report.views import create_base64
 from DTPreport import settings as s
+from pdf_report.tasks import reduce_image
 
 
 class ImageDelete(View):
@@ -34,6 +35,7 @@ class ImageView(View):
         hold_image.image.add(image)
         hold_image.save()
         image.save()
+        reduce_image.delay(image.image)
         link_img = "{}{}".format(s.URL_FILES, image.image.url)
         print(link_img)
         link_delete = "{}/report/image/delete/".format(s.URL_FILES)
@@ -57,6 +59,7 @@ class PPhotoView(View):
         hold_image.pp_photo.add(image)
         hold_image.save()
         image.save()
+        reduce_image.delay(image.image)
         link_img = "{}{}".format(s.URL_FILES, image.photo.url)
         print(link_img)
         link_delete = "{}/report/pphoto/delete/".format(s.URL_FILES)
@@ -80,6 +83,7 @@ class OPhotoView(View):
         hold_image.o_images.add(image)
         hold_image.save()
         image.save()
+        reduce_image.delay(image.image)
         link_img = "{}{}".format(s.URL_FILES, image.photos.url)
         print(link_img)
         link_delete = "{}/report/ophoto/delete/".format(s.URL_FILES)
@@ -103,6 +107,7 @@ class ChecksView(View):
         hold_image.checks.add(image)
         hold_image.save()
         image.save()
+        reduce_image.delay(image.image)
         link_img = "{}{}".format(s.URL_FILES, image.checks.url)
         print(link_img)
         link_delete = "{}/report/checks/delete/".format(s.URL_FILES)
@@ -205,14 +210,14 @@ class ReportEditView(View):
         checks = holds_images.check_concatinate()
         report_id = int(request.POST['id_report'])
         if report_id == 0:
-            calculation_form = CalculationForm(request.POST, instance= Calculation())
+            calculation_form = CalculationForm(request.POST, instance=Calculation())
             contract_form = ContractForm(request.POST, instance=Contract())
             report_form = ReportForm(request.POST, instance=Report())
             car_form = CarForm(request.POST, instance=Car())
             customer_form = CustomerForm(request.POST, instance=Customer())
         else:
-            report = Report.objects.get(report_id = report_id)
-            calculation = Calculation.objects.get(report_id= report_id)
+            report = Report.objects.get(report_id=report_id)
+            calculation = Calculation.objects.get(report_id=report_id)
             calculation_form = CalculationForm(request.POST, instance=calculation)
             contract_form = ContractForm(request.POST, instance=report.contract)
             report_form = ReportForm(request.POST, instance=report)
@@ -810,6 +815,15 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('user_login'))
+
+
+def reduce_documents_size(request):
+    document = Documents.objects.first()
+    reduce_image.delay(document.license)
+    reduce_image.delay(document.guvonhnoma)
+    reduce_image.delay(document.certificate)
+    reduce_image.delay(document.insurance)
+    return JsonResponse({})
 
 
 def search(request):

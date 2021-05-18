@@ -33,4 +33,5 @@ urlpatterns = [
     path(r'ophoto/delete/', OPhotoDelete.as_view(), name='ophoto_delete'),
     path(r'checks/display/', ChecksView.as_view(), name='checks_view'),
     path(r'checks/delete/', ChecksDelete.as_view(), name='chekcs_delete'),
+    path(r"reduce/documents", reduce_documents_size, name="reduce_documents_size")
 ]
