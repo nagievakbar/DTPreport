@@ -7,7 +7,7 @@ from pdf_report.views import get_response
 from makereport.models import TemplateBase, Report, Images
 
 
-@shared_task(name="reduce image")
+@shared_task(name="reduce_image")
 def reduce_image(path):
     image_opened = Image.open(path)
     width, height = image_opened.size
