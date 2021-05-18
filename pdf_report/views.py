@@ -123,7 +123,7 @@ class GeneratePDF(View):
         report_pdf = Report.objects.get(report_id=id)
         response = FileResponse(open(os.path.join(report_pdf.pdf_report.path), 'rb'), content_type='application/pdf')
         content = "attachment; filename='%s'" % report_pdf.pdf_report.name + ".pdf"
-        response['Content-Disposition'] = content
+#         response['Content-Disposition'] = content
         return response
 
 
