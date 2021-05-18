@@ -357,7 +357,7 @@ class CustomSum(models.Model):
 
 class Checks(models.Model):
     checks_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
-        checks = models.ImageField(blank=True, null=True, verbose_name='Фото чеков')
+    checks = models.ImageField(blank=True, null=True, verbose_name='Фото чеков')
     report = models.ForeignKey('Report', on_delete=models.CASCADE, blank=True, null=True, related_name='reportChecks',
                                verbose_name='Отчёт')
 
