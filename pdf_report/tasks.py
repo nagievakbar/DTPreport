@@ -8,11 +8,11 @@ from makereport.models import TemplateBase, Report, Images
 
 
 @shared_task(name="reduce image")
-def reduce_image(image):
-    image_opened = Image.open(image.path)
+def reduce_image(path):
+    image_opened = Image.open(path)
     width, height = image_opened.size
     image_opened = image_opened.resize((int(width / 2), int(height / 2)), Image.ANTIALIAS)
-    image_opened.save(image.path, quality=10)
+    image_opened.save(path, quality=10)
 
 
 def get_base(request):
