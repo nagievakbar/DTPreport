@@ -121,7 +121,7 @@ class GeneratePDF(View):
     def get(self, request, id=None):
         if type(id) is not int or id <= 0:
             return get_file('base.pdf', content_type='application/pdf')
-        get_bases(id)
+        # get_bases(id)
         report_pdf = Report.objects.get(report_id=id)
         response = FileResponse(open(os.path.join(report_pdf.pdf_report.path), 'rb'), content_type='application/pdf')
         content = "attachment; filename='%s'" % report_pdf.pdf_report.name + ".pdf"
