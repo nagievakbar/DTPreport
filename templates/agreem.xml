@@ -176,8 +176,8 @@
          --------------------------------------------table-text--------------------------------------
         <text lineheight="1.3">Директор ООО "AMIR AVTO BAHOLASH"                       </text>
         <text>                          Сагдулаев Б.К                                            {{ report.contract.customer.name }}</text>
-         {% if qrcode_company %}
-        <barcode   y='0.1' x="4" type="QR" height="2">{{ qrcode_company }}</barcode>
+         {% if qrcode %}
+        <barcode   y='0.1' x="4" type="QR" height="2">{{ qrcode }}</barcode>
 
         {% endif %}
 

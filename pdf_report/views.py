@@ -80,7 +80,7 @@ class GenerateAgreement(View):
         context = {
             'calculation': calculation,
             'report': report,
-            'qrcode': get_qrc_code(qr_company=report.pdf_qr_code_company, qr_user=report.pdf_qr_code_user),
+            'qrcode': report.pdf_qr_code_company,
             'contract': contract,
         }
         try:
