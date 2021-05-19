@@ -1778,9 +1778,9 @@
      <page>
     {% for photo in other_photos %}
     {% if loop.index % 2 == 0 %}
-        <image src = "{{ photo.photos }}" y='15.5' x='0.5'  height='14' width = '20'/>
+        <image src = "{{ photo.photos }}" y='15.8' x='0.5'  height='14' width = '20'/>
     {% elif loop.index % 2 == 1 %}
-        <image src = "{{ photo.photos }}" y='0.7' x='0.5' height='14' width = '20'/>
+        <image src = "{{ photo.photos }}" y='1' x='0.5' height='14' width = '20'/>
     {% endif %}
 
     {% endfor %}
