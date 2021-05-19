@@ -296,7 +296,7 @@
             <tbody>
             {% for report in reports %}
                 <tr id="{{ report.report_id }}">
-                    <td style="border-bottom: 1px solid #fff;" data-title="№">{{ report.report_number }}</td>
+                    <td style="border-bottom: 1px solid #fff;" data-title="№">{{ forloop.counter }}</td>
                     {#                  <td style="border-bottom: 1px solid #fff;" data-title="Дата">{{ report.created_at|date:"d.m.Y" }}</td>#}
                     <td style="border-bottom: 1px solid #fff;"
                         data-title="Дата">{{ report.contract.contract_number }}</td>
@@ -314,7 +314,7 @@
 {#                        {% if report.pdf_qr_code_company == None or report.pdf_qr_code_user == None %}#}
 {#                            <span>Подпись</span>#}
 {#                        {% else %}#}
-{#                            <span>Документ подписан</span>#}
+{#                             <span>Документ подписан</span>#}
 {#                        {% endif %}#}
 {#                        <div class="inline_button">#}
 {#                            {% if report.pdf_qr_code_company == None %}#}

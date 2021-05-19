@@ -130,8 +130,8 @@
         {% if qrcode%}
           <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
         {%endif %}
-        <text   y='0.5' x="0" align="center">1</text>
-        <text   y='0.5' x="17" >Оценщик</text>
+{#        <text   y='0.5' x="0" align="center">1</text>#}
+{#        <text   y='0.5' x="17" >Оценщик</text>#}
     </page>
     <page>
         <text align="justify" lineheight="1.2">4.3.2. Выполнять работы в заданные сроки.</text>
@@ -185,8 +185,8 @@
             {% if qrcode%}
           <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
         {%endif %}
-        <text   y='0.5' x="0" align="center">2</text>
-        <text   y='0.5' x="17" >Оценщик</text>
+{#        <text   y='0.5' x="0" align="center">2</text>#}
+{#        <text   y='0.5' x="17" >Оценщик</text>#}
     </page>
     <page>
         <text align="center">АКТ</text>
@@ -318,11 +318,11 @@
         <text x="1.5" y="3.2"  fontsize="10">Главный бухгалтер: ________________________                                      {{ report.contract.customer.name }} </text>
         <text  x="1.5" y="2.7" fontsize="9" font="TNRB">                                                                                                                                 (Ф.И.О получателя)</text>
         {# -----------------------------------------table-text------------------------------------ #}
-        <text   y='0.5' x="0" align="center">3</text>
-        <text   y='0.5' x="17" >Оценщик</text>
-            {% if qrcode%}
-          <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
-        {%endif %}
+{#        <text   y='0.5' x="0" align="center">3</text>#}
+{#        <text   y='0.5' x="17" >Оценщик</text>#}
+{#            {% if qrcode%}#}
+{#          <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>#}
+{#        {%endif %}#}
     </page>
     <page>
 		<image src="AAB.png" height="5" width="9" x="1" y="24" />
@@ -386,8 +386,8 @@
 		<text align="center">Ташкент - 2020
 		</text>
 		<text/>
-            <text   y='0.5' x="0" align="center">4</text>
-        <text   y='0.5' x="17" >Оценщик</text>
+{#            <text   y='0.5' x="0" align="center">4</text>#}
+{#        <text   y='0.5' x="17" >Оценщик</text>#}
             {% if qrcode%}
           <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
         {%endif %}
@@ -446,7 +446,7 @@
          <barcode  x="12" y="2"  type="QR" height="2">{{ qrcode_company }}</barcode>
 
            {% endif %}
-      <text   y='0.5' x="0" align="center">5</text>
+      <text   y='0.5' x="0" align="center">2</text>
             {% if qrcode%}
           <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
         {%endif %}
@@ -496,7 +496,7 @@
         {% if qrcode%}
           <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
         {%endif %}
-      <text   y='0.5' x="0" align="center">6</text>
+      <text   y='0.5' x="0" align="center">3</text>
         <text   y='0.5' x="17" >Оценщик</text>
     </page>
                                      PAGE 4
@@ -525,7 +525,7 @@
         {% if qrcode%}
           <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
         {%endif %}
-      <text   y='0.5' x="0" align="center">7</text>
+      <text   y='0.5' x="0" align="center">4</text>
         <text   y='0.5' x="17" >Оценщик</text>
     </page>
                                                                      PAGE 5
@@ -552,7 +552,7 @@
         {% if qrcode%}
           <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
         {%endif %}
-      <text   y='0.5' x="0" align="center">8</text>
+      <text   y='0.5' x="0" align="center">5</text>
         <text   y='0.5' x="17" >Оценщик</text>
     </page>
                                              PAGE 6
@@ -588,7 +588,7 @@
         {% if qrcode%}
           <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
         {%endif %}
-      <text   y='0.5' x="0" align="center">9</text>
+      <text   y='0.5' x="0" align="center">6</text>
         <text   y='0.5' x="17" >Оценщик</text>
     </page>
                                                  PAGE 7
@@ -716,7 +716,7 @@
         {% if qrcode%}
           <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
         {%endif %}
-      <text   y='0.5' x="0" align="center">10</text>
+      <text   y='0.5' x="0" align="center">7</text>
         <text   y='0.5' x="17" >Оценщик</text>
     </page>
                                                  PAGE 7
@@ -775,7 +775,7 @@
         {% if qrcode%}
           <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
         {%endif %}
-      <text   y='0.5' x="0" align="center">11</text>
+      <text   y='0.5' x="0" align="center">8</text>
         <text   y='0.5' x="17" >Оценщик</text>
     </page>
                                                           PAGE 8
@@ -844,7 +844,7 @@
         {% if qrcode%}
           <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
         {%endif %}
-      <text   y='0.5' x="0" align="center">12</text>
+      <text   y='0.5' x="0" align="center">9</text>
         <text   y='0.5' x="17" >Оценщик</text>
     </page>
     <page>
@@ -867,7 +867,7 @@
     {% if qrcode %}
         <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
         {% endif %}
-      <text   y='0.5' x="0" align="center">13</text>
+      <text   y='0.5' x="0" align="center">10</text>
         <text   y='0.5' x="17" >Оценщик</text>
     </page>
     <page>
@@ -950,7 +950,7 @@
             {% if qrcode %}
       <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
         {% endif %}
-      <text   y='0.5' x="0" align="center">14</text>
+      <text   y='0.5' x="0" align="center">11</text>
         <text   y='0.5' x="17" >Оценщик</text>
     </page>
     <page>
@@ -976,7 +976,7 @@
                 {% if qrcode %}
         <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
         {% endif %}
-      <text   y='0.5' x="0" align="center">15</text>
+      <text   y='0.5' x="0" align="center">12</text>
         <text   y='0.5' x="17" >Оценщик</text>
       </page>
     <page>
@@ -1079,7 +1079,7 @@
             {% if qrcode %}
         <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
         {% endif %}
-      <text   y='0.5' x="0" align="center">16</text>
+      <text   y='0.5' x="0" align="center">13</text>
         <text   y='0.5' x="17" >Оценщик</text>
     </page>
     <page>
@@ -1218,7 +1218,7 @@
             {% if qrcode %}
         <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
         {% endif %}
-      <text   y='0.5' x="0" align="center">17</text>
+      <text   y='0.5' x="0" align="center">14</text>
         <text   y='0.5' x="17" >Оценщик</text>
     </page>
     <page>
@@ -1273,7 +1273,7 @@
             {% if qrcode %}
         <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
         {% endif %}
-          <text   y='0.5' x="0" align="center">18</text>
+          <text   y='0.5' x="0" align="center">15</text>
         <text   y='0.5' x="17" >Оценщик</text>
 
     </page>
@@ -1342,7 +1342,7 @@
         {% if qrcode%}
           <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
         {%endif %}
-      <text   y='0.5' x="0" align="center">19</text>
+      <text   y='0.5' x="0" align="center">16</text>
         <text   y='0.5' x="17" >Оценщик</text>
     </page>
 
@@ -1416,7 +1416,7 @@
             {% if qrcode %}
      <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
         {% endif %}
-      <text   y='0.5' x="0" align="center">20</text>
+      <text   y='0.5' x="0" align="center">17</text>
         <text   y='0.5' x="17" >Оценщик</text>
     </page>
     <page>
@@ -1479,7 +1479,7 @@
         {% if qrcode%}
           <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
         {%endif %}
-      <text   y='0.5' x="0" align="center">21</text>
+      <text   y='0.5' x="0" align="center">18</text>
         <text   y='0.5' x="17" >Оценщик</text>
     </page>
     <page>
@@ -1545,7 +1545,7 @@
         {% if qrcode%}
           <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
         {%endif %}
-      <text   y='0.5' x="0" align="center">22</text>
+      <text   y='0.5' x="0" align="center">19</text>
         <text   y='0.5' x="17" >Оценщик</text>
     </page>
     <page>
@@ -1636,7 +1636,7 @@
              {% if qrcode%}
           <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
         {%endif %}
-      <text   y='0.5' x="0" align="center">23</text>
+      <text   y='0.5' x="0" align="center">20</text>
         <text   y='0.5' x="17" >Оценщик</text>
     </page>
    <page><text font="TNRB" lineheight="1.5">7.2 Вывод об итоговой стоимости ущерба</text>
@@ -1686,7 +1686,7 @@
         {% if qrcode%}
           <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
         {%endif %}
-     <text   y='0.5' x="0" align="center">24</text>
+     <text   y='0.5' x="0" align="center">21</text>
         <text   y='0.5' x="17" >Оценщик</text>
    </page>
     <page>
@@ -1709,7 +1709,7 @@
          {% if qrcode%}
           <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
         {%endif %}
-     <text   y='0.5' x="0" align="center">25</text>
+     <text   y='0.5' x="0" align="center">22</text>
         <text   y='0.5' x="17" >Оценщик</text>
     </page>
 <page>
@@ -1755,17 +1755,17 @@
      {% if qrcode%}
           <barcode   y='0.5' x="19" type="QR" height="2">{{ qrcode }}</barcode>
         {%endif %}
-     <text   y='0.5' x="0" align="center">26</text>
+     <text   y='0.5' x="0" align="center">23</text>
         <text   y='0.5' x="17" >Оценщик</text>
 </page>
-    {% set pagination = namespace(value=27) %}
+    {% set pagination = namespace(value=24) %}
     {% if passport %}
    <page>
     {% for pass in passport %}
     {% if loop.index % 2 == 0 %}
-        <image src = "{{ pass.photo }}" y='15' x='0.5'  height='14.5' width = '20'/>
+        <image src = "{{ pass.photo }}" y='15.5' x='0.5'  height='14' width = '20'/>
     {% elif loop.index % 2 == 1 %}
-        <image src = "{{ pass.photo }}" y='0.2' x='0.5' height='14.5' width = '20'/>
+        <image src = "{{ pass.photo }}" y='0.7' x='0.5' height='14' width = '20'/>
     {% endif %}
 
     {% endfor %}
@@ -1778,9 +1778,9 @@
      <page>
     {% for photo in other_photos %}
     {% if loop.index % 2 == 0 %}
-        <image src = "{{ photo.photos }}" y='15' x='0.5'  height='14.5' width = '20'/>
+        <image src = "{{ photo.photos }}" y='15.5' x='0.5'  height='14' width = '20'/>
     {% elif loop.index % 2 == 1 %}
-        <image src = "{{ photo.photos }}" y='0.2' x='0.5' height='14.5' width = '20'/>
+        <image src = "{{ photo.photos }}" y='0.7' x='0.5' height='14' width = '20'/>
     {% endif %}
 
     {% endfor %}
@@ -1820,16 +1820,16 @@
     {% if document_photo %}
     <page>
     {% if document_photo.license %}
-    <image height="14.5" width="9.5" y='15' x='1' src="{{ document_photo.license}}"/>
+    <image height="14" width="9.5" y='15.5' x='1' src="{{ document_photo.license}}"/>
     {% endif %}
     {% if document_photo.guvonhnoma %}
-    <image  height="14.5" width="9.5" y='15' x='11' src="{{document_photo.guvonhnoma}}"/>
+    <image  height="14" width="9.5" y='15.5' x='11' src="{{document_photo.guvonhnoma}}"/>
     {% endif %}
     {% if document_photo.certificate %}
-    <image  height="14.5" width="9.5" y='0.5' x='1' src="{{document_photo.certificate}}"/>
+    <image  height="14" width="9.5" y='1' x='1' src="{{document_photo.certificate}}"/>
         {% endif %}
     {% if document_photo.insurance %}
-    <image  height="14.5" width="9.5"  y='0.5' x='11' src="{{document_photo.insurance}}"/>
+    <image  height="14" width="9.5"  y='1' x='11' src="{{document_photo.insurance}}"/>
     {% endif %}
         <text   y='0.5' x="0" align="center">{{ pagination.value }}</text>
              {% set pagination.value = pagination.value + 1  %}

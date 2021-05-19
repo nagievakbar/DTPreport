@@ -40,6 +40,7 @@ class GenerateMixing(View):
     def get(self, request, id=None):
         if id == 0:
             return get_file('mixing.pdf', content_type='application/pdf')
+
         report = Report.objects.get(report_id=id)
         car = report.car
         contract = report.contract
@@ -120,22 +121,29 @@ class GeneratePDF(View):
     def get(self, request, id=None):
         if type(id) is not int or id <= 0:
             return get_file('base.pdf', content_type='application/pdf')
+        get_bases(id)
         report_pdf = Report.objects.get(report_id=id)
         response = FileResponse(open(os.path.join(report_pdf.pdf_report.path), 'rb'), content_type='application/pdf')
         content = "attachment; filename='%s'" % report_pdf.pdf_report.name + ".pdf"
-#         response['Content-Disposition'] = content
+        #         response['Content-Disposition'] = content
         return response
 
 
-
+def get_bases(id):
+    obj = TemplateBase.objects
+    new_report_pdf = Report.objects.get(report_id=id)
+    data = get_response(id, obj=obj)
+    filename = "%s.pdf" % new_report_pdf.car.car_number
+    new_report_pdf.pdf_report.save(filename, ContentFile(data))
+    new_report_pdf.save()
 
 
 def get_additional(request, id):
     obj = TemplateAdditional.objects
-    return get_response( id, obj=obj)
+    return get_response(id, obj=obj)
 
 
-def get_response( id, obj):
+def get_response(id, obj):
     locale.setlocale(locale.LC_ALL, 'C')
     new_report_pdf = Report.objects.get(report_id=id)
     calculation = Calculation.objects.get(report_id=id)

@@ -186,14 +186,11 @@
             <div class="accordion one">
                 <!-- 1 -->
                 <div class="accordion-item">
-                    <div class="accordion-header active-accordion">
-                                <span class="accordion-title">Данные
-                           
-                                
-                                </span>
+                    <div class="accordion-header">
+                                <span class="accordion-title">Данные</span>
                         <img src="{% static '/makereport/img/Polygon.png' %}" alt="polygon" class="polygon">
                     </div>
-                    <div class="inside-content accordion-content" style="display: block;">
+                    <div class="inside-content accordion-content">
                         <div class="accordion-content-wrapper">
                             <div class="inputs_big">
                                 <div class="left-inputs">
@@ -469,7 +466,7 @@
                                         <th class="table-spare-part-headers4" style="text-align: left">№</th>
                                         <th class="table-spare-part-headers4">ID</th>
                                         <th class="table-spare-part-headers4">Наименование</th>
-                                        <th class="table-spare-part-headers4">Ед.измерения</th>
+                                        <th class="table-spare-part-headers4">Ед.изм.</th>
                                         <th class="table-spare-part-headers4">Кол-во</th>
                                         <th class="table-spare-part-headers4">Ед.расхода</th>
                                         <th class="table-spare-part-headers4">Сумма</th>
@@ -808,32 +805,32 @@
                             <div class="row">
                                 <div class="col-lg-3 download_button">
                                     <div class="panel_user" id="download_button1">
-                                        <a href="{% url 'get_mixing' id %}">
-                                            <button type="button" class="btn panel_button">Скачать</button>
+                                        <a href="{% url 'get_mixing' id %}" target="_blank">
+                                            <button type="button" class="btn panel_button">Посмотреть</button>
                                         </a>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-2 download_button">
                                     <div class="panel_user" id="download_button2">
-                                        <a href="{% url 'get_agreement' id %}">
-                                            <button type="button" class="btn panel_button">Скачать</button>
+                                        <a href="{% url 'get_agreement' id %}" target="_blank" >
+                                            <button type="button" class="btn panel_button">Посмотреть</button>
                                         </a>
                                     </div>
                                 </div>
                                 {% if base %}
                                     <div class="col-lg-2 download_button">
                                         <div class="panel_user" id="download_button3">
-                                            <a href="{% url 'get_response' id %}">
-                                                <button type="button" class="btn panel_button">Скачать</button>
+                                            <a href="{% url 'get_response' id %}" target="_blank">
+                                                <button type="button" class="btn panel_button">Посмотреть</button>
                                             </a>
                                         </div>
                                     </div>
                                 {% else %}
                                     <div class="col-lg-2 download_button">
                                         <div class="panel_user" id="download_button4">
-                                            <a href="{% url 'get_additional' id %}">
-                                                <button type="button" class="btn panel_button">Скачать</button>
+                                            <a href="{% url 'get_additional' id %}" target="_blank">
+                                                <button type="button" class="btn panel_button">Посмотреть</button>
                                             </a>
                                         </div>
                                     </div>

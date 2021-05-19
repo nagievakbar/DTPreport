@@ -96,8 +96,13 @@
 }
 
 table {
-    margin: 15px 0;
+    /*margin: 15px 0;*/
     color: #3f3f3f;
+/
+}
+
+table:first-child {
+    margin-top: 15px;
 }
 
 /* common */
@@ -239,12 +244,12 @@ table {
 }
 
 .table-headers:nth-child(4) {
-    width: 10%;
+    width: 11%;
     text-align: left;
 }
 
 .table-headers:nth-child(3) {
-    padding-left: 60px;
+    padding-left: 30px;
     text-align: left;
     width: 60%;
     padding-right: 300px;
@@ -282,10 +287,6 @@ table {
     height: 30px;
     border: none;
     border-bottom: 1px solid #5c6e91;
-    margin-left: 10px;
-    margin-bottom: 15px;
-    padding-left: 5px;
-    padding-right: 5px;
 }
 
 @media (max-width: 992px) {
@@ -386,8 +387,8 @@ table {
 }
 
 .table-spare-part-headers:nth-child(3) {
-   text-align: left;
-    padding-left: 240px;
+    text-align: left;
+    padding-left: 220px;
 }
 
 .table-spare-part-headers:nth-child(4) {
@@ -396,7 +397,7 @@ table {
 }
 
 .table-spare-part-headers:nth-child(5) {
-     text-align: left;
+    text-align: left;
     padding-left: 60px;
 }
 
@@ -410,9 +411,8 @@ table {
     height: 30px;
     border: none;
     border-bottom: 1px solid #5c6e91;
-    margin-top: 10px;
+    /*margin-top: 10px;*/
     margin-bottom: 10px;
-    margin-left: 10px;
 }
 
 @media (max-width: 576px) {
@@ -466,7 +466,7 @@ table {
 }
 
 #counter_id {
-    padding-top: 15px;
+    /*padding-top: 15px;*/
 }
 
 .time3 {
@@ -627,10 +627,10 @@ table {
     position: relative;
     border: none;
     border-bottom: 1px solid #5c6e91;
-    margin-bottom: 15px;
-    margin-left: 8px;
-    padding-left: 5px;
-    padding-right: 5px;
+    /*margin-bottom: 15px;*/
+    /*margin-left: 8px;*/
+    /*padding-left: 5px;*/
+    /*padding-right: 5px;*/
 }
 
 @media (max-width: 992px) {
@@ -643,8 +643,8 @@ table {
 .work-price-input4 {
     border: 1px solid #3f3f3f;
     border-radius: 5px;
-    margin-bottom: 5px;
-    margin-top: 5px;
+    /*margin-bottom: 5px;*/
+    /*margin-top: 5px;*/
     outline: 0;
 }
 
@@ -660,8 +660,6 @@ table {
 
 .name4 {
     width: 453px;
-    margin-top: 10px;
-    margin-bottom: 8px;
 }
 
 @media (max-width: 576px) {
@@ -907,7 +905,7 @@ table {
 }
 
 .name3 {
-    margin-top: 12px;
+    /*margin-top: 12px;*/
 }
 
 .total {
@@ -945,3 +943,4 @@ table {
 #consumable_formset .id_padding {
     padding-left: 10px;
 }
+
