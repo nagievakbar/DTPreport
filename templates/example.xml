@@ -178,7 +178,7 @@
         <text>                          Сагдулаев Б.К                                            {{ report.contract.customer.name }}</text>
          {% if qrcode_company %}
         <barcode   y='0.1' x="4" type="QR" height="2">{{ qrcode_company }}</barcode>
-
+        {% endif %}
 
 {#        <text   y='0.5' x="0" align="center">2</text>#}
 {#        <text   y='0.5' x="17" >Оценщик</text>#}
