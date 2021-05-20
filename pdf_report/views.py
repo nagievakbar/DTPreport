@@ -186,7 +186,7 @@ def create_base64(request, new_report_pdf):
     calculation = Calculation.objects.create()
     context = {
         'calculation': calculation,
-        'contract': "",
+        'contract': new_report_pdf.contract,
         'report': new_report_pdf,
         'services': new_report_pdf.service.all().__len__(),
         'datetime': new_report_pdf.report_date,
