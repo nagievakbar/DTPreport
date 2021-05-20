@@ -145,6 +145,9 @@ class ReportEditView(View):
         holds_image = HoldsImages.objects.get(report_id=id)
         new_hold_images = hold_image()
         new_hold_images.set_new(holds_image)
+        report = Report.objects.create()
+        report.save()
+        new_hold_images.report = report
         images = new_hold_images.image_previous.all()
         pphotos = new_hold_images.pp_photo_previous.all()
         ophotos = new_hold_images.o_images_previous.all()
@@ -181,7 +184,7 @@ class ReportEditView(View):
             'calculation_form': calculation_form,
             'contract_form': contract_form,
             'report_form': report_form,
-            'id': 0,
+            'id': report.id,
             'prices': get_prices(),
             'car_form': car_form,
             'customer_form': customer_form,
@@ -242,7 +245,7 @@ class ReportEditView(View):
             'calculation_form': calculation_form,
             'contract_form': contract_form,
             'report_form': report_form,
-            'id': 0,
+            'id': report_id,
             'prices': get_prices(),
             'car_form': car_form,
             'customer_form': customer_form,
@@ -296,8 +299,6 @@ class ReportEditView(View):
                     pd = get_data_from_product_form(form)
                     if pd.__getitem__('product_cost') is not None:
                         add_product_to_report(new_report, pd.__getitem__('product_cost'))
-                        print("PRODUCT HRE")
-                        print(pd)
                         new_report.product_data.append(pd)
             for form in consumable_formset.forms:
                 if form.is_valid() and form.cleaned_data:
@@ -382,7 +383,9 @@ class ReportView(View):
             total_price_report = report.total_report_cost
             # template = 'makereport/edit_repor.html'
         else:
-            report_id = 0
+            report = Report.objects.create()
+            report.save()
+            report_id = report.id
             calculation_form = CalculationForm(instance=Calculation())
             image_form = ImageForm(instance=Images())
             contract_form = ContractForm(instance=Contract())
@@ -401,6 +404,8 @@ class ReportView(View):
             wear_form = WearForm()
             total_price_report = 0
             holds_image = hold_image()
+            holds_image.report = report
+            holds_image.save()
         template = 'makereport/add_repor.html'
         context = {
             'base': True,
@@ -433,7 +438,7 @@ class ReportView(View):
     def post(self, request, id=None, extend=0):
         total_report_price = 0
         print("ID REPORT")
-        print(request.POST['id_report'])
+
         if int(request.POST['id_report']) != 0:
             id = int(request.POST['id_report'])
         if id:
