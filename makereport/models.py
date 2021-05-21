@@ -424,7 +424,7 @@ class Report(models.Model):
 
     def precise_iznos_ki(self):
         try:
-            return "{0:.1f}".format(self.product_cost - self.product_acc_cost)
+            return "{0:.0f}".format(self.product_cost - self.product_acc_cost)
         except TypeError:
             return 0
 
@@ -439,7 +439,7 @@ class Report(models.Model):
 
     def precise_acc_cost(self):
         try:
-            return "{0:.1f}".format(self.product_acc_cost)
+            return "{0:.0f}".format(self.product_acc_cost)
         except TypeError:
             return 0
 

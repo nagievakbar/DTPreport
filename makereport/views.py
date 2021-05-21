@@ -16,7 +16,7 @@ from .utils import *
 
 from pdf_report.views import create_base64
 from DTPreport import settings as s
-from pdf_report.tasks import reduce_image
+from pdf_report.tasks import reduce_image , delete_empty_report
 
 
 class ImageDelete(View):
@@ -143,11 +143,11 @@ class ReportEditView(View):
         calculation = Calculation.objects.get(report_id=id)
         calculation_form = CalculationForm(instance=calculation)
         holds_image = HoldsImages.objects.get(report_id=id)
-        new_hold_images = hold_image()
+        new_hold_images = HoldsImages.objects.create()
         new_hold_images.set_new(holds_image)
-        report = Report.objects.create()
-        report.save()
-        new_hold_images.report = report
+        new_report = create_report(request)
+        new_hold_images.report = new_report
+        new_hold_images.save()
         images = new_hold_images.image_previous.all()
         pphotos = new_hold_images.pp_photo_previous.all()
         ophotos = new_hold_images.o_images_previous.all()
@@ -184,7 +184,7 @@ class ReportEditView(View):
             'calculation_form': calculation_form,
             'contract_form': contract_form,
             'report_form': report_form,
-            'id': report.id,
+            'id': new_report.report_id,
             'prices': get_prices(),
             'car_form': car_form,
             'customer_form': customer_form,
@@ -383,9 +383,8 @@ class ReportView(View):
             total_price_report = report.total_report_cost
             # template = 'makereport/edit_repor.html'
         else:
-            report = Report.objects.create()
-            report.save()
-            report_id = report.id
+            report = create_report(request)
+            report_id = report.report_id
             calculation_form = CalculationForm(instance=Calculation())
             image_form = ImageForm(instance=Images())
             contract_form = ContractForm(instance=Contract())
@@ -709,9 +708,9 @@ def reports_list(request):
 @login_required
 def reports_edit_list(request):
     if 'search' in request.GET:
-        reports = Report.objects.filter(car__car_number=request.GET['search'])
+        reports = Report.objects.filter(car__car_number=request.GET['search']).exclude((Q(key__isnull=True) | Q(key__exact='')))
     else:
-        reports = Report.objects.all()
+        reports = Report.objects.exclude((Q(key__isnull=True) | Q(key__exact='')))
     return render(request, 'makereport/additional.html', context={'reports': reports})
 
 
@@ -726,10 +725,10 @@ def user_list_some(request):
 def admin_list(request):
     if 'search' in request.GET:
         reports = Report.objects.filter(
-            car__car_number__contains=request.GET['search'])
+            Q(car__car_number__contains=request.GET['search'])).exclude((Q(key__isnull=True) | Q(key__exact='')))
     else:
-        reports = Report.objects.all()
-
+        reports = Report.objects.exclude((Q(key__isnull=True) | Q(key__exact='')))
+    # delete_empty_report.delay()
     return render(request, 'makereport/index.html', context={'reports': reports})
 
 

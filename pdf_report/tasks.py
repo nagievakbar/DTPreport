@@ -3,7 +3,7 @@ from django.core.files.base import ContentFile
 from django.http import JsonResponse
 from PIL import Image
 from pdf_report.views import get_response
-
+from django.db.models import Q
 from makereport.models import TemplateBase, Report, Images
 
 
@@ -22,6 +22,13 @@ def get_base(request):
     except Report.DoesNotExist:
         pass
     return JsonResponse({})
+
+
+@shared_task(name="delete_empty")
+def delete_empty_report():
+    report = Report.objects.filter((Q(key__isnull=True) | Q(key__exact='')))
+    for rep in report.all():
+        rep.delete()
 
 
 @shared_task(name="make_pdf")

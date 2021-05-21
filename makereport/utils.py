@@ -230,7 +230,7 @@ def get_service_cost(request):
     norm_per_hour = request.GET.get('nph', None)
     price = request.GET.get('price', None)
     double_norm_per_hour = float(norm_per_hour)
-    service_cost = int((double_norm_per_hour + float(premium)/100*double_norm_per_hour) * float(price))
+    service_cost = int((double_norm_per_hour + float(premium) / 100 * double_norm_per_hour) * float(price))
 
     data = {
         'service_cost': service_cost,
@@ -329,7 +329,6 @@ def get_data_from_consum_form(form):
 
 
 def get_data_from_wear_form(form):
-
     wear_data = {
         'point': checkOnNone(form.cleaned_data['point']),
         'weight': checkOnNone(form.cleaned_data['weight']),
@@ -339,10 +338,13 @@ def get_data_from_wear_form(form):
     print(wear_data)
     return wear_data
 
+
 def checkOnNone(data):
     if data is None:
         return 0
-    return  data
+    return data
+
+
 # def get_report_cost(report, request):
 #     accept_wear = request.GET.get('id_accept_wear', None)
 #     wear = ((0.208 - 0.003 * float(point)) * float(weight) ** 0.7) * 100
@@ -375,3 +377,25 @@ def response_image(link_img, link_delete, image, id):
 def get_prices():
     prices = CustomSum.objects.order_by('sum')
     return prices
+
+
+def create_report(request):
+    car = Car.objects.create()
+    car.save()
+    customer = Customer.objects.create()
+    customer.save()
+    contract = Contract.objects.create(
+        customer=customer
+    )
+    contract.save()
+    report = Report.objects.create(
+        car=car,
+        contract=contract,
+        created_by=request.user
+    )
+    report.save()
+    calculation = Calculation.objects.create(
+        report=report
+    )
+    calculation.save()
+    return report
