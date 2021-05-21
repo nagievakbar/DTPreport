@@ -634,11 +634,14 @@ class ReportView(View):
                 wd = get_data_from_wear_form(wear_form)
                 new_report.wear_data.update(wd)
                 new_report.get_total_report_price()
+
+            if new_report.key is None or new_report.key == "":
+                new_report.set_private_key()
             new_report.save()
+
             context['report'] = new_report
             total_price_report = new_report.total_report_cost
             context['total_price_report'] = total_price_report
-
             try:
                 create_base64(request, new_report)
             except KeyError:
@@ -727,7 +730,7 @@ def admin_list(request):
         reports = Report.objects.filter(
             Q(car__car_number__contains=request.GET['search'])).exclude((Q(key__isnull=True) | Q(key__exact='')))
     else:
-        reports = Report.objects.exclude((Q(key__isnull=True) | Q(key__exact='')))
+        reports = Report.objects.all().exclude((Q(key__isnull=True) | Q(key__exact='')))
     # delete_empty_report.delay()
     return render(request, 'makereport/index.html', context={'reports': reports})
 
