@@ -728,7 +728,7 @@ def admin_list(request):
             Q(car__car_number__contains=request.GET['search'])).exclude((Q(key__isnull=True) | Q(key__exact='')))
     else:
         reports = Report.objects.exclude((Q(key__isnull=True) | Q(key__exact='')))
-    delete_empty_report.delay()
+    # delete_empty_report.delay()
     return render(request, 'makereport/index.html', context={'reports': reports})
 
 
