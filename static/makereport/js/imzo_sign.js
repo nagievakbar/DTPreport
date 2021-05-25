@@ -5,7 +5,7 @@ $('#sign_boss').on('click', function () {
     loadModels($(this))
 })
 var sign_user;
-var url = "http://e-otsenka.uz/report/ajax/verifyPkcs7/";
+var url = "https://e-otsenka.uz/report/ajax/verifyPkcs7/";
 function loadModels(object) {
     let sign = object.attr('sign');
     let sign_form = object.attr('sign_from')
