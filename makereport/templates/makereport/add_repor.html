@@ -1064,7 +1064,7 @@
 
         function set_price(coming_price, set_class) {
             var price = $("#price_all_services").val()
-            set_class.val(coming_price ? coming_price : price);
+            set_class.val(price === "0" ? coming_price : price);
         }
 
         function get_procent(item) {
