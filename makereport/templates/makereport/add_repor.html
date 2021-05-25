@@ -1455,6 +1455,7 @@
                 $el.fileinput('disable');
             }
         });
+
         $(".btn-info").on('click', function () {
             $("#file-4").fileinput('refresh', {previewClass: 'bg-info'});
         });
@@ -1464,7 +1465,7 @@
             calculate_total_sum(0);
             calculate_product_overall_sum(true);
 
-            const server = "http://e-otsenka.uz";
+            const server = "https://e-otsenka.uz";
             $("#test-upload").fileinput({
                 'theme': 'fas',
                 'showPreview': false,
