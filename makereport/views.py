@@ -401,7 +401,7 @@ class ReportView(View):
             consumable_formset = consumable_form(prefix='consumable')
             wear_form = WearForm()
             total_price_report = 0
-            holds_image = hold_image()
+            holds_image = HoldsImages.objects.create()
             holds_image.report = report
             holds_image.save()
         template = 'makereport/add_repor.html'
