@@ -223,8 +223,10 @@ class TemplateBase(models.Model):
                                 verbose_name='Шаблон для отчета')
 
     def delete(self, *args, **kwargs):
-        default_storage.delete(self.template.path)
-        super(TemplateBase, self).delete(*args, **kwargs)
+        try:
+            default_storage.delete(self.template.path)
+        finally:
+            super(TemplateBase, self).delete(*args, **kwargs)
 
 
 class TemplateMixing(models.Model):
@@ -232,8 +234,10 @@ class TemplateMixing(models.Model):
                                 verbose_name='Шаблоны для заключения')
 
     def delete(self, *args, **kwargs):
-        default_storage.delete(self.template.path)
-        super(TemplateMixing, self).delete(*args, **kwargs)
+        try:
+            default_storage.delete(self.template.path)
+        finally:
+            super(TemplateMixing, self).delete(*args, **kwargs)
 
 
 class TemplateAdditional(models.Model):
@@ -241,8 +245,10 @@ class TemplateAdditional(models.Model):
                                 verbose_name='Шаблоны для дополнения')
 
     def delete(self, *args, **kwargs):
-        default_storage.delete(self.template.path)
-        super(TemplateAdditional, self).delete(*args, **kwargs)
+        try:
+            default_storage.delete(self.template.path)
+        finally:
+            super(TemplateAdditional, self).delete(*args, **kwargs)
 
 
 class TemplateAgreement(models.Model):
@@ -250,8 +256,10 @@ class TemplateAgreement(models.Model):
                                 verbose_name='Шаблоны для догвора')
 
     def delete(self, *args, **kwargs):
-        default_storage.delete(self.template.path)
-        super(TemplateAgreement, self).delete(*args, **kwargs)
+        try:
+            default_storage.delete(self.template.path)
+        finally:
+            super(TemplateAgreement, self).delete(*args, **kwargs)
 
 
 class HoldsImages(models.Model):

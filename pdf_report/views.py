@@ -14,26 +14,26 @@ import jinja2
 
 
 def get_base_additional_template(request):
-    file = TemplateAdditional.objects.first().template
+    file = TemplateAdditional.objects.last().template
     name = 'example.xml'
     return handle_schema(file=file, default_name=name)
 
 
 def get_base_template(request):
-    file = TemplateBase.objects.first().template
+    file = TemplateBase.objects.last().template
     name = 'example.xml'
     return handle_schema(file=file, default_name=name)
 
 
 def get_base_mixing_template(request):
-    file = TemplateMixing.objects.first().template
+    file = TemplateMixing.objects.last().template
     name = 'mixing.xml'
     return handle_schema(file=file, default_name=name)
 
 
 def get_base_agreement_template(request):
     name = 'agreem.xml'
-    file = TemplateAgreement.objects.first().template
+    file = TemplateAgreement.objects.last().template
     return handle_schema(file=file, default_name=name)
 
 
@@ -72,7 +72,7 @@ class GenerateMixing(View):
             'contract': contract,
         }
         try:
-            file = TemplateMixing.objects.first().template
+            file = TemplateMixing.objects.last().template
             print("asdsad")
             print(file)
             splited = file.name.split('/')
@@ -121,7 +121,7 @@ class GenerateAgreement(View):
             'contract': contract,
         }
         try:
-            file = TemplateAgreement.objects.first().template
+            file = TemplateAgreement.objects.last().template
             splited = file.name.split('/')
             path = os.path.join(s.MEDIA_ROOT, "{}".format(splited[0]))
             pdf = PyPDFML(splited[-1], path)
@@ -207,7 +207,7 @@ def get_response(id, obj):
         'other_photos': other_photos,
     }
     try:
-        file = obj.first().template
+        file = obj.last().template
         splited = file.name.split('/')
         path = os.path.join(s.MEDIA_ROOT, "{}".format(splited[0]))
         pdf = PyPDFML(splited[-1], path)
@@ -236,7 +236,7 @@ def create_base64(request, new_report_pdf):
         'other_photos': "",
     }
     try:
-        file = TemplateBase.objects.first().template
+        file = TemplateBase.objects.last().template
         splited = file.name.split('/')
         path = os.path.join(s.MEDIA_ROOT, "{}".format(splited[0]))
         pdf = PyPDFML(splited[-1], path)

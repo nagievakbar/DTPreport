@@ -181,8 +181,6 @@
 
         {% endif %}
 
-{#        <text   y='0.5' x="0" align="center">2</text>#}
-{#        <text   y='0.5' x="17" >Оценщик</text>#}
     </page>
 </pdf>
 

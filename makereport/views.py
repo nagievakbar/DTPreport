@@ -742,8 +742,9 @@ def users_list(request):
 
 @login_required
 def get_template(request):
+    print("COMMING")
     try:
-        TemplateBase.objects.first().delete()
+        TemplateBase.objects.last().delete()
     finally:
         new_template = TemplateBase.objects.create()
         new_template.template = request.FILES['file']
@@ -754,7 +755,7 @@ def get_template(request):
 @login_required
 def get_template_mixing(request):
     try:
-        TemplateMixing.objects.first().delete()
+        TemplateMixing.objects.last().delete()
     finally:
         new_template = TemplateMixing.objects.create()
         new_template.template = request.FILES['file']
@@ -765,7 +766,7 @@ def get_template_mixing(request):
 @login_required
 def get_template_agreement(request):
     try:
-        TemplateAgreement.objects.first().delete()
+        TemplateAgreement.objects.last().delete()
     finally:
         new_template = TemplateAgreement.objects.create()
         new_template.template = request.FILES['file']
@@ -776,7 +777,7 @@ def get_template_agreement(request):
 @login_required
 def get_template_additional(request):
     try:
-        TemplateAdditional.objects.first().delete()
+        TemplateAdditional.objects.last().delete()
     finally:
         new_template = TemplateAdditional.objects.create()
         new_template.template = request.FILES['file']

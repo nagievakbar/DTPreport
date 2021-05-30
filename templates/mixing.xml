@@ -178,7 +178,7 @@
         <text x="5.7" y="26.2">{{ report.report_date }}</text>
 
 
-        <text x="5.7" y="25.2">http://e-otsenka.uz/pdf/{{ report.report_id }}</text>
+        <text x="5.7" y="25.2">http://e-otsenka.uz      {{ report.key }}</text>
 
         <barcode x="5.7" y="22.7" type="QR" height="1.5">http://e-otsenka.uz/pdf/{{ report.report_id }}</barcode>
      <text/>
