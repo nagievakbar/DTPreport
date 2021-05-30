@@ -286,7 +286,7 @@ class ReportEditView(View):
             new_calculation = calculation_form.save()
             new_calculation.report = new_report
             new_calculation.save()
-            new_report.update()
+            new_report.clean_incoming_data()
             for form in service_formset.forms:
                 if form.is_valid() and form.cleaned_data:
                     sd = get_data_from_service_form(form)
@@ -503,7 +503,7 @@ class ReportView(View):
             new_calculation = calculation_form.save()
             new_calculation.report = new_report
             new_calculation.save()
-            new_report.update()
+            new_report.clean_incoming_data()
             for form in service_formset.forms:
                 if form.is_valid() and form.cleaned_data:
                     sd = get_data_from_service_form(form)
@@ -592,7 +592,7 @@ class ReportView(View):
             'checks': checks or None,
         }
 
-        # report_form.is_valid() and 
+        # report_form.is_valid() and
         if report_form.is_valid() and car_form.is_valid() and customer_form.is_valid() and contract_form.is_valid() and calculation_form.is_valid():
             new_contract = contract_form.save()
             new_customer = customer_form.save(commit=False)
@@ -611,7 +611,7 @@ class ReportView(View):
             new_calculation = calculation_form.save()
             new_calculation.report = new_report
             new_calculation.save()
-            new_report.update()
+            new_report.clean_incoming_data()
             for form in service_formset.forms:
                 if form.is_valid() and form.cleaned_data:
                     sd = get_data_from_service_form(form)

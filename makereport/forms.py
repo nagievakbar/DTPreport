@@ -206,7 +206,7 @@ class ServiceForm(forms.Form):
     norm_per_hour = forms.FloatField(
         required=False,
         widget=forms.NumberInput(attrs={'class': 'input2 work-price-input2 time2'}))
-    premium = forms.CharField(
+    premium = forms.FloatField(
         required=False,
         widget=forms.TextInput(attrs={'class': 'input2 work-price-input2 allowance2'}))  # 'value': '0'
     price = forms.IntegerField(
@@ -225,7 +225,7 @@ class ProductForm(forms.Form):
         widget=forms.Textarea(attrs={'class': 'input3 work-price-input3 name3', 'onkeyup': 'textAreaAdjust(this)'}))
     # unit = forms.CharField(
     # widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 name3', 'readonly': ''}))
-    quantity = forms.IntegerField(
+    quantity = forms.FloatField(
         required=False,
         widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 time3', }))  # 'value': '0'
     price = forms.IntegerField(
@@ -246,7 +246,7 @@ class ConsumableForm(forms.Form):
     unit = forms.CharField(
         required=False,
         widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 time4', }))
-    quantity = forms.IntegerField(
+    quantity = forms.FloatField(
         required=False,
         widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 allowance4', }))  # 'value': '0'
     price = forms.IntegerField(

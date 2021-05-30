@@ -1024,7 +1024,7 @@
         $(document).on('keydown', ".first2", function (e) {
             console.log('CLICK service_id')
             var key = e.which;
-            if (key === 9) {
+            if (key === 13) {
                 e.preventDefault();
                 var service_id = $(this).val(),
                     last_input_name = $(this).parents('tr').find('.name2'),
@@ -1076,7 +1076,7 @@
 
         $(document).on('keydown', ".price2", function (e) {
             var key = e.which;
-            if (9 === key) {
+            if (key === 13) {
                 e.preventDefault();
                 var price = $(this).val(),
                     last_input_premium = $(this).parents('tr').find('.allowance2').val(),
@@ -1139,7 +1139,7 @@
         $(document).on('keydown', ".allowance2", function (e) {
             console.log('CLICK premium')
             var key = e.which;
-            if (key === 9) {
+            if (key === 13) {
                 e.preventDefault();
                 var premium = $(this).val(),
                     price = $(this).parents('tr').find('.price2').val(),
@@ -1180,7 +1180,7 @@
         $(document).on('keydown', ".count", function (e) {
             console.log('CLICK product_id')
             var key = e.which;
-            if (key === 9) {
+            if (key === 13) {
                 e.preventDefault();
                 var product_id = $(this).val(),
                     last_input_name = $(this).parents('tr').find('.name3'),
@@ -1212,7 +1212,7 @@
         $(document).on('keydown', ".price4", function (e) {
 
             var key = e.which;
-            if (key === 9) {
+            if (key === 13) {
                 e.preventDefault();
                 var price = $(this).val(),
                     quantity = $(this).parents('tr').find('.allowance4').val(),
@@ -1248,7 +1248,7 @@
         $(document).on('keydown', ".allowance4", function (e) {
             console.log('CLICK quantity-cons')
             var key = e.which;
-            if (key === 9) {
+            if (key === 13) {
                 e.preventDefault();
                 var quantity = $(this).val(),
                     price = $(this).parents('tr').find('.price4').val(),
@@ -1287,7 +1287,7 @@
         $(document).on('keydown', ".first4", function (e) {
             console.log('CLICK consumable_id')
             var key = e.which;
-            if (key === 9) {
+            if (key === 13) {
                 e.preventDefault();
                 var consumable_id = $(this).val(),
                     last_input_name = $(this).parents('tr').find('.name4'),
@@ -1321,7 +1321,7 @@
         $(document).on('keydown', ".price3", function (e) {
             console.log('CLICK quantity')
             var key = e.which;
-            if (key === 9) {
+            if (key === 13) {
                 e.preventDefault();
                 var price = $(this).val(),
                     quantity = $(this).parents('tr').find('.time3').val(),
@@ -1357,7 +1357,7 @@
         $(document).on('keydown', ".time3", function (e) {
             console.log('CLICK quantity')
             var key = e.which;
-            if (key === 9) {
+            if (key === 13) {
                 e.preventDefault();
                 var quantity = $(this).val(),
                     price = $(this).parents('tr').find('.price3').val(),
@@ -1395,7 +1395,7 @@
         $(document).on('keydown', ".weight-input", function (e) {
             console.log('CLICK point-input')
             var key = e.which;
-            if (key === 9) {
+            if (key === 13) {
                 e.preventDefault();
                 var weight = $(this).val(),
                     point = $(this).parents('.details').find('.point-input').val(),
@@ -1427,7 +1427,7 @@
         $(document).on('keydown', ".point-input", function (e) {
             console.log('CLICK point-input')
             var key = e.which;
-            if (key === 9) {
+            if (key === 13) {
                 e.preventDefault();
                 var point = $(this).val(),
                     weight = $(this).parents('.details').find('.weight-input')
@@ -1439,7 +1439,7 @@
         $(document).on('keydown', ".prehnite-input", function (e) {
             console.log('CLICK accept_weight')
             var key = e.which;
-            if (key === 9) {
+            if (key === 13) {
                 e.preventDefault();
                 var point = $(this).val(),
                     btn = $(document).find('#imageinput')

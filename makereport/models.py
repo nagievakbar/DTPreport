@@ -428,7 +428,7 @@ class Report(models.Model):
         except TypeError:
             return 0
 
-    def update(self):
+    def clean_incoming_data(self):
         self.product_cost = 0
         self.consumable_cost = 0
         self.service_cost = 0

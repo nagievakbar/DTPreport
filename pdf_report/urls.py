@@ -11,4 +11,6 @@ urlpatterns = [
     path("make_pdf/", get_base, name='make_pdf'),
     path("download_xml_mixing/", get_base_mixing_template, name='download_xml_mixing'),
     path("download_xml_agreement/", get_base_agreement_template, name='download_xml_agreement'),
+    path("download_xml_additional/", get_base_additional_template, name="download_xml_additional")
+    # path("test/", test_api)
 ]

@@ -13,25 +13,44 @@ import base64
 import jinja2
 
 
+def get_base_additional_template(request):
+    file = TemplateAdditional.objects.first().template
+    name = 'example.xml'
+    return handle_schema(file=file, default_name=name)
+
+
 def get_base_template(request):
-    filename = 'example.xml'
-    return get_file(filename)
+    file = TemplateBase.objects.first().template
+    name = 'example.xml'
+    return handle_schema(file=file, default_name=name)
 
 
 def get_base_mixing_template(request):
-    filename = 'mixing.xml'
-    return get_file(filename)
+    file = TemplateMixing.objects.first().template
+    name = 'mixing.xml'
+    return handle_schema(file=file, default_name=name)
 
 
 def get_base_agreement_template(request):
-    filename = 'agreem.xml'
-    return get_file(filename)
+    name = 'agreem.xml'
+    file = TemplateAgreement.objects.first().template
+    return handle_schema(file=file, default_name=name)
 
 
-def get_file(filename, content_type='text/xml'):
-    response = FileResponse(open(os.path.join(s.MEDIA_ROOT, '../templates/{}'.format(filename)), 'rb'),
+def handle_schema(file, default_name):
+    try:
+        file_data = open(file.path, 'rb')
+        return get_file(file=file_data, name=file.name)
+    except:
+        print(default_name)
+        file_data = open(os.path.join(s.MEDIA_ROOT, '../templates/{}'.format(default_name)), 'rb')
+        return get_file(file=file_data, name=default_name)
+
+
+def get_file(file, name, content_type='text/xml'):
+    response = FileResponse(file,
                             content_type=content_type)
-    content = "attachment; filename=%s" % filename
+    content = "attachment; filename=%s" % name
     response['Content-Disposition'] = content
     return response
 
@@ -68,6 +87,24 @@ class GenerateMixing(View):
         data = pdf.contents()
         response = FileResponse(ContentFile(data), content_type='application/pdf')
         return response
+
+
+# from jinja2 import Environment, FileSystemLoader
+# from weasyprint import HTML
+# # from flask_qrcode import QRcode
+# # import segno
+#
+#
+# def test_api(request):
+#     load = os.path.join(s.MEDIA_ROOT, '../templates/')
+#     env = Environment(loader=FileSystemLoader(load))
+#     template = env.get_template("mixing_new.html")
+#     html_out = template.render()
+#     save = load + "test.pdf"
+#     HTML(string=html_out).write_pdf(save)
+#     pdf = open(save, 'rb')
+#     reponse = FileResponse(pdf, content_type='application/pdf')
+#     return reponse
 
 
 class GenerateAgreement(View):
