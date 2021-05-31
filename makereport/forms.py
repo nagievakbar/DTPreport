@@ -197,9 +197,9 @@ class CustomerForm(forms.ModelForm):
 
 
 class ServiceForm(forms.Form):
-    service_id = forms.IntegerField(
+    service_id = forms.CharField(
         required=False,
-        widget=forms.NumberInput(attrs={'class': 'input2 work-price-input2 first2'}))
+        widget=forms.TextInput(attrs={'class': 'input2 work-price-input2 first2'}))
     name = forms.CharField(
         required=False,
         widget=forms.Textarea(attrs={'class': 'input2 work-price-input2 name2', 'onkeyup': 'textAreaAdjust(this)'}))
@@ -237,7 +237,7 @@ class ProductForm(forms.Form):
 
 
 class ConsumableForm(forms.Form):
-    consumable_id = forms.IntegerField(
+    consumable_id = forms.CharField(
         required=False,
         widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 first4'}))
     name = forms.CharField(
