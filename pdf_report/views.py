@@ -4,7 +4,7 @@ import os
 from DTPreport import settings as s
 from makereport.models import Report, Documents, Contract, Calculation, \
     HoldsImages, TemplateBase, TemplateMixing, TemplateAgreement, TemplateAdditional
-from pdf_report.utils import PyPDFML
+from pdf_report.utils import PyPDFML, generate_pdf
 
 from django.core.files.base import ContentFile
 
@@ -89,22 +89,43 @@ class GenerateMixing(View):
         return response
 
 
-# from jinja2 import Environment, FileSystemLoader
-# from weasyprint import HTML
-# # from flask_qrcode import QRcode
-# # import segno
-#
-#
-# def test_api(request):
-#     load = os.path.join(s.MEDIA_ROOT, '../templates/')
-#     env = Environment(loader=FileSystemLoader(load))
-#     template = env.get_template("mixing_new.html")
-#     html_out = template.render()
-#     save = load + "test.pdf"
-#     HTML(string=html_out).write_pdf(save)
-#     pdf = open(save, 'rb')
-#     reponse = FileResponse(pdf, content_type='application/pdf')
-#     return reponse
+from flask_qrcode import QRcode
+
+def check_qr_code(qrcode:str) :
+    return  QRcode.qrcode(qrcode) if qrcode is not None else None
+
+def test_api(request, id):
+    report = Report.objects.get(report_id=id)
+    car = report.car
+    contract = report.contract
+    customer = contract.customer
+    qrcode = get_qrc_code(qr_company="SAdasdasdsaasdsadsa", qr_user=report.pdf_qr_code_user)
+    context = {
+        'car': car,
+        'customer': customer,
+        'report': report,
+        'qrcode': check_qr_code(qrcode),
+        'contract': contract,
+        'qrcode_some': QRcode.qrcode("http://e-otsenka.uz/pdf/{id}".format(id=report.report_id))
+    }
+    pdf = generate_pdf(html_name="finishing_report.html", css_name="finish_report.css", context=context)
+    reponse = FileResponse(ContentFile(pdf), content_type='application/pdf')
+    return reponse
+
+
+def test_agreement(request, id):
+    report = Report.objects.get(report_id=id)
+    calculation = Calculation.objects.get(report_id=id)
+    contract = report.contract
+    context = {
+        'calculation': calculation,
+        'report': report,
+        'qrcode': check_qr_code("Asdsadasdasdsadasdasdsadsadsadasdasd sadas"),
+        'contract': contract,
+    }
+    pdf = generate_pdf(context=context, html_name="aggreement_report.html", css_name='aggreement_report.css')
+    response = FileResponse(ContentFile(pdf), content_type='application/pdf')
+    return response
 
 
 class GenerateAgreement(View):
@@ -158,7 +179,7 @@ class GeneratePDF(View):
     def get(self, request, id=None):
         if type(id) is not int or id <= 0:
             return get_file('base.pdf', content_type='application/pdf')
-        # get_bases(id)
+        get_bases(id)
         report_pdf = Report.objects.get(report_id=id)
         response = FileResponse(open(os.path.join(report_pdf.pdf_report.path), 'rb'), content_type='application/pdf')
         content = "attachment; filename='%s'" % report_pdf.pdf_report.name + ".pdf"

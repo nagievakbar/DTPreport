@@ -433,7 +433,7 @@ class Report(models.Model):
     def precise_iznos_ki(self):
         try:
             return "{0:.0f}".format(self.product_cost - self.product_acc_cost)
-        except TypeError:
+        except:
             return 0
 
     def clean_incoming_data(self):
@@ -448,7 +448,7 @@ class Report(models.Model):
     def precise_acc_cost(self):
         try:
             return "{0:.0f}".format(self.product_acc_cost)
-        except TypeError:
+        except:
             return 0
 
     def get_product_acc_cost(self):
@@ -457,7 +457,7 @@ class Report(models.Model):
             print(self.wear_data.__getitem__('accept_wear'))
             self.product_acc_cost = (self.product_cost * (1 - self.wear_data.__getitem__('accept_wear') / 100))
             return self.product_acc_cost
-        except TypeError:
+        except:
             return 0
 
     def get_total_report_price(self):
@@ -470,7 +470,7 @@ class Report(models.Model):
             print(int(self.service_cost + self.get_product_acc_cost() + self.consumable_cost));
             self.total_report_cost = ' '.join(
                 '{:,}'.format(int(self.service_cost + self.get_product_acc_cost() + self.consumable_cost)).split(','))
-        except TypeError:
+        except:
             return 0
 
     def get_total_report_cost_txt(self):
@@ -479,7 +479,7 @@ class Report(models.Model):
                 int(self.service_cost + self.get_product_acc_cost() + self.consumable_cost),
                 main_units=((u'сум', u'сум', u'суммов'), 'f'))
             return self.total_report_cost_txt
-        except TypeError:
+        except:
             return 0
 
     def set_private_key(self):

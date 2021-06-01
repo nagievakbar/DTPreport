@@ -5,6 +5,7 @@ from reportlab.graphics import barcode
 from reportlab.graphics import renderPDF
 import xml.parsers.expat
 import os.path
+from DTPreport import settings as s
 from reportlab.graphics.barcode import createBarcodeDrawing
 from reportlab.graphics.shapes import Drawing
 from reportlab.lib import colors
@@ -16,6 +17,18 @@ try:
     from jinja2 import Environment, PackageLoader, FileSystemLoader
 except ImportError:
     pass
+from weasyprint import HTML, CSS
+
+def generate_pdf(context: dict, html_name: str, css_name: str):
+    load = os.path.join(s.MEDIA_ROOT, '../templates/')
+    css = os.path.join(load, 'css/{name}'.format(name=css_name))
+    main_css = os.path.join(load, 'css/main.css')
+    env = Environment(loader=FileSystemLoader(load))
+    template = env.get_template("template_html/{name}".format(name=html_name))
+    html_out = template.render(context)
+    return HTML(string=html_out).write_pdf(stylesheets=[CSS(filename=css), CSS(filename=main_css)])
+
+
 
 # DEFAULT VALUES
 
