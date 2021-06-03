@@ -104,6 +104,7 @@ def test_api(request, id):
     qrcode = get_qrc_code(qr_company="SAdasdasdsaasdsadsa", qr_user=report.pdf_qr_code_user)
     context = {
         'car': car,
+        's': s.BASE_URL,
         'customer': customer,
         'report': report,
         'qrcode': check_qr_code(qrcode),
@@ -121,11 +122,48 @@ def test_agreement(request, id):
     contract = report.contract
     context = {
         'calculation': calculation,
+        's': s.BASE_URL,
         'report': report,
-        'qrcode': check_qr_code("Asdsadasdasdsadasdasdsadsadsadasdasd sadas"),
+        'car':report.car,
+        'customer':report.contract.customer,
+        'qrcode': check_qr_code(report.pdf_qr_code_company),
         'contract': contract,
     }
     pdf = generate_pdf(context=context, html_name="aggreement_report.html", css_name='aggreement_report.css')
+    response = FileResponse(ContentFile(pdf), content_type='application/pdf')
+    return response
+
+
+def test_report(request, id):
+    locale.setlocale(locale.LC_ALL, 'C')
+    new_report_pdf = Report.objects.get(report_id=id)
+    calculation = Calculation.objects.get(report_id=id)
+    contract = Contract.objects.get(contract_id=new_report_pdf.contract_id)
+    holds_images = HoldsImages.objects.get(report_id=id)
+    images = holds_images.image.all()
+    passport = holds_images.pp_photo.all()
+    checks = holds_images.checks.first()
+    other_photos = holds_images.o_images.all()
+    document_photo = Documents.objects.first()
+    path_for_images = s.MEDIA_ROOT
+    context = {
+        'car': new_report_pdf.car,
+        'calculation': calculation,
+        'customer' : new_report_pdf.contract.customer,
+        's': s.BASE_URL,
+        'contract': contract,
+        'report': new_report_pdf,
+        'services': new_report_pdf.service.all().__len__(),
+        'datetime': new_report_pdf.report_date,
+        'qrcode': check_qr_code("sadasdasdsdsd"),
+        'qrcode_company':check_qr_code("ASdsaddasddasdsad"),
+        'images': images,
+        'document_photo': document_photo,
+        'passport': passport,
+        'checks': checks,
+        'other_photos': other_photos,
+    }
+    pdf = generate_pdf(context=context, html_name="report.html", css_name="report.css")
     response = FileResponse(ContentFile(pdf), content_type='application/pdf')
     return response
 

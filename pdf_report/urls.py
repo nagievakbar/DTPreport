@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from .views import *
 from .tasks import get_base
+
 urlpatterns = [
     path('<int:id>/', GeneratePDF.as_view(), name='get_response'),
     path('mixing/<int:id>', GenerateMixing.as_view(), name='get_mixing'),
@@ -14,5 +15,6 @@ urlpatterns = [
     path("download_xml_additional/", get_base_additional_template, name="download_xml_additional"),
     path("test_finish/<int:id>", test_api),
     path("test_agreement/<int:id>", test_agreement),
+    path("test_report/<int:id>", test_report)
 
 ]

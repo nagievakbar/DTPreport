@@ -1,4 +1,7 @@
-
+@page {
+    margin: 0.3cm;
+    font-family: "Times New Roman", sans-serif;
+}
 .finish-table {
     font-size: 1em;
 }
@@ -19,6 +22,12 @@
 
 td:first-child {
     width: 32%;
+}
+.main-image {
+    padding: 0px;
+    margin: 0px;
+    height: 80px;
+    width: 120px;
 }
 
 

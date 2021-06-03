@@ -1,0 +1,97 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.margin-2-left {
+    margin-left: 2cm;
+}
+
+#container {
+    margin: 0;
+}
+
+
+.image-header {
+    width: 300px;
+    height: 150px;
+}
+
+.big-size-bold {
+    font-size: 3em;
+}
+
+.align-right {
+
+    align-self: flex-end;
+}
+
+.header-text {
+    align-self: center;
+}
+
+.header-text p strong {
+    font-size: 2em;
+}
+
+#container-left {
+
+    justify-content: flex-end;
+}
+
+#without-borders, #without-borders td, #without-borders th {
+    margin-top: 2em;
+    padding: 0.5em;
+    border: none;
+}
+
+#without-borders {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 1.1em;
+}
+
+#without-borders th {
+    text-align: left;
+}
+#without-borders td:first-child{
+    width: 20%;
+}
+.flex-increase-5{
+    flex-grow: 5;
+}
+.flex-increase-2{
+    flex-grow: 2;
+}
+
+.sum-header {
+    font-size: 1.3em;
+}
+.dot-leader {
+    position: relative;
+    overflow: hidden; /* clip the dots */
+}
+
+.dot-leader__left {
+    position: relative;
+    display: inline-block;
+}
+
+.dot-leader__left::after {
+    color: gray;
+    content: ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .";
+    font-weight: normal;
+    display: inline-block;
+    position: absolute;
+    white-space: nowrap;
+    margin-left: 5px; /* space left of dots */
+}
+
+.dot-leader__right {
+    background: white; /* cover the dots */
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    padding-left: 5px; /* space right of dots */
+}

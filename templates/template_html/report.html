@@ -1,5 +1,475 @@
 {% extends 'template_html/layout.html' %}
 {% block title %}  <title>Отчет</title> {% endblock %}
 {% block content %}
+    <style>
+        @media print {
+            @page {
+                margin: 1cm 1.5cm;
+                size: A4 portrait;
+                @bottom-center {
+                    content: counter(page);
+                }
+                @bottom-right {
+                    margin-bottom: 5cm;
+                    margin-right: 3cm;
+                    content: "Оценщик";
+                }
+                background-image: url("{{ qrcode }}");
+                background-repeat: no-repeat;
+                background-position: right bottom;
+                background-size: 80px 80px;
+            }
+        }
+    </style>
+    <div class="center">
+        <p class="large-text">
+            АКТ
+            Сдачи-приёмки выполненных работ и услуг
+            Договор №222222 от 222222
+        </p>
+    </div>
+    <p class="large-text margin-1-left">
+        ЗАКАЗЧИК:miranda storey
+        Дата составления отчёта: 124124
+        Место составления: г. Ташкент
+    </p>
+    <p class="large-text">
+        Мы, нижеподписавшиеся, директор ООО «AMIR AVTO BAHOLASH» Сагдуллаев Б К., с одной
+        стороны и Заказчик miranda storey с другой стороны, составили настоящий акт в том, что
+        выполненные работы и услуги удовлетворяют полностью условиям договора, оформлены и сданы
+        Заказчику (полностью, частично) в надлежащем порядке, претензии не имеет.
+        <br/>
+    <p class="margin-1-left">
+        Выполнено работ и услуг: отчет об оценке рыночной стоимости ущерба
+        Отчет, заключение: в письменной форме.
+    </p>
+    <br/>
+    Договорная стоимость работ составляет: 0,00 сум ноль суммов , 00 тийин без НДС.
+    Работа выполнена на сумму 0,00 сум ноль суммов , 00 тийин,с учётом надбавки.
+    </p>
+    <div class="container margin-1-top">
+        <div>
+            <div class="center">
+                <p>Директор </p>
+                <p> ООО "AMIR AVTO BAHOLASH"</p>
+                <br>
+                {% if qrcode %}
+                    <img alt="" align="middle" src="{{ qrcode }}" class="qr-code-big"/>
+                {% endif %}
+            </div>
+        </div>
+        <div>
+            <br/>
+            <p>
+                Заказчик:{{ report.contract.customer.name }}
+            </p>
+        </div>
+    </div>
+    <div class="center">
+        <p class="large-text">
+            СЧЕТ-ФАКТУРА №
+            от 124124
+            к договору № 222222 от 222222
+        </p>
+    </div>
+    <div id="container" class="container margin-1-top">
+        <div>
+            <div class="center">
+                <p class="large-text">
+                    Поставщик:
+                    ООО «AMIR AVTO BAHOLASH»
+                    Адрес: г.Ташкент, Чиланзарский р-онпроспект Бунёдкор, д.118
+                    Телефон: 279-46-60, 125-74-91
+                    Р/с№ 20208000200244206001
+                    в Чиланзарском ф-ле
+                    АИКБ «Ипак йули»
+                    ОКЭД 68310, ИНН: 302667624 МФО: 01067
+                </p>
+            </div>
+        </div>
 
+        <div>
+            <div class="center">
+                <p class="large-text">
+                    Получатель: miranda storey
+                    адрес:9305 Gerwig Lane, Suite e
+                    паспорт 214124 когда выдан 2016-04-24
+                    кем выдан 4214124
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="margin-1-top"></div>
+    <table>
+        <tr>
+            <th rowspan="2" colspan="1">
+                aa
+            </th>
+            <th rowspan="2" colspan="1">
+                aa
+            </th>
+            <th rowspan="2" colspan="1">
+                aa
+            </th>
+            <th rowspan="2" colspan="1">
+                aa
+            </th>
+            <th rowspan="1" colspan="2">
+                aa
+            </th>
+            <th rowspan="1" colspan="2">
+                aa
+            </th>
+            <th rowspan="2" colspan="1">
+                aa
+            </th>
+        </tr>
+        <tr>
+            <th rowspan="1" colspan="1">
+                aaa
+            </th>
+            <th rowspan="1" colspan="1">
+                aaa
+            </th>
+            <th rowspan="1" colspan="1">
+                aaa
+            </th>
+            <th rowspan="1" colspan="1">
+                aaa
+            </th>
+        </tr>
+        <tr>
+            <td rowspan="1" colspan="1">
+                aa
+            </td>
+            <td rowspan="1" colspan="1">
+                aa
+            </td>
+            <td rowspan="1" colspan="1">
+                aa
+            </td>
+            <td rowspan="1" colspan="1">
+                aa
+            </td>
+            <td rowspan="1" colspan="2">
+                aa
+            </td>
+            <td rowspan="1" colspan="2">
+                aa
+            </td>
+            <td rowspan="1" colspan="1">
+                aa
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="1" colspan="1">
+                aa
+            </td>
+            <td rowspan="1" colspan="1">
+                aa
+            </td>
+            <td rowspan="1" colspan="1">
+                aa
+            </td>
+            <td rowspan="1" colspan="1">
+                aa
+            </td>
+            <td rowspan="1" colspan="2">
+                aa
+            </td>
+            <td rowspan="1" colspan="2">
+                aa
+            </td>
+            <td rowspan="1" colspan="1">
+                aa
+            </td>
+        </tr>
+        <tr>
+            <td colspan="1">aa</td>
+            <td colspan="8"></td>
+        </tr>
+    </table>
+    <div class="margin-1-top"></div>
+    <div id="container" class="container">
+        <div>
+            <p>
+                Руководитель: Сагдуллаев Бобир Камилович
+                <br/> <br/>
+                Главный бухгалтер: ________________________
+            </p>
+        </div>
+        <div>
+            <p class="center">
+                Получила (а) ______________
+                <br>
+                <strong class="reduce-font-size">(подпись покупателя или уполномоченного представителя)</strong>
+                <br>
+                miranda storey
+                <br>
+                <strong class="reduce-font-size">(Ф.И.О получателя)</strong>
+            </p>
+        </div>
+    </div>
+    <div id="container" class="container">
+        <div>
+            <img alt="" class="image-header" src="{{ s }}/AAB.png"/>
+        </div>
+        <div class="header-text">
+            <p class=" center">
+                ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ
+                <br>
+                <br>
+                <strong>
+                    «AMIR AVTO BAHOLASH»
+                </strong>
+            </p>
+        </div>
+    </div>
+    <p class="center reduce-font-size ">
+        Лицензия Госкомимущества РУз на осущестьвление оценочной деятельности серия BL 001 №0033 регистрационный
+        №RR-0184 от 12.05.2014г.
+    </p>
+    <hr>
+    <div id="container-left" class="container">
+        <img src="{{ qrcode }}" alt="" class="qr-code-big margin-1-top">
+        <p class="center large-text align-right">
+            Утверждаю
+            Директор
+            ООО «AMIR AVTO BAHOLASH»
+
+            Сагдуллаев Б.К.
+            124124
+        </p>
+    </div>
+    <p class="center big-size-bold margin-2-top">
+        Отчет № 21421
+    </p>
+    <p class="center large-text">
+        Об оценки по определению рыночной стоимости ущерба автотранспортного средства марки
+        Машина, гос. номер 12AB23151
+    </p>
+    <div class="margin-2-top"></div>
+    <table id="without-borders">
+        <tr id="reduce-first">
+            <td> Регистрационный номер:</td>
+            <td> aa sdadsad asd adadasdada assad asdsa ads adasd asd</td>
+        </tr>
+        <tr id="reduce-first">
+            <td>Цель оценки:</td>
+            <td>aa</td>
+        </tr>
+        <tr id="reduce-first">
+            <td>Назначение результатов оценки:</td>
+            <td>aa</td>
+        </tr>
+        <tr id="reduce-first">
+            <td>Место регистрации:</td>
+            <td>aa</td>
+        </tr>
+        <tr id="reduce-first">
+            <td>Дата оценки</td>
+            <td>aa</td>
+        </tr>
+        <tr id="reduce-first">
+            <td>Дата составления отчёта:</td>
+            <td>aa</td>
+        </tr>
+        <tr id="reduce-first">
+            <th>Заказчик:</th>
+            <td>aa</td>
+        </tr>
+        <tr id="reduce-first">
+            <th>Собственник объекта оценки:</th>
+            <td>aa</td>
+        </tr>
+    </table>
+    <p class="center footer"> Ташкент - 2021</p>
+
+    <div id="container" class="container">
+        <div>
+            <img alt="" class="image-header" src="{{ s }}/AAB.png"/>
+        </div>
+        <div class="header-text">
+            <p class=" center">
+                ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ
+                <br>
+                <br>
+                <strong>
+                    «AMIR AVTO BAHOLASH»
+                </strong>
+            </p>
+        </div>
+    </div>
+    <hr>
+    <p class="center reduce-font-size ">
+        "г.Ташкент ул. Бунедкор 118, тел.: 279-46-60, факс: 279-33-38, МФО 01067
+        р/с: 20208000200244206001 Чиланзарский ф-л ОАИКБ «Ипак Йули», ИНН 302 667624 ОКЭД 68310
+    </p>
+    <div id="container-left" class="container">
+
+        <p class="center large-text align-right">
+            г-ну 12412421
+        </p>
+    </div>
+
+    <p class="center margin-1-top bold-text">Уважаемый miranda storey</p>
+    <p class="large-text-space">
+        &Tab;В соответствии с Договором об оценке имущества № 222222 от 222222,оценщики ООО «AMIR
+        AVTO BAHOLASH» провели оценку транспортного средства марки Машина Государственный
+        номер:12AB23151 зарегистрированного по адресу:9305 Gerwig Lane, Suite e, Республика Узбекистан.
+        &Tab;Цель оценки: Определение рыночной стоимости затрат на восстановление АМТС, пострадавшего
+        в результате ДТП.
+        &Tab;Обращаю Ваше внимание на то, что это письмо не является отчетом по оценке имущества, а
+        только предваряет отчет, приведенный ниже.
+        &Tab;Предлагаемый Вашему вниманию Отчет, который содержит описание расчета стоимости
+        движимого имущества, собранную информацию, этапы проведенного исследования и сделанные
+        выводы. Кроме того, в Отчет включены гарантии объективности и независимости оценщиков, а
+        также сделанные допущения и принятые ограничения. Отдельные части анализа, приведенного
+        Отчете, не могут трактоваться раздельно, а только в связи с полным его текстом, с учетом принятых
+        допущений и ограничений.
+        &Tab;На основании информации, предоставленной и проанализированной в приведенном ниже отчете
+        об оценке имущества, мы пришли к заключению, что рекомендуемая рыночная стоимость реального
+        ущерба имущества по состоянию на 124124 , составляет:</p>
+    <p class="center"> Автомобиль марки Машина государственный номер: 12AB2315</p>
+    <p class="center large-text sum-header">
+        66 523
+    </p>
+    <p class="center"> шестьдесят шесть тысяч пятьсот двадцать три сум</p>
+    <p class="large-text-space">
+        &Tab;Оценка произведена в соответствии с требованиями Закона «Об оценочной деятельности» №
+        811-I от 19.08.1999г и Единый национальный стандарт оценки Республики Узбекистан (ЕНСО) (рег.
+        № 3239 от 04.06.2020 г.), с соблюдением Правил внутреннего контроля качества ООО «AMIR
+        AVTO BAHOLASH», утвержденных 2014г.
+        &Tab;В соответствии с Законом Республики Узбекистан «Об оценочной деятельности» ст. 18:
+        «стоимость объекта оценки, указанная в отчете, носит рекомендательный характер…».
+        Окончательную стоимость объекта определяет собственник объекта при совершении с ним
+        какой-либо сделки.
+        &Tab;Если у Вас возникнут какие-либо вопросы по оценке или по нашим рассуждениям, пожалуйста,
+        обращайтесь непосредственно к нам.
+    </p>
+    <p class="center"> Благодарим за возможность оказать Вам услуги!</p>
+    <br>
+    <div class="container-right">
+        <p class="large-text flex-increase-5">
+            С уважением,
+            директор ООО «AMIR AVTO BAHOLASH»</p>
+        <img src="{{ qrcode }}" alt="" class="qr-code-big align-right">
+        <p class="header-text flex-increase-2">
+            Сагдуллаев Б.К
+        </p>
+    </div>
+    <p class="new-page center sum-header">СОДЕРЖАНИЕ:</p>
+
+    <ul class="is-no-padding ">
+        <li class="dot-leader">
+            <span class="dot-leader__left">Раздел 1 «Титульный Лист»</span>
+            <span class="dot-leader__right">1</span>
+        </li>
+        <br>
+        <li class="dot-leader">
+            <span class="dot-leader__left">Раздел 2 «Сопроводительное письмо»</span>
+            <span class="dot-leader__right">2</span>
+        </li>
+           <br>
+        <li class="dot-leader">
+            <span class="dot-leader__left">Раздел 3 «Оглавление»</span>
+            <span class="dot-leader__right">3</span>
+        </li>
+           <br>
+        <li class="dot-leader">
+            <span class="dot-leader__left">Раздел 4 «Перечень сокращений условных обозначений»</span>
+            <span class="dot-leader__right">4</span>
+        </li>
+           <br>
+        <li class="dot-leader">
+            <span class="dot-leader__left">Раздел 5 «Введение»</span>
+            <span class="dot-leader__right">5</span>
+        </li>
+        <li class="dot-leader">
+            <span class="dot-leader__left">5.1 Общие сведения об объекте оценки</span>
+            <span class="dot-leader__right">6</span>
+        </li>
+        <li class="dot-leader">
+            <span class="dot-leader__left">5.2 Сертификат качества оценки</span>
+            <span class="dot-leader__right">7</span>
+        </li>
+        <li class="dot-leader">
+            <span class="dot-leader__left">5.3 Сведения о специалистах-оценщиках</span>
+            <span class="dot-leader__right">7</span>
+        </li>
+        <li class="dot-leader">
+            <span class="dot-leader__left">5.4 Принятые(сделанные) допущения и ограничивающие условия</span>
+            <span class="dot-leader__right">8</span>
+        </li>
+        <li class="dot-leader">
+            <span class="dot-leader__left">5.5 Примененные стандарты оценки</span>
+            <span class="dot-leader__right">8</span>
+        </li>
+           <br>
+        <li class="dot-leader">
+            <span class="dot-leader__left">Раздел 6 «Основная часть» </span>
+            <span class="dot-leader__right">9</span>
+        </li>
+        <li class="dot-leader">
+            <span class="dot-leader__left">6.1 Этапы процесса оценки </span>
+            <span class="dot-leader__right">9</span>
+        </li>
+        <li class="dot-leader">
+            <span class="dot-leader__left">6.2 Идентификация объекта оценки</span>
+            <span class="dot-leader__right">9</span>
+        </li>
+        <li class="dot-leader">
+            <span class="dot-leader__left">6.3 Выбор и обоснование подходов к оценке</span>
+            <span class="dot-leader__right">9</span>
+        </li>
+        <li class="dot-leader">
+            <span class="dot-leader__left">6.4 Оценка затратным (имущественным) подходом</span>
+            <span class="dot-leader__right">10</span>
+        </li>
+        <li class="dot-leader">
+            <span class="dot-leader__left">6.5 Оценка сравнителным подходом</span>
+            <span class="dot-leader__right">13</span>
+        </li>
+        <li class="dot-leader">
+            <span class="dot-leader__left">6.6 Оценка доходным подходом</span>
+            <span class="dot-leader__right">13</span>
+        </li>
+           <br>
+        <li class="dot-leader">
+            <span class="dot-leader__left">Раздел 7 «Заключение» </span>
+            <span class="dot-leader__right">14</span>
+        </li>
+        <li class="dot-leader">
+            <span class="dot-leader__left">7.1 Согласование результатов оценки</span>
+            <span class="dot-leader__right">14</span>
+        </li>
+        <li class="dot-leader">
+            <span class="dot-leader__left">7.2 Вывод об итоговой стоимости</span>
+            <span class="dot-leader__right">14</span>
+        </li>
+           <br>
+        <li class="dot-leader">
+            <span class="dot-leader__left">Раздел 8 Приложения</span>
+            <span class="dot-leader__right">18</span>
+        </li>
+        <li class="dot-leader">
+            <span>Копия лицензии на проведение оценочных работ</span>
+        </li>
+        <li class="dot-leader">
+            <span>Копия сертификата оценщика</span>
+
+        </li>
+        <li class="dot-leader">
+            <span>Копия техпаспорта автомобиля</span>
+
+        </li>
+        <li class="dot-leader">
+            <span>Копия письма-заявки от Заказчика.</span>
+
+        </li>
+        <li class="dot-leader">
+            <span>Фотоснимки оцениваемого объекта</span>
+
+        </li>
+    </ul>
 {% endblock %}

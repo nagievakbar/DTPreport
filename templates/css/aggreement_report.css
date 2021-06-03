@@ -1,4 +1,7 @@
-
+@page {
+    margin: 0.8cm;
+    font-family: "Times New Roman", sans-serif;
+}
 .border {
     border: 1px solid black;
     border-collapse: collapse;
@@ -10,11 +13,5 @@
 
 .second-table td:first-child {
     width: 20%;
-}
-
-.container {
-    margin: 0px 10%;
-    display: flex;
-    justify-content: space-between;
 }
 

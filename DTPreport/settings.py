@@ -40,8 +40,8 @@ ALLOWED_HOSTS = ['makereport.elite-house.uz',
                  'localhost',
                  '184.196.214.55'
                  ]
-URL_FILES = 'http://e-otsenka.uz'
-
+URL_FILES = 'https://e-otsenka.uz'
+BASE_URL = URL_FILES + "/media/"
 # Application definition
 
 INSTALLED_APPS = [
