@@ -124,3 +124,6 @@ p {
 .new-page {
     page-break-before: always;
 }
+.right{
+    text-align: right;
+}

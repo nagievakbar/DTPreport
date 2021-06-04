@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+table td {
+    padding: 2px
+}
+
 .margin-2-left {
     margin-left: 2cm;
 }
@@ -11,6 +15,9 @@
     margin: 0;
 }
 
+#container-marging-30 {
+    margin: 30px;
+}
 
 .image-header {
     width: 300px;
@@ -55,19 +62,23 @@
 #without-borders th {
     text-align: left;
 }
-#without-borders td:first-child{
+
+#without-borders td:first-child {
     width: 20%;
 }
-.flex-increase-5{
+
+.flex-increase-5 {
     flex-grow: 5;
 }
-.flex-increase-2{
+
+.flex-increase-2 {
     flex-grow: 2;
 }
 
 .sum-header {
     font-size: 1.3em;
 }
+
 .dot-leader {
     position: relative;
     overflow: hidden; /* clip the dots */
@@ -95,3 +106,83 @@
     right: 0;
     padding-left: 5px; /* space right of dots */
 }
+
+.list {
+    font-size: 1.3em;
+}
+
+.image-formula {
+    width: 30%;
+    height: 30%;
+    horiz-align: center;
+}
+
+.image-formula-more {
+    width: 20%;
+    height: 20%;
+    horiz-align: center;
+}
+
+.image-reduce {
+    width: 30px;
+    height: 30px;
+}
+
+#explain-table, #explain-table td, #explain-table th {
+    border: none;
+    padding: 3px;
+    margin: 0;
+}
+
+.second-explain td:nth-child(3) {
+    width: 90%;
+}
+
+.table-font-size-1 {
+    font-size: 1.1em;
+    text-align: center;
+}
+
+.table-font-size-1 th, .table-font-size-1 td {
+    padding: 5px;
+
+}
+
+.table-increase-font-size {
+    font-size: 1.3em;
+}
+
+.table-increase-font-size th, .table-increase-font-size td {
+    padding: 5px;
+}
+
+.header-increase {
+    font-size: 1.4em;
+}
+
+.table-add-padding th, .table-add-padding td {
+    padding: 5px;
+}
+
+.center-table td {
+    text-align: center;
+}
+
+.half-list {
+    width: 770px;
+    height: 500px;
+
+}
+.three-list {
+    margin: 10px;
+    width: 220px;
+    height: 200px;
+}
+#image-table , #image-table td, #image-table th {
+    border: none;
+}
+.two-list {
+    width: 375px;
+    height: 520px;
+}
+

@@ -1,3 +1,4 @@
+from django.core.files.base import ContentFile
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.files.storage import default_storage
@@ -203,19 +204,19 @@ class Consumable(models.Model):
 
 
 def handler_base(instance, filename):
-    return "templates_xml/base.xml"
+    return "templates_html/report_custom.html"
 
 
 def handler_base_mixing(instance, filename):
-    return "templates_xml/mixing.xml"
+    return "templates_html/finish_custom.html"
 
 
 def handler_base_agreement(instance, filename):
-    return "templates_xml/agreement.xml"
+    return "templates_html/agreement_custom.html"
 
 
 def handler_base_additional(instance, filename):
-    return "templates_xml/additional.xml"
+    return "templates_html/additional_custom.html"
 
 
 class TemplateBase(models.Model):
@@ -397,6 +398,8 @@ class Report(models.Model):
     total_report_cost = models.CharField(max_length=20, blank=True, null=True, )
     total_report_cost_txt = models.CharField(max_length=200, blank=True, null=True, )
 
+    pdf_report_additional = models.FileField(blank=True, null=True, upload_to='uploads_additional/%Y/%m/%d/',
+                                             verbose_name='Дополнительный отчет в пдф')
     pdf_report = models.FileField(blank=True, null=True, upload_to='uploads/%Y/%m/%d/', verbose_name='Отчёт в пдф')
     pdf_report_base64 = models.CharField(max_length=1000000, blank=True, null=True)
     pdf_report_pkcs7 = models.JSONField(blank=True, null=True)
@@ -416,6 +419,32 @@ class Report(models.Model):
 
     def __str__(self):
         return str(self.report_id)
+
+    def save_additional_pdf(self, filename, data):
+        try:
+            default_storage.delete(self.pdf_report_additional.path)
+        except ValueError:
+            pass
+        except AssertionError:
+            pass
+        except:
+            pass
+
+        self.pdf_report_additional.save(filename, ContentFile(data))
+        self.save()
+
+    def save_pdf(self, filename, data):
+        try:
+            default_storage.delete(self.pdf_report.path)
+        except ValueError:
+            pass
+        except AssertionError:
+            pass
+        except:
+            pass
+
+        self.pdf_report.save(filename, ContentFile(data))
+        self.save()
 
     def delete(self, *args, **kwargs):
         try:

@@ -326,7 +326,7 @@
                 headers: {
                     "X-CSRFToken": csrftoken
                 },
-                url: `{% url "make_pdf" %}?id=${id}`,
+                url: `{% url "make_pdf_additional" %}?id=${id}`,
                 success: function (data) {
                     alert("Вы успешно добавили в pdf!");
 

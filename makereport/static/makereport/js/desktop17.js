@@ -167,7 +167,7 @@ $('#upload_additional').click(function () {
 function shipOff(name, tag) {
     var result = document.getElementById(tag).files[0];
     var upload = new Upload(result, name);
-    var content = upload.getType() === "text/xml";
+    var content = upload.getType() === "text/html";
     if (content) {
         upload.doUpload();
         alert("Ваш template успешно загружен")

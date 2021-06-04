@@ -4,7 +4,7 @@ import os
 from DTPreport import settings as s
 from makereport.models import Report, Documents, Contract, Calculation, \
     HoldsImages, TemplateBase, TemplateMixing, TemplateAgreement, TemplateAdditional
-from pdf_report.utils import PyPDFML, generate_pdf
+from pdf_report.utils import PyPDFML, generate_pdf, get_name
 
 from django.core.files.base import ContentFile
 
@@ -14,27 +14,39 @@ import jinja2
 
 
 def get_base_additional_template(request):
-    file = TemplateAdditional.objects.last().template
-    name = 'example.xml'
-    return handle_schema(file=file, default_name=name)
+    try:
+        file = TemplateAdditional.objects.last().template
+    except:
+        file = None
+    name = 'report.html'
+    return handle_schema(file=None, default_name=name)
 
 
 def get_base_template(request):
-    file = TemplateBase.objects.last().template
-    name = 'example.xml'
-    return handle_schema(file=file, default_name=name)
+    try:
+        file = TemplateBase.objects.last().template
+    except:
+        file = None
+    name = 'report.html'
+    return handle_schema(file=None, default_name=name)
 
 
 def get_base_mixing_template(request):
-    file = TemplateMixing.objects.last().template
-    name = 'mixing.xml'
-    return handle_schema(file=file, default_name=name)
+    try:
+        file = TemplateMixing.objects.last().template
+    except:
+        file = None
+    name = 'finishing_report.html'
+    return handle_schema(file=None, default_name=name)
 
 
 def get_base_agreement_template(request):
-    name = 'agreem.xml'
-    file = TemplateAgreement.objects.last().template
-    return handle_schema(file=file, default_name=name)
+    try:
+        file = TemplateAgreement.objects.last().template
+    except:
+        file = None
+    name = 'aggreement_report.html'
+    return handle_schema(file=None, default_name=name)
 
 
 def handle_schema(file, default_name):
@@ -43,15 +55,15 @@ def handle_schema(file, default_name):
         return get_file(file=file_data, name=file.name)
     except:
         print(default_name)
-        file_data = open(os.path.join(s.MEDIA_ROOT, '../templates/{}'.format(default_name)), 'rb')
+        file_data = open(os.path.join(s.MEDIA_ROOT, '../templates/template_html/{}'.format(default_name)), 'rb')
         return get_file(file=file_data, name=default_name)
 
 
-def get_file(file, name, content_type='text/xml'):
-    response = FileResponse(file,
+def get_file(file, name="", content_type='text/xml'):
+    response = FileResponse(open(os.path.join(s.MEDIA_ROOT, '..', 'templates', file), 'rb'),
                             content_type=content_type)
-    content = "attachment; filename=%s" % name
-    response['Content-Disposition'] = content
+    # content = "attachment; filename=%s" % name
+    # response['Content-Disposition'] = content
     return response
 
 
@@ -96,7 +108,7 @@ def check_qr_code(qrcode: str):
     return QRcode.qrcode(qrcode) if qrcode is not None else None
 
 
-def test_api(request, id):
+def finish_view(request, id):
     report = Report.objects.get(report_id=id)
     car = report.car
     contract = report.contract
@@ -111,12 +123,14 @@ def test_api(request, id):
         'contract': contract,
         'qrcode_some': QRcode.qrcode("http://e-otsenka.uz/pdf/{id}".format(id=report.report_id))
     }
-    pdf = generate_pdf(html_name="finishing_report.html", css_name="finish_report.css", context=context)
+    file_path = get_name(TemplateMixing.objects.last())
+    pdf = generate_pdf(default_template="finishing_report.html", main_template_path=file_path,
+                       css_name="finish_report.css", context=context)
     reponse = FileResponse(ContentFile(pdf), content_type='application/pdf')
     return reponse
 
 
-def test_agreement(request, id):
+def agreement_view(request, id):
     report = Report.objects.get(report_id=id)
     calculation = Calculation.objects.get(report_id=id)
     contract = report.contract
@@ -124,17 +138,32 @@ def test_agreement(request, id):
         'calculation': calculation,
         's': s.BASE_URL,
         'report': report,
-        'car':report.car,
-        'customer':report.contract.customer,
+        'car': report.car,
+        'customer': report.contract.customer,
         'qrcode': check_qr_code(report.pdf_qr_code_company),
         'contract': contract,
     }
-    pdf = generate_pdf(context=context, html_name="aggreement_report.html", css_name='aggreement_report.css')
+
+    file_name = get_name(TemplateAgreement.objects.last())
+    pdf = generate_pdf(context=context, default_template="aggreement_report.html", main_template_path=file_name,
+                       css_name='aggreement_report.css')
     response = FileResponse(ContentFile(pdf), content_type='application/pdf')
     return response
 
 
-def test_report(request, id):
+def test_report(request, id: int):
+    pdf = test_report_base(id, TemplateBase)
+    response = FileResponse(ContentFile(pdf), content_type='application/pdf')
+    return response
+
+
+def test_report_additional(request, id: int):
+    pdf = test_report_base(id, TemplateAdditional)
+    response = FileResponse(ContentFile(pdf), content_type='application/pdf')
+    return response
+
+
+def test_report_base(id: int, obj):
     locale.setlocale(locale.LC_ALL, 'C')
     new_report_pdf = Report.objects.get(report_id=id)
     calculation = Calculation.objects.get(report_id=id)
@@ -147,25 +176,23 @@ def test_report(request, id):
     document_photo = Documents.objects.first()
     path_for_images = s.MEDIA_ROOT
     context = {
-        'car': new_report_pdf.car,
         'calculation': calculation,
-        'customer' : new_report_pdf.contract.customer,
         's': s.BASE_URL,
         'contract': contract,
         'report': new_report_pdf,
         'services': new_report_pdf.service.all().__len__(),
         'datetime': new_report_pdf.report_date,
-        'qrcode': check_qr_code("sadasdasdsdsd"),
-        'qrcode_company':check_qr_code("ASdsaddasddasdsad"),
+        'qrcode': check_qr_code(new_report_pdf.pdf_qr_code_user),
+        'qrcode_company': check_qr_code(new_report_pdf.pdf_qr_code_company),
         'images': images,
         'document_photo': document_photo,
         'passport': passport,
         'checks': checks,
         'other_photos': other_photos,
     }
-    pdf = generate_pdf(context=context, html_name="report.html", css_name="report.css")
-    response = FileResponse(ContentFile(pdf), content_type='application/pdf')
-    return response
+    file_name = get_name(obj.objects.last())
+    return generate_pdf(context=context, default_template="report.html", main_template_path=file_name,
+                        css_name="report.css")
 
 
 class GenerateAgreement(View):
@@ -208,23 +235,24 @@ def get_qrc_code(qr_company, qr_user):
 
 class GenerateAdditional(View):
     def get(self, request, id=None):
-        if id == 0:
-            return get_file('base.pdf', content_type='application/pdf')
-        data = get_additional(request, id)
-        response = FileResponse(ContentFile(data), content_type='application/pdf')
-        return response
+        try:
+            report_pdf = Report.objects.get(report_id=id)
+            response = FileResponse(open(os.path.join(report_pdf.pdf_report_additional.path), 'rb'),
+                                    content_type='application/pdf')
+            return response
+        except:
+            return get_file(file='base.pdf', name='asd', content_type='application/pdf')
 
 
 class GeneratePDF(View):
     def get(self, request, id=None):
-        if type(id) is not int or id <= 0:
+        try:
+            report_pdf = Report.objects.get(report_id=id)
+            response = FileResponse(open(os.path.join(report_pdf.pdf_report.path), 'rb'),
+                                    content_type='application/pdf')
+            return response
+        except:
             return get_file('base.pdf', content_type='application/pdf')
-        get_bases(id)
-        report_pdf = Report.objects.get(report_id=id)
-        response = FileResponse(open(os.path.join(report_pdf.pdf_report.path), 'rb'), content_type='application/pdf')
-        content = "attachment; filename='%s'" % report_pdf.pdf_report.name + ".pdf"
-        #         response['Content-Disposition'] = content
-        return response
 
 
 def get_bases(id):
@@ -279,7 +307,7 @@ def get_response(id, obj):
     return pdf.contents()
 
 
-def create_base64(request, new_report_pdf):
+def create_base64(request, new_report_pdf: Report):
     locale.setlocale(locale.LC_ALL, 'C')
     calculation = Calculation.objects.create()
     context = {
@@ -296,18 +324,11 @@ def create_base64(request, new_report_pdf):
         'checks': "",
         'other_photos': "",
     }
-    try:
-        file = TemplateBase.objects.last().template
-        splited = file.name.split('/')
-        path = os.path.join(s.MEDIA_ROOT, "{}".format(splited[0]))
-        pdf = PyPDFML(splited[-1], path)
-        pdf.generate(context)
-    except (jinja2.exceptions.TemplateNotFound, AttributeError):
-        pdf = PyPDFML('example.xml')
-        pdf.generate(context)
-    data = pdf.contents()
+    file_name = get_name(TemplateBase.objects.last())
+    data = generate_pdf(context=context, default_template="report.html", main_template_path=file_name,
+                        css_name="report.css")
     filename = "%s.pdf" % new_report_pdf.car.car_number
-    new_report_pdf.pdf_report.save(filename, ContentFile(data))
+    new_report_pdf.save_pdf(filename, ContentFile(data))
     with open(new_report_pdf.pdf_report.path, "rb") as file:
         encoded_string = base64.b64encode(file.read())
     new_report_pdf.pdf_report_base64 = encoded_string.decode('ascii')

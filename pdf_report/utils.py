@@ -19,15 +19,26 @@ except ImportError:
     pass
 from weasyprint import HTML, CSS
 
-def generate_pdf(context: dict, html_name: str, css_name: str):
-    load = os.path.join(s.MEDIA_ROOT, '../templates/')
-    css = os.path.join(load, 'css/{name}'.format(name=css_name))
-    main_css = os.path.join(load, 'css/main.css')
+
+def generate_pdf(context: dict, default_template: str, css_name: str, main_template_path: str = ""):
+    load = os.path.join(s.MEDIA_ROOT, '..')
+    css = os.path.join(load, 'templates/css/{name}'.format(name=css_name))
+    main_css = os.path.join(load, 'templates/css/main.css')
     env = Environment(loader=FileSystemLoader(load))
-    template = env.get_template("template_html/{name}".format(name=html_name))
-    html_out = template.render(context)
+    try:
+        template = env.get_template('media/{path}'.format(path=main_template_path))
+        html_out = template.render(context)
+    except:
+        template = env.get_template("templates/template_html/{name}".format(name=default_template))
+        html_out = template.render(context)
     return HTML(string=html_out).write_pdf(stylesheets=[CSS(filename=css), CSS(filename=main_css)])
 
+
+def get_name(obj):
+    try:
+        return obj.template.name
+    except:
+        return ""
 
 
 # DEFAULT VALUES
@@ -681,5 +692,3 @@ class PyPDFML(object):
     def barcode_cdata(self, cdata):
         b = self.barcode_stack.pop()
         b.draw(self.canvas, cdata)
-
-
