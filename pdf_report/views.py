@@ -57,12 +57,15 @@ def handle_schema(file, default_name):
         print(default_name)
         file_data = open(os.path.join(s.MEDIA_ROOT, '../templates/template_html/{}'.format(default_name)), 'rb')
         return get_file_path(file=file_data, name=default_name)
+
+
 def get_file_path(file, name="", content_type='text/xml'):
     response = FileResponse(file,
                             content_type=content_type)
-    # content = "attachment; filename=%s" % name
-    # response['Content-Disposition'] = content
+    content = "attachment; filename=%s" % name
+    response['Content-Disposition'] = content
     return response
+
 
 def get_file(file, name="", content_type='text/xml'):
     response = FileResponse(open(os.path.join(s.MEDIA_ROOT, '..', 'templates', file), 'rb'),
