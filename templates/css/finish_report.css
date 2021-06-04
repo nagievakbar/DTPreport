@@ -1,11 +1,8 @@
 @page {
     margin: 0.3cm;
-    font-family: "Times New Roman", sans-serif;
+    font-family: "Times New Roman";
 }
 
-* {
-    font-family: "Times New Roman", sans-serif;
-}
 
 .finish-table {
     font-size: 1em;
