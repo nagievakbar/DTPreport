@@ -182,7 +182,6 @@ def test_report_base(id: int, obj):
     checks = holds_images.checks.first()
     other_photos = holds_images.o_images.all()
     document_photo = Documents.objects.first()
-    path_for_images = s.MEDIA_ROOT
     context = {
         'calculation': calculation,
         's': s.BASE_URL,
