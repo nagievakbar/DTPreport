@@ -1344,7 +1344,7 @@
         </table>
         <p>
             Принятое значение эксплуатационного износа с учетом технического состояния АМТС - <strong>
-            {{ report.wear_data.__getitem__('accept_wear') }}%%</strong>
+            {{ report.wear_data.__getitem__('accept_wear') }}%</strong>
         </p>
         <br>
         <p class="bold-text">
@@ -1927,12 +1927,12 @@
             <div class="new-page">
                 <table id="image-table" class="center-image">
                     <tr>
-                        <td><img src="{{ document_photo.license }}" alt="" class="two-list"></td>
-                        <td><img src="{{ document_photo.guvonhnoma }}" alt="" class="two-list"></td>
+                        <td><img src="{{ document_photo.license.path }}" alt="" class="two-list"></td>
+                        <td><img src="{{ document_photo.guvonhnoma.path }}" alt="" class="two-list"></td>
                     </tr>
                     <tr>
-                        <td><img src="{{ document_photo.certificate }}" alt="" class="two-list"></td>
-                        <td><img src="{{ document_photo.insurance }}" alt="" class="two-list"></td>
+                        <td><img src="{{ document_photo.certificate.path }}" alt="" class="two-list"></td>
+                        <td><img src="{{ document_photo.insurance.path }}" alt="" class="two-list"></td>
                     </tr>
                 </table>
             </div>
