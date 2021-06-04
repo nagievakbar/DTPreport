@@ -1938,4 +1938,8 @@
             </div>
             </div>
         {% endif %}
+
+    {% if checks %}
+        <img src="{{ s }}/{{ checks.checks.name }}" alt="" class="half-list new-page">
+    {% endif %}
 {% endblock %}
