@@ -17,5 +17,4 @@ urlpatterns = [
     path("test_finish/<int:id>", finish_view),
     path("test_agreement/<int:id>", agreement_view),
     path("test_report/<int:id>", test_report)
-
 ]

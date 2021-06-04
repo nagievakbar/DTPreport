@@ -19,7 +19,7 @@ def get_base_additional_template(request):
     except:
         file = None
     name = 'report.html'
-    return handle_schema(file=None, default_name=name)
+    return handle_schema(file=file, default_name=name)
 
 
 def get_base_template(request):
@@ -28,7 +28,7 @@ def get_base_template(request):
     except:
         file = None
     name = 'report.html'
-    return handle_schema(file=None, default_name=name)
+    return handle_schema(file=file, default_name=name)
 
 
 def get_base_mixing_template(request):
@@ -37,7 +37,7 @@ def get_base_mixing_template(request):
     except:
         file = None
     name = 'finishing_report.html'
-    return handle_schema(file=None, default_name=name)
+    return handle_schema(file=file, default_name=name)
 
 
 def get_base_agreement_template(request):
@@ -46,7 +46,7 @@ def get_base_agreement_template(request):
     except:
         file = None
     name = 'aggreement_report.html'
-    return handle_schema(file=None, default_name=name)
+    return handle_schema(file=file, default_name=name)
 
 
 def handle_schema(file, default_name):
