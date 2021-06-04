@@ -1,10 +1,15 @@
+@font-face {
+ font-family: 'Roman';
+    src: local('templates/font/roman.ttf');
+
+}
 * {
-    font-size: 0.974em;
-    font-family: "Times New Roman";
+    font-size: 0.9em;
+    font-family: "Roman";
 }
 
 .container {
-    margin: 0px 10%;
+    margin: 0 10%;
     display: flex;
     justify-content: space-between;
 }
