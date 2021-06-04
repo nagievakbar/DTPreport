@@ -42,7 +42,7 @@ def delete_empty_report():
 
 @shared_task(name="make_pdf")
 def make_pdf(id):
-    obj = TemplateBase.objects
+    obj = TemplateBase
     new_report_pdf = Report.objects.get(report_id=id)
     data = test_report_base(id, obj=obj)
     filename = "%s.pdf" % new_report_pdf.car.car_number
@@ -51,7 +51,7 @@ def make_pdf(id):
 
 @shared_task(name="make_pdf_additional")
 def make_pdf_additional(id):
-    obj = TemplateAdditional.objects
+    obj = TemplateAdditional
     new_report_pdf = Report.objects.get(report_id=id)
     data = test_report_base(id, obj=obj)
     filename = "%s.pdf" % new_report_pdf.car.car_number
