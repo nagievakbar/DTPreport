@@ -1304,7 +1304,8 @@
                     success: function (data) {
 
                         get_procent(last_input_price_cons)
-                        set_price(data.price, last_input_price);
+                        last_input_price.val(data.price);
+                        {#set_price(data.price, last_input_price);#}
                         last_input_price_cons.select()
                         last_input_name.val(data.name)
                         textAreaAdjust(last_input_name[0]);
