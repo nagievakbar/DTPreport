@@ -383,7 +383,7 @@ a:hover {
   font-weight: normal;
   cursor: pointer;
   font-size: 0;
-  white-space: nowrap;contact-wrap
+  white-space: nowrap;
   overflow: hidden;
   padding-right: 20px;
   -moz-box-sizing: border-box;
@@ -403,7 +403,7 @@ a:hover {
   content: "▼";
   position: absolute;
   right: 5px;
-  background: #5c6e91;contact-wrap
+  background: #5c6e91;
   top: 0;
   width: 20px;
   padding-left: 0px;

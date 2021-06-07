@@ -49,7 +49,7 @@ class CarForm(forms.ModelForm):
     brand_text = forms.CharField(required=False,
                                  widget=forms.TextInput(attrs={'placeholder': 'Марка', 'class': 'input_in'}))
     brand = forms.ChoiceField(choices=BRANDS, required=False,
-                              widget=forms.Select(attrs={'class': 'form-control select-block'}))
+                              widget=forms.Select(attrs={'class': 'form-control select-block drop-down-list'}))
     car_number = forms.CharField(required=False,
                                  widget=forms.TextInput(attrs={'placeholder': 'Номер машины', 'class': 'input_in'}))
     registration = forms.CharField(required=False,
