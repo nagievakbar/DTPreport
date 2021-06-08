@@ -261,26 +261,25 @@ def get_consumable_cost(request):
 
 
 def calculate_service_cost(report, cost):
+
     report.service_cost = report.service_cost + cost
 
 
 def add_product_to_report(report, cost):
+    if cost is None or cost == "":
+        cost= 0
     calculate_product_cost(report, cost)
 
 
 def add_service_to_report(report, service_id, cost):
-    try:
-        report.service.add(Service.objects.get(service_id=service_id))
-    except Service.DoesNotExist:
-        pass
+    if cost is None or cost == "":
+        cost = 0
     calculate_service_cost(report, cost)
 
 
 def add_consumable_to_report(report, consumable_id, cost):
-    try:
-        report.consumable.add(Consumable.objects.get(consumable_id=consumable_id))
-    except Consumable.DoesNotExist:
-        pass
+    if cost is None or cost == "":
+        cost = 0
     calculate_consumable_cost(report, cost)
 
 
