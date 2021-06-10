@@ -6,6 +6,15 @@ $('#sign_boss').on('click', function () {
 })
 var sign_user;
 var url = "https://e-otsenka.uz/report/ajax/verifyPkcs7/";
+function success_sign() {
+    console.log(typeof (sign_user));
+    if (sign_user === '0') {
+        $("#company_sign").css('display','none');
+    }
+    else {
+         $("#user_sign").css('display','none');
+    }
+}
 function loadModels(object) {
     let sign = object.attr('sign');
     let sign_form = object.attr('sign_from')
@@ -346,7 +355,8 @@ sign = function () {
                     },
                     cache: true,
                     success: function (data) {
-                        alert("Вы успешно подписали документ!")
+                        success_sign();
+                        alert("Вы успешно подписали документ!");
                     },
                 })
             }, function (e, r) {
