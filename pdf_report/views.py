@@ -148,7 +148,7 @@ def agreement_view(request, id):
         'report': report,
         'car': report.car,
         'customer': report.contract.customer,
-        'qrcode': check_qr_code(report.pdf_qr_code_user),
+        'qrcode_company': check_qr_code(report.pdf_qr_code_company),
         'contract': contract,
     }
 
