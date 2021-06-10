@@ -210,7 +210,7 @@
                 1
             </td>
             <td rowspan="1" colspan="1">
-               {{ calculation.total }}
+                {{ calculation.total }}
             </td>
             <td rowspan="1" colspan="2">
                 Без акциза
@@ -710,7 +710,7 @@
             <tr>
                 <td>Реквизиты заказчика:</td>
                 <td><p>
-                    Адрес: {{ report.contract.customer.address[:35] }}
+                    Адрес: {{ report.contract.customer.address }}
                     <br>
                     паспорт серия: {{ report.contract.customer.passport_number }}
                     <br>
@@ -1265,11 +1265,11 @@
         </table>
 
         <p class="bold-text center margin-1-top">
-            Ки,физ =(0,208 - 0,003 * {{ report.wear_data.__getitem__('point') }}) *
-            {{ report.wear_data.__getitem__('weight') }} ^ 0.7 = {{ report.wear_data.__getitem__('wear')}}%
+            Ки,физ =(0,208 - 0,003 * {{ report.wear_data_get('point') }}) *
+            {{ report.wear_data_get('weight') }} ^ 0.7 = {{ report.wear_data_get('wear')}}%
         </p>
         <p class="large-text-space">
-            &Tab;Таким образом, расчетный износ объекта оценки составляет: {{ report.wear_data.__getitem__('wear') }}
+            &Tab;Таким образом, расчетный износ объекта оценки составляет: {{ report.wear_data_get('wear') }}
             &Tab;В случаях, когда расчетный эксплуатационный износ Иэ не соответствует техническому
             состоянию АМТС, эксперт вправе скорректировать (увеличить или уменьшить с обязательным
             обоснованием) расчетный эксплуатационный износ, и установить его значение исходя из
@@ -1344,7 +1344,7 @@
         </table>
         <p>
             Принятое значение эксплуатационного износа с учетом технического состояния АМТС - <strong>
-            {{ report.wear_data.__getitem__('accept_wear') }}%</strong>
+            {{ report.wear_data_get('accept_wear') }}%</strong>
         </p>
         <br>
         <p class="bold-text">
@@ -1476,17 +1476,19 @@
             <tr>
                 <th>н/ч</th>
             </tr>
-            {% for service in report.service_data %}
-                <tr>
-                    <td>{{ service.service_id }}</td>
-                    <td>{{ service.name }}</td>
-                    <td>{{ service.norm_per_hour }}</td>
-                    <td> {{ service.premium }}</td>
-                    <td>{{ service.price }}</td>
-                    <td>{{ service.service_cost }}</td>
+            {% if report.service_data %}
+                {% for service in report.service_data %}
+                    <tr>
+                        <td>{{ service.service_id }}</td>
+                        <td>{{ service.name }}</td>
+                        <td>{{ service.norm_per_hour }}</td>
+                        <td> {{ service.premium }}</td>
+                        <td>{{ service.price }}</td>
+                        <td>{{ service.service_cost }}</td>
 
-                </tr>
-            {% endfor %}
+                    </tr>
+                {% endfor %}
+            {% endif %}
             <tr>
                 <td colspan="5">Общая стоимость работ</td>
                 <th>{{ report.service_cost }}</th>
@@ -1510,16 +1512,18 @@
                 <th>цена</th>
                 <th>сумма</th>
             </tr>
-            {% for product in report.product_data %}
-                <tr>
-                    <td>{{ loop.index }}</td>
-                    <td> {{ product.name }} </td>
-                    <td>шт</td>
-                    <td> {{ product.quantity }}</td>
-                    <td>{{ product.price }} </td>
-                    <td>{{ product.product_cost }}</td>
-                </tr>
-            {% endfor %}
+            {% if report.product_data %}
+                {% for product in report.product_data %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td> {{ product.name }} </td>
+                        <td>шт</td>
+                        <td> {{ product.quantity }}</td>
+                        <td>{{ product.price }} </td>
+                        <td>{{ product.product_cost }}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
             <tr>
                 <td colspan="5">Общая стоимость запасных частей</td>
                 <th>{{ report.product_cost }}</th>
@@ -1554,6 +1558,7 @@
                 </th>
                 <th>сумма</th>
             </tr>
+         {% if report.consumable_data %}
             {% for consumable in report.consumable_data %}
                 <tr>
                     <td>{{ consumable.consumable_id }}</td>
@@ -1565,6 +1570,7 @@
                     <td>{{ consumable.consumable_cost }}</td>
                 </tr>
             {% endfor %}
+        {% endif %}
             <tr>
                 <td colspan="5">Общая стоимость материалов</td>
                 <td>{{ report.consumable_cost }}</td>

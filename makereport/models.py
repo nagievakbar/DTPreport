@@ -103,10 +103,10 @@ class Customer(models.Model):
         return str(self.name)
 
     def name_respect(self):
-        name_new = self.name.split(' ')
         try:
+            name_new = self.name.split(' ')
             return "{first} {second}".format(first=name_new[1], second=name_new[2])
-        except IndexError:
+        except:
             return self.name
 
     class Meta:
@@ -486,6 +486,12 @@ class Report(models.Model):
             print(self.wear_data.__getitem__('accept_wear'))
             self.product_acc_cost = (self.product_cost * (1 - self.wear_data.__getitem__('accept_wear') / 100))
             return self.product_acc_cost
+        except:
+            return 0
+
+    def wear_data_get(self, key: str):
+        try:
+            return self.wear_data.__getitem__(key)
         except:
             return 0
 

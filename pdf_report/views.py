@@ -148,7 +148,7 @@ def agreement_view(request, id):
         'report': report,
         'car': report.car,
         'customer': report.contract.customer,
-        'qrcode': check_qr_code(report.pdf_qr_code_company),
+        'qrcode': check_qr_code(report.pdf_qr_code_user),
         'contract': contract,
     }
 
@@ -314,30 +314,24 @@ def get_response(id, obj):
     return pdf.contents()
 
 
-def create_base64(request, new_report_pdf: Report):
+def create_base64(new_report_pdf: Report):
     locale.setlocale(locale.LC_ALL, 'C')
     calculation = Calculation.objects.create()
     context = {
         'calculation': calculation,
-        'contract': new_report_pdf.contract,
+        's': s.BASE_URL,
         'report': new_report_pdf,
-        'services': new_report_pdf.service.all().__len__(),
-        'datetime': new_report_pdf.report_date,
-        'qrcode': new_report_pdf.pdf_qr_code_user,
-        'qrcode_admin': new_report_pdf.pdf_qr_code_company,
-        'images': "",
-        'document_photo': "",
-        'passport': "",
-        'checks': "",
-        'other_photos': "",
+        'car': new_report_pdf.car,
+        'customer': new_report_pdf.contract.customer,
+        'qrcode': check_qr_code(new_report_pdf.pdf_qr_code_user),
+        'contract': new_report_pdf.contract,
     }
-    file_name = get_name(TemplateBase.objects.last())
-    data = generate_pdf(context=context, default_template="report.html", main_template_path=file_name,
-                        css_name="report.css")
+    file_name = get_name(TemplateAgreement.objects.last())
+    data = generate_pdf(context=context, default_template="aggreement_report.html", main_template_path=file_name,
+                        css_name="aggreement_report.css")
     filename = "%s.pdf" % new_report_pdf.car.car_number
-    new_report_pdf.save_pdf(filename, ContentFile(data))
+    new_report_pdf.save_pdf(filename, data)
     with open(new_report_pdf.pdf_report.path, "rb") as file:
         encoded_string = base64.b64encode(file.read())
     new_report_pdf.pdf_report_base64 = encoded_string.decode('ascii')
-
     new_report_pdf.save()

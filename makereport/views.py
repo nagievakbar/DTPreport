@@ -317,7 +317,7 @@ class ReportEditView(View):
             context['total_price_report'] = total_price_report
             context['report'] = new_report
             try:
-                create_base64(request, new_report)
+                create_base64(new_report)
             except KeyError:
                 pass
 
@@ -532,7 +532,7 @@ class ReportView(View):
             context['total_price_report'] = total_price_report
             context['report'] = new_report
             try:
-                create_base64(request, new_report)
+                create_base64( new_report)
             except KeyError:
                 pass
 
@@ -642,7 +642,7 @@ class ReportView(View):
             total_price_report = new_report.total_report_cost
             context['total_price_report'] = total_price_report
             try:
-                create_base64(request, new_report)
+                create_base64( new_report)
             except KeyError:
                 pass
             finally:

@@ -836,7 +836,7 @@
                                     </div>
                                 {% endif %}
                              {% if report.pdf_qr_code_company == None and id != 0%}
-                                <div class="col-lg-2 download_button">
+                                <div id="company_sign" class="col-lg-2 download_button">
                                     <div class="panel_user" id="download_button5">
                                         <button class="btn panel_button"
                                                 href="#" data-bs-toggle="modal"
@@ -853,7 +853,7 @@
                                 </div>
                               {% endif %}
                             {% if report.pdf_qr_code_user == None and id != 0 %}
-                                <div class="col-lg-3 download_button">
+                                <div id="user_sign" class="col-lg-3 download_button">
                                     <div class="panel_user" id="download_button6">
 
                                         <button class="btn panel_button"
