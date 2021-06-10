@@ -38,7 +38,7 @@ def get_verifyPkcs7(report_id, sign_from=None):
     pkcs7 = report.pdf_report_pkcs7
     print("PKCS7 : ".format(pkcs7))
     url = "http://127.0.0.1:9090/dsvs/pkcs7/v1?WSDL"
-    headers = {'content-type': 'text/xml'}
+    headers = {'Content-type': 'text/xml', 'Accept': 'application/json'}
 
     body = """<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
         <Body>
@@ -53,6 +53,7 @@ def get_verifyPkcs7(report_id, sign_from=None):
     # my_file.write(response.content)
     # my_file.close()
     my_json = response.content.decode('utf8').replace("'", '"')
+    print(my_json)
     formatted_output = my_json.replace('\\n', '\n').replace('\\t', '\t')
     # my_file = open('output.txt', 'w')
     # my_file.write(formatted_output)
