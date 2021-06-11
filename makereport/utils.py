@@ -55,7 +55,7 @@ def get_verifyPkcs7(report_id, sign_from=None):
 
     response.encoding = 'utf-8'
     my_json = response.text
-    print(my_json)
+
     formatted_output = my_json.replace('\\n', '\n').replace('\\t', '\t')
     # my_file = open('output.txt', 'w')
     # my_file.write(formatted_output)
@@ -266,13 +266,12 @@ def get_consumable_cost(request):
 
 
 def calculate_service_cost(report, cost):
-
     report.service_cost = report.service_cost + cost
 
 
 def add_product_to_report(report, cost):
     if cost is None or cost == "":
-        cost= 0
+        cost = 0
     calculate_product_cost(report, cost)
 
 
