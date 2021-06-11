@@ -62,7 +62,7 @@ def get_verifyPkcs7(report_id, sign_from=None):
     # my_file.close()
     print(formatted_output)
     get_str = serializing(formatted_output)
-    print("AASDSADSADSADDD")
+
     print(get_str)
     get_json = json.loads(get_str)
     index = 0

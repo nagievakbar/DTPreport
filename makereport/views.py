@@ -15,7 +15,7 @@ from .utils import *
 
 from pdf_report.views import create_base64
 from DTPreport import settings as s
-from pdf_report.tasks import reduce_image , delete_empty_report
+from pdf_report.tasks import reduce_image, delete_empty_report, make_pdf, make_pdf_additional
 
 
 class ImageDelete(View):
@@ -320,6 +320,7 @@ class ReportEditView(View):
                 create_base64(new_report)
             except KeyError:
                 pass
+            make_pdf_additional.delay(new_report.report_id)
 
         return render(request, 'makereport/add_repor.html', context)
 
@@ -532,10 +533,10 @@ class ReportView(View):
             context['total_price_report'] = total_price_report
             context['report'] = new_report
             try:
-                create_base64( new_report)
+                create_base64(new_report)
             except KeyError:
                 pass
-
+            make_pdf.delay(new_report.report_id)
         return render(request, 'makereport/add_repor.html', context)
 
     @method_decorator(decorators)
@@ -642,10 +643,12 @@ class ReportView(View):
             total_price_report = new_report.total_report_cost
             context['total_price_report'] = total_price_report
             try:
-                create_base64( new_report)
+                create_base64(new_report)
             except KeyError:
                 pass
+
             finally:
+                make_pdf.delay(new_report.report_id)
                 context = {
                     'base': True,
                     'id_image': holds_images.id,
@@ -710,7 +713,8 @@ def reports_list(request):
 @login_required
 def reports_edit_list(request):
     if 'search' in request.GET:
-        reports = Report.objects.filter(car__car_number=request.GET['search']).exclude((Q(key__isnull=True) | Q(key__exact='')))
+        reports = Report.objects.filter(car__car_number=request.GET['search']).exclude(
+            (Q(key__isnull=True) | Q(key__exact='')))
     else:
         reports = Report.objects.exclude((Q(key__isnull=True) | Q(key__exact='')))
     return render(request, 'makereport/additional.html', context={'reports': reports})
