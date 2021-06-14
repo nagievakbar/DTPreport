@@ -318,19 +318,34 @@
             </tbody>
         </table>
     </div>
-<div class="center">
-    <div class="pagination">
-        {% if reports.has_previous %}
-            <a href="?page={{ reports.previous_page_number }}">&laquo;</a>
-        {% endif %}
-        {% for page in reports.paginator.page_range %}
-            <a href="?page={{ page }}" class="{% if reports.number == page %} active  {% endif %}">{{ page }}</a>
-        {% endfor %}
-        {% if reports.has_next %}
-            <a href="?page={{ reports.next_page_number }}">&raquo;</a>
-        {% endif %}
+  <div class="center">
+        <div class="pagination">
+            {% if reports.has_previous %}
+                <a href="?page=1">первая</a>
+            {% endif %}
+            {% if reports.has_previous %}
+                <a href="?page={{ reports.previous_page_number }}">&laquo;</a>
+            {% endif %}
+            {% for page in reports.paginator.page_range %}
+                <a href="?page={{ page }}" class="{% if reports.number == page %} active  {% endif %}">{{ page }}</a>
+            {% endfor %}
+            {% if reports.has_next %}
+                <a href="?page={{ reports.next_page_number }}">&raquo;</a>
+            {% endif %}
+            {% if reports.has_next %}
+                <a href="?page={{ reports.paginator.num_pages }}">последния</a>
+            {% endif %}
+        </div>
     </div>
-</div>
+    <div class="center">
+        <div class="pagination">
+    <span class="step-links">
+        <span class="current">
+            Страница {{ reports.number }} из {{ reports.paginator.num_pages }}.
+        </span>
+    </span>
+        </div>
+    </div>
     <script>
         var csrftoken = getCookie('csrftoken');
 
