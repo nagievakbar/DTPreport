@@ -150,7 +150,7 @@
                     </svg>
                     <br>Настройка</a>
                 </li>
-                <li ><a href="{% url 'reports_list' %}">
+                <li><a href="{% url 'reports_list' %}">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -296,15 +296,17 @@
                 <tr>
                     <td style="border-bottom: 1px solid #fff;" data-title="№">{{ forloop.counter }}</td>
                     {#                  <td style="border-bottom: 1px solid #fff;" data-title="Дата">{{ report.created_at|date:"d.m.Y" }}</td>#}
-                    <td style="border-bottom: 1px solid #fff;" data-title="Дата">{{ report.contract.contract_number }}</td>
-                    <td style="border-bottom: 1px solid #fff;" data-title="Марка машины">{{ report.car.brand_text }}</td>
+                    <td style="border-bottom: 1px solid #fff;"
+                        data-title="Дата">{{ report.contract.contract_number }}</td>
+                    <td style="border-bottom: 1px solid #fff;"
+                        data-title="Марка машины">{{ report.car.brand_text }}</td>
                     <td style="border-bottom: 1px solid #fff;" data-title="Номер">{{ report.car.car_number }}</td>
                     <td style="border-bottom: 1px solid #fff;"
                         data-title="Исполнитель">{{ report.created_by }}</td>
                     {#                  <td style="border-bottom: 1px solid #fff;" data-title="Договор">{{ report.contract }}</td>#}
                     <td style="border-bottom: 1px solid #fff;" data-title="Ключ">{{ report.key }}</td>
                     <td style="border-bottom: 1px solid #fff;" data-title="Отчёт" data-type="currency">
-                        <button type="button"  onclick="makePdf({{ report.report_id }})">Отчет в pdf</button>
+                        <button type="button" onclick="makePdf({{ report.report_id }})">Отчет в pdf</button>
                     </td>
                     <td style="border-bottom: 1px solid #fff;" data-title="Функции" data-type="currency">
                         <a class="btn btn-primary" href="{% url 'add_report' report.report_id %}">Дополнительно</a>
@@ -316,31 +318,44 @@
             </tbody>
         </table>
     </div>
+<div class="center">
+    <div class="pagination">
+        {% if reports.has_previous %}
+            <a href="?page={{ reports.previous_page_number }}">&laquo;</a>
+        {% endif %}
+        {% for page in reports.paginator.page_range %}
+            <a href="?page={{ page }}" class="{% if reports.number == page %} active  {% endif %}">{{ page }}</a>
+        {% endfor %}
+        {% if reports.has_next %}
+            <a href="?page={{ reports.next_page_number }}">&raquo;</a>
+        {% endif %}
+    </div>
+</div>
+    <script>
+        var csrftoken = getCookie('csrftoken');
 
-<script>
-    var csrftoken = getCookie('csrftoken');
-   function makePdf(id){
-       if (id){
-           $.ajax({
-                type: "GET",
-                headers: {
-                    "X-CSRFToken": csrftoken
-                },
-                url: `{% url "make_pdf_additional" %}?id=${id}`,
-                success: function (data) {
-                    alert("Вы успешно добавили в pdf!");
+        function makePdf(id) {
+            if (id) {
+                $.ajax({
+                    type: "GET",
+                    headers: {
+                        "X-CSRFToken": csrftoken
+                    },
+                    url: `{% url "make_pdf_additional" %}?id=${id}`,
+                    success: function (data) {
+                        alert("Вы успешно добавили в pdf!");
 
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    console.log(xhr)
-                    console.log(ajaxOptions)
-                    console.log(thrownError)
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        console.log(xhr)
+                        console.log(ajaxOptions)
+                        console.log(thrownError)
                         console.log("error")
                     }
-            })
-       }
-   }
-</script>
+                })
+            }
+        }
+    </script>
 </main>
 
 

@@ -306,37 +306,37 @@
                     {#                  <td style="border-bottom: 1px solid #fff;" data-title="Договор">{{ report.contract }}</td>#}
                     <td style="border-bottom: 1px solid #fff;" data-title="Ключ">{{ report.key }}</td>
                     <td style="border-bottom: 1px solid #fff;" data-title="Отчёт" data-type="currency">
-                        <button type="button"  onclick="makePdf({{ report.report_id }})">Отчет в pdf</button>
+                        <button type="button" onclick="makePdf({{ report.report_id }})">Отчет в pdf</button>
                     </td>
                     <td style="border-bottom: 1px solid #fff;" data-title="Функции" data-type="currency">
-{#                        {% if report.pdf_qr_code_company == None or report.pdf_qr_code_user == None %}#}
-{#                            <span>Подпись</span>#}
-{#                        {% else %}#}
-{#                             <span>Документ подписан</span>#}
-{#                        {% endif %}#}
-{#                        <div class="inline_button">#}
-{#                            {% if report.pdf_qr_code_company == None %}#}
-{#                                <button class="btn btn-primary"#}
-{#                                        href="#" data-bs-toggle="modal"#}
-{#                                        data-bs-target="#exampleModal"#}
-{#                                        sign="{{ report.signed }}"#}
-{#                                        sign_from='0'#}
-{#                                        data-bs-report="{{ report.report_id }}"#}
-                                        {#                                    pkcs7="{{ report.pdf_report_pkcs7.0 }}"#}
-{#                                        data-bs-whatever="{{ report.pdf_report_base64 }}">Компании#}
-{#                                </button>#}
-{#                            {% endif %}#}
-{#                            {% if report.pdf_qr_code_user == None %}#}
-{#                                <button class="btn btn-primary"#}
-{#                                        href="#" data-bs-toggle="modal"#}
-{#                                        data-bs-target="#exampleModal"#}
-{#                                        sign="{{ report.signed }}"#}
-{#                                        sign_from='1'#}
-{#                                        data-bs-report="{{ report.report_id }}"#}
-                                        {#                                    pkcs7="{{ report.pdf_report_pkcs7.0 }}"#}
-{#                                        data-bs-whatever="{{ report.pdf_report_base64 }}">Руководителя#}
-{#                                </button>#}
-{#                            {% endif %}#}
+                        {#                        {% if report.pdf_qr_code_company == None or report.pdf_qr_code_user == None %}#}
+                        {#                            <span>Подпись</span>#}
+                        {#                        {% else %}#}
+                        {#                             <span>Документ подписан</span>#}
+                        {#                        {% endif %}#}
+                        {#                        <div class="inline_button">#}
+                        {#                            {% if report.pdf_qr_code_company == None %}#}
+                        {#                                <button class="btn btn-primary"#}
+                        {#                                        href="#" data-bs-toggle="modal"#}
+                        {#                                        data-bs-target="#exampleModal"#}
+                        {#                                        sign="{{ report.signed }}"#}
+                        {#                                        sign_from='0'#}
+                        {#                                        data-bs-report="{{ report.report_id }}"#}
+                        {#                                    pkcs7="{{ report.pdf_report_pkcs7.0 }}"#}
+                        {#                                        data-bs-whatever="{{ report.pdf_report_base64 }}">Компании#}
+                        {#                                </button>#}
+                        {#                            {% endif %}#}
+                        {#                            {% if report.pdf_qr_code_user == None %}#}
+                        {#                                <button class="btn btn-primary"#}
+                        {#                                        href="#" data-bs-toggle="modal"#}
+                        {#                                        data-bs-target="#exampleModal"#}
+                        {#                                        sign="{{ report.signed }}"#}
+                        {#                                        sign_from='1'#}
+                        {#                                        data-bs-report="{{ report.report_id }}"#}
+                        {#                                    pkcs7="{{ report.pdf_report_pkcs7.0 }}"#}
+                        {#                                        data-bs-whatever="{{ report.pdf_report_base64 }}">Руководителя#}
+                        {#                                </button>#}
+                        {#                            {% endif %}#}
 
                         <a href="{% url 'edit_report' report.report_id %}">Изменить </a>
                         <button class="" type="button" onclick="myFunction({{ report.report_id }})">Удалить</button>
@@ -345,10 +345,25 @@
                 </tr>
 
             {% endfor %}
+
             </tbody>
         </table>
     </div>
+    <div class="center">
 
+
+        <div class="pagination">
+            {% if reports.has_previous %}
+                <a href="?page={{ reports.previous_page_number }}">&laquo;</a>
+            {% endif %}
+            {% for page in reports.paginator.page_range %}
+                <a href="?page={{ page }}" class="{% if reports.number == page %} active  {% endif %}">{{ page }}</a>
+            {% endfor %}
+            {% if reports.has_next %}
+                <a href="?page={{ reports.next_page_number }}">&raquo;</a>
+            {% endif %}
+        </div>
+    </div>
 
     <svg class="liquid_shape_first" width="302" height="261" viewBox="0 0 302 261" fill="none"
          xmlns="http://www.w3.org/2000/svg">
@@ -434,9 +449,9 @@
 
 </body>
 <script>
-   function makePdf(id){
-       if (id){
-           $.ajax({
+    function makePdf(id) {
+        if (id) {
+            $.ajax({
                 type: "GET",
                 headers: {
                     "X-CSRFToken": csrftoken
@@ -450,11 +465,11 @@
                     console.log(xhr)
                     console.log(ajaxOptions)
                     console.log(thrownError)
-                        console.log("error")
-                    }
+                    console.log("error")
+                }
             })
-       }
-   }
+        }
+    }
 
     function myFunction(id) {
         var txt;
@@ -474,8 +489,8 @@
                     console.log(xhr)
                     console.log(ajaxOptions)
                     console.log(thrownError)
-                        console.log("error")
-                    }
+                    console.log("error")
+                }
             })
         } else {
             txt = "You pressed Cancel!";
@@ -510,7 +525,7 @@
         })
 
         $('#exampleModal').on('hidden.bs.modal', function (e) {
-         location.reload();
+            location.reload();
         })
 
         $(document).on('click', ".btn btn-primary sign", function (e) {

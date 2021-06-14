@@ -10,7 +10,7 @@ def qr_code(signature, valid_from):
     # str_for_qr_code = "success: {success}\nsignature:{signature}\nsignAlgName:{signAlgName}\nlink:{link}\n".format(
     #     success=success, signature=signature, signAlgName=signAlgName, link=link)
     str_for_qr_code = "signature:{signature}           from: {valid_from}".format(
-        signature=signature[:22], valid_from=valid_from)
+        signature=signature, valid_from=valid_from)
     print(str_for_qr_code)
     return str_for_qr_code
     # img = qrcode.make(str_for_qr_code)  # вот сюда любую ссылку вставите он переведет в QR CODE
@@ -98,13 +98,9 @@ def verifyPkcs7(request):
         pkcs7 = request.POST.get('pkcs7', None)
         report_id = request.POST.get('report_id', None)
         report = Report.objects.get(report_id=report_id)
-        # if not report.pdf_report_pkcs7:
         report.pdf_report_pkcs7 = []
         report.pdf_report_pkcs7.append(pkcs7)
         report.save()
-        my_file_serialized = open('serialized.txt', 'w')
-        my_file_serialized.write(str(request.POST))
-        my_file_serialized.close()
         get_verifyPkcs7(report_id, int(request.POST.get('sign_from', 0)))
         data = {
             'success': 'True',
@@ -402,3 +398,26 @@ def create_report(request):
     )
     calculation.save()
     return report
+
+
+from django.core.paginator import Paginator
+
+
+class CustomPaginator(Paginator):
+
+    def _get_page(self, *args, **kwargs):
+        self._page_custom = super()._get_page(*args, **kwargs)
+        return self._page_custom
+
+    @property
+    def page_range(self):
+        if self.num_pages < 10:
+            return range(1, self.num_pages + 1)
+        elif self.num_pages - self._page_custom.number < 10:
+            previous = self._page_custom.number - self._page_custom.number % 10
+            next = self._page_custom.number + self.num_pages - previous
+            return range(previous, next)
+        else:
+            previous = self._page_custom.number - self._page_custom.number % 10
+            next = self._page_custom.number + 10 - previous
+            return range(previous, next)

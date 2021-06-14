@@ -6,7 +6,6 @@ $('#sign_boss').on('click', function () {
 })
 var sign_user;
 var url = "https://e-otsenka.uz/report/ajax/verifyPkcs7/";
-
 function success_sign() {
     console.log(typeof (sign_user));
     if (sign_user === '0') {
@@ -16,15 +15,12 @@ function success_sign() {
          $("#user_sign").css('display','none');
     }
 }
-
 function loadModels(object) {
     let sign = object.attr('sign');
     let sign_form = object.attr('sign_from')
-    var model = $("#exampleModal");
+        var model = $("#exampleModal");
     model.modal('show');
     sign_user = sign_form;
-    console.log(sign_user);
-
     model.find('.sign').val(sign)
     model.find('.sign_form').val(sign_form)
     let recipient = object.attr('data-bs-whatever');
@@ -236,7 +232,7 @@ sign_decide = function (obj) {
 
     var choice = document.getElementById("sign").value;
     console.log('sign decide')
-    console.log(sign_user);
+     console.log(sign_user);
     sign();
 
 }
@@ -332,7 +328,7 @@ adding_sign = function () {
 }
 sign = function () {
     var sign_from = document.getElementById('sign_from');
-    var report_input = document.getElementById('report_id');
+     var report_input = document.getElementById('report_id');
     console.log(sign_from.value);
     console.log("sadsdsdasd");
     var itm = document.testform.key.value;
@@ -360,7 +356,7 @@ sign = function () {
                     cache: true,
                     success: function (data) {
                         success_sign();
-                        alert("Вы успешно подписали документ!")
+                        alert("Вы успешно подписали документ!");
                     },
                 })
             }, function (e, r) {
