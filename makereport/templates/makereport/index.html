@@ -350,9 +350,10 @@
         </table>
     </div>
     <div class="center">
-
-
         <div class="pagination">
+            {% if reports.has_previous %}
+                <a href="?page=1">первая</a>
+            {% endif %}
             {% if reports.has_previous %}
                 <a href="?page={{ reports.previous_page_number }}">&laquo;</a>
             {% endif %}
@@ -362,8 +363,25 @@
             {% if reports.has_next %}
                 <a href="?page={{ reports.next_page_number }}">&raquo;</a>
             {% endif %}
+            {% if reports.has_next %}
+                <a href="?page={{ reports.paginator.num_pages }}">последния</a>
+            {% endif %}
         </div>
     </div>
+    <div class="center">
+        <div class="pagination">
+    <span class="step-links">
+
+
+        <span class="current">
+            Страница {{ reports.number }} из {{ reports.paginator.num_pages }}.
+        </span>
+
+
+    </span>
+        </div>
+    </div>
+
 
     <svg class="liquid_shape_first" width="302" height="261" viewBox="0 0 302 261" fill="none"
          xmlns="http://www.w3.org/2000/svg">
