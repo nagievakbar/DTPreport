@@ -413,7 +413,7 @@ class CustomPaginator(Paginator):
     def page_range(self):
         if self.num_pages < 10:
             return range(1, self.num_pages + 1)
-        elif int(self.num_pages / 10) == int(self._page_custom.number / 10) and False:
+        elif int(self.num_pages / 10) == int(self._page_custom.number / 10):
             previous = self._page_custom.number - self._page_custom.number % 10
             next = self.num_pages + 1
             return range(previous, next)
