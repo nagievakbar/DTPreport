@@ -420,6 +420,6 @@ class CustomPaginator(Paginator):
         else:
             remainder = self._page_custom.number % 10
             to_ten = 10 - remainder
-            previous = self._page_custom.number - remainder + 1
+            previous = self._page_custom.number - remainder
             next = self._page_custom.number + to_ten + 1
             return range(previous, next)
