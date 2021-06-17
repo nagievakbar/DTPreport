@@ -283,10 +283,8 @@ class HoldsImages(models.Model):
 
     def set_new(self, old):
         self._clear()
-        self.image_previous.set(old.image.all())
         self.pp_photo_previous.set(old.pp_photo.all())
         self.o_images_previous.set(old.o_images.all())
-        self.checks_previous.set(old.checks.all())
         self.save()
 
     def store_add(self):

@@ -306,7 +306,7 @@
                     {#                  <td style="border-bottom: 1px solid #fff;" data-title="Договор">{{ report.contract }}</td>#}
                     <td style="border-bottom: 1px solid #fff;" data-title="Ключ">{{ report.key }}</td>
                     <td style="border-bottom: 1px solid #fff;" data-title="Отчёт" data-type="currency">
-                        <button type="button" onclick="makePdf({{ report.report_id }})">Отчет в pdf</button>
+                       <a target="_blank" href="{% url 'get_additional' report.report_id %}">дополнительный отчёт</a>
                     </td>
                     <td style="border-bottom: 1px solid #fff;" data-title="Функции" data-type="currency">
                         <a class="btn btn-primary" href="{% url 'add_report' report.report_id %}">Дополнительно</a>

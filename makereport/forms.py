@@ -70,8 +70,9 @@ class CarForm(forms.ModelForm):
     car_owner = forms.CharField(required=False,
                                 widget=forms.TextInput(attrs={'placeholder': 'Владелец', 'class': 'input_in'}))
     owner_address = forms.CharField(required=False,
-                                    widget=forms.TextInput(
-                                        attrs={'placeholder': 'Адрес владельца', 'class': 'input_in'}))
+                                    widget=forms.Textarea(
+                                        attrs={'placeholder': 'Адрес владельца', 'class': 'input_in',
+                                               'onkeyup': 'textAreaAdjust(this)'}))
     type_of_car = forms.ChoiceField(
         required=False,
         choices=TYPE_CAR,

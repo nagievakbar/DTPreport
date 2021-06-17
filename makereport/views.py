@@ -191,7 +191,7 @@ class ReportEditView(View):
             'product_formset': product_formset,
             'consumable_formset': consumable_formset,
             'wear_form': wear_form,
-            'report': report or None,
+            'report': new_report or None,
             'total_price_report': total_price_report,
             'image_form': image_form or None,
             'passphoto_form': passphoto_form or None,
@@ -713,7 +713,7 @@ def reports_list(request):
 @login_required
 def reports_edit_list(request):
     if 'search' in request.GET:
-        reports = Report.objects.filter(car__car_number=request.GET['search']).exclude(
+        reports = Report.objects.filter(car__car_number__contains=request.GET['search']).exclude(
             (Q(key__isnull=True) | Q(key__exact='')))
     else:
         reports = Report.objects.exclude((Q(key__isnull=True) | Q(key__exact=''))).order_by('-report_id')
