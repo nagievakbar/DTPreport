@@ -717,9 +717,9 @@ def reports_edit_list(request):
             (Q(key__isnull=True) | Q(key__exact='')))
     else:
         reports = Report.objects.exclude((Q(key__isnull=True) | Q(key__exact=''))).order_by('-report_id')
-        paginator = CustomPaginator(reports, 10)
-        page_number = request.GET.get('page')
-        reports = paginator.get_page(page_number)
+    paginator = CustomPaginator(reports, 10)
+    page_number = request.GET.get('page')
+    reports = paginator.get_page(page_number)
     return render(request, 'makereport/additional.html', context={'reports': reports})
 
 
@@ -737,9 +737,9 @@ def admin_list(request):
             Q(car__car_number__contains=request.GET['search'])).exclude((Q(key__isnull=True) | Q(key__exact='')))
     else:
         reports = Report.objects.all().exclude((Q(key__isnull=True) | Q(key__exact=''))).order_by('-report_id')
-        paginator = CustomPaginator(reports, 10)
-        page_number = request.GET.get('page')
-        reports = paginator.get_page(page_number)
+    paginator = CustomPaginator(reports, 10)
+    page_number = request.GET.get('page')
+    reports = paginator.get_page(page_number)
     return render(request, 'makereport/index.html', context={'reports': reports})
 
 

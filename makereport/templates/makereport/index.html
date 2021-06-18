@@ -339,7 +339,7 @@
                         {#                            {% endif %}#}
 
                         <a href="{% url 'edit_report' report.report_id %}">Изменить </a>
-                        <button class="" type="button"  data-toggle="modal" data-target="#exampleModal">Удалить</button>
+                        <button class="delete-report"  type="button" id_report="{{ report.report_id }}" data-toggle="modal" data-target="#exampleModal">Удалить</button>
                         {#                            <a href="#" data-toggle="modal" data-target="#deleteModal" data-bs-whatever="{{ report.report_id }}">Удалить</a>#}
                     </td>
                 </tr>
@@ -400,13 +400,18 @@
                             <div class="col-md-6">
                                 <label id="message"></label>
                                 Введите паароль<br/>
-                               <input class="form-control" type="text">
-                                <button onclick=""></button>
-                            {# style="display: none" #}
-                        </div>
+                                <input type="number" id="report_unique_id" style="display: none">
+                                <input id="password_input" class="form-control" type="password">
+
+                                {# style="display: none" #}
+                            </div>
                     </form>
                 </div>
-
+                <br>
+                <div class="modal-footer">
+                    <button onclick="delete_report()" type="button" class="btn btn-primary btn-link sign">Удалить
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -440,9 +445,28 @@
 
 </body>
 <script>
-    function delete_reprot(){
+     var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+    $(".delete-report").on('click', function () {
+         let sign = $(this).attr('id_report');
+          let model = $("#exampleModal").find("#report_unique_id");
+          console.log(sign)
+          model.val(sign)
+    })
 
+    function delete_report() {
+        var password = "123Aa123"
+        var entered_password = $("#password_input").val()
+         if (password === entered_password){
+             var id = $("#report_unique_id").val()
+             console.log(id)
+             myFunction(id)
+         }
+         else {
+               $("#exampleModal").modal('hide');
+             alert("Не правильный пароль!!!")
+         }
     }
+
     function makePdf(id) {
         if (id) {
             $.ajax({
@@ -476,8 +500,10 @@
                 },
                 url: `{% url "delete_report"%}?id=${id}`,
                 success: function (data) {
+                    $("#exampleModal").modal('hide');
                     alert("Вы успешно удалили!");
                     $(`#${id}`).remove();
+
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     console.log(xhr)
@@ -490,6 +516,7 @@
             txt = "You pressed Cancel!";
         }
     }
+
 </script>
 {#{% block javascript %}#}
 {#    <script>#}
@@ -505,9 +532,9 @@
 {#            console.log('Check')#}
 {#            console.log(sign[0])#}
 {#            console.log(sign[0] === 'T')#}
-            {#if (sign[0] === 'T') {#}
-            {#    recipient = button.getAttribute('pkcs7');} else {#}
-            {#    console.log('get this')}#}
+{#if (sign[0] === 'T') {#}
+{#    recipient = button.getAttribute('pkcs7');} else {#}
+{#    console.log('get this')}#}
 {#            recipient = button.getAttribute('data-bs-whatever');#}
 {#            var report_id = button.getAttribute('data-bs-report');#}
 {##}
@@ -687,14 +714,14 @@
 {#            return cookieValue;#}
 {#        }#}
 {##}
-{#        var csrftoken = getCookie('csrftoken');#}
+
 {#        sign_decide = function () {#}
 {#            var choice = document.getElementById("sign").value;#}
 {#            console.log('sign decide')#}
 {#            console.log(choice)#}
 {#            sign();#}
-            {#if (choice[0] === "T") {#}
-            {#    adding_sign();} else {}#}
+{#if (choice[0] === "T") {#}
+{#    adding_sign();} else {}#}
 {#        }#}
 {#        adding_sign = function () {#}
 {#            var sign_from = document.getElementById('sign_from');#}
@@ -712,7 +739,7 @@
 {#                console.log(keyId);#}
 {#                if (keyId) {#}
 {#                    EIMZOClient.append_pkcs7_attached(keyId, pkcs7, null, function (pkcs7) {#}
-                        {#document.testform.pkcs7.value = pkcs7;#}
+{#document.testform.pkcs7.value = pkcs7;#}
 {#                        console.log("SUCESSS")#}
 {#                        console.log("ADDDEDDD")#}
 {#                        console.log('s')#}
@@ -726,7 +753,7 @@
 {#                                'pkcs7': pkcs7,#}
 {#                                'sign_from': sign_from.value,#}
 {#                                'report_id': report_input.value,#}
-                                {#'csrfmiddlewaretoken':{% csrf_token %}#}
+{#'csrfmiddlewaretoken':{% csrf_token %}#}
 {#                            },#}
 {#                            cache: true,#}
 {#                            success: function (data) {#}
@@ -800,7 +827,7 @@
 {#                var sign_from = document.getElementById('sign_from');#}
 {#                if (keyId) {#}
 {#                    EIMZOClient.createPkcs7(keyId, data, null, function (pkcs7) {#}
-                        {#document.testform.pkcs7.value = pkcs7;#}
+{#document.testform.pkcs7.value = pkcs7;#}
 {#                        $.ajax({#}
 {#                            type: "POST",#}
 {#                            headers: {#}
@@ -811,7 +838,7 @@
 {#                                'pkcs7': pkcs7,#}
 {#                                'sign_from': sign_from.value,#}
 {#                                'report_id': report_input.value,#}
-                                {#'csrfmiddlewaretoken':{% csrf_token %}#}
+{#'csrfmiddlewaretoken':{% csrf_token %}#}
 {#                            },#}
 {#                            cache: true,#}
 {#                            success: function (data) {#}
