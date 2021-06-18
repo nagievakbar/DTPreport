@@ -537,6 +537,7 @@ class ReportView(View):
             except KeyError:
                 pass
             make_pdf.delay(new_report.report_id)
+            make_pdf_additional.delay(new_report.report_id)
         return render(request, 'makereport/add_repor.html', context)
 
     @method_decorator(decorators)
@@ -649,6 +650,7 @@ class ReportView(View):
 
             finally:
                 make_pdf.delay(new_report.report_id)
+                make_pdf_additional.delay(new_report.report_id)
                 context = {
                     'base': True,
                     'id_image': holds_images.id,
