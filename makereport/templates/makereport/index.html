@@ -287,7 +287,7 @@
                 <th style="width: 136px;">Исполнитель</th>
                 {#              <th style="width: 136px;">Договор</th>#}
                 <th style="width: 136px;">Ключ</th>
-                <th style="width: 136px;">Отчёт</th>
+                <th style="width: 136px;">Дата</th>
                 <th style="width: 159px;">Функции</th>
             </tr>
             </thead>
@@ -305,9 +305,7 @@
                         data-title="Исполнитель">{{ report.created_by }}</td>
                     {#                  <td style="border-bottom: 1px solid #fff;" data-title="Договор">{{ report.contract }}</td>#}
                     <td style="border-bottom: 1px solid #fff;" data-title="Ключ">{{ report.key }}</td>
-                    <td style="border-bottom: 1px solid #fff;" data-title="Отчёт" data-type="currency">
-                        <button type="button" onclick="makePdf({{ report.report_id }})">Отчет в pdf</button>
-                    </td>
+                    <td style="border-bottom: 1px solid #fff;" data-title="Отчет">{{ report.report_date }}</td>
                     <td style="border-bottom: 1px solid #fff;" data-title="Функции" data-type="currency">
                         {#                        {% if report.pdf_qr_code_company == None or report.pdf_qr_code_user == None %}#}
                         {#                            <span>Подпись</span>#}
@@ -339,7 +337,9 @@
                         {#                            {% endif %}#}
 
                         <a href="{% url 'edit_report' report.report_id %}">Изменить </a>
-                        <button class="delete-report"  type="button" id_report="{{ report.report_id }}" data-toggle="modal" data-target="#exampleModal">Удалить</button>
+                        <button class="delete-report" type="button" id_report="{{ report.report_id }}"
+                                data-toggle="modal" data-target="#exampleModal">Удалить
+                        </button>
                         {#                            <a href="#" data-toggle="modal" data-target="#deleteModal" data-bs-whatever="{{ report.report_id }}">Удалить</a>#}
                     </td>
                 </tr>
@@ -445,26 +445,25 @@
 
 </body>
 <script>
-     var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+    var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
     $(".delete-report").on('click', function () {
-         let sign = $(this).attr('id_report');
-          let model = $("#exampleModal").find("#report_unique_id");
-          console.log(sign)
-          model.val(sign)
+        let sign = $(this).attr('id_report');
+        let model = $("#exampleModal").find("#report_unique_id");
+        console.log(sign)
+        model.val(sign)
     })
 
     function delete_report() {
         var password = "123Aa123"
         var entered_password = $("#password_input").val()
-         if (password === entered_password){
-             var id = $("#report_unique_id").val()
-             console.log(id)
-             myFunction(id)
-         }
-         else {
-               $("#exampleModal").modal('hide');
-             alert("Не правильный пароль!!!")
-         }
+        if (password === entered_password) {
+            var id = $("#report_unique_id").val()
+            console.log(id)
+            myFunction(id)
+        } else {
+            $("#exampleModal").modal('hide');
+            alert("Не правильный пароль!!!")
+        }
     }
 
     function makePdf(id) {

@@ -990,11 +990,17 @@
         $(document).on('keypress', "form", function (event) {
             return event.key !== "Enter";
         });
+        $(".total").on('input', function(event){
+            var serialized = $(this).val().replace(/\s/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+            $(this).val(serialized);
+        })
+
         $('.work-price-input2').on('change', function (event) {
-            var price_1 = $('.price_1').val() ? parseInt($('.price_1').val()) : 0;
-            var price_2 = $('.price_2').val() ? parseInt($('.price_2').val()) : 0;
-            var price_3 = $('.price_3').val() ? parseInt($('.price_3').val()) : 0;
-            $('.price_all').val(price_1 + price_2 + price_3);
+            var price_1 = $('.price_1').val() ? parseInt($('.price_1').val().replace(/\s/g, '')) : 0;
+            var price_2 = $('.price_2').val() ? parseInt($('.price_2').val().replace(/\s/g, '')) : 0;
+            var price_3 = $('.price_3').val() ? parseInt($('.price_3').val().replace(/\s/g, '')) : 0;
+            var all = price_1 + price_2 + price_3;
+            $('.price_all').val(all.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " "));
         })
 
         function add_service() {
@@ -1385,7 +1391,7 @@
                         var sum = data.total_cost - cost.val();
                         calculate_exact_sum(sum, 'product');
                         calculate_product_overall_sum();
-                        cost.val(data.total_cost);
+                        cost.val(data. _cost);
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
                         console.log("error")
