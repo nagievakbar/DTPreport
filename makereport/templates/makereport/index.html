@@ -281,7 +281,7 @@
             <thead>
             <tr>
                 <th style="width: 34px;">№</th>
-                <th style="width: 136px;">Номер договора</th>
+                <th style="width: 136px;">Номер отчета</th>
                 <th style="width: 136px;">Марка машины</th>
                 <th style="width: 136px;">Номер</th>
                 <th style="width: 136px;">Исполнитель</th>
@@ -294,10 +294,10 @@
             <tbody>
             {% for report in reports %}
                 <tr id="{{ report.report_id }}">
-                    <td style="border-bottom: 1px solid #fff;" data-title="№">{{ forloop.counter }}</td>
+                    <td style="border-bottom: 1px solid #fff;" data-title="№">{{ report.report_id }}</td>
                     {#                  <td style="border-bottom: 1px solid #fff;" data-title="Дата">{{ report.created_at|date:"d.m.Y" }}</td>#}
                     <td style="border-bottom: 1px solid #fff;"
-                        data-title="Дата">{{ report.contract.contract_number }}</td>
+                        data-title="Дата">{{ report.report_number }}</td>
                     <td style="border-bottom: 1px solid #fff;"
                         data-title="Марка машины">{{ report.car.brand_text }}</td>
                     <td style="border-bottom: 1px solid #fff;" data-title="Номер">{{ report.car.car_number }}</td>
