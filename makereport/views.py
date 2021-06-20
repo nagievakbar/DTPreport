@@ -15,7 +15,10 @@ from .utils import *
 
 from pdf_report.views import create_base64
 from DTPreport import settings as s
-from pdf_report.tasks import reduce_image, delete_empty_report, make_pdf, make_pdf_additional
+from pdf_report.tasks import reduce_image, delete_empty_report,make_pdf, make_pdf_additional
+
+
+
 
 
 class ImageDelete(View):
@@ -236,7 +239,8 @@ class ReportEditView(View):
         consumable_formset = self.init_consumable_formset(request)
         wear_form = WearForm(request.POST)
 
-        print("VALIDATION {}{}{}".format(report_form.is_valid(), car_form.is_valid(), customer_form.is_valid()))
+        print("VALIDATION {}{}{} {}".format(report_form.is_valid(), car_form.is_valid(), customer_form.is_valid(),
+                                            calculation_form.is_valid()))
         print(car_form.errors)
         context = {
             'base': False,
@@ -368,6 +372,7 @@ class ReportView(View):
             contract = Contract.objects.get(contract_id=report.contract_id)
             contract_form = ContractForm(instance=contract)
             report_form = ReportForm(instance=report)
+            report_form.custom_integer_validation()
             car = Car.objects.get(car_id=report.car_id)
             car.release_date = car.release_date
             car_form = CarForm(instance=car)
@@ -485,8 +490,12 @@ class ReportView(View):
             'ophotos': ophotos or None,
             'checks': checks or None,
         }
-        print("VALIDATION {}{}{}".format(report_form.is_valid(), car_form.is_valid(), customer_form.is_valid()))
-        if report_form.is_valid() and car_form.is_valid() and customer_form.is_valid() and contract_form.is_valid() and calculation_form.is_valid():
+        print(
+            "VALIDATION {}{} {} {} {}".format(report_form.is_valid(), car_form.is_valid(), customer_form.is_valid(),
+                                              contract_form.is_valid(), calculation_form.is_valid()))
+        if report_form.is_valid() and car_form.is_valid() \
+                and customer_form.is_valid() and \
+                contract_form.is_valid() and calculation_form.is_valid():
             new_contract = contract_form.save()
             new_customer = customer_form.save(commit=False)
             new_customer.save()
@@ -511,17 +520,23 @@ class ReportView(View):
                     print(sd)
                     add_service_to_report(new_report, sd.__getitem__('service_id'), sd.__getitem__('service_cost'))
                     new_report.service_data.append(sd)
+                else:
+                    print(form.errors)
             for form in product_formset.forms:
                 if form.is_valid() and form.cleaned_data:
                     pd = get_data_from_product_form(form)
                     add_product_to_report(new_report, pd.__getitem__('product_cost'))
                     new_report.product_data.append(pd)
+                else:
+                    print(form.errors)
             for form in consumable_formset.forms:
                 if form.is_valid() and form.cleaned_data:
                     cd = get_data_from_consum_form(form)
                     add_consumable_to_report(new_report, cd.__getitem__('consumable_id'),
                                              cd.__getitem__('consumable_cost'))
                     new_report.consumable_data.append(cd)
+                else:
+                    print(form.errors)
             if wear_form.is_valid():
                 wd = get_data_from_wear_form(wear_form)
                 new_report.wear_data.update(wd)
@@ -595,7 +610,9 @@ class ReportView(View):
         }
 
         # report_form.is_valid() and
-        if report_form.is_valid() and car_form.is_valid() and customer_form.is_valid() and contract_form.is_valid() and calculation_form.is_valid():
+        if report_form.is_valid() and car_form.is_valid() \
+                and customer_form.is_valid() and \
+                contract_form.is_valid() and calculation_form.is_valid():
             new_contract = contract_form.save()
             new_customer = customer_form.save(commit=False)
             new_customer.save()
@@ -619,18 +636,24 @@ class ReportView(View):
                     sd = get_data_from_service_form(form)
                     add_service_to_report(new_report, sd.__getitem__('service_id'), sd.__getitem__('service_cost'))
                     new_report.service_data.append(sd)
+                else:
+                    print(form.errors)
             for form in product_formset.forms:
                 if form.is_valid() and form.cleaned_data:
                     pd = get_data_from_product_form(form)
                     print(pd.__getitem__('product_cost'))
                     add_product_to_report(new_report, pd.__getitem__('product_cost'))
                     new_report.product_data.append(pd)
+                else:
+                    print(form.errors)
             for form in consumable_formset.forms:
                 if form.is_valid() and form.cleaned_data:
                     cd = get_data_from_consum_form(form)
                     add_consumable_to_report(new_report, cd.__getitem__('consumable_id'),
                                              cd.__getitem__('consumable_cost'))
                     new_report.consumable_data.append(cd)
+                else:
+                    print(form.errors)
             if wear_form.is_valid():
                 wd = get_data_from_wear_form(wear_form)
                 new_report.wear_data.update(wd)

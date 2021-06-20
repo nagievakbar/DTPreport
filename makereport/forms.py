@@ -1,9 +1,19 @@
 from django import forms
 from .models import *
+import re
 import datetime
 
 
-class ReportForm(forms.ModelForm):
+class CustomForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        print("DATA")
+        # print(self.fields['total_report_cost'].initial)
+        # if self.fields['total_report_cost'] != None:
+        #     self.fields['total_report_cost'] = re.sub(r"\B(?=(\d{3})+(?!\d))", " ", self.fields['total_report_cost'])
+
+
+class ReportForm(CustomForm):
     """docstring for ReportForm."""
 
     report_date = forms.CharField(required=False,
@@ -11,7 +21,13 @@ class ReportForm(forms.ModelForm):
     report_number = forms.CharField(required=False,
                                     widget=forms.TextInput(attrs={'placeholder': 'Номер отчёта', 'class': 'input_in'}))
     total_report_cost = forms.CharField(required=False,
-                                        widget=forms.TextInput(attrs={'class': 'invisible_class all_sum'}))
+                                        widget=forms.TextInput(
+                                            attrs={'class': 'invisible_class all_sum divide-integer'}))
+
+    def custom_integer_validation(self):
+        print('asdsasad')
+        print(self['total_report_cost'].value())
+        self.fields['total_report_cost'].initial = 123
 
     class Meta:
         model = Report
@@ -111,13 +127,17 @@ class ContractForm(forms.ModelForm):
 
 class CalculationForm(forms.ModelForm):
     total = forms.CharField(required=False,
-                            widget=forms.TextInput(attrs={'class': 'input2 work-price-input2 price_all total'}))
+                            widget=forms.TextInput(
+                                attrs={'class': 'input2 work-price-input2 price_all total divide-integer', 'readonly':True}))
     departure = forms.CharField(required=False,
-                                widget=forms.TextInput(attrs={'class': 'input2 work-price-input2 price_3 total'}))
+                                widget=forms.TextInput(
+                                    attrs={'class': 'input2 work-price-input2 price_3 total divide-integer'}))
     opr_ust = forms.CharField(required=False,
-                              widget=forms.TextInput(attrs={'class': 'input2 work-price-input2 price_2 total'}))
+                              widget=forms.TextInput(
+                                  attrs={'class': 'input2 work-price-input2 price_2 total divide-integer'}))
     opr_damage = forms.CharField(required=False,
-                                 widget=forms.TextInput(attrs={'class': 'input2 work-price-input2 price_1 total'}))
+                                 widget=forms.TextInput(
+                                     attrs={'class': 'input2 work-price-input2 price_1 total divide-integer'}))
 
     class Meta:
         model = Calculation
@@ -210,12 +230,12 @@ class ServiceForm(forms.Form):
     premium = forms.FloatField(
         required=False,
         widget=forms.TextInput(attrs={'class': 'input2 work-price-input2 allowance2'}))  # 'value': '0'
-    price = forms.IntegerField(
+    price = forms.CharField(
         required=False,
-        widget=forms.NumberInput(attrs={'class': 'input2 work-price-input2 price2'}))
-    service_cost = forms.IntegerField(
+        widget=forms.TextInput(attrs={'class': 'input2 work-price-input2 price2 divide-integer'}))
+    service_cost = forms.CharField(
         required=False,
-        widget=forms.NumberInput(attrs={'class': 'input2 work-price-input2 sum2', 'readonly': ''}))
+        widget=forms.TextInput(attrs={'class': 'input2 work-price-input2 sum2 divide-integer', 'readonly': ''}))
     # 'readonly': ''
 
 
@@ -224,17 +244,15 @@ class ProductForm(forms.Form):
     name = forms.CharField(
         required=False,
         widget=forms.Textarea(attrs={'class': 'input3 work-price-input3 name3', 'onkeyup': 'textAreaAdjust(this)'}))
-    # unit = forms.CharField(
-    # widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 name3', 'readonly': ''}))
     quantity = forms.FloatField(
         required=False,
         widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 time3', }))  # 'value': '0'
-    price = forms.IntegerField(
+    price = forms.CharField(
         required=False,
-        widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 price3', }))
-    product_cost = forms.IntegerField(
+        widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 price3 divide-integer', }))
+    product_cost = forms.CharField(
         required=False,
-        widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 sum3', 'readonly': ''}))
+        widget=forms.TextInput(attrs={'class': 'input3 work-price-input3 sum3 divide-integer', 'readonly': ''}))
 
 
 class ConsumableForm(forms.Form):
@@ -250,12 +268,12 @@ class ConsumableForm(forms.Form):
     quantity = forms.FloatField(
         required=False,
         widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 allowance4', }))  # 'value': '0'
-    price = forms.IntegerField(
+    price = forms.CharField(
         required=False,
-        widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 price4', }))
-    consumable_cost = forms.IntegerField(
+        widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 price4 divide-integer', }))
+    consumable_cost = forms.CharField(
         required=False,
-        widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 sum4', 'readonly': ''}))
+        widget=forms.TextInput(attrs={'class': 'input4 work-price-input4 sum4 divide-integer', 'readonly': ''}))
 
 
 class ImageForm(forms.ModelForm):

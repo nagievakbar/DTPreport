@@ -229,7 +229,7 @@ def get_brand_nph(request):
 def get_service_cost(request):
     premium = request.GET.get('premium', None)
     norm_per_hour = request.GET.get('nph', None)
-    price = request.GET.get('price', None)
+    price = request.GET.get('price', None).replace(" ", "")
     double_norm_per_hour = float(norm_per_hour)
     service_cost = int((double_norm_per_hour + float(premium) / 100 * double_norm_per_hour) * float(price))
 
@@ -241,7 +241,7 @@ def get_service_cost(request):
 
 def get_product_cost(request):
     quantity = request.GET.get('quantity', None)
-    price = request.GET.get('price', None)
+    price = request.GET.get('price', None).replace(" ", "")
     total_cost = int(float(quantity) * float(price))
 
     data = {
@@ -252,7 +252,7 @@ def get_product_cost(request):
 
 def get_consumable_cost(request):
     quantity = request.GET.get('quantity', None)
-    price = request.GET.get('price', None)
+    price = request.GET.get('price', None).replace(" ", "")
     total_cost = int(float(quantity) * float(price))
 
     data = {
@@ -262,7 +262,21 @@ def get_consumable_cost(request):
 
 
 def calculate_service_cost(report, cost):
-    report.service_cost = report.service_cost + cost
+    print(cost)
+    report.service_cost = report.service_cost + int(cost.replace(" ", ""))
+    print("GOTTED")
+    print(report.service_cost)
+
+def calculate_product_cost(report, cost):
+    print(cost)
+    report.product_cost = report.product_cost + int(cost.replace(" ", ""))
+
+
+def calculate_consumable_cost(report, cost):
+    print(cost)
+    report.consumable_cost = report.consumable_cost + int(cost.replace(" ", ""))
+    print("GOTTED")
+    print(report.consumable_cost)
 
 
 def add_product_to_report(report, cost):
@@ -281,14 +295,6 @@ def add_consumable_to_report(report, consumable_id, cost):
     if cost is None or cost == "":
         cost = 0
     calculate_consumable_cost(report, cost)
-
-
-def calculate_product_cost(report, cost):
-    report.product_cost = report.product_cost + cost
-
-
-def calculate_consumable_cost(report, cost):
-    report.consumable_cost = report.consumable_cost + cost
 
 
 def get_data_from_service_form(form):
