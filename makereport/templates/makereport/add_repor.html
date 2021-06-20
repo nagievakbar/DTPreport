@@ -1481,6 +1481,7 @@
             calculate_product_overall_sum(true);
             $(".divide-integer").each(function () {
                 var serialized = $(this).val().replace(/\s/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+                $(this).val(serialized);
                 $(this).text(serialized);
             })
             $(".divide-integer-label").each(function (){
