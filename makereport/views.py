@@ -15,10 +15,7 @@ from .utils import *
 
 from pdf_report.views import create_base64
 from DTPreport import settings as s
-from pdf_report.tasks import reduce_image, delete_empty_report,make_pdf, make_pdf_additional
-
-
-
+from pdf_report.tasks import reduce_image, delete_empty_report, make_pdf, make_pdf_additional
 
 
 class ImageDelete(View):
@@ -314,6 +311,9 @@ class ReportEditView(View):
                 wd = get_data_from_wear_form(wear_form)
                 new_report.wear_data.update(wd)
                 new_report.get_total_report_price()
+            else:
+                print("ERRROS WEAR FORMSSS")
+                print(wear_form.errors)
             new_report.set_private_key()
             new_report.save()
             total_price_report = new_report.total_report_cost
@@ -541,6 +541,10 @@ class ReportView(View):
                 wd = get_data_from_wear_form(wear_form)
                 new_report.wear_data.update(wd)
                 new_report.get_total_report_price()
+            else:
+                print("ERRROS WEAR FORMSSS")
+                print(wear_form.errors)
+
             new_report.set_private_key()
             new_report.save()
             total_price_report = new_report.total_report_cost
@@ -658,7 +662,9 @@ class ReportView(View):
                 wd = get_data_from_wear_form(wear_form)
                 new_report.wear_data.update(wd)
                 new_report.get_total_report_price()
-
+            else:
+                print("ERRROS WEAR FORMSSS")
+                print(wear_form.errors)
             if new_report.key is None or new_report.key == "":
                 new_report.set_private_key()
             new_report.save()
@@ -737,15 +743,30 @@ def reports_list(request):
 
 @login_required
 def reports_edit_list(request):
+    context = list(request)
+    return render(request, 'makereport/additional.html', context=context)
+
+
+def list(request):
+    page = pagination_update(request)
     if 'search' in request.GET:
         reports = Report.objects.filter(car__car_number__contains=request.GET['search']).exclude(
             (Q(key__isnull=True) | Q(key__exact='')))
+    elif 'sign' in request.GET:
+        reports = filter_update(request).exclude((Q(key__isnull=True) | Q(key__exact=''))).order_by('-report_id')
     else:
         reports = Report.objects.exclude((Q(key__isnull=True) | Q(key__exact=''))).order_by('-report_id')
-    paginator = CustomPaginator(reports, 10)
+    paginator = CustomPaginator(reports, page)
     page_number = request.GET.get('page')
     reports = paginator.get_page(page_number)
-    return render(request, 'makereport/additional.html', context={'reports': reports})
+    context = {'reports': reports, "page_obj": PaginationModels.objects.all().order_by('page'),
+               'params': request.GET.get('sign', -1)}
+    return context
+
+
+def admin_list(request):
+    context = list(request)
+    return render(request, 'makereport/index.html', context=context)
 
 
 def user_list_some(request):
@@ -753,18 +774,6 @@ def user_list_some(request):
         reports = Report.objects.filter(car__car_number__contains=request.GET['search'], created_by=request.user)
     else:
         reports = Report.objects.filter(created_by=request.user)
-    return render(request, 'makereport/index.html', context={'reports': reports})
-
-
-def admin_list(request):
-    if 'search' in request.GET:
-        reports = Report.objects.filter(
-            Q(car__car_number__contains=request.GET['search'])).exclude((Q(key__isnull=True) | Q(key__exact='')))
-    else:
-        reports = Report.objects.all().exclude((Q(key__isnull=True) | Q(key__exact=''))).order_by('-report_id')
-    paginator = CustomPaginator(reports, 10)
-    page_number = request.GET.get('page')
-    reports = paginator.get_page(page_number)
     return render(request, 'makereport/index.html', context={'reports': reports})
 
 

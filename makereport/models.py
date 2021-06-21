@@ -542,3 +542,19 @@ class Calculation(models.Model):
             report_rate_price_txt = num2text(int(self.total.strip().replace(' ', "")),
                                              main_units=((u'сумм', u'сумм', u'суммов'), 'f'))
             return report_rate_price_txt
+
+
+class PaginationModels(models.Model):
+    page = models.IntegerField(default=10, verbose_name="Количество документов на одной странице")
+    is_chosen = models.BooleanField(default=False, verbose_name="Активация для сайта")
+
+    def save(self, *args, **kwargs):
+        PaginationModels.objects.exclude(id=self.id).update(is_chosen=False)
+        super(PaginationModels, self).save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = 'Документы на странице'
+        verbose_name_plural = 'Документы на странице'
+
+    def __str__(self):
+        return str(self.page)

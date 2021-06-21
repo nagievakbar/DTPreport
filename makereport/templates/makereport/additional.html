@@ -306,7 +306,7 @@
                     {#                  <td style="border-bottom: 1px solid #fff;" data-title="Договор">{{ report.contract }}</td>#}
                     <td style="border-bottom: 1px solid #fff;" data-title="Ключ">{{ report.key }}</td>
                     <td style="border-bottom: 1px solid #fff;" data-title="Отчёт" data-type="currency">
-                       <a target="_blank" href="{% url 'get_additional' report.report_id %}">дополнительный отчёт</a>
+                        <a target="_blank" href="{% url 'get_additional' report.report_id %}">дополнительный отчёт</a>
                     </td>
                     <td style="border-bottom: 1px solid #fff;" data-title="Функции" data-type="currency">
                         <a class="btn btn-primary" href="{% url 'add_report' report.report_id %}">Дополнительно</a>
@@ -318,34 +318,7 @@
             </tbody>
         </table>
     </div>
-  <div class="center">
-        <div class="pagination">
-            {% if reports.has_previous %}
-                <a href="?page=1">первая</a>
-            {% endif %}
-            {% if reports.has_previous %}
-                <a href="?page={{ reports.previous_page_number }}">&laquo;</a>
-            {% endif %}
-            {% for page in reports.paginator.page_range %}
-                <a href="?page={{ page }}" class="{% if reports.number == page %} active  {% endif %}">{{ page }}</a>
-            {% endfor %}
-            {% if reports.has_next %}
-                <a href="?page={{ reports.next_page_number }}">&raquo;</a>
-            {% endif %}
-            {% if reports.has_next %}
-                <a href="?page={{ reports.paginator.num_pages }}">последния</a>
-            {% endif %}
-        </div>
-    </div>
-    <div class="center">
-        <div class="pagination">
-    <span class="step-links">
-        <span class="current">
-            Страница {{ reports.number }} из {{ reports.paginator.num_pages }}.
-        </span>
-    </span>
-        </div>
-    </div>
+    {% include 'makereport/pagination/pagination.html' %}
     <script>
         var csrftoken = getCookie('csrftoken');
 

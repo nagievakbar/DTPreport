@@ -5,6 +5,8 @@ from django.http import JsonResponse
 from django.core.files.storage import default_storage
 from .models import *
 
+from django.db.models import Q
+
 
 def qr_code(signature, valid_from):
     # str_for_qr_code = "success: {success}\nsignature:{signature}\nsignAlgName:{signAlgName}\nlink:{link}\n".format(
@@ -267,6 +269,7 @@ def calculate_service_cost(report, cost):
     print("GOTTED")
     print(report.service_cost)
 
+
 def calculate_product_cost(report, cost):
     print(cost)
     report.product_cost = report.product_cost + int(cost.replace(" ", ""))
@@ -431,3 +434,32 @@ class CustomPaginator(Paginator):
             previous = self._page_custom.number - remainder
             next = self._page_custom.number + to_ten
             return range(previous, next)
+
+
+def pagination_update(request):
+    try:
+        if 'id' in request.GET:
+            id_pagination = request.GET['id']
+            pagination = PaginationModels.objects.get(id=id_pagination)
+            pagination.is_chosen = True
+            pagination.save()
+
+        obj = PaginationModels.objects.filter(is_chosen=True).first().page
+        print(obj)
+        return obj if obj is not None and obj != 0 else 10
+    except:
+        return 10
+
+
+def filter_update(request):
+    switch = request.GET['sign']
+    sign_user = ~Q(pdf_qr_code_user__exact="") & Q(pdf_qr_code_user__isnull=False)
+    sign_company = Q(pdf_qr_code_company__exact="") & Q(pdf_qr_code_company__isnull=False)
+    filter = {
+        '-1':Report.objects.all(),
+        '0': Report.objects.filter(sign_user & sign_company),
+        '1': Report.objects.filter(sign_company & ~sign_user),
+        '2': Report.objects.filter(sign_user & ~sign_company),
+        '3': Report.objects.filter(~sign_user & ~sign_company)
+    }
+    return filter[switch]

@@ -14,7 +14,7 @@ from .models import *
 
 
 
-
+admin.site.register(PaginationModels)
 admin.site.register(CustomSum)
 
 @admin.register(Report)
