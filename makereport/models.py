@@ -415,6 +415,8 @@ class Report(models.Model):
     product_data = models.JSONField(blank=True, null=True)
     consumable_data = models.JSONField(blank=True, null=True)
 
+    date_created = models.DateTimeField(auto_now=True)
+
     def __str__(self):
         return str(self.report_id)
 

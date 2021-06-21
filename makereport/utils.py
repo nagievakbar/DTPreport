@@ -451,12 +451,31 @@ def pagination_update(request):
         return 10
 
 
+def date_update(request):
+    date_from = Q()
+    date_to = Q()
+    params = ""
+    try:
+        if request.GET['date_from'] != "":
+            date_from = Q(date_created__gte=request.GET['date_from'])
+            params += "date_from={}&".format(request.GET['date_from'])
+    except:
+        pass
+    try:
+        if request.GET['date_to'] != "":
+            date_to = Q(date_created__lte=request.GET['date_to'])
+            params += "date_to={}&".format(request.GET['date_to'])
+    except:
+        pass
+    return {'reports': Report.objects.filter(date_from & date_to), 'params': params}
+
+
 def filter_update(request):
-    switch = request.GET['sign']
+    switch = request.GET['filter']
     sign_user = ~Q(pdf_qr_code_user__exact="") & Q(pdf_qr_code_user__isnull=False)
     sign_company = Q(pdf_qr_code_company__exact="") & Q(pdf_qr_code_company__isnull=False)
     filter = {
-        '-1':Report.objects.all(),
+        '-1': Report.objects.all(),
         '0': Report.objects.filter(sign_user & sign_company),
         '1': Report.objects.filter(sign_company & ~sign_user),
         '2': Report.objects.filter(sign_user & ~sign_company),

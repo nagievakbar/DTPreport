@@ -1,19 +1,19 @@
    <div class="center">
         <div class="pagination">
             {% if reports.has_previous %}
-                <a href="?page=1&sign={{ params }}">первая</a>
+                <a href="?page=1&{{ params }}">первая</a>
             {% endif %}
             {% if reports.has_previous %}
-                <a href="?page={{ reports.previous_page_number }}&sign={{ params }}">&laquo;</a>
+                <a href="?page={{ reports.previous_page_number }}&{{ params }}">&laquo;</a>
             {% endif %}
             {% for page in reports.paginator.page_range %}
-                <a href="?page={{ page }}&sign={{ params }}" class="{% if reports.number == page %} active  {% endif %}">{{ page }}</a>
+                <a href="?page={{ page }}&{{ params }}" class="{% if reports.number == page %} active  {% endif %}">{{ page }}</a>
             {% endfor %}
             {% if reports.has_next %}
-                <a href="?page={{ reports.next_page_number }}&sign={{ params }}"  >&raquo;</a>
+                <a href="?page={{ reports.next_page_number }}&{{ params }}"  >&raquo;</a>
             {% endif %}
             {% if reports.has_next %}
-                <a href="?page={{ reports.paginator.num_pages }}&sign={{ params }}">последния</a>
+                <a href="?page={{ reports.paginator.num_pages }}&{{ params }}">последния</a>
             {% endif %}
         </div>
     </div>

@@ -88,21 +88,16 @@ floatingField.blur(function () {
 
 //dropdown list
 $('body').click(function () {
-    if ($('.custom-select .drop-down-list').is(':visible')) {
-        $('.custom-select').parent().removeClass('focus');
-    }
-    $('.custom-select .drop-down-list:visible').slideUp();
+    // if ($('.custom-select .drop-down-list').is(':visible')) {
+    //     $('.custom-select').parent().removeClass('focus');
+    // }
+    // $('.custom-select .drop-down-list:visible').slideUp();
 });
 $('.custom-select .active-list').click(function () {
-    $(this).parent().parent().addClass('focus');
+    // $(this).parent().parent().addClass('focus');
     $(this).parent().find('.drop-down-list').stop(true, true).delay(10).slideToggle(300);
 });
-$('.custom-select .drop-down-list li').click(function () {
-    var listParent = $(this).parent().parent();
-    listParent.parent('.select-block').removeClass('focus').addClass('added');
-    listParent.find('.active-list').text($(this).text());
-    listParent.find('input.list-field').attr('value', $(this).text());
-});
+
 $('#page_list li').click(function () {
     $("#page_input").attr('value', $(this).attr('id_attr'))
     $("#page_form").submit();

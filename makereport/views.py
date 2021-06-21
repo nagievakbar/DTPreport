@@ -749,18 +749,24 @@ def reports_edit_list(request):
 
 def list(request):
     page = pagination_update(request)
+    params = ""
     if 'search' in request.GET:
         reports = Report.objects.filter(car__car_number__contains=request.GET['search']).exclude(
             (Q(key__isnull=True) | Q(key__exact='')))
-    elif 'sign' in request.GET:
-        reports = filter_update(request).exclude((Q(key__isnull=True) | Q(key__exact=''))).order_by('-report_id')
+    elif 'filter' in request.GET:
+        params += "filter={}&".format(request.GET['filter'])
+        reports = filter_update(request)
+    elif 'date_from' in request.GET or 'date_to' in request.GET:
+        data = date_update(request)
+        params += data['params']
+        reports = data['reports']
     else:
-        reports = Report.objects.exclude((Q(key__isnull=True) | Q(key__exact=''))).order_by('-report_id')
-    paginator = CustomPaginator(reports, page)
+        reports = Report.objects
+    paginator = CustomPaginator(reports.exclude((Q(key__isnull=True) | Q(key__exact=''))).order_by('-report_id'), page)
     page_number = request.GET.get('page')
     reports = paginator.get_page(page_number)
     context = {'reports': reports, "page_obj": PaginationModels.objects.all().order_by('page'),
-               'params': request.GET.get('sign', -1)}
+               'params': params}
     return context
 
 

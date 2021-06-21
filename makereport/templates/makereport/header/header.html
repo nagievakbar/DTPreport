@@ -36,10 +36,29 @@
     </div>
 
     <div class="block-grid">
-        <div class="data_user">
-            <a href="#">
-                <button type="button" class="btn data_button">Дата</button>
-            </a>
+        <div class="name_user">
+            <div class="select-block">
+                <label>Дата</label>
+                <div class="custom-select">
+                    <div class="active-list"></div>
+                    <form id="page_form" method="GET">
+                        <ul class="drop-down-list">
+                            <li><span>Начальная дата</span><input type="date" class="form-control" id="start"
+                                                                  name="date_from"
+                                                                  min="2015-01-01" max="2050-12-31">
+                            </li>
+                            <li><span>Окончательная дата</span> <input type="date" class="form-control" id="start"
+                                                                       name="date_to"
+                                                                       min="2015-01-01" max="2050-12-31">
+                            </li>
+
+                                <input type="submit" class="btn float-right" style="margin: 20px">
+
+
+                        </ul>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 
