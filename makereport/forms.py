@@ -321,15 +321,15 @@ class ChecksForm(forms.ModelForm):
 
 
 class WearForm(forms.Form):
-    point = forms.IntegerField(
+    point = forms.FloatField(
         required=False,
         widget=forms.TextInput(attrs={'class': 'input work-price-input point-input'}))
-    weight = forms.IntegerField(
+    weight = forms.FloatField(
         required=False,
         widget=forms.TextInput(attrs={'class': 'input work-price-input weight-input'}))
-    wear = forms.IntegerField(
+    wear = forms.FloatField(
         required=False,
         widget=forms.TextInput(attrs={'class': 'input work-price-input prehnite-input', 'readonly': ""}))
-    accept_wear = forms.IntegerField(
+    accept_wear = forms.FloatField(
         required=False,
         widget=forms.TextInput(attrs={'class': 'input work-price-input prehnite-input'}))
