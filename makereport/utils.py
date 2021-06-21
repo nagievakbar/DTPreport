@@ -472,8 +472,8 @@ def date_update(request):
 
 def filter_update(request):
     switch = request.GET['filter']
-    sign_user = ~Q(pdf_qr_code_user__exact="") & Q(pdf_qr_code_user__isnull=False)
-    sign_company = Q(pdf_qr_code_company__exact="") & Q(pdf_qr_code_company__isnull=False)
+    sign_user = Q(pdf_qr_code_user__isnull=False)
+    sign_company = Q(pdf_qr_code_company__isnull=False)
     filter = {
         '-1': Report.objects.all(),
         '0': Report.objects.filter(sign_user & sign_company),
