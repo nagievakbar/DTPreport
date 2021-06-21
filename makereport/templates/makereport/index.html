@@ -210,7 +210,7 @@
     </div>
     <!-- ======= Header ======= -->
 
-        {% include 'makereport/header/header.html' %}
+    {% include 'makereport/header/header.html' %}
 
 
     <div class="table1">
@@ -317,6 +317,7 @@
 
                                 {# style="display: none" #}
                             </div>
+                        </div>
                     </form>
                 </div>
                 <br>
@@ -366,7 +367,7 @@
     })
 
     function delete_report() {
-        var password = "123Aa123"
+        var password = "123Aa123_"
         var entered_password = $("#password_input").val()
         if (password === entered_password) {
             var id = $("#report_unique_id").val()
