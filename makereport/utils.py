@@ -299,19 +299,19 @@ def calculate_consumable_cost(report, cost):
 
 def add_product_to_report(report, cost):
     if cost is None or cost == "":
-        cost = 0
+        cost = '0'
     calculate_product_cost(report, cost)
 
 
 def add_service_to_report(report, service_id, cost):
     if cost is None or cost == "":
-        cost = 0
+        cost = '0'
     calculate_service_cost(report, cost)
 
 
 def add_consumable_to_report(report, consumable_id, cost):
     if cost is None or cost == "":
-        cost = 0
+        cost = '0'
     calculate_consumable_cost(report, cost)
 
 
