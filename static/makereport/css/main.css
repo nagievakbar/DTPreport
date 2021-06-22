@@ -488,8 +488,8 @@ a:focus {
 }
 
 .select-block label {
-    left: 30px;
-    top: 12px;
+    left: 4px;
+    top: 4px;
     margin: 0;
     position: absolute;
     max-width: 870px;
@@ -506,6 +506,9 @@ a:focus {
     font-size: 12px;
 
     overflow: hidden;
+}
+#date-select{
+        width: 250px;
 }
 
 #id_brand {
@@ -770,7 +773,6 @@ a:focus {
     border-radius: 5px;
     padding: 0px 5px 0px 22px;
     transition: 0.2s ease-out;
-
     font-style: normal;
     font-weight: normal;
     font-size: 12px;

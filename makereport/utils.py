@@ -205,20 +205,26 @@ def get_wear_ajax(request):
 
 def get_service_from_request(request):
     service_id = request.GET.get('service_id', None)
-    finded_service = Service.objects.get(service_id=service_id)
-    return finded_service
+    if service_id != "":
+        finded_service = Service.objects.get(service_id=service_id)
+        return finded_service
+    return None
 
 
 def get_product_from_request(request):
     product_id = request.GET.get('product_id', None)
-    finded_product = Product.objects.get(product_id=product_id)
-    return finded_product
+    if product_id != "":
+        finded_product = Product.objects.get(product_id=product_id)
+        return finded_product
+    return None
 
 
 def get_consumable_from_request(request):
     consumable_id = request.GET.get('consumable_id', None)
-    finded_consumable = Consumable.objects.get(consumable_id=consumable_id)
-    return finded_consumable
+    if consumable_id != '':
+        finded_consumable = Consumable.objects.get(consumable_id=consumable_id)
+        return finded_consumable
+    return None
 
 
 def get_brand_nph(request):
