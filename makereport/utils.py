@@ -271,19 +271,28 @@ def get_consumable_cost(request):
 
 def calculate_service_cost(report, cost):
     print(cost)
-    report.service_cost = report.service_cost + int(cost.replace(" ", ""))
+    try:
+        report.service_cost = report.service_cost + int(cost.replace(" ", ""))
+    except AttributeError:
+        report.service_cost = report.service_cost + cost
     print("GOTTED")
     print(report.service_cost)
 
 
 def calculate_product_cost(report, cost):
     print(cost)
-    report.product_cost = report.product_cost + int(cost.replace(" ", ""))
+    try:
+        report.product_cost = report.product_cost + int(cost.replace(" ", ""))
+    except AttributeError:
+        report.product_cost = report.product_cost + cost
 
 
 def calculate_consumable_cost(report, cost):
     print(cost)
-    report.consumable_cost = report.consumable_cost + int(cost.replace(" ", ""))
+    try:
+        report.consumable_cost = report.consumable_cost + int(cost.replace(" ", ""))
+    except AttributeError:
+        report.consumable_cost = report.consumable_cost + cost
     print("GOTTED")
     print(report.consumable_cost)
 
