@@ -132,6 +132,65 @@ def hold_image():
     return last_hold
 
 
+class EnumerationView(View):
+    def get(self, request):
+        report = None
+        images = None
+        pphotos = None
+        ophotos = None
+        checks = None
+        report = create_report(request)
+        report_id = report.report_id
+        calculation_form = CalculationForm(instance=Calculation())
+        image_form = ImageForm(instance=Images())
+        contract_form = ContractForm(instance=Contract())
+        passphoto_form = PPhotoForm(instance=PassportPhotos())
+        otherphoto_form = OPhotoForm(instance=OtherPhotos())
+        checks_form = ChecksForm(instance=Checks())
+        report_form = ReportForm(instance=Report())
+        car_form = CarForm(instance=Car())
+        customer_form = CustomerForm(instance=Customer())
+        service_form = formset_factory(ServiceForm, extra=2)
+        service_formset = service_form(prefix='service')
+        product_form = formset_factory(ProductForm, extra=2)
+        product_formset = product_form(prefix='product')
+        consumable_form = formset_factory(ConsumableForm, extra=2)
+        consumable_formset = consumable_form(prefix='consumable')
+        wear_form = WearForm()
+        total_price_report = 0
+        holds_image = HoldsImages.objects.create()
+        holds_image.report = report
+        holds_image.save()
+
+        template = 'makereport/enumeration.html'
+        context = {
+            'base': True,
+            'id_image': holds_image.id,
+            'id': report_id,
+            'calculation_form': calculation_form,
+            'contract_form': contract_form,
+            'report_form': report_form,
+            'car_form': car_form,
+            'prices': get_prices(),
+            'customer_form': customer_form,
+            'service_formset': service_formset,
+            'product_formset': product_formset,
+            'consumable_formset': consumable_formset,
+            'wear_form': wear_form,
+            'report': report or None,
+            'total_price_report': total_price_report,
+            'image_form': image_form or None,
+            'passphoto_form': passphoto_form or None,
+            'otherphoto_form': otherphoto_form or None,
+            'checks_form': checks_form or None,
+            'images': images or None,
+            'pphotos': pphotos or None,
+            'ophotos': ophotos or None,
+            'checks': checks or None,
+        }
+        return render(request, template, context)
+
+
 # Additional thingsss
 class ReportEditView(View):
     decorators = [login_required]
