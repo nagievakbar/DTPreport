@@ -1,0 +1,47 @@
+{% load static %}
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Подписание документа</h5>
+                <button id="close_m" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name=testform>
+                    <div class="container-fluid">
+                        <div class="col-md-6">
+                            <label id="message"></label>
+                            Выберите ключ <br/>
+                            <select class="form-select" id="floatingSelect"
+                                    aria-label="Floating label select example" name="key"
+                                    onchange="cbChanged(this)">
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <textarea class="file" name="data" style="display: none"></textarea>
+                            {# style="display: none" #}
+                        </div>
+
+                        <label id="keyId" style="display: none"></label><br/>
+                        <input id="sign" class="sign" class="sign" style="display: none"/>
+                        <input id="sign_from" class="sign_from" style="display: none"/>
+                        <input id="report_id" class="report_id" style="display: none"/>
+                        {#                Подписанный документ PKCS#7<br />#}
+                        <textarea class="pkcs7" name="pkcs7" style="display: none"></textarea><br/>
+                        {# style="display: none" #}
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="close_model" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть
+                </button>
+                <button onclick="sign_decide(this)" type="button" class="btn btn-primary btn-link sign">Подписать
+                </button>
+                <br/>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static "makereport/js/imzo_sign.js" %}"></script>

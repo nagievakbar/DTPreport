@@ -373,7 +373,26 @@ class Checks(models.Model):
         super(Checks, self).delete(*args, **kwargs)
 
 
+class Enumeration(models.Model):
+    report = models.ForeignKey('Report', on_delete=models.CASCADE, blank=True, null=True,
+                               related_name='report_enumeration',
+                               verbose_name='Отчёт')
+    p_c = models.CharField(max_length=50, blank=True, null=True)
+    bank = models.CharField(max_length=50, blank=True, null=True)
+    MFO = models.CharField(max_length=50, blank=True, null=True)
+    INN = models.CharField(max_length=50, blank=True, null=True)
+    OKED = models.CharField(max_length=50, blank=True, null=True)
+
+
+TYPE_OF_REPORT = (
+    (0, 0),
+    (1, 1),
+    (2, 2)
+)
+
+
 class Report(models.Model):
+    type_report = models.IntegerField(default=0, choices=TYPE_OF_REPORT)
     report_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     report_number = models.CharField(max_length=20, blank=True, null=True, )
     report_date = models.CharField(max_length=20, blank=True, null=True, )

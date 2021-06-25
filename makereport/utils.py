@@ -424,6 +424,23 @@ def create_report(request):
     return report
 
 
+def create_report_enumeration(request):
+    report = create_report(request)
+    report.type_report = 2
+    report.save()
+    Enumeration.objects.create(
+        report=report
+    )
+    return report
+
+
+def create_report_additional(request):
+    report = create_report(request)
+    report.type_report = 1
+    report.save()
+    return report
+
+
 from django.core.paginator import Paginator
 
 

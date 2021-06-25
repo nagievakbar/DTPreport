@@ -146,7 +146,7 @@
                 <th style="width: 136px;">Исполнитель</th>
                 {#              <th style="width: 136px;">Договор</th>#}
                 <th style="width: 136px;">Ключ</th>
-                <th style="width: 136px;">Отчёт</th>
+                <th style="width: 136px;">Дата</th>
                 <th style="width: 159px;">Функции</th>
             </tr>
             </thead>
@@ -164,9 +164,7 @@
                         data-title="Исполнитель">{{ report.created_by }}</td>
                     {#                  <td style="border-bottom: 1px solid #fff;" data-title="Договор">{{ report.contract }}</td>#}
                     <td style="border-bottom: 1px solid #fff;" data-title="Ключ">{{ report.key }}</td>
-                    <td style="border-bottom: 1px solid #fff;" data-title="Отчёт" data-type="currency">
-                        <a target="_blank" href="{% url 'get_additional' report.report_id %}">дополнительный отчёт</a>
-                    </td>
+                     <td style="border-bottom: 1px solid #fff;" data-title="Отчет">{{ report.report_date }}</td>
                     <td style="border-bottom: 1px solid #fff;" data-title="Функции" data-type="currency">
                         <a class="btn btn-primary" href="{% url 'add_report' report.report_id %}">Дополнительно</a>
                         {#                            <a href="#" data-toggle="modal" data-target="#deleteModal" data-bs-whatever="{{ report.report_id }}">Удалить</a>#}

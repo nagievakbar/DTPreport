@@ -128,7 +128,8 @@ class ContractForm(forms.ModelForm):
 class CalculationForm(forms.ModelForm):
     total = forms.CharField(required=False,
                             widget=forms.TextInput(
-                                attrs={'class': 'input2 work-price-input2 price_all total divide-integer', 'readonly':True}))
+                                attrs={'class': 'input2 work-price-input2 price_all total divide-integer',
+                                       'readonly': True}))
     departure = forms.CharField(required=False,
                                 widget=forms.TextInput(
                                     attrs={'class': 'input2 work-price-input2 price_3 total divide-integer'}))
@@ -198,23 +199,47 @@ class CustomerForm(forms.ModelForm):
                   'whom_passport_issued', 'phone_number', 'gnu_or_gje', 'uvajaemaya', 'mesto_osmotra']
 
 
-# class CustomerFormEdit(forms.ModelForm):
-#     name = forms.CharField(required=False,widget=forms.TextInput(attrs={'placeholder': 'Заказчик', 'class': 'input_in'}))
-#     address = forms.CharField(required=False,widget=forms.TextInput(attrs={'placeholder': 'Адрес заказчика', 'class': 'input_in'}))
-#     passport_number = forms.CharField(required=False,widget=forms.TextInput(attrs={'placeholder': 'Паспорт', 'class': 'input_in'}))
-#     when_passport_issued = forms.CharField(
-#         required=False,
-#         widget=forms.TextInput(attrs={'placeholder': 'Когда выдан', 'class': 'input_in'}))
-#     whom_passport_issued = forms.CharField(
-#         required=False,
-#         widget=forms.TextInput(attrs={'placeholder': 'Кем выдан', 'class': 'input_in'}))
-#     phone_number = forms.CharField(
-#         required=False,widget=forms.TextInput(attrs={'placeholder': 'Телефон', 'class': 'input_in'}))
-#
-#     class Meta:
-#         model = Customer
-#         fields = ['name', 'address', 'passport_number', 'when_passport_issued',
-#                   'whom_passport_issued', 'phone_number']
+class CustomerFormEdit(forms.ModelForm):
+    name = forms.CharField(required=False,
+                           widget=forms.TextInput(attrs={'placeholder': 'Заказчик', 'class': 'input_in'}))
+    address = forms.CharField(required=False,
+                              widget=forms.TextInput(attrs={'placeholder': 'Адрес заказчика', 'class': 'input_in'}))
+    gnu_or_gje = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={'placeholder': 'Г-ну', 'class': 'input_in'}))
+    uvajaemaya = forms.CharField(required=False,
+                                 widget=forms.TextInput(attrs={'placeholder': 'Уважаемый', 'class': 'input_in'}))
+
+    mesto_osmotra = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={'placeholder': 'Акт осмотра Место', 'class': 'input_in'}))
+
+    class Meta:
+        model = Customer
+        fields = ['name', 'address', 'gnu_or_gje', 'uvajaemaya', 'mesto_osmotra']
+
+
+class EnumerationForms(forms.ModelForm):
+    p_c = forms.CharField(required=False,
+                          widget=forms.TextInput(attrs={'placeholder': ' Р/c №', 'class': 'input_in'}))
+    bank = forms.CharField(required=False,
+                           widget=forms.TextInput(attrs={'placeholder': 'Банк', 'class': 'input_in'}))
+    MFO = forms.CharField(required=False,
+                          widget=forms.TextInput(attrs={'placeholder': 'МФО', 'class': 'input_in'}))
+    INN = forms.CharField(required=False,
+                          widget=forms.TextInput(attrs={'placeholder': 'ИНН', 'class': 'input_in'}))
+    OKED = forms.CharField(required=False,
+                           widget=forms.TextInput(attrs={'placeholder': 'ОKED', 'class': 'input_in'}))
+
+    class Meta:
+        model = Enumeration
+        fields = [
+            'p_c',
+            'bank',
+            'MFO',
+            'INN',
+            'OKED'
+        ]
 
 
 class ServiceForm(forms.Form):

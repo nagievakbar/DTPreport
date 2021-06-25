@@ -106,7 +106,7 @@
 <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
 
 <!-- ======= Header ======= -->
- {% include 'makereport/header/left_navbar.html' with reports="active"  %}
+{% include 'makereport/header/left_navbar.html' with reports="active" %}
 
 
 <main id="main">
@@ -196,8 +196,11 @@
                         {#                                        data-bs-whatever="{{ report.pdf_report_base64 }}">Руководителя#}
                         {#                                </button>#}
                         {#                            {% endif %}#}
-
-                        <a href="{% url 'edit_report' report.report_id %}">Изменить </a>
+                        {% if report.type_report == 0 %}
+                            <a href="{% url 'edit_report' report.report_id %}">Изменить</a>
+                        {% elif report.type_report == 2 %}
+                            <a href="{% url 'enumeration_view_edit' report.report_id %}">Изменить</a>
+                        {% endif %}
                         <button class="delete-report" type="button" id_report="{{ report.report_id }}"
                                 data-toggle="modal" data-target="#exampleModal">Удалить
                         </button>

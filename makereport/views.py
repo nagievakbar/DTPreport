@@ -9,7 +9,7 @@ from django.urls import reverse
 from django.utils.decorators import method_decorator
 
 from django.views.generic import View
-from django.db.models import Q
+from django.db.models import Q, Subquery
 from .forms import *
 from .utils import *
 
@@ -132,69 +132,9 @@ def hold_image():
     return last_hold
 
 
-class EnumerationView(View):
-    def get(self, request):
-        report = None
-        images = None
-        pphotos = None
-        ophotos = None
-        checks = None
-        report = create_report(request)
-        report_id = report.report_id
-        calculation_form = CalculationForm(instance=Calculation())
-        image_form = ImageForm(instance=Images())
-        contract_form = ContractForm(instance=Contract())
-        passphoto_form = PPhotoForm(instance=PassportPhotos())
-        otherphoto_form = OPhotoForm(instance=OtherPhotos())
-        checks_form = ChecksForm(instance=Checks())
-        report_form = ReportForm(instance=Report())
-        car_form = CarForm(instance=Car())
-        customer_form = CustomerForm(instance=Customer())
-        service_form = formset_factory(ServiceForm, extra=2)
-        service_formset = service_form(prefix='service')
-        product_form = formset_factory(ProductForm, extra=2)
-        product_formset = product_form(prefix='product')
-        consumable_form = formset_factory(ConsumableForm, extra=2)
-        consumable_formset = consumable_form(prefix='consumable')
-        wear_form = WearForm()
-        total_price_report = 0
-        holds_image = HoldsImages.objects.create()
-        holds_image.report = report
-        holds_image.save()
-
-        template = 'makereport/enumeration.html'
-        context = {
-            'base': True,
-            'id_image': holds_image.id,
-            'id': report_id,
-            'calculation_form': calculation_form,
-            'contract_form': contract_form,
-            'report_form': report_form,
-            'car_form': car_form,
-            'prices': get_prices(),
-            'customer_form': customer_form,
-            'service_formset': service_formset,
-            'product_formset': product_formset,
-            'consumable_formset': consumable_formset,
-            'wear_form': wear_form,
-            'report': report or None,
-            'total_price_report': total_price_report,
-            'image_form': image_form or None,
-            'passphoto_form': passphoto_form or None,
-            'otherphoto_form': otherphoto_form or None,
-            'checks_form': checks_form or None,
-            'images': images or None,
-            'pphotos': pphotos or None,
-            'ophotos': ophotos or None,
-            'checks': checks or None,
-        }
-        return render(request, template, context)
-
-
 # Additional thingsss
 class ReportEditView(View):
     decorators = [login_required]
-    extend = False
 
     @method_decorator(decorators)
     def get(self, request, id=None):
@@ -203,7 +143,7 @@ class ReportEditView(View):
         holds_image = HoldsImages.objects.get(report_id=id)
         new_hold_images = HoldsImages.objects.create()
         new_hold_images.set_new(holds_image)
-        new_report = create_report(request)
+        new_report = create_report_additional(request)
         new_hold_images.report = new_report
         new_hold_images.save()
         images = new_hold_images.image_previous.all()
@@ -263,6 +203,7 @@ class ReportEditView(View):
         }
         return render(request, template, context)
 
+    @method_decorator(decorators)
     def post(self, request, id=None):
         holds_images = HoldsImages.objects.get(id=request.POST['id_image'])
         images = holds_images.image_concatinate()
@@ -332,9 +273,7 @@ class ReportEditView(View):
             new_customer.save()
             new_contract.customer = new_customer
             new_contract.save()
-
             new_report = report_form.save(commit=False)
-
             new_report.contract = new_contract
             new_car = car_form.save()
             new_car.save()
@@ -405,11 +344,18 @@ class ReportEditView(View):
 
 class ReportView(View):
     decorators = [login_required]
-    extend = False
 
     @method_decorator(decorators)
     def get(self, request, id=None, extend=0):
-        report = None
+        if id is None:
+            report = create_report(request)
+        else:
+            report = Report.objects.get(report_id=id)
+        context = self.prepare_get_request(request, id, report, customer_form=CustomerForm)
+        template = 'makereport/add_repor.html'
+        return render(request, template, context)
+
+    def prepare_get_request(self, request, id, report: Report, customer_form=forms.ModelForm):
         images = None
         pphotos = None
         ophotos = None
@@ -436,7 +382,7 @@ class ReportView(View):
             car.release_date = car.release_date
             car_form = CarForm(instance=car)
             customer = Customer.objects.get(customer_id=contract.customer_id)
-            customer_form = CustomerForm(instance=customer)
+            customer_form = customer_form(instance=customer)
             service_form = formset_factory(ServiceForm, extra=1)
             service_formset = service_form(initial=report.service_data, prefix='service')
             product_form = formset_factory(ProductForm, extra=1)
@@ -445,9 +391,8 @@ class ReportView(View):
             consumable_formset = consumable_form(initial=report.consumable_data, prefix='consumable')
             wear_form = WearForm(initial=report.wear_data)
             total_price_report = report.total_report_cost
-            # template = 'makereport/edit_repor.html'
         else:
-            report = create_report(request)
+
             report_id = report.report_id
             calculation_form = CalculationForm(instance=Calculation())
             image_form = ImageForm(instance=Images())
@@ -457,7 +402,7 @@ class ReportView(View):
             checks_form = ChecksForm(instance=Checks())
             report_form = ReportForm(instance=Report())
             car_form = CarForm(instance=Car())
-            customer_form = CustomerForm(instance=Customer())
+            customer_form = customer_form(instance=Customer())
             service_form = formset_factory(ServiceForm, extra=2)
             service_formset = service_form(prefix='service')
             product_form = formset_factory(ProductForm, extra=2)
@@ -469,7 +414,6 @@ class ReportView(View):
             holds_image = HoldsImages.objects.create()
             holds_image.report = report
             holds_image.save()
-        template = 'makereport/add_repor.html'
         context = {
             'base': True,
             'id_image': holds_image.id,
@@ -495,7 +439,7 @@ class ReportView(View):
             'ophotos': ophotos or None,
             'checks': checks or None,
         }
-        return render(request, template, context)
+        return context
 
     @method_decorator(decorators)
     def post(self, request, id=None, extend=0):
@@ -786,6 +730,158 @@ class ReportView(View):
         return consumable_formset
 
 
+class EnumerationView(ReportView):
+    decorators = [login_required]
+    extend = False
+
+    @method_decorator(decorators)
+    def get(self, request, id=None):
+        template = 'makereport/enumeration.html'
+        if id is None:
+            enumeration_form = EnumerationForms(instance=Enumeration())
+            report = create_report_enumeration(request)
+        else:
+            enumeration = Enumeration.objects.get(report_id=id)
+            enumeration_form = EnumerationForms(instance=enumeration)
+            report = Report.objects.get(report_id=id)
+        context = self.prepare_get_request(request, id, report, customer_form=CustomerFormEdit)
+        context['enumeration_form'] = enumeration_form
+        return render(request, template, context)
+
+    @method_decorator(decorators)
+    def post(self, request, id=None):
+        holds_images = HoldsImages.objects.get(id=request.POST['id_image'])
+        images = holds_images.image_concatinate()
+        pphotos = holds_images.pp_photo_concatinate()
+        ophotos = holds_images.o_photo_concatinate()
+        checks = holds_images.check_concatinate()
+        if id is not None:
+            report_id = id
+        else:
+            report_id = int(request.POST['id_report'])
+        if report_id == 0:
+            calculation_form = CalculationForm(request.POST, instance=Calculation())
+            contract_form = ContractForm(request.POST, instance=Contract())
+            report_form = ReportForm(request.POST, instance=Report())
+            car_form = CarForm(request.POST, instance=Car())
+            customer_form = CustomerFormEdit(request.POST, instance=Customer())
+            enumeration_form = EnumerationForms(instance=Enumeration())
+        else:
+            report = Report.objects.get(report_id=report_id)
+            calculation = Calculation.objects.get(report_id=report_id)
+            enumeration = Enumeration.objects.get(report_id=report_id)
+            calculation_form = CalculationForm(request.POST, instance=calculation)
+            contract_form = ContractForm(request.POST, instance=report.contract)
+            report_form = ReportForm(request.POST, instance=report)
+            car_form = CarForm(request.POST, instance=report.car)
+            customer_form = CustomerFormEdit(request.POST, instance=report.contract.customer)
+            enumeration_form = EnumerationForms(request.POST, instance=enumeration)
+
+        image_form = ImageForm(request.POST, request.FILES)
+        passphoto_form = PPhotoForm(request.POST, request.FILES)
+        otherphoto_form = OPhotoForm(request.POST, request.FILES)
+        checks_form = ChecksForm(request.POST, request.FILES)
+
+        service_formset = self.init_service_formset(request)
+        product_formset = self.init_product_formset(request)
+        consumable_formset = self.init_consumable_formset(request)
+        wear_form = WearForm(request.POST)
+
+        print("VALIDATION {}{}{} {}  {}".format(report_form.is_valid(), car_form.is_valid(), customer_form.is_valid(),
+                                                calculation_form.is_valid(), enumeration_form.is_valid()))
+        print(car_form.errors)
+        context = {
+            'base': False,
+            'id_image': holds_images.id,
+            'calculation_form': calculation_form,
+            'contract_form': contract_form,
+            'report_form': report_form,
+            'enumeration_form': enumeration_form,
+            'id': report_id,
+            'prices': get_prices(),
+            'car_form': car_form,
+            'customer_form': customer_form,
+            'service_formset': service_formset,
+            'product_formset': product_formset,
+            'consumable_formset': consumable_formset,
+            'report': None,
+            'wear_form': wear_form,
+            'image_form': image_form,
+            'passphoto_form': passphoto_form,
+            'otherphoto_form': otherphoto_form,
+            'checks_form': checks_form,
+            'images': images or None,
+            'pphotos': pphotos or None,
+            'ophotos': ophotos or None,
+            'checks': checks or None,
+        }
+        if report_form.is_valid() \
+                and car_form.is_valid() \
+                and customer_form.is_valid() \
+                and contract_form.is_valid() \
+                and calculation_form.is_valid() \
+                and enumeration_form.is_valid():
+            new_contract = contract_form.save()
+            new_customer = customer_form.save(commit=False)
+            new_customer.save()
+            new_contract.customer = new_customer
+            new_contract.save()
+
+            new_report = report_form.save(commit=False)
+            new_report.contract = new_contract
+            new_car = car_form.save()
+            new_car.save()
+            new_report.car = new_car
+            new_report.created_by = request.user
+            new_report.save()
+            enumeration_form.save()
+            holds_images.report = new_report
+            holds_images.store_add()
+            new_calculation = calculation_form.save()
+            new_calculation.report = new_report
+            new_calculation.save()
+            new_report.clean_incoming_data()
+            for form in service_formset.forms:
+                if form.is_valid() and form.cleaned_data:
+                    sd = get_data_from_service_form(form)
+                    if sd.__getitem__('service_cost') is not None:
+                        add_service_to_report(new_report, sd.__getitem__('service_id'), sd.__getitem__('service_cost'))
+                        new_report.service_data.append(sd)
+            for form in product_formset.forms:
+                if form.is_valid() and form.cleaned_data:
+                    pd = get_data_from_product_form(form)
+                    if pd.__getitem__('product_cost') is not None:
+                        add_product_to_report(new_report, pd.__getitem__('product_cost'))
+                        new_report.product_data.append(pd)
+            for form in consumable_formset.forms:
+                if form.is_valid() and form.cleaned_data:
+                    cd = get_data_from_consum_form(form)
+                    if cd.__getitem__('consumable_cost') is not None:
+                        add_consumable_to_report(new_report, cd.__getitem__('consumable_id'),
+                                                 cd.__getitem__('consumable_cost'))
+                        new_report.consumable_data.append(cd)
+            if wear_form.is_valid():
+                wd = get_data_from_wear_form(wear_form)
+                new_report.wear_data.update(wd)
+                new_report.get_total_report_price()
+            else:
+                print("ERRROS WEAR FORMSSS")
+                print(wear_form.errors)
+            new_report.set_private_key()
+            new_report.save()
+            total_price_report = new_report.total_report_cost
+            context['id'] = new_report.report_id
+            context['total_price_report'] = total_price_report
+            context['report'] = new_report
+            try:
+                create_base64(new_report)
+            except KeyError:
+                pass
+            # make_pdf.delay(new_report.report_id)
+
+        return render(request, 'makereport/enumeration.html', context)
+
+
 def delete(request):
     try:
         report = Report.objects.get(report_id=request.GET.get('id', 0))
@@ -802,11 +898,12 @@ def reports_list(request):
 
 @login_required
 def reports_edit_list(request):
-    context = list(request)
+    enumeration = Q(report_id__in=Subquery(Enumeration.objects.all().values('report_id')))
+    context = list(request, enumeration=enumeration)
     return render(request, 'makereport/additional.html', context=context)
 
 
-def list(request):
+def list(request, enumeration=Q()):
     page = pagination_update(request)
     params = ""
     if 'search' in request.GET:
@@ -821,7 +918,11 @@ def list(request):
         reports = data['reports']
     else:
         reports = Report.objects
-    paginator = CustomPaginator(reports.exclude((Q(key__isnull=True) | Q(key__exact=''))).order_by('-report_id'), page)
+
+    paginator = CustomPaginator(
+        reports.exclude(
+            (Q(key__isnull=True) | Q(key__exact='') | enumeration)).order_by(
+            '-report_id'), page)
     page_number = request.GET.get('page')
     reports = paginator.get_page(page_number)
     context = {'reports': reports, "page_obj": PaginationModels.objects.all().order_by('page'),
