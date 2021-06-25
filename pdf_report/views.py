@@ -121,7 +121,7 @@ def finish_view(request, id):
     car = report.car
     contract = report.contract
     customer = contract.customer
-    qrcode = get_qrc_code(qr_company=report.pdf_qr_code_company, qr_user=report.pdf_qr_code_user)
+    qrcode = get_qrc_code(qr_company=report.pdf_qr_code_company)
     context = {
         'car': car,
         's': s.BASE_URL,
