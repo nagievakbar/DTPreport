@@ -877,7 +877,7 @@ class EnumerationView(ReportView):
                 create_base64(new_report)
             except KeyError:
                 pass
-            # make_pdf.delay(new_report.report_id)
+            make_pdf.delay(new_report.report_id)
 
         return render(request, 'makereport/enumeration.html', context)
 
