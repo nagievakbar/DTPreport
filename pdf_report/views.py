@@ -230,7 +230,7 @@ class GenerateAgreement(View):
         return response
 
 
-def get_qrc_code(qr_company, qr_user):
+def get_qrc_code(qr_company="", qr_user=""):
     if (qr_company is not None and qr_user is not None) and (qr_company != "" and qr_user != ""):
         return "{company} {user}".format(company=qr_company, user=qr_user)
     elif qr_company is not None and qr_company != "":
