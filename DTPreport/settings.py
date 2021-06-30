@@ -38,6 +38,7 @@ ALLOWED_HOSTS = ['makereport.elite-house.uz',
                  'e-otsenka.uz',
                  'e-imzo.uz'
                  'localhost',
+                 '192.168.1.3',
                  '184.196.214.55'
                  ]
 URL_FILES = 'https://e-otsenka.uz'
