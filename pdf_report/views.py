@@ -254,13 +254,13 @@ class GenerateAdditional(View):
 
 class GeneratePDF(View):
     def get(self, request, id=None):
-        try:
+        # try:
             report_pdf = Report.objects.get(report_id=id)
             response = FileResponse(open(os.path.abspath(os.path.join(report_pdf.pdf_report.path)), 'rb'),
                                     content_type='application/pdf')
             return response
-        except:
-            return get_file('base.pdf', content_type='application/pdf')
+        # except:
+        #     return get_file('base.pdf', content_type='application/pdf')
 
 
 def get_bases(id):
