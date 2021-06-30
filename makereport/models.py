@@ -453,13 +453,16 @@ class Report(models.Model):
         self.save()
 
     def save_pdf(self, filename, data):
-        path = self.pdf_report.path
+        path = None
+        if self.pdf_report is not None:
+            path = self.pdf_report.path
         self.pdf_report.save(filename, ContentFile(data))
         self.save()
         try:
             default_storage.delete(path)
         except:
             pass
+
     def delete(self, *args, **kwargs):
         try:
             default_storage.delete(self.passport_photo.path)
