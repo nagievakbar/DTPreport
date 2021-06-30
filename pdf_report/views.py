@@ -69,7 +69,7 @@ def get_file_path(file, name="", content_type='text/xml'):
 
 
 def get_file(file, name="", content_type='text/xml'):
-    response = FileResponse(open(os.path.join(s.MEDIA_ROOT, '..', 'templates', file), 'rb'),
+    response = FileResponse(open(os.path.abspath(os.path.join(s.MEDIA_ROOT, '..', 'templates', file)), 'rb'),
                             content_type=content_type)
     # content = "attachment; filename=%s" % name
     # response['Content-Disposition'] = content
@@ -245,7 +245,7 @@ class GenerateAdditional(View):
     def get(self, request, id=None):
         try:
             report_pdf = Report.objects.get(report_id=id)
-            response = FileResponse(open(os.path.join(report_pdf.pdf_report_additional.path), 'rb'),
+            response = FileResponse(open(os.path.abspath(os.path.join(report_pdf.pdf_report_additional.path)), 'rb'),
                                     content_type='application/pdf')
             return response
         except:
@@ -256,7 +256,7 @@ class GeneratePDF(View):
     def get(self, request, id=None):
         try:
             report_pdf = Report.objects.get(report_id=id)
-            response = FileResponse(open(os.path.join(report_pdf.pdf_report.path), 'rb'),
+            response = FileResponse(open(os.path.abspath(os.path.join(report_pdf.pdf_report.path)), 'rb'),
                                     content_type='application/pdf')
             return response
         except:

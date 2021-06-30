@@ -21,7 +21,7 @@ from weasyprint import HTML, CSS
 
 
 def generate_pdf(context: dict, default_template: str, css_name: str, main_template_path: str = ""):
-    load =  os.path.abspath(os.path.join(s.MEDIA_ROOT, '..'))
+    load = os.path.abspath(os.path.join(s.MEDIA_ROOT, '..'))
     css = os.path.join(load, 'templates/css/{name}'.format(name=css_name))
     main_css = os.path.join(load, 'templates/css/main.css')
     env = Environment(loader=FileSystemLoader(load))
