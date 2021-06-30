@@ -456,14 +456,14 @@ class Report(models.Model):
 
         try:
             path = self.pdf_report.path
-        except:
+        except ValueError:
             path = None
 
         self.pdf_report.save(filename, ContentFile(data))
         self.save()
         try:
             default_storage.delete(path)
-        except:
+        except ValueError:
             pass
 
     def delete(self, *args, **kwargs):
