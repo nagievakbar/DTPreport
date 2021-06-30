@@ -453,17 +453,10 @@ class Report(models.Model):
         self.save()
 
     def save_pdf(self, filename, data):
-        try:
-            default_storage.delete(self.pdf_report.path)
-        except ValueError:
-            pass
-        except AssertionError:
-            pass
-        except:
-            pass
-
+        path = self.pdf_report.path
         self.pdf_report.save(filename, ContentFile(data))
         self.save()
+        default_storage.delete(path)
 
     def delete(self, *args, **kwargs):
         try:
