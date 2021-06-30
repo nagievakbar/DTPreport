@@ -415,9 +415,9 @@ class Report(models.Model):
     total_report_cost = models.CharField(max_length=20, blank=True, null=True, )
     total_report_cost_txt = models.CharField(max_length=200, blank=True, null=True, )
 
-    pdf_report_additional = models.FileField(blank=True, null=True, upload_to='uploads_additional/%Y/%m/%d/',
+    pdf_report_additional = models.FileField(blank=True, null=True, upload_to='uploads_additional/%Y/%m/%d',
                                              verbose_name='Дополнительный отчет в пдф')
-    pdf_report = models.FileField(blank=True, null=True, upload_to='uploads/%Y/%m/%d/', verbose_name='Отчёт в пдф')
+    pdf_report = models.FileField(blank=True, null=True, upload_to='uploads/%Y/%m/%d', verbose_name='Отчёт в пдф')
     pdf_report_base64 = models.CharField(max_length=1000000, blank=True, null=True)
     pdf_report_pkcs7 = models.JSONField(blank=True, null=True)
     pdf_report_qr = models.JSONField(blank=True, null=True)
