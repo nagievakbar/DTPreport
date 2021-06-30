@@ -453,9 +453,12 @@ class Report(models.Model):
         self.save()
 
     def save_pdf(self, filename, data):
-        path = None
-        if self.pdf_report is not None:
+
+        try:
             path = self.pdf_report.path
+        except:
+            path = None
+
         self.pdf_report.save(filename, ContentFile(data))
         self.save()
         try:
