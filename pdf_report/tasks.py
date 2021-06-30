@@ -45,7 +45,7 @@ def make_pdf(id):
     obj = TemplateBase
     new_report_pdf = Report.objects.get(report_id=id)
     data = test_report_base(id, obj=obj)
-    filename = "%s.pdf" % new_report_pdf.car.car_number
+    filename = "main_{}.pdf".format(new_report_pdf.report_id)
     new_report_pdf.save_pdf(filename, data)
 
 
@@ -54,5 +54,5 @@ def make_pdf_additional(id):
     obj = TemplateAdditional
     new_report_pdf = Report.objects.get(report_id=id)
     data = test_report_base(id, obj=obj)
-    filename = "%s.pdf" % new_report_pdf.car.car_number
+    filename = "second_{}.pdf".format(new_report_pdf.report_id)
     new_report_pdf.save_additional_pdf(filename, data)
