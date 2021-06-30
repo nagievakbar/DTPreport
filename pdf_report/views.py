@@ -55,7 +55,7 @@ def handle_schema(file, default_name):
         return get_file_path(file=file_data, name=file.name)
     except:
         print(default_name)
-        file_data = open(os.path.join(s.MEDIA_ROOT, '../templates/template_html/{}'.format(default_name)), 'rb')
+        file_data = open(os.path.abspath(os.path.join(s.MEDIA_ROOT, '../templates/template_html/{}'.format(default_name))), 'rb')
         return get_file_path(file=file_data, name=default_name)
 
 
