@@ -179,6 +179,7 @@ def test_report_base(id: int, obj):
     contract = Contract.objects.get(contract_id=new_report_pdf.contract_id)
     holds_images = HoldsImages.objects.get(report_id=id)
     images = holds_images.image.all()
+    print(images)
     passport = holds_images.pp_photo.all()
     checks = holds_images.checks.first()
     other_photos = holds_images.o_images.all()

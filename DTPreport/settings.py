@@ -41,7 +41,7 @@ ALLOWED_HOSTS = ['makereport.elite-house.uz',
                  '192.168.1.3',
                  '184.196.214.55'
                  ]
-URL_FILES = 'https://e-otsenka.uz'
+URL_FILES = 'http://192.168.1.3'
 BASE_URL = URL_FILES + "/media/"
 # Application definition
 
@@ -110,18 +110,18 @@ WSGI_APPLICATION = 'DTPreport.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': str(os.path.join(BASE_DIR, "db.sqlite3")),
-    # }
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'project',
-        'USER': 'vid',
-        'PASSWORD': '123Aa123',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': str(os.path.join(BASE_DIR, "db.sqlite3")),
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'project',
+    #     'USER': 'vid',
+    #     'PASSWORD': '123Aa123',
+    #     'HOST': 'localhost',
+    #     'PORT': '',
+    # }
 }
 
 # DATABASES = {
