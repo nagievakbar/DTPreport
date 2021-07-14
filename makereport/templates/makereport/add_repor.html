@@ -762,6 +762,14 @@
                                             </a>
                                         </div>
                                     </div>
+                                {% elif report.type_report == 2 %}
+                                    <div class="col-lg-2 download_button">
+                                        <div class="panel_user" id="download_button3">
+                                            <a href="{% url 'get_response' id %}" target="_blank">
+                                                <button type="button" class="btn panel_button">Посмотреть</button>
+                                            </a>
+                                        </div>
+                                    </div>
                                 {% else %}
                                     <div class="col-lg-2 download_button">
                                         <div class="panel_user" id="download_button4">

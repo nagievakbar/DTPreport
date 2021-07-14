@@ -5,6 +5,7 @@ from .tasks import get_base
 
 urlpatterns = [
     path('<int:id>/', GeneratePDF.as_view(), name='get_response'),
+    path('enumeration/<int:id>/', GeneratePDF.as_view(), name='get_response'),
     path('mixing/<int:id>', finish_view, name='get_mixing'),
     path('agreement/<int:id>', agreement_view, name='get_agreement'),
     path('additional/<int:id>', GenerateAdditional.as_view(), name='get_additional'),
