@@ -710,6 +710,9 @@
             <tr>
                 <td>Реквизиты заказчика:</td>
                 <td><p>
+
+                    {#                    Create extension here #}
+                    {#                   #}
                     Адрес: {{ report.contract.customer.address }}
                     <br>
                     паспорт серия: {{ report.contract.customer.passport_number }}
@@ -717,7 +720,8 @@
                     дата выдачи: {{ report.contract.customer.when_passport_issued }} года
                     <br>
                     от: {{ report.contract.customer.whom_passport_issued }}
-                </p></td>
+                </p>
+                </td>
             </tr>
             <tr>
                 <td>Исполнитель:</td>
@@ -807,6 +811,7 @@
                 <td> {{ report.report_date }}</td>
             </tr>
         </table>
+        {#    as###############################################################################################################################}
         <br>
         <p class="bold-text">5.1 Сертификат качества оценки</p>
         <p class="large-text-space">
@@ -1558,19 +1563,19 @@
                 </th>
                 <th>сумма</th>
             </tr>
-         {% if report.consumable_data %}
-            {% for consumable in report.consumable_data %}
-                <tr>
-                    <td>{{ consumable.consumable_id }}</td>
-                    <td>{{ consumable.name }}</td>
-                    <td> {{ consumable.unit }}</td>
+            {% if report.consumable_data %}
+                {% for consumable in report.consumable_data %}
+                    <tr>
+                        <td>{{ consumable.consumable_id }}</td>
+                        <td>{{ consumable.name }}</td>
+                        <td> {{ consumable.unit }}</td>
 
-                    <td> {{ consumable.quantity }}</td>
-                    <td>{{ consumable.price }}</td>
-                    <td>{{ consumable.consumable_cost }}</td>
-                </tr>
-            {% endfor %}
-        {% endif %}
+                        <td> {{ consumable.quantity }}</td>
+                        <td>{{ consumable.price }}</td>
+                        <td>{{ consumable.consumable_cost }}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
             <tr>
                 <td colspan="5">Общая стоимость материалов</td>
                 <td>{{ report.consumable_cost }}</td>

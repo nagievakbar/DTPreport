@@ -391,6 +391,10 @@ TYPE_OF_REPORT = (
 )
 
 
+# 0 is usual report
+# 1 is additional report
+# 2 is enumeration report
+
 class Report(models.Model):
     type_report = models.IntegerField(default=0, choices=TYPE_OF_REPORT)
     report_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')

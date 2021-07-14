@@ -173,13 +173,13 @@ class CustomerForm(forms.ModelForm):
                               widget=forms.TextInput(attrs={'placeholder': 'Адрес заказчика', 'class': 'input_in'}))
     passport_number = forms.CharField(
         required=False,
-        widget=forms.TextInput(attrs={'placeholder': 'Паспорт / Р/c № / в ', 'class': 'input_in'}))
+        widget=forms.TextInput(attrs={'placeholder': 'Паспорт', 'class': 'input_in'}))
     when_passport_issued = forms.CharField(
         required=False,
-        widget=forms.TextInput(attrs={'placeholder': 'Когда выдан / город', 'class': 'input_in'}))
+        widget=forms.TextInput(attrs={'placeholder': 'Когда выдан', 'class': 'input_in'}))
     whom_passport_issued = forms.CharField(
         required=False,
-        widget=forms.TextInput(attrs={'placeholder': 'Кем выдан / МФО ОКЕД ИНН', 'class': 'input_in'}))
+        widget=forms.TextInput(attrs={'placeholder': 'Кем выдан', 'class': 'input_in'}))
     phone_number = forms.CharField(
         required=False,
         widget=forms.TextInput(attrs={'placeholder': 'Телефон', 'class': 'input_in'}))
@@ -197,6 +197,9 @@ class CustomerForm(forms.ModelForm):
         model = Customer
         fields = ['name', 'address', 'passport_number', 'when_passport_issued',
                   'whom_passport_issued', 'phone_number', 'gnu_or_gje', 'uvajaemaya', 'mesto_osmotra']
+
+
+
 
 
 class CustomerFormEdit(forms.ModelForm):

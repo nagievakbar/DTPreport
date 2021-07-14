@@ -63,7 +63,7 @@
 <button type="button" class="mobile-nav-toggle d-xl-none"><i class="icofont-navigation-menu"></i></button>
 
 <!-- ======= Header ======= -->
- {% include 'makereport/header/left_navbar.html' with new_page="active"  %}
+{% include 'makereport/header/left_navbar.html' with new_page="active" %}
 
 
 <main id="main">
@@ -178,10 +178,19 @@
                                             </strong>
                                         </div>
                                     {% endif %}
-                                    {{ customer_form.when_passport_issued }}
-                                    {{ customer_form.whom_passport_issued }}
-                                    {{ customer_form.phone_number }}
+                                    {% if report.type_report == 2 %}
+                                        {{ enumeration_form.p_c }}
+                                        {{ enumeration_form.bank }}
+                                        {{ enumeration_form.MFO }}
+                                        {{ enumeration_form.INN }}
+                                        {{ enumeration_form.OKED }}
+                                    {% else %}
+                                        {{ customer_form.when_passport_issued }}
+                                        {{ customer_form.whom_passport_issued }}
+                                        {{ customer_form.phone_number }}
+                                    {% endif %}
                                     {{ customer_form.gnu_or_gje }}
+
                                     {{ customer_form.uvajaemaya }}
                                     {{ customer_form.mesto_osmotra }}
                                 </div>
@@ -290,7 +299,8 @@
                                     <li class="table-row">
                                         <div class="col col-1" data-label="">Общая<span>стоимость</span></div>
                                         <div class="col col-2" data-label="Эксплуатационныйизнос"><span
-                                                id="all_service_cost" class="divide-integer-label">{{ report.service_cost }}</span></div>
+                                                id="all_service_cost"
+                                                class="divide-integer-label">{{ report.service_cost }}</span></div>
                                     </li>
                                 </ul>
                             </div>
@@ -353,12 +363,14 @@
                                     <li class="table-row">
                                         <div class="col col-1" data-label="">Общая<span>стоимость</span></div>
                                         <div class="col col-2" data-label="Эксплуатационныйизнос"><span
-                                                id="all_product_cost" class="divide-integer-label">{{ report.product_cost }}</span></div>
+                                                id="all_product_cost"
+                                                class="divide-integer-label">{{ report.product_cost }}</span></div>
                                     </li>
                                     <li class="table-row">
                                         <div class="col col-1" data-label="">Износ<span>Ки</span></div>
                                         <div class="col col-2" data-label="Эксплуатационныйизнос"><span
-                                                id="product_wear_show" class="">{{ report.wear_data.accept_wear }}</span></div>
+                                                id="product_wear_show"
+                                                class="">{{ report.wear_data.accept_wear }}</span></div>
                                     </li>
                                     <li class="table-row">
                                         <div class="col col-1" data-label="">
@@ -432,7 +444,8 @@
                                     <li class="table-row">
                                         <div class="col col-1" data-label="">Общая<span>стоимость</span></div>
                                         <div class="col col-2" data-label="Эксплуатационныйизнос"><span
-                                                id="all_consumable_cost" class="divide-integer-label">{{ report.consumable_cost }}</span></div>
+                                                id="all_consumable_cost"
+                                                class="divide-integer-label">{{ report.consumable_cost }}</span></div>
                                     </li>
                                 </ul>
                             </div>
