@@ -104,7 +104,9 @@
     <section class="padding_phone" style="z-index: 9999 !important;">
 
         <form method="POST" class="material-form-2" enctype="multipart/form-data">{% csrf_token %}
+{#        id of image holder #}
             <input type="number" value="{{ id_image }}" id="id_image" name="id_image" style="display: none"/>
+{#            report id are important for knowing which report to open and#}
             <input type="number" value="{{ id }}" name="id_report" style="display: none"/>
             <div class="accordion one">
                 <!-- 1 -->
@@ -765,7 +767,7 @@
                                 {% elif report.type_report == 2 %}
                                     <div class="col-lg-2 download_button">
                                         <div class="panel_user" id="download_button3">
-                                            <a href="{% url 'get_response' id %}" target="_blank">
+                                            <a href="{% url 'get_enumeration' id %}" target="_blank">
                                                 <button type="button" class="btn panel_button">Посмотреть</button>
                                             </a>
                                         </div>

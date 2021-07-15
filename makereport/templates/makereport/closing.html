@@ -1,0 +1,100 @@
+{% extends 'makereport/layout_form_input.html' %}
+{% block title %}
+    <title>Заключение</title>
+{% endblock %}
+{% block header %}
+    {% include 'makereport/header/left_navbar.html' with closing="active" %}
+{% endblock %}
+
+{% block content %}
+    <form method="POST" class="material-form-2" enctype="multipart/form-data">{% csrf_token %}
+        {#            closing id are important for knowing which report to open and where to store#}
+        <input type="number" value="{{ id }}" name="id_closing" style="display: none"/>
+        <div class="accordion one">
+            <!-- 1 -->
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span class="accordion-title">Данные</span>
+                    <img src="{% static '/makereport/img/Polygon.png' %}" alt="polygon" class="polygon">
+                </div>
+                <div class="inside-content accordion-content">
+                    <div class="accordion-content-wrapper">
+                        <div class="inputs_big">
+                            <div class="left-inputs">
+                                {#                                            <input type="text" placeholder="Отчёт" class="input_in">#}
+                                {{ closing_form.report_number }}
+                                {{ closing_form.movable_property }}
+                                {{ closing_form.place_registration }}
+                                {{ closing_form.damage_auto }}
+                                {{ closing_form.owner }}
+                                {{ closing.report_date }}
+                                {{ closing_form.customer }}
+                                {{ closing_form.address_customer }}
+                                {{ closing_form.passport_data }}
+                            </div>
+                            <div class="divider"></div>
+                            <div class="right-inputs">
+                                {{ closing_form.executor }}
+                                {{ closing_form.requisite_executor }}
+                                {{ closing_form.aim_mark }}
+                                {{ closing_form.appearance_cost }}
+                                {{ closing_form.form_report }}
+                                {{ closing_form.license_executor }}
+                                {{ closing_form.legislative_contractual_limitations }}
+                                {{ closing_form.main_mark }}
+                                {{ closing_form.data_mark }}
+                                {{ closing_form.data_creation_mark }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="almost_latest_block">
+            <div class="row last_details_price">
+                <div class="col-sm-12">
+                    <div class="save-btn-block">
+                        <button class="save-btn">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="material-form-2">
+            <div class="last_bottom_block col-12">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-6 download_button">
+                                <div class="panel_user" id="download_button7">
+                                    <a href="{% url 'get_disposable' id %}" target="_blank">
+                                        <button type="button" class="btn panel_button">Посмотреть</button>
+                                    </a>
+                                </div>
+                            </div>
+                            {#                            There is we are using methods of add report for sign boss to implement signing of closing whatever who it will be#}
+                            {#                            So do not be confused when you see it later. Just do not touch anything from here and everything will be okey!#}
+                            {% if closing.sign == None and id != 0 %}
+                            <div id="user_sign" class="col-lg-6 download_button">
+                                <div class="panel_user" id="download_button6">
+                                    <button class="btn panel_button"
+                                            type="button"
+                                            id="sign_boss"
+                                            href="#" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal"
+                                            sign="False"
+                                            sign_from='1'
+                                            data-bs-report="{{ closing.id }}"
+                                            {#                                    pkcs7="{{ report.pdf_report_pkcs7.0 }}"#}
+                                            data-bs-whatever="{{ closing.pdf_closing_base64 }}"> Подписать
+                                    </button>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+       {% include 'makereport/modal/imzo_sign_modal.html' %}
+{% endblock %}

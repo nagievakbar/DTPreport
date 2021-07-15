@@ -1,9 +1,0 @@
-{% extends 'templates/template_html/report.html' %}
-{% block common_info %}
-    Адрес: {{ report.contract.customer.address }}
-    <br>
-    р\с {{ enumeration.p_c }}
-    {{ enumeration.bank }}
-    МФО {{ enumeration.MFO }} ИНН {{ enumeration.INN }}
-    ОКЭД {{ enumeration.OKED }}
-{% endblock %}

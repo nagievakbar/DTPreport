@@ -9,15 +9,10 @@ from django.db.models import Q
 
 
 def qr_code(signature, valid_from):
-    # str_for_qr_code = "success: {success}\nsignature:{signature}\nsignAlgName:{signAlgName}\nlink:{link}\n".format(
-    #     success=success, signature=signature, signAlgName=signAlgName, link=link)
     str_for_qr_code = "signature:{signature}           from: {valid_from}".format(
         signature=signature, valid_from=valid_from)
     print(str_for_qr_code)
     return str_for_qr_code
-    # img = qrcode.make(str_for_qr_code)  # вот сюда любую ссылку вставите он переведет в QR CODE
-    # # Create and save the svg file naming "myqr.svg"
-    # img.save('qrcode_test.png')
 
 
 def serializing(formatted_output):
@@ -104,6 +99,51 @@ def verifyPkcs7(request):
         report.pdf_report_pkcs7.append(pkcs7)
         report.save()
         get_verifyPkcs7(report_id, int(request.POST.get('sign_from', 0)))
+        data = {
+            'success': 'True',
+        }
+        return JsonResponse(data)
+    data = {
+        'success': 'False',
+    }
+    return JsonResponse(data)
+
+
+# Can I delete base64 after all sign was made ?
+# handles incoming data for sign
+def processForSign(closing_id: int, pkcs7):
+    closing = Closing.objects.get(id=closing_id)
+    url = "http://127.0.0.1:9090/dsvs/pkcs7/v1?WSDL"
+    headers = {'Content-type': 'text/xml', 'Accept': 'application/json'}
+
+    body = """<Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
+          <Body>
+              <verifyPkcs7 xmlns="http://v1.pkcs7.plugin.server.dsv.eimzo.yt.uz/">
+                  <pkcs7B64 xmlns="">{}</pkcs7B64 >
+              </verifyPkcs7 >
+          </Body>
+      </Envelope> """.format(pkcs7)
+    response = requests.post(url, data=body, headers=headers)
+    response.encoding = 'utf-8'
+    my_json = response.text
+    formatted_output = my_json.replace('\\n', '\n').replace('\\t', '\t')
+    get_str = serializing(formatted_output)
+    get_json = json.loads(get_str)
+    index = 0
+    signers = get_json["pkcs7Info"]["signers"][0]
+    certificate = signers["certificate"][index]
+    valid_from = certificate['validFrom']
+    signature = certificate['signature']['signature']
+    closing.sign = qr_code(signature, valid_from)
+    closing.save()
+
+
+# create new method for handling sign for closing
+def verifyPkcs7Closing(request):
+    if request.method == "POST":
+        pkcs7 = request.POST.get('pkcs7', None)
+        closing_id = request.POST.get('report_id', None)
+        processForSign(closing_id, pkcs7)
         data = {
             'success': 'True',
         }

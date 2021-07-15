@@ -1,3 +1,4 @@
+// a can just change url and everything will work as expected. But I will give some time to make up better ideas
 $('#sign').on('click', function () {
     loadModels($(this))
 })

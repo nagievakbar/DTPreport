@@ -88,7 +88,7 @@ Upload.prototype.doUpload = function () {
                 xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
             }
         },
-        url: `get_template/${this.getUrl()}`,
+        url: `${this.getUrl()}`,
         xhr: function () {
             var myXhr = $.ajaxSettings.xhr();
             if (myXhr.upload) {
@@ -164,36 +164,61 @@ $('#upload_mixing').click(function () {
 $('#upload_additional').click(function () {
     $("#additionalFile").click();
 });
+$('#upload_pdf').click(function () {
+    $("#mixingPDF").click();
+});
+
 function shipOff(name, tag) {
+    uploadFile(name, tag, "text/html");
+    // var result = document.getElementById(tag).files[0];
+    // var upload = new Upload(result, name);
+    // var content = upload.getType() === "text/html";
+    // if (content) {
+    //     upload.doUpload();
+    //     alert("Ваш template успешно загружен")
+    // } else {
+    //     alert("Файл должен быть в xml формате")
+    // }
+}
+
+function uploadFile(url, tag, formatFile) {
     var result = document.getElementById(tag).files[0];
-    var upload = new Upload(result, name);
-    var content = upload.getType() === "text/html";
+    var upload = new Upload(result, url);
+    var content = upload.getType() === formatFile;
     if (content) {
         upload.doUpload();
         alert("Ваш template успешно загружен")
     } else {
-        alert("Файл должен быть в xml формате")
+        alert("Файл был загружен в не правильном формате")
     }
-    //
 }
 
 $(document).ready(function () {
+    function processFile(tag) {
+        var file = document.getElementById(tag).files[0];
+        var reader = new FileReader();
+        reader.readAsText(file, 'UTF-8');
+    }
+
     function getFileName(tag, url) {
         return function (elm) {
-            var file = document.getElementById(tag).files[0];
-            console.log(tag)
-            console.log(url)
-             console.log(file);
-            var reader = new FileReader();
-            reader.readAsText(file, 'UTF-8');
-            shipOff(url, tag);
+            processFile(tag);
+            uploadFile(`get_template/${url}`, tag, "text/html");
+        }
+    }
+
+    function uploadPDF(tag, url) {
+        return function (elm) {
+            processFile(tag);
+            uploadFile(url, tag, 'application/pdf')
         }
     }
 
     $("#myFile").on("change", getFileName('myFile', 'base'));
     $("#mixingFile").on("change", getFileName('mixingFile', 'mixing'));
-     $("#agreementFile").on("change", getFileName('agreementFile', 'agreement'));
-      $("#additionalFile").on("change", getFileName('additionalFile', 'additional'));
+    $("#agreementFile").on("change", getFileName('agreementFile', 'agreement'));
+    $("#additionalFile").on("change", getFileName('additionalFile', 'additional'));
+    // $("#mixingPDF").on("change", uploadPDF('mixingPDF', '/mixing_pdf'));
 });
 
 //dropdown list

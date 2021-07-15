@@ -1374,6 +1374,7 @@ tbody tr td a {
     content: 'Заключение';
 }
 
+
 #download_button2::before {
     content: 'Договор';
 }
@@ -1392,6 +1393,9 @@ tbody tr td a {
 
 #download_button6::before {
     content: 'Подпись руководителя';
+}
+#download_button7::before {
+    content: 'Одноразовый';
 }
 
 .panel_button {

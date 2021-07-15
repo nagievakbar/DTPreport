@@ -15,7 +15,7 @@ from .utils import *
 
 from pdf_report.views import create_base64
 from DTPreport import settings as s
-from pdf_report.tasks import reduce_image, delete_empty_report, make_pdf, make_pdf_additional
+from pdf_report.tasks import reduce_image, delete_empty_report, make_pdf, make_pdf_additional, make_pdf_enumeration
 
 
 class ImageDelete(View):
@@ -877,7 +877,7 @@ class EnumerationView(ReportView):
                 create_base64(new_report)
             except KeyError:
                 pass
-            make_pdf.delay(new_report.report_id)
+            make_pdf_enumeration.delay(new_report.report_id)
 
         return render(request, 'makereport/enumeration.html', context)
 
@@ -1054,3 +1054,89 @@ def search(request):
         'errors': errors
     }
     return render(request, "makereport/auth/search.html", context=context)
+
+
+class DisposableView(View):
+    def get(self, request, id=None):
+        if id is None:
+            return self.show_new_disposable(request)
+        else:
+            return self.show_existing_disposable(request, id)
+
+    def post(self, request, id=None):
+        if id is None:
+            return self.create_new_disposable(request)
+        else:
+            return self.edit_disposable(request, id)
+
+    def create_new_disposable(self, request):
+        pass
+
+    def edit_disposable(self, request, id):
+        pass
+
+    def show_new_disposable(self, request):
+        pass
+
+    def show_existing_disposable(self, request, id):
+        pass
+
+
+class ClosingView(View):
+    template_name = "makereport/closing.html"
+
+    def get(self, request, id=None):
+        if id is None:
+            return self.show_new_closing(request)
+        else:
+            return self.show_existing_closing(request, id)
+
+    def post(self, request, id=None):
+        closing_id = request.POST.get('id_closing', 0)
+        if id is None and closing_id == 0:
+            return self.create_new_closing(request)
+        else:
+            return self.edit_closing(request, id)
+
+    def create_new_closing(self, request):
+        closing_form = ClosingForm(request.POST, instance=Closing())
+        context = {
+            'closing_form': closing_form,
+        }
+        if closing_form.is_valid():
+            closing = closing_form.save()
+            context['id'] = closing.id
+        else:
+            raise Exception(closing_form.errors)
+            context['id'] = 0
+        return render(self.template_name, context)
+
+    def edit_closing(self, request, id):
+        closing
+
+    def show_new_closing(self, request):
+        closing_form = ClosingForm(instance=Closing())
+        context = {
+            'closing_form': closing_form,
+            'id': 0
+        }
+        return render(self.template_name, context)
+
+    def show_existing_closing(self, request, id: int):
+        closing = Closing.objects.get(id=id)
+        closing_form = ClosingForm(instance=closing)
+        context = {
+            'closing_form': closing_form,
+            'id': closing.id
+        }
+        return render(self.template_name, context)
+
+
+# LIST OF CLOSING WHICH HAS TO BE SHOWN
+class ListClosing(View):
+    pass
+
+
+# LIST OF DISPOSABLE WHICH HAS TO BE SHOWN
+class ListDisposable(View):
+    pass

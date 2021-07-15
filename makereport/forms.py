@@ -199,9 +199,6 @@ class CustomerForm(forms.ModelForm):
                   'whom_passport_issued', 'phone_number', 'gnu_or_gje', 'uvajaemaya', 'mesto_osmotra']
 
 
-
-
-
 class CustomerFormEdit(forms.ModelForm):
     name = forms.CharField(required=False,
                            widget=forms.TextInput(attrs={'placeholder': 'Заказчик', 'class': 'input_in'}))
@@ -361,3 +358,69 @@ class WearForm(forms.Form):
     accept_wear = forms.FloatField(
         required=False,
         widget=forms.TextInput(attrs={'class': 'input work-price-input prehnite-input'}))
+
+
+class ClosingForm(forms.ModelForm):
+    report_number = forms.CharField(required=False,
+                                       widget=forms.TextInput(
+                                           attrs={'placeholder': 'Номер отчета', 'class': 'input_in'}))
+    movable_property = forms.CharField(required=False,
+                                       widget=forms.TextInput(
+                                           attrs={'placeholder': 'Движимое имущество', 'class': 'input_in'}))
+    place_registration = forms.CharField(required=False,
+                                         widget=forms.TextInput(
+                                             attrs={'placeholder': 'Место регистрации объекта оценки',
+                                                    'class': 'input_in'}))
+    damage_auto = forms.CharField(required=False,
+                                  widget=forms.TextInput(
+                                      attrs={'placeholder': 'Ущерб автотранспортного средства по состоянию',
+                                             'class': 'input_in'}))
+    report_date = forms.CharField(required=False,
+                                  widget=forms.TextInput(
+                                      attrs={'placeholder': 'Дата отчета',
+                                             'class': 'input_in'}))
+    owner = forms.CharField(required=False,
+                            widget=forms.TextInput(attrs={'placeholder': 'Владелец', 'class': 'input_in'}))
+    customer = forms.CharField(required=False,
+                               widget=forms.TextInput(attrs={'placeholder': 'Заказчик', 'class': 'input_in'}))
+    address_customer = forms.CharField(required=False,
+                                       widget=forms.TextInput(
+                                           attrs={'placeholder': 'Адрес Заказчика', 'class': 'input_in'}))
+    passport_data = forms.CharField(required=False,
+                                    widget=forms.TextInput(
+                                        attrs={'placeholder': 'Паспортные данные', 'class': 'input_in'}))
+    executor = forms.CharField(required=False,
+                               widget=forms.TextInput(attrs={'placeholder': 'Исполнитель', 'class': 'input_in'}))
+    requisite_executor = forms.CharField(required=False,
+                                         widget=forms.TextInput(
+                                             attrs={'placeholder': 'Реквизиты исполнителя', 'class': 'input_in'}))
+    aim_mark = forms.CharField(required=False,
+                                    widget=forms.TextInput(
+                                        attrs={'placeholder': 'Цель и назначение оценки', 'class': 'input_in'}))
+    appearance_cost = forms.CharField(required=False,
+                                      widget=forms.TextInput(
+                                          attrs={'placeholder': 'Вид определяемой стоимости', 'class': 'input_in'}))
+    form_report = forms.CharField(required=False,
+                                  widget=forms.TextInput(attrs={'placeholder': 'Электронная', 'class': 'input_in'}))
+    license_executor = forms.CharField(required=False,
+                                       widget=forms.TextInput(
+                                           attrs={'placeholder': 'П Сведения о Лицензии и Страховом полисе Исполнителя',
+                                                  'class': 'input_in'}))
+    legislative_contractual_limitations = forms.CharField(required=False,
+                                                          widget=forms.TextInput(
+                                                              attrs={
+                                                                  'placeholder': 'Законодательные или договорные ограничения',
+                                                                  'class': 'input_in'}))
+    main_mark = forms.CharField(required=False,
+                                widget=forms.TextInput(
+                                    attrs={'placeholder': 'Основание для проведения оценки', 'class': 'input_in'}))
+    data_mark = forms.CharField(required=False,
+                                widget=forms.TextInput(attrs={'placeholder': 'Дата оценки', 'class': 'input_in'}))
+    data_creation_mark = forms.CharField(required=False,
+                                         widget=forms.TextInput(
+                                             attrs={'placeholder': 'Дата составления отчета об оценки',
+                                                    'class': 'input_in'}))
+
+    class Meta:
+        model = Closing
+        fields = '__all__'

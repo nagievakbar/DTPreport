@@ -713,13 +713,24 @@
 
                     {#                    Create extension here #}
                     {#                   #}
+
                     Адрес: {{ report.contract.customer.address }}
                     <br>
-                    паспорт серия: {{ report.contract.customer.passport_number }}
-                    <br>
-                    дата выдачи: {{ report.contract.customer.when_passport_issued }} года
-                    <br>
-                    от: {{ report.contract.customer.whom_passport_issued }}
+                    {% if enumeration %}
+                        р\с {{ enumeration.p_c }}
+                        <br>
+                        {{ enumeration.bank }}
+                        <br>
+                        МФО {{ enumeration.MFO }} ИНН {{ enumeration.INN }}
+                        <br>
+                        ОКЭД {{ enumeration.OKED }}
+                    {% else %}
+                        паспорт серия: {{ report.contract.customer.passport_number }}
+                        <br>
+                        дата выдачи: {{ report.contract.customer.when_passport_issued }} года
+                        <br>
+                        от: {{ report.contract.customer.whom_passport_issued }}
+                    {% endif %}
                 </p>
                 </td>
             </tr>

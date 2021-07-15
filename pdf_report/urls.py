@@ -5,7 +5,6 @@ from .tasks import get_base
 
 urlpatterns = [
     path('<int:id>/', GeneratePDF.as_view(), name='get_response'),
-    path('enumeration/<int:id>/', GeneratePDF.as_view(), name='get_response'),
     path('mixing/<int:id>', finish_view, name='get_mixing'),
     path('agreement/<int:id>', agreement_view, name='get_agreement'),
     path('additional/<int:id>', GenerateAdditional.as_view(), name='get_additional'),
@@ -17,5 +16,11 @@ urlpatterns = [
     path("download_xml_additional/", get_base_additional_template, name="download_xml_additional"),
     path("test_finish/<int:id>", finish_view),
     path("test_agreement/<int:id>", agreement_view),
-    path("test_report/<int:id>", test_report)
+    path("test_report/<int:id>", test_report),
+    # new methods which have to implemented
+    path('enumeration/<int:id>/', ShowEnumerationPDF.as_view(), name='get_enumeration'),
+    path('disposable/<int:id>/', disposable_pdf_concatenate, name='get_disposable'),
+    path('closing/<int:id>/', closing_pdf, name='get_closing'),
+    path('test_disposable/<int:id>', test_disposable),
+    path('test_closing/<int:id>', test_closing),
 ]

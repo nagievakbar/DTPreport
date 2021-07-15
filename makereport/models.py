@@ -318,6 +318,62 @@ class HoldsImages(models.Model):
             to_model.add(each)
 
 
+# It is required for disposable to process images and store them
+class HoldsImagesDisposable(models.Model):
+    image = models.ManyToManyField('Images')
+    image_previous = models.ManyToManyField('Images', related_name="image_previous")
+    pp_photo = models.ManyToManyField('PassportPhotos')
+    pp_photo_previous = models.ManyToManyField('PassportPhotos', related_name="pp_photo_previous")
+    o_images = models.ManyToManyField('OtherPhotos')
+    o_images_previous = models.ManyToManyField('OtherPhotos', related_name="o_photo_previous")
+    checks = models.ManyToManyField('Checks')
+    checks_previous = models.ManyToManyField('Checks', related_name="check_previous")
+    disposable = models.ForeignKey('Disposable', blank=True, null=True, on_delete=models.CASCADE)
+
+    def create_new(self, old):
+        self.image.set(old.image.all())
+        self.pp_photo.set(old.pp_photo.all())
+        self.o_images.set(old.o_images.all())
+        self.checks.set(old.checks.all())
+        self.save()
+
+    def set_new(self, old):
+        self._clear()
+        self.pp_photo_previous.set(old.pp_photo.all())
+        self.o_images_previous.set(old.o_images.all())
+        self.save()
+
+    def store_add(self):
+        self._store(self.image_previous.all(), self.image)
+        self._store(self.pp_photo_previous.all(), self.pp_photo)
+        self._store(self.o_images_previous.all(), self.o_images)
+        self._store(self.checks_previous.all(), self.checks)
+        self._clear()
+        self.save()
+
+    def _clear(self):
+        self.image_previous.clear()
+        self.pp_photo_previous.clear()
+        self.o_images_previous.clear()
+        self.checks_previous.clear()
+
+    def image_concatinate(self):
+        return list(self.image_previous.all()) + list(self.image.all())
+
+    def pp_photo_concatinate(self):
+        return list(self.pp_photo_previous.all()) + list(self.pp_photo.all())
+
+    def check_concatinate(self):
+        return list(self.checks_previous.all()) + list(self.checks.all())
+
+    def o_photo_concatinate(self):
+        return list(self.o_images.all()) + list(self.o_images_previous.all())
+
+    def _store(self, from_model, to_model):
+        for each in from_model:
+            to_model.add(each)
+
+
 class Images(models.Model):
     image_id = models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
     image = models.ImageField(blank=True, null=True, verbose_name='Фото')
@@ -369,7 +425,12 @@ class Checks(models.Model):
                                verbose_name='Отчёт')
 
     def delete(self, *args, **kwargs):
-        default_storage.delete(self.checks.path)
+        try:
+            default_storage.delete(self.checks.path)
+        except AssertionError:
+            pass
+        except:
+            pass
         super(Checks, self).delete(*args, **kwargs)
 
 
@@ -382,6 +443,26 @@ class Enumeration(models.Model):
     MFO = models.CharField(max_length=50, blank=True, null=True)
     INN = models.CharField(max_length=50, blank=True, null=True)
     OKED = models.CharField(max_length=50, blank=True, null=True)
+    pdf_report_enumeration = models.FileField(blank=True, null=True, upload_to='uploads_enumeration/%Y/%m/%d',
+                                              verbose_name='Дополнительный отчет в пдф')
+
+    def save_pdf_enumeration(self, filename, data):
+
+        try:
+            path = self.pdf_report_enumeration.path
+        except ValueError:
+            path = None
+
+        self.pdf_report_enumeration.save(filename, ContentFile(data))
+        self.save()
+        try:
+            default_storage.delete(path)
+        except ValueError:
+            pass
+        except AssertionError:
+            pass
+        except:
+            pass
 
 
 TYPE_OF_REPORT = (
@@ -394,6 +475,39 @@ TYPE_OF_REPORT = (
 # 0 is usual report
 # 1 is additional report
 # 2 is enumeration report
+class Closing(models.Model):
+    report_number = models.CharField(blank=True, null=True)
+    movable_property = models.CharField(blank=True, null=True)
+    place_registration = models.CharField(blank=True, null=True)
+    damage_auto = models.CharField(blank=True, null=True)
+    report_date = models.CharField(blank=True, null=True)
+    owner = models.CharField(blank=True, null=True)
+    customer = models.CharField(blank=True, null=True)
+    address_customer = models.CharField(blank=True, null=True)
+    passport_data = models.CharField(blank=True, null=True)
+    executor = models.CharField(blank=True, null=True)
+    requisite_executor = models.CharField(blank=True, null=True)
+    aim_mark = models.CharField(blank=True, null=True)
+    appearance_cost = models.CharField(blank=True, null=True)
+    form_report = models.CharField(blank=True, null=True)
+    license_executor = models.CharField(blank=True, null=True)
+    legislative_contractual_limitations = models.CharField(blank=True, null=True)
+    main_mark = models.CharField(blank=True, null=True)
+    data_mark = models.CharField(blank=True, null=True)
+    data_creation_mark = models.CharField(blank=True, null=True)
+
+    pdf_closing_base64 = models.CharField(max_length=1000000, blank=True, null=True)
+    sign = models.CharField(blank=True, null=True)
+
+
+class Disposable(models.Model):
+    pdf_disposable = models.FileField(blank=True, null=True, verbose_name='Одноразовый пдф')
+    pdf_created = models.FileField(blank=True, null=True, verbose_name="Объединенный пдф")
+
+    def delete(self, *args, **kwargs):
+        default_storage.delete(self.pdf_disposable.path)
+        super(Disposable, self).delete(*args, **kwargs)
+
 
 class Report(models.Model):
     type_report = models.IntegerField(default=0, choices=TYPE_OF_REPORT)
@@ -421,6 +535,7 @@ class Report(models.Model):
 
     pdf_report_additional = models.FileField(blank=True, null=True, upload_to='uploads_additional/%Y/%m/%d',
                                              verbose_name='Дополнительный отчет в пдф')
+
     pdf_report = models.FileField(blank=True, null=True, upload_to='uploads/%Y/%m/%d', verbose_name='Отчёт в пдф')
     pdf_report_base64 = models.CharField(max_length=1000000, blank=True, null=True)
     pdf_report_pkcs7 = models.JSONField(blank=True, null=True)
@@ -469,13 +584,21 @@ class Report(models.Model):
             default_storage.delete(path)
         except ValueError:
             pass
+        except AssertionError:
+            pass
+        except:
+            pass
 
     def delete(self, *args, **kwargs):
         try:
             default_storage.delete(self.passport_photo.path)
             default_storage.delete(self.registration_photo.path)
-            default_storage.delete(self.pdf_report)
+            default_storage.delete(self.pdf_report.path)
         except ValueError:
+            pass
+        except AssertionError:
+            pass
+        except:
             pass
         finally:
             self.car.delete()

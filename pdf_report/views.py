@@ -3,7 +3,7 @@ from django.views.generic import View
 import os
 from DTPreport import settings as s
 from makereport.models import Report, Documents, Contract, Calculation, \
-    HoldsImages, TemplateBase, TemplateMixing, TemplateAgreement, TemplateAdditional
+    HoldsImages, TemplateBase, TemplateMixing, TemplateAgreement, TemplateAdditional, Enumeration, Closing, Disposable
 from pdf_report.utils import PyPDFML, generate_pdf, get_name
 
 from django.core.files.base import ContentFile
@@ -161,25 +161,32 @@ def agreement_view(request, id):
 
 
 def test_report(request, id: int):
-    pdf = test_report_base(id, TemplateBase)
+    pdf = generate_pdf_report(id, TemplateBase)
     response = FileResponse(ContentFile(pdf), content_type='application/pdf')
     return response
 
 
 def test_report_additional(request, id: int):
-    pdf = test_report_base(id, TemplateAdditional)
+    pdf = generate_pdf_report(id, TemplateAdditional)
     response = FileResponse(ContentFile(pdf), content_type='application/pdf')
     return response
 
 
-def test_report_base(id: int, obj):
+def generate_pdf_enumeration(id: int, obj):
+    context = generate_pdf_base(id)
+    context['enumeration'] = Enumeration.objects.get(report_id=id)
+    file_name = get_name(obj)
+    return generate_pdf(context=context, default_template="report.html", main_template_path=file_name,
+                        css_name="report.css")
+
+
+def generate_pdf_base(id: int) -> dict:
     locale.setlocale(locale.LC_ALL, 'C')
     new_report_pdf = Report.objects.get(report_id=id)
     calculation = Calculation.objects.get(report_id=id)
     contract = Contract.objects.get(contract_id=new_report_pdf.contract_id)
     holds_images = HoldsImages.objects.get(report_id=id)
     images = holds_images.image.all()
-    print(images)
     passport = holds_images.pp_photo.all()
     checks = holds_images.checks.first()
     other_photos = holds_images.o_images.all()
@@ -199,6 +206,11 @@ def test_report_base(id: int, obj):
         'checks': checks,
         'other_photos': other_photos,
     }
+    return context
+
+
+def generate_pdf_report(id: int, obj):
+    context = generate_pdf_base(id)
     file_name = get_name(obj.objects.last())
     return generate_pdf(context=context, default_template="report.html", main_template_path=file_name,
                         css_name="report.css")
@@ -256,12 +268,29 @@ class GenerateAdditional(View):
 class GeneratePDF(View):
     def get(self, request, id=None):
         # try:
-            report_pdf = Report.objects.get(report_id=id)
-            response = FileResponse(open(os.path.abspath(os.path.join(report_pdf.pdf_report.path)), 'rb'),
-                                    content_type='application/pdf')
-            return response
-        # except:
-        #     return get_file('base.pdf', content_type='application/pdf')
+        report_pdf = Report.objects.get(report_id=id)
+        response = FileResponse(open(os.path.abspath(os.path.join(report_pdf.pdf_report.path)), 'rb'),
+                                content_type='application/pdf')
+        return response
+
+    # except:
+    #     return get_file('base.pdf', content_type='application/pdf')
+
+
+class ShowEnumerationPDF(View):
+    def get(self, request, id=None):
+        enumeration = Enumeration.objects.get(report_id=id)
+        response = FileResponse(open(os.path.abspath(os.path.join(enumeration.pdf_report_enumeration.path)), 'rb'),
+                                content_type='application/pdf')
+        return response
+
+
+class ShowDisposablePDF(View):
+    def get(self, request, id=None):
+        disposable = Disposable.objects.get(report_id=id)
+        response = FileResponse(open(os.path.abspath(os.path.join(disposable.pdf_created.path)), 'rb'),
+                                content_type='application/pdf')
+        return response
 
 
 def get_bases(id):
@@ -337,3 +366,41 @@ def create_base64(new_report_pdf: Report):
         encoded_string = base64.b64encode(file.read())
     new_report_pdf.pdf_report_base64 = encoded_string.decode('ascii')
     new_report_pdf.save()
+
+
+# test it I think there is high chance of appearing error
+def create_base64_closing(closing: Closing):
+    context = {
+        's': s.BASE_URL,
+        'closing': closing,
+        # 'qrcode': check_qr_code(qrcode),
+        # 'contract': contract,
+        # 'qrcode_some': QRcode.qrcode("http://e-otsenka.uz/pdf/{id}".format(id=report.report_id))
+    }
+    pdf = generate_pdf(default_template="closing_report.html",
+                       css_name="finish_report.css", context=context)
+    file = ContentFile(pdf)
+    encode_string = base64.b64encode(file.read())
+    closing.pdf_closing_base64 = encode_string
+    closing.save()
+
+
+# How to return closing pdf !!!
+def closing_pdf(request):
+    closing = Closing.objects.get(report_id=id)
+    # car = report.car
+    # contract = report.contract
+    # customer = contract.customer
+    # qrcode = get_qrc_code(qr_company=report.pdf_qr_code_company)
+    context = {
+        's': s.BASE_URL,
+        'closing': closing,
+        # 'qrcode': check_qr_code(qrcode),
+        # 'contract': contract,
+        # 'qrcode_some': QRcode.qrcode("http://e-otsenka.uz/pdf/{id}".format(id=report.report_id))
+    }
+
+    pdf = generate_pdf(default_template="closing_report.html",
+                       css_name="finish_report.css", context=context)
+    reponse = FileResponse(ContentFile(pdf), content_type='application/pdf')
+    return reponse

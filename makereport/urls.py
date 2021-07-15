@@ -19,10 +19,14 @@ urlpatterns = [
     path(r'ajax/get_car_card/', get_car_card, name='get_car_card'),
     path(r'ajax/get_btn_to_download/', get_btn_to_download, name='get_btn_to_download'),
     path(r'ajax/verifyPkcs7/', verifyPkcs7, name='verifyPkcs7'),
+    # created new url for signing , though it is not implemented yet
+    path(r'ajax/verifyPkcs7/closing', verifyPkcs7Closing, name='verifyPkcs7Closing'),
     path('user_settings/get_template/base', get_template, name='upload_template'),
     path('user_settings/get_template/mixing', get_template_mixing, name='upload_template_mixing'),
     path('user_settings/get_template/agreement', get_template_agreement, name='upload_template_agreement'),
     path('user_settings/get_template/additional', get_template_additional, name='upload_template_additional'),
+    path('user_settings/get_template/mixing_pdf', get_template_additional, name='upload_template_additional'),
+
     path('list_edit', reports_edit_list, name='reports_edit_list'),
     path('<int:id>/add/', ReportEditView.as_view(), name='add_report'),
     path(r'image/display/', ImageView.as_view(), name='image_view'),
@@ -35,6 +39,11 @@ urlpatterns = [
     path(r'checks/delete/', ChecksDelete.as_view(), name='chekcs_delete'),
     path(r"reduce/documents", reduce_documents_size, name="reduce_documents_size"),
     path(r'enumeration/', EnumerationView.as_view(), name="enumeration_view"),
-    path(r'enumeration/edit/<int:id>', EnumerationView.as_view(), name="enumeration_view_edit")
+    path(r'enumeration/edit/<int:id>', EnumerationView.as_view(), name="enumeration_view_edit"),
+    # implement this methods
+    path(r'disposable/', DisposableView.as_view(), name="disposable_view"),
+    path(r'disposable/edit/<int:id>', DisposableView.as_view(), name="disposable_view_edit"),
+    path(r'closing/', ClosingView.as_view(), name="closing_view"),
+    path(r'closing/edit/<int:id>', ClosingView.as_view(), name="closing_view_edit"),
 
 ]
