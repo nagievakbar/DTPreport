@@ -4,6 +4,7 @@ import os
 from DTPreport import settings as s
 from makereport.models import Report, Documents, Contract, Calculation, \
     HoldsImages, TemplateBase, TemplateMixing, TemplateAgreement, TemplateAdditional, Enumeration, Closing, Disposable
+from pdf_report.pdf_merger import PDFMerger
 from pdf_report.utils import PyPDFML, generate_pdf, get_name
 
 from django.core.files.base import ContentFile
@@ -404,3 +405,13 @@ def closing_pdf(request):
                        css_name="finish_report.css", context=context)
     reponse = FileResponse(ContentFile(pdf), content_type='application/pdf')
     return reponse
+
+
+# test disposable
+def test_disposable(request, id: int):
+    manger = PDFMerger(id)
+    manger.concatenate_pdf()
+    disposable = Disposable.objects.get(report_id=id)
+    response = FileResponse(open(os.path.abspath(os.path.join(disposable.pdf_created.path)), 'rb'),
+                            content_type='application/pdf')
+    return response

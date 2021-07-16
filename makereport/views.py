@@ -1,3 +1,4 @@
+import requests
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.files.storage import FileSystemStorage
@@ -15,7 +16,8 @@ from .utils import *
 
 from pdf_report.views import create_base64
 from DTPreport import settings as s
-from pdf_report.tasks import reduce_image, delete_empty_report, make_pdf, make_pdf_additional, make_pdf_enumeration
+from pdf_report.tasks import reduce_image, delete_empty_report, make_pdf, make_pdf_additional, make_pdf_enumeration, \
+    concatenate_pdf_disposable
 
 
 class ImageDelete(View):
@@ -392,7 +394,6 @@ class ReportView(View):
             wear_form = WearForm(initial=report.wear_data)
             total_price_report = report.total_report_cost
         else:
-
             report_id = report.report_id
             calculation_form = CalculationForm(instance=Calculation())
             image_form = ImageForm(instance=Images())
@@ -751,10 +752,10 @@ class EnumerationView(ReportView):
     @method_decorator(decorators)
     def post(self, request, id=None):
         holds_images = HoldsImages.objects.get(id=request.POST['id_image'])
-        images = holds_images.image_concatinate()
-        pphotos = holds_images.pp_photo_concatinate()
-        ophotos = holds_images.o_photo_concatinate()
-        checks = holds_images.check_concatinate()
+        images = holds_images.image.all()
+        pphotos = holds_images.pp_photo.all()
+        ophotos = holds_images.o_images.all()
+        checks = holds_images.checks.all()
         if id is not None:
             report_id = id
         else:
@@ -836,7 +837,9 @@ class EnumerationView(ReportView):
             new_report.save()
             enumeration_form.save()
             holds_images.report = new_report
-            holds_images.store_add()
+
+            ## I CHANGE TO SAVE ##
+            holds_images.save()
             new_calculation = calculation_form.save()
             new_calculation.report = new_report
             new_calculation.save()
@@ -1057,29 +1060,94 @@ def search(request):
 
 
 class DisposableView(View):
+    template_name = "makereport/disposable.html"
+
     def get(self, request, id=None):
         if id is None:
             return self.show_new_disposable(request)
         else:
             return self.show_existing_disposable(request, id)
 
-    def post(self, request, id=None):
-        if id is None:
-            return self.create_new_disposable(request)
-        else:
-            return self.edit_disposable(request, id)
+    def post(self, request, id=0):
+        id_disposable = request.POST.get('id_disposable', id)
+        return self.store_disposable(request, id_disposable)
 
-    def create_new_disposable(self, request):
-        pass
+    def store_disposable(self, request, id):
+        disposable = Disposable.objects.get(id=id)
+        files = request.POST.FILES['pdf_custom']
+        filename = "disposable_{}_{}".format(datetime.datetime.now().timestamp(), disposable.id)
+        disposable.save_disposable_pdf(filename, files)
+        disposable.save()
+        holds_image = disposable.holds_images
 
-    def edit_disposable(self, request, id):
-        pass
+        images = holds_image.image.all()
+        pphotos = holds_image.pp_photo.all()
+        ophotos = holds_image.o_images.all()
+        checks = holds_image.checks.all()
+
+        image_form = ImageForm(Images())
+        passphoto_form = PPhotoForm(PassportPhotos())
+        otherphoto_form = OPhotoForm(OtherPhotos())
+        checks_form = ChecksForm(Checks())
+        concatenate_pdf_disposable.delay(disposable.id)
+        context = {
+            'id_image': disposable.holds_images_id,
+            'id': disposable.id,
+            'image_form': image_form or None,
+            'passphoto_form': passphoto_form or None,
+            'otherphoto_form': otherphoto_form or None,
+            'checks_form': checks_form or None,
+            'images': images,
+            'pphotos': pphotos,
+            'ophotos': ophotos,
+            'checks': checks,
+        }
+        return render(self.template_name, context)
 
     def show_new_disposable(self, request):
-        pass
+        disposable = create_disposable()
+        image_form = ImageForm(Images())
+        passphoto_form = PPhotoForm(PassportPhotos())
+        otherphoto_form = OPhotoForm(OtherPhotos())
+        checks_form = ChecksForm(Checks())
+        context = {
+            'id_image': disposable.holds_images_id,
+            'id': disposable.id,
+            'image_form': image_form or None,
+            'passphoto_form': passphoto_form or None,
+            'otherphoto_form': otherphoto_form or None,
+            'checks_form': checks_form or None,
+            'images': None,
+            'pphotos': None,
+            'ophotos': None,
+            'checks': None,
+        }
+        return render(self.template_name, context)
 
     def show_existing_disposable(self, request, id):
-        pass
+        disposable = Disposable.objects.get(id=id)
+        holds_image = disposable.holds_images
+        image_form = ImageForm(Images())
+        passphoto_form = PPhotoForm(PassportPhotos())
+        otherphoto_form = OPhotoForm(OtherPhotos())
+        checks_form = ChecksForm(Checks())
+        images = holds_image.image.all()
+        pphotos = holds_image.pp_photo.all()
+        ophotos = holds_image.o_images.all()
+        checks = holds_image.checks.all()
+        context = {
+            'id_image': disposable.holds_images_id,
+            'id': disposable.id,
+            'image_form': image_form or None,
+            'passphoto_form': passphoto_form or None,
+            'otherphoto_form': otherphoto_form or None,
+            'checks_form': checks_form or None,
+            'images': images,
+            'pphotos': pphotos,
+            'ophotos': ophotos,
+            'checks': checks,
+        }
+        return render(self.template_name, context)
 
 
 class ClosingView(View):
@@ -1091,12 +1159,12 @@ class ClosingView(View):
         else:
             return self.show_existing_closing(request, id)
 
-    def post(self, request, id=None):
-        closing_id = request.POST.get('id_closing', 0)
-        if id is None and closing_id == 0:
+    def post(self, request, id=0):
+        closing_id = request.POST.get('id_closing', id)
+        if closing_id == 0:
             return self.create_new_closing(request)
         else:
-            return self.edit_closing(request, id)
+            return self.edit_closing(request, closing_id)
 
     def create_new_closing(self, request):
         closing_form = ClosingForm(request.POST, instance=Closing())
@@ -1112,7 +1180,17 @@ class ClosingView(View):
         return render(self.template_name, context)
 
     def edit_closing(self, request, id):
-        closing
+        closing = Closing.objects.get(id=id)
+        closing_form = ClosingForm(request.POST, instance=closing)
+        context = {
+            'closing_form': closing_form,
+            'id': closing.id
+        }
+        if closing_form.is_valid():
+            closing_form.save()
+        else:
+            raise Exception(closing_form.errors)
+        return render(self.template_name, context)
 
     def show_new_closing(self, request):
         closing_form = ClosingForm(instance=Closing())

@@ -264,6 +264,10 @@ class TemplateAgreement(models.Model):
 
 
 class HoldsImages(models.Model):
+    # previous images are needed for additional report
+    # Because we are considering to type of group images: new ones and old ones
+    # So I , at first, store every old image to previous images and then transfer everything to usual place
+
     image = models.ManyToManyField('Images')
     image_previous = models.ManyToManyField('Images', related_name="image_previous")
     pp_photo = models.ManyToManyField('PassportPhotos')
@@ -273,62 +277,6 @@ class HoldsImages(models.Model):
     checks = models.ManyToManyField('Checks')
     checks_previous = models.ManyToManyField('Checks', related_name="check_previous")
     report = models.ForeignKey('Report', blank=True, null=True, on_delete=models.CASCADE)
-
-    def create_new(self, old):
-        self.image.set(old.image.all())
-        self.pp_photo.set(old.pp_photo.all())
-        self.o_images.set(old.o_images.all())
-        self.checks.set(old.checks.all())
-        self.save()
-
-    def set_new(self, old):
-        self._clear()
-        self.pp_photo_previous.set(old.pp_photo.all())
-        self.o_images_previous.set(old.o_images.all())
-        self.save()
-
-    def store_add(self):
-        self._store(self.image_previous.all(), self.image)
-        self._store(self.pp_photo_previous.all(), self.pp_photo)
-        self._store(self.o_images_previous.all(), self.o_images)
-        self._store(self.checks_previous.all(), self.checks)
-        self._clear()
-        self.save()
-
-    def _clear(self):
-        self.image_previous.clear()
-        self.pp_photo_previous.clear()
-        self.o_images_previous.clear()
-        self.checks_previous.clear()
-
-    def image_concatinate(self):
-        return list(self.image_previous.all()) + list(self.image.all())
-
-    def pp_photo_concatinate(self):
-        return list(self.pp_photo_previous.all()) + list(self.pp_photo.all())
-
-    def check_concatinate(self):
-        return list(self.checks_previous.all()) + list(self.checks.all())
-
-    def o_photo_concatinate(self):
-        return list(self.o_images.all()) + list(self.o_images_previous.all())
-
-    def _store(self, from_model, to_model):
-        for each in from_model:
-            to_model.add(each)
-
-
-# It is required for disposable to process images and store them
-class HoldsImagesDisposable(models.Model):
-    image = models.ManyToManyField('Images')
-    image_previous = models.ManyToManyField('Images', related_name="image_previous")
-    pp_photo = models.ManyToManyField('PassportPhotos')
-    pp_photo_previous = models.ManyToManyField('PassportPhotos', related_name="pp_photo_previous")
-    o_images = models.ManyToManyField('OtherPhotos')
-    o_images_previous = models.ManyToManyField('OtherPhotos', related_name="o_photo_previous")
-    checks = models.ManyToManyField('Checks')
-    checks_previous = models.ManyToManyField('Checks', related_name="check_previous")
-    disposable = models.ForeignKey('Disposable', blank=True, null=True, on_delete=models.CASCADE)
 
     def create_new(self, old):
         self.image.set(old.image.all())
@@ -427,6 +375,8 @@ class Checks(models.Model):
     def delete(self, *args, **kwargs):
         try:
             default_storage.delete(self.checks.path)
+        except ValueError:
+            pass
         except AssertionError:
             pass
         except:
@@ -500,13 +450,48 @@ class Closing(models.Model):
     sign = models.CharField(blank=True, null=True)
 
 
+def delete_pdf(path):
+    try:
+        default_storage.delete(path)
+    except ValueError:
+        pass
+    except AssertionError:
+        pass
+    except:
+        pass
+
+
 class Disposable(models.Model):
-    pdf_disposable = models.FileField(blank=True, null=True, verbose_name='Одноразовый пдф')
-    pdf_created = models.FileField(blank=True, null=True, verbose_name="Объединенный пдф")
+    pdf_disposable = models.FileField(blank=True, null=True,upload_to='uploads_disposable/%Y/%m/%d', verbose_name='Одноразовый пдф')
+    pdf_created = models.FileField(blank=True, null=True,upload_to='uploads_created/%Y/%m/%d', verbose_name="Объединенный пдф")
+    holds_images = models.ForeignKey('HoldsImages', null=True, blank=True, on_delete=models.CASCADE)
 
     def delete(self, *args, **kwargs):
-        default_storage.delete(self.pdf_disposable.path)
+        delete_pdf(self.pdf_disposable.path)
+        delete_pdf(self.pdf_created.path)
         super(Disposable, self).delete(*args, **kwargs)
+
+    def save_disposable_pdf(self, filename, data):
+        try:
+            path = self.pdf_disposable.path
+        except ValueError:
+            path = None
+
+        self.pdf_disposable.save(filename, ContentFile(data))
+        self.save()
+
+        delete_pdf(path)
+
+    def save_created_pdf(self, filename, data):
+        try:
+            path = self.pdf_created.path
+        except ValueError:
+            path = None
+
+        self.pdf_created.save(filename, ContentFile(data))
+        self.save()
+
+        delete_pdf(path)
 
 
 class Report(models.Model):
@@ -560,16 +545,13 @@ class Report(models.Model):
 
     def save_additional_pdf(self, filename, data):
         try:
-            default_storage.delete(self.pdf_report_additional.path)
+            path = self.pdf_report_additional.path
         except ValueError:
-            pass
-        except AssertionError:
-            pass
-        except:
-            pass
-
+            path = None
         self.pdf_report_additional.save(filename, ContentFile(data))
         self.save()
+
+        delete_pdf(path)
 
     def save_pdf(self, filename, data):
 
@@ -580,30 +562,18 @@ class Report(models.Model):
 
         self.pdf_report.save(filename, ContentFile(data))
         self.save()
-        try:
-            default_storage.delete(path)
-        except ValueError:
-            pass
-        except AssertionError:
-            pass
-        except:
-            pass
+
+        delete_pdf(path)
 
     def delete(self, *args, **kwargs):
-        try:
-            default_storage.delete(self.passport_photo.path)
-            default_storage.delete(self.registration_photo.path)
-            default_storage.delete(self.pdf_report.path)
-        except ValueError:
-            pass
-        except AssertionError:
-            pass
-        except:
-            pass
-        finally:
-            self.car.delete()
-            self.contract.customer.delete()
-            self.contract.delete()
+
+        delete_pdf(self.passport_photo.path)
+        delete_pdf(self.registration_photo.path)
+        delete_pdf(self.pdf_report.path)
+
+        self.car.delete()
+        self.contract.customer.delete()
+        self.contract.delete()
         return super(Report, self).delete(*args, **kwargs)
 
     def precise_iznos_ki(self):
