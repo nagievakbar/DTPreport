@@ -21,5 +21,5 @@ urlpatterns = [
     path('enumeration/<int:id>/', ShowEnumerationPDF.as_view(), name='get_enumeration'),
     path('disposable/<int:id>/', ShowDisposablePDF.as_view(), name='get_disposable'),
     path('closing/<int:id>/', closing_pdf, name='get_closing'),
-    path('test_disposable/<int:id>', test_disposable)
+
 ]

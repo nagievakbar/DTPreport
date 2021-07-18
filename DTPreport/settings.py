@@ -39,9 +39,10 @@ ALLOWED_HOSTS = ['makereport.elite-house.uz',
                  'e-imzo.uz'
                  'localhost',
                  '192.168.1.3',
-                 '184.196.214.55'
+                 '184.196.214.55',
+                 '89.236.227.206'
                  ]
-URL_FILES = 'http://192.168.1.3'
+URL_FILES = 'http://127.0.0.1:8000'
 BASE_URL = URL_FILES + "/media/"
 # Application definition
 

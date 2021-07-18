@@ -1,10 +1,7 @@
-from datetime import datetime
-from io import BytesIO
-
 import PyPDF2
 from django.core.files.base import ContentFile
 
-from makereport.models import Disposable
+from makereport.models import Disposable, Documents
 
 
 class PDFMerger:
@@ -14,17 +11,19 @@ class PDFMerger:
 
     def concatenate_pdf(self):
         number_pages = self.write_first_pdf()
+        self.create_and_write_second_pdf(number_pages)
+        self.store_pdf()
+
+    def create_and_write_second_pdf(self, number_pages: int):
         pdf_second = self.create_second_pdf(number_pages)
         self.write_second_pdf(pdf_second)
-        self.store_pdf()
 
     # I will use pdf writer for creating merged pdf
     def write_first_pdf(self) -> int:
-        pdf_first = open(self.disposable_model.pdf_disposable.path, 'rb')
-        pdf_first_reader = PyPDF2.PdfFileReader(pdf_first)
+        pdf_file = self.disposable_model.pdf_disposable
+        pdf_first_reader = PyPDF2.PdfFileReader(pdf_file)
         number_of_pages = pdf_first_reader.numPages
         self._write(pdf_first_reader)
-        pdf_first.close()
         return number_of_pages
 
     def _write(self, reader: PyPDF2.PdfFileReader):
@@ -33,11 +32,24 @@ class PDFMerger:
             self.pdf_writer.addPage(page_obj)
 
     def create_second_pdf(self, number_pages: int) -> ContentFile:
+        holds_images = self.disposable_model.holds_images
+        images = holds_images.image.all()
+        passport = holds_images.pp_photo.all()
+        checks = holds_images.checks.first()
+        other_photos = holds_images.o_images.all()
+        document_photo = Documents.objects.first()
+        from DTPreport import settings as s
         context = {
-            'number_of_pages': number_pages
+            'number_of_pages': number_pages,
+            's': s.BASE_URL,
+            'images': images,
+            'document_photo': document_photo,
+            'passport': passport,
+            'checks': checks,
+            'other_photos': other_photos,
         }
         from pdf_report.utils import generate_pdf
-        pdf = generate_pdf(context=context, default_template="report.html",
+        pdf = generate_pdf(context=context, default_template="disposable.html",
                            css_name="report.css")
         return ContentFile(pdf)
 
@@ -47,8 +59,6 @@ class PDFMerger:
         pdf_second.close()
 
     def store_pdf(self):
-        pdf_output = BytesIO()
+        pdf_output = ContentFile(bytes())
         self.pdf_writer.write(pdf_output)
-        filename = "created_{}_{}".format(datetime.now().timestamp(), self.disposable_model.id)
-        self.disposable_model.save_created_pdf(filename, pdf_output)
-        pdf_output.close()
+        self.disposable_model.save_created_pdf(pdf_output)

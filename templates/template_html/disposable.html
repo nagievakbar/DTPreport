@@ -1,0 +1,28 @@
+{% extends 'templates/template_html/layout.html' %}
+{% block title %}  <title>Одноразовый</title> {% endblock %}
+{% block content %}
+    <style>
+     @media print {
+            .paginate-figure {
+                page: paginate-figure;
+            }
+            @page:first{
+                 counter-reset: page {{ number_of_pages + 1 }};
+            }
+            @page {
+                margin: 1cm 1.5cm;
+                size: A4 portrait;
+
+            }
+
+            @page paginate-figure {
+                margin: 0.8cm;
+
+                @bottom-center {
+                    content: counter(page);
+                }
+            }
+        }
+    </style>
+{% include 'templates/template_html/images_part.html' %}
+{% endblock %}

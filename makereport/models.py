@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.core.files.base import ContentFile
 from django.db import models
 from django.contrib.auth.models import User
@@ -426,28 +428,28 @@ TYPE_OF_REPORT = (
 # 1 is additional report
 # 2 is enumeration report
 class Closing(models.Model):
-    report_number = models.CharField(blank=True, null=True)
-    movable_property = models.CharField(blank=True, null=True)
-    place_registration = models.CharField(blank=True, null=True)
-    damage_auto = models.CharField(blank=True, null=True)
-    report_date = models.CharField(blank=True, null=True)
-    owner = models.CharField(blank=True, null=True)
-    customer = models.CharField(blank=True, null=True)
-    address_customer = models.CharField(blank=True, null=True)
-    passport_data = models.CharField(blank=True, null=True)
-    executor = models.CharField(blank=True, null=True)
-    requisite_executor = models.CharField(blank=True, null=True)
-    aim_mark = models.CharField(blank=True, null=True)
-    appearance_cost = models.CharField(blank=True, null=True)
-    form_report = models.CharField(blank=True, null=True)
-    license_executor = models.CharField(blank=True, null=True)
-    legislative_contractual_limitations = models.CharField(blank=True, null=True)
-    main_mark = models.CharField(blank=True, null=True)
-    data_mark = models.CharField(blank=True, null=True)
-    data_creation_mark = models.CharField(blank=True, null=True)
+    report_number = models.CharField(max_length=100, blank=True, null=True)
+    movable_property = models.CharField(max_length=100, blank=True, null=True)
+    place_registration = models.CharField(max_length=100, blank=True, null=True)
+    damage_auto = models.CharField(max_length=100, blank=True, null=True)
+    report_date = models.CharField(max_length=100, blank=True, null=True)
+    owner = models.CharField(max_length=100, blank=True, null=True)
+    customer = models.CharField(max_length=100, blank=True, null=True)
+    address_customer = models.CharField(max_length=100, blank=True, null=True)
+    passport_data = models.CharField(max_length=100, blank=True, null=True)
+    # executor = models.CharField(max_length=100, blank=True, null=True)
+    # requisite_executor = models.CharField(max_length=100, blank=True, null=True)
+    # aim_mark = models.CharField(max_length=100, blank=True, null=True)
+    # appearance_cost = models.CharField(max_length=100, blank=True, null=True)
+    # form_report = models.CharField(max_length=100, blank=True, null=True)
+    # license_executor = models.CharField(max_length=100, blank=True, null=True)
+    # legislative_contractual_limitations = models.CharField(max_length=100, blank=True, null=True)
+    main_mark = models.CharField(max_length=100, blank=True, null=True)
+    data_mark = models.CharField(max_length=100, blank=True, null=True)
+    data_creation_mark = models.CharField(max_length=100, blank=True, null=True)
 
     pdf_closing_base64 = models.CharField(max_length=1000000, blank=True, null=True)
-    sign = models.CharField(blank=True, null=True)
+    sign = models.CharField(max_length=400, blank=True, null=True)
 
 
 def delete_pdf(path):
@@ -462,33 +464,49 @@ def delete_pdf(path):
 
 
 class Disposable(models.Model):
-    pdf_disposable = models.FileField(blank=True, null=True,upload_to='uploads_disposable/%Y/%m/%d', verbose_name='Одноразовый пдф')
-    pdf_created = models.FileField(blank=True, null=True,upload_to='uploads_created/%Y/%m/%d', verbose_name="Объединенный пдф")
+    pdf_disposable = models.FileField(blank=True, null=True, upload_to='uploads_disposable/%Y/%m/%d',
+                                      verbose_name='Одноразовый пдф')
+    pdf_created = models.FileField(blank=True, null=True, upload_to='uploads_created/%Y/%m/%d',
+                                   verbose_name="Объединенный пдф")
     holds_images = models.ForeignKey('HoldsImages', null=True, blank=True, on_delete=models.CASCADE)
 
-    def delete(self, *args, **kwargs):
+    def clear_pdf(self):
         delete_pdf(self.pdf_disposable.path)
+        self.pdf_disposable.delete()
+
+    def delete(self, *args, **kwargs):
+        self.clear_pdf()
         delete_pdf(self.pdf_created.path)
         super(Disposable, self).delete(*args, **kwargs)
 
-    def save_disposable_pdf(self, filename, data):
+    @property
+    def url_pdf_disposable(self):
+        try:
+            url = self.pdf_disposable.url
+        except:
+            url = ""
+        return url
+
+    def save_disposable_pdf(self, data):
+        filename = "disposable_{}_{}.pdf".format(datetime.now().timestamp(), self.id)
         try:
             path = self.pdf_disposable.path
         except ValueError:
             path = None
 
-        self.pdf_disposable.save(filename, ContentFile(data))
+        self.pdf_disposable.save(filename, data)
         self.save()
 
         delete_pdf(path)
 
-    def save_created_pdf(self, filename, data):
+    def save_created_pdf(self, data):
+        filename = "created_{}_{}.pdf".format(datetime.now().timestamp(), self.id)
         try:
             path = self.pdf_created.path
         except ValueError:
             path = None
 
-        self.pdf_created.save(filename, ContentFile(data))
+        self.pdf_created.save(filename, data)
         self.save()
 
         delete_pdf(path)

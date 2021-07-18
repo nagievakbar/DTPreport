@@ -417,16 +417,16 @@ def checkOnNone(data):
 #         'total_report_cost': total_report_cost
 #     }
 #     return JsonResponse(data)
-def response_image(link_img, link_delete, image, id):
+def response_file(link_file, link_delete, file, id):
     return {
         'errors': "",
         'initialPreview': [
-            link_img
+            link_file
         ],
         'initialPreviewConfig': [{
-            'caption': image.name,
+            'caption': file.name,
             'width': '120px',
-            'size': image.size,
+            'size': file.size,
             'url': link_delete,
             'key': id,
         }],

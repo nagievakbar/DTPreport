@@ -717,12 +717,11 @@
                     Адрес: {{ report.contract.customer.address }}
                     <br>
                     {% if enumeration %}
-                        р\с {{ enumeration.p_c }}
+                        р\с № {{ enumeration.p_c }}
                         <br>
                         {{ enumeration.bank }}
-                        <br>
-                        МФО {{ enumeration.MFO }} ИНН {{ enumeration.INN }}
-                        <br>
+                        МФО {{ enumeration.MFO }}
+                        ИНН {{ enumeration.INN }}
                         ОКЭД {{ enumeration.OKED }}
                     {% else %}
                         паспорт серия: {{ report.contract.customer.passport_number }}
@@ -1912,56 +1911,57 @@
             автомобиля.
         </p>
     </div>
-    <div class="paginate-figure">
-
-        {% for pass in passport %}
-            {% if loop.first %}
-                <div class="new-page">
-            {% endif %}
-        <img src="{{ s }}/{{ pass.photo.name }}" alt="" class="half-list">
-        {% if loop.last %}
-            </div>
-        {% endif %}
-        {% endfor %}
-
-
-        {% for pass in other_photos %}
-            {% if loop.first %}
-                <div class="new-page">
-            {% endif %}
-        <img src="{{ s }}/{{ pass.photos.name }}" alt="" class="half-list">
-        {% if loop.last %}
-            </div>
-        {% endif %}
-        {% endfor %}
-
-
-        {% for image in images %}
-            {% if loop.first %}
-                <div class="new-page">
-            {% endif %}
-        <img src="{{ s }}/{{ image.image.name }}" alt="" class="three-list">
-        {% if loop.last %}
-            </div>
-        {% endif %}
-        {% endfor %}
-        {% if document_photo %}
-            <div class="new-page">
-                <table id="image-table" class="center-image">
-                    <tr>
-                        <td><img src="{{ s }}/{{ document_photo.license.name }}" alt="" class="two-list"></td>
-                        <td><img src="{{ s }}/{{ document_photo.guvonhnoma.name }}" alt="" class="two-list"></td>
-                    </tr>
-                    <tr>
-                        <td><img src="{{ s }}/{{ document_photo.certificate.name }}" alt="" class="two-list"></td>
-                        <td><img src="{{ s }}/{{ document_photo.insurance.name }}" alt="" class="two-list"></td>
-                    </tr>
-                </table>
-            </div>
-            </div>
-        {% endif %}
-
-    {% if checks %}
-        <img src="{{ s }}/{{ checks.checks.name }}" alt="" class="half-list new-page">
-    {% endif %}
+    {% include 'templates/template_html/images_part.html' %}
+{#    <div class="paginate-figure">#}
+{##}
+{#        {% for pass in passport %}#}
+{#            {% if loop.first %}#}
+{#                <div class="new-page">#}
+{#            {% endif %}#}
+{#        <img src="{{ s }}/{{ pass.photo.name }}" alt="" class="half-list">#}
+{#        {% if loop.last %}#}
+{#            </div>#}
+{#        {% endif %}#}
+{#        {% endfor %}#}
+{##}
+{##}
+{#        {% for pass in other_photos %}#}
+{#            {% if loop.first %}#}
+{#                <div class="new-page">#}
+{#            {% endif %}#}
+{#        <img src="{{ s }}/{{ pass.photos.name }}" alt="" class="half-list">#}
+{#        {% if loop.last %}#}
+{#            </div>#}
+{#        {% endif %}#}
+{#        {% endfor %}#}
+{##}
+{##}
+{#        {% for image in images %}#}
+{#            {% if loop.first %}#}
+{#                <div class="new-page">#}
+{#            {% endif %}#}
+{#        <img src="{{ s }}/{{ image.image.name }}" alt="" class="three-list">#}
+{#        {% if loop.last %}#}
+{#            </div>#}
+{#        {% endif %}#}
+{#        {% endfor %}#}
+{#        {% if document_photo %}#}
+{#            <div class="new-page">#}
+{#                <table id="image-table" class="center-image">#}
+{#                    <tr>#}
+{#                        <td><img src="{{ s }}/{{ document_photo.license.name }}" alt="" class="two-list"></td>#}
+{#                        <td><img src="{{ s }}/{{ document_photo.guvonhnoma.name }}" alt="" class="two-list"></td>#}
+{#                    </tr>#}
+{#                    <tr>#}
+{#                        <td><img src="{{ s }}/{{ document_photo.certificate.name }}" alt="" class="two-list"></td>#}
+{#                        <td><img src="{{ s }}/{{ document_photo.insurance.name }}" alt="" class="two-list"></td>#}
+{#                    </tr>#}
+{#                </table>#}
+{#            </div>#}
+{#        {% endif %}#}
+{##}
+{#        {% if checks %}#}
+{#            <img src="{{ s }}/{{ checks.checks.name }}" alt="" class="half-list new-page">#}
+{#        {% endif %}#}
+{#    </div>#}
 {% endblock %}

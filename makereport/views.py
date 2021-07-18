@@ -41,7 +41,28 @@ class ImageView(View):
         print(link_img)
         link_delete = "{}/report/image/delete/".format(s.URL_FILES)
         return JsonResponse(
-            response_image(link_img=link_img, link_delete=link_delete, image=image.image, id=image.image_id))
+            response_file(link_file=link_img, link_delete=link_delete, file=image.image, id=image.image_id))
+
+
+class PDFDisposableDelete(View):
+    def post(self, request):
+        disposable = Disposable.objects.get(id=request.POST['key'])
+        disposable.clear_pdf()
+        return JsonResponse({'errors': True})
+
+
+# create method
+class PDFDisposableView(View):
+    def post(self, request):
+        disposable = Disposable.objects.get(id=request.POST['id'])
+        pdf = request.FILES['pdf_disposable']
+        disposable.save_disposable_pdf(pdf)
+        link_img = "{}{}".format(s.URL_FILES, disposable.pdf_disposable.url)
+        print(link_img)
+        link_delete = "{}/report/pdf/delete/".format(s.URL_FILES)
+        return JsonResponse(
+            response_file(link_file=link_img, link_delete=link_delete, file=disposable.pdf_disposable,
+                          id=disposable.id))
 
 
 class PPhotoDelete(View):
@@ -65,7 +86,7 @@ class PPhotoView(View):
         print(link_img)
         link_delete = "{}/report/pphoto/delete/".format(s.URL_FILES)
         return JsonResponse(
-            response_image(link_img=link_img, link_delete=link_delete, image=image.photo, id=image.p_photo_id))
+            response_file(link_file=link_img, link_delete=link_delete, file=image.photo, id=image.p_photo_id))
 
 
 class OPhotoDelete(View):
@@ -89,7 +110,7 @@ class OPhotoView(View):
         print(link_img)
         link_delete = "{}/report/ophoto/delete/".format(s.URL_FILES)
         return JsonResponse(
-            response_image(link_img=link_img, link_delete=link_delete, image=image.photos, id=image.o_photo_id))
+            response_file(link_file=link_img, link_delete=link_delete, file=image.photos, id=image.o_photo_id))
 
 
 class ChecksDelete(View):
@@ -113,7 +134,7 @@ class ChecksView(View):
         print(link_img)
         link_delete = "{}/report/checks/delete/".format(s.URL_FILES)
         return JsonResponse(
-            response_image(link_img=link_img, link_delete=link_delete, image=image.checks, id=image.checks_id))
+            response_file(link_file=link_img, link_delete=link_delete, file=image.checks, id=image.checks_id))
 
 
 def hold_image():
@@ -346,6 +367,7 @@ class ReportEditView(View):
 
 class ReportView(View):
     decorators = [login_required]
+    template_name = 'makereport/add_repor.html'
 
     @method_decorator(decorators)
     def get(self, request, id=None, extend=0):
@@ -354,8 +376,7 @@ class ReportView(View):
         else:
             report = Report.objects.get(report_id=id)
         context = self.prepare_get_request(request, id, report, customer_form=CustomerForm)
-        template = 'makereport/add_repor.html'
-        return render(request, template, context)
+        return render(request, self.template_name, context)
 
     def prepare_get_request(self, request, id, report: Report, customer_form=forms.ModelForm):
         images = None
@@ -561,7 +582,7 @@ class ReportView(View):
                 pass
             make_pdf.delay(new_report.report_id)
             # make_pdf_additional.delay(new_report.report_id)
-        return render(request, 'makereport/add_repor.html', context)
+        return render(request, self.template_name, context)
 
     @method_decorator(decorators)
     def put(self, request, id=None):
@@ -709,10 +730,8 @@ class ReportView(View):
                     'ophotos': ophotos or None,
                     'checks': checks or None,
                 }
-                print("PRODUCT_COST")
-                print(new_report.product_cost)
-                return render(request, 'makereport/add_repor.html', context)
-        return render(request, 'makereport/add_repor.html', context)
+
+        return render(request, self.template_name, context)
 
     def init_service_formset(self, request):
 
@@ -747,7 +766,7 @@ class EnumerationView(ReportView):
             report = Report.objects.get(report_id=id)
         context = self.prepare_get_request(request, id, report, customer_form=CustomerFormEdit)
         context['enumeration_form'] = enumeration_form
-        return render(request, template, context)
+        return render(request, self.template_name, context)
 
     @method_decorator(decorators)
     def post(self, request, id=None):
@@ -882,7 +901,7 @@ class EnumerationView(ReportView):
                 pass
             make_pdf_enumeration.delay(new_report.report_id)
 
-        return render(request, 'makereport/enumeration.html', context)
+        return render(request, self.template_name, context)
 
 
 def delete(request):
@@ -1069,15 +1088,13 @@ class DisposableView(View):
             return self.show_existing_disposable(request, id)
 
     def post(self, request, id=0):
-        id_disposable = request.POST.get('id_disposable', id)
+        id_disposable = int(request.POST.get('id_disposable', id))
         return self.store_disposable(request, id_disposable)
 
     def store_disposable(self, request, id):
+
         disposable = Disposable.objects.get(id=id)
-        files = request.POST.FILES['pdf_custom']
-        filename = "disposable_{}_{}".format(datetime.datetime.now().timestamp(), disposable.id)
-        disposable.save_disposable_pdf(filename, files)
-        disposable.save()
+
         holds_image = disposable.holds_images
 
         images = holds_image.image.all()
@@ -1085,52 +1102,49 @@ class DisposableView(View):
         ophotos = holds_image.o_images.all()
         checks = holds_image.checks.all()
 
-        image_form = ImageForm(Images())
-        passphoto_form = PPhotoForm(PassportPhotos())
-        otherphoto_form = OPhotoForm(OtherPhotos())
-        checks_form = ChecksForm(Checks())
         concatenate_pdf_disposable.delay(disposable.id)
         context = {
             'id_image': disposable.holds_images_id,
             'id': disposable.id,
-            'image_form': image_form or None,
-            'passphoto_form': passphoto_form or None,
-            'otherphoto_form': otherphoto_form or None,
-            'checks_form': checks_form or None,
+            'disposable': disposable,
             'images': images,
             'pphotos': pphotos,
             'ophotos': ophotos,
             'checks': checks,
         }
-        return render(self.template_name, context)
+        context = self.get_context_forms(context)
+        return render(request, self.template_name, context)
 
-    def show_new_disposable(self, request):
-        disposable = create_disposable()
+    def get_context_forms(self, context: dict) -> dict:
+        disposable_from = DisposableForm(Disposable())
         image_form = ImageForm(Images())
         passphoto_form = PPhotoForm(PassportPhotos())
         otherphoto_form = OPhotoForm(OtherPhotos())
         checks_form = ChecksForm(Checks())
+        context['image_form'] = image_form
+        context['passphoto_form'] = passphoto_form
+        context['disposable_from'] = disposable_from
+        context['otherphoto_form'] = otherphoto_form
+        context['checks_form'] = checks_form
+        return context
+
+    def show_new_disposable(self, request):
+        disposable = create_disposable()
         context = {
             'id_image': disposable.holds_images_id,
             'id': disposable.id,
-            'image_form': image_form or None,
-            'passphoto_form': passphoto_form or None,
-            'otherphoto_form': otherphoto_form or None,
-            'checks_form': checks_form or None,
+            'disposable': disposable,
             'images': None,
             'pphotos': None,
             'ophotos': None,
             'checks': None,
         }
-        return render(self.template_name, context)
+        context = self.get_context_forms(context)
+        return render(request, self.template_name, context)
 
     def show_existing_disposable(self, request, id):
         disposable = Disposable.objects.get(id=id)
         holds_image = disposable.holds_images
-        image_form = ImageForm(Images())
-        passphoto_form = PPhotoForm(PassportPhotos())
-        otherphoto_form = OPhotoForm(OtherPhotos())
-        checks_form = ChecksForm(Checks())
         images = holds_image.image.all()
         pphotos = holds_image.pp_photo.all()
         ophotos = holds_image.o_images.all()
@@ -1138,16 +1152,14 @@ class DisposableView(View):
         context = {
             'id_image': disposable.holds_images_id,
             'id': disposable.id,
-            'image_form': image_form or None,
-            'passphoto_form': passphoto_form or None,
-            'otherphoto_form': otherphoto_form or None,
-            'checks_form': checks_form or None,
+            'disposable': disposable,
             'images': images,
             'pphotos': pphotos,
             'ophotos': ophotos,
             'checks': checks,
         }
-        return render(self.template_name, context)
+        context = self.get_context_forms(context)
+        return render(request, self.template_name, context)
 
 
 class ClosingView(View):
@@ -1160,7 +1172,8 @@ class ClosingView(View):
             return self.show_existing_closing(request, id)
 
     def post(self, request, id=0):
-        closing_id = request.POST.get('id_closing', id)
+        closing_id = int(request.POST.get('id_closing', id))
+        print("CLOSING {}{}".format(closing_id, type(closing_id)))
         if closing_id == 0:
             return self.create_new_closing(request)
         else:
@@ -1175,11 +1188,13 @@ class ClosingView(View):
             closing = closing_form.save()
             context['id'] = closing.id
         else:
-            raise Exception(closing_form.errors)
             context['id'] = 0
-        return render(self.template_name, context)
+            raise Exception(closing_form.errors)
+
+        return render(request, self.template_name, context)
 
     def edit_closing(self, request, id):
+
         closing = Closing.objects.get(id=id)
         closing_form = ClosingForm(request.POST, instance=closing)
         context = {
@@ -1190,7 +1205,7 @@ class ClosingView(View):
             closing_form.save()
         else:
             raise Exception(closing_form.errors)
-        return render(self.template_name, context)
+        return render(request, self.template_name, context)
 
     def show_new_closing(self, request):
         closing_form = ClosingForm(instance=Closing())
@@ -1198,7 +1213,7 @@ class ClosingView(View):
             'closing_form': closing_form,
             'id': 0
         }
-        return render(self.template_name, context)
+        return render(request, self.template_name, context)
 
     def show_existing_closing(self, request, id: int):
         closing = Closing.objects.get(id=id)
@@ -1207,7 +1222,7 @@ class ClosingView(View):
             'closing_form': closing_form,
             'id': closing.id
         }
-        return render(self.template_name, context)
+        return render(request, self.template_name, context)
 
 
 # LIST OF CLOSING WHICH HAS TO BE SHOWN

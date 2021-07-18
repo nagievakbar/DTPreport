@@ -527,17 +527,7 @@
         }
 
         $(document).ready(function () {
-            calculate_total_sum(0);
-            calculate_product_overall_sum(true);
-            $(".divide-integer").each(function () {
-                var serialized = $(this).val().replace(/\s/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-                $(this).val(serialized);
-                $(this).text(serialized);
-            })
-            $(".divide-integer-label").each(function (){
-                var serialized = $(this).text().replace(/\s/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-                $(this).text(serialized);
-            })
+
             const server = "https://e-otsenka.uz";
             $("#test-upload").fileinput({
                 'theme': 'fas',
@@ -696,6 +686,17 @@
                 }
 
             });
+            calculate_total_sum(0);
+            calculate_product_overall_sum(true);
+            $(".divide-integer").each(function () {
+                var serialized = $(this).val().replace(/\s/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+                $(this).val(serialized);
+                $(this).text(serialized);
+            })
+            $(".divide-integer-label").each(function (){
+                var serialized = $(this).text().replace(/\s/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+                $(this).text(serialized);
+            })
         });
     </script>
 

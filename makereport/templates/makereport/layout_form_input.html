@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -81,6 +82,7 @@
 
 </main>
 {% block script_file_input %}{% endblock %}
+{% include 'makereport/javascript/js_report.html' %}
 <script src="{% static '/makereport/js/desktop3.js' %}"></script>
 </body>
 </html>

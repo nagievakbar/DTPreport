@@ -288,7 +288,7 @@ class ShowEnumerationPDF(View):
 
 class ShowDisposablePDF(View):
     def get(self, request, id=None):
-        disposable = Disposable.objects.get(report_id=id)
+        disposable = Disposable.objects.get(id=id)
         response = FileResponse(open(os.path.abspath(os.path.join(disposable.pdf_created.path)), 'rb'),
                                 content_type='application/pdf')
         return response
@@ -387,8 +387,8 @@ def create_base64_closing(closing: Closing):
 
 
 # How to return closing pdf !!!
-def closing_pdf(request):
-    closing = Closing.objects.get(report_id=id)
+def closing_pdf(request, id=0 ):
+    closing = Closing.objects.get(id=id)
     # car = report.car
     # contract = report.contract
     # customer = contract.customer
@@ -401,17 +401,8 @@ def closing_pdf(request):
         # 'qrcode_some': QRcode.qrcode("http://e-otsenka.uz/pdf/{id}".format(id=report.report_id))
     }
 
-    pdf = generate_pdf(default_template="closing_report.html",
+    pdf = generate_pdf(default_template="closing.html",
                        css_name="finish_report.css", context=context)
     reponse = FileResponse(ContentFile(pdf), content_type='application/pdf')
     return reponse
 
-
-# test disposable
-def test_disposable(request, id: int):
-    manger = PDFMerger(id)
-    manger.concatenate_pdf()
-    disposable = Disposable.objects.get(report_id=id)
-    response = FileResponse(open(os.path.abspath(os.path.join(disposable.pdf_created.path)), 'rb'),
-                            content_type='application/pdf')
-    return response
