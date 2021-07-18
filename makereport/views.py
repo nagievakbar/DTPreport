@@ -1196,7 +1196,6 @@ class ClosingView(View):
         return render(request, self.template_name, context)
 
     def edit_closing(self, request, id):
-
         closing = Closing.objects.get(id=id)
         closing_form = ClosingForm(request.POST, instance=closing)
         context = {
@@ -1205,7 +1204,9 @@ class ClosingView(View):
             'id': closing.id
         }
         if closing_form.is_valid():
-            closing_form.save()
+            sign = closing.sign
+            closing = closing_form.save(commit=False)
+            closing.sign = sign
             create_base64_closing(closing)
         else:
             raise Exception(closing_form.errors)
