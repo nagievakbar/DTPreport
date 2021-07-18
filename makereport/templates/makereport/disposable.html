@@ -51,17 +51,19 @@
         <div class="material-form-2">
             <div class="last_bottom_block col-12">
                 <div class="row">
-                {% if id != 0 and disposable.pdf_disposable.name != '' %}
+
                     <div class="col-lg-12">
-                            <div class="download_button">
+                        <div class="download_button">
+                            {% if id != 0 and disposable.pdf_created.name != ''  and  disposable.pdf_created.name != None %}
                                 <div class="panel_user" id="download_button7">
                                     <a href="{% url 'get_disposable' id %}" target="_blank">
                                         <button type="button" class="btn panel_button">Посмотреть</button>
                                     </a>
                                 </div>
-                            </div>
+                            {% endif %}
+                        </div>
                     </div>
-                {% endif %}
+
                 </div>
             </div>
         </div>

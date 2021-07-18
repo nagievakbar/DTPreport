@@ -197,9 +197,6 @@ def get_last_report_id(request):
 
 def get_service_ajax(request):
     service = get_service_from_request(request)
-    print(service.price)
-    print(service.name)
-    print(get_brand_nph(request))
     data = {
         'name': service.name,
         'norm_per_hour': get_brand_nph(request),
@@ -233,6 +230,7 @@ def get_consumable_ajax(request):
 
 
 def get_wear_ajax(request):
+
     point = request.GET.get('point', None)
     weight = request.GET.get('weight', None)
     wear = ((0.208 - 0.003 * float(point)) * float(weight) ** 0.7) * 100

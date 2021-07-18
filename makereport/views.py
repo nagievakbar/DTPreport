@@ -1130,6 +1130,8 @@ class DisposableView(View):
 
     def show_new_disposable(self, request):
         disposable = create_disposable()
+        print("ASDASDASD")
+        print(disposable.pdf_created.name)
         context = {
             'id_image': disposable.holds_images_id,
             'id': disposable.id,
@@ -1148,6 +1150,7 @@ class DisposableView(View):
         images = holds_image.image.all()
         pphotos = holds_image.pp_photo.all()
         ophotos = holds_image.o_images.all()
+
         checks = holds_image.checks.all()
         context = {
             'id_image': disposable.holds_images_id,
