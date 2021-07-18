@@ -396,7 +396,7 @@ def closing_pdf(request, id=0 ):
     context = {
         's': s.BASE_URL,
         'closing': closing,
-        # 'qrcode': check_qr_code(qrcode),
+        'qrcode': check_qr_code(closing.sign),
         # 'contract': contract,
         # 'qrcode_some': QRcode.qrcode("http://e-otsenka.uz/pdf/{id}".format(id=report.report_id))
     }
