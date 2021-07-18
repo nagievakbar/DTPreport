@@ -19,6 +19,7 @@ function success_sign() {
     }
 }
 function loadModels(object) {
+    console.log(object)
     let sign = object.attr('sign');
     let sign_form = object.attr('sign_from')
         var model = $("#exampleModal");
@@ -30,6 +31,8 @@ function loadModels(object) {
     let report_id = object.attr('data-bs-report');
     var modalFileInput = model.find('.file');
     var modalReportIdField = model.find('.report_id');
+    console.log("BELOW MUST BE RECIPIENT");
+    console.log(recipient);
     modalFileInput.text(recipient)
     modalReportIdField.val(report_id)
 
@@ -85,7 +88,8 @@ var AppLoad = function () {
         'localhost', '96D0C1491615C82B9A54D9989779DF825B690748224C2B04F500F370D51827CE2644D8D4A82C18184D73AB8530BB8ED537269603F61DB0D03D2104ABF789970B',
         '127.0.0.1', 'A7BCFA5D490B351BE0754130DF03A068F855DB4333D43921125B9CF2670EF6A40370C646B90401955E1F7BC9CDBF59CE0B2C5467D820BE189C845D0B79CFC96F',
         'null', 'E0A205EC4E7B78BBB56AFF83A733A1BB9FD39D562E67978CC5E7D73B0951DB1954595A20672A63332535E13CC6EC1E1FC8857BB09E0855D7E76E411B6FA16E9D',
-        'dls.yt.uz', 'EDC1D4AB5B02066FB3FEB9382DE6A7F8CBD095E46474B07568BC44C8DAE27B3893E75B79280EA82A38AD42D10EA0D600E6CE7E89D1629221E4363E2D78650516'
+        'dls.yt.uz', 'EDC1D4AB5B02066FB3FEB9382DE6A7F8CBD095E46474B07568BC44C8DAE27B3893E75B79280EA82A38AD42D10EA0D600E6CE7E89D1629221E4363E2D78650516',
+        'e-otsenka.uz' , '53B925F2B659F7BAB4306ED57731E7FCF620A484D8D7D5E7317968EA7655965B1EF1A536726D24280FB0A6283239C2C1C15D920F67BF397F8BC75DA58859E29E'
     ];
     uiLoading();
     EIMZOClient.checkVersion(function (major, minor) {
@@ -256,9 +260,6 @@ adding_sign = function () {
         if (keyId) {
             EIMZOClient.append_pkcs7_attached(keyId, pkcs7, null, function (pkcs7) {
 
-                console.log("SUCESSS")
-                console.log("ADDDEDDD")
-                console.log('s')
                 $.ajax({
                     type: "POST",
                     headers: {
@@ -335,13 +336,17 @@ sign = function () {
     console.log(sign_from.value);
     console.log("sadsdsdasd");
     var itm = document.testform.key.value;
+    console.log(itm)
     if (itm) {
+        console.log("HERE WE GOES,")
         var id = document.getElementById(itm);
         var vo = JSON.parse(id.getAttribute('vo'));
         var data = document.testform.data.value;
         var keyId = document.getElementById('keyId').innerHTML;
         var report_input = document.getElementById('report_id');
+        console.log(keyId)
         if (keyId) {
+            console.log("GOES THERE ?")
             EIMZOClient.createPkcs7(keyId, data, null, function (pkcs7) {
 
                 $.ajax({

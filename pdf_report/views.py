@@ -378,11 +378,11 @@ def create_base64_closing(closing: Closing):
         # 'contract': contract,
         # 'qrcode_some': QRcode.qrcode("http://e-otsenka.uz/pdf/{id}".format(id=report.report_id))
     }
-    pdf = generate_pdf(default_template="closing_report.html",
+    pdf = generate_pdf(default_template="closing.html",
                        css_name="finish_report.css", context=context)
     file = ContentFile(pdf)
     encode_string = base64.b64encode(file.read())
-    closing.pdf_closing_base64 = encode_string
+    closing.pdf_closing_base64 = encode_string.decode('ascii')
     closing.save()
 
 

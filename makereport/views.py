@@ -14,7 +14,7 @@ from django.db.models import Q, Subquery
 from .forms import *
 from .utils import *
 
-from pdf_report.views import create_base64
+from pdf_report.views import create_base64, create_base64_closing
 from DTPreport import settings as s
 from pdf_report.tasks import reduce_image, delete_empty_report, make_pdf, make_pdf_additional, make_pdf_enumeration, \
     concatenate_pdf_disposable
@@ -1186,7 +1186,9 @@ class ClosingView(View):
         }
         if closing_form.is_valid():
             closing = closing_form.save()
+            create_base64_closing(closing)
             context['id'] = closing.id
+            context['closing']= closing
         else:
             context['id'] = 0
             raise Exception(closing_form.errors)
@@ -1199,10 +1201,12 @@ class ClosingView(View):
         closing_form = ClosingForm(request.POST, instance=closing)
         context = {
             'closing_form': closing_form,
+            'closing': closing,
             'id': closing.id
         }
         if closing_form.is_valid():
             closing_form.save()
+            create_base64_closing(closing)
         else:
             raise Exception(closing_form.errors)
         return render(request, self.template_name, context)
@@ -1220,6 +1224,7 @@ class ClosingView(View):
         closing_form = ClosingForm(instance=closing)
         context = {
             'closing_form': closing_form,
+            'closing':closing,
             'id': closing.id
         }
         return render(request, self.template_name, context)
