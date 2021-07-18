@@ -1188,7 +1188,7 @@ class ClosingView(View):
             closing = closing_form.save()
             create_base64_closing(closing)
             context['id'] = closing.id
-            context['closing']= closing
+            context['closing'] = closing
         else:
             context['id'] = 0
             raise Exception(closing_form.errors)
@@ -1225,7 +1225,7 @@ class ClosingView(View):
         closing_form = ClosingForm(instance=closing)
         context = {
             'closing_form': closing_form,
-            'closing':closing,
+            'closing': closing,
             'id': closing.id
         }
         return render(request, self.template_name, context)
