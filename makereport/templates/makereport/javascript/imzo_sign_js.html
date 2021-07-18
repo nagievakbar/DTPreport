@@ -31,8 +31,6 @@ function loadModels(object) {
     let report_id = object.attr('data-bs-report');
     var modalFileInput = model.find('.file');
     var modalReportIdField = model.find('.report_id');
-    console.log("BELOW MUST BE RECIPIENT");
-    console.log(recipient);
     modalFileInput.text(recipient)
     modalReportIdField.val(report_id)
 
