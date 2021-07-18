@@ -434,5 +434,4 @@ class ClosingForm(forms.ModelForm):
 
     class Meta:
         model = Closing
-        exclude = ('sign',)
         fields = '__all__'
