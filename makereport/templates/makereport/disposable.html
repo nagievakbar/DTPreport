@@ -51,9 +51,8 @@
         <div class="material-form-2">
             <div class="last_bottom_block col-12">
                 <div class="row">
-
+                {% if id != 0 and disposable.pdf_disposable.name != '' %}
                     <div class="col-lg-12">
-                        <div class="row">
                             <div class="download_button">
                                 <div class="panel_user" id="download_button7">
                                     <a href="{% url 'get_disposable' id %}" target="_blank">
@@ -61,9 +60,8 @@
                                     </a>
                                 </div>
                             </div>
-                        </div>
                     </div>
-
+                {% endif %}
                 </div>
             </div>
         </div>
